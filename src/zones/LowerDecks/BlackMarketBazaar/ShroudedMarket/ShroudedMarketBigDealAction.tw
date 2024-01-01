@@ -1,0 +1,132 @@
+:: ShroudedMarketBigDeal [lowerdeckact] {"position":"1950,1325","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/shroudedmarket/marketveiledpromenade.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Shrouded Market - Broker a Big Deal",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $shroudedMarketBigDealEventsRecord>> <<set $shroudedMarketBigDealEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $shroudedMarketBigDealEventsRecord.today != _today>>
+    <<set $shroudedMarketBigDealEventsRecord.today to _today>>
+    <<set $shroudedMarketBigDealEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available big deal events -->
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $shroudedMarketBigDealEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available big deal events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $shroudedMarketBigDealEventsRecord.triggeredEvents.push(_randomEvent)>>
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Shrouded Market - Broker a Big Deal</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The stakes are high as you approach the secluded booth, your arms laden with goods. The eyes that meet yours are sharp and calculating, and you know that this deal could change everything. The tension is palpable, and you can feel the stress coursing through your veins as you begin the dance of negotiation.</p>
+
+<<switch _randomEvent>>
+    <<case 1>> <!-- Monumental Gain -->
+        <p>The deal goes better than you could have hoped. You walk away with your pockets significantly heavier.</p>
+        <<set $player.credits += 4000>>
+        <<creditchange 4000 "positive">>
+        <<itemchange "blackmarketactivity" 4000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 2>> <!-- Undercut Offer -->
+        <p>The buyer is shrewd and cuts down your asking price. You accept, but it's a bitter pill to swallow.</p>
+        <<set $player.credits += 2500>>
+        <<creditchange 2500 "positive">>
+        <<itemchange "blackmarketactivity" 2500 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 3>> <!-- Even Exchange -->
+        <p>You manage to negotiate an even exchange. It's not a windfall, but it's fair.</p>
+        <<set $player.credits += 3000>>
+        <<creditchange 3000 "positive">>
+        <<itemchange "blackmarketactivity" 3000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 4>> <!-- Generous Bonus -->
+        <p>The buyer is impressed with the quality and throws in a generous bonus on top of the agreed price.</p>
+        <<set $player.credits += 3500>>
+        <<creditchange 3500 "positive">>
+        <<itemchange "blackmarketactivity" 3500 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 5>> <!-- Tough Loss -->
+        <p>The deal turns sour, and you're forced to take a loss. It's a tough hit to your finances and pride.</p>
+        <<set $player.credits += 2000>>
+        <<creditchange 2000 "positive">>
+        <<itemchange "blackmarketactivity" 2000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 6>> <!-- Law Enforcement Scare -->
+        <p>Mid-deal, you catch sight of law enforcement. You hastily conclude the deal at a lower price to avoid trouble.</p>
+        <<set $player.credits += 2200>>
+        <<creditchange 2200 "positive">>
+        <<itemchange "blackmarketactivity" 2200 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 7>> <!-- Windfall Profit -->
+        <p>A bidding war erupts over your goods, and you come out on top with a windfall profit.</p>
+        <<set $player.credits += 4500>>
+        <<creditchange 4500 "positive">>
+        <<itemchange "blackmarketactivity" 4500 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 8>> <!-- Market Crash -->
+        <p>Just as you're about to close the deal, the market crashes. You're left with a deal that barely covers your costs.</p>
+        <<set $player.credits += 2100>>
+        <<creditchange 2100 "positive">>
+        <<itemchange "blackmarketactivity" 2100 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 9>> <!-- Fair Compensation -->
+        <p>The buyer recognizes the value of your goods and offers fair compensation. You shake hands, content with the deal.</p>
+        <<set $player.credits += 3200>>
+        <<creditchange 3200 "positive">>
+        <<itemchange "blackmarketactivity" 3200 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<case 10>> <!-- Negotiation Fatigue -->
+        <p>After hours of back-and-forth, you're mentally exhausted. You agree to a deal that's good, but not great.</p>
+        <<set $player.credits += 2800>>
+        <<creditchange 2800 "positive">>
+        <<itemchange "blackmarketactivity" 2800 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+
+    <<default>> <!-- Balanced Outcome -->
+        <p>The deal is tough but ultimately balanced. You walk away feeling that both sides got something out of it.</p>
+        <<set $player.credits += 3000>>
+        <<creditchange 3000 "positive">>
+        <<itemchange "blackmarketactivity" 3000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+<</switch>>
+
+
+<<set $player.stress += 20>>
+<<set $player.mood -= 10>>
+<<set $player.trauma += 5>>
+
+<!-- Continue Link -->
+[[Return to the Shrouded Market.|ShroudedMarket]]
+<</nobr>>
+
+
+

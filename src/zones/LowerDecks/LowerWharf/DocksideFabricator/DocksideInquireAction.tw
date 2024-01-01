@@ -1,0 +1,50 @@
+:: DocksideInquire [lowerdeckact] {"position":"1325,400","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Dockside Fabricator - Inquiries",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Dockside Fabricator - Inquiries</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+
+<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Welcome to Dockside Fabricator, spacer. I'm Lucas Radiz, the manager of this fine establishment. Are you interested in our fabrication services? For a one-time license fee of <span style="color:red;">12,500 credits</span>, you can fabricate scrap, purchase materials, and sell parts right here."<</say>>
+
+<<set $enoughCredits = $player.credits >= 12500>>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"<span style="color:red;">12,500 credits</span>? That's quite a sum. Why so expensive?"<</say>>
+
+<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Running a fabricator isn't cheap—energy costs, maintenance, and not to mention the skilled technicians we employ to keep things going. You can buy scrap at competitive rates, fabricate it into valuable parts, and sell for a profit, even with the fee. If you have a Lockbox Hub subscription, you can store it all in your locker if you want to try your luck at trading even."<</say>>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<if $enoughCredits>>\
+    "I do have enough, but I am going to need to think about it."
+<<else>>\
+    "It does sound like a good opportunity, but I'll need to get the credits together first."
+<</if>><</say>>
+
+<p>You take a moment to step back from the conversation and observe the bustling activity of the Dockside Fabricator. The air is alive with the electric hum of machinery and the rhythmic dance of sparks from welding torches. Workers in heavy aprons move with deliberate precision, their hands guiding the complex machinery as they transform raw materials into intricate components. The scent of heated metal and ozone fills the space, a testament to the ceaseless production that powers the station's economy.</p>
+
+<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Take your time, no rush. I realize its a hefty fee for most down here on the Lower Decks. There's also a fee each time you use the fabricator, but it isn't that much. The volume we deal with here makes up for it."<</say>>
+
+<p>As you watch a sheet of scrap being fed into a fabricator, it's reshaped and emerges as a sleek panel, ready for use. It's a process of creation, almost alchemical in its transformation. You ponder the potential of having such resources at your fingertips. The cost is significant, but the ability to craft and trade with such efficiency could open new avenues for profit and self-reliance beyond scavenging through lockers or digging through trash.</p>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<if $enoughCredits>>
+    [[Proceed with the purchase. Cr 12500|DocksidePurchase][$player.credits -= 12500; $DocksideFabricatorState = "purchased"; $timeadd = 30]]<br>
+<<else>>
+    [[I'll earn the credits and come back.|DocksideFabricator][$timeadd = 1]]<br>
+<</if>>
+[["I'll think about it. Thanks for the information."|DocksideFabricator][$timeadd = 1]]<br>
+[["I'm not convinced it's the right move for me. I'll pass."|Lower Wharf][$timeadd = 5]]<br>
+<</say>><</nobr>>
+
+

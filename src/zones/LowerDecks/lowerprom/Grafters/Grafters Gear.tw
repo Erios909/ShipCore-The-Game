@@ -1,0 +1,58 @@
+:: Grafters Gear [poi] {"position":"200,1050","size":"100,100"}
+<<nobr>><<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/graftergear.jpg'>>
+<<addmins $timeadd>><<set $location to {
+    name: "Meltisar System, MOR-1, Grafter's Gear",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Grafter's Gear</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>You have <<=$lowerdecksScrap>> <span style="color:orange;">scrap</span>, <<=$lowerdecksParts>> <span style="color:lightgreen;">parts</span>, and <<=$lowerdecksCyberware>> <span style="color:yellow;">cyberware</span> in the lockers. There's free delivery drone service to the Lower Wharf and Black Market if you want to see if you can sell them for a profit. You could also try trading at Grafter's Gear which is nearby.</p>
+
+Things to do:<br>
+<<if $player.credits >= 300>>
+    [[Buy parts for your equipment. (00:15) 300 Cr.|GraftersGearBuyParts][$player.credits -= 300; $lowerdecksParts += 1; $timeadd = 15]]<br>
+<<else>>
+    <span class="disabledLink">Buy parts for your equipment. (00:15) 300 Cr.</span><br>
+<</if>>
+<<if $lowerdecksParts >= 1>>
+    [[Sell parts from your inventory. (00:15) -1 Part|GraftersGearSellParts][$lowerdecksParts -= 1; $timeadd = 15]]<br>
+<<else>>
+    <span class="disabledLink">Sell parts from your inventory. (00:15) -1 Part</span><br>
+<</if>>
+<<if $lowerdecksParts >= 1>>
+    [[Try to trade parts for cyberware. (00:15)|GraftersGearTradeParts][$lowerdecksParts -= 1; $timeadd = 15]]<br>
+<<else>>
+    <span class="disabledLink">Try to trade parts for cyberware. (00:15) -1 Part</span><br>
+<</if>>
+<!-- NanoDoc Injector -->
+<<if $player.credits >= 1000>>
+    [[Purchase NanoDoc Injector (00:15) 1000 Cr.|Grafters Gear][$player.credits -= 1000; $playerConsumables.nanoDocInjector += 1; $timeadd += 15]]<br>
+    "Heal your wounds with the latest in nanotech."<br>
+<<else>>
+    <span class="disabledLink">Not enough credits for NanoDoc Injector</span><br>
+<</if>>
+
+
+<!-- New interaction with the Grafter -->
+<<if $GrafterTalked is 0>>
+    <p>In the corner of the shop, the cyborg works meticulously, his mechanical fingers deftly manipulating delicate cybernetic components. His presence is both intriguing and intimidating to those unaccustomed to the melding of flesh and steel.</p>
+    [[Talk to the cyborg.|GrafterConversation][$GrafterTalked = 1; $timeadd += 15]]<br>
+<<else>>
+    <p>The Grafter, now a familiar figure to you, looks up from his workbench with a nod of recognition. His cybernetic eye gleams as it adjusts to focus on you, and you can't help but wonder what enhancements he has in store today.</p>
+    [[Speak to the Grafter.|GrafterConversation][$timeadd += 15]]<br>
+<</if>>
+<</nobr>>
+Travel:
+[[Step back into the mechanical heartbeat of the Promenade.|Lower Deck Promenade][$timeadd = 5]]
+
+Grafter's Gear is a dimly lit shop nestled in a nondescript corner of the Lower Deck Promenade. Its displays are cluttered with an array of cybernetic parts, from ocular implants to dermal armor plating. The air crackles with the faint buzz of live circuits, and the smell of ionized air is strong.
+
+Behind the counter, the Grafter, a cyborg with an eye for detail, demonstrates the latest in limb enhancements to a potential customer. Here, beneath layers of hanging cables and softly glowing LEDs, you can upgrade or offload your tech, getting a taste of the edge needed to survive in the bowels of MOR-1.
+
+
+

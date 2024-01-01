@@ -1,0 +1,114 @@
+:: MarinersRestDrink [lowerdeckact] {"position":"1200,500","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/marinersrest.jpg'>>
+<<addmins $timeadd>>
+<<set $player.credits -= 5>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Mariner's Rest - Grabbing a Drink",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $marinersRestDrinkEventsRecord>> <<set $marinersRestDrinkEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $marinersRestDrinkEventsRecord.today != _today>>
+    <<set $marinersRestDrinkEventsRecord.today to _today>>
+    <<set $marinersRestDrinkEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<!-- Create a list of available events that have not occurred today -->
+<<set _availableEvents to []>>
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $marinersRestDrinkEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<!-- Select a random event from the available ones or default if none are available -->
+<<if _availableEvents.length>> <!-- If there are still available events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $marinersRestDrinkEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Standard Heading Template -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Mariner's Rest</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The dim lighting and quiet hum of conversation in Mariner's Rest offer a welcome reprieve from the station's cacophony. You order your favorite drink and find a spot where you can unwind, the gentle melody of a distant harmonica blending with the sound of clinking glasses.</p>
+
+<!-- Random Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Spacer's Salute -->
+        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
+        <p>A group of spacers celebrating a successful salvage operation welcome you to their table. The shared stories and laughter are a welcome distraction from the tough life at the port.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- Bitter Brew -->
+        <<set $player.mood -= Math.round($player.mood * 0.02)>>
+        <p>Your drink is more bitter than expected. It's not terrible, but it's not the relaxing experience you were hoping for.</p>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 3>> <!-- Old Spacer's Yarn -->
+        <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
+        <p>An aged spacer regales you with stories of distant stars and close calls. Their wisdom could come in handy on your travels.</p>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Lucrative Tip -->
+        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02 + 5)>>
+        <p>You overhear a tip about a lucrative trade route from a loose-lipped freighter captain. This information could be worth something.</p>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 5>> <!-- Serendipitous Silence -->
+        <<set $player.stress -= Math.round($player.stress * 0.02)>>
+        <p>A sudden lull in the bar's noise grants you a moment of serenity, soothing your weary mind.</p>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 6>> <!-- Somber Remembrance -->
+        <<set $player.mood -= Math.round($player.mood * 0.02)>>
+        <<set $player.stress -= Math.round($player.stress * 0.02)>>
+        <p>The bar observes a moment of silence for a vessel lost to the void. It's a poignant reminder of the risks all spacers share.</p>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 7>> <!-- Lucky Hand -->
+        <<set $player.credits += 15>>
+        <p>An impromptu game of cards goes your way, and you walk away with a small windfall. The extra credits lift your spirits.</p>
+        <<creditchange 15 "positive">><br>
+
+    <<case 8>> <!-- Eavesdropped Opportunity -->
+        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02 + 5)>>
+        <p>Listening in on a hushed conversation, you learn about a potential job opportunity. It pays to keep your ears open.</p>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 9>> <!-- Arm-Wrestling Bout -->
+        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
+        <p>A challenge from a burly dockworker leads to a friendly arm-wrestling match. You don't win, but the physical exertion feels good.</p>
+        <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 10>> <!-- Generous Patron -->
+        <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
+        <p>A patron leaves a hefty tip at the bar and insists on buying a round for everyone. You can't help but feel a bit more cheerful.</p>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Event -->
+        <<set $player.credits -= 5>>
+        <p>The evening winds down, and you find yourself a few credits lighter after sharing stories and drinks with newfound friends. It's a small price for the memories and warmth shared in this corner of the stars.</p>
+        <<creditchange 5 "negative">><br>
+<</switch>>
+
+
+<!-- Continue Link -->
+[[Return to the comforting embrace of Mariner's Rest.|MarinersRest]]
+<</nobr>>
+
+
+

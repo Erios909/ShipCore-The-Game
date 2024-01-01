@@ -1,0 +1,52 @@
+:: DocksideFabricatorManual [lowerdeckact] {"position":"1550,775","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Dockside Fabricator - Automated Fabricator Manual",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Automated Fabricator Manual</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+You open the manual to the automated fabricator system, a series of holographic pages that detail the operation and maintenance of the machinery.
+
+<h3>Scrap Input and Parts Production</h3>
+The automated fabricator can process <span style="color:orange;">scrap</span> into <span style="color:lightgreen;">parts</span> at a fixed rate. You may input scrap into the hoppers, which will then be automatically converted into parts. The base production rate is <span style="color:lightblue;">10 scrap to 5 parts every 15 minutes</span>.
+
+<h3>Overclocking with Cyberware</h3>
+To increase production speed, you can install <span style="color:yellow;">cyberware</span> into the fabricator. Each set of cyberware units installed will overclock the fabricator, increasing the production rate. The production multiplier increases as follows:<br>
+<br>
+- 1-9 cyberware installed: 2x speed (20 scrap to 10 parts every 15 minutes)<br>
+- 10-199 cyberware installed: 3x speed (30 scrap to 15 parts every 15 minutes)<br>
+- 200-3999 cyberware installed: 4x speed (40 scrap to 20 parts every 15 minutes)<br>
+- 4000-7999 cyberware installed: 5x speed (50 scrap to 25 parts every 15 minutes)<br>
+- 8000-31999 cyberware installed: 6x speed (60 scrap to 30 parts every 15 minutes)<br>
+- 32000-63999 cyberware installed: 7x speed (70 scrap to 35 parts every 15 minutes)<br>
+- 64000-127999 cyberware installed: 8x speed (80 scrap to 40 parts every 15 minutes)<br>
+- 128000-255999 cyberware installed: 9x speed (90 scrap to 45 parts every 15 minutes)<br>
+- 256000+ cyberware installed: 10x speed (100 scrap to 50 parts every 15 minutes)<br>
+<br>
+Be aware that cyberware <span style="color:red;">degrades</span> over time, losing one unit per day, regardless of whether the fabricator is running.
+
+
+<h3>Energy Fees</h3>
+The fabricator requires energy to operate, incurring a fee of <span style="color:red;">1 credit per minute</span>. You can input energy fees in increments of <span style="color:lightblue;">1000 credits</span> at a time. This fee is charged continuously, even when the fabricator is not actively producing parts.
+
+<h3>Parts Collection</h3>
+Once parts are produced, you can request <span style="color:purple;">service drones</span> to transport them to your locker. For security reasons, this action must be initiated manually at the automated fabricator interface.
+
+<h3>Maintenance</h3>
+Please note that both the energy fee and cyberware degradation occur regardless of the fabricator's operational status. Regular maintenance and monitoring are recommended to ensure optimal performance.
+<br>
+[[Return to the Fabricator|DocksideFabricateScrap]]
+<</nobr>>
+
+
+

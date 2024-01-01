@@ -1,0 +1,89 @@
+:: RoguesGalleryRumors [lowerdeckact] {"position":"1525,1450","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket/roguesgallery.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Rogue's Gallery - Listening to Rumors",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+<<if not $roguesGalleryRumorsEventsRecord>>
+    <<set $roguesGalleryRumorsEventsRecord to {today: "", triggeredEvents: []}>>
+<</if>>
+
+<<if $roguesGalleryRumorsEventsRecord.today != _today>>
+    <<set $roguesGalleryRumorsEventsRecord.today to _today>>
+    <<set $roguesGalleryRumorsEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to random(1, 10)>>
+<<if not $roguesGalleryRumorsEventsRecord.triggeredEvents.includes(_randomEvent)>>
+    <<set $roguesGalleryRumorsEventsRecord.triggeredEvents.push(_randomEvent)>>
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Rogue's Gallery</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The Rogue's Gallery is a cacophony of whispers and coded language. You lean back against the bar, a nondescript drink in hand, and let the undercurrent of rumors wash over you. In this den of secrets, every overheard word could be the key to fortune or downfall.</p>
+
+<!-- Random Rumor Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- A Smuggler's Boast -->
+        <p>A smuggler boasts about a recent haul. You make a mental note of the details; such information could be valuable.</p>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- A Coded Message -->
+        <p>You catch a coded message meant for someone else. Deciphering it could lead to unexpected opportunities.</p>
+        <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
+
+    <<case 3>> <!-- A Tense Standoff -->
+        <p>A tense standoff at a nearby table ends without incident, but the stress of the moment leaves you more alert.</p>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 4>> <!-- A Lucky Tip -->
+        <p>A tip from a fellow patron about a lucrative job opportunity seems promising. It's worth looking into.</p>
+        <<creditchange 30 "positive">><br>
+
+    <<case 5>> <!-- A Shared Secret -->
+        <p>In a hushed tone, someone shares a rumor of a stash of contraband. The thrill of the hunt invigorates you.</p>
+        <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 6>> <!-- An Overheard Plot -->
+        <p>You overhear a plot for a heist. The details are sketchy, but it's enough to keep your mind sharp.</p>
+        <<changemoods "trauma" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 7>> <!-- A Drunken Revelation -->
+        <p>A drunken patron lets slip a key piece of information about a rival faction. Knowledge is power.</p>
+        <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
+
+    <<case 8>> <!-- A Warning Whisper -->
+        <p>A warning whisper about increased security measures on the docks. Staying informed keeps you one step ahead.</p>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 9>> <!-- A Fortuitous Encounter -->
+        <p>A chance encounter with an old friend leads to a promising business proposition. It could be a windfall.</p>
+        <<creditchange 40 "positive">><br>
+
+    <<case 10>> <!-- A Mysterious Stranger -->
+        <p>A mysterious stranger offers a cryptic piece of advice before disappearing into the crowd. It's puzzling, but you feel prepared for what's to come.</p>
+        <<changemoods "trauma" "minor" "NegEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Rumor Event -->
+        <p>The rumors are many, but none stand out as particularly useful tonight. Still, the act of listening keeps your wits sharp.</p>
+<</switch>>
+
+<br><br>
+
+<!-- Continue Link -->
+[[Back to The Rogue's Gallery.|RoguesGallery]]
+<</nobr>>
+
+
+

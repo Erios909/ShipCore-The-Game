@@ -1,0 +1,112 @@
+:: NebulaRumors [lowerdeckact] {"position":"425,700","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/nebula.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Nebula Noodle Stand - Rumors",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+<<if not $nebulaRumorsEventsRecord>> 
+    <<set $nebulaRumorsEventsRecord to {today: "", triggeredEvents: []}>>
+<</if>>
+
+<<if $nebulaRumorsEventsRecord.today != _today>> 
+    <<set $nebulaRumorsEventsRecord.today to _today>>
+    <<set $nebulaRumorsEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to random(1, 10)>>
+<<if not $nebulaRumorsEventsRecord.triggeredEvents.includes(_randomEvent)>> 
+    <<set $nebulaRumorsEventsRecord.triggeredEvents.push(_randomEvent)>>
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Nebula Noodle Stand</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>You find a spot at the bar, the hum of conversation around you blending with the scent of spices and steam. As you wait for your order, you tune in to the snippets of gossip and tales being exchanged by the stand's eclectic clientele. The Nebula Noodle Stand isn't just a place for a good meal; it's a nexus of news and rumors for those who know how to listen.</p>
+
+<!-- Random Rumor Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- A Laugh Among Friends -->
+        <p>A group of regulars shares a joke that has the whole stand laughing. The good cheer is infectious, and you find your spirits lifted.</p>
+        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- An Uplifting Tale -->
+        <p>An old spacefarer recounts an uplifting tale of survival against the odds. Inspired, you feel a surge of resilience and resolve.</p>
+        <<set $player.trauma -= Math.round($player.trauma * 0.05 + 20)>>
+        <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
+
+    <<case 3>> <!-- A Tense Exchange -->
+        <p>You witness a tense exchange over a trade deal gone wrong. It's unnerving to watch, leaving you a bit on edge.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.02 + 10)>>
+        <<set $player.stress += Math.round($player.stress * 0.02 + 10)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Encouragement -->
+        <p>A nearby patron notices your attire and assumes you're new to the station. They offer words of encouragement and some friendly advice.</p>
+        <<set $player.mood += Math.round($player.mood * 0.02 + 10)>>
+        <<set $player.stress -= Math.round($player.stress * 0.02 + 10)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 5>> <!-- A Shared Secret -->
+        <p>In a hushed tone, someone shares a rumor of a hidden stash of power cells. The possibility of replenishing your reserves is exciting.</p>
+        <<set $player.powerReserves += Math.round($player.powerReserves * 0.05 + 20)>>
+        <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
+
+    <<case 6>> <!-- An Overheard Argument -->
+        <p>An argument breaks out nearby over station politics. You try to ignore it, but it's distracting and you can't help feeling a bit rattled.</p>
+        <<set $player.stress += Math.round($player.stress * 0.02 + 15)>>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 7>> <!-- A Moment of Connection -->
+        <p>You strike up a conversation with a stranger and find surprising common ground. It's a small world, even out here among the stars.</p>
+        <<set $player.mood += Math.round($player.mood * 0.05 + 30)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+
+    <<case 8>> <!-- A Grim Reminder -->
+        <p>A weary miner shares a story of a recent cave-in. It's a grim reminder of the dangers that lurk on the fringes of space.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.02 + 20)>>
+        <<set $player.trauma += Math.round($player.trauma * 0.02 + 10)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">>
+        <<changemoods "trauma" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 9>> <!-- A Fortuitous Tip -->
+        <p>A tip from a fellow patron about a stockpile of medical supplies seems worth investigating. It could be nothing, or it could be a boon.</p>
+        <<set $player.health += Math.round($player.health * 0.05 + 25)>>
+        <<changemoods "health" "major" "PosEffectOnPlayer">><br>
+
+    <<case 10>> <!-- Lost in Thought -->
+        <p>The noodles are good, but you find yourself lost in thought over the rumors swirling around you. It's hard to know what to make of it all.</p>
+        <<set $player.mood += Math.round($player.mood * 0.02 + 15)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Rumor Event -->
+        <p>You eavesdrop on several conversations, but nothing particularly noteworthy sticks out. As you finish your meal, you can't help but feel you might have missed out on something important.</p>
+        <<if $player.credits >= 5>>
+            <<set $player.stress -= Math.round($player.stress * 0.02 + 5)>>
+            <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+        <<else>>
+            <p>You realize you don't have enough credits to pay attention to any valuable information. The missed opportunity adds to your stress.</p>
+            <<set $player.stress += Math.round($player.stress * 0.02 + 10)>>
+            <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+        <</if>>
+<</switch>>
+<br>
+
+<!-- Continue Link -->
+[[Back to Nebula Noodles.|Nebula Noodles]]
+<</nobr>>
+
+
+

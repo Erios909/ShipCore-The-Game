@@ -1,0 +1,122 @@
+:: MarinersRestWorkBar [lowerdeckact] {"position":"1075,625","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/marinersrestwork.jpg'>>
+<<addmins $timeadd>> <!-- Working a shift takes time. -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Mariner's Rest - Working Shift",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Mariner's Rest</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Flavor text about offering to help at the bar -->
+<p>Mariner's Rest is teeming with patrons from all walks of life, each with their own tale of spacefaring adventures.</p>
+
+<p>You roll up your sleeves and step behind the bar, ready to lend a hand. The regular bartender, with a grateful nod, directs you to a group of patrons waiting for their orders.</p>
+
+<!-- Randomized customer array -->
+<<set _customerNames to [
+    "Rugged Miner", "Ship Engineer", "Spacefarer", "Freelancer", "Merchant Trader", "Retired Pilot",
+    "Starry-Eyed Tourist", "Veteran Spacer", "Grizzled Captain", "Deckhand", "Wandering Scholar", "Galactic Drifter",
+    "Dockworker", "Haggard Bounty Hunter", "Up-and-Coming Starlet", "Jaded Mercenary", "Fledgling Astronaut", "Intrepid Explorer",
+    "Down-on-Luck Gambler", "Curious Researcher", "Ornery Mechanic", "Spacer on Leave", "Astrogator", "Off-Duty Security Officer",
+    "Ship's Cook", "Holovid Enthusiast", "Comms Operator", "Astrophysicist", "Smuggler", "Lost Tourist"
+]>>
+
+<!-- Shuffle the customer names -->
+<<set _customers to _customerNames.shuffle()>>
+
+<!-- Customer serving section -->
+<<set _group to _customers.splice(0, 5)>>
+<div id="customerGroup">
+    <ul>
+    <<for _i = 0; _i < _group.length; _i++>>
+        <<set _tip to random(1, 3)>>
+        <<capture _i _tip _group[_i]>>
+            <<link _group[_i]>>
+                <<replace "#customerGroup">>
+                    <p>You serve the <<=_group[_i]>> their favorite drink. They thank you with a smile and a tip of $<<=_tip>>.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<set $player.fatigue -= 5>> <!-- Reduce fatigue for each served customer -->
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Customer serving section -->
+<<set _group to _customers.splice(0, 5)>>
+<div id="customerGroup2">
+    <ul>
+    <<for _i = 0; _i < _group.length; _i++>>
+        <<set _tip to random(1, 3)>>
+        <<capture _i _tip _group[_i]>>
+            <<link _group[_i]>>
+                <<replace "#customerGroup2">>
+                    <p>You serve the <<=_group[_i]>> their favorite drink. They thank you with a smile and a tip of $<<=_tip>>.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<set $player.fatigue -= 5>> <!-- Reduce fatigue for each served customer -->
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Customer serving section -->
+<<set _group to _customers.splice(0, 5)>>
+<div id="customerGroup3">
+    <ul>
+    <<for _i = 0; _i < _group.length; _i++>>
+        <<set _tip to random(1, 3)>>
+        <<capture _i _tip _group[_i]>>
+            <<link _group[_i]>>
+                <<replace "#customerGroup3">>
+                    <p>You serve the <<=_group[_i]>> their favorite drink. They thank you with a smile and a tip of $<<=_tip>>.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<set $player.fatigue -= 5>> <!-- Reduce fatigue for each served customer -->
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Customer serving section -->
+<<set _group to _customers.splice(0, 5)>>
+<div id="customerGroup4">
+    <ul>
+    <<for _i = 0; _i < _group.length; _i++>>
+        <<set _tip to random(1, 3)>>
+        <<capture _i _tip _group[_i]>>
+            <<link _group[_i]>>
+                <<replace "#customerGroup4">>
+                    <p>You serve the <<=_group[_i]>> their favorite drink. They thank you with a smile and a tip of $<<=_tip>>.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<set $player.fatigue -= 5>> <!-- Reduce fatigue for each served customer -->
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Link to finish the work shift -->
+[[Finish your shift.|MarinersRest]] <!-- Link back to the main Mariner's Rest passage -->
+<</nobr>>
+
+
+

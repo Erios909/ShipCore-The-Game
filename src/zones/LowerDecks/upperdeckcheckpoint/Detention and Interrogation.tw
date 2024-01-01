@@ -1,0 +1,26 @@
+:: Detention and Interrogation [poi] {"position":"2625,1825","size":"100,100"}
+<<nobr>><<set $currentArea to "lowerdecks">><<setBackground setup.ImagePath+'/locs/melt/mor1/mid/middetention.jpg'>>
+<<addmins $timeadd>><<set $location to {
+    name: "Meltisar System, MOR-1, Detention and Interrogation",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Detention and Interrogation</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
+Places of Interest:
+There is nothing to do here at the moment.
+
+Travel:
+
+The Detention and Interrogation sector of MOR-1 is a place many fear, but few see. The walls here are thick, designed to muffle the sounds within. Stark lighting casts harsh shadows, and the air carries a chill that has little to do with temperature control.
+
+Security officers lead detainees through reinforced doors into soundproofed rooms. The only decorations are the unyielding restraints and the steel tables where much of the station's darker business is conducted — extracting information by whatever means necessary.
+
+[[Return to the Security Command Center.|Security Command Center][$timeadd = 5]]
+
+This is a dead end by design, a place meant for inquisition and containment. There are no other exits, only the way back to the command hub from which all surveillance and security thread together in the ever-watchful eyes of MOR-1's Security Command Center.
+
+

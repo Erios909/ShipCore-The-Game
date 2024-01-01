@@ -1,0 +1,55 @@
+:: RoguesGalleryCards [lowerdeckact] {"position":"1475,1350","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket/roguesgallery.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Rogue's Gallery - Playing Cards",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Rogue's Gallery</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The Rogue's Gallery is filled with the sound of shuffling cards and the occasional clatter of chips. You find a seat at a table where a card game is about to begin. The stakes are high, and the players' faces are unreadable. It's time to see if luck is on your side tonight.</p>
+
+<!-- Card Game Event with Weighted Random Outcome -->
+<<set _cardOutcome = 0>>
+<<set _randomNumber = random(1, 100)>>
+
+<<if _randomNumber <= 5>> <!-- Big Win (5% chance) -->
+    <<set _cardOutcome to random(300, 500)>>
+<<elseif _randomNumber <= 20>> <!-- Win (15% chance) -->
+    <<set _cardOutcome to random(100, 299)>>
+<<elseif _randomNumber <= 50>> <!-- Break Even (30% chance) -->
+    <<set _cardOutcome to random(-20, 99)>>
+<<else>> <!-- Loss (50% chance) -->
+    <<set _cardOutcome to random(-30, -1)>>
+<</if>>
+
+<<set $player.credits += _cardOutcome>>
+
+<<if _cardOutcome >= 300>> <!-- Big Win Text -->
+    <p>Fortune smiles upon you as you play your hand with a deft touch. The chips pile up, and by the end of the night, you're walking away with a hefty sum of credits. It's a big win, and the other players can only look on in envy.</p>
+    <<creditchange _cardOutcome "positive">><br>
+<<elseif _cardOutcome >= 100>> <!-- Win Text -->
+    <p>Your strategy pays off as the final card seals your victory. You've earned a respectable amount of credits, and the satisfaction of outplaying your opponents is just as rewarding.</p>
+    <<creditchange _cardOutcome "positive">><br>
+<<elseif _cardOutcome >= 0>> <!-- Break Even Text -->
+    <p>The game is a rollercoaster of ups and downs, but you manage to break even. You count your credits and find you're right back where you started. Not a bad outcome, all things considered.</p>
+<<else>> <!-- Loss Text -->
+    <p>The cards are cruel tonight, and no amount of skill can save you from a run of bad luck. You've lost some credits, but you take the defeat in stride. After all, that's the game.</p>
+    <<creditchange _cardOutcome "negative">><br>
+<</if>>
+
+<!-- Continue Link -->
+[[Back to The Rogue's Gallery.|RoguesGallery]]
+<</nobr>>
+
+
+

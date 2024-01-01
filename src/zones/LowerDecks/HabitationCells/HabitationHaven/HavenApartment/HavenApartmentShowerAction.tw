@@ -1,0 +1,31 @@
+:: HavenApartmentShower [safe] {"position":"1525,2250","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">><<addmins $timeadd>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/apartmentshower.jpg'>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Your Apartment - Showering",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="showerTitleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Invigorating Shower</span></h2>
+<hr id="showerTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="showerLocationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="showerLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<</nobr>>
+
+
+<<addmins 15>>
+
+The water cascades down in a soothing torrent, the warmth enveloping you in a cocoon away from the cold metal of MOR-1. Each drop helps wash away the <<if $player.filth < 200>><span style="color: red;">heavy grime of hard labor</span><<elseif $player.filth < 400>><span style="color: orange;">dust of a long day</span><<elseif $player.filth < 600>><span style="color: yellow;">traces of work</span><<else>><span style="color: green;">minimal residue</span><</if>>, leaving your skin feeling rejuvenated and your spirit lifted.
+<<set $player.filth to 0>> <!-- Player is now clean -->
+
+As steam fills the small enclosure, you take a moment to appreciate the simple luxury of hot water, <<if $player.stress >= 600>><span style="color: green;">easily letting your worries dissolve</span><<elseif $player.stress >= 400>><span style="color: yellow;">steaming away stress</span><<elseif $player.stress >= 200>><span style="color: orange;">calming your frazzled nerves</span><<else>><span style="color: red;">as you struggle to relax</span><</if>> in the mist.
+
+Feeling fresher and with renewed clarity, you step out onto the cool tile, ready to face whatever challenges the station might hold with a <<if $player.mood >= 600>><span style="color: green;">bright outlook</span><<elseif $player.mood >= 400>><span style="color: yellow;">calm disposition</span><<elseif $player.mood >= 200>><span style="color: orange;">stabilized demeanor</span><<else>><span style="color: red;">need for more uplifting activities</span><</if>>.
+
+[[Continue.|HabitationApartment][$timeadd = 1]]
+
+
+

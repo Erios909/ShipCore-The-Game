@@ -1,0 +1,53 @@
+:: ContrabandTechDepot [poi] {"position":"1825,1200","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket/techdepot.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Contraband Tech Depot",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Contraband Tech Depot</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+You have <<=$lowerdecksCyberware>> <span style="color:yellow;">Cyberware</span> units in your lockers.<br>
+<p>The Contraband Tech Depot is a neon-lit maze of stalls and workshops, each offering the latest in illegal cyberware enhancements. The air hums with the sound of machinery and the murmur of clandestine deals. Here, the cutting edge of technology is not just a phrase—it's a literal truth etched in chrome and silicon.</p>
+
+<<blackmarketactivity>>
+
+
+<!-- Actions -->
+<<if $player.credits >= 300>>
+    [[Buy cyberware (-300 Credits, 01:00)|ContrabandTechDepotBuyCyberware][$player.credits -= 300; $lowerdeckBlackActivity += 300; $timeadd = 60]]<br>
+<<else>>
+    <span class="disabledLink">Buy cyberware (-300 Credits, 01:00)</span><br>
+<</if>>
+[[Work as a dealer (01:00)|ContrabandTechDepotWorkDealer][$timeadd = 60]]<br>
+
+<!-- VigorMax Shot -->
+<<if $player.credits >= 1000>>
+    [[Purchase VigorMax Shot (00:15) 1000 Cr.|ContrabandTechDepot][$player.credits -= 1000; $playerConsumables.vigorMaxShot += 1; $timeadd += 15]]<br>
+    "Recharge your energy to maximum levels."<br>
+<<else>>
+    <span class="disabledLink">Not enough credits for VigorMax Shot</span><br>
+<</if>>
+
+<!-- Continue Link -->
+[[Return to the Lower Decks.|Black Market Bazaar]]
+
+<!-- Additional Narrative Flavor Text -->
+<p>As you navigate through the depot, your senses are assaulted by the sharp tang of ozone and the slick sheen of bio-lubricant. The vendors hawk their wares with a predator's grin, each claiming their illegal mods are the best, the most cutting-edge, the most undetectable. You can't help but wonder how many of these enhancements have been ripped from the bodies of the less fortunate, or how many have been used for unspeakable acts.</p>
+
+<p>Over in a shadowy corner, a cybersurgeon offers a quick install, her hands steady as a rock despite the questionable legality of her practice. Her eyes, enhanced with a metallic sheen, scan you up and down, appraising your potential as a customer—or perhaps as a product. You're reminded that in the Contraband Tech Depot, the line between human and commodity is disturbingly blurred.</p>
+
+<p>Despite the risks, the allure of power that comes with these enhancements is undeniable. You watch as a deal is struck, and a man walks away with a new-found swagger, his gait now assisted by silent, invisible pistons. You can't help but feel a twinge of envy, mixed with a dose of caution. After all, in the world of contraband tech, every upgrade comes with its own set of dangers and debts.</p>
+<</nobr>>
+
+
+

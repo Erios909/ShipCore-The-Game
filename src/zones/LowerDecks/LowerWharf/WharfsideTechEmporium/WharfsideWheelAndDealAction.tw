@@ -1,0 +1,133 @@
+:: WharfsideWheelAndDeal [lowerdeckact] {"position":"1400,925","size":"100,100"}
+<<nobr>>   
+    <<set $currentArea to "lowerdecks">>
+    <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/wharfsidetechemporium.jpg'>>
+    <<addmins $timeadd>>
+    <<set $lowerdecksScrap -= 1>>
+    <<set $lowerdecksParts -= 1>>
+    <<set $lowerdecksCyberware -= 1>>
+    <<set $location to {
+        name: "Meltisar System, MOR-1, Wharfside Tech Emporium - Wheel and Deal",
+        outside: false,
+        vacuum: false,
+        temperature: true
+    }>>
+    <<updatebar>>
+    
+    <<if not $wharfsideWheelAndDealEventsRecord>> <<set $wharfsideWheelAndDealEventsRecord to {}>><</if>>
+    <<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+    
+    <<if $wharfsideWheelAndDealEventsRecord.today != _today>>
+        <<set $wharfsideWheelAndDealEventsRecord.today to _today>>
+        <<set $wharfsideWheelAndDealEventsRecord.triggeredEvents to []>>
+    <</if>>
+    
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+    
+    <<set _availableEvents to []>> <!-- List of available wheel and deal trading events -->
+    <<for _i to 1; _i <= 11; _i++>>
+        <<if not $wharfsideWheelAndDealEventsRecord.triggeredEvents.includes(_i)>>
+            <<set _availableEvents.push(_i)>>
+        <</if>>
+    <</for>>
+    
+    <<if _availableEvents.length>> <!-- If there are still available wheel and deal trading events -->
+        <<set _randomEvent to _availableEvents.random()>>
+        <<set $wharfsideWheelAndDealEventsRecord.triggeredEvents.push(_randomEvent)>>
+    <</if>>
+    
+    <!-- Area Header -->
+    <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Wharfside Tech Emporium - Wheel and Deal</span></h2>
+    <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+    <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+    <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+    <p>With an assortment of scrap, parts, and cyberware at your disposal, you dive into the bustling trade hall. It's a veritable treasure trove for a savvy dealer; you just need to find the right buyer to turn your collection into a windfall.</p>
+    
+    <!-- Random Wheel and Deal Trading Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Profitable Trade-Up -->
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 50 "positive">>
+        <p>Your keen eye and negotiation tactics lead to a profitable exchange. You trade in your scrap and parts for high-demand cyberware, and the trader, impressed by your items, tops off the deal with some credits.</p>
+        <br>
+
+    <<case 2>> <!-- Balanced Bargain -->
+        <<itemchange "cyberware" 1 "gain">>
+        <<itemchange "parts" 2 "gain">>
+        <<creditchange 50 "positive">>
+        <p>You find just the right buyers to strike a balanced bargain. Your scrap is exchanged for a valuable piece of cyberware and some much-needed parts, along with a bonus in credits for your effort.</p>
+        <br>
+
+    <<case 3>> <!-- Surplus Success -->
+        <<itemchange "parts" 3 "gain">>
+        <<creditchange 50 "positive">>
+        <p>The day's surplus sell-off works in your favor as you manage to secure a bundle of parts in exchange for your cyberware and scrap. The pile of credits you receive feels like a bonus at this point.</p>
+        <br>
+
+    <<case 4>> <!-- Tech Tinkerer's Triumph -->
+        <<itemchange "cyberware" 2 "gain">>
+        <<itemchange "parts" 1 "gain">>
+        <p>Your knack for spotting hidden gems in the tech bazaar pays off. A tinkerer's eyes light up at the scrap you offer, rewarding you with top-tier cyberware and a few extra parts.</p>
+        <br>
+
+    <<case 5>> <!-- Scrapper's Luck -->
+        <<itemchange "parts" 3 "gain">>
+        <<itemchange "scrap" 1 "gain">>
+        <p>Luck is on your side as you trade cyberware for a heap of useful parts. A scrapper, impressed with your haggling, throws in a bit of extra scrap to seal the deal.</p>
+        <br>
+
+    <<case 6>> <!-- Cybernetic Jackpot -->
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 100 "positive">>
+        <p>The cyberware market is booming, and you ride the wave to a jackpot. You exchange parts and scrap for advanced cybernetics and a tidy sum of credits.</p>
+        <br>
+
+    <<case 7>> <!-- Parts Procurement Prowess -->
+        <<itemchange "parts" 4 "gain">>
+        <<creditchange 100 "positive">>
+        <p>Your parts procurement prowess is unmatched today. A sequence of favorable exchanges leaves you with an abundance of high-quality parts and a wallet that's pleasantly heavier.</p>
+        <br>
+
+    <<case 8>> <!-- Scrapyard Fortune -->
+        <<itemchange "cyberware" 1 "gain">>
+        <<itemchange "scrap" 2 "gain">>
+        <<itemchange "parts" 1 "gain">>
+        <<creditchange 100 "positive">>
+        <p>A visit to the scrapyard turns into an unexpected fortune. You parlay your wares into a selection that includes a piece of top-notch cyberware, extra scrap, and parts, rounded off with a hefty sum of credits.</p>
+        <br>
+
+    <<case 9>> <!-- Grand Haul -->
+        <<itemchange "cyberware" 4 "gain">>
+        <<creditchange 50 "positive">>
+        <p>Your shrewd bargaining at the cyberware stall pays off handsomely. You trade your less valuable items for a set of premium cybernetic enhancements, and the grateful vendor slips you a bonus in credits for choosing their shop.</p>
+        <br>
+
+    <<case 10>> <!-- Master Merchant -->
+        <<itemchange "parts" 3 "gain">>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 100 "positive">>
+        <p>Today you're the master merchant, turning each offer to your advantage. You leave the market with a surplus of sought-after parts and some impressive cyberware, along with a hefty extra in credits.</p>
+        <br>
+
+    <<case 11>> <!-- Scrap to Riches -->
+        <<itemchange "parts" 4 "gain">>
+        <<itemchange "scrap" 2 "gain">>
+        <<creditchange 100 "positive">>
+        <p>A stroke of luck turns your pile of scrap into a treasure trove. You swap it for a large quantity of high-quality parts and more scrap, and the deal is sweetened with credits to boot.</p>
+        <br>
+
+    <<default>> <!-- Even-Steven Exchange -->
+        <<itemchange "cyberware" 1 "gain">>
+        <<itemchange "parts" 1 "gain">>
+        <<creditchange 100 "positive">>
+        <p>You play it safe and opt for an even-steven exchange. Each item finds a new owner, and you walk away with a more valuable selection and a satisfying amount of credits to boot.</p>
+        <br>
+<</switch>>
+
+    <br>
+    
+    <!-- Continue Link -->
+    [[Return to navigating the Wharfside Tech Emporium.|WharfsideTechEmporium]]
+    <</nobr>>
+
+

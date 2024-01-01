@@ -1,0 +1,156 @@
+:: LastHomeWork [lowerdeckact] {"position":"750,1800","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
+<<addmins $timeadd>> <!-- Working a shift takes time. -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Last Home - Working Shift",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Flavor text about offering to help at the bar -->
+<p>The Last Home is more than a bar—it's a crossroads for those seeking purpose or escape.</p>
+
+<p>You offer your help to the bar staff, who quickly take you up on it. It seems they're short-handed like usual. You look around and see several customers waiting to be served:</p>
+
+<!-- Create an array of customer names to choose from -->
+<<set _customerNames to [
+    "Refugee", "Stowaway", "Outcast", "Deserter", "Fugitive", "Scrapper",
+    "Vagrant", "Relic Hunter", "Deck Swab", "Ex-Convict", "Orphan", "Beggar",
+    "Downtrodden Miner", "Worn-Out Medic", "Retired Soldier", "Defector",
+    "Former Engineer", "Mutineer", "Street Artist", "Ex-Corporate Spy", "Cult Survivor",
+    "Displaced Diplomat", "Struggling Musician", "Clanless Warrior", "Disgraced Academic",
+    "Down-and-out Merchant", "Aging Pilot", "Maverick Hacker", "Spacefarer", "Nomad"
+]>>
+
+<!-- Randomize the customer names -->
+<<set _customers to _customerNames.shuffle()>>
+
+<!-- Customer serving section for group 1 -->
+<<set _group1 to _customers.splice(0, 3)>>
+<div id="customerGroup1">
+    <ul>
+    <<for _i = 0; _i < _group1.length; _i++>>
+        <<set _tip to random(1, 2)>>
+        <<capture _i _tip _group1[_i]>>
+            <<link _group1[_i]>>
+                <<replace "#customerGroup1">>
+                    <p>You deftly serve the <<=_group1[_i]>>. They appreciate the quick service and leave a tip of $<<=_tip>>. It's not much, but every little bit helps.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Group 2 -->
+<div id="customerGroup2">
+    <ul>
+    <<set _group2 to _customers.splice(0, 3)>>
+    <<for _i = 0; _i < _group2.length; _i++>>
+        <<set _tip = random(1, 2)>>
+        <<capture _i _tip _group2[_i]>>
+            <<link _group2[_i]>>
+                <<replace "#customerGroup2">>
+                    <p>You serve the <<=_group2[_i]>> and receive a tip of $<<=_tip>>.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Group 3 -->
+<div id="customerGroup3">
+    <ul>
+    <<set _group3 to _customers.splice(0, 3)>>
+    <<for _i = 0; _i < _group3.length; _i++>>
+        <<set _tip = random(1, 2)>>
+        <<capture _i _tip _group3[_i]>>
+            <<link _group3[_i]>>
+                <<replace "#customerGroup3">>
+                    <p>The <<=_group3[_i]>> nods appreciatively as you hand over their order, leaving a $<<=_tip>> tip.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Group 4 -->
+<div id="customerGroup4">
+    <ul>
+    <<set _group4 to _customers.splice(0, 3)>>
+    <<for _i = 0; _i < _group4.length; _i++>>
+        <<set _tip = random(1, 2)>>
+        <<capture _i _tip _group4[_i]>>
+            <<link _group4[_i]>>
+                <<replace "#customerGroup4">>
+                    <p>With a swift exchange, you handle the <<=_group4[_i]>>'s request. They leave a $<<=_tip>> tip for your service.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Group 5 -->
+<div id="customerGroup5">
+    <ul>
+    <<set _group5 to _customers.splice(0, 3)>>
+    <<for _i = 0; _i < _group5.length; _i++>>
+        <<set _tip = random(1, 2)>>
+        <<capture _i _tip _group5[_i]>>
+            <<link _group5[_i]>>
+                <<replace "#customerGroup5">>
+                    <p>You engage in a bit of small talk with the <<=_group5[_i]>> as you serve them, earning a $<<=_tip>> tip for the friendly service.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Group 6 -->
+<div id="customerGroup6">
+    <ul>
+    <<set _group6 to _customers.splice(0, 3)>>
+    <<for _i = 0; _i < _group6.length; _i++>>
+        <<set _tip = random(1, 2)>>
+        <<capture _i _tip _group6[_i]>>
+            <<link _group6[_i]>>
+                <<replace "#customerGroup6">>
+                    <p>The atmosphere lightens as the <<=_group6[_i]>> laughs off a joke, leaving you a $<<=_tip>> tip as thanks.<span style="color: green;"> +$<<=_tip>> Credits</span></p>
+                    <<set $player.credits += _tip>>
+                    <<updatebar>>
+                <</replace>>
+            <</link>>
+        <</capture>>
+    <</for>>
+    </ul>
+</div>
+
+<!-- Finish Shift Link -->
+[[Finish your shift|The Last Home]]
+<</nobr>>
+
+

@@ -1,0 +1,115 @@
+:: LastHomeDrink [lowerdeckact] {"position":"575,2050","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
+<<addmins $timeadd>>
+<<set $player.credits -= 5>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Last Home - Grabbing a Drink",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $lastHomeEventsRecord>> <<set $lastHomeEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $lastHomeEventsRecord.today != _today>>
+    <<set $lastHomeEventsRecord.today to _today>>
+    <<set $lastHomeEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<!-- Create a list of available events that have not occurred today -->
+<<set _availableEvents to []>>
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $lastHomeEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<!-- Select a random event from the available ones or default if none are available -->
+<<if _availableEvents.length>> <!-- If there are still available events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $lastHomeEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Standard Heading Template -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The Last Home's ambient lighting casts soothing shadows across the establishment, inviting you to take a seat at the bar. You order a drink, the ice clinking softly in the glass, and lean in to catch the fragments of hushed conversations. Tales from the edge of the galaxy mix with the latest station gossip, offering a glimpse into the lives of those who call MOR-1 their temporary haven.</p>
+
+<!-- Random Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Local Spacers' Toast -->
+        <p>A group of spacers toast to a successful voyage and invite you to join. The camaraderie lifts your spirits.</p>
+        <<set $player.mood += Math.round($player.mood * 0.02)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- Unfortunate Spill -->
+        <p>Your drink gets knocked over in a minor scuffle at the bar. It's a small loss, but it dampens the mood.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.01)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 3>> <!-- Helpful Advice -->
+        <p>An old engineer shares some tales and gives you advice on maintaining your gear, which might just save your life one day.</p>
+        <<set $player.trauma -= Math.round($player.trauma * 0.02)>>
+        <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Rumor Has It -->
+        <p>You catch wind of a cargo ship looking for extra hands. This could be your ticket to a steady job.</p>
+        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02)>>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 5>> <!-- Quiet Reflection -->
+        <p>The low hubbub of the bar allows you a moment of reflection, easing your mind.</p>
+        <<set $player.stress -= Math.round($player.stress * 0.02)>>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 6>> <!-- A Toast to the Fallen -->
+        <p>The bar falls silent for a toast to crewmembers lost to the void. It's a sobering reminder of the dangers out here.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.01)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">>
+        <<set $player.stress -= Math.round($player.stress * 0.01)>>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 7>> <!-- Winning Hand -->
+        <p>You join a game of cards and your luck holds out. Walking away with a few extra credits feels good.</p>
+        <<set $player.credits += 15>>
+        <<creditchange 15 "positive">><br>
+
+    <<case 8>> <!-- Overheard Plans -->
+        <p>Overhearing plans for a black market deal, you file away the information. Knowledge is power, after all.</p>
+        <<set $player.powerReserves += Math.round($player.powerReserves * 0.01)>>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 9>> <!-- Dockworker's Challenge -->
+        <p>A friendly arm-wrestling challenge with a dockworker proves to be tougher than expected. You welcome the physical exertion, though.</p>
+        <<set $player.health += Math.round($player.health * 0.01)>>
+        <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 10>> <!-- Misplaced Wallet -->
+        <p>You find a wallet under your seat. Honesty wins out as you return it to its grateful owner, who rewards you with a few credits.</p>
+        <<set $player.credits += 10>>
+        <<creditchange 10 "positive">><br>
+
+    <<default>> <!-- Default Event -->
+        <p>The night wanes, and despite the warmth of the bar, luck isn't on your side as you find yourself buying a round of drinks for newly made friends, or perhaps losing a handful of credits in an ill-advised bet. Either way, it's an evening to remember, even with a slightly lighter wallet.</p>
+        <<set $player.credits -= 5>>
+        <<creditchange 5 "negative">>
+        <<set $player.credits += 5>>
+        <<creditchange 5 "positive">><br>
+<</switch>>
+<br>
+
+<!-- Continue Link -->
+[[Return to the bustle of The Last Home.|The Last Home]]
+<</nobr>>
+
+

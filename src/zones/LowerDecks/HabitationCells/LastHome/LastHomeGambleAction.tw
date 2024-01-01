@@ -1,0 +1,109 @@
+:: LastHomeGamble [lowerdeckact] {"position":"550,1950","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthomegamble.jpg'>>
+<<addmins $timeadd>>
+<<set $player.credits -= 10>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Last Home - Gambling",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $lastHomeGambleEventsRecord>> <<set $lastHomeGambleEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $lastHomeGambleEventsRecord.today != _today>>
+    <<set $lastHomeGambleEventsRecord.today to _today>>
+    <<set $lastHomeGambleEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available gambling events -->
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $lastHomeGambleEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available gambling events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $lastHomeGambleEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available gambling events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>At the back of The Last Home, a raucous cheer erupts from a circle of patrons huddled around a gambling table. You make your way through the crowd, the allure of chance and the glint of credits calling you to join. With a confident nod, you place your bet among the hopeful and the desperate, the clatter of dice echoing the beating heart of the Lower Decks.</p>
+
+<!-- Random Gambling Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Impressive Jackpot -->
+        <p>A risky bet pays off as you hit an impressive jackpot on the slot machine, eliciting cheers from around. Your initial investment pales in comparison to the hefty pile of credits now in front of you.</p>
+        <<set $player.credits += 100>> <!-- Including the initial -10 credits buy-in -->
+        <<creditchange 100 "positive">><br>
+
+    <<case 2>> <!-- Bad Luck at the Dice Table -->
+        <p>The dice seem cursed tonight; no matter how you throw them, they betray you. The losses mount quickly, prompting you to step away before the damage gets worse.</p>
+        <<set $player.credits -= 30>> <!-- Including the initial buy-in -->
+        <<creditchange 30 "negative">><br>
+
+    <<case 3>> <!-- Error in Your Favor -->
+        <p>Due to a miscalculation by your opponents, a pot you thought lost is awarded to you. It's a modest win, but a win nonetheless.</p>
+        <<set $player.credits += 30>> <!-- Including the initial buy-in -->
+        <<creditchange 30 "positive">><br>
+
+    <<case 4>> <!-- Strategic Fold -->
+        <p>Recognizing a losing hand early on, you strategically fold and watch as the pot grows. It turns out to be the right call, as your modest bet is returned to you when the accused cheater is revealed.</p><br>
+        <<set $player.credits += 10>> <!-- Refunded the initial buy-in -->
+
+    <<case 5>> <!-- Unexpected Bonus -->
+        <p>You didn't win the main pot, but a side bet with another player comes through for you in the end. Sometimes, it's the side games that pay off.</p>
+        <<set $player.credits += 35>> <!-- Including the initial buy-in -->
+        <<creditchange 35 "positive">><br>
+
+    <<case 6>> <!-- Generous Stranger -->
+        <p>After a string of losses, a sympathetic stranger places a lucky token in your hand. Inspired, your next bet turns the tide.</p>
+        <<set $player.credits += 25>> <!-- Including the initial buy-in -->
+        <<creditchange 25 "positive">><br>
+
+    <<case 7>> <!-- Crushing Loss -->
+        <p>A high-stakes game draws you in, and the thrill of the risk clouds your judgment. The loss is more than you anticipated, leaving a bitter taste.</p>
+        <<set $player.credits -= 50>> <!-- Including the initial buy-in -->
+        <<creditchange 50 "negative">><br>
+
+    <<case 8>> <!-- Clean Sweep -->
+        <p>Your competitors underestimate you, and hand after hand falls into your favor. By the end of the game, you've cleanly swept the table.</p>
+        <<set $player.credits += 70>> <!-- Including the initial buy-in -->
+        <<creditchange 70 "positive">><br>
+
+    <<case 9>> <!-- Miraculous Turnaround -->
+        <p>Just when all seemed lost, a miraculous turn of the cards swings fortune back to you. You manage to recoup your losses and then some, breathing a sigh of relief.</p>
+        <<set $player.credits += 20>> <!-- Including the initial buy-in -->
+        <<creditchange 20 "positive">><br>
+
+    <<case 10>> <!-- The High Roller's Edge -->
+        <p>A high roller at the table ups the ante to a level few can match. You decide to follow suit and it pays off tremendously, boosting both your wallet and your confidence.</p>
+        <<set $player.credits += 90>> <!-- Including the initial buy-in -->
+        <<creditchange 90 "positive">><br>
+
+    <<default>> <!-- Default Gambling Event -->
+        <p>The evening's gambles come and go; sometimes you're up, sometimes you're down. As the night comes to a close and your pile of chips is cashed out, you find yourself just a little bit ahead of where you started.</p>
+        <<set $player.credits += 15>> <!-- Including the initial buy-in -->
+        <<creditchange 15 "positive">><br>
+<</switch>>
+
+
+
+<!-- Continue Link -->
+[[Head back to the bar.|The Last Home]]
+<</nobr>>
+
+
