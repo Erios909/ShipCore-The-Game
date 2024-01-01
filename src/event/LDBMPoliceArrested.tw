@@ -1,5 +1,5 @@
 :: LDBMPoliceArrested [event nobr] {"position":"1925,950","size":"100,100"}
-<<set $currentArea to "lowerdecks">>
+<<nobr>><<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/arrest.jpg'>>
 <<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
 <<set $location to {

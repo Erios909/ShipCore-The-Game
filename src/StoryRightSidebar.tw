@@ -16,7 +16,7 @@
             <</link>>
             <ul class="content hidden">
                 <li><<button 'View Change Log'>>
-  					  <<run slideWin("Consumables")>>
+  					  <<run slideWin("changelist")>>
 				<</button>></li>
 				<li>[[Consumables]]</li>
                 <li>[[Stash]]</li>

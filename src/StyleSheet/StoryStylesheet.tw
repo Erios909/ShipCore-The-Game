@@ -1,4 +1,4 @@
-:: StoryStylesheet [stylesheet]
+:: StoryStylesheet [stylesheet] {"position":"1800,100"}
 #passages {
             max-width: 75%;
         }

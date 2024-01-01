@@ -22,9 +22,9 @@
 <<elseif $player.debt <= 0>> 
     <<goto "DebtFreeEvent">>
 <<elseif $someStoryFlag>> 
-    <<goto "StorySpecificEvent">>
+    <<goto $nextPassage>>
 <<elseif $anotherStoryFlag>> 
-    <<goto "AnotherStorySpecificEvent">>
+    <<goto $nextPassage>>
 <<elseif $currentArea is "lowerdecks">>
     <<set _randomChance to random(1, 3)>>
     <<if $lowerdeckHeat >= 10 or ($lowerdeckHeat >= 2 and _randomChance <= $lowerdeckHeat - 1)>>

@@ -27,5 +27,3 @@ Your new watch lights up again, and a strange tingling sensation can be felt in 
 [[Great, I woke up and I'm already broke?|Intro4][$playerIntro5 = 2;$timeadd = 1]]
 [[Does this place have debt slavery?|Intro4][$playerIntro5 = 3;$timeadd = 1]]
 [[Fuck!|Intro4][$playerIntro5 = 4;$timeadd = 1]]<</say>>
-
-

@@ -1,7 +1,7 @@
 ShipCore - The Game License Agreement
 
 1. License Grant for ShipCore - The Game's Source Code
-The source code of "ShipCore - The Game" ("Game") is made available under the [Name of Open Source License, e.g., MIT, GPL] License. This allows users to use, modify, and distribute the source code of the Game in accordance with the terms of that license.
+The source code of "ShipCore - The Game" ("Game") is made available under the [Attribution-NonCommercial-ShareAlike 4.0 International] License. This allows users to use, modify, and distribute the source code of the Game in accordance with the terms of that license.
 
 2. Limited Use License for ShipCore Intellectual Property
 The characters, storylines, and related intellectual property from the "ShipCore" book series ("Intellectual Property") are integral to the Game. While the Game's source code is open source, the ShipCore Intellectual Property is not. Contributors to the Game are granted a limited use license by Erios Writes LLC to use, adapt, and incorporate the Intellectual Property solely within the context of ShipCore - The Game. This license is revokable by Erios Writes LLC at any time.

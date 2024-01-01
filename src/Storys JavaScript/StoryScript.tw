@@ -1,4 +1,4 @@
-:: StoryScript [script]
+:: StoryScript [script] {"position":"1925,100"}
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where the HTML file is
 	// located if you want to run this from inside Twine.
@@ -755,5 +755,5 @@ $(document).on("keyup", function (e) {
 });
 /* Keyboard links - End */
 
-$("#ui-bar").append('<div id="uifooter"><center><hr id="HuDHr><span class="smallHuDFont">(V0.002 A Sci-Fi sandbox based on ShipCore)</span></center></div>');
+$("#ui-bar").append('<div id="uifooter"><center><hr id="HuDHr><span class="smallHuDFont">(V0.00261 A Sci-Fi sandbox based on ShipCore)</span></center></div>');
 

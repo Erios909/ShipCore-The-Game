@@ -18,42 +18,50 @@
 <</if>>
 <<if $player.credits >= 1000>>
     <<link "Pay debt off (1000Cr.)">>
-        <<set $player.credits -= 1000>>
-        <<set $player.debt -= 1000>>
-        <<creditchange -1000 "negative">>
-        <<debtchange -1000 "positive">>
-        <<addmins $timeadd>>
+        <<if $player.credits >= 1000>>
+            <<set $player.credits -= 1000>>
+            <<set $player.debt -= 1000>>
+            <<creditchange -1000 "negative">>
+            <<debtchange -1000 "positive">>
+            <<addmins $timeadd>>
+        <</if>>
         <<updatebar>>
         <</link>><br>
 <</if>>
 <<if $player.credits >= 10000>>
     <<link "Pay debt off (10000Cr.)">>
-        <<set $player.credits -= 10000>>
-        <<set $player.debt -= 10000>>
-        <<creditchange -10000 "negative">>
-        <<debtchange -10000 "positive">>
-        <<addmins $timeadd>>
+        <<if $player.credits >= 10000>>
+            <<set $player.credits -= 10000>>
+            <<set $player.debt -= 10000>>
+            <<creditchange -10000 "negative">>
+            <<debtchange -10000 "positive">>
+            <<addmins $timeadd>>
+        <</if>>
         <<updatebar>>
         <</link>><br>
 <</if>>
 <<if $player.credits >= 100000>>
     <<link "Pay debt off (100000Cr.)">>
-        <<set $player.credits -= 100000>>
-        <<set $player.debt -= 100000>>
-        <<creditchange -100000 "negative">>
-        <<debtchange -100000 "positive">>
-        <<addmins $timeadd>>
+        <<if $player.credits >= 100000>>
+            <<set $player.credits -= 100000>>
+            <<set $player.debt -= 100000>>
+            <<creditchange -100000 "negative">>
+            <<debtchange -100000 "positive">>
+            <<addmins $timeadd>>
+        <</if>>
         <<updatebar>>
         <</link>><br>
 <</if>>
 <<if $player.credits >= 1000000>>
     <<link "Pay debt off (1000000Cr.)">>
-        <<set $player.credits -= 1000000>>
-        <<set $player.debt -= 1000000>>
-        <<creditchange -1000000 "negative">>
-        <<debtchange -1000000 "positive">>
-        <<addmins $timeadd>>
-        <<updatebar>>
+        <<if $player.credits >= 1000000>>
+            <<set $player.credits -= 1000000>>
+            <<set $player.debt -= 1000000>>
+            <<creditchange -1000000 "negative">>
+            <<debtchange -1000000 "positive">>
+            <<addmins $timeadd>>
+            <<updatebar>>
+        <</if>>
         <</link>><br>
 <</if>>
 

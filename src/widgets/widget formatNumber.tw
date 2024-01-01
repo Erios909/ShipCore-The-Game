@@ -5,5 +5,3 @@
     <<print _numToFormat.toLocaleString("en-US")>> /* Format with commas */
 <</nobr>>
 <</widget>>
-
-

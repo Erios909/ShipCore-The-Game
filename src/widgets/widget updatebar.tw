@@ -1,8 +1,8 @@
 :: widget updatebar [widget nobr] {"position":"175,275","size":"100,100"}
 <<widget "updatebar">><<silently>><<nobr>>
     <<clamps>>
-    <<replace "#story-banner">><<display "StoryBanner">><</replace>>
-    <<replace "#story-caption">><<display "StoryCaption">><</replace>>
+    <<replace "#story-banner">><<include "StoryBanner">><</replace>>
+    <<replace "#story-caption">><<include "StoryCaption">><</replace>>
 <</nobr>><</silently>><</widget>>
 
 

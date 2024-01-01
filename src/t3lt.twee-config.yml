@@ -1,0 +1,50 @@
+sugarcube-2:
+  macros:
+    setBackground:
+      name: setBackground
+    updatebar:  
+      name: updatebar
+    changemoods:
+      name: changemoods
+    addmins:
+      name: addmins 
+    playerp:
+      name: playerp
+    maincomputer:
+      name: maincomputer
+      container: true
+    say:
+      name: say
+      container: true
+    clamps:
+      name: clamps
+    date:
+      name: date  
+    time24hr:
+      name: time24hr
+    time12hr:
+      name: time12hr
+    manageNeeds:
+      name: manageNeeds
+    creditchange:
+      name: creditchange
+    debtchange:
+      name: debtchange
+    autoFabricatorProcess:
+      name: autoFabricatorProcess
+    blackmarketactivity:
+      name: blackmarketactivity
+    character:
+      name: character
+    PlayTrack:
+      name: PlayTrack
+    displayAreaImage:
+      name: displayAreaImage
+    setSidebarBackground:
+      name: setSidebarBackground
+    formatNumber:
+      name: formatNumber
+    mapWidget:
+      name: mapWidget
+    koloss:
+      name: koloss
