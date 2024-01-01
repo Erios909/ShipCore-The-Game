@@ -1,0 +1,85 @@
+:: VoidVistasWorkTourGuide [lowerdeckact] {"position":"575,875","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/voidvistas.jpg'>>
+<<addmins 60>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Void Vistas - Virtual Tour Guide Shift",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+
+<<set _randomEvent to random(1, 10)>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Void Vistas</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;>
+<p>As the virtual tour guide, you are the bridge between the cosmos and the customers. You slip on the interface gloves, feeling the subtle haptic feedback as you prepare to sweep the patrons away on a galactic adventure. The walls of Void Vistas disappear, replaced by the vast expanse of space stretching out in all directions.</p>
+
+<!-- Random Tour Guide Events -->
+<<switch _randomEvent>>
+    <<case 1>>
+        <p>Your engaging narrative on the life cycle of stars captivates the audience. They leave generous tips for the unforgettable journey.</p>
+        <<creditchange 50 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>>
+        <p>A group of students is thrilled by your detailed tour of historical space battles. You've made learning fun and earn a bonus.</p>
+        <<creditchange 25 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 3>>
+        <p>You deftly handle a malfunction in the holo-projector, keeping the tour on track. Your improvisation is rewarded.</p>
+        <<creditchange 20 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 4>>
+        <p>A curious child's relentless questions lead you to explore unplanned cosmic wonders. The parents are pleased and tip well.</p>
+        <<creditchange 40 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 5>>
+        <p>The day is slow, and you spend much of your shift maintaining the equipment. It's not the most exciting work, but it pays.</p>
+        <<creditchange 15 "positive">>
+        <<changemoods "fatigue" "major" "PosEffectOnPlayer">><br>
+
+    <<case 6>>
+        <p>A technical glitch sends your tour off-course, but you turn it into an impromptu lesson on troubleshooting. The crowd appreciates the transparency.</p>
+        <<creditchange 10 "positive">>
+        <<changemoods "fatigue" "major" "PosEffectOnPlayer">><br>
+
+    <<case 7>>
+        <p>Your vivid descriptions of alien landscapes leave the audience in awe. Your passion translates into a healthy tip pool.</p>
+        <<creditchange 35 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 8>>
+        <p>You spot a mistake in the tour script and correct it on the fly. The audience is none the wiser and your professionalism is noted.</p>
+        <<creditchange 20 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 9>>
+        <p>A mischievous kid tries to hijack the tour controls, but you manage to avert chaos. It's an exhausting day, but you keep your cool.</p>
+        <<creditchange 10 "positive">>
+        <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br>
+
+    <<case 10>>
+        <p>An unexpected power surge knocks out the main display. You use handheld projectors to finish the tour, earning respect and a modest bonus.</p>
+        <<creditchange 30 "positive">>
+        <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Tour Guide Event -->
+        <p>You lead a standard tour without any hiccups. The patrons are satisfied, and you earn your usual rate for the hour's work.</p>
+        <<creditchange 20 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+<</switch>>
+<br>
+
+<!-- Continue Link -->
+[[Back to Void Vistas.|Void Vistas]]
+<</nobr>>
+
+
