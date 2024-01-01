@@ -1,0 +1,75 @@
+:: LDBMPoliceArrested [event nobr] {"position":"1925,950","size":"100,100"}
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/arrest.jpg'>>
+<<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Arrested</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>The clank of the cell door echoes in your ears as you're thrown into the brig. The stark reality of your situation sets in—you've been arrested, and the evidence against you is daunting.</p>
+<<set $player.stress += Math.round($player.stress * 0.05 + 25)>>
+<<set $player.fatigue += Math.round($player.fatigue * 0.05 + 15)>>
+<<changemoods "stress" "major" "NegEffectOnPlayer">>
+<<changemoods "fatigue" "minor" "NegEffectOnPlayer">>
+
+<<set _arrestScenario to random(1, 4)>>
+
+<<switch _arrestScenario>>
+    <<case 1>>
+        <p>Your cell is a small, windowless room, the only light coming from a flickering bulb overhead. The guards are unsympathetic to your pleas, their stern faces a constant reminder of your predicament. You're left alone with your thoughts, the silence punctuated only by the distant sounds of the station.</p>
+        <p>As the hours pass, the isolation begins to gnaw at you. The walls seem to close in, and the air grows thick and heavy. You pace the cell, trying to keep the creeping despair at bay, but it's a losing battle. The uncertainty of your future weighs heavily on your mind.</p>
+        <p>Eventually, the door opens. You're released due to procedural errors, but the damage has been done. Your name has been tarnished, and the whispers follow you as you exit the brig. The relief of freedom is tainted by the stain on your reputation.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.15 + 20)>>
+        <<set $timeadd to (12 * 60)>>
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 20000>>
+    <<case 2>>
+        <p>The interrogation is harsh, the questions sharp and unyielding. The officers are convinced of your guilt, and they press you for a confession. You hold firm, denying the allegations, but each denial seems to only fuel their determination.</p>
+        <p>Time becomes a blur as the interrogation stretches on. You're denied food and rest, the officers using exhaustion as a tool to break your will. But you cling to the truth, the knowledge that you're innocent, even as they try to twist your words against you.</p>
+        <p>When they finally admit defeat, releasing you for lack of evidence, you're a shell of your former self. The station's corridors feel alien as you stagger to your quarters, the ordeal leaving you with a deep-seated sense of injustice and a burning desire for retribution.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.15 + 25)>>
+        <<set $timeadd to (14 * 60)>>
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 20000>>
+    <<case 3>>
+        <p>The cell is cold, the thin blanket provided doing little to ward off the chill. The guards ignore your requests, their indifference a clear message—you're not worth their time. The sound of your own breathing is your only company, a constant reminder of the solitude.</p>
+        <p>As the hours tick by, you feel the weight of the station above you, a crushing pressure that seems to sap your strength. You try to sleep, to find some escape from the reality of your situation, but rest is elusive, chased away by the specter of what might come.</p>
+        <p>Freedom comes at last, not with an apology, but with a curt nod and a gruff order to leave. You're innocent, but the experience has left its mark. Trust in the station's justice system is shattered, and you know that things will never be quite the same again.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.15 + 30)>>
+        <<set $timeadd to (16 * 60)>>
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 20000>>
+    <<case 4>>
+        <p>The questioning is relentless, a never-ending stream of accusations and demands for information you don't have. The officers are like predators, circling, waiting for any sign of weakness. But you give them nothing, holding onto your integrity with a fierce determination.</p>
+        <p>The lack of human contact is the hardest part. You're left to stew in your own thoughts, the uncertainty of your fate a constant companion. The station's justice system feels like a farce, and you're the unwilling actor in its twisted play.</p>
+        <p>When they finally release you, citing a lack of actionable evidence, the sense of relief is overwhelming. But it's tempered by anger, by the knowledge that you were wronged by the very system that's supposed to protect you. The walk back to your quarters is long, each step heavy with the weight of what you've endured.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.15 + 35)>>
+        <<set $timeadd to (18 * 60)>>
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 20000>>
+<</switch>>
+
+<<addmins $timeadd>>
+
+<<link "Back to your quarters." $LastHomeZone>><</link>>
+<</nobr>>
+
+TODO: Add arrest system
+
+

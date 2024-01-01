@@ -1,0 +1,5 @@
+:: StoryDisplayTitle {"position":"300,75","size":"100,100"}
+<h1 style="font-size: 1.2em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000; margin: 0">ShipCore</h1>\
+<hr id="HuDHr">
+
+

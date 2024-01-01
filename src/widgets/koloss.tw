@@ -1,0 +1,28 @@
+:: koloss [widget nobr] {"position":"1300,1200","size":"100,100"}
+<<widget "koloss">><<nobr>>
+    /* Calculate the combined difficulty score */
+    <<set $combinedDifficultyScore to ((2000 - $worldEconomyScore - $dangerLevelScore) / 20)>>
+    <<set _maxPercentageLoss = 50>> /* Maximum percentage loss */
+    <<set _maxFixedLoss = 5000>> /* Maximum fixed loss */
+    
+    /* Determine the percentage loss based on difficulty */
+    <<set _percentageLoss = Math.min(_maxPercentageLoss, $combinedDifficultyScore)>>
+    
+    /* Determine the fixed loss based on difficulty */
+    <<set _fixedLoss = Math.min(_maxFixedLoss, Math.floor($combinedDifficultyScore * 250))>>
+
+    /* Ensure fixed loss is at least 10 credits */
+    <<set _fixedLoss = Math.max(10, _fixedLoss)>>
+
+    /* Calculate the total amount of credits to lose */
+    <<set _totalLoss = Math.floor($player.credits * (_percentageLoss / 100)) + _fixedLoss>>
+
+    /* Apply the total loss */
+    <<set $player.credits -= _totalLoss>>
+
+    /* Display the loss */
+    <p style="color: red;">You have lost <span style="font-weight: bold;"><<= _totalLoss.toLocaleString("en-US")>> Cr.</span> due to the challenging conditions.</p>
+<</nobr>>
+<</widget>>
+
+

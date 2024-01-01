@@ -1,0 +1,66 @@
+:: DocksideSellParts [lowerdeckact] {"position":"1650,600","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Dockside Fabricator - Sell Parts",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Sell Fabricated Parts</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<</nobr>>
+<<nobr>>
+You've sold <<=$docksideStats.partsSold>> parts here so far.<br>
+You approach the parts selling terminal, where you can trade your fabricated parts for credits. The current going rate is 150 credits per part. How many parts are you looking to sell?
+
+<<set _partsSellPrice to 150>> <!-- Set the sell price per part -->
+<br>
+<<if $lowerdecksParts >= 10>>
+    [[Sell 10 parts for 1500 credits.|DocksideFabricator][$player.credits += (_partsSellPrice * 10); $docksideStats.partsSold += 10; $lowerdecksParts -= 10; $timeadd = 1]]<br>
+<<else>>
+    <span class="disabledLink">Sell 10 parts for 1500 credits. (Not enough parts)</span><br>
+<</if>>
+
+<<if $lowerdecksParts >= 25>>
+    [[Sell 25 parts for 3750 credits.|DocksideFabricator][$player.credits += (_partsSellPrice * 25); $docksideStats.partsSold += 25; $lowerdecksParts -= 25; $timeadd = 1]]<br>
+<<else>>
+    <span class="disabledLink">Sell 25 parts for 3750 credits. (Not enough parts)</span><br>
+<</if>>
+
+<<if $lowerdecksParts >= 50>>
+    [[Sell 50 parts for 7500 credits.|DocksideFabricator][$player.credits += (_partsSellPrice * 50); $docksideStats.partsSold += 50; $lowerdecksParts -= 50; $timeadd = 1]]<br>
+<<else>>
+    <span class="disabledLink">Sell 50 parts for 7500 credits. (Not enough parts)</span><br>
+<</if>>
+
+<<if $lowerdecksParts >= 75>>
+    [[Sell 75 parts for 11250 credits.|DocksideFabricator][$player.credits += (_partsSellPrice * 75); $docksideStats.partsSold += 75; $lowerdecksParts -= 75; $timeadd = 1]]<br>
+<<else>>
+    <span class="disabledLink">Sell 75 parts for 11250 credits. (Not enough parts)</span><br>
+<</if>>
+
+<<if $lowerdecksParts >= 100>>
+    [[Sell 100 parts for 15000 credits.|DocksideFabricator][$player.credits += (_partsSellPrice * 100); $docksideStats.partsSold += 100; $lowerdecksParts -= 100; $timeadd = 1]]<br>
+<<else>>
+    <span class="disabledLink">Sell 100 parts for 15000 credits. (Not enough parts)</span><br>
+<</if>>
+
+<<if $lowerdecksParts >= 1000>>
+    [[Sell 100 parts for 150000 credits.|DocksideFabricator][$player.credits += (_partsSellPrice * 100); $docksideStats.partsSold += 1000; $lowerdecksParts -= 1000; $timeadd = 1]]<br>
+<<else>>
+    <span class="disabledLink">Sell 1000 parts for 150000 credits. (Not enough parts)</span><br>
+<</if>>
+
+[[Inquire about bulk sales.|DocksideFabricatorBulkInquiry][$timeadd = 1]]<br>
+
+[[Reconsider.|DocksideFabricator][$timeadd = 5]]
+<</nobr>>
+
+
+

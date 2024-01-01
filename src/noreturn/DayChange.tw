@@ -1,0 +1,89 @@
+:: DayChange [event safe noreturn] {"position":"1200,325","size":"100,100"}
+<<nobr>>
+<<if $prevUpdateYear === undefined or $prevUpdateMonth === undefined or $prevUpdateDay === undefined>>
+    <<set $prevUpdateYear = $gameDate.getFullYear()>>
+    <<set $prevUpdateMonth = $gameDate.getMonth()>>
+    <<set $prevUpdateDay = $gameDate.getDate()>>
+    <<set $daysSinceLastUpdate = 1>>
+<<else>>
+    <<set _lastUpdate = new Date($prevUpdateYear, $prevUpdateMonth, $prevUpdateDay)>>
+    <<set _currentDate = new Date($gameDate.getFullYear(), $gameDate.getMonth(), $gameDate.getDate())>>
+    <<set _timeDiff = _currentDate.getTime() - _lastUpdate.getTime()>>
+    <<set $daysSinceLastUpdate = Math.floor(_timeDiff / (1000 * 60 * 60 * 24))>>
+    <<set $prevUpdateYear = $gameDate.getFullYear()>>
+    <<set $prevUpdateMonth = $gameDate.getMonth()>>
+    <<set $prevUpdateDay = $gameDate.getDate()>>
+<</if>>
+
+<!-- Rest of your code... -->
+
+<<setBackground setup.ImagePath+'/locs/melt/daychange.jpg'>>
+
+<<set _creditsChange = $player.credits - ($playerPreviousCredits ? $playerPreviousCredits : 0)>>
+<<set _debtChange = $player.debt - ($playerPreviousDebt ? $playerPreviousDebt : 0)>>
+<<set _debtChangeAbs = _debtChange < 0 ? -_debtChange : _debtChange>>
+<<set $playerPreviousCredits to $player.credits>>
+<<set $playerPreviousDebt to $player.debt>>
+
+<!-- Display the current day at the top -->
+<h2 id="dayChangeHeading" style="margin-top: 10px; margin-bottom: 10px; color: lightblue; font-weight: bold; font-size: 24px;">Day Change: <<= $gameDate.toDateString() >></h2>
+<hr id="dayChangeHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p style="font-size: 14px;">It has been <<= $daysSinceLastUpdate>> day(s) since the last update.</p>
+<</nobr>>\
+<<nobr>>
+<<if $prevWorldEconomyScore === undefined>> <<set $prevWorldEconomyScore = $worldEconomyScore>><</if>>
+<<if $prevDangerLevelScore === undefined>> <<set $prevDangerLevelScore = $dangerLevelScore>><</if>>
+
+<<if $worldEconomyScore > $prevWorldEconomyScore>>
+    <p style="color: green;">Reports indicate that the stability of the system economy is increasing.</p>
+<<elseif $worldEconomyScore < $prevWorldEconomyScore>>
+    <p style="color: red;">Reports indicate that the stability of the system economy is decreasing.</p>
+<<else>>
+    <p>There has been no significant change in the stability of the system economy.</p>
+<</if>>
+
+<<if $dangerLevelScore > $prevDangerLevelScore>>
+    <p style="color: green;">The danger level in the system is showing signs of decrease.</p>
+<<elseif $dangerLevelScore < $prevDangerLevelScore>>
+    <p style="color: red;">The danger level in the system is showing signs of increase.</p>
+<<else>>
+    <p>There has been no significant change in the danger level of the system.</p>
+<</if>>
+
+<<set $worldEconomyScore += either(-10, 10)>>
+<<set $dangerLevelScore += either(-10, 10)>>
+
+<<set $prevWorldEconomyScore = $worldEconomyScore>>
+<<set $prevDangerLevelScore = $dangerLevelScore>>
+
+
+<<if $daysSinceLastUpdate > 0>>
+    <<set _interestRate = 1.01>>  /* Interest rate of 1% per day */
+    <<set _initialDebt = $player.debt>>  /* Store initial debt before applying interest */
+    <<set $player.debt *= Math.pow(_interestRate, $daysSinceLastUpdate)>>  /* Apply compound interest */
+    <<set _interestCharged = $player.debt - _initialDebt>>  /* Calculate interest charged */
+    <<set _totalDebtChange = $player.debt - $playerPreviousDebt>>  /* Calculate total debt change including interest */
+
+<</if>>
+
+<!-- Displaying the interest information to the player -->
+<<if _interestCharged > 0>>
+    <p>Your debt has accrued interest over <<= $daysSinceLastUpdate>> day(s). A total interest of <span style="color: red;"><<= _interestCharged.toFixed(2)>> Cr.</span> has been added to your debt.</p>
+<</if>>
+
+
+<!-- Display changes in financial balance and total debt -->
+<p>A new day dawns in the Meltisar System. Your credit balance has changed by 
+<<if _creditsChange >= 0>><span style="color: green;">+<<= _creditsChange>> Cr</span><<else>><span style="color: red;"><<= _creditsChange>> Cr</span><</if>>.</p>
+
+<p>The debt counter shows a total change of 
+<<if _totalDebtChange >= 0>><span style="color: red;">+<<= _totalDebtChange.toFixed(2)>> Cr</span><<else>><span style="color: green;">-<<= Math.abs(_totalDebtChange).toFixed(2)>> Cr</span><</if>>, 
+
+and you feel 
+<<if $player.debt >= 50000>>the burden of your obligations<<else>>a weight lifting<</if>> as you prepare for the day ahead.</p>
+<br>
+<<link "Continue" $continue>><</link>>
+<</nobr>>
+
+

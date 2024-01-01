@@ -1,0 +1,97 @@
+:: StoryRightSidebar [menu] {"position":"1525,175","size":"100,100"}
+<<nobr>><<link "Toggle Debug Controls">>
+    <<toggleclass "#debug-controls" "visible">>
+<</link>>
+<h1 style="font-size: 2em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">Interface Controller</h1>
+<div id="debug-controls" class="hidden">
+    <<include [[DebugControls]]>>
+    </div>
+<<if $playerIntro3 >= 1>>
+<div class="sidebar" id="rightside-navigation">
+    <ul class="nano-content">
+        <li class="sub-menu">
+            <<link "Personal Management">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Personal Management
+            <</link>>
+            <ul class="content hidden">
+                <li><<button 'View Change Log'>>
+  					  <<run slideWin("Consumables")>>
+				<</button>></li>
+				<li>[[Consumables]]</li>
+                <li>[[Stash]]</li>
+                <li>[[Reputation]]</li>
+                <li>[[Journal]]</li>
+                <li>[[Appearance]]</li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <<link "Ship Managemnt">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+        <!-- Add more sections as needed -->
+        <li class="sub-menu">
+            <<link "Fleet Management">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <<link "Business Management">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <<link "Station Management">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <<link "Colony Management">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <<link "Diplomacy">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+        <li class="sub-menu">
+            <<link "Computronics">>
+                <span class="sc-icon sc-caret-right pull-right"></span>
+                Another Section
+            <</link>>
+            <ul class="content hidden">
+                <li>Content for Another Section...</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<</if>>
+<</nobr>>
+
+

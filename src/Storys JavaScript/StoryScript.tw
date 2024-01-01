@@ -1,0 +1,759 @@
+:: StoryScript [script]
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where the HTML file is
+	// located if you want to run this from inside Twine.
+	setup.Path = "C:\Users\Documents\Twine\Scratch";  // Running inside Twine application
+} else { 
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "images/";
+setup.SoundPath = setup.Path + "sounds/music/";
+
+$(document).on(':passagestart', function (ev) {
+	if (!ev.passage.tags.includes('noreturn')) {
+		State.variables.return = ev.passage.title;
+	}
+});
+
+window.setup = window.setup || {};
+
+setup.advanceTrack = function() {
+    var currentTrack = setup.songList[setup.currentSongIndex];
+    var nextTrackIndex = (setup.currentSongIndex + 1) % setup.songList.length;
+    var nextTrack = setup.songList[nextTrackIndex];
+
+    // Stop the current track if it's playing
+    if (SimpleAudio.tracks.get(currentTrack).isPlaying()) {
+        SimpleAudio.tracks.get(currentTrack).stop();
+    }
+
+    // Play the next track
+    SimpleAudio.tracks.get(nextTrack).play({ volume: 0.2, loop: true });
+
+    // Update the current track index
+    setup.currentSongIndex = nextTrackIndex;
+};
+
+// Check to see if trackID is currently loaded
+window.TrackExists = function (trackID) {
+	return SimpleAudio.tracks.has(trackID);
+};
+
+// Check to see if trackID is the currently playing track
+window.isPlaying = function (trackID) {
+	var track = SimpleAudio.tracks.get(trackID);
+	return track !== null && track.isPlaying();
+};
+
+Config.history.maxStates = 2;
+
+$(document).on(':passageend', function () {
+    // Accordion toggle for sub-menus
+    $(".sub-menu > a").click(function(e) {
+        var $this = $(this);
+        var $content = $this.next('.content');
+        var $icon = $this.find('.sc-icon');
+
+        // Slide up all other sub-menu contents and remove active class
+        $(".sub-menu").not($this.parent()).removeClass('active');
+        $(".sub-menu .content").not($content).slideUp();
+
+        // Toggle the clicked sub-menu content
+        $content.slideToggle();
+        $this.parent().toggleClass('active');
+
+        // Rotate the icon
+        if ($this.parent().hasClass('active')) {
+            $icon.css('transform', 'rotate(-90deg)');
+        } else {
+            $icon.css('transform', 'rotate(0deg)');
+        }
+
+        e.preventDefault();
+    });
+});
+
+
+Config.saves.autosave = function () {
+    // Check if the current passage has the "POI" tag
+    if (tags().includes("poi")) {
+        return true; // Autosave for passages with the "POI" tag
+    }
+    return false; // Do not autosave for other passages
+};
+
+
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where this HTML file is
+	// located if you want to run this from inside Twine.
+	setup.Path = "C:\Users\Documents\Twine\Scratch";  // Running inside Twine application
+} else {
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "images/";
+setup.SoundPath = setup.Path + "sounds/";
+
+
+
+
+
+
+/* Create the Right UI Bar. */
+var $rightUiBar = $('<div id="right-ui-bar"></div>').insertAfter("#ui-bar");
+
+var rightTray = $rightUiBar.append('<div id="right-ui-bar-tray"><button id="right-ui-bar-toggle" tabindex="0" title="Toggle the Right UI bar" aria-label="Toggle the Right UI bar" type="button"></button></div>');
+
+var rightBody = $rightUiBar.append('<div id="right-ui-bar-body"></div>');
+
+/* Attach the toggle button click. */
+$rightUiBar.find('#right-ui-bar-toggle').ariaClick({label : "Toggle the Right UI bar"}, () => $rightUiBar.toggleClass('stowed'));
+
+/* Automatically show the contents of the StoryRightSidebar passage in the right-ui-bar-body element. */
+postrender["Display Right Sidebar Contents"] = function (content, taskName) {
+	setPageElement('right-ui-bar-body', 'StoryRightSidebar');
+};
+
+
+
+
+(function () {
+    // v1.1.1
+    'use strict';
+
+    var characters = new Map();
+
+    function addCharacter (name, displayname, icon) {
+		if(icon === undefined && displayname){
+			icon = displayname;
+			displayname = null;
+		}
+        if (State.length) {
+            throw new Error('addCharacter() -> must be called before story starts');
+        }
+        if (!name || !icon) {
+            console.error('addCharacter() -> invalid arguments');
+            return;
+        }
+        if (characters.has(name)) {
+            console.error('addCharacter() -> overwriting character "' + name + '"');
+        }
+        characters.set(name, {displayName: displayname, image: icon});
+    }
+
+    function say ($output, character, text, imgSrc) {
+        // 
+        var $box = $(document.createElement('div'))
+            .addClass(Util.slugify(character) + ' say');
+
+			
+        // portrait
+        var _img = characters.has(character) ? characters.get(character).image : null;        
+        var $img = $(document.createElement('img'))
+            .attr('src', imgSrc || _img || '');
+
+        if ($img.attr('src') && $img.attr('src').trim()) {
+            $box.append($img);
+        }
+
+        // name and content boxes
+		var _name =  character.toUpperFirst();
+		if (characters.has(character) && characters.get(character).displayName) {
+            _name = characters.get(character).displayName;
+        }
+
+        $box.append($(document.createElement('p'))
+            .wiki(_name))
+            .append($(document.createElement('p'))
+                .wiki(text));
+
+        if ($output) {
+            if (!($output instanceof $)) {
+                $output = $($output);
+            }
+            $box.appendTo($output);
+        }
+
+        return $box;
+    }
+
+    setup.say = say;
+    setup.addCharacter = addCharacter;
+
+    Macro.add('character', {
+        // character macro
+        handler : function () {
+            addCharacter(this.args[0], this.args[1], this.args[2]);
+        }
+    });
+
+    $(document).one(':passagestart', function () {
+        // construct array of character names
+        var names = Array.from(characters.keys());
+        names.push('say');
+        // generate macros
+        Macro.add(names, {
+            tags : null,
+            handler : function () {
+                if (this.name !== 'say') {
+                    say(this.output, this.name, this.payload[0].contents);
+                } else {
+                    say(this.output, this.args[0], this.payload[0].contents, this.args[1]);
+                }
+            }
+        });
+    });
+}());
+
+
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	setup.Path = "C:\Users\Documents\Twine\Scratch";  // Running inside Twine application
+} else { 
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "images/";
+
+// fontSize: Increase or decrease passage font size by "value" pixels.
+window.fontSize = function(value) {
+	$("#story").css("font-size", (parseInt($("#story").css("font-size")) + value) + "px");
+};
+
+// Make it so that paths can work properly when launched from Twine.
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where the HTML file is
+	// located if you want to run this from inside Twine.
+	setup.Path = "C:\Users\Documents\Twine\Scratch";  // Running inside Twine application
+} else {
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "images/";
+
+// Game icon in tab.  Generated at: https://realfavicongenerator.net
+var favIco = setup.ImagePath + "favicon/";
+$(document.head).append('<link rel="apple-touch-icon" sizes="180x180" href="' + favIco + 'apple-touch-icon.png">');
+$(document.head).append('<link rel="icon" type="image/png" sizes="32x32" href="' + favIco + 'favicon-32x32.png">');
+$(document.head).append('<link rel="icon" type="image/png" sizes="16x16" href="' + favIco + 'favicon-16x16.png">');
+$(document.head).append('<link rel="manifest" href="' + favIco + 'site.webmanifest">');
+$(document.head).append('<link rel="shortcut icon" href="' + favIco + 'favicon.ico">');
+$(document.head).append('<meta name="msapplication-TileColor" content="#da532c">');
+$(document.head).append('<meta name="msapplication-config" content="' + favIco + 'browserconfig.xml">');
+$(document.head).append('<meta name="theme-color" content="#ffffff">');
+
+
+
+
+Config.navigation.override = function (dest) {
+    console.log("Original Destination:", dest);
+    console.log("Current passage tags:", tags());
+    console.log("Destination passage tags:", tags(dest));
+
+  // Inside Config.navigation.override
+if (tags().includes("DebtEvent")) {
+    console.log("In DebtEvent, waiting for player action.");
+    return dest; // Return the current destination without changing it.
+}
+
+  
+    // Check if the destination passage is not an event and if a new day has started.
+    if (!tags(dest).includes("event") && State.variables.newDay) {
+        console.log("New day detected. Triggering day change.");
+        State.variables.continue = dest;  // Store the original destination
+        State.variables.newDay = false;  // Reset the newDay flag to false to prevent re-triggering the day change.
+
+        return "DayChange"; // Redirect to the "DayChange" passage.
+    }
+
+    // Check for breakdown condition.
+    if (State.variables.breakdown && !tags().includes("safe") && !tags().includes("conversation")) {
+        console.log("Breakdown detected. Redirecting to breakdown passage.");
+        State.variables.continue = dest;  // Store the original destination
+
+        var currentArea = State.variables.currentArea || 'default'; // Get the current area or default if not set
+        var breakdownEvent = setup.breakdownEvents[currentArea] || setup.breakdownEvents.default; // Get breakdown event for the current area or default if none
+
+        dest = breakdownEvent; // Redirect to the selected breakdown event
+        console.log("Selected breakdown event:", dest);
+
+        State.variables.breakdown = false; // Reset the breakdown flag
+    }
+
+    // New case: Redirecting from 'poi' to 'travel' tagged passage to an 'event handler' passage.
+    if (tags().includes("poi") && tags(dest).includes("travel")) {
+        console.log("Moving from 'poi' to 'travel'. Redirecting to 'event handler' passage.");
+        State.variables.continue = dest;  // Store the original destination
+
+        return "eventHandler"; // Redirect to the "eventHandler" passage.
+    }
+
+    // Existing logic for handling random events on travel passages.
+    if (tags(dest).includes("travel") && !tags().includes("event")) {
+        console.log("Travel passage detected. Checking for event...");
+
+        var currentArea = State.variables.currentArea || 'default';
+        console.log("Current Area:", currentArea);
+
+        var events = setup.areaEvents[currentArea] || [];
+        console.log("All available events in current area:", events);
+
+        if (random(1, 10) <= 3) {  // 30% chance for an event
+            console.log("Event condition met. Attempting to trigger an event...");
+            State.variables.continue = dest;  // Store the original destination
+
+            if (events.length > 0) {
+                dest = events.random();
+                console.log("Selected random event:", dest);
+            } else {
+                console.log("No events available for this area.");
+            }
+        } else {
+            console.log("Event condition not met. Continuing to the original destination.");
+        }
+    } else {
+        console.log("Not a travel passage or already in an event. Clearing $continue.");
+        delete State.variables.continue;
+    }
+
+    console.log("Final destination after processing:", dest);
+    return dest;
+};
+
+
+
+
+// Define a clamp function
+Math.clamp = function(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+};
+
+
+
+/* ToggleImages JavaScript - Start */
+function allowHide(el) {
+	return (!$(el).hasClass("nohide")) && (!$(el).parent().hasClass("nohide"));
+}
+window.imageRecheck = function () {
+	if (settings.images) {
+		$("img").each(function () {
+			if (allowHide(this)) {
+				$(this).addClass("hidden");
+			}
+		});
+	}
+};
+var toggleImages = function () {
+	if (settings.images) {
+		// Hide images
+		$(".toggle-wrapper").removeClass("pushed");
+		window.imageRecheck();
+	} else {
+		// Show images
+		$(".toggle-wrapper").addClass("pushed");
+		$("img").removeClass("hidden");
+		$("img").each(function () {
+			if (allowHide(this)) {
+				$(this).attr("src", $(this).data("src"));
+			}
+		});
+	}
+};
+Setting.addToggle("images", { label: "Hide images?", onChange: toggleImages });
+/* You can do <<run toggleImg()>> to toggle the display of images,
+		<<run toggleImg(true)>> to hide images,
+		and <<run toggleImg(false)>> to show images. */
+window.toggleImg = function (val) {
+	if (val === undefined) {
+		settings.images = !settings.images;
+	} else {
+		settings.images = !!val;
+	}
+	Setting.save();
+	toggleImages();
+	return settings.images;
+};
+$(document).on("click", ".toggle_handler", function (event) {
+	window.toggleImg();
+});
+$(document).on(":passagerender", function (event) {
+	$(event.content).find("img").each(function () {
+		if (allowHide(this)) {
+			$(this).data("src", $(this).attr("src"));
+			if (settings.images) {
+				$(this).addClass("hidden").removeAttr("src");
+			}
+		}
+	});
+});
+$(document).on(":passageend", function (event) {
+	window.imageRecheck();
+});
+/* ToggleImages JavaScript - End */
+
+// Sanitize input to allow only alphanumeric characters. Default to "ErRoR" if input is empty.
+window.sanitizeInput = function(input) {
+    var sanitized = input.replace(/[^a-zA-Z0-9]/g, ''); // Remove non-alphanumeric characters
+    return sanitized.length > 0 ? sanitized : 'ErRoR'; // Default to 'ErRoR' if empty
+}
+
+
+
+
+
+
+
+
+//HEALTH BAR STUFF IS HERE!!!!
+
+
+
+
+
+window.UpdateStatBar = function (currentValue, maxValue, barId, isInverse) {
+    var percentage = Math.floor((currentValue / maxValue) * 100);
+    var minPercentage = 5;
+    
+    if (isInverse) {
+        percentage = 100 - percentage;
+    }
+
+    percentage = Math.max(percentage, minPercentage);
+
+    var barElement = document.getElementById(barId);
+
+    if (barElement) {
+        barElement.style.width = percentage + '%';
+
+        var color;
+        if (isInverse) {
+            // For inverted bars: Red when full (high percentage), Green when low (low percentage).
+                      color = percentage >= 75 ? 'red' :
+                    percentage >= 50 ? 'orange' :
+                    percentage >= 25 ? 'lightgreen' : 'green';
+
+        } else {
+            // For non-inverted bars: Green when full (high percentage), Red when low (low percentage).
+            color = percentage >= 75 ? 'green' :
+                    percentage >= 50 ? 'lightgreen' :
+                    percentage >= 25 ? 'orange' : 'red';
+        }
+
+        barElement.style.backgroundColor = color;
+    }
+};
+
+
+
+
+
+/* SlideWin v1.0 - Start */
+// Add the SlideWin window to the page.
+var el = document.createElement("div");
+el.id = "slideWin";
+el.setAttribute("role", "main");
+el.setAttribute("aria-labelledby", "slideTitle");
+document.body.appendChild(el);
+$(el).css({ transform: "translateX(-101vw)", "stroke-width": "101px" });
+// Allow the ESC key to hide the SlideWin window.
+$(document).on("keyup", function (event) {
+	if (($("#slideWin").css("stroke-width") !== "101px") && ((event.key === "Escape") || (event.key === "Esc"))) {
+		window.slideWin("hide");
+		return false;
+	}
+});
+// The slideWin() function.
+setup.slideWinHandler = [];
+window.slideWin = function (dir) {
+	if ($("#slideWin").css("stroke-width") !== "101px") {  // Hide slide window.
+		setup.slideWinPassage = undefined;
+		$("#slideWin").attr("tabindex", null);
+		$("#slideWin").animate(
+			{ "stroke-width": "101px" },  // Hack to get animation to work.
+			{	step: function (now, fx) { $(this).css("transform", "translateX(" + (-now) + "vw)"); },
+				complete: function () {
+					$("#slideWin").empty();
+					if (dir !== "hide") {
+						window.slideWin(dir);
+					}
+				},
+				duration: 500
+			},
+			"swing"
+		);
+		var handler;  // Remove event handlers.
+		while (setup.slideWinHandler.length) {
+			handler = setup.slideWinHandler.shift();
+			$(handler.selector).off(handler.event, "#slideWin", handler.function);
+		}
+		$("body").removeClass("slideWin");
+	} else {  // Show slide window.
+		setup.slideWinPassage = dir;
+		$("#slideWin").empty().attr("tabindex", 0).wiki('<button class="ur" onclick="slideWin(\'hide\')" tabindex="0" aria-label="Close Save/Load Window">X</button><div id="slideWinContent" tabindex="0"><<include "' + dir + '">></div>');
+		$("#slideWin p").each(function () {  // Remove any empty <p> elements.
+			if ($(this).text().trim() === "") {
+				$(this).remove();
+			} else {  // Strip <p> elements from around their contents.
+				$(this).children().unwrap();
+			}
+		});
+		$("#slideWin").delay(1).animate(  // Delay prevents animation stutter.
+			{ "stroke-width": "0" },  // Hack to get animation to work.
+			{	step: function (now, fx) { $(this).css("transform", "translateX(" + (-now) + "vw)"); },
+				complete: function () { $("body").addClass("slideWin"); },
+				duration: 500
+			},
+			"swing"
+		).focus();
+	}
+};
+/* SlideWin - End */
+
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where the HTML file is
+	// located if you want to run this from inside Twine.
+	setup.Path = "C:/Users/Browning/Documents/Twine/Scratch";  // Running inside Twine application
+} else { 
+	setup.Path = "";  // Running in a browser
+}
+setup.SoundPath = setup.Path + "sounds/music/";
+
+// Volume Slider, by Chapel; for SugarCube 2
+// version 1.2.0 (modified by HiEv)
+// For custom CSS for slider use: http://danielstern.ca/range.css/#/
+
+/*
+	Changelog:
+	v1.2.0:
+		- Fixed using/storing the current volume level in the settings.
+	v1.1.0:
+		- Fixed compatibility issues with SugarCube version 2.28 (still
+		  compatible with older versions, too).
+		- Added settings API integration for SugarCube 2.26.
+		- Internal improvements and greater style consistency with my
+		  other work.
+		- Added a pre-minified version.
+		- By default, the slider is now more granular than before
+		  (101 possible positions vs 11). Change the 'current' and
+		  'rangeMax' options to 10 to restore the old feel.
+*/
+
+(function () {
+	// Set initial values.
+	var options = {
+		current  : 50,  // Default volume level.
+		rangeMax : 100,
+		step	 : 1,
+		setting  : true
+	};
+	Setting.load();
+	if (options.setting && settings.volume) {
+		options.current = parseInt(settings.volume);
+	}
+	var vol = {
+		last: options.current,
+		start: (options.current / options.rangeMax).toFixed(2)
+	};
+
+	// Function to update the volume level.
+	function setVolume (val) {
+		if (typeof val !== 'number') val = Number(val);
+		if (Number.isNaN(val) || val < 0) val = 0;
+		if (val > 1) val = 1;
+		options.current = Math.round(val * options.rangeMax);
+		if (options.setting) {
+			settings.volume = options.current;
+			Setting.save();
+		}
+		if ($('input[name=volume]').val() != options.current) {
+			$('input[name=volume]').val(options.current);
+		}
+		try {
+			if (SimpleAudio) {
+				if (typeof SimpleAudio.volume === 'function') {
+					SimpleAudio.volume(val);
+				} else {
+					SimpleAudio.volume = val;
+				}
+				return val;
+			} else {
+				throw new Error('Cannot access audio API.');
+			}
+		} catch (err) {
+			// Fall back to the wikifier if we have to.
+			console.error(err.message, err);
+			$.wiki('<<masteraudio volume ' + val + '>>');
+			return val;
+		}
+	}
+
+	// Fix the initial volume level display.
+	postdisplay['volume-task'] = function (taskName) {
+		delete postdisplay[taskName];
+		setVolume(vol.start);
+	};
+
+	// Grab volume level changes from the volume slider.
+	$(document).on('input', 'input[name=volume]', function() {
+		var change = parseInt($('input[name=volume]').val());
+		setVolume(change / options.rangeMax);
+		vol.last = change;
+	});
+
+	// Create the <<volume>> macro.
+	Macro.add('volume', {
+		handler : function () {
+			var wrapper = $(document.createElement('span'));
+			var slider = $(document.createElement('input'));
+			var className = 'macro-' + this.name;
+			slider.attr({
+				id		: 'volume-control',
+				type	: 'range',
+				name	: 'volume',
+				min		: '0',
+				max		: options.rangeMax,
+				step	: options.step,
+				value	: options.current
+			});
+			// Class '.macro-volume' and ID '#volume-control' for styling the slider
+			wrapper.append(slider).addClass(className).appendTo(this.output);
+		}
+	});
+
+	// Add Setting API integration for SugarCube 2.26 and higher.
+	function updateVolume () {
+		setVolume(settings.volume / options.rangeMax);
+	}
+	if (options.setting) {
+		if (Setting && Setting.addRange && typeof Setting.addRange === 'function') {
+			Setting.addRange('volume', {
+				label : 'Volume: ',
+				min : 0,
+				max : options.rangeMax,
+				step : options.step,
+				default : options.current,
+				onInit : updateVolume,
+				onChange : updateVolume
+			});
+		} else {
+			console.error('This version of SugarCube does not include the `Settings.addRange()` method; please try updating to the latest version of SugarCube.');
+		}
+	}
+}());
+
+
+
+
+/* Keyboard links v1.3 - Start */
+var KBIntervalID = 0;
+$(document).on(":passagerender", function (ev) {
+	clearInterval(KBIntervalID);
+	UpdateLinks(ev.content);
+	// Search passages for links every 300ms, just in case they get updated, and marks them for key clicks
+	KBIntervalID = setInterval(UpdateLinks, 300);
+});
+// Adds key shortcut indicators to links in passage if there are less than 11 links in the passsage.
+function UpdateLinks(Container) {
+	// Enables keyboard shortcuts on passages that do not have the "DisableKeyLinks" tag
+	if (!tags().includes("DisableKeyLinks")) {
+		var Links, i;
+		if (typeof Container === "undefined") {
+			Container = document;
+			Links = $("#passages a").toArray();
+		} else {
+			Links = $(Container).find("a").toArray();
+		}
+		if (Links.length > 0) {
+			for (i = Links.length - 1; i >= 0; i--) {
+				if ($(Links[i]).data("nokeys") || $(Links[i]).parent().data("nokeys")) {
+					Links.deleteAt(i);
+				}
+			}
+		}
+		if (Links.length === 1) {
+			if (!Links[0].id.includes("Link") && !Links[0].id.includes("NextLnk")) {
+				Links[0].id = "NextLnk";
+			}
+		} else if (Links.length >= 1 && Links.length <= 10) {
+			if ($("#NextLnk").length > 0) {  // Remove "NextLnk" ID since the passage now has more than one link.
+				$("#NextLnk").removeAttr("id");
+			}
+			var n = 1;
+			for (i = 0; i < Links.length; i++) {
+				if (!Links[i].id.includes("Link")) {
+					while ($(Container).find("#Link" + n).length) {
+						++n;
+						if (n > 10) {
+							break;
+						}
+					}
+					if (n < 10) {
+						$("<sup>[" + n + "]</sup>").appendTo(Links[i]);
+						Links[i].id = "Link" + n;
+					} else if (n === 10) {
+						$("<sup>[0]</sup>").appendTo(Links[i]);
+						Links[i].id = "Link0";
+						break;
+					} else {
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+$(document).on("keyup", function (e) {
+	// Enables keyboard shortcuts on passages that do not have the "DisableKeyLinks" tag and when you're not entering text
+	if (!tags().includes("DisableKeyLinks") && ($("input:focus").length === 0) && ($("textarea:focus").length === 0) && ($("div[contenteditable='true']:focus").length == 0)) {
+		// Trigger next link click on right arrow key or "1" (normal and numpad)
+		if (((e.key == "ArrowRight") || (e.key == "1") || (e.keyCode === 97)) && ($("#NextLnk").length > 0)) {
+			if (!(tags().includes("IgnoreArrowKeys") && (e.key == "ArrowRight"))) {
+				e.preventDefault();
+				$("#NextLnk").click();
+				return false;
+			}
+		} else {
+			// Trigger link click on keys "0" through "9"
+			if ((e.keyCode > 47) && (e.keyCode < 58)) {
+				if ($("#Link" + (e.keyCode - 48)).length) {
+					e.preventDefault();
+					$("#Link" + (e.keyCode - 48)).click();
+					return false;
+				}
+			}
+			// Trigger link click on numpad keys "0" through "9"
+			if ((e.keyCode > 95) && (e.keyCode < 106)) {
+				if ($("#Link" + (e.keyCode - 96)).length) {
+					e.preventDefault();
+					$("#Link" + (e.keyCode - 96)).click();
+					return false;
+				}
+			}
+		}
+		// Trigger random click on "." or "r" key
+		if ((e.key == ".") || (e.key == "r")) {
+			e.preventDefault();
+			var Links = $("#passages a"), n, UsableLinks = [];
+			if (Links.length > 0) {
+				for (n = 0; n < Links.length; n++) {
+					if (!$(Links[n]).data("nokey")) {
+						UsableLinks.push(n);
+					}
+				}
+				if (UsableLinks.length > 0) {
+					n = random(UsableLinks.length - 1);
+					Links[UsableLinks[n]].click();
+					return false;
+				}
+			}
+		}
+		// Trigger back click on left arrow key or backquote
+		if ((e.key == "ArrowLeft") || (e.key == "`")) {
+			if ((!tags().includes("IgnoreArrowKeys")) || (e.key != "ArrowLeft")) {
+				e.preventDefault();
+				Engine.backward();
+				return false;
+			}
+		}
+	}
+});
+/* Keyboard links - End */
+
+$("#ui-bar").append('<div id="uifooter"><center><hr id="HuDHr><span class="smallHuDFont">(V0.002 A Sci-Fi sandbox based on ShipCore)</span></center></div>');
+

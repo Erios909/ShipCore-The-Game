@@ -1,0 +1,72 @@
+:: LockboxHubPurchaseAbandonedLocker [lowerdeckact] {"position":"1250,1525","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lockboxhub2.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Lockbox Hub - Abandoned Locker",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Generate random rewards -->
+<<set _foundItems = []>> <!-- Initialize an array to hold found items -->
+<<set _randomCredits = 0>> <!-- Initialize variable to hold random credits -->
+
+<<if random(1, 2) == 1>> <!-- Determine if parts or credits will be found -->
+    <<set _foundItem to random(1, 5)>>
+    <<set _itemString = "lowerdecks" + ["Parts", "Scrap", "Cyberware", "StolenItems", "Contraband"][_foundItem - 1]>>
+    <<set _foundItems.push(_itemString)>>
+    <<set _foundItems.push(_itemString)>> <!-- Add two items to the array -->
+<<else>>
+    <<set _randomCredits to random(100, 450)>>
+    <<set $player.credits += _randomCredits>> <!-- Add random credits to player's balance -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Lockbox Hub - Abandoned Locker</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Display found items or credits -->
+<p>As you pry open the abandoned locker, a musty scent wafts out, mingling with the sterile air of the hub. It's a scent full of secrets, holding the promise of forgotten treasures within.</p>
+
+<<if _foundItems.length>> <!-- If items were found -->
+    <p>You rummage through the contents, and your efforts uncover:</p>
+    <ul>
+    <<for _item range _foundItems>>
+    <<set _itemName to _item.replace("lowerdecks", "")>>
+    <<set _itemDisplayName to {
+        "Parts": "Mechanical Parts",
+        "Scrap": "Assorted Scrap Metal",
+        "Cyberware": "Cybernetic Components",
+        "StolenItems": "Unclaimed Stolen Goods",
+        "Contraband": "Illegal Contraband"
+    }[_itemName]>>
+    <<run State.variables[_item]++>> <!-- Increment the global variable directly using State.variables -->
+    <li><<print _itemDisplayName>>: +1</li>
+<</for>>
+
+    </ul>
+    <p>Each piece feels heavy with history, and you can't help but wonder about the locker's previous owner.</p>
+<<else>> <!-- If credits were found instead -->
+    <p>You don't find much, but after selling a few bits of junk to the recycler you discover a stash of credits. Counting them out, you find a total of <<print _randomCredits>> credits.</p>
+    <p><span style="color: green;"><<print _randomCredits>> Credits found!</span></p>
+    <<if _randomCredits < 300>>
+        <p>It's not the windfall you were hoping for, but it cuts down on your loss a bit.</p>
+    <<elseif _randomCredits > 300>>
+        <p>You've turned a tidy profit on this locker—fortune smiles upon you today.</p>
+    <<else>>
+        <p>You've broken even on this gamble. Not a loss, but the thrill of risk now seems a distant memory.</p>
+    <</if>>
+<</if>>
+
+<!-- Continue Link -->
+[[Return to The Lockbox Hub.|The Lockbox Hub]]
+<</nobr>>
+
+
+

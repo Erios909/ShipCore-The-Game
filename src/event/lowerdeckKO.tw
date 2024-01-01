@@ -1,0 +1,165 @@
+:: lowerdeckKO [event] {"position":"1300,1300","size":"100,100"}
+<<nobr>>
+<<capture _lowestStat _triggeredStat>>
+    <<set _lowestStat to "health">>
+    <<set _triggeredStat to $player[_lowestStat]>>
+    <<script>>
+        // Initialize player stats if not already done
+        if (typeof $player === "undefined") {
+            $player = { health: 100, mood: 100, stress: 100, trauma: 100, fatigue: 100, filth: 100 };
+        }
+
+        var statPriority = ["health", "mood", "stress", "trauma", "fatigue", "filth"];
+
+        statPriority.forEach(function(stat) {
+            if ($player[stat] < _triggeredStat || ($player[stat] === _triggeredStat && statPriority.indexOf(stat) < statPriority.indexOf(_lowestStat))) {
+                _triggeredStat = $player[stat];
+                _lowestStat = stat;
+            }
+        });
+    <</script>>
+
+
+
+<!-- Ensure the switch statement is within the capture block -->
+<<switch _lowestStat>>
+/* Updated case for health with comments */
+<<case "health">>
+    /* High danger level: Imply severe consequences with darkred to signify critical health. */
+    <<if $dangerLevelScore <= 300>>
+        <p>The relentless pace of the Lower Decks has taken its toll. You feel a <span style="color: darkred;">sharp pain</span> and your vision narrows. Panic sets in as the corridor spins and you <span style="color: darkred;">crumple</span> to the ground, unnoticed.</p>
+<<koloss>>
+
+    /* Moderate danger level: Use darkorange to indicate serious but less dire health issues. */
+    <<elseif $dangerLevelScore > 300 and $dangerLevelScore <= 700>>
+        <p>Your body protests the constant strain with a <span style="color: darkorange;">debilitating weakness</span>. The bustle of the station blurs into a dizzying whirl as you <span style="color: darkorange;">stagger</span> and fall, the clamor of commerce fading away.</p>
+<<koloss>>
+
+    /* Low danger level: Yellow signifies caution as the player faces a health setback in a safer area. */
+    <<else>>
+        <p>The safer corridors of the station offer no sanctuary from your body's exhaustion. A <span style="color: yellow;">dizzy spell</span> forces you to grasp at the wall for support, but it's not enough to stop the encroaching <span style="color: yellow;">darkness</span>.</p>
+<<koloss>>
+    <</if>>
+
+/* Updated case for mood with comments */
+<<case "mood">>
+    /* High danger level: Darkred signifies a severe mental breakdown due to low mood. */
+    <<if $dangerLevelScore <= 300>>
+        <p>Despair grips you tightly, and you sink to the floor, a <span style="color: darkred;">torrent of emotion</span> washing over you. Your sobs are lost in the cacophony of the station's heartless rhythm.</p>
+<<koloss>>
+
+    /* Moderate danger level: Darkorange indicates a distressing emotional state, with significant impact. */
+    <<elseif $dangerLevelScore > 300 and $dangerLevelScore <= 700>>
+        <p>You feel a crushing <span style="color: darkorange;">loneliness</span> even in the crowd. Your spirit <span style="color: darkorange;">falters</span>, and you slump against a bulkhead, trying to find solace amid the station's indifference.</p>
+<<koloss>>
+
+    /* Low danger level: Yellow implies a less severe but still concerning mood-related breakdown. */
+    <<else>>
+        <p>The station's ambient hum becomes a backdrop to your <span style="color: yellow;">growing despondency</span>. Sliding down the wall, you wrap your arms around yourself, seeking comfort in the <span style="color: yellow;">solitude</span>.</p>
+<<koloss>>
+    <</if>>
+
+/* Remaining cases with similar updates can be crafted following this pattern, ensuring the text is meaningful and the severity is indicated through color coding. Comments will guide the narrative and gameplay implications without specifying the wake-up location. */
+
+/* Updated case for stress with comments */
+<<case "stress">>
+    /* High danger level: Darkred indicates a severe mental breakdown due to overwhelming stress. */
+    <<if $dangerLevelScore <= 300>>
+        <p>The station's relentless demands shatter your composure. A <span style="color: darkred;">scream</span> tears from your throat, raw and pained, as you succumb to the <span style="color: darkred;">pressure</span>. Your last conscious memory is of falling through a sea of uncaring faces.</p>
+<<koloss>>
+
+    /* Moderate danger level: Darkorange represents a significant stress-induced incident but not as life-threatening. */
+    <<elseif $dangerLevelScore > 300 and $dangerLevelScore <= 700>>
+        <p>Your mind races as the station's pace overwhelms you. You find yourself trembling, <span style="color: darkorange;">overwhelmed</span> by the unending noise and movement until everything fades to <span style="color: darkorange;">silence</span>.</p>
+<<koloss>>
+
+    /* Low danger level: Yellow color signifies a stressful episode that is concerning but less dangerous. */
+    <<else>>
+        <p>In a quieter sector of the station, the stress still finds you, coiling around your thoughts. You <span style="color: yellow;">pause</span>, leaning on a wall for support as your surroundings <span style="color: yellow;">blur</span> into insignificance.</p>
+<<koloss>>
+    <</if>>
+
+/* Updated case for trauma with comments */
+<<case "trauma">>
+    /* High danger level: Darkred signifies the intense psychological impact of past trauma resurfacing. */
+    <<if $dangerLevelScore <= 300>>
+        <p>Memories of past horrors ambush your mind, leaving you <span style="color: darkred;">frozen</span> in a crowded passageway. Your body is there, but your mind is trapped in the past, until you sink into darkness.</p>
+<<koloss>>
+
+    /* Moderate danger level: Darkorange indicates a significant but not life-threatening traumatic experience. */
+    <<elseif $dangerLevelScore > 300 and $dangerLevelScore <= 700>>
+        <p>A sudden flashback hits you like a physical blow. You stumble, your breath <span style="color: darkorange;">catching</span> in your chest as the station's reality <span style="color: darkorange;">fades away</span> under the weight of your past.</p>
+<<koloss>>
+
+    /* Low danger level: Yellow implies a distressing but manageable encounter with trauma. */
+    <<else>>
+        <p>A seemingly mundane trigger sends you spiraling into a <span style="color: yellow;">reverie of fear</span>. You clutch at your head, trying to keep the present in focus as the echoes of old scars <span style="color: yellow;">whisper</span> to you.</p>
+<<koloss>>
+    <</if>>
+
+/* Updated case for fatigue with comments */
+<<case "fatigue">>
+    /* High danger level: Darkred coloration indicates a critical level of exhaustion. */
+    <<if $dangerLevelScore <= 300>>
+        <p>The harsh environment takes its final toll as your body <span style="color: darkred;">gives out</span>. The last drops of your energy are spent, and you <span style="color: darkred;">collapse</span> without a sound, the station's dangers looming over your prone form.</p>
+<<koloss>>
+
+    /* Moderate danger level: Darkorange suggests a serious but not immediately life-threatening level of fatigue. */
+    <<elseif $dangerLevelScore > 300 and $dangerLevelScore <= 700>>
+        <p>You've been running on empty for too long, and it catches up with you. A wave of <span style="color: darkorange;">exhaustion</span> sweeps over you, and your knees buckle. The ground rushes up to meet you as you <span style="color: darkorange;">faint</span>.</p>
+<<koloss>>
+
+    /* Low danger level: Yellow signifies a significant but less severe episode of fatigue. */
+    <<else>>
+        <p>The quieter corridors offer no respite from the <span style="color: yellow;">weariness</span> that has seeped into your bones. You slow to a stop, your energy sapped, and you <span style="color: yellow;">lean heavily</span> against a wall, hoping for a brief moment of rest.</p>
+<<koloss>>
+    <</if>>
+
+/* Updated case for filth with comments */
+<<case "filth">>
+    /* High danger level: Darkred highlights the extreme consequences of severe neglect. */
+    <<if $dangerLevelScore <= 300>>
+        <p>The grime and stench of the Lower Decks cling to you, a <span style="color: darkred;">tangible shroud</span> that isolates you. As others recoil, you're left <span style="color: darkred;">alone</span> and exposed, a target for any who prey on the weak.</p>
+<<koloss>>
+    <<elseif $dangerLevelScore > 300 and $dangerLevelScore <= 700>>
+        <p>The station's residents give you a <span style="color: darkorange;">wide berth</span> as your unkempt state becomes impossible to ignore. You feel the weight of their <span style="color: darkorange;">stares</span> as much as the dirt that cakes your skin, and you can't help but feel <span style="color: darkorange;">diminished</span>.</p>
+<<koloss>>
+    <<else>>
+        <p>Even in the cleaner areas of the station, your <span style="color: yellow;">neglected hygiene</span> draws unwanted attention. You find yourself <span style="color: yellow;">avoided</span>, the isolation a stark reminder that appearances matter, even here.</p>
+<<koloss>>
+    <</if>>
+
+/* Updated default case with comments */
+<<case "default">>
+    /* Unexpected default case: Use of darkred to signify a severe and unintended game state. */
+    /* This is a catch-all scenario indicating something has gone wrong, such as an unhandled state or error. */
+    <p><span style="color: darkred;">Confusion</span> clouds your thoughts as the world around you seems to <span style="color: darkred;">warp and twist</span>. Something isn't right. You struggle to maintain consciousness, but the effort is too much, and everything slips away into darkness.</p>
+<<koloss>>
+<</switch>><</capture>>
+
+<!--
+    Random Redirect to Cold Storage or Apartment:
+    This conditional block determines where the player ends up after a breakdown.
+    If the player has signed for the apartment, they will find their way back there.
+    Otherwise, they come to in Cold Storage.
+    This decision is based on the $HavenApartmentState variable.
+-->
+<</nobr>>
+
+<<set $player.health = Math.min($player.health + 150, 1000)>>
+<<set $player.mood = Math.min($player.mood + 150, 1000)>>
+<<set $player.stress = Math.min($player.stress - 150, 1000)>>
+<<set $player.trauma = Math.min($player.trauma - 150, 1000)>>
+<<set $player.fatigue = Math.min($player.fatigue - 150, 1000)>>
+<<set $player.filth = Math.min($player.filth - 150, 1000)>>
+<<set $breakdown = false>>
+
+<<if $HavenApartmentState is "signed">>
+    [[You somehow find your way back to your apartment.|HabitationApartment]]
+<<else>>
+    [[You come to in Cold Storage, unsure how you got there.|Cold Storage]]
+<</if>>
+
+
+
+

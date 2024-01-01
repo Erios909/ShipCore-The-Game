@@ -1,0 +1,36 @@
+:: LDBMCriminalSkirmish [event nobr] {"position":"2175,1075","size":"100,100"}
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/events/criminalshoot.jpg'>>
+<<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Criminal Skirmish</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>The skirmish is brief but intense. You manage to hold your own, but not without sustaining a few bruises and scrapes. As the smugglers retreat, you take stock of your injuries and the time lost.</p>
+    <p>It's a stark reminder that in the Lower Decks, violence is a language spoken with swift and brutal eloquence. You've survived this time, but the encounter leaves you wary of future confrontations.</p>
+    <<set $player.health -= Math.round($player.health * 0.05 + 15)>>
+    <<set $player.stress += Math.round($player.stress * 0.04 + 15)>>
+    <<changemoods "health" "major" "NegEffectOnPlayer">>
+    <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+    
+    <<link "Back to your quarters." $LastHomeZone>><</link>>
+    
+    TODO: Implement combat system
+
+

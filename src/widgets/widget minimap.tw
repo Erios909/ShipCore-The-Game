@@ -1,0 +1,15 @@
+:: widget minimap [widget nobr] {"position":"50,575","size":"100,100"}
+<<widget "displayAreaImage">><<nobr>>
+<<if $areaImages.hasOwnProperty($currentArea)>>
+    <<set _imagePath to setup.ImagePath + "/locs/areaminimaps/" + $areaImages[$currentArea]>>
+<<else>>
+    <<set _imagePath to setup.ImagePath + "/locs/areaminimaps/" + $areaImages["default"]>>
+<</if>>
+
+<div id="miniarea-image-container">
+    <<print '<img src="' + _imagePath + '" alt="Map of ' + $currentArea + '">'>> /* Output the image tag within the uniquely ID'd div */
+</div>
+<</nobr>><</widget>>
+
+
+

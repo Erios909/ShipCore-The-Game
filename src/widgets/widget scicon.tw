@@ -1,0 +1,4 @@
+:: widget scicon [widget nobr] {"position":"50,675","size":"100,100"}
+<<widget "scicon">><span @class="'sc-icon sc-' + $args.raw" alt="' + $args.raw + '"></span><</widget>>
+
+

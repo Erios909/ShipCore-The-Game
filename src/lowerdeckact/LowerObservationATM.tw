@@ -1,0 +1,69 @@
+:: LowerObservationATM [lowerdeckact] {"position":"300,1775","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerobservation.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "ATM Machine - Lower Observation Deck",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<p>You approach the ATM machine, its screen flickering to life as you draw near. It offers you the option to transfer your hard-earned credits into debt repayment.</p>
+
+<<if $player.credits < 1000>>
+    <span style="color: red">You do not have enough credits to think about paying your debt back.</span>
+<</if>>
+<<if $player.credits >= 1000>>
+    <<link "Pay debt off (1000Cr.)">>
+        <<set $player.credits -= 1000>>
+        <<set $player.debt -= 1000>>
+        <<creditchange -1000 "negative">>
+        <<debtchange -1000 "positive">>
+        <<addmins $timeadd>>
+        <<updatebar>>
+        <</link>><br>
+<</if>>
+<<if $player.credits >= 10000>>
+    <<link "Pay debt off (10000Cr.)">>
+        <<set $player.credits -= 10000>>
+        <<set $player.debt -= 10000>>
+        <<creditchange -10000 "negative">>
+        <<debtchange -10000 "positive">>
+        <<addmins $timeadd>>
+        <<updatebar>>
+        <</link>><br>
+<</if>>
+<<if $player.credits >= 100000>>
+    <<link "Pay debt off (100000Cr.)">>
+        <<set $player.credits -= 100000>>
+        <<set $player.debt -= 100000>>
+        <<creditchange -100000 "negative">>
+        <<debtchange -100000 "positive">>
+        <<addmins $timeadd>>
+        <<updatebar>>
+        <</link>><br>
+<</if>>
+<<if $player.credits >= 1000000>>
+    <<link "Pay debt off (1000000Cr.)">>
+        <<set $player.credits -= 1000000>>
+        <<set $player.debt -= 1000000>>
+        <<creditchange -1000000 "negative">>
+        <<debtchange -1000000 "positive">>
+        <<addmins $timeadd>>
+        <<updatebar>>
+        <</link>><br>
+<</if>>
+
+<p>After completing your transactions, you step away from the ATM, feeling the weight of your debt slightly lifted.</p>
+
+<<link "Back to the Lower Observation Deck.">>
+    <<set $timeadd to 5>>
+    <<addmins $timeadd>>
+    <<goto "Lower Observation Deck">>
+<</link>>
+<</nobr>>
+
+

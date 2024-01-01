@@ -1,0 +1,37 @@
+:: LDBMCriminalHitman [event nobr] {"position":"2075,1200","size":"100,100"}
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/events/hitman.jpg'>>
+<<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Hitman</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>The battle is fierce, and you're forced to use every trick at your disposal to survive. The hitman is relentless, but eventually, you gain the upper hand and they flee into the darkness from which they came.</p>
+    <p>Exhausted and injured, you realize this was no random encounter. Someone wants you out of the picture, and they're willing to pay a high price to see it done. The Lower Decks have just become even more dangerous for you.</p>
+    <<set $player.health -= Math.round($player.health * 0.07 + 20)>>
+    <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
+    <<changemoods "health" "major" "NegEffectOnPlayer">>
+    <<changemoods "stress" "major" "NegEffectOnPlayer">>
+    
+    <br><br>
+        <<link "Back to your quarters." $LastHomeZone>><</link>>
+    <br><br>
+    TODO: Implement combat system
+
+

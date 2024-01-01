@@ -1,0 +1,84 @@
+:: LowerEvent7 [event] {"position":"1000,1100","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/event.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: gold; font-weight: bold; font-size: 24px;">Lower Decks - Economic Sector</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Random Event based on World Economy Score -->
+<<if $worldEconomyScore < 100>>
+    <p>The market is in <span style="color: red;">freefall</span>. Desperate traders offer goods at rock-bottom prices, trying to liquidate assets before they lose everything.</p>
+    <<set $player.stress -= Math.round($player.stress * 0.05 + 10)>>
+    <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+
+<<elseif $worldEconomyScore >= 100 and $worldEconomyScore < 200>>
+    <p>Investment scams are rampant. You nearly fall for a <span style="color: orange;">too-good-to-be-true</span> scheme before spotting the telltale signs of fraud.</p>
+    <<set $player.stress -= Math.round($player.stress * 0.05 + 10)>>
+    <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+
+<<elseif $worldEconomyScore >= 200 and $worldEconomyScore < 300>>
+    <p>A <span style="color: yellow;">modest upturn</span> in the economy brings cautious optimism. Small businesses offer discounts to attract more customers, hoping for a recovery.</p>
+    <<set $player.credits += 10>>
+    <<creditchange 10 "positive">><br>
+
+<<elseif $worldEconomyScore >= 300 and $worldEconomyScore < 400>>
+    <p>Local markets are stable, but rumors of impending economic policies keep everyone <span style="color: yellow;">on their toes</span>.</p>
+    <!-- No change in player stats -->
+
+<<elseif $worldEconomyScore >= 400 and $worldEconomyScore < 500>>
+    <p>The economy shows signs of <span style="color: green;">growth</span>. You manage to sell a trinket for a decent price.</p>
+    <<set $player.credits += 20>>
+    <<creditchange 20 "positive">><br>
+
+<<elseif $worldEconomyScore >= 500 and $worldEconomyScore < 600>>
+    <p>Consumer confidence is on the rise. You find a good deal on some much-needed supplies, and it doesn't put a <span style="color: green;">dent in your wallet</span>.</p>
+    <<set $player.credits += 30>>
+    <<creditchange 30 "positive">><br>
+
+<<elseif $worldEconomyScore >= 600 and $worldEconomyScore < 700>>
+    <p>Momentum in the markets means good business. Your investments yield a <span style="color: blue;">healthy return</span>.</p>
+    <<set $player.credits += 40>>
+    <<creditchange 40 "positive">><br>
+
+<<elseif $worldEconomyScore >= 700 and $worldEconomyScore < 800>>
+    <p>The bustling economy has led to a <span style="color: blue;">job boom</span>. You're offered a lucrative contract for a simple delivery job.</p>
+    <<set $player.credits += 50>>
+    <<creditchange 50 "positive">><br>
+
+<<elseif $worldEconomyScore >= 800 and $worldEconomyScore < 900>>
+    <p>With the economy thriving, you take a chance on a small investment which quickly <span style="color: blue;">doubles in value</span>.</p>
+    <<set $player.credits += 60>>
+    <<creditchange 60 "positive">><br>
+
+<<else>>
+    <p>The Lower Decks are alive with the sound of prosperity. A passing trader gifts you a valuable item as a sign of <span style="color: green;">good fortune</span>.</p>
+    <<set $player.credits += 70>>
+    <<creditchange 70 "positive">><br>
+<</if>>
+
+<br>
+<!-- Continue Link -->
+<<link "Continue" $continue>><</link>>
+
+<</nobr>>
+
+
+

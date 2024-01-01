@@ -1,0 +1,32 @@
+:: Journal [noreturn safe menu nobr] {"position":"1200,175","size":"100,100"}
+<<set _startDate = new Date(3562, 2, 17, 3, 24)>>  /* Start date */
+<<set _currentDate = $gameDate>>  /* Current game date */
+<<set _timeDiff = _currentDate - _startDate>>  /* Time difference in milliseconds */
+<<set _days = Math.floor(_timeDiff / (1000 * 60 * 60 * 24))>>  /* Total days passed */
+<<set _months = Math.floor(_days / 30)>>  /* Approximate months passed */
+<<set _years = Math.floor(_months / 12)>>  /* Years passed */
+<<set _remainingMonths = _months % 12>>  /* Remaining months after subtracting years */
+<<set _remainingDays = _days % 30>>  /* Remaining days after subtracting months */
+
+You have been surviving for:
+<<set _timeSurvived = "">>
+<<if _years > 0>>
+    <<set _timeSurvived += _years + " year(s)">>
+    <<if _remainingMonths > 0 or _remainingDays > 0>><<set _timeSurvived += " and " >><</if>>
+<</if>>
+<<if _remainingMonths > 0>>
+    <<set _timeSurvived += _remainingMonths + " month(s)">>
+    <<if _remainingDays > 0>><<set _timeSurvived += " and " >><</if>>
+<</if>>
+<<if _remainingDays > 0>>
+    <<set _timeSurvived += _remainingDays + " day(s)">>
+<</if>>
+<<print _timeSurvived>> since your journey began.
+
+<<print "Today's Date: " + window.GameMonths[_currentDate.getMonth()] + " " + _currentDate.getDate() + ", " + _currentDate.getFullYear()>>
+
+<br>
+<!-- Return Link -->
+<<link "Return" $return>><</link>>
+
+

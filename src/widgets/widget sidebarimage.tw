@@ -1,0 +1,20 @@
+:: widget sidebarimage [widget nobr] {"position":"175,475","size":"100,100"}
+<<widget "setSidebarBackground">>
+<<nobr>>
+    /* Check if an image path is provided */
+    <<if $args[0]>>
+        /* Set the background image of the UI sidebar */
+        <<run $('#ui-bar').css({
+            'background-image': 'url(' + $args[0] + ')',
+            'background-size': 'cover',
+            'background-position': 'center center'
+        })>>
+    <<else>>
+        /* Error handling if no image path is provided */
+        <<run console.error("setSidebarBackground: No image path provided")>>
+    <</if>>
+<</nobr>>
+<</widget>>
+
+
+

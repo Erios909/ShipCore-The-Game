@@ -1,0 +1,231 @@
+:: StoryInit {"position":"175,175","size":"100,100"}
+/* In your StoryInit passage or JavaScript section */
+<<set setup.songList = ["music1", "music2", "music3", "music4", "music5"]>>
+<<set setup.currentSongIndex = 0>>
+<<set $LastHomeZone to "Cold Storage">>
+
+/*
+	Date & Time Widget Setup
+*/
+<<set
+	window.GameDays to [
+		"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+	];
+	window.GameMonths to [
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+	];
+
+	/*
+		Below we have to use the multi-parameter version of the Date
+		constructor, rather than the date string version, because the
+		date string version treats a missing timezone offset as UTC.
+		While there are ways to determine players' timezone offsets,
+		so they could be added to a date string, it's more convenient
+		simply to use the multi-parameter constructor.
+
+		The point of this is so that you can simply initialize the game
+		world clock to whatever date and time you wish without having to
+		worry about the players' timezone offsets, while still ensuring
+		that they all see the same game world dates and times.
+	*/
+	/* params: year , month(0-based) , day , hour(24H) , minute [, second ] */
+	$gameDate to new Date(3562, 2, 17, 3, 24); /* e.g. Mar 17, 3562 03:24 */
+>>
+
+<<script>>
+setup.statInversed = {
+    "health": false,
+    "mood": false,
+    "stress": true,
+    "trauma": true,
+    "fatigue": true,
+    "filth": true,
+    "powerReserves": false,
+    "credits": false,
+    "debt": true,
+    // Add more stats as needed
+};
+<</script>>
+
+<<script>>
+setup.statNames = {
+    "health": "Health",
+    "mood": "Mood",
+    "stress": "Stress",
+    "trauma": "Trauma",
+    "fatigue": "Fatigue",
+    "filth": "Filth",
+    "powerReserves": "Power Reserves",
+    "credits": "Credits",
+    "debt": "Debt",
+    // Add more stats as needed
+};
+<</script>>
+
+<<set $playerConsumables = {
+    'nanoDocInjector': 0,
+    'euphorixVape': 0,
+    'zenithPulse': 0,
+    'psycheLockCapsule': 0,
+    'vigorMaxShot': 0,
+    'puriDermSpray': 0,
+    'energyCellBoost': 0
+}>>
+
+<<set $playerConsumablesTracker = {
+    'nanoDocInjector': 0,
+    'euphorixVape': 0,
+    'zenithPulse': 0,
+    'psycheLockCapsule': 0,
+    'vigorMaxShot': 0,
+    'puriDermSpray': 0,
+    'energyCellBoost': 0
+}>>
+
+<!-- In StoryInit Passage -->
+<<set $showDebugControls = false>>
+
+<<set $areaImages to {
+    "lowerdecks": "lowerdecks.jpg",
+    "middecks": "middecks.jpg",
+    "upperdecks": "upperdecks.jpg",
+    "default": "default.jpg"
+}>>
+
+/* music stuff */
+<<set _bgm = setup.SoundPath + "music1.mp3">>
+<<cacheaudio "music1" _bgm>>
+<<set _bgm = setup.SoundPath + "music2.mp3">>
+<<cacheaudio "music2" _bgm>>
+<<set _bgm = setup.SoundPath + "music3.mp3">>
+<<cacheaudio "music3" _bgm>>
+<<set _bgm = setup.SoundPath + "music4.mp3">>
+<<cacheaudio "music4" _bgm>>
+<<set _bgm = setup.SoundPath + "music5.mp3">>
+<<cacheaudio "music5" _bgm>>
+
+setup.currentSongIndex = 0; // Start with the first song
+setup.songList = ["music1", "music2", "music3", "music4", "music5"]; // List of songs
+
+
+<<setSidebarBackground setup.ImagePath+'/uisidebar.jpg'>>
+
+
+/* creating MAIN CHARACTERS and associating them with images (goes in StoryInit) */
+<<character 'maincomputer' 'MainComputer' setup.ImagePath+'/characters/maincomputer/maincomputer.jpg'>>
+<<character 'playerM' '$player.name' setup.ImagePath+'/characters/playerM/playerM.jpg'>>
+<<character 'playerF' '$player.name' setup.ImagePath+'/characters/playerF/playerF.jpg'>>
+<<character 'playerN' '$player.name' setup.ImagePath+'/characters/playerN/playerN.jpg'>>
+/* using the generated macros in passages */
+
+/* variable names raw
+$lowerdecksParts
+$lowerdecksScrap
+$lowerdecksCyberware
+$lowerdecksStolenItems
+$lowerdecksContraband
+$lowerdecksFabricatorHopperScrap
+$lowerdecksFabricatorHopperParts
+$lowerdecksEnergyFeeCredits
+$lowerdecksFabricatorCyberware
+*/
+
+/* Breakdown Areas */
+<<set setup.breakdownEvents = {
+    "lowerdecks": "lowerdeckKO",
+    "middecks": "middeckKO",
+    "upperdecks": "upperdeckKO",
+    "default": "defaultKO"
+}>>
+
+
+/* LOWER DECKS SETUP */
+<<set $docksideStats = {
+    partsFabricated: 0, // Initialize or update with actual fabricated parts count
+    scrapBought: 0, // Initialize or update with actual scrap bought count
+    partsSold: 0 // Initialize or update with actual parts sold count
+}>>
+
+<<set $lowerdeckBlackActivity to 0>>
+<<set $lowerdecksRep to 0>>
+<<set $LockboxHubSpecialRequests to false>>
+<<set $lowerdecksParts to 0>>
+<<set $lowerdecksScrap to 0>>
+<<set $lowerdecksCyberware to 0>>
+<<set $lowerdecksStolenItems to 0>>
+<<set $lowerdecksContraband to 0>>
+<<set $lowerdecksFabricatorHopperScrap>>
+<<set $lowerdecksFabricatorHopperParts>>
+<<set $lowerdecksEnergyFeeCredits>>
+<<set $lowerdecksFabricatorCyberware>>
+<<set $HavenApartmentState to "none">>
+<<set $currentArea to "lowerdecks">> 
+<<set $lowerdecksFabricatorHopperScrap to 0>>
+<<set $lowerdecksFabricatorHopperParts to 0>>
+<<set $lowerdecksEnergyFeeCredits to 0>>
+<<set $lowerdecksFabricatorCyberware to 0>>
+
+/* LOWER DECK NPCS */
+/* Grafter */
+<<set $GrafterTalked to 0>>
+<<set $GrafterCyberTalk to 0>>
+
+<<set $talkedToManager = false>>
+<<set $introColdExit = 0>>
+
+/* AREA SETUP */
+<<set setup.areaEvents = {
+    "lowerdecks": ["LowerEvent1", "LowerEvent2", "LowerEvent3", "LowerEvent4", "LowerEvent5", "LowerEvent6", "LowerEvent7"],
+    "middecks": ["MidEvent1", "MidEvent2", "MidEvent3"],
+    "upperdecks": ["UpperEvent1", "UpperEvent2", "UpperEvent3"]
+}>>
+
+<<set $currentArea to "default">>
+
+/* SETTING UP BASE DIFFICULTY */
+<<set $worldEconomyScore to 700>>  <!-- Sets the initial state of the game's economy. A score of 700 represents a stable economy. Higher values indicate more prosperity, lower values indicate economic struggles. -->
+<<set $combinedDifficultyScore to 7>>
+<<set $dangerLevelScore to 700>>   <!-- Determines the initial level of danger in the game. A score of 700 suggests moderate danger. Higher scores indicate a safer environment, while lower scores indicate increased danger and risk. -->
+
+/* INTITIALIZING PLAYER */
+<<set $player to {
+    name: "Unknown",  // Name entered by the player
+    gender: 1,  // 1 for male, 2 for female, 3 for gender-neutral
+    skinColor: 1, // 1 for light, 2 for olive, etc.
+    hairColor: 1,  // 1 for black, 2 for blonde, etc.
+    hairLength: 1,  // 1 for short, 2 for medium-length, etc.
+    eyeColor: 1,  // 1 for blue, 2 for green, etc.
+    build: 1,  // 1 for slender and soft, 2 for slender and toned, etc.
+    height: 1,  // 1 for short, 2 for average height, 3 for tall
+    distinctiveFeature: 1,  // 1 for freckles, 2 for a scar, etc.
+    appearance: 1,  // 1 for rugged, 2 for elegant, etc.
+    health: 1000,  // Initial health
+    mood: 500,    // Initial mood
+    stress: 500,  // Initial stress
+    trauma: 500,  // Initial trauma
+    fatigue: 750, // Initial fatigue
+    filth: 1000, //starting player clean, removed by shower etc
+    powerReserves: 750, // Initial power reserves
+    inventory: [],  // Empty inventory
+    credits: 0,  // Initial credits
+    debt: 0 // Initial Debt
+}>>
+
+/* We use $timeadd at the end of a passage to show how long it will take to go somewhere, and then when entering passages use addmins $timeadd to increase time */
+
+<<set $timeadd to 0>>
+
+/* In each location we set whether it is outside, in a vacuum, and has controlled temperature, we'll use these to check against gear and if the player doesn't have appropriate measures, then they are penalized */
+
+<<set $location to {
+    name: "Unknown",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+
+<<set $player.gender to 1>>
+<<playerp>>
+
+

@@ -1,0 +1,84 @@
+:: widget moneychanger [widget nobr] {"position":"175,775","size":"100,100"}
+<<widget "creditchange">>
+<<nobr>>
+    <<set _changeAmount to $args[0]>>
+    <<set _effectType to $args[1]>>
+    <<set _symbol to ''>>
+    <<set _color to ''>>
+    <<set _percentageChange to ($player.credits > 0) ? (_changeAmount / $player.credits) * 100 : 100>>
+
+    /* Determine the symbol and color based on the percentage change and effect type. */
+    <<if _effectType is "positive">>
+        <<if _percentageChange <= 1>>
+            <<set _symbol to '+'>>
+            <<set _color to 'lightgreen'>>
+        <<elseif _percentageChange <= 2>>
+            <<set _symbol to '++'>>
+            <<set _color to 'green'>>
+        <<else>>
+            <<set _symbol to '+++'>>
+            <<set _color to 'darkgreen'>>
+        <</if>>
+    <<else>>
+        <<if _percentageChange <= 1>>
+            <<set _symbol to '-'>>
+            <<set _color to 'yellow'>>
+        <<elseif _percentageChange <= 2>>
+            <<set _symbol to '- -'>>
+            <<set _color to 'orange'>>
+        <<else>>
+            <<set _symbol to '- - -'>>
+            <<set _color to 'red'>>
+        <</if>>
+    <</if>>
+
+    /* Format the number with commas. */
+    <<set _formattedAmount to _changeAmount.toLocaleString()>>
+
+    /* Print the result with the formatted amount of change in parentheses. */
+    <<print '<span style="color: ' + _color + '">' + _symbol + ' Credits (' + _formattedAmount + ')</span>'>>
+<</nobr>>
+<</widget>>
+
+<<widget "debtchange">>
+<<nobr>>
+    <<set _changeAmount to $args[0]>>
+    <<set _effectType to $args[1]>>
+    <<set _symbol to ''>>
+    <<set _color to ''>>
+    <<set _percentageChange to ($player.debt > 0) ? (_changeAmount / $player.debt) * 100 : 100>>
+
+    /* Determine the symbol and color based on the percentage change and effect type. */
+    <<if _effectType is "positive">>
+        <<if _percentageChange <= 1>>
+            <<set _symbol to '+++'>>
+            <<set _color to 'red'>>
+        <<elseif _percentageChange <= 2>>
+            <<set _symbol to '++'>>
+            <<set _color to 'orange'>>
+        <<else>>
+            <<set _symbol to '+'>>
+            <<set _color to 'yellow'>>
+        <</if>>
+    <<else>>
+        <<if _percentageChange <= 1>>
+            <<set _symbol to '- - -'>>
+            <<set _color to 'lightgreen'>>
+        <<elseif _percentageChange <= 2>>
+            <<set _symbol to '- -'>>
+            <<set _color to 'green'>>
+        <<else>>
+            <<set _symbol to '-'>>
+            <<set _color to 'darkgreen'>>
+        <</if>>
+    <</if>>
+
+    /* Format the number with commas. */
+    <<set _formattedAmount to _changeAmount.toLocaleString()>>
+
+    /* Print the result with the formatted amount of change in parentheses. */
+    <<print '<span style="color: ' + _color + '">' + _symbol + ' Debt (' + _formattedAmount + ')</span>'>>
+<</nobr>>
+<</widget>>
+
+

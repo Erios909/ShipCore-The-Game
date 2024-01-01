@@ -1,0 +1,111 @@
+:: LowerEvent2 [event] {"position":"1000,1200","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/event.jpg'>>
+<<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Encounter at the Lower Decks</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Event Description with Random Character and Cost -->
+<!-- Random character and cost add unpredictability and depth to the event -->
+<<set _characters = ["a scrappy-looking individual", "a mysterious cloaked figure", "an old acquaintance", "a wary station worker", "a chatty merchant"]>>
+<<set _character = _characters.random()>>
+<<set _cost = random(5, 100)>>
+<<set _stressRelief = Math.round(_cost / 2)>>
+<p>As you navigate the maze-like corridors of the Lower Decks, you're approached by <<=_character>>. "Got any credits for some valuable info?" they ask, eyes glinting with sly knowledge.</p>
+
+<!-- Player Choices Container -->
+<div id="_choiceId">
+
+    <!-- Player Choice: Give Credits -->
+    <<if $player.credits >= _cost>>
+        <<linkreplace "Give <<= _cost >> credits for info">>
+            <<replace "#_choiceId">>
+                <<set $player.credits -= _cost>>
+                <<set _warnings = ["a security checkpoint", "a gang looking for 'tax'", "a chemical spill", "a malfunctioning security drone", "a heated argument escalating", "an area with faulty lighting"]>>
+                <<set _warning = _warnings.random()>>
+                <p>You hand over the credits, and <<= _character >> leans in closer. "Be careful around the next corridor. There's <<= _warning >>. Good luck," they whisper, before disappearing into the crowd.</p>
+                <<set $player.stress += _stressRelief>>
+                <p>You feel a bit relieved knowing what to avoid ahead.<span style="color: green;"> +Stress</span></p>
+                <<link "Continue" $continue>><</link>>
+            <</replace>>
+        <</linkreplace>>
+    <<else>>
+        <span style="color: grey;">Give <<= _cost >> credits for info (Not enough credits)</span>
+    <</if>>
+<br>
+    <!-- Player Choice: Refuse -->
+    <<linkreplace "Refuse and walk away">>
+        <<replace "#_choiceId">>
+            <p>You decline and continue on your way, keeping an eye out for any trouble on your own.</p>
+            <<link "Continue" $continue>><</link>>
+        <</replace>>
+    <</linkreplace>>
+</div>
+<!-- Event Description based on Combined Difficulty Score -->
+<<if $combinedDifficultyScore <= 2>>
+    <p>Whispers of calm spread through the Lower Decks as if the station itself has taken a deep, soothing breath. The dim corridors are tranquil, the usual clamor giving way to a rare hush that invites a moment of respite for weary souls.</p>
+    <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
+    <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+<<elseif $combinedDifficultyScore >= 3 and $combinedDifficultyScore <= 5>>
+    <p>Glimmers of hope flicker amidst the routine bustle. Merchants display their wares with a touch more zeal, and the residents' conversations are tinged with a cautious optimism that better cycles may be on the horizon.</p>
+    <<set $player.mood += Math.round($player.mood * 0.03 + 5)>>
+    <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+<<elseif $combinedDifficultyScore >= 6 and $combinedDifficultyScore <= 8>>
+    <p>The pulse of the decks is steady and strong, mirroring the resolve of those who wander them. Every exchange, every hurried step speaks to the collective effort to thrive despite the shadows that loom in the background.</p>
+    <<set $player.mood += Math.round($player.mood * 0.02 + 3)>>
+    <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+<<else>>
+    <p>An uneasy current flows through the corridors, as if the very air is charged with the station's collective anxieties. Each glance shared between passersby is heavy with unspoken challenges, a silent testament to the resilience required to endure these trying times.</p>
+    <<set $player.mood -= Math.round($player.mood * 0.05 + 10)>>
+    <<changemoods "mood" "major" "NegEffectOnPlayer">><br>
+<</if>>
+
+<!-- Additional Effect based on Danger Score -->
+<<if $dangerLevelScore < 300>>
+    <p>Caution taints the atmosphere as frequent alarms and confrontations punctuate your path. The station's pulse races, a reflection of the heightened vigilance required to navigate these charged encounters.</p>
+    <<set $player.stress += Math.round($player.stress * 0.05 + 10)>>
+    <<set $player.fatigue += Math.round($player.fatigue * 0.05 + 5)>>
+    <<set $player.mood -= Math.round($player.mood * 0.05 + 10)>>
+    <<changemoods "stress" "major" "NegEffectOnPlayer">>
+    <<changemoods "fatigue" "minor" "NegEffectOnPlayer">>
+    <<changemoods "mood" "major" "NegEffectOnPlayer">><br>
+<<elseif $dangerLevelScore >= 300 and $dangerLevelScore < 600>>
+    <p>A subtle tension permeates the crowd, with security patrols threading through the masses like steel threads in a tapestry. The wary glances of your fellow travelers remind you that alertness here is not a choice, but a necessity.</p>
+    <<set $player.stress += Math.round($player.stress * 0.03 + 5)>>
+    <<set $player.fatigue += Math.round($player.fatigue * 0.03 + 3)>>
+    <<set $player.mood -= Math.round($player.mood * 0.03 + 5)>>
+    <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+    <<changemoods "fatigue" "minor" "NegEffectOnPlayer">>
+    <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+<<elseif $dangerLevelScore >= 600 and $dangerLevelScore < 900>>
+    <p>Amidst the backdrop of commerce and chatter, signs of discord surface. A hastily scrubbed slogan here, a wary eye there—small reminders that while the surface may seem calm, the waters below are ever turbulent.</p>
+    <<set $player.stress += Math.round($player.stress * 0.02 + 3)>>
+    <<set $player.mood -= Math.round($player.mood * 0.02 + 3)>>
+    <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+    <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+<<else>>
+    <p>The decks today exude a relative peace, as if the station has found a momentary respite from its usual trials. Laughter echoes where once there were harsh words, and the guards' presence is reassuring rather than imposing.</p>
+    <<set $player.mood += Math.round($player.mood * 0.05 + 15)>>
+    <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+<</if>>
+<</nobr>>
+
+

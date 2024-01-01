@@ -1,0 +1,60 @@
+:: Lower Decks [travel] {"position":"1100,1425","size":"100,100"}
+<<nobr>><<set $currentArea to "lowerdecks">>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerdecks.jpg'>>
+<<addmins $timeadd>><<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<<mapWidget "images/locs/melt/mor1/lower/map/lowerdeckhub.jpg">>
+<!-- Adding an ID to the first heading -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks</span></h2>
+<!-- Adding an ID to the first horizontal rule -->
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<!-- Adding an ID to the second heading -->
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<!-- Adding an ID to the second horizontal rule -->
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+
+<<if $lowerdecksfirstvisit !== 1>>
+<p>Emerging from the dimly lit confines of cold storage, you're immediately enveloped by the vibrant chaos of the station's hub. The stark transition is disorienting—the quiet hum of refrigeration units is replaced by the cacophony of a living, breathing marketplace. The air is warmer here, tinged with the scent of exotic spices and the tang of ionized metal.</p>
+
+<p>Around you, the station <span style="color: #FFD700;">teems with life</span>. A sea of faces from countless species moves in a constant stream, each individual absorbed in their own story. The hubbub of conversation is punctuated by the clatter of machinery and the occasional hiss of steam from an overworked food stall.</p>
+
+<p>The architecture here is a patchwork of repairs and improvisations. Pipes and cables snake along the ceiling, disappearing into the bulkheads. The walls are plastered with layers of advertisements, each vying for attention with bold colors and flashing lights. It's clear that the Lower Decks serve as the <span style="color: #4CAF50;">beating heart</span> of MOR-1, a place where survival hinges on wit and will.</p>
+
+<p>As you navigate through the crowd, you catch snippets of haggling, the laughter of shared jokes, and the occasional snarl of a deal gone sour. The station's inhabitants move with a purposeful energy, each one a cog in the vast machine of station life.</p>
+
+<p>Despite the initial sensory overload, you begin to find a rhythm in the chaos. The station's pulse becomes a guiding beat, leading you deeper into the network of commerce and camaraderie that defines the Lower Decks. Here, in the nexus of activity, you sense that every choice you make could be the start of a new chapter in your own story.</p>
+
+<p>Strands of <span style="color: #00BFFF;">neon signage</span> cut through the gloom, offering a hazy illumination to navigate by. Rugged signs with hastily scrawled directions point towards these arteries, providing the only guidance through the labyrinth. Here, at the nexus of the Lower Decks, every being forges their path—some towards <span style="color: lightgreen;">hope</span>, others towards <span style="color: #DC143C;">oblivion</span>.</p>
+<<set $lowerdecksfirstvisit to 1>>
+<</if>>
+
+<</nobr>>
+Places of Interest:
+[[The Lockbox Hub. (00:15)|The Lockbox Hub][$timeadd = 5]]
+[[Take the Escalator to the Upper Deck Checkpoint. (00:05)|Upper Deck Checkpoint][$timeadd = 5]]
+[[Loiter. (00:15)|Lower Decks][$timeadd = 15]]
+
+Travel:
+[[Promenade.|Lower Deck Promenade][$timeadd = 5]]
+[[Hab Cells.|Habitation Cells][$timeadd = 5]]
+[[Lower Wharf.|Lower Wharf][$timeadd = 5]]
+[[Lower Engineering.|Station Infrastructure][$timeadd = 5]]
+[[Lower Observation Deck.|Lower Observation Deck][$timeadd = 5]]
+[[Slums.|Forgotten Slums][$timeadd = 5]]
+[[Cold Storage.|Cold Storage][$timeadd = 5]]
+
+The Lower Decks of MOR-1 unfold before you as a sprawling lattice of corridors and sections, pulsing with the lifeblood of the station's underprivileged. Overhead, naked light tubes flicker erratically, casting unstable shadows over the crowded thoroughfare. Vendors hawk their wares from ramshackle stalls tucked into every conceivable nook, peddling everything from cheap repair parts to grey-market augmentations.
+
+The air is thick with the mingling scents of synthetic oil and fried sustenance, and a constant murmur fills the space—a cacophony of bartering, machinery, and the occasional raised voice as tempers flare. Strands of neon signage cut through the gloom, offering a hazy illumination to navigate by.
+
+In the midst of the controlled chaos, the pathways branch off, leading to the other facets of this metallic underworld:
+
+Rugged signs with hastily scrawled directions point towards these arteries, providing the only guidance through the labyrinth. Here, at the nexus of the Lower Decks, every being forges their path—some towards hope, others towards oblivion.
+
+

@@ -1,0 +1,879 @@
+:: StoryStylesheet [stylesheet]
+#passages {
+            max-width: 75%;
+        }
+
+
+.i-gain {
+    color: green;
+}
+
+.i-loss {
+  color: red;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+
+#ui-bar {
+    overflow: hidden auto;
+    padding-right: 15px; /* Adjust this value as needed to provide space for the scrollbar */
+}
+
+/* For WebKit browsers like Chrome, Safari */
+#ui-bar::-webkit-scrollbar {
+    width: 8px; /* Adjust the width as needed */
+}
+
+#ui-bar::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track color */
+}
+
+#ui-bar::-webkit-scrollbar-thumb {
+    background: #888; /* Handle color */
+}
+
+#ui-bar::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Handle color on hover */
+}
+
+/* For Firefox */
+#ui-bar {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1; /* Handle and track colors */
+}
+
+#ui-bar-body {
+  	line-height: 1.2;
+    height: auto;
+    min-height: -webkit-calc(100% - 120px);
+    min-height: -moz-calc(100% - 120px);
+    min-height: calc(100% - 120px);
+}
+#uifooter {
+    position: relative;
+    width: -webkit-calc(100% - 60px);
+    width: -moz-calc(100% - 60px);
+    width: calc(100% - 60px);
+    /* padding: 12px; */
+    bottom: 2em;
+}
+
+#ui-bar.stowed #uifooter {
+	display: none;
+}
+
+/* Used to align label for volume slider */
+input[type=range] {
+	vertical-align: middle;
+}
+
+
+/* General sidebar styles */
+.sidebar {
+
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 100;
+}
+
+/* Style for the navigation links */
+.nano-content > li > a {
+    color: #aeb2b7;
+    text-decoration: none;
+    display: block;
+    padding: 18px 25px;
+    font-size: 1em;
+    transition: color 200ms ease-in;
+  	
+}
+
+.nano-content > li > a:hover {
+    color: #1abc9c;
+}
+
+/* Style for the caret icons */
+.nano-content > li > a > .sc-icon {
+    float: right;
+    transition: transform 200ms ease-in;
+}
+
+/* Style for the sub-menu content */
+.content {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.content li a {
+    background: #23313f;
+    padding: 13px 25px;
+    display: block;
+    color: #aeb2b7;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.content li a:hover {
+    color: #1abc9c;
+}
+
+/* Adjust content when visible */
+.sub-menu.active .content {
+    display: block;
+}
+
+.sub-menu.active > a > .sc-icon {
+    transform: rotate(-90deg);
+}
+
+/* Style for the sub-menu links */
+.nano-content li a {
+    display: block; /* Make the links block-level elements */
+    padding: 0.5em 0; /* Add padding to the top and bottom of each link */
+    text-decoration: none; /* Optional: remove the underline from links */
+    color: #aeb2b7; /* Set the text color for the links */
+    /* Other styling properties */
+  	border: 2px solid #444;
+  	margin: -2px;
+  	background: #000000e6;
+}
+
+/* Style for the sub-menu content */
+.content {
+    list-style-type: none; /* Remove bullet points from list items */
+    padding: 0; /* Remove padding from the list */
+    margin: 0; /* Remove margin from the list */
+  	border: 2px solid #444;
+}
+
+/* Style for individual list items within the content */
+.content li {
+    margin-bottom: 0.0em; /* Add space below each list item */
+  	border: 2px solid #444;
+}
+
+/* Styling for the sidebar */
+
+#rightside-navigation.sidebar {
+
+}
+
+/* Styling and Colours of the Right UI Bar. */
+#right-ui-bar {
+	background-color: #222;
+	border-right: 2px solid #444;
+	text-align: center;
+    background-image: url(images//uisidebar.jpg);
+    background-size: cover;
+    background-position: center center;
+}
+#right-ui-bar-toggle {
+	font-size: 1.2em;
+	line-height: inherit;
+	color: #eee;
+	background-color: transparent;
+	border: 1px solid #444;
+}
+#right-ui-bar-toggle:before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+
+/* Layout and Positioning of the Right UI Bar. */
+#right-ui-bar {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    right: 0;
+    width: 17.5em; /* Set a fixed width for the right UI bar */
+    height: 100%;
+	margin: 0;
+	padding: 0;
+ 	overflow: hidden; /* Hide overflow content */
+	-webkit-transition: right .2s ease-in;
+	-o-transition: right .2s ease-in;
+	transition: right .2s ease-in;
+      min-height: -webkit-calc(100% - 120px);
+    min-height: -moz-calc(100% - 120px);
+    min-height: calc(100% - 120px);
+}
+#right-ui-bar-tray {
+	position: absolute;
+	top: .2em;
+	left: 0;
+	right: 0;
+}
+#right-ui-bar-toggle {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-left: none;
+	padding: .3em .45em .25em;
+	-webkit-user-select: none;
+}
+#right-ui-bar-toggle:before {
+	content: "\e81e";
+}
+#right-ui-bar-body {
+  	line-height: 1.2;
+	height: 90%;
+	height: calc(100% - 2.5em);
+	margin: 2.5em 0;
+	padding: 0 1.5em;
+  	padding-right: 3em;
+  	overflow: hidden; /* Hide overflow content */
+}
+
+#story {
+	margin-right: 20em;
+}
+
+/* Stowing of the Right UI Bar. */
+#right-ui-bar.stowed {
+	right: -15.5em;
+}
+#right-ui-bar.stowed #right-ui-bar-toggle {
+	padding: .3em .55em .25em .35em;
+}
+#right-ui-bar.stowed #right-ui-bar-toggle:before {
+	content: "\e81d";
+}
+#right-ui-bar.stowed #right-ui-bar-body {
+	visibility: hidden;
+	-webkit-transition: visibility .2s step-end;
+	-o-transition: visibility .2s step-end;
+	transition: visibility .2s step-end;
+}
+
+#right-ui-bar.stowed~#story {
+	margin-right: 4.5em;
+}
+
+
+/* Style for all text within the accordion */
+#rightside-navigation.sidebar .nano-content {
+    font-weight: bold; /* Make the text bold */
+    font-size: 1.1em; /* Increase the font size slightly */
+}
+
+/* Style for all links within the accordion */
+#rightside-navigation.sidebar .nano-content a {
+    color: #68d; /* Set the link color */
+    text-decoration: none; /* Optional: remove underline from links */
+}
+
+/* Style for all links within the accordion on hover */
+#rightside-navigation.sidebar .nano-content a:hover {
+    color: #8af; /* Set a brighter color on hover */
+    text-decoration: underline; /* Optional: add underline on hover */
+}
+
+#debug-controls {
+    background-color: black; /* Replace with the color you want for the background */
+    /* Other styles you may want to apply, such as padding or border */
+}
+
+#story-author {
+    /* margin-top: 2em; */
+    /* font-weight: 700; */
+}
+
+.specialmutebutton button {
+    width: 60px; /* Further reduced width */
+    height: 15px; /* Further reduced height */
+    line-height: 15px; /* Line height equal to height for vertical alignment */
+    padding: 0; /* No padding */
+    background-color: black; /* Background color */
+    border: 2px solid #000; /* Border properties */
+    border-radius: 2px; /* Smaller border radius */
+    font-size: 8px; /* Very small font size */
+    /* Add more styles as needed */
+}
+
+
+
+
+/* offset-x | offset-y | blur-radius | color */
+.passage {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;
+    background-color: rgba(0, 0, 0, 0.65);
+    border: 2px solid #444;
+  	padding: 1%;
+}
+
+body.splash .passage {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;
+    background-color: rgba(0, 0, 0, 1);
+    border: 0px solid #444;
+    padding: 1%;
+    opacity: 0;
+    animation: fadeIn 10s ease forwards;
+}
+
+body.splash1 .passage {
+    text-shadow: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    animation: fadeIn 2s ease forwards;
+	
+    /* Centering and scaling */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;  /* Adjust the width as needed */
+    height: auto; /* Adjust the height as needed */
+    font-size: 1vw; /* Adjust font size as needed */
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+.disabledLink {
+    color: grey;
+    pointer-events: none;
+    cursor: default;
+}
+
+
+.say {
+    border: 1px solid #eee;
+    overflow: auto;
+    padding-top: .1em;
+    padding-bottom: .1em;
+}
+
+
+.say > img {
+    max-width: 20%;
+    float: left;
+    margin-right: 1em;
+}
+
+.say > p:first-of-type {
+    font-weight: bold;
+    margin: 0.2em 0;
+    border-bottom: 1px solid #eee;
+}
+
+.say > p:last-of-type {
+    padding: 0.5em;
+    margin: 0;
+}
+
+.shadow {
+	text-shadow: 0.08em 0.08em 0.08em #FFF;
+}
+.emboss {
+	text-shadow: 0.08em 0.08em 0em #FFF;
+	color: black;
+}
+.blur {
+	color: transparent;
+	text-shadow: 0em 0em 0.08em #FFF;
+}
+.blurrier {
+	color: transparent;
+	text-shadow: 0em 0em 0.2em #FFF;
+}
+.blurrier::selection {
+	background-color: transparent;
+	color: transparent;
+}
+.blurrier::-moz-selection {
+	background-color: transparent;
+	color: transparent;
+}
+.smear {
+	color: transparent;
+	text-shadow:
+		0em    0em 0.02em rgba(255,255,255,0.75),
+		-0.2em 0em 0.5em  rgba(255,255,255,0.5),
+		0.2em  0em 0.5em  rgba(255,255,255,0.5);
+}
+.mirror {
+	display: inline-block;
+	transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+}
+.upside-down {
+	display: inline-block;
+	transform: scaleY(-1);
+	-webkit-transform: scaleY(-1);
+}
+
+@-webkit-keyframes fade-in-out {
+	0%,
+	to {opacity: 0}
+	50% {opacity: 1}
+}
+@keyframes fade-in-out {
+	0%,
+	to {opacity: 0}
+	50% {opacity: 1}
+}
+.fade-in-out {
+	text-decoration: none;
+	animation: fade-in-out 2s ease-in-out infinite alternate;
+	-webkit-animation: fade-in-out 2s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes rumble {
+	50% {
+		-webkit-transform: translateY(-.2em);
+		transform: translateY(-.2em)
+	}
+}
+@keyframes rumble {
+	50% {
+		-webkit-transform: translateY(-.2em);
+		transform: translateY(-.2em)
+	}
+}
+.rumble {
+	-webkit-animation: rumble linear 0.1s 0s infinite;
+	animation: rumble linear 0.1s 0s infinite;
+	display:inline-block;
+}
+
+@-webkit-keyframes shudder {
+	50% {
+		-webkit-transform: translateX(0.2em);
+		transform: translateX(0.2em)
+	}
+}
+@keyframes shudder {
+	50% {
+		-webkit-transform: translateX(0.2em);
+		transform: translateX(0.2em)
+	}
+}
+.shudder {
+	-webkit-animation: shudder linear 0.1s 0s infinite;
+	animation: shudder linear 0.1s 0s infinite;
+	display: inline-block;
+}
+
+/* Font Size Buttons - Start */
+.fullscreenImg {
+	cursor: pointer;
+	transition: 0.3s;
+	border-radius: 3px;
+	position: absolute;
+	top: 40px;
+	left: 252px;
+	vertical-align: text-bottom;
+	height: 25px;
+	visibility: visible;
+}
+.fullscreenImg:hover {
+	background: #444444;
+}
+#story {
+	margin-left: 320px;
+	margin-right: 320px;
+}
+@media screen and (max-width: 1136px) {
+	#story {
+		margin-left: 290px;
+		margin-right: 24px;
+	}
+	#ui-bar.stowed~#story {
+		margin-left: 42px;
+	}
+}
+/* Font Size Buttons - End */
+
+#HuDHr {
+    border: 0;                   /* Removes default border */
+    height: 1px;                 /* Sets the height of the line */
+    background-color: #444;      /* Sets the color of the line */
+    margin: 0;                   /* Removes default margin/padding */
+}
+
+.smallHudFont {
+    font-size: 14px;
+    line-height: 0.5;    /* Adjusts the line spacing; 1.5 is a common value, but you can customize it */
+    border: 0;           /* Removes default border */
+    height: 1px;         /* Sets the height of the line */
+    background-color: #444; /* Sets the color of the line */
+    margin: 0;           /* Removes default margin/padding */
+}
+
+
+.maincomputer.say p {
+    color: lightblue;
+}
+
+/* Toggle Switch - Start */
+.toggle-wrapper {
+	position: relative;
+	top: 8px;
+	width: 91px;
+	height: 29px;
+	display: inline-flex;
+}
+.rect_1 {
+	position: absolute;
+	left: 4px;
+	top: 4px;
+	width: 80px;
+	height: 20px;
+	background-color: #d6503a;
+	border-radius: 9px;
+	box-shadow: 0 0 1px 0px #e1e1e1;
+	overflow: hidden;
+	transition: all 0.3s;
+	will-change: background-color;
+}
+.rect_1_inset {
+	position: absolute;
+	left: 32px;
+	top: -4px;
+	width: 48px;
+	height: 28px;
+	background-color: #3362a8;
+	background-image: linear-gradient(to top, #b6b8b3 0%, #b6b8b3 18%, #e1e2e1 62%, #e1e2e1 74%, #e1e2e1 100%, #e1e2e1 100%);
+	border-radius: 16px;
+	box-shadow: inset 0 0 2px rgba(255,255,255,0.35);
+	transition: all 0.2s;
+	will-change: transform;
+}
+.rect_2 {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 84px;
+	height: 22px;
+	background-color: #3362a8;
+	background-image: linear-gradient(to right, #cbcbcb 0%, #cbcbcb 0%, #cdcdcd 100%);
+	border: 3px solid #e4e4e3;
+	border-radius: 14px;
+}
+.rect_3 {
+	position: absolute;
+	left: 4px;
+	top: 4px;
+	width: 80px;
+	height: 20px;
+	border-radius: 10px;
+	background-color: rgba(0,0,0,0);
+	box-shadow: inset 0 5px 25px 0 rgba(0,0,0,0.6);
+}
+.toggle_handler {
+	position: absolute;
+	left: 39px;
+	top: 3px;
+	width: 48px;
+	height: 22px;
+	background-color: #3362a8;
+	background-image: linear-gradient(to top, #bfbfbe 0%, #e1e2e1 64%, #f3f3f3 77%, #f3f3f3 100%, #f3f3f3 100%);
+	border-radius: 11px;
+	box-shadow: inset 0 0 2px rgba(255,255,255,0.35), 0 3px 3px rgba(0,0,0,0.5), 0 0 3px rgba(0,0,0,0.5);
+	transition: all 0.2s;
+	will-change: transform;
+}
+.toggle_ellipse {
+	position: absolute;
+	left: 28px;
+	top: 4px;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background-color: #3362a8;
+	background-image: linear-gradient(to top, #e1e2e1 0%, #e1e2e1 0%, #b6b8b3 100%, #c1c1c1 100%);
+}
+.toggle-wrapper.pushed .toggle_handler {
+	-webkit-transform: translate3d(-75%, 0, 0);
+	transform: translate3d(-75%, 0, 0);
+}
+.toggle-wrapper.pushed .rect_1_inset {
+	-webkit-transform: translate3d(-60%, 0, 0) scale(1, 1);
+	transform: translate3d(-60%, 0, 0) scale(1, 1);
+}
+.toggle-wrapper.pushed .rect_1 {
+	background-color: #4fade3;
+}
+/* Toggle Switch - End */
+
+/* Stylesheet section of your Twine project: */
+
+/* Style for the map widget header */
+#map-widget-header {
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Stylesheet section of your Twine project: */
+
+/* Style for the map widget header */
+#map-widget-header {
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+ 	Display: none;
+}
+
+/* Style for the map image, centered */
+#map-image {
+    display: block;
+    margin: 0 auto; /* Center align the image */
+    max-width: 80%; /* Ensure image is not larger than the container */
+    height: 312px;
+    margin-bottom: 10px;
+}
+
+/* Style for the horizontal rule specific to the map widget */
+#map-widget-header + hr,
+#map-image-container + hr {
+    border: none;
+    height: 1px;
+    background-color: #ccc;
+    margin: 10px 0;
+}
+
+/* Custom CSS for the mini area image container */
+#miniarea-image-container {
+    text-align: center; /* Center the image within the container */
+    padding: 0px; /* Spacing around the image */
+    border: 2px solid black; /* A light border around the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    margin-bottom: 2px; /* Space below the container */
+    /* More styles can be added as needed */
+}
+
+#miniarea-image-container img {
+    max-width: 100%; /* Ensure the image fits within the container */
+    height: auto; /* Maintain the aspect ratio */
+    /* Add more styles for the img element if needed */
+}
+
+/* In your Story Stylesheet */
+.hidden {
+    display: none;
+}
+
+/* Style for the visible state of the debug controls for added clarity */
+#debug-controls.visible {
+    display: block; /* or 'flex', 'grid', etc., depending on your layout needs */
+    /* Other styles for your debug controls when they are visible */
+}
+
+/* Horizontal Health Bar - Start */
+.hzbarbkg {  /* default class for all horizontal bar backgrounds */
+    position: relative;
+    height: 1px;
+    width: 100%;
+    background-color: #111;
+    border-radius: 0px;
+    z-index: 10;
+    visibility: visible;
+}
+.hzbar {  /* default class for all horizontal bars */
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 1px;
+    border-radius: 10px;
+    z-index: 20;
+    transition: width ease 1s, background-color ease 1s;
+}
+/* Horizontal Health Bar - End */
+
+/* SlideWin styling v1.0 */
+body.slideWin {
+	overflow: hidden;
+}
+#slideWin {
+	position: fixed;
+	top: 0;
+	-webkit-transform: translateX(-101vw);
+	   -moz-transform: translateX(-101vw);
+		-ms-transform: translateX(-101vw);
+		 -o-transform: translateX(-101vw);
+			transform: translateX(-101vw);
+	stroke-width: 101px;  /* Used for animation trick on the transform property. */
+	width: 80.1vw;
+	height: calc(100vh - 30px);
+	padding: 30px 10vw;
+	overflow: hidden auto;
+	background-color: rgba(17, 17, 17, 0.97);
+	line-height: 1.75;
+	z-index: 100;
+}
+#slideWin:focus {
+	outline: none;
+}
+#slideWinContent {
+	position: relative;
+	top: -46px;
+	padding: 24px;
+	background-color: #222;
+}
+.ur {  /* Upper-right "close" button */
+	position: sticky;
+	top: 10px;
+	left: calc(80.1vw - 56px);
+	width: 26px;
+	height: 26px;
+	margin: 10px;
+	color: black;
+	cursor: pointer;
+	line-height: 14px;
+	-webkit-box-shadow: 1px 3px 0px 0px grey;
+	   -moz-box-shadow: 1px 3px 0px 0px grey;
+			box-shadow: 1px 3px 0px 0px grey;
+	border: 1px solid #5F5F5F;
+	border-collapse: separate;
+	font-weight: bold;
+	background-color: #FFFFFF;
+	-webkit-border-radius: 13px;
+	   -moz-border-radius: 13px;
+			border-radius: 13px;
+	z-index: 101;
+}
+.ur:hover {
+	background-color: #FFFFFF;
+	border-color: #5F5F5F;
+}
+.ur:focus, .ur:hover {
+	outline: transparent;
+	-webkit-animation: pulsing-glow-white 1s linear infinite alternate;
+	   -moz-animation: pulsing-glow-white 1s linear infinite alternate;
+		 -o-animation: pulsing-glow-white 1s linear infinite alternate;
+			animation: pulsing-glow-white 1s linear infinite alternate;
+}
+.ur:active {
+	top: 2px;
+	-webkit-box-shadow: none !important;
+	   -moz-box-shadow: none !important;
+			box-shadow: none !important;
+}
+@-webkit-keyframes pulsing-glow-white {
+	0% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+	}
+	100% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+	}
+}
+@-moz-keyframes pulsing-glow-white {
+	0% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+	}
+	100% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+	}
+}
+@-o-keyframes pulsing-glow-white {
+	0% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+	}
+	100% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+	}
+}
+@keyframes pulsing-glow-white {
+	0% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 20px rgb(255, 255, 255), inset 0 2px 10px rgb(255, 255, 255);
+	}
+	100% {
+		-webkit-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
+	}
+}
+
+/* SugarCube's built-in Font Awesome icons - Start */
+.sc-fa {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+.sc-icon {
+	padding-left: 4px;
+}
+.sc-icon::before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+.sc-plus::before {
+	content: "\e805\00a0";
+}
+.sc-minus::before {
+	content: "\e806\00a0";
+}
+.sc-caret-down::before {
+	content: "\e818\00a0";
+}
+.sc-caret-left::before {
+	content: "\e819\00a0";
+}
+.sc-caret-right::before {
+	content: "\e81a\00a0";
+}
+.sc-caret-up::before {
+	content: "\e81b\00a0";
+}
+.sc-toggle-off::before {
+	content: "\e830\00a0";
+}
+.sc-toggle-on::before {
+	content: "\e831\00a0";
+}
+.sc-checkbox-on::before {
+	content: "\e832\00a0";
+}
+.sc-checkbox-off::before {
+	content: "\e833\00a0";
+}
+.sc-radiobutton-off::before {
+	content: "\e834\00a0";
+}
+.sc-radiobutton-on::before {
+	content: "\e835\00a0";
+}
+/* SugarCube's built-in Font Awesome icons - End */

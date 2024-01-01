@@ -1,0 +1,18 @@
+:: Intro2 {"position":"625,400","size":"100,100"}
+After examining your reflection, you turn to the locker. It's neatly divided into compartments, all securely locked save for one near the top. In this compartment, a sleek smartwatch catches your eye. <<playerp>>
+
+As you pick it up, the watch lights up and a voice emanates from it: 
+<span style="color: lightblue;">"Initializing for User: <<= $player.name >>... Smart HUD functions activating."</span> 
+Almost instantly, a holographic display appears before your eyes, overlaying the real world. <<set $PlayerIntro2 to 1>><<updatebar>>
+
+The display reveals today's date, <span style="color: lightblue;"><<date>></span>, and the current time, <span style="color: lightblue;"><<time12hr>></span>. 
+
+It's a vivid reminder of the advanced technology at your fingertips and the mysteries that await. You study the hologram, hoping for clues to understand your situation better.
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+[[Hello?|Intro3][$playerIntro3 = 1;$timeadd = 1]]
+[[Anyone in there?|Intro3][$playerIntro3 = 2;$timeadd = 1]]
+[[Is this thing on?|Intro3][$playerIntro3 = 3;$timeadd = 1]]
+[[Computer, sitrep, now!|Intro3][$playerIntro3 = 4;$timeadd = 1]]<</say>>
+
+

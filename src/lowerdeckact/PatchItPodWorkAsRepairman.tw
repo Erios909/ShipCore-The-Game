@@ -1,0 +1,73 @@
+:: PatchItPodWorkAsRepairman [lowerdeckact] {"position":"900,2325","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/patchitpod.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Patch-It Pod - Repair Work",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $patchItPodWorkRecord>> <<set $patchItPodWorkRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $patchItPodWorkRecord.today != _today>>
+    <<set $patchItPodWorkRecord.today to _today>>
+    <<set $patchItPodWorkRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available repair work events -->
+<<for _i to 1; _i <= 3; _i++>>
+    <<if not $patchItPodWorkRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available repair work events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $patchItPodWorkRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available repair work events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Patch-It Pod - Repair Work</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Random Repair Work Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Complex Circuitry Challenge -->
+        <p>You are handed a tangled mess of wires and circuit boards. It's a challenge, but with focus and a steady hand, you manage to repair the device. The owner is grateful, and your work does not go unrewarded.</p><br>
+        <<set $player.credits += 25>>
+        <<creditchange 25 "positive">><br>
+
+    <<case 2>> <!-- Stitch in Time Saves Nine -->
+        <p>Today's task is a mountain of torn uniforms and fabric. It's monotonous work, but as the pile dwindles, you find a rhythm. A job well done earns you a pat on the back and a token payment.</p><br>
+        <<set $player.credits += 10>>
+        <<creditchange 10 "positive">><br>
+
+    <<case 3>> <!-- The Ever-Whirring Gadget -->
+        <p>An intricate gadget from a bygone era requires your attention. It's a tricky fix, and while the work takes longer than expected, the satisfaction of seeing it whir to life again is worth it.</p><br>
+        <<set $player.mood += Math.round($player.mood * 0.02)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Repair Work Event -->
+        <p>Your shift at the Patch-It Pod comes to an end. The mundane repairs were nothing out of the ordinary, but you're content with the work and the steady pay it brings.</p><br>
+        <<set $player.credits += 15>><br>
+        <<creditchange 15 "positive">>
+<</switch>>
+
+<br><br>
+<!-- Continue Link -->
+[[Step back into the station's life.|Patch-It Pod]]
+<</nobr>>
+
+
+

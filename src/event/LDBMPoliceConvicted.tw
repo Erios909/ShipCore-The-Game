@@ -1,0 +1,86 @@
+:: LDBMPoliceConvicted [event nobr] {"position":"1925,825","size":"100,100"}
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/convict.jpg'>>
+<<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Convicted</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<<nobr>>
+<<set $currentArea to "prison">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/prisoncell.jpg'>>
+<<set $location to {
+    name: "Prison Cell",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<p>The gavel falls, and the sound seals your fate. Convicted. The word echoes through the courtroom and settles heavily in your chest. Despite your best efforts, the evidence was stacked against you, and now you face the consequences.</p>
+<<set $player.stress += Math.round($player.stress * 0.05 + 30)>>
+<<set $player.fatigue += Math.round($player.fatigue * 0.05 + 20)>>
+<<changemoods "stress" "major" "NegEffectOnPlayer">>
+<<changemoods "fatigue" "minor" "NegEffectOnPlayer">>
+
+<<set _convictionScenario to random(1, 4)>>
+
+<<switch _convictionScenario>>
+    <<case 1>>
+        <p>Your first day in the prison cell is a blur. The stark walls and the cold floor are a far cry from the life you once knew. The other inmates are distant, sizing you up as the newcomer. You're left to ponder the turns your life has taken to lead you here.</p>
+        <p>Days turn into weeks. The routine is monotonous and dehumanizing. You work, eat, and sleep at the mercy of the prison schedule. The small freedoms you once took for granted are now just memories, each one a reminder of what you've lost.</p>
+        <p>When you're finally allowed a moment alone in the exercise yard, you look up at the sliver of sky visible between the high walls. The conviction has changed you, hardened you. You vow to survive, to come out of this ordeal stronger than before.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.05 + 35)>>
+        <<set $timeadd to (24 * 60 * 30)>> <!-- Assuming 30 days in prison -->
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 50000>>
+    <<case 2>>
+        <p>The cell is claustrophobic, the air stale and heavy. You lie on the thin mattress, listening to the sounds of the prison around you. The clanging of doors, the shouts of guards, the murmurs of other prisoners—it's a cacophony that never ceases.</p>
+        <p>As the days pass, you find a routine that keeps you sane. You read, exercise, and write letters that you know may never be sent. The conviction looms over you like a shadow, a constant reminder of the life you're missing beyond these walls.</p>
+        <p>One day, you're pulled from your cell and informed that your case has been reopened. There's a chance for appeal, a glimmer of hope in the darkness. You cling to it, letting it fuel your determination to reclaim your freedom and clear your name.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.05 + 40)>>
+        <<set $timeadd to (24 * 60 * 45)>> <!-- Assuming 45 days in prison -->
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 50000>>
+    <<case 3>>
+        <p>The first night in your cell is the longest night of your life. The conviction has stripped you of your identity, reduced you to a number. You're processed, cataloged, and left alone with the weight of your sentence pressing down on you.</p>
+        <p>Time becomes a meaningless concept. The days blend together, each one indistinguishable from the last. You do what you can to stay fit, to keep your mind sharp, but the monotony is a relentless enemy, chipping away at your resolve.</p>
+        <p>Eventually, you find solace in the small acts of kindness from a few sympathetic guards and fellow inmates. These moments of human connection become your lifeline, a reminder that even in the depths of despair, there is still hope for redemption.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.05 + 45)>>
+        <<set $timeadd to (24 * 60 * 60)>> <!-- Assuming 60 days in prison -->
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 50000>>
+    <<case 4>>
+        <p>The reality of your conviction hits you as you're escorted to your cell. The finality of the sentence is a heavy chain around your neck. You're innocent, but that truth doesn't matter within these walls. Here, you're just another convict.</p>
+        <p>You fight to keep your dignity, to maintain some semblance of the person you were before. You engage in prison programs, seek legal advice, and do everything in your power to fight for an appeal. The days are long, but you refuse to let them break you.</p>
+        <p>And then, a breakthrough. New evidence comes to light, and there's talk of a retrial. Hope surges within you, a fierce flame that refuses to be extinguished. You may be down, but you're not out—not yet.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.05 + 50)>>
+        <<set $timeadd to (24 * 60 * 75)>> <!-- Assuming 75 days in prison -->
+        <<changemoods "mood" "major" "NegEffectOnPlayer">>
+        <<set $lowerdeckBlackActivity -= 50000>>
+<</switch>>
+
+<<addmins $timeadd>>
+
+<<link "Back to your quarters." $LastHomeZone>><</link>>
+<</nobr>>
+
+TODO: Full prison system
+
+

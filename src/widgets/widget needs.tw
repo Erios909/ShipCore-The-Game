@@ -1,0 +1,43 @@
+:: widget needs [widget nobr] {"position":"175,575","size":"100,100"}
+<<widget "manageNeeds">>
+    /* Check if $lastUpdateTime is set; if not, initialize it */
+    <<if $lastUpdateTime === undefined>>
+        <<set $lastUpdateTime = new Date($gameDate.getTime())>> /* Initialize with the current game time */
+    <</if>>
+
+    /* Calculate the time difference in minutes since the last update */
+    <<set _currentTime = new Date($gameDate.getTime())>> /* Get the current game time */
+    <<set _timeDifference = (_currentTime.getTime() - $lastUpdateTime.getTime()) / 60000>> /* Calculate the difference in minutes */
+
+    /* Apply changes to stats based on the elapsed time, but only if at least 5 minutes have passed */
+    <<if _timeDifference >= 5>>
+        /* Calculate the adjustment factor using an exponential curve */
+        <<set _maxDecay = 500>> /* Adjusted maximum decay for complete depletion in 24 hours */
+        <<set _halfLife = 360>> /* Adjusted half-life to 60 minutes for a faster decay rate */
+        <<set _adjustmentFactor = _maxDecay * (1 - Math.exp(-0.693 * _timeDifference / _halfLife))>>
+        /* This limits the adjustment factor based on an exponential decay curve */
+
+        <<set _reducedFactor = _adjustmentFactor / 12>> 
+        <<set $player.health = Math.clamp($player.health + _reducedFactor, 0, 1000)>>
+        <<set $player.mood = Math.clamp($player.mood + _reducedFactor, 0, 1000)>>
+        <<set $player.trauma = Math.clamp($player.trauma - _reducedFactor, 0, 1000)>>
+        <<set $player.stress = Math.clamp($player.stress - _reducedFactor, 0, 1000)>>
+        
+        
+        <<set _fatigueReductionFactor = _adjustmentFactor / 1>> /* Use the full adjustment factor for fatigue */
+        <<set $player.fatigue = Math.clamp($player.fatigue + _fatigueReductionFactor, 0, 1000)>>
+        <<set $player.filth = Math.clamp($player.filth + _fatigueReductionFactor, 0, 1000)>>
+    <</if>>
+
+    /* Check for any need dropping below 50 and set $breakdown accordingly */
+    <<if $player.health < 50 or $player.mood < 50 or $player.trauma > 950 or $player.stress > 950 or $player.fatigue > 950 or $player.filth > 950>>
+        <<set $breakdown = true>>
+    <<else>>
+        <<set $breakdown = false>>
+    <</if>>
+
+    /* Update the last update time for the next check */
+    <<set $lastUpdateTime = _currentTime>>  /* Store the current time for the next update */
+<</widget>>
+
+

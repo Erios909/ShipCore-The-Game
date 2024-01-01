@@ -1,0 +1,116 @@
+:: changelist [noreturn] {"position":"625,25","size":"100,100"}
+<<nobr>>
+<div style="background-color: black; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    <h2 style="color: white; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px;">Changelist</h2>
+
+    <h3 style="color: #007bff;">V0.0025 Hotpatch</h3>
+    <h4 style="color: white;">Moodchanges</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Redid mood change system, for more consistent moodlet effects.</li>
+        <li>Fixed bugs reported in discord.</li>
+        <li>Implemented black market penalty system.</li>
+        <li>Law enforcement will be looking for you.</li>
+        <li>Other criminals don't like competition. Keep your head down.</li>
+        <li>Added TheGrafter conversation.</li>
+        <li>Keyboard hotkeys added 1 2 3 4 etc</li>
+        <li> You can now pay off your debt! ATM added to Lower Observation Deck</li>
+        <li> Added view background button on left panel.</li>
+        <li> Fixed debt event handler and day change handler. Again. </li>
+        <li>Please report bugs on discord! https://discord.gg/BsZAt3u6cF </li>
+    </ul>
+
+    <h3 style="color: #007bff;">V0.0022 Hotpatch</h3>
+    <h4 style="color: white;">Fix Haven Apartment signing bug:</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Fixed doubled text on character creation</li>
+    </ul>
+
+    <h3 style="color: #007bff;">V0.0021 Hotpatch</h3>
+    <h4 style="color: white;">Fix Haven Apartment signing bug:</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Fixed purchasing the apartment conversation to set correct flag</li>
+    </ul>
+
+    <h3 style="color: #007bff;">V0.002</h3>
+    <h4 style="color: white;">Time and Needs Mechanics:</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Time progresses as you engage in activities and move around.</li>
+        <li>Similar to The Sims, your needs decay over time and must be managed.</li>
+    </ul>
+    
+    <h4 style="color: white;">Updates and Additions:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Added right side bar widget.</li>
+    <li>Did planning on stuff.</li>
+    <li>Added consumable biometric boosters player can use via Personal Management -> Consumables.</li>
+    <li>Worked on KO screen.</li>
+    <li>Fixed day changes.</li>
+    <li>Fixed lots of random broken things.</li>
+    <li>Added Jax the NPC to help get bearings.</li>
+    <li>Implemented all lower deck areas but observation deck and slums.</li>
+</ul>
+
+<h4 style="color: white;">Did Not Make It This Version:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Hostile NPC to add tension.</li>
+    <li>Combat system.</li>
+    <li>More NPCs and main questline starts.</li>
+    <li>Reputation.</li>
+    <li>Journal.</li>
+    <li>Business management.</li>
+    <li>Still need to develop and refine systems while in lower deck before expanding the world or there will be massive amounts to redo later when they are refined.</li>
+</ul>
+
+    <h4 style="color: white;">Employment Opportunities:</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Basic jobs (e.g., bar, noodle stand) are available throughout the game, offering a modest credit income.</li>
+        <li>Scrap collection jobs allow for gathering materials to sell or trade at parts dealers.</li>
+    </ul>
+
+    <h4 style="color: white;">Storage Locker System:</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Players can purchase abandoned storage lockers to find items and resources.</li>
+        <li>Discover synergies, such as certain shops offering better prices for specific items like cyberware.</li>
+        <li>Illegal items found in lockers can be sold at black markets for higher profits but increase the risk level.</li>
+    </ul>
+
+    <h4 style="color: white;">Black Market Mechanics:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Selling illegal items boosts the black market score, escalating danger levels and attracting attention.</li>
+</ul>
+
+<h4 style="color: white;">Housing and Rest:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Players can unlock and rent apartments for improved rest and recovery.</li>
+</ul>
+
+<h4 style="color: white;">Fabricator Feature:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Upon earning enough money and acquiring a license, players can use the fabricator to convert scrap into parts over time.</li>
+    <li>Mini upgrade system available through the installation of cyberware.</li>
+</ul>
+
+<h4 style="color: white;">Contribution to the Economy:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Parts can be donated or used in engineering jobs to enhance the game's economy score.</li>
+</ul>
+
+<h4 style="color: white;">Daily Reports:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Each day ends with a report detailing changes in the player's credits and debt.</li>
+</ul>
+
+<h4 style="color: white;">Collapse System:</h4>
+<ul style="margin-bottom: 20px;">
+    <li>Players collapsing from unmet needs are sent to a default slum house or their apartment, if owned.</li>
+</ul>
+
+    <h3 style="color: #007bff;">V0.001</h3>
+    <ul style="margin-bottom: 20px;">
+        <li>Basic Navigation for Lower Deck setup</li>
+        <li>Intro done</li>
+    </ul>
+</div>
+<</nobr>>
+
+

@@ -1,0 +1,103 @@
+:: LDBMpoliceaction [event nobr] {"position":"1800,825","size":"100,100"}
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/events/security.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Police Action</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>As you make your way through the Lower Decks, the presence of law enforcement is a constant shadow, their vigilance a reminder of the consequences of your actions in the Black Market Bazaar.</p>
+
+<<set _encounterList to []>>
+<<for _i = 2; _i <= 10; _i++>>
+    <<if _i <= $lowerdeckHeat>>
+        <<set _encounterList.push(_i)>>
+    <</if>>
+<</for>>
+
+<<set _selectedHeat to _encounterList[random(0, _encounterList.length - 1)]>>
+<<switch _selectedHeat>>
+    <<case 2>>
+        <p>You notice a pair of officers eyeing you from across the corridor, but they seem preoccupied with their own conversation and soon move on.</p>
+        <<set $lowerdeckBlackActivity -= 100>><br><br>
+        <<link "Continue." $nextPassage>><</link>>
+    <<case 3>>
+        <p>An officer stops you for a quick ID scan. It's routine, nothing more, and you're on your way again with minimal delay.</p>
+        <<set $lowerdeckBlackActivity -= 100>><br><br>
+        <<link "Continue." $nextPassage>><</link>>
+    <<case 4>>
+        <<set _randomEvent to random(1, 2)>>
+        <<if _randomEvent == 1>>
+            <p>Your heart skips a beat as a security drone hovers nearby, its sensors flickering. After a moment, it buzzes off, leaving you to ponder the close call.</p>
+            <<set $lowerdeckBlackActivity -= 100>><br><br>
+            <<link "Continue." $nextPassage>><</link>>
+        <<else>>
+            <p>A checkpoint forces you to line up for inspection. The officers are thorough, and you can't help but sweat as they examine your belongings.</p>
+            <<set $player.stress += Math.round($player.stress * 0.03 + 10)>>
+            <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+            <<set $lowerdeckBlackActivity -= 200>><br><br>
+            <<link "Continue." $nextPassage>><</link>>
+        <</if>>
+    <<case 5>>
+        <<set _randomEvent to random(1, 2)>>
+        <<if _randomEvent == 1>>
+            <p>You're briefly detained by a patrol for a cursory search. They find nothing incriminating, but the encounter leaves you rattled.</p><br>
+            <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
+            <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+            <<set $lowerdeckBlackActivity -= 500>><br><br>
+            <<link "Continue." $nextPassage>><</link>>
+        <<else>>
+            <p>Security seems to be tightening. You're pulled aside for questioning and released only after an hour of heated demands.</p><br>
+            <<set $player.stress += Math.round($player.stress * 0.04 + 15)>>
+            <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+            <<set $timeadd += 60>>
+            <<addmins $timeadd>>
+            <<set $lowerdeckBlackActivity -= 500>><br><br>
+            <<link "Continue." $nextPassage>><</link>>
+        <</if>>
+    <<case 6>>
+        <p>Today's not your day. You're detained and taken in for questioning. The ordeal will be draining, both mentally and physically.</p><br>
+        <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
+        <<set $player.fatigue += Math.round($player.fatigue * 0.05 + 10)>>
+        <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br><br>
+        [[You have been detained.|LDBMPoliceDetained]]
+    <<case 7>>
+        <p>You're caught in a surprise sting operation. The evidence against you is damning, and you're whisked away before you can protest.</p><br>
+        <<set $player.stress += Math.round($player.stress * 0.06 + 25)>>
+        <<set $player.fatigue += Math.round($player.fatigue * 0.06 + 15)>>
+        <<set $player.credits -= 50>>
+        <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
+        <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br><br>
+        <<creditchange 50 "negative">>
+        [[You have been detained.|LDBMPoliceArrested]]
+    <<case 8>>
+        <p>It's a full-blown raid. Law enforcement descends upon you with overwhelming force, and any thoughts of escape are quickly dashed. The repercussions will be severe and long-lasting.</p><br>
+        <<set $player.stress += Math.round($player.stress * 0.07 + 30)>>
+        <<set $player.fatigue += Math.round($player.fatigue * 0.07 + 20)>>
+        <<set $player.credits -= 100>>
+        <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
+        <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br>
+        <<creditchange 100 "negative">><br><br>
+        <<set $timeadd to 60>>
+        <<addmins $timeadd>>
+        [[You have been detained.|LDBMPoliceConvicted]]
+    <<default>>
+        <p>You notice a pair of officers eyeing you from across the corridor, but they seem preoccupied with their own conversation and soon move on.</p>
+        <<link "Continue." $nextPassage>><</link>>
+<</switch>>
+
+

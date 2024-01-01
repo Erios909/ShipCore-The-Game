@@ -1,0 +1,9 @@
+:: widget formatNumber [widget nobr] {"position":"50,175","size":"100,100"}
+<<widget "formatNumber">>
+<<nobr>>
+    <<set _numToFormat = Math.round($args[0])>> /* Round to the nearest whole number */
+    <<print _numToFormat.toLocaleString("en-US")>> /* Format with commas */
+<</nobr>>
+<</widget>>
+
+

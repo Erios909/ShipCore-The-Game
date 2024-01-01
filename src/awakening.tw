@@ -1,0 +1,32 @@
+:: awakening {"position":"500,175","size":"100,100"}
+<!-- Version 4: Glowing Text with Stroke Shadows -->
+<h1 style="font-size: 4em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">Awakening</h1>\
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>\
+You awaken in a small, dimly lit room aboard a bustling starport. 
+
+As your eyes adjust, the faint <span style="color: skyblue;">pulsating glow</span> of the sleek metal walls remind you of distant stars. You lay on a single metallic bench that rises from the floor and is the room's only furnishing. Through a small, circular window, you catch glimpses of the vastness of space and the dimly lit hull of the station outside.
+
+Occasionally the flicker of a shuttle or other extravehicular activity sparkles in the dark.
+
+As you sit up on the edge of the bench, dizziness takes you, and images of the world flow through your mind. You have a clear picture that the galactic economy is \
+<<link "Flourishing">><<set $worldEconomy to "Flourishing">><<set $worldEconomyScore to 900>><<updatebar>><<replace "#economyState">><span style="color: green;">Flourishing</span><</replace>>\
+<<replace "#lockerState">><span style="color: green;">immaculate, as if newly installed.</span><</replace>><</link>>, \
+<<link "Stable">><<set $worldEconomy to "Stable">><<set $worldEconomyScore to 700>><<updatebar>><<replace "#economyState">><span style="color: lightgreen;">Stable</span><</replace>>\
+<<replace "#lockerState">><span style="color: lightgreen;">showing signs of use but in good condition.</span><</replace>><</link>>, \
+<<link "Struggling">><<set $worldEconomy to "Struggling">><<set $worldEconomyScore to 500>><<updatebar>><<replace "#economyState">><span style="color: orange;">Struggling</span><</replace>>\
+<<replace "#lockerState">><span style="color: orange;">bearing scratches and signs of wear.</span><</replace>><</link>>, \
+<<link "Crumbling">><<set $worldEconomy to "Crumbling">><<set $worldEconomyScore to 300>><<updatebar>><<replace "#economyState">><span style="color: red;">Crumbling</span><</replace>>\
+<<replace "#lockerState">><span style="color: red;">tarnished, hinting at tough times.</span><</replace>><</link>>, or \
+<<link "Collapsed">><<set $worldEconomy to "Collapsed">><<set $worldEconomyScore to 100>><<updatebar>><<replace "#economyState">><span style="color: darkred;">Collapsed</span><</replace>>\
+<<replace "#lockerState">><span style="color: darkred;">broken and neglected.</span><</replace>><</link>>?
+
+Above you, a network of pipes and conduits crisscrosses the ceiling, humming softly, carrying the lifeblood of the starport. The air is crisp and carries a sterile scent, hinting at advanced filtration systems. In one corner lies an array of lockers, their surfaces <span id="lockerState" style="color: lightgreen;">showing signs of use but in good condition.</span> You wonder how many have woken here before you. Each locker has a small digital keypad, glowing softly in the dim light.
+
+When you glance back at the small porthole, the activity outside hints that the local economy's state is <span id="economyState" style="color: lightgreen;">Stable</span>.
+
+Another series of images begins to assail you...
+
+[[Close your eyes->Memories]]
+
+
+

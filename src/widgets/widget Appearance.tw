@@ -1,0 +1,29 @@
+:: widget Appearance [widget nobr] {"position":"175,375","size":"100,100"}
+<<widget "appearance">><<silently>>
+   <<set $hairColorDesc = ["black", "blonde", "red", "brown", "silver"][$player.hairColor - 1]>>
+   <<set $hairColorStyle = ["Gray", "Gold", "Red", "Brown", "Silver"][$player.hairColor - 1]>>
+
+   <<set $hairLengthDesc = ["short", "medium-length", "long", "nearly shaved"][$player.hairLength - 1]>>
+   <<set $hairLengthStyle = ["Gray", "LightGray", "DarkGray", "Gainsboro"][$player.hairLength - 1]>>
+
+   <<set $eyeColorDesc = ["blue", "green", "brown", "hazel", "gray"][$player.eyeColor - 1]>>
+   <<set $eyeColorStyle = ["Blue", "Green", "Brown", "Khaki", "Gray"][$player.eyeColor - 1]>>
+
+   <<set $skinColorDesc = ["light", "olive", "tan", "brown", "dark"][$player.skinColor - 1]>>
+   <<set $skinColorStyle = ["PeachPuff", "Moccasin", "Tan", "SaddleBrown", "DarkOliveGreen"][$player.skinColor - 1]>>
+
+   <<set $buildDesc = ["slender and toned", "muscular and ripped", "average and moderately toned", "stocky and bulky", "slender and soft", "athletic and fit"][$player.build - 1]>>
+   <<set $buildStyle = ["LightGreen", "ForestGreen", "LimeGreen", "OliveDrab", "Gray", "SteelBlue"][$player.build - 1]>>
+
+   <<set $heightDesc = ["short", "average height", "tall"][$player.height - 1]>>
+   <<set $heightStyle = ["LightPink", "Khaki", "LightSkyBlue"][$player.height - 1]>>
+
+   <<set $distinctiveFeatureDesc = ["freckles", "a scar", "a birthmark", "clear skin"][$player.distinctiveFeature - 1]>>
+   <<set $distinctiveFeatureStyle = ["Gold", "Tomato", "Sienna", "LemonChiffon"][$player.distinctiveFeature - 1]>>
+
+   <<set $appearanceDesc = ["rugged", "elegant", "youthful", "weathered"][$player.appearance - 1]>>
+   <<set $appearanceStyle = ["Brown", "MediumPurple", "HotPink", "Tan"][$player.appearance - 1]>>
+<</silently>><</widget>>
+
+
+

@@ -1,0 +1,19 @@
+:: widget clamps [widget nobr] {"position":"300,275","size":"100,100"}
+<<widget "clamps">><<nobr>>
+        /* Clamp global game variables to their defined ranges */
+        <<set $worldEconomyScore = Math.clamp($worldEconomyScore, 0, 1000)>>
+        <<set $dangerLevelScore = Math.clamp($dangerLevelScore, 0, 1000)>>
+        
+        /* Clamp player-specific variables */
+        <<set $player.health = Math.clamp($player.health, 0, 1000)>>
+        <<set $player.mood = Math.clamp($player.mood, 0, 1000)>>
+        <<set $player.stress = Math.clamp($player.stress, 0, 1000)>>
+        <<set $player.trauma = Math.clamp($player.trauma, 0, 1000)>>
+        <<set $player.fatigue = Math.clamp($player.fatigue, 0, 1000)>>
+        <<set $player.filth = Math.clamp($player.filth, 0, 1000)>>
+        <<set $player.powerReserves = Math.clamp($player.powerReserves, 0, 1000)>>
+        <<set $player.debt = Math.clamp($player.debt, 0, 20000000000000000000)>>
+    <</nobr>><</widget>>
+
+
+

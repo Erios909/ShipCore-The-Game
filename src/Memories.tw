@@ -1,0 +1,34 @@
+:: Memories {"position":"500,300","size":"100,100"}
+A new series of images flashes through your mind without warning. Men and women in powered combat armor, emblazoned with the logos of various interstellar corporations, yelling and fighting and dying in the void of space... the universe can be a dangerous place. 
+
+Starships clash in orbit around contested planets, their hulls scarred by laser fire and missile strikes. On the ground, soldiers in exoskeletons move through the ruins of once-great cities, their steps echoing in the silence of a world left desolate by war.
+
+Although wars come and go, competition for limited resources will always haunt humanity. Right now, you feel that the danger level around you is \
+<<link "Low">><<set $dangerLevel to "Low">><<set $dangerLevelScore to 900>><<updatebar>><<replace "#dangerState">><span style="color: blue;">Low</span><</replace>>\
+<<replace "#doorDescription2">><span style="color: blue;">It looks like an average autodoor.</span><</replace>><</link>>, \
+<<link "Moderate">><<set $dangerLevel to "Moderate">><<set $dangerLevelScore to 700>><<updatebar>><<replace "#dangerState">><span style="color: lightgreen;">Moderate</span><</replace>>\
+<<replace "#doorDescription2">><span style="color: lightgreen;">It looks secure.</span><</replace>><</link>>, \
+<<link "High">><<set $dangerLevel to "High">><<set $dangerLevelScore to 500>><<updatebar>><<replace "#dangerState">><span style="color: orange;">High</span><</replace>>\
+<<replace "#doorDescription2">><span style="color: orange;">It looks fortified and secure.</span><</replace>><</link>>, or \
+<<link "Extreme">><<set $dangerLevel to "Extreme">><<set $dangerLevelScore to 300>><<updatebar>><<replace "#dangerState">><span style="color: red;">Extreme</span><</replace>>\
+<<replace "#doorDescription2">><span style="color: red;">It looks heavily fortified and secure.</span><</replace>><</link>>?
+
+You perceive that you will face a level of <span id="dangerState" style="color: lightgreen;">Moderate</span> danger outside.
+
+<<nobr>>The room's only exit, a heavy sliding door,
+<<if $worldEconomyScore >= 800>>
+    <span style="color: green;">looks pristine and high-tech, almost blending seamlessly into the well-maintained wall.</span>
+<<elseif $worldEconomyScore >= 600>>
+    <span style="color: lightgreen;">has a sleek design, showing minimal signs of wear, indicative of regular maintenance.</span>
+<<elseif $worldEconomyScore >= 400>>
+    <span style="color: orange;">appears functional but with visible signs of age and infrequent repairs.</span>
+<<elseif $worldEconomyScore >= 200>>
+    <span style="color: red;">bears marks of neglect, with peeling paint and a faint creaking noise as it moves.</span>
+<<else>>  <!-- For scores less than 200 -->
+    <span style="color: darkred;">stands deteriorated and barely operational, reflecting the harsh economic times.</span>
+<</if>> <span id="doorDescription2" style="color: lightgreen;">It looks secure.</span> It remains firmly shut, severing your connection to the world outside.<</nobr>>
+
+[[Stand Up->Stand Up]]
+
+
+

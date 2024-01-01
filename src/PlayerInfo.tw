@@ -1,0 +1,19 @@
+:: PlayerInfo {"position":"875,50","size":"100,100"}
+<<nobr>><!-- PlayerInfo Passage with conditional logic -->
+<div style="background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black */
+    border: 4px solid #444;
+    text-shadow: -1px -1px 0 #000,  /* Top-left sharp shadow */
+                 1px -1px 0 #000,   /* Top-right sharp shadow */
+                 -1px 1px 0 #000,   /* Bottom-left sharp shadow */
+                 1px 1px 0 #000,    /* Bottom-right sharp shadow */
+                 0px -2px 0 #000,   /* Top sharp shadow */
+                 0px 2px 0 #000,    /* Bottom sharp shadow */
+                 -2px 0px 0 #000,   /* Left sharp shadow */
+                 2px 0px 0 #000,    /* Right sharp shadow */
+                 0px 0px 2px #000;  /* General soft blur */
+    padding: 0.4em;
+    margin-bottom: 0em;"> <!-- Adjust margin as needed -->
+    Location: $location.name<br>
+</div><</nobr>>\
+
+

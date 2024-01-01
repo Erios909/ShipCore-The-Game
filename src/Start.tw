@@ -1,0 +1,28 @@
+:: Start [splash] {"position":"500,50","size":"100,100"}
+<<type 2ms start 1s>><<nobr>><<PlayTrack>><<setBackground setup.ImagePath+'/splash.jpg'>>
+<!-- Version 4: Glowing Text with Stroke Shadows -->
+<h1 style="font-size: 4em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">ShipCore</h1>
+<h2 style="font-size: 2.5em; text-align: center; color: #add8e6; text-shadow: 0 0 8px #add8e6, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">The Depths of Space Await</h2>
+    <p>Welcome to <strong>ShipCore</strong>, a text-based adventure game set in the expansive universe of the ShipCore webserial by Erios909, taking place over a decade after the Battle of Meltisar. Characters from the series will appear, but it may be a long journey before you progress to meet these icons.</p>
+    <p> Your path is yours to forge, from building a business empire to acquiring a ship and fleet for trading, or perhaps even obtaining your own wormhole drive to expand humanity's reach into unknown systems. Who knows, maybe you will encounter the fabled Omega or her friends?</p>
+    <p>In this world, you will encounter a diverse cast of characters that go far beyond the heroes in the story, here we'll dive into the lives of common men and women instead of larger than life legends. All of them have their own stories and agendas. From the diligent engineers maintaining the lifeblood of the station to the shrewd traders of the Black Market Bazaar.</p>
+    <p>Your adventure begins in the Lower Decks, a place teeming with opportunity and danger. Here, the station's underbelly reveals itself, and you must learn to adapt, survive, and thrive amidst the shadows.</p>
+    <p>As you explore the station, you will face challenges that test your wit, resolve, and morality. Your choices will affect not only your own story but also the delicate balance of power within MOR-1, and eventually beyond. Will you rise to become a beacon of hope, or will you delve into the depths of corruption?</p>
+    <p>Manage your resources carefully, for space is unforgiving. Your health, mood, stress, and fatigue are just as important as the credits in your pocket. Remember, in space, no one can hear you scream... but they can certainly see you thrive or falter.</p>
+    <p>Engage in various activities to earn credits, from trading valuable parts to taking on high-stakes jobs. But beware, for each action comes with consequences, and the station's ever-watchful security drones are always on the lookout for trouble.</p>
+    <p>Uncover the mysteries of cold storage and why no one dares to venture there. What secrets lie within its silent chambers? Only the brave or the foolish seek to uncover the truth.</p>
+    <p>Forge alliances or rivalries with the station's factions. Your reputation precedes you, and your allegiances will open doors to new possibilities or close them forever.</p>
+    <p>The story of ShipCore is <span style="color: skyblue;">now</span> yours to write. Will you become a legend among the stars or a footnote in the station's history?</p>
+    <p>Prepare to embark on your journey. The decks of MOR-1 await your footsteps, and the stars beyond beckon for exploration. The question is, what will you discover?</p>
+<span style="color: lightblue; text-decoration: none; font-weight: bold; background-color: #333; padding: 0.5em 1em; border-radius: 5px; display: inline-block; margin-top: 0em;">
+    <<link "Begin Your Adventure">><<goto "awakening">><</link>>
+</span>
+<</nobr>>
+<span style="display: none;">[[Continue.->awakening]]</span>
+<!-- Change Log Button using SlideWin -->
+<p><<button 'View Change Log'>>
+    <<run slideWin("changelist")>>
+<</button>></p>
+<</type>>
+
+

@@ -1,0 +1,28 @@
+:: widget addmins [widget nobr] {"position":"300,475","size":"100,100"}
+<<widget "addmins">><<nobr>>
+    /* Clone the current $gameDate for comparison */
+    <<set _previousDate = new Date($gameDate.getTime())>>
+
+
+    /* Add minutes to the game date */
+    <<set $gameDate.setMinutes($gameDate.getMinutes() + $args[0])>>
+
+
+    /* Call manageNeeds widget to adjust player's needs based on time */
+    <<manageNeeds>>
+
+    /* Call clamps widget to ensure all variables are within their defined ranges */
+    <<clamps>>
+
+    /* Check if a new day has started */
+    <<if _previousDate.getDate() != $gameDate.getDate() or _previousDate.getMonth() != $gameDate.getMonth() or _previousDate.getFullYear() != $gameDate.getFullYear()>>
+        <<set State.variables.newDay = true>>
+    <</if>>
+
+    <<autoFabricatorProcess>>
+
+    <<set $timeadd to 0>>
+<</nobr>><</widget>>
+
+
+

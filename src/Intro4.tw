@@ -1,0 +1,42 @@
+:: Intro4 {"position":"625,150","size":"100,100"}
+<<nobr>><<playerp>>
+<<if $playerIntro5 is 1>>
+<<maincomputer>>"Your current debt stands at <<formatNumber $player.debt>> credits. While significant, it's not an immediate danger to your well-being. However, I advise addressing it at your earliest convenience," the smartwatch advises pragmatically.<</maincomputer>>
+<<elseif $playerIntro5 is 2>>
+<<maincomputer>>"Regrettably, yes. Financial management is not within my programming, but I suggest formulating a repayment plan soon," the watch responds sympathetically.
+"Your current debt stands at <<formatNumber $player.debt>> credits. While significant, it's not an immediate danger to your well-being.<</maincomputer>>
+<<elseif $playerIntro5 is 3>>
+<<maincomputer>>"Debt slavery is strictly prohibited on Meltisar. However, your debt obligations need to be met. I recommend seeking employment opportunities," the watch informs you in a matter-of-fact tone.
+"Your current debt stands at <<formatNumber $player.debt>> credits. While significant, it's not an immediate danger to your well-being.<</maincomputer>>
+<<else>>
+<<maincomputer>>"I understand your frustration. However, expressing discontent will not resolve your financial predicament. A plan of action is required," the watch responds with a hint of sternness.
+"Your current debt stands at <<formatNumber $player.debt>> credits. While significant, it's not an immediate danger to your well-being."<</maincomputer>>
+<</if>><<addmins $timeadd>><<set $playerIntro5 to 1>><<updatebar>><</nobr>>
+A soft chime from your watch draws your attention to an incoming message. You glance at the screen, seeing an alert about a job opportunity nearby. "Job posting: Service personnel at local restaurant. Payment: 5 credits per hour." 
+
+It seems like a potential start to tackle your debt. Until you think about the numbers for more than half a second.
+
+<<nobr>><<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"With my current debt, a 40-hour work week, and estimated living costs, exactly how long will that take to pay off?"
+<</say>>
+<<nobr>>
+<<set $weeklyEarnings = 5 * 40>>
+<<set $weeklyNetIncome = $weeklyEarnings - 175>>
+<<set $weeksToRepay = Math.ceil($player.debt / $weeklyNetIncome)>>
+<</nobr>>
+<<maincomputer>>"Calculating based on your current debt of <<= $player.debt.toLocaleString() >> credits, assuming an average earnings of 5 credits per hour, and estimated weekly living costs of 175 credits... One moment please."<</maincomputer>><</nobr>>
+You wait patiently, but the fact that it's taking more than a few seconds to process is ridiculous. You already know that based on the job listing, you might as well just forget about ever repaying anything.
+
+<<nobr>><<maincomputer>>"You will require approximately <span style="color: red;"><<formatNumber $weeksToRepay>></span> weeks to repay the debt, provided there are no additional expenses or changes in income."<</maincomputer>>
+<<set $yearsToRepay = $weeksToRepay / 52>>
+<<set $yearsToRepay = $yearsToRepay.toFixed(0)>><!-- There are 52 weeks in a year -->
+<</nobr>><<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"That's roughly <<formatNumber $yearsToRepay>> years... That's not happening."<</say>>
+There is a sympathetic beep from the computer, and you sigh. You look around the room once again. Other than the door, there doesn't appear to be another way out.
+
+<<maincomputer>>"User mathmatics core appears to be operating satisfactorily. I have accessed the local job market with multiple listings that offer better rates of return; however, they require specialized skills. Shall I display them?"<</maincomputer>>\
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+[[Is that required for me to get out of here?|Intro5][$playerIntro6 = 1;$timeadd = 1]]
+[[I need to think about this.|Intro5][$playerIntro6 = 2;$timeadd = 1]]
+[[Is there anything else I can do besides work?|Intro5][$playerIntro6 = 3;$timeadd = 1]]
+[[Just give me some time to process this.|Intro5][$playerIntro6 = 4;$timeadd = 1]]<</say>>
+
+

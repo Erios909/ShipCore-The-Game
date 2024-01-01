@@ -1,0 +1,14 @@
+:: widget displayAreaImage [widget nobr] {"position":"50,475","size":"100,100"}
+<<widget "displayAreaImage">>
+<<nobr>>
+<<set _area = $args[0]>>
+<<set _imagePath = setup.areaImagePaths[_area] ? setup.areaImagePaths[_area] : setup.defaultImagePath>>
+
+<div id="area-image-container">
+    <img src="@{_imagePath}" alt="Map of the area">
+</div>
+<</nobr>>
+<</widget>>
+
+
+

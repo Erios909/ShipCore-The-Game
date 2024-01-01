@@ -1,0 +1,106 @@
+:: ShroudedMarketTradeContraband [lowerdeckact] {"position":"1950,1450","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/shroudedmarket/marketveiledpromenade.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Shrouded Market - Trade Contraband",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $shroudedMarketTradeContrabandEventsRecord>> <<set $shroudedMarketTradeContrabandEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $shroudedMarketTradeContrabandEventsRecord.today != _today>>
+    <<set $shroudedMarketTradeContrabandEventsRecord.today to _today>>
+    <<set $shroudedMarketTradeContrabandEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available contraband trading events -->
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $shroudedMarketTradeContrabandEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available contraband trading events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $shroudedMarketTradeContrabandEventsRecord.triggeredEvents.push(_randomEvent)>>
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Shrouded Market - Trade Contraband</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The Shrouded Market's underbelly is ripe with the whispers of contraband trade. You navigate through the crowd, your pockets heavy with illicit goods, ready to make a deal that will line them with credits instead.</p>
+
+<!-- Random Contraband Trading Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- High Demand -->
+        <p>The items you're offering are in high demand. You negotiate a price that's well above the standard rate.<span style="color: green;"> +2200 Credits</span></p>
+        <<set $player.credits += 2200>>
+        <<set $lowerdeckBlackActivity += 2200>>
+
+    <<case 2>> <!-- Buyer's Market -->
+        <p>It's a buyer's market today. You're forced to settle for a price that's slightly below what you were hoping for.<span style="color: yellow;"> +1800 Credits</span></p>
+        <<set $player.credits += 1800>>
+        <<set $lowerdeckBlackActivity += 1800>>
+
+    <<case 3>> <!-- Standard Exchange -->
+        <p>You find a buyer willing to pay the standard rate for your contraband. No hassle, no haggling.<span style="color: green;"> +2000 Credits</span></p>
+        <<set $player.credits += 2000>>
+        <<set $lowerdeckBlackActivity += 2000>>
+
+    <<case 4>> <!-- Generous Tip -->
+        <p>The buyer is pleased with the quality of your goods and throws in a little extra as a tip.<span style="color: green;"> +2100 Credits</span></p>
+        <<set $player.credits += 2100>>
+        <<set $lowerdeckBlackActivity += 2100>>
+
+    <<case 5>> <!-- Tough Bargain -->
+        <p>The buyer drives a hard bargain. You walk away with less than you wanted, but it's better than nothing.<span style="color: yellow;"> +1900 Credits</span></p>
+        <<set $player.credits += 1900>>
+        <<set $lowerdeckBlackActivity += 1900>>
+
+    <<case 6>> <!-- Law Enforcement Discount -->
+        <p>You spot law enforcement nearby and quickly make a deal at a discount to avoid suspicion.<span style="color: yellow;"> +1850 Credits</span></p>
+        <<set $player.credits += 1850>>
+        <<set $lowerdeckBlackActivity += 1850>>
+
+    <<case 7>> <!-- Windfall Sale -->
+        <p>A rare opportunity presents itself, and you sell your contraband for a significant profit.<span style="color: green;"> +2300 Credits</span></p>
+        <<set $player.credits += 2300>>
+        <<set $lowerdeckBlackActivity += 2300>>
+
+    <<case 8>> <!-- Saturated Market -->
+        <p>The market is saturated with similar goods, forcing you to accept a lower price.<span style="color: yellow;"> +1700 Credits</span></p>
+        <<set $player.credits += 1700>>
+        <<set $lowerdeckBlackActivity += 1700>>
+
+    <<case 9>> <!-- Sympathetic Buyer -->
+        <p>A sympathetic buyer understands your situation and offers a fair price for the contraband.<span style="color: green;"> +2050 Credits</span></p>
+        <<set $player.credits += 2050>>
+        <<set $lowerdeckBlackActivity += 2050>>
+
+    <<case 10>> <!-- Haggling Success -->
+        <p>Your haggling pays off, and you manage to secure a slightly better deal than usual.<span style="color: green;"> +2150 Credits</span></p>
+        <<set $player.credits += 2150>>
+        <<set $lowerdeckBlackActivity += 2150>>
+
+    <<default>> <!-- Balanced Deal -->
+        <p>The trade is fair and square. You get a decent price for your contraband, and the buyer seems satisfied.<span style="color: green;"> +2000 Credits</span></p>
+        <<set $player.credits += 2000>>
+        <<set $lowerdeckBlackActivity += 2000>>
+<</switch>>
+
+<!-- Continue Link -->
+[[Return to the Shrouded Market.|ShroudedMarket]]
+<</nobr>>
+
+
+

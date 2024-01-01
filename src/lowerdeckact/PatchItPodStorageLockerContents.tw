@@ -1,0 +1,86 @@
+:: PatchItPodStorageLockerContents [lowerdeckact] {"position":"1100,2325","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/patchitpod.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Patch-It Pod - Locker Salvaging",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $patchItPodLockerEventsRecord>> <<set $patchItPodLockerEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $patchItPodLockerEventsRecord.today != _today>>
+    <<set $patchItPodLockerEventsRecord.today to _today>>
+    <<set $patchItPodLockerEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available locker salvaging events -->
+<<for _i to 1; _i <= 5; _i++>>
+    <<if not $patchItPodLockerEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available locker salvaging events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $patchItPodLockerEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available locker salvaging events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Patch-It Pod - Locker Salvaging</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Random Locker Salvaging Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Mysterious Artifact -->
+        <p>Amongst forgotten debris, a mysterious artifact captures your attention. Its origins and function unclear, but undoubtedly valuable to the right buyer.</p>
+        <<set $player.credits += 40>>
+        <<creditchange 40 "positive">>
+
+    <<case 2>> <!-- Personal Effects with a Story -->
+        <p>You come across personal effects—a photo here, a trinket there—each with a story you'll never know. It's a somber reminder of transient lives aboard the station.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.02)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">>
+
+    <<case 3>> <!-- Stashed Credits Cache -->
+        <p>A small stack of credits is tucked away in a corner of a locker. Either forgotten or left in a rush, the find is a simple but welcomed windfall.</p>
+        <<set $player.credits += 35>>
+        <<creditchange 35 "positive">>
+
+    <<case 4>> <!-- Unexpected Occupant -->
+        <p>Opening a locker releases a cloud of bio-luminescent spores. The harmless but surprising occupants were part of a failed bioluminescence experiment.</p>
+        <<set $player.mood += Math.round($player.mood * 0.02)>>
+        <<set $player.health += Math.round($player.health * 0.02)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "health" "minor" "PosEffectOnPlayer">>
+
+    <<case 5>> <!-- Hazardous Material Leak -->
+        <p>Your salvage is cut short by the discovery of a hazardous material leak. Evacuating the area, you alert the station's maintenance crew, preventing a potential disaster.</p>
+        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02)>>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">>
+
+    <<default>> <!-- Default Locker Salvaging Event -->
+        <p>The contents of the lockers are mundane, but amongst the assorted bric-a-brac, you find useful knick-knacks and oddments. Nothing of great value, but enough to cover a meal.</p>
+        <<set $player.credits += 10>>
+        <<creditchange 10 "positive">>
+<</switch>>
+
+
+<br><br>
+<!-- Continue Link -->
+[[Return to the Patch-It Pod.|Patch-It Pod]]
+<</nobr>>
+
+
+

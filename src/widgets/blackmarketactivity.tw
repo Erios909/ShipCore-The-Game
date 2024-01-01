@@ -1,0 +1,36 @@
+:: blackmarketactivity [widget nobr] {"position":"1800,1075","size":"100,100"}
+<<widget "blackmarketactivity">>
+	<<if $lowerdeckBlackActivity < 0>>
+    <<set $lowerdeckBlackActivity to 0>>
+	<</if>>
+    <<if $lowerdeckBlackActivity > 32000>>
+        <<set $lowerdeckHeat = 8>>
+        <p><span style="color: darkred;">You're a high-priority target now. Every deal is a risk, and you're sure that law enforcement is just waiting for you to slip up.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 16000>>
+        <<set $lowerdeckHeat = 7>>
+        <p><span style="color: red;">It's getting hot. You've had to dodge a few plainclothes officers who are clearly looking for someone.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 8000>>
+        <<set $lowerdeckHeat = 6>>
+        <p><span style="color: tomato;">There's no doubt about it, you're on the radar. You've seen drones lingering near your usual haunts.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 4000>>
+        <<set $lowerdeckHeat = 5>>
+        <p><span style="color: darkorange;">You've made quite a splash. Informants are likely keeping tabs on you now.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 2000>>
+        <<set $lowerdeckHeat = 4>>
+        <p><span style="color: orange;">Your name has come up in hushed conversations. You catch the occasional stare from someone who might be undercover.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 1000>>
+        <<set $lowerdeckHeat = 3>>
+        <p><span style="color: gold;">Whispers in the dark corners of the market suggest that law enforcement might be taking an interest.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 500>>
+        <<set $lowerdeckHeat = 2>>
+        <p><span style="color: yellow;">You're starting to get noticed. A few patrols seem to linger a bit longer than usual.</span></p>
+    <<elseif $lowerdeckBlackActivity >= 100>>
+        <<set $lowerdeckHeat = 1>>
+        <p><span style="color: yellowgreen;">There's a slight buzz around your recent activities, but no overt interest from the authorities.</span></p>
+    <<else>>
+        <<set $lowerdeckHeat = 0>>
+        <p><span style="color: green;">The market is calm, and there's no sign of law enforcement interest in your activities.</span></p>
+    <</if>>
+<</widget>>
+
+

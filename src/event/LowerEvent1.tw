@@ -1,0 +1,70 @@
+:: LowerEvent1 [event] {"position":"1100,1200","size":"100,100"}
+<<nobr>>
+<!-- this is the first event and can serve as a template for other events -->
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/event.jpg'>>
+<!-- addmins is a function that adds the previous timeadd to the clock, its run at the top of a passage to update the clock, it shouldn't be changed to a value here, instead we are running the previous time add. Instead, at the bottom of the passage, based on how long the even took, set $timeadd there. addmins resets timeadd to 0 -->
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks - Incident</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Event Description based on Combined Difficulty Score -->
+<!-- The following paragraphs change based on the combined difficulty score -->
+<<if $combinedDifficultyScore <= 3>>
+    <p>The Lower Decks are unusually calm today. The corridors, though dimly lit, are peaceful, and the usual hustle is replaced by a serene quietness. It seems the recent economic stability has brought a temporary respite from the usual chaos.</p>
+<<elseif $combinedDifficultyScore <= 6>>
+    <p>The corridors of the Lower Decks are bustling with activity. Traders and inhabitants go about their business warily, a reflection of the moderate danger and economic uncertainty that characterizes this area of the station.</p>
+<<else>>
+    <p>The Lower Decks are a scene of turmoil. The flickering lights cast long shadows over the debris-strewn corridors, evidence of recent conflicts and economic hardship. Tension hangs heavy in the air, a constant reminder of the high danger and dire economic situation.</p>
+<</if>>
+
+
+<!-- Additional Effect based on Danger Score -->
+<!-- Player stat effects are indicated with colored spans: Yellow (-), Red (--), Green (+/++) -->
+<!-- Comment: Stat effect markers (+Stress, -Mood, etc.) are placed at the end of sentences or paragraphs without periods, indicating the change in player stats. In this system, higher values are better, so an increase (+) is positive and a decrease (-) is negative. -->
+<<if $dangerLevelScore < 400>> <!-- Lower score means higher danger -->
+    <p>As you make your way through the area, the heavy presence of gangs and aggressive security patrols is noticeable. Their watchful eyes and the palpable tension in the air are a constant stressor. The need to remain alert and cautious takes a toll on your mental and physical well-being. <span style="color: yellow;">-Fatigue</span></p>
+    <<set $player.stress -= 10>>
+    <<set $player.fatigue -= 10>>
+    <<set $player.mood -= 10>>
+    <p>The encounter leaves you more stressed, and in a worse mood than before, making your journey through these corridors increasingly challenging. <span style="color: red;">-Mood</span> <span style="color: red;">-Stress</span></p>
+<</if>>
+
+<!-- Continue Link -->
+<<link "Continue" $continue>><</link>>
+
+<!-- 
+Player stat variables that can be modified by events include: 
+$player.health, $player.mood, $player.stress, $player.trauma, 
+$player.fatigue, $player.powerReserves, $player.credits, $player.debt
+
+Guidelines for Adjusting Player Stats:
+1. Each stat ranges from 0 to 1000.
+2. Adjustments to stats should be carefully considered based on the event's context and frequency.
+3. For frequent or recurring events, changes to stats should generally be minor to avoid excessively penalizing or benefiting the player. For example, a loss or gain of 10 points in an event that occurs regularly provides a noticeable but not severe impact.
+4. More significant changes can be justified for rare or particularly impactful events. However, these should be used sparingly and align with the narrative or gameplay mechanics.
+5. In this template, we adjust 'stress', 'fatigue', and 'mood' by -10 points each as the player is observed by others, creating a mild but noticeable effect that reflects the narrative context without being overly punitive.
+
+Note on this Template: If this is being used as a template, keep in mind that all the comments and notes in it shouldn't be repeated when making the new event unless the comment is specific to the event. This will reduce comment overhead.
+-->
+<</nobr>>
+
+
+

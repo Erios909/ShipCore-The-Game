@@ -1,0 +1,105 @@
+:: ShroudedMarketSellStolen [lowerdeckact] {"position":"1825,1450","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/shroudedmarket/marketveiledpromenade.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Shrouded Market - Sell Stolen Items",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $shroudedMarketSellStolenEventsRecord>> <<set $shroudedMarketSellStolenEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $shroudedMarketSellStolenEventsRecord.today != _today>>
+    <<set $shroudedMarketSellStolenEventsRecord.today to _today>>
+    <<set $shroudedMarketSellStolenEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available stolen item selling events -->
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $shroudedMarketSellStolenEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available stolen item selling events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $shroudedMarketSellStolenEventsRecord.triggeredEvents.push(_randomEvent)>>
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Shrouded Market - Sell Stolen Items</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>In the dimly lit corners of the Shrouded Market, you find yourself among other shadowy figures, each looking to convert their ill-gotten gains into something more liquid. You clutch your stolen items, knowing that here, the right buyer can make all the difference.</p>
+
+<<switch _randomEvent>>
+    <<case 1>> <!-- Lucky Break -->
+        <p>A collector is on the lookout for exactly what you're selling. You strike a deal for a bit more than the usual rate.<span style="color: green;"> +550 Credits</span></p>
+        <<set $player.credits += 550>>
+        <<set $lowerdeckBlackActivity += 550>>
+
+    <<case 2>> <!-- Desperate Times -->
+        <p>You're desperate to sell and it shows. A buyer haggles you down to less than you wanted.<span style="color: yellow;"> +450 Credits</span></p>
+        <<set $player.credits += 450>>
+        <<set $lowerdeckBlackActivity += 450>>
+
+    <<case 3>> <!-- Fair Trade -->
+        <p>You find a trader willing to do business at the standard rate, no questions asked.<span style="color: green;"> +500 Credits</span></p>
+        <<set $player.credits += 500>>
+        <<set $lowerdeckBlackActivity += 500>>
+
+    <<case 4>> <!-- Finder's Fee -->
+        <p>The buyer offers a finder's fee on top of the base price, sweetening the deal.<span style="color: green;"> +525 Credits</span></p>
+        <<set $player.credits += 525>>
+        <<set $lowerdeckBlackActivity += 525>>
+
+    <<case 5>> <!-- Bargain Hunter -->
+        <p>A bargain hunter sniffs out your urgency to sell and offers you a lower price, which you begrudgingly accept.<span style="color: yellow;"> +475 Credits</span></p>
+        <<set $player.credits += 475>>
+        <<set $lowerdeckBlackActivity += 475>>
+
+    <<case 6>> <!-- Under Surveillance -->
+        <p>You suspect you're being watched and quickly offload the goods for a safe but slightly lower price.<span style="color: yellow;"> +480 Credits</span></p>
+        <<set $player.credits += 480>>
+        <<set $lowerdeckBlackActivity += 480>>
+
+    <<case 7>> <!-- Generous Patron -->
+        <p>A wealthy patron is feeling generous today and offers you more than the going rate.<span style="color: green;"> +550 Credits</span></p>
+        <<set $player.credits += 550>>
+        <<set $lowerdeckBlackActivity += 550>>
+
+    <<case 8>> <!-- Market Glut -->
+        <p>The market is currently flooded with similar items, driving your selling price down.<span style="color: yellow;"> +470 Credits</span></p>
+        <<set $player.credits += 470>>
+        <<set $lowerdeckBlackActivity += 470>>
+
+    <<case 9>> <!-- Sympathetic Buyer -->
+        <p>A buyer sympathizes with your plight and offers a fair price for your goods.<span style="color: green;"> +510 Credits</span></p>
+        <<set $player.credits += 510>>
+        <<set $lowerdeckBlackActivity += 510>>
+
+    <<case 10>> <!-- Haggling Headache -->
+        <p>After a lengthy haggling session, you walk away with a slightly lower payout than expected.<span style="color: yellow;"> +490 Credits</span></p>
+        <<set $player.credits += 490>>
+        <<set $lowerdeckBlackActivity += 490>>
+
+    <<default>> <!-- Standard Deal -->
+        <p>You make a standard deal. It's not the best you've had, but it's not the worst either.<span style="color: green;"> +500 Credits</span></p>
+        <<set $player.credits += 500>>
+        <<set $lowerdeckBlackActivity += 500>>
+<</switch>>
+
+<!-- Continue Link -->
+[[Return to the Shrouded Market.|ShroudedMarket]]
+<</nobr>>
+
+
+

@@ -1,0 +1,49 @@
+:: ColdStorageLockers [safe] {"position":"825,525","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">> <!-- Keep the current area as lowerdecks -->
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Cold Storage - Lockers",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="lockersTitleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Rummaging the Lockers</span></h2>
+<hr id="lockersTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="lockersLocationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="lockersLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+
+<!-- Random event generator for searching lockers -->
+<<set _creditsFound to random(1, 100)>>
+<<set _isLucky to _creditsFound <= 30>> <!-- 30% chance to find credits -->
+<<set _creditsAmount to random(5, 20)>>
+<<set _moodChange to random(5, 10)>> <!-- Random mood boost value -->
+<<set _stressChange to random(1, 5)>> <!-- Random stress penalty value -->
+
+<<if _isLucky>>
+    <<set $player.credits += _creditsAmount>> <!-- Increase player's credits -->
+    <<set $player.mood += _moodChange>> <!-- Increase player's mood -->
+    <!-- Narrative for a positive outcome -->
+    You manage to find <<print _creditsAmount>> credits in one of the lockers. The small windfall lifts your spirits, the <span style="color: lightgreen;">joy</span> of the unexpected find momentarily warming the <span style="color: lightblue;">chill</span> of the room. Your mood improves as you pocket the credits, feeling a bit more optimistic about your prospects.
+    <p><span style="color: green;">+<<print _creditsAmount>> Credits</span> <span style="color: green;">+<<print _moodChange>> Mood</span></p>
+<<else>>
+    <<set $player.stress -= _stressChange>> <!-- Decrease player's stress -->
+    <!-- Narrative for a negative outcome -->
+    Despite your thorough search, the lockers yield nothing but <span style="color: darkred;">dust</span> and the <span style="color: grey;">echo</span> of forgotten belongings. The act weighs on you, increasing your <span style="color: orange;">stress</span> with the disheartening silence that follows. You can't help but feel a bit more burdened as you come to terms with the fruitless effort.
+    <p><span style="color: red;">-<<print _stressChange>> Stress</span></p>
+<</if>>
+
+<!-- Additional narrative to conclude the event -->
+<<if _isLucky>>
+    As you close the last locker, the sound of its latch clicking shut is a satisfying confirmation of your <span style="color: lightgreen;">success</span>. With a lighter step and a slightly fuller pocket, you prepare to continue your journey through the station, a subtle smile playing on your lips.
+<<else>>
+    The hollow clang of the final locker door resonates through the area, a stark reminder of the time spent with nothing to show for it. It's time to <span style="color: grey;">move on</span>, leaving the silent guardians of personal histories behind. You shake off the disappointment and refocus on the path ahead, knowing that not every search can end in triumph.
+<</if>>
+
+[[Continue.|Cold Storage][$timeadd = 1]]
+<</nobr>>
+
+

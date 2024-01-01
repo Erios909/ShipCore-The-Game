@@ -1,0 +1,48 @@
+:: DebtEvent [DebtEvent safe] {"position":"1000,325","size":"100,100"}
+<<nobr>>
+<<setBackground setup.ImagePath+'/ui/crashbackground.jpg'>>
+<<script>>
+    console.log("We arrived in debt event.");
+<</script>>
+
+<<if $debtEventOccurred is undefined>> 
+    <<set $debtEventOccurred to false>>
+<</if>>
+
+<<if not $debtEventOccurred>> 
+    <<set $debtIncurred to Math.abs($player.credits) * 100>> 
+    <<set $player.debt += $debtIncurred>> 
+    <<set $player.credits to 0>> 
+
+<!-- Area Header -->
+<h2 id="eventTitleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: gold; font-weight: bold; font-size: 24px;">Negative Credit Balance</span>
+</h2>
+<hr id="eventTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- Location Description -->
+<h2 id="eventLocationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+    <<say maincomputer>>"Alert: Your account balance has fallen into the negative. As per station regulations, your debt has been incremented by <<print $debtIncurred.toLocaleString()>> credits to restore balance to zero."<</say>>
+    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Wait, that's insane! How can I spend money I don't have? And now I owe how much?!"<</say>>
+    <<say maincomputer>>"The system allows for temporary credit advances to ensure uninterrupted service. However, a debt of <span style='color: red;'><<print $debtIncurred.toLocaleString()>></span> credits has been added to your account."<</say>>
+    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"That's completely messed up. There's got to be a better way to handle this."<</say>>
+    <<say maincomputer>>"I apologize for any inconvenience. It is advisable to maintain a positive balance to avoid further debt accumulation."<</say>>
+<<else>> 
+    <<set $debtIncurred to Math.abs($player.credits) * 100>> 
+    <<set $player.debt += $debtIncurred>> 
+    <<set $player.credits to 0>> 
+
+    <p>Your smartwatch beeps softly, displaying a new debt alert. Your negative balance of <span style='color: red;'>-<<print Math.abs($player.credits).toLocaleString()>></span> credits has resulted in an additional debt increase of <span style='color: red;'><<print $debtIncurred.toLocaleString()>></span> credits.</p>
+<</if>>
+
+<<addmins $timeadd>>
+<<updatebar>>
+<</nobr>>
+
+<<link "Continue." $nextPassage>><</link>>
+
+

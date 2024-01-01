@@ -1,0 +1,41 @@
+:: FinancialStatus {"position":"1125,50","size":"100,100"}
+<<nobr>><!-- FinancialStatus Passage -->
+<div style="background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black */
+    border: 4px solid #444;
+    text-shadow: -1px -1px 0 #000,  /* Top-left sharp shadow */
+                 1px -1px 0 #000,   /* Top-right sharp shadow */
+                 -1px 1px 0 #000,   /* Bottom-left sharp shadow */
+                 1px 1px 0 #000,    /* Bottom-right sharp shadow */
+                 0px -2px 0 #000,   /* Top sharp shadow */
+                 0px 2px 0 #000,    /* Bottom sharp shadow */
+                 -2px 0px 0 #000,   /* Left sharp shadow */
+                 2px 0px 0 #000,    /* Right sharp shadow */
+                 0px 0px 2px #000;  /* General soft blur */
+    padding: 0.4em;
+    margin-bottom: 0em;"> <!-- Adjust margin as needed -->
+    
+    Credits:
+    <<if $player.credits > 0>><span style="color: green;"><<formatNumber $player.credits>></span>
+    <<elseif $player.credits == 0>><<formatNumber $player.credits>>
+    <<else>><span style="color: red;"><<formatNumber $player.credits>></span><</if>><br>
+    Debt:
+    <<if $player.debt > 50000>><span style="color: red;"><<formatNumber $player.debt>></span>
+    <<elseif $player.debt > 0>><span style="color: yellow;"><<formatNumber $player.debt>></span>
+    <<else>><span style="color: green;"><<formatNumber $player.debt>></span><</if>><br>
+    <<set $worldEconomyScore = Math.clamp($worldEconomyScore, 0, 1000)>>
+    <<set $dangerLevelScore = Math.clamp($dangerLevelScore, 0, 1000)>>
+    <<set $combinedDifficultyScore to ((2000 - $worldEconomyScore - $dangerLevelScore) / 20).toFixed(1)>>
+    Economy:
+    <<if $worldEconomyScore >= 800>><span style="color: green;">Flourishing</span>
+    <<elseif $worldEconomyScore >= 600>><span style="color: lightgreen;">Stable</span>
+    <<elseif $worldEconomyScore >= 400>><span style="color: orange;">Struggling</span>
+    <<elseif $worldEconomyScore >= 200>><span style="color: red;">Crumbling</span>
+    <<else>><span style="color: darkred;">Collapsed</span><</if>><br>
+    Danger Level:
+    <<if $dangerLevelScore >= 800>><span style="color: blue;">Low</span>
+    <<elseif $dangerLevelScore >= 600>><span style="color: lightgreen;">Moderate</span>
+    <<elseif $dangerLevelScore >= 400>><span style="color: orange;">High</span>
+    <<else>><span style="color: red;">Extreme</span><</if>>
+</div><</nobr>>\
+
+

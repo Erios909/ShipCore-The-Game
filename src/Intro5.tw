@@ -1,0 +1,39 @@
+:: Intro5 {"position":"750,275","size":"100,100"}
+<<nobr>><<addmins $timeadd>><<updatebar>><<if $playerIntro6 is 1>>
+    <<maincomputer>>"Securing employment is not a prerequisite for station access. However, it is advisable for addressing your financial obligations."<</maincomputer>>
+    <br>
+    The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
+    <br><br>
+    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Not much I can do while locked in here, right?"<</say>>
+<<elseif $playerIntro6 is 2>>
+    <<maincomputer>>"Understood. Calculating your options is a prudent course of action."<</maincomputer>>
+    <br>
+    The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
+    <br><br>
+    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"I'm still trapped in this room, though."<</say>>
+<<elseif $playerIntro6 is 3>>
+    <<maincomputer>>"Exploring all available options is recommended. Employment is the most direct method to alleviate debt."<</maincomputer>>
+    <br>
+    The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
+    <br><br>
+    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"But I'm still stuck in here, so that's a problem."<</say>>
+<<else>>
+    <<maincomputer>>"Processing time is essential for informed decision-making. I am here to assist when you are ready."<</maincomputer>>
+    <br>
+    The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
+    <br><br>
+    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"First step, getting out of this room, though."<</say>><</if>><</nobr>>\
+<<maincomputer>>"You may access a local bulletin board for job listings from any station terminal. However, your identification is required."<</maincomputer>>
+The locker before you clicks and whirs as its locking mechanism disengages. The door swings open with a faint creak, revealing its contents bathed in soft light. You approach cautiously, as if the items within are relics of a former life.
+
+<<maincomputer>>"I have now unlocked your locker containing your ID card and belongings."<</maincomputer>>
+You reach inside and retrieve the ID card. Its surface is sleek and cool to the touch, displaying your name <<print $player.name>>, etched alongside biometric data that confirms your identity. A designation label marks you as 'Refugee,' a status you suspect would be benefical to shed.
+
+As your fingers trace over the card's embedded chip, you also pull out a standard skinsuit. It's lightweight yet durable, designed for utility rather than comfort. The fabric shifts and conforms to your movements as you slip into it. The absence of a helmet leaves your face exposed, a vulnerability you're acutely aware of.
+
+<<maincomputer>>"With your identification, you will have access to public areas on the station. This will facilitate your job search and movement."<</maincomputer>>
+You take one last look at the spartan room that has been your temporary cell. With ID card in hand and skinsuit donned, you're ready to step into the corridors of the station — into uncertainty, but also possibility.
+
+[[Explore the Station.|Cold Storage][$timeadd = 1]]
+
+

@@ -1,0 +1,108 @@
+:: ElectricEmporiumProcessScrap [lowerdeckact] {"position":"75,1200","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/electricemporium.jpg'>>
+<<addmins $timeadd>><<set $lowerdecksScrap -= 10>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Electric Emporium - Scrap Processing",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $electricEmporiumProcessScrapEventsRecord>> <<set $electricEmporiumProcessScrapEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $electricEmporiumProcessScrapEventsRecord.today != _today>>
+    <<set $electricEmporiumProcessScrapEventsRecord.today to _today>>
+    <<set $electricEmporiumProcessScrapEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available scrap processing events -->
+<<for _i to 1; _i <= 5; _i++>>
+    <<if not $electricEmporiumProcessScrapEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available scrap processing events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $electricEmporiumProcessScrapEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available scrap processing events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Electric Emporium - Scrap Processing</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The Electric Emporium buzzes with the sound of raw innovation and the crackle of electricity jumping between exposed wires. Surrounded by heaps of scrap that hold untold potential, you ready your tools for the meticulous task of refining the raw materials. The work is tedious and the machinery unforgiving, but the promise of turning refuse into profit drives you forward in this cathedral of technology.</p>
+
+<!-- Random Scrap Processing Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Efficient Refinement -->
+        <p>You expertly separate valuable materials from the dross, earning a commendation from the shop owner and a hefty payment for your refined scrap.</p>
+        <<set $player.credits += 500>>
+        <<creditchange 500 "positive">><br>
+
+    <<case 2>> <!-- Machine Malfunction -->
+        <p>A machine critical to the processing line malfunctions, but you quickly troubleshoot the issue. The delay is minor, and your problem-solving doesn't go unnoticed.</p>
+        <<set $player.credits += 300>>
+        <<creditchange 300 "positive">><br>
+
+    <<case 3>> <!-- Rare Material Discovery -->
+        <p>In the midst of ordinary scrap, you find a rare material strand. This could be the key component for high-tech repairs or a lucrative sell on its own.</p>
+        <<set $player.credits += 350>>
+        <<creditchange 350 "positive">><br>
+
+    <<case 4>> <!-- Tedious Task -->
+        <p>The work today is repetitive and tedious, but you push through. Your dedication earns you a fair day's pay.</p>
+        <<set $player.credits += 250>>
+        <<creditchange 250 "positive">><br>
+
+    <<case 5>> <!-- Accidental Damage -->
+        <p>An error in processing damages a portion of the scrap, reducing its resale value. The mistake is a setback, but a lesson learned in attentiveness.</p>
+        <<set $player.credits += 150>>
+        <<creditchange 150 "positive">><br>
+
+    <<case 6>> <!-- Expert Appraisal -->
+        <p>Your keen eye for detail allows you to appraise the scrap's true value, leading to a profitable transaction.</p>
+        <<set $player.credits += 400>>
+        <<creditchange 400 "positive">><br>
+
+    <<case 7>> <!-- Hazardous Materials -->
+        <p>You handle a batch of hazardous materials with care, preventing a potential disaster and earning a bonus for your diligence.</p>
+        <<set $player.credits += 450>>
+        <<creditchange 450 "positive">><br>
+
+    <<case 8>> <!-- Overlooked Gem -->
+        <p>Hidden within the scrap, you discover an overlooked gem that fetches a high price on the market.</p>
+        <<set $player.credits += 500>>
+        <<creditchange 500 "positive">><br>
+
+    <<case 9>> <!-- Technical Glitch -->
+        <p>A technical glitch slows down the processing, but your quick thinking minimizes the downtime and keeps the credits flowing.</p>
+        <<set $player.credits += 275>>
+        <<creditchange 275 "positive">><br>
+
+    <<case 10>> <!-- Resourceful Recycling -->
+        <p>Your resourcefulness in recycling scrap material not only benefits the environment but also lines your pockets with extra credits.</p>
+        <<set $player.credits += 325>>
+        <<creditchange 325 "positive">><br>
+
+    <<default>> <!-- Default Scrap Processing Event -->
+        <p>Hours of work sorting and processing scrap pay off with a respectable payout. It's hard work, but it keeps the credits coming.</p>
+        <<set $player.credits += 200>>
+        <<creditchange 200 "positive">><br>
+<</switch>><br>
+
+<!-- Continue Link -->
+[[Finish Processing.|The Electric Emporium]]
+<</nobr>>
+
+
+

@@ -1,0 +1,120 @@
+:: BiometricsReadout {"position":"1250,50","size":"100,100"}
+<<nobr>><!-- BiometricsReadout Passage -->
+<!-- Biometrics readout container with shadow and padding -->
+<div style="background-color: rgba(0, 0, 0, 0.75); border: 4px solid #444; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000; padding: 0.4em; margin-bottom: 0em;">
+    <span style="color: lightblue; font-weight: bold;">Biometrics Readout</span><br>
+    <!-- Health -->
+    <!-- Health status with color coding -->
+    Health:
+    <<if $player.health >= 800>><span style="color: green;">Excellent</span>
+    <<elseif $player.health >= 600>><span style="color: lightgreen;">Good</span>
+    <<elseif $player.health >= 400>><span style="color: yellow;">Fair</span>
+    <<elseif $player.health >= 200>><span style="color: orange;">Poor</span>
+    <<else>><span style="color: red;">Critical</span>
+    <</if>>
+    <!-- Health bar -->
+    <div id="healthbarbkg" class="hzbarbkg">
+        <div id="healthbar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar($player.health, 1000, "healthbar", false)>>
+    <!-- Mood -->
+    <!-- Mood status with color coding -->
+    Mood:
+    <<if $player.mood >= 800>><span style="color: green;">Joyful</span>
+    <<elseif $player.mood >= 600>><span style="color: lightgreen;">Happy</span>
+    <<elseif $player.mood >= 400>><span style="color: yellow;">Neutral</span>
+    <<elseif $player.mood >= 200>><span style="color: orange;">Unhappy</span>
+    <<else>><span style="color: red;">Depressed</span>
+    <</if>>
+    <!-- Mood bar -->
+    <div id="moodbarbkg" class="hzbarbkg">
+        <div id="moodbar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar($player.mood, 1000, "moodbar", false)>>
+        <!-- Power Reserves -->
+    <!-- Power Reserves status with color coding -->
+    Power Reserves:
+    <<if $player.powerReserves >= 800>><span style="color: green;">Full</span>
+    <<elseif $player.powerReserves >= 600>><span style="color: lightgreen;">High</span>
+    <<elseif $player.powerReserves >= 400>><span style="color: yellow;">Moderate</span>
+    <<elseif $player.powerReserves >= 200>><span style="color: orange;">Low</span>
+    <<else>><span style="color: red;">Critical</span>
+    <</if>>
+    <!-- Power Reserves bar -->
+    <div id="powerReservesbarbkg" class="hzbarbkg">
+        <div id="powerReservesbar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar($player.powerReserves, 1000, "powerReservesbar", false)>>
+    <!-- Stress -->
+    <!-- Stress status with inverted color coding -->
+    Stress:
+    <<if $player.stress < 200>><span style="color: green;">Relaxed</span>
+    <<elseif $player.stress < 400>><span style="color: lightgreen;">Manageable</span>
+    <<elseif $player.stress < 600>><span style="color: yellow;">Stressed</span>
+    <<elseif $player.stress < 800>><span style="color: orange;">High</span>
+    <<else>><span style="color: red;">Overwhelmed</span>
+    <</if>>
+    <!-- Stress bar with inverted logic -->
+    <div id="stressbarbkg" class="hzbarbkg">
+        <div id="stressbar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar(1000 - $player.stress, 1000, "stressbar", true)>>
+    <!-- Trauma -->
+    <!-- Trauma status with inverted color coding -->
+    Trauma:
+    <<if $player.trauma < 200>><span style="color: green;">Minimal</span>
+    <<elseif $player.trauma < 400>><span style="color: lightgreen;">Moderate</span>
+    <<elseif $player.trauma < 600>><span style="color: yellow;">Significant</span>
+    <<elseif $player.trauma < 800>><span style="color: orange;">Severe</span>
+    <<else>><span style="color: red;">Extreme</span>
+    <</if>>
+    <!-- Trauma bar with inverted logic -->
+    <div id="traumabarbkg" class="hzbarbkg">
+        <div id="traumabar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar(1000 - $player.trauma, 1000, "traumabar", true)>>
+    <!-- Fatigue -->
+    <!-- Fatigue status with inverted color coding -->
+    Fatigue:
+    <<if $player.fatigue < 200>><span style="color: green;">Energetic</span>
+    <<elseif $player.fatigue < 400>><span style="color: lightgreen;">Alert</span>
+    <<elseif $player.fatigue < 600>><span style="color: yellow;">Tired</span>
+    <<elseif $player.fatigue < 800>><span style="color: orange;">Exhausted</span>
+    <<else>><span style="color: red;">Depleted</span>
+    <</if>>
+    <!-- Fatigue bar with inverted logic -->
+    <div id="fatiguebarbkg" class="hzbarbkg">
+        <div id="fatiguebar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar(1000 - $player.fatigue, 1000, "fatiguebar", true)>>
+    <!-- Filth -->
+    <!-- Filth status with inverted color coding -->
+    Filth:
+    <<if $player.filth < 200>><span style="color: green;">Clean</span>
+    <<elseif $player.filth < 400>><span style="color: lightgreen;">Tidy</span>
+    <<elseif $player.filth < 600>><span style="color: yellow;">Dirty</span>
+    <<elseif $player.filth < 800>><span style="color: orange;">Filthy</span>
+    <<else>><span style="color: red;">Squalid</span>
+    <</if>>
+    <!-- Filth bar with inverted logic -->
+    <div id="filthbarbkg" class="hzbarbkg">
+        <div id="filthbar" class="hzbar"></div>
+    </div>
+    <<run UpdateStatBar(1000 - $player.filth, 1000, "filthbar", true)>>
+</div>
+<!-- End of Biometrics readout container -->
+<</nobr>>
+<<script>>
+// Update the stat bars on passage end
+$(document).one(':passageend', function () {
+    UpdateStatBar(State.variables.player.health, 1000, "healthbar", false);
+    UpdateStatBar(State.variables.player.mood, 1000, "moodbar", false);
+    UpdateStatBar(1000 - State.variables.player.stress, 1000, "stressbar", true); // Inverted logic for stress
+    UpdateStatBar(1000 - State.variables.player.trauma, 1000, "traumabar", true); // Inverted logic for trauma
+    UpdateStatBar(1000 - State.variables.player.fatigue, 1000, "fatiguebar", true); // Inverted logic for fatigue
+    UpdateStatBar(State.variables.player.powerReserves, 1000, "powerReservesbar", false);
+    UpdateStatBar(1000 - State.variables.player.filth, 1000, "filthbar", true); // Inverted logic for filth
+});
+<</script>>
+
+

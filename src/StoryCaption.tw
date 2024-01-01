@@ -1,0 +1,27 @@
+:: StoryCaption [menu] {"position":"750,50","size":"100,100"}
+<<nobr>>
+<!-- Font Size Control kept inline -->
+<img @src="setup.ImagePath+'GrowF.png'" alt="Larger font" title="Larger font" class="fullscreenImg" style="top: 70px;" onclick="fontSize(1)">
+<img @src="setup.ImagePath+'ShrinkF.png'" alt="Smaller font" title="Smaller font" class="fullscreenImg" style="top: 100px;" onclick="fontSize(-1)">
+
+<!-- Conditional inclusion of Date and Time section -->
+<<if $PlayerIntro2 >= 1>>
+    <<include [[DateAndTime]]>>
+<</if>>
+
+<!-- unConditional inclusion of Player Info section -->
+<<include [[PlayerInfo]]>>
+
+<!-- Conditional inclusion of Biometrics Readout section -->
+<<if $playerIntro4 >= 1>>
+    <<include [[BiometricsReadout]]>>
+<</if>>
+
+<!-- Conditional inclusion of Financial Status section -->
+<<if $playerIntro5 >= 1>>
+    <<include [[FinancialStatus]]>>
+<</if>>
+
+<</nobr>>
+
+

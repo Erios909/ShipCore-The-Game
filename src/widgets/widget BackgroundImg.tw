@@ -1,0 +1,29 @@
+:: widget BackgroundImg [widget nobr] {"position":"50,275","size":"100,100"}
+<<widget "setBackground">><<silently>>
+   /* Remove previous background and overlay */
+   <<run $('.custom-background, .background-overlay').remove()>>
+   /* Create a new div for the background */
+   <<run $('<div class="custom-background"></div>').prependTo('body').css({
+       "position": "fixed",
+       "top": "0",
+       "left": "0",
+       "right": "0",
+       "bottom": "0",
+       "z-index": "-2",
+       "background-image": "url(" + $args[0] + ")",
+       "background-size": "cover",
+       "background-position": "center center"
+   })>>
+   /* Add dimming overlay */
+   <<run $('<div class="background-overlay"></div>').prependTo('body').css({
+       "position": "fixed",
+       "top": "0",
+       "left": "0",
+       "right": "0",
+       "bottom": "0",
+       "z-index": "-1",
+       "background-color": "rgba(25, 25, 25, 0.75)" /* Adjust opacity for dimming */
+   })>>
+<</silently>><</widget>>
+
+

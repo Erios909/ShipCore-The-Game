@@ -1,0 +1,30 @@
+:: widget music [widget nobr] {"position":"50,775","size":"100,100"}
+<<widget "PlayTrack">>
+    /* If a track ID is passed as an argument, update the current song index */
+    <<if $args[0]>> 
+        <<set setup.currentSongIndex to $args[0]>>
+    <</if>>
+
+    /* Get the current track ID */
+    <<set _nextTrack to setup.songList[setup.currentSongIndex]>>
+
+    /* Check if the track exists and is not currently playing */
+    <<if TrackExists(_nextTrack) and not isPlaying(_nextTrack)>>
+        /* Stop all playing audio */
+        <<masteraudio stop>>
+        
+        /* Play the current track */
+        <<audio _nextTrack volume 0.2 play loop>>
+        
+        /* Event handler for when the track ends */
+        <<run SimpleAudio.tracks.get(_nextTrack).one("end", function () {
+            /* Advance to the next track and loop back if at the end of the list */
+            setup.currentSongIndex = (setup.currentSongIndex + 1) % setup.songList.length;
+            
+            /* Play the next track */
+            SugarCube.Macro.get("PlayTrack").fn();
+        })>>
+    <</if>>
+<</widget>>
+
+

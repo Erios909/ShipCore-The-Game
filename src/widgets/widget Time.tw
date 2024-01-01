@@ -1,0 +1,61 @@
+:: widget Time [widget] {"position":"300,375","size":"100,100"}
+
+
+
+/*
+	Date & Time Advancement Widget Definitions
+*/
+/* Adds the specified number of minutes. */
+
+/* Adds the specified number of hours. */
+<<widget "addhours">>\
+<<run $gameDate.setHours($gameDate.getHours() + $args[0])>>\
+<</widget>>
+
+/* Adds the specified number of days. */
+<<widget "adddays">>\
+<<run $gameDate.setHours($gameDate.getHours() + $args[0] * 24)>>\
+<</widget>>
+
+/* Adds the specified number of years. */
+<<widget "addyears">>\
+<<run $gameDate.setFullYear($gameDate.getFullYear() + $args[0])>>\
+<</widget>>
+
+
+/*
+	Date & Time Printing Widget Definitions
+*/
+/* Prints the current date ("{weekday} {month} {day}, {year}"). */
+<<widget "date">>\
+<<print String.format("{0} {1} {2}, {3}",
+	GameDays[$gameDate.getDay()],
+	GameMonths[$gameDate.getMonth()],
+	$gameDate.getDate(),
+	$gameDate.getFullYear()
+)>>\
+<</widget>>
+
+/* Prints the current time (12H). */
+<<widget "time12hr">>\
+<<if $gameDate.getHours() eq 0>>\
+12\
+<<elseif $gameDate.getHours() gt 12>>\
+<<print $gameDate.getHours() - 12>>\
+<<else>>\
+<<print $gameDate.getHours()>>\
+<</if>>:\
+<<if $gameDate.getMinutes() lt 10>>0<</if>><<print $gameDate.getMinutes()>> \
+<<if $gameDate.getHours() gte 12>>PM<<else>>AM<</if>>\
+<</widget>>
+
+/* Prints the current time (24H). */
+<<widget "time24hr">>\
+<<if $gameDate.getHours() lt 10>>0<</if>><<print $gameDate.getHours()>>:\
+<<if $gameDate.getMinutes() lt 10>>0<</if>><<print $gameDate.getMinutes()>>\
+<</widget>>
+
+/* Prints the current date and time (12H). */
+<<widget "datetime">><<date>> <<time12hr>> (<<time24hr>>)<</widget>>
+
+

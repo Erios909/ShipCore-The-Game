@@ -1,0 +1,135 @@
+:: main menu {"position":"1450,50","size":"100,100"}
+<<changemoods "stress" "major" "NegEffectOnPlayer">> /* -- Stress (red) */
+
+/* Health */
+<<changemoods "health" "major" "PosEffectOnPlayer">> /* ++ Health (green) */
+<<changemoods "health" "major" "NegEffectOnPlayer">> /* -- Health (red) */
+<<changemoods "health" "minor" "PosEffectOnPlayer">> /* + Health (lightgreen) */
+<<changemoods "health" "minor" "NegEffectOnPlayer">> /* - Health (yellow) */
+
+/* Mood */
+<<changemoods "mood" "major" "PosEffectOnPlayer">> /* ++ Mood (green) */
+<<changemoods "mood" "major" "NegEffectOnPlayer">> /* -- Mood (red) */
+<<changemoods "mood" "minor" "PosEffectOnPlayer">> /* + Mood (lightgreen) */
+<<changemoods "mood" "minor" "NegEffectOnPlayer">> /* - Mood (yellow) */
+
+/* Stress */
+<<changemoods "stress" "major" "PosEffectOnPlayer">> /* ++ Stress (green) */
+<<changemoods "stress" "major" "NegEffectOnPlayer">> /* -- Stress (red) */
+<<changemoods "stress" "minor" "PosEffectOnPlayer">> /* + Stress (lightgreen) */
+<<changemoods "stress" "minor" "NegEffectOnPlayer">> /* - Stress (yellow) */
+
+/* Trauma */
+<<changemoods "trauma" "major" "PosEffectOnPlayer">> /* ++ Trauma (green) */
+<<changemoods "trauma" "major" "NegEffectOnPlayer">> /* -- Trauma (red) */
+<<changemoods "trauma" "minor" "PosEffectOnPlayer">> /* + Trauma (lightgreen) */
+<<changemoods "trauma" "minor" "NegEffectOnPlayer">> /* - Trauma (yellow) */
+
+/* Fatigue */
+<<changemoods "fatigue" "major" "PosEffectOnPlayer">> /* ++ Fatigue (green) */
+<<changemoods "fatigue" "major" "NegEffectOnPlayer">> /* -- Fatigue (red) */
+<<changemoods "fatigue" "minor" "PosEffectOnPlayer">> /* + Fatigue (lightgreen) */
+<<changemoods "fatigue" "minor" "NegEffectOnPlayer">> /* - Fatigue (yellow) */
+
+/* Filth */
+<<changemoods "filth" "major" "PosEffectOnPlayer">> /* ++ Filth (green) */
+<<changemoods "filth" "major" "NegEffectOnPlayer">> /* -- Filth (red) */
+<<changemoods "filth" "minor" "PosEffectOnPlayer">> /* + Filth (lightgreen) */
+<<changemoods "filth" "minor" "NegEffectOnPlayer">> /* - Filth (yellow) */
+
+/* Power Reserves */
+<<changemoods "powerReserves" "major" "PosEffectOnPlayer">> /* ++ Power Reserves (green) */
+<<changemoods "powerReserves" "major" "NegEffectOnPlayer">> /* -- Power Reserves (red) */
+<<changemoods "powerReserves" "minor" "PosEffectOnPlayer">> /* + Power Reserves (lightgreen) */
+<<changemoods "powerReserves" "minor" "NegEffectOnPlayer">> /* - Power Reserves (yellow) */
+
+/* Example usage for creditchange */
+<<set $player.credits += 100>> /* Adjust the player's credits. */
+<<creditchange 100 "positive">> /* Display the credit change. */
+
+/* Example usage for debtchange */
+<<set $player.debt += 200>> /* Adjust the player's debt. */
+<<debtchange 200 "negative">> /* Display the debt change. */
+
+
+
+        <p>You've managed to acquire some cutting-edge cyberware. The seller assures you it's top of the line, and the price reflects it. <span style="color: green;">+1 Cyberware</span></p>
+        <<set $player.credits += 25>>
+        <<creditchange 25 "positive">>
+        <<set $lowerdeckBlackActivity += 325>>
+        <<set $lowerdecksCyberware += 1>>
+
+
+        <p>A seller offers you a bulk deal on some slightly outdated, but still valuable, cyberware. It's a bargain too good to pass up. <span style="color: green;">+2 Cyberware</span></p>
+        <<set $player.credits += 50>>
+        <<creditchange 50 "positive">>
+        <<set $lowerdeckBlackActivity += 650>>
+        <<set $lowerdecksCyberware += 2>>
+
+ 
+        <p>You find a deal on last season's model. It may not be the latest, but it'll turn a profit. <span style="color: green;">+1 Cyberware</span></p>
+        <<set $player.credits += 30>>
+        <<creditchange 30 "positive">>
+        <<set $lowerdeckBlackActivity += 330>>
+        <<set $lowerdecksCyberware += 1>>
+
+ 
+        <p>An eccentric tinkerer sells you some experimental tech. It's untested, but if it works, it could be worth a fortune. <span style="color: green;">+1 Cyberware</span></p>
+        <<set $player.credits += 45>>
+        <<creditchange 45 "positive">>
+        <<set $lowerdeckBlackActivity += 345>>
+        <<set $lowerdecksCyberware += 1>>
+
+    
+        <p>You've acquired cyberware that's currently in high demand. The price is steep, but so is the potential markup. <span style="color: green;">+1 Cyberware</span></p>
+        <<set $player.credits += 40>>
+        <<creditchange 40 "positive">>
+        <<set $lowerdeckBlackActivity += 340>>
+        <<set $lowerdecksCyberware += 1>>
+
+ 
+        <p>You take a chance on some refurbished units. They're a bit of a gamble, but the low price makes it worth the risk. <span style="color: green;">+2 Cyberware</span></p>
+        <<set $player.credits += 35>>
+        <<creditchange 35 "positive">>
+        <<set $lowerdeckBlackActivity += 635>>
+        <<set $lowerdecksCyberware += 2>>
+
+
+        <p>The cyberware is hot, and the seller is looking to offload it fast. You take it off their hands for a song. <span style="color: green;">+2 Cyberware</span></p>
+        <<set $player.credits += 25>>
+        <<creditchange 25 "positive">>
+        <<set $lowerdeckBlackActivity += 625>>
+        <<set $lowerdecksCyberware += 2>>
+
+
+        <p>You stumble upon a rare piece of cyberware. It's an older model, but a collector's item nonetheless. <span style="color: green;">+1 Cyberware</span></p>
+        <<set $player.credits += 50>>
+        <<creditchange 50 "positive">>
+        <<set $lowerdeckBlackActivity += 350>>
+        <<set $lowerdecksCyberware += 1>>
+
+
+        <p>A vendor is clearing out surplus stock. The cyberware is standard, but the price is unbeatable. <span style="color: green;">+2 Cyberware</span></p>
+        <<set $player.credits += 45>>
+        <<creditchange 45 "positive">>
+        <<set $lowerdeckBlackActivity += 645>>
+        <<set $lowerdecksCyberware += 2>>
+
+ 
+        <p>The cyberware looks a bit questionable, but the seller is persuasive. You decide to take a chance on it. <span style="color: yellow;">+1 Cyberware</span></p>
+        <<set $player.credits += 25>>
+        <<creditchange 25 "positive">>
+        <<set $lowerdeckBlackActivity += 325>>
+        <<set $lowerdecksCyberware += 1>>
+
+
+        <p>You make a standard purchase. Nothing fancy, but it'll do the job. <span style="color: green;">+1 Cyberware</span></p>
+        <<set $player.credits += 30>>
+        <<creditchange 30 "positive">>
+        <<set $lowerdeckBlackActivity += 330>>
+        <<set $lowerdecksCyberware += 1>>
+
+
+
+
+

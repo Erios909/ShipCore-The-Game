@@ -1,0 +1,82 @@
+:: widget autoFabricatorProcess [widget nobr] {"position":"1675,725","size":"100,100"}
+<<widget "autoFabricatorProcess">><<nobr>>
+<<set _fabricatorInterval = 15 * 60>> <!-- Fabricator processes every 15 minutes (in seconds) -->
+<<set _baseRate = 10>> <!-- Base rate: 10 scrap to 5 parts -->
+<<set _basePartsProduced = 5>> <!-- Base parts produced per interval -->
+
+<!-- Initialize or retrieve the accumulated time since the last processing -->
+<<if $fabricatorAccumulatedTime === undefined>> <<set $fabricatorAccumulatedTime = 0>><</if>>
+<<set $fabricatorAccumulatedTime += ($timeadd * 60)>> <!-- Convert $timeadd from minutes to seconds and add to the accumulated time -->
+
+<!-- Deduct energy fees -->
+<<set _energyCost = $timeadd>> <!-- 1 credit per minute -->
+<<set _enoughEnergy = $lowerdecksEnergyFeeCredits >= _energyCost>>
+
+<<if $lowerdecksEnergyFeeCredits >= _energyCost>>
+    <<set $lowerdecksEnergyFeeCredits -= _energyCost>>
+    <<set $lowerdecksEnergyFeeCredits = Math.max(0, $lowerdecksEnergyFeeCredits)>>
+<<else>>
+    <<set $lowerdecksEnergyFeeCredits to 0>>
+    <<set $lowerdecksEnergyFeeCredits = Math.max(0, $lowerdecksEnergyFeeCredits)>>
+<</if>>
+<!-- Initialize or retrieve the last cyberware degradation date -->
+<<if $prevCyberwareDegradationYear === undefined or $prevCyberwareDegradationMonth === undefined or $prevCyberwareDegradationDay === undefined>>
+    <<set $prevCyberwareDegradationYear = $gameDate.getFullYear()>>
+    <<set $prevCyberwareDegradationMonth = $gameDate.getMonth()>>
+    <<set $prevCyberwareDegradationDay = $gameDate.getDate()>>
+    <<set $daysSinceLastCyberwareUpdate = 1>>
+<<else>>
+    <<set _lastCyberwareUpdate = new Date($prevCyberwareDegradationYear, $prevCyberwareDegradationMonth, $prevCyberwareDegradationDay)>>
+    <<set _currentDate = new Date($gameDate.getFullYear(), $gameDate.getMonth(), $gameDate.getDate())>>
+    <<set _timeDiff = _currentDate.getTime() - _lastCyberwareUpdate.getTime()>>
+    <<set $daysSinceLastCyberwareUpdate = Math.floor(_timeDiff / (1000 * 60 * 60 * 24))>>
+    <<set $prevCyberwareDegradationYear = $gameDate.getFullYear()>>
+    <<set $prevCyberwareDegradationMonth = $gameDate.getMonth()>>
+    <<set $prevCyberwareDegradationDay = $gameDate.getDate()>>
+<</if>>
+
+<!-- Cyberware degradation should be checked daily, not based on the fabricator intervals -->
+<<if $daysSinceLastCyberwareUpdate > 0>>
+    <<set $lowerdecksFabricatorCyberware = Math.max(0, $lowerdecksFabricatorCyberware - $daysSinceLastCyberwareUpdate)>>
+<</if>>
+<!-- Initialize or retrieve the fabricator hopper variables -->
+<<if $lowerdecksFabricatorHopperScrap === undefined>> <<set $lowerdecksFabricatorHopperScrap = 0>><</if>>
+<<if $lowerdecksFabricatorHopperParts === undefined>> <<set $lowerdecksFabricatorHopperParts = 0>><</if>>
+<<if $lowerdecksFabricatorCyberware === undefined>> <<set $lowerdecksFabricatorCyberware = 0>><</if>>
+<<if $lowerdecksEnergyFeeCredits === undefined>> <<set $lowerdecksEnergyFeeCredits = 0>><</if>>
+
+<!-- Check if the accumulated time has reached the interval for processing -->
+<<if $fabricatorAccumulatedTime >= _fabricatorInterval>>
+    <<set _intervalsPassed = Math.floor($fabricatorAccumulatedTime / _fabricatorInterval)>>
+    <<set $fabricatorAccumulatedTime -= _intervalsPassed * _fabricatorInterval>>
+
+    <!-- Only process if there's enough scrap -->
+    <<if $lowerdecksFabricatorHopperScrap >= _baseRate and $lowerdecksEnergyFeeCredits > 0>>
+        <!-- Processing logic block -->
+        <<set _multiplier = 1>> <!-- Default multiplier is 1x -->
+        <<set _cyberwareInstalled = $lowerdecksFabricatorCyberware>> <!-- Get the amount of cyberware installed -->
+
+<!-- Calculate the multiplier based on cyberware installed -->
+<<if _cyberwareInstalled >= 1 and _cyberwareInstalled < 10>> <<set _multiplier = 2>>
+<<elseif _cyberwareInstalled >= 10 and _cyberwareInstalled < 200>> <<set _multiplier = 3>>
+<<elseif _cyberwareInstalled >= 200 and _cyberwareInstalled < 4000>> <<set _multiplier = 4>>
+<<elseif _cyberwareInstalled >= 4000 and _cyberwareInstalled < 8000>> <<set _multiplier = 5>>
+<<elseif _cyberwareInstalled >= 8000 and _cyberwareInstalled < 32000>> <<set _multiplier = 6>>
+<<elseif _cyberwareInstalled >= 32000 and _cyberwareInstalled < 64000>> <<set _multiplier = 7>>
+<<elseif _cyberwareInstalled >= 64000 and _cyberwareInstalled < 128000>> <<set _multiplier = 8>>
+<<elseif _cyberwareInstalled >= 128000 and _cyberwareInstalled < 256000>> <<set _multiplier = 9>>
+<<elseif _cyberwareInstalled >= 256000>> <<set _multiplier = 10>>
+<</if>>
+
+<<if $lowerdecksEnergyFeeCredits >= 1>>
+        <!-- Calculate the amount of scrap to process and the parts produced -->
+        <<set _scrapToProcess = Math.min($lowerdecksFabricatorHopperScrap, _intervalsPassed * _baseRate * _multiplier)>>
+        <<set $lowerdecksFabricatorHopperScrap -= _scrapToProcess>>
+        <<set _partsProduced = (_scrapToProcess / _baseRate) * _basePartsProduced>>
+        <<set $lowerdecksFabricatorHopperParts += _partsProduced>>
+        <</if>>
+    <</if>>
+<</if>>
+<</nobr>><</widget>>
+
+

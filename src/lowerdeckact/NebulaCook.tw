@@ -1,0 +1,108 @@
+:: NebulaCook [lowerdeckact] {"position":"450,800","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/nebula.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Nebula Noodle Stand - Cooking Shift",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<set _randomEvent to random(1, 10)>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Nebula Noodle Stand</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The heat of the kitchen greets you as you tie on your apron and wash your hands, ready for the day's shift. The clatter of pots and pans is a constant backdrop as you and the other cooks busily prepare for the inevitable rush of hungry patrons. The smell of simmering broth and fresh ingredients promises a busy day at the Nebula Noodle Stand.</p>
+
+<!-- Random Cook Events -->
+<<switch _randomEvent>>
+    <<case 1>>
+        <p>Your broth is a hit! Customers rave about the depth of flavor. The tips are generous today.</p>
+        <<set $player.credits += 50>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 5)>>
+        <<creditchange 50 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>>
+        <p>A surprise inspection puts everyone on edge, but your station is spotless. The manager rewards your diligence.</p>
+        <<set $player.credits += 25>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 10)>>
+        <<creditchange 25 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 3>>
+        <p>You narrowly avoid a kitchen disaster, saving a batch of noodles from ruin. Your quick thinking doesn't go unnoticed.</p>
+        <<set $player.credits += 20>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 10)>>
+        <<creditchange 20 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 4>>
+        <p>A new recipe you suggest becomes the special of the day and it's a bestseller. You've earned your keep and then some.</p>
+        <<set $player.credits += 40>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 5)>>
+        <<creditchange 40 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 5>>
+        <p>It's a slow day and you spend most of your shift cleaning. It's not glamorous, but you get a modest pay for the day's work.</p>
+        <<set $player.credits += 15>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.05 + 15)>>
+        <<creditchange 15 "positive">>
+        <<changemoods "fatigue" "major" "PosEffectOnPlayer">><br>
+
+    <<case 6>>
+        <p>The stand runs out of a key ingredient, and you have to improvise. The result is not perfect, but the effort is appreciated.</p>
+        <<set $player.credits += 10>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.05 + 15)>>
+        <<creditchange 10 "positive">>
+        <<changemoods "fatigue" "major" "PosEffectOnPlayer">><br>
+
+    <<case 7>>
+        <p>You handle a lunch rush like a seasoned chef. Patrons leave satisfied, and the manager gives you a bonus.</p>
+        <<set $player.credits += 35>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 10)>>
+        <<creditchange 35 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 8>>
+        <p>Your attention to detail pays off as you catch a mistake before it affects any orders. It's a good day's work.</p>
+        <<set $player.credits += 20>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 10)>>
+        <<creditchange 20 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 9>>
+        <p>During cleanup, you slip and take a small tumble. No harm done, but it's a reminder to watch your step.</p>
+        <<set $player.credits += 10>>
+        <<set $player.fatigue += Math.round($player.fatigue * 0.05 + 20)>>
+        <<creditchange 10 "positive">>
+        <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br>
+
+    <<case 10>>
+        <p>The automated cooking system malfunctions, and you step in to manually complete the orders. You're exhausted, but your efforts ensure the stand stays open.</p>
+        <<set $player.credits += 30>>
+        <<set $player.fatigue += Math.round($player.fatigue * 0.05 + 20)>>
+        <<creditchange 30 "positive">>
+        <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Cook Event -->
+        <p>The stand isn't too busy, and you manage to get through your shift without any fuss. You earn a standard day's pay.</p>
+        <<set $player.credits += 20>>
+        <<set $player.fatigue -= Math.round($player.fatigue * 0.02 + 10)>>
+        <<creditchange 20 "positive">>
+        <<changemoods "fatigue" "minor" "PosEffectOnPlayer">><br>
+<</switch>>
+
+<!-- Continue Link -->
+[[Back to Nebula Noodles.|Nebula Noodles]]
+<</nobr>>
+
+
+

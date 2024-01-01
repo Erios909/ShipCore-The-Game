@@ -1,0 +1,58 @@
+:: StorySubtitle {"position":"175,75","size":"100,100"}
+<<nobr>><<set $isMuted to false>>
+<<PlayTrack>>
+<<set $isMuted to false>>
+<<set $previousVolume to 0.5>> <!-- Set to your default volume level -->
+<<set $buttonLabel to "Mute Toggle">>
+
+<!-- Group both buttons in a container and apply flex styling -->
+<div style="display: flex; align-items: center; justify-content: center;">
+<div class="specialmutebutton" style="display: inline-block;"><<button "Background">>
+  <<run $('#passages').toggleClass('hidden')>>    
+<</button>></div>
+
+    <!-- Audio Control Button with Special Class -->
+    <div class="specialmutebutton" style="display: inline-block;">
+        <span id="audioControl">
+            <<button $buttonLabel>>
+                <<if $isMuted>>
+                    <<set SimpleAudio.volume($previousVolume)>>
+                    <<set $isMuted to false>>
+                    <<set $buttonLabel to "Mute Toggle">>
+                <<else>>
+                    <<set $previousVolume to SimpleAudio.volume()>>
+                    <<set SimpleAudio.volume(0)>>
+                    <<set $isMuted to true>>
+                    <<set $buttonLabel to "Mute Toggle">>
+                <</if>>
+                <<updatebar>>  <!-- Update the UI after toggling mute -->
+            <</button>>
+        </span>
+    </div>
+
+    <<set $nextTrackLabel to "Next Track">>
+
+    <!-- Next Track Button with Special Class -->
+    <div class="specialmutebutton" style="display: inline-block;">
+        <span id="trackControl">
+            <<button "Next Track">>
+                <<run setup.advanceTrack()>>
+            <</button>>
+        </span>
+    </div>
+
+
+<<script>>
+// Ensure the setup object exists
+window.setup = window.setup || {};
+
+// Function to advance to the next track
+
+<</script>>
+
+</div><h1 style="font-size: 0.8em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000; margin: 0">Blue is Better</h1>
+
+
+<<displayAreaImage>><</nobr>>\
+
+
