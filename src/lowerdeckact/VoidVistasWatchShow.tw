@@ -21,79 +21,56 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- An Uplifting Adventure -->
         <p>The show features an epic space journey filled with hope and camaraderie. It leaves you feeling lighter and more optimistic.</p>
-        <<set $player.mood += Math.round($player.mood * 0.05)>>
-        <<set $player.trauma -= Math.round($player.trauma * 0.03)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- A Hilarious Comedy -->
         <p>Laughter is the best medicine, and tonight's comedic performance proves it. You leave with your spirits lifted and your worries momentarily forgotten.</p>
-        <<set $player.mood += Math.round($player.mood * 0.04)>>
-        <<set $player.stress -= Math.round($player.stress * 0.04)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
 
     <<case 3>> <!-- A Romantic Tale -->
         <p>A story of star-crossed lovers fills the screen, tugging at your heartstrings. It's a poignant reminder of the power of love, leaving you both sentimental and soothed.</p>
-        <<set $player.mood += Math.round($player.mood * 0.05)>>
-        <<set $player.trauma -= Math.round($player.trauma * 0.02)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
 
     <<case 4>> <!-- A Thrilling Action Flick -->
         <p>Adrenaline pumps through you as the hero navigates danger with ease. You're on the edge of your seat, and when the show ends, you feel a rush of relief and excitement.</p>
-        <<set $player.mood += Math.round($player.mood * 0.03)>>
-        <<set $player.stress += Math.round($player.stress * 0.03)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
-        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
     <<case 5>> <!-- A Touching Drama -->
         <p>The drama portrays deep human connections and the struggles of life. It's heart-wrenching but ultimately cathartic, helping you process your own past traumas.</p>
-        <<set $player.mood += Math.round($player.mood * 0.04)>>
-        <<set $player.trauma += Math.round($player.trauma * 0.04)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
-        <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
+        <<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
 
     <<case 6>> <!-- A Sci-Fi Mystery -->
         <p>The plot twists of the interstellar whodunit keep you guessing until the very end. You leave the theater with your curiosity sated and a sense of accomplishment.</p>
-        <<set $player.mood += Math.round($player.mood * 0.03)>>
-        <<set $player.stress -= Math.round($player.stress * 0.03)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 7>> <!-- A Historical Documentary -->
         <p>You absorb the rich details of the documentary, gaining new insights into the galaxy's past. It's an enlightening experience that leaves you feeling grounded and connected.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 8>> <!-- A Musical Extravaganza -->
         <p>The vibrant music and dazzling performances fill you with energy and joy. You can't help but feel rejuvenated by the show's exuberance.</p>
-        <<set $player.mood += Math.round($player.mood * 0.05)>>
-        <<set $player.stress -= Math.round($player.stress * 0.05)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
 
     <<case 9>> <!-- An Experimental Art Piece -->
         <p>The unconventional narrative and abstract visuals challenge your perceptions. It's a thought-provoking experience that leaves you introspective and slightly unsettled.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $player.trauma -= Math.round($player.trauma * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
 
     <<case 10>> <!-- A Fantasy Adventure -->
         <p>The tale of heroes and mythical creatures in a faraway land sparks your imagination. You leave feeling inspired and full of wonder.</p>
-        <<set $player.mood += Math.round($player.mood * 0.04)>>
-        <<set $player.trauma -= Math.round($player.trauma * 0.05)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
 
     <<default>> <!-- Default Showtime Event -->
         <p>The show is decent, if not particularly memorable. Nonetheless, it provides a welcome distraction from the daily grind.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
-        <<set $player.trauma -= Math.round($player.trauma * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>

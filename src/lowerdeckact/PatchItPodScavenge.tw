@@ -44,42 +44,37 @@
 <!-- Random Scavenging Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- Hidden Gem Among the Scrap -->
-        <p>Deep within a pile of scrap, your hand grazes something solid and unexpectedly pristine. It's a functioning data pad, perhaps discarded in haste or error. It could fetch a good price.<span class="i-gain"> +1 Scrap</span></p><br>
-        <<set $player.credits += 30>>
-        <<creditchange 30 "positive">><br>
-        <<set $lowerdecksScrap += 1>>
+        <p>Deep within a pile of scrap, your hand grazes something solid and unexpectedly pristine. It's a functioning data pad, perhaps discarded in haste or error. It could fetch a good price.</p>
+        <<creditchange 30 "positive">>
+        <<itemchange "scrap" 1 "gain">><br>
 
     <<case 2>> <!-- Old Relic with a Story -->
-        <p>You find an old relic, a trinket with intricate engravings. To your surprise, an antique dealer in the pod recognizes its origin and offers to buy it on the spot.<span class="i-gain"> +1 Scrap</span></p><br>
-        <<set $player.credits += 20>>
-        <<creditchange 20 "positive">><br>
-        <<set $lowerdecksScrap += 1>>
+        <p>You find an old relic, a trinket with intricate engravings. To your surprise, an antique dealer in the pod recognizes its origin and offers to buy it on the spot.</p>
+        <<creditchange 20 "positive">>
+        <<itemchange "scrap" 1 "gain">><br>
 
     <<case 3>> <!-- Junkyard Hazard -->
-        <p>What looks like a harmless pile of junk turns out to be a precarious stack. A wrong move sends metals clattering, and you barely dodge a sharp edge. It's a close call, and you're shaken but safe.</p><br>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
+        <p>What looks like a harmless pile of junk turns out to be a precarious stack. A wrong move sends metals clattering, and you barely dodge a sharp edge. It's a close call, and you're shaken but safe.</p>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 4>> <!-- The Engineer's Cache -->
-        <p>Beneath a façade of broken appliances, you uncover a cache of valuable engineering components. These could be useful for your own repairs, or sold to those in need.<span class="i-gain"> +1 Scrap</span></p><br>
-        <<set $player.credits += 25>>
-        <<creditchange 25 "positive">><br>
-        <<set $lowerdecksScrap += 1>>
+        <p>Beneath a façade of broken appliances, you uncover a cache of valuable engineering components. These could be useful for your own repairs, or sold to those in need.</p>
+        <<creditchange 25 "positive">>
+        <<itemchange "scrap" 1 "gain">><br>
 
     <<case 5>> <!-- Eclectic Collector's Request -->
-        <p>An eccentric collector at the pod admires your knack for finding the unusual. A quick deal is struck and you part with some oddities in exchange for credits.<span class="i-gain"> +1 Scrap</span></p><br>
-        <<set $player.credits += 15>>
-        <<creditchange 15 "positive">><br>
-        <<set $lowerdecksScrap += 1>>
+        <p>An eccentric collector at the pod admires your knack for finding the unusual. A quick deal is struck and you part with some oddities in exchange for credits.</p>
+        <<creditchange 15 "positive">>
+        <<itemchange "scrap" 1 "gain">><br>
 
     <<default>> <!-- Default Scavenging Event -->
-        <p>Your search through the recyclers doesn't unearth anything of big value today, but the smaller components you find could prove useful later. It's not a wasted effort.<span class="i-gain"> +1 Scrap</span></p><br>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02)>>
-        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
-        <<set $lowerdecksScrap += 1>>
+        <p>Your search through the recyclers doesn't unearth anything of big value today, but the smaller components you find could prove useful later. It's not a wasted effort.</p>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">>
+        <<itemchange "scrap" 1 "gain">><br>
 <</switch>>
 
-<br><br>
+
+<br>
 <!-- Continue Link -->
 [[Return to the Patch-It Pod.|Patch-It Pod]]
 <</nobr>>

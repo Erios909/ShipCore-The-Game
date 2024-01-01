@@ -46,29 +46,23 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Gardener's Wisdom -->
         <p>An experienced gardener shares insights on the delicate balance of hydroponics. The knowledge could be useful for your own botanical endeavors.</p>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02)>>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- Tales of the Green Thumb Thief -->
         <p>You're enthralled by the tale of the Green Thumb Thief, an individual who once stole rare seeds from stations across the sector. It's a story of intrigue and mystery.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 3>> <!-- The Oxygen Garden Ghost -->
         <p>A gardener whispers about a supposed ghost haunting the garden at night. Whether true or not, the story sends a shiver down your spine.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 4>> <!-- Clandestine Deal Overheard -->
         <p>While pretending to tend to the plants, you overhear a suspicious deal between two gardeners. The information could be valuable... or dangerous.</p>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.05)>>
         <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
 
     <<default>> <!-- Default Tale-Sharing Event -->
         <p>As tales are swapped and laughter echoes through the foliage, you find yourself uplifted by the camaraderie of the gardeners. You leave with a few interesting stories and a lighter step.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>><br>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>><br>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
 <</switch>>
 

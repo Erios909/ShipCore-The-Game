@@ -46,33 +46,27 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Scent of Flowers -->
         <p>You find yourself surrounded by an aromatic cluster of Aloran blossoms. The scent is soothing and your breathing becomes deep and even. You feel the tension leaving your body.</p>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- Meditation Group -->
         <p>A small group practicing silent meditation invites you to join them. The shared focus on calm and steady breaths enhances the restorative effect of the garden.</p>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 3>> <!-- Birdsong Melody -->
         <p>A hidden speaker plays a recording of Earth bird songs. The trills and warbles transport you away from the station's hum, bringing peace to your heart.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 4>> <!-- Allergenic Flora -->
         <p>A particular pollen-heavy plant starts to trigger your allergies. It's a minor discomfort, but it disrupts the otherwise serene atmosphere.</p>
-        <<set $player.health -= Math.round($player.health * 0.02)>>
         <<changemoods "health" "minor" "NegEffectOnPlayer">><br>
 
     <<default>> <!-- Default Breathing Space Event -->
         <p>After a while, the tranquility of the garden has done its work. Though it may be a small respite, you leave feeling a bit more refreshed than when you arrived.</p>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 <</switch>>
+<br>
 
 <!-- Continue Link -->
 [[Refreshing!|The Oxygen Garden]]

@@ -755,5 +755,7 @@ $(document).on("keyup", function (e) {
 });
 /* Keyboard links - End */
 
-$("#ui-bar").append('<div id="uifooter"><center><hr id="HuDHr><span class="smallHuDFont">(V0.00261 A Sci-Fi sandbox based on ShipCore)</span></center></div>');
+// Appends a footer div to the UI bar with a horizontal rule, 
+// version text, and centered formatting
+$("#ui-bar").append('<div id="uifooter"><center><hr id="HuDHr><span class="smallHuDFont">(V0.00262 A Sci-Fi sandbox based on ShipCore)</span></center></div>');
 

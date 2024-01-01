@@ -45,26 +45,27 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Tech Enthusiast Bonus -->
         <!-- A tech enthusiast recognizes the rarity of the cyberware, willing to pay extra. -->
-        <<set $player.credits += 1050>> <!-- Gain of 150 credits above the base value -->
+        <<creditchange 1050 "positive">>
         <p>An enthusiastic collector, recognizing the rarity of your cyberware, offers you a sum well above the standard rate for your tech.</p>
-        <<creditchange 1050 "positive">><br>
+        <br>
 
     <<case 2>> <!-- Surge in Demand -->
         <!-- A sudden surge in demand for cyberware increases its value. -->
-        <<set $player.credits += 1000>> <!-- Gain of 100 credits above the base value -->
+        <<creditchange 1000 "positive">>
         <p>A sudden surge in demand for high-tech cybernetics has spiked the market value. You take advantage of the trend and secure a lucrative deal.</p>
-        <<creditchange 1000 "positive">><br>
+        <br>
 
     <<case 3>> <!-- Desperate Dealer -->
         <!-- A dealer is desperate for cyberware stock and offers a fair price. -->
-        <<set $player.credits += 950>> <!-- Gain of 50 credits above the base value -->
+        <<creditchange 950 "positive">>
         <p>A dealer in desperate need of cyberware stock offers you a fair price for a quick sale. While not the highest bid, it's a solid offer.</p>
-        <<creditchange 950 "positive">><br>
+        <br>
 
     <<default>> <!-- Standard Cyberware Transaction -->
         <!-- The standard market rate applies, with no special circumstances affecting the price. -->
+        <<creditchange 900 "positive">>
         <p>The going rate for cyberware is fair at the Emporium today. You trade in your units and receive the standard market price, no questions asked.</p>
-        <<creditchange 900 "positive">><br>
+        <br>
 <</switch>>
 
 

@@ -6,10 +6,12 @@
 
 .i-gain {
     color: green;
+	font-variant-ligatures: none;
 }
 
 .i-loss {
   color: red;
+  font-variant-ligatures: none;
 }
 
 
@@ -17,6 +19,15 @@
     display: none;
 }
 
+.gainColor {
+    color: green; /* Color for gains */
+	font-variant-ligatures: none;
+}
+
+.lossColor {
+    color: red; /* Color for losses */
+	font-variant-ligatures: none;
+}
 
 
 #ui-bar {

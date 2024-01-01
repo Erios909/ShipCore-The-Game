@@ -46,32 +46,33 @@ Amidst the sea of neon signs and holographic displays, the Wharfside Tech Empori
 <<switch _randomEvent>>
     <<case 1>> <!-- Rare Tech Opportunity -->
         <!-- Player trades for a rare piece of tech, gaining additional value. -->
-        <<set $lowerdecksCyberware += 2>> <!-- Gain of 1 additional cyberware -->
-        <<set $player.credits += 50>> <!-- Gain of 25 additional credits -->
-        <p>Your parts draw the attention of a trader with a rare piece of cyberware. Sensing an opportunity, you negotiate and secure a trade that favors you.<span class="i-gain"> +2 Cyberware</span></p>
-        <<creditchange 50 "positive">><br>
+        <<itemchange "cyberware" 2 "gain">> <!-- Gain of 1 additional cyberware -->
+        <<creditchange 50 "positive">> <!-- Gain of 25 additional credits -->
+        <p>Your parts draw the attention of a trader with a rare piece of cyberware. Sensing an opportunity, you negotiate and secure a trade that favors you.</p>
+        <br>
 
     <<case 2>> <!-- Enthusiastic Exchange -->
         <!-- An enthusiastic trader offers a good deal for the parts. -->
-        <<set $lowerdecksCyberware += 1>> <!-- Standard gain of cyberware -->
-        <<set $player.credits += 75>> <!-- Gain of 50 additional credits -->
-        <p>An enthusiastic trader offers you a new piece of tech for your parts. You shake hands, pleased with the straightforward and favorable exchange.<span class="i-gain"> +1 Cyberware</span></p>
-        <<creditchange 75 "positive">><br>
+        <<itemchange "cyberware" 1 "gain">> <!-- Standard gain of cyberware -->
+        <<creditchange 75 "positive">> <!-- Gain of 50 additional credits -->
+        <p>An enthusiastic trader offers you a new piece of tech for your parts. You shake hands, pleased with the straightforward and favorable exchange.</p>
+        <br>
 
     <<case 3>> <!-- Bargain Hunter -->
         <!-- A bargain hunter trades for the parts but offers less additional value. -->
-        <<set $lowerdecksCyberware += 1>> <!-- Standard gain of cyberware -->
-        <<set $player.credits += 15>> <!-- Gain of 10 less credits -->
-        <p>A keen bargain hunter trades you a cybernetic unit for your parts. It's a fair deal, but you can't help feeling you could have haggled for more.<span class="i-gain"> +1 Cyberware</span></p>
-        <<creditchange 15 "positive">><br>
+        <<itemchange "cyberware" 1 "gain">> <!-- Standard gain of cyberware -->
+        <<creditchange 15 "positive">> <!-- Gain of 10 less credits -->
+        <p>A keen bargain hunter trades you a cybernetic unit for your parts. It's a fair deal, but you can't help feeling you could have haggled for more.</p>
+        <br>
 
     <<default>> <!-- Standard Parts for Tech Transaction -->
         <!-- Standard trade, parts exchanged for cyberware and a small credit bonus. -->
-        <<set $lowerdecksCyberware += 1>> <!-- Standard gain of cyberware -->
-        <<set $player.credits += 25>> <!-- Standard gain of credits -->
-        <p>The trade is quick and efficient. Your parts are exchanged for a standard issue of cyberware and a small credit bonus, just as expected.<span class="i-gain"> +1 Cyberware</span></p>
-        <<creditchange 25 "positive">><br>
+        <<itemchange "cyberware" 1 "gain">> <!-- Standard gain of cyberware -->
+        <<creditchange 25 "positive">> <!-- Standard gain of credits -->
+        <p>The trade is quick and efficient. Your parts are exchanged for a standard issue of cyberware and a small credit bonus, just as expected.</p>
+        <br>
 <</switch>>
+
 
 <!-- Subtract the parts traded during the event -->
 <<set $lowerdecksParts -= 1>>

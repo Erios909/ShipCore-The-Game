@@ -1,81 +1,62 @@
 :: widget changemoods [widget nobr] {"position":"175,675","size":"100,100"}
 <<widget "changemoods">>
 <<nobr>>
-    /* Set local variables for the stat name, severity, and effect type. */
+    /* Initialize local variables for the stat name, severity, and effect type. */
     <<set _statName to $args[0]>>
     <<set _severity to $args[1].toLowerCase()>>
     <<set _effectType to $args[2]>>
+    <<set _changeAmount to 0>>
     <<set _symbol to ''>>
     <<set _color to ''>>
     <<set _displayStatName to ''>>
-    <<set _inverseStats to ["a", "ab", "ac", "ad"]>> /* List of inverse stats */
+    <<set _inverseStats to ["stress", "trauma", "fatigue", "filth"]>>
 
     /* Determine the display stat name. */
     <<switch _statName>>
-        <<case "health">>
-            <<set _displayStatName to 'Health'>>
-        <<case "mood">>
-            <<set _displayStatName to 'Mood'>>
-        <<case "stress">>
-            <<set _displayStatName to 'Stress'>>
-        <<case "trauma">>
-            <<set _displayStatName to 'Trauma'>>
-        <<case "fatigue">>
-            <<set _displayStatName to 'Fatigue'>>
-        <<case "filth">>
-            <<set _displayStatName to 'Filth'>>
-        <<case "powerReserves">>
-            <<set _displayStatName to 'Power Reserves'>>
-        <<case "economy">>
-        	<<set _displayStatName to 'Economy'>>
-        <<case "dangerlevel">>
-        	<<set _displayStatName to 'Danger'>>
-        <<default>>
-            <<set _displayStatName to 'Unknown Stat'>>
+        <<case "health">> <<set _displayStatName to 'Health'>>
+        <<case "mood">> <<set _displayStatName to 'Mood'>>
+        <<case "stress">> <<set _displayStatName to 'Stress'>>
+        <<case "trauma">> <<set _displayStatName to 'Trauma'>>
+        <<case "fatigue">> <<set _displayStatName to 'Fatigue'>>
+        <<case "filth">> <<set _displayStatName to 'Filth'>>
+        <<case "powerReserves">> <<set _displayStatName to 'Power Reserves'>>
+        <<case "credits">> <<set _displayStatName to 'Credits'>>
+        <<default>> <<set _displayStatName to 'Unknown Stat'>>
     <</switch>>
 
-    /* Determine if the current stat is an inverse stat. */
-    <<set _isInverseStat to _inverseStats.includes(_statName)>>
+    /* Calculate the change amount based on severity. */
+    <<if _severity is "minor">>
+        <<set _changeAmount to Math.round($player[_statName] * 0.02 + 25)>>
+    <<elseif _severity is "major">>
+        <<set _changeAmount to Math.round($player[_statName] * 0.05 + 50)>>
+    <</if>>
+
+    /* Apply the change to the player's stat, considering the effect type and whether the stat is inverse. */
+    <<if _effectType is "PosEffectOnPlayer">>
+        <<if _inverseStats.includes(_statName)>> <<set $player[_statName] -= _changeAmount>> <<else>> <<set $player[_statName] += _changeAmount>> <</if>>
+    <<elseif _effectType is "NegEffectOnPlayer">>
+        <<if _inverseStats.includes(_statName)>> <<set $player[_statName] += _changeAmount>> <<else>> <<set $player[_statName] -= _changeAmount>> <</if>>
+    <</if>>
 
     /* Determine the symbol and color based on severity, effect type, and whether the stat is inverse. */
     <<if _effectType is "PosEffectOnPlayer">>
-        <<if _isInverseStat>>
-            /* Positive effect is bad for inverse stats. */
-            <<if _severity is "minor">>
-                <<set _symbol to '+'>>
-                <<set _color to 'yellow'>>
-            <<elseif _severity is "major">>
-                <<set _symbol to '+ +'>> /* Use non-breaking space to separate plus signs */
-                <<set _color to 'red'>>
+        <<if _inverseStats.includes(_statName)>>
+            <<if _severity is "minor">> <<set _symbol to '+'>> <<set _color to 'lightgreen'>>
+            <<elseif _severity is "major">> <<set _symbol to '++'>> <<set _color to 'green'>>
             <</if>>
         <<else>>
-            /* Positive effect is good for normal stats. */
-            <<if _severity is "minor">>
-                <<set _symbol to '+'>>
-                <<set _color to 'lightgreen'>>
-            <<elseif _severity is "major">>
-                <<set _symbol to '+ +'>> /* Use non-breaking space to separate plus signs */
-                <<set _color to 'green'>>
+            <<if _severity is "minor">> <<set _symbol to '+'>> <<set _color to 'lightgreen'>>
+            <<elseif _severity is "major">> <<set _symbol to '++'>> <<set _color to 'green'>>
             <</if>>
         <</if>>
     <<elseif _effectType is "NegEffectOnPlayer">>
-        <<if _isInverseStat>>
-            /* Negative effect is good for inverse stats. */
-            <<if _severity is "minor">>
-                <<set _symbol to '-'>>
-                <<set _color to 'lightgreen'>>
-            <<elseif _severity is "major">>
-                <<set _symbol to '- -'>> /* Use non-breaking space to separate minus signs */
-                <<set _color to 'green'>>
+        <<if _inverseStats.includes(_statName)>>
+            <<if _severity is "minor">> <<set _symbol to '-'>> <<set _color to 'yellow'>>
+            <<elseif _severity is "major">> <<set _symbol to '--'>> <<set _color to 'red'>>
             <</if>>
         <<else>>
-            /* Negative effect is bad for normal stats. */
-            <<if _severity is "minor">>
-                <<set _symbol to '-'>>
-                <<set _color to 'yellow'>>
-            <<elseif _severity is "major">>
-                <<set _symbol to '- -'>> /* Use non-breaking space to separate minus signs */
-                <<set _color to 'red'>>
+            <<if _severity is "minor">> <<set _symbol to '-'>> <<set _color to 'yellow'>>
+            <<elseif _severity is "major">> <<set _symbol to '--'>> <<set _color to 'red'>>
             <</if>>
         <</if>>
     <</if>>
@@ -84,71 +65,3 @@
     <<print '<span style="color: ' + _color + '">' + _symbol + ' ' + _displayStatName + '</span>'>>
 <</nobr>>
 <</widget>>
-
-/*
-Widget Documentation: changemoods
-
-Description:
-The 'changemoods' widget visually represents changes in player stats with symbols and colors. It is intended to be used after flavor text to provide a styled indication of stat changes.
-
-Usage:
-<<changemoods "statName" "severity" "effectType">>
-
-Parameters:
-- "statName": The name of the stat being affected (e.g., "health", "mood", "stress").
-- "severity": The severity of the change, either "minor" or "major".
-- "effectType": The type of effect on the player, either "PosEffectOnPlayer" for positive effects or "NegEffectOnPlayer" for negative effects. Inverse stats such as "stress", "trauma", "fatigue", and "filth" will have their color coding reversed.
-
-Examples:
-1. To show a major improvement in the player's health:
-<<changemoods "health" "major" "PosEffectOnPlayer">>
-<<set $player.health += 60>>  // Adjust the health stat.
-
-2. To show a minor increase in the player's stress (which is bad, as stress is an inverse stat):
-<<changemoods "stress" "minor" "NegEffectOnPlayer">>
-<<set $player.stress += 10>>  // Adjust the stress stat.
-
-3. To show a major reduction in the player's fatigue (which is good, as fatigue is an inverse stat):
-<<changemoods "fatigue" "major" "PosEffectOnPlayer">>
-<<set $player.fatigue -= 50>>  // Adjust the fatigue stat.
-
-Note:
-Always ensure to adjust the player's stats using the appropriate SugarCube <<set>> macro in conjunction with the <<changemoods>> widget to reflect the actual changes in the game's state. Below are examples for adjusting each named player stat:
-
-- Health (normal stat):
-<<set $player.health += 30>>  // Increase health.
-<<set $player.health -= 15>>  // Decrease health.
-
-- Mood (normal stat):
-<<set $player.mood += 20>>  // Improve mood.
-<<set $player.mood -= 10>>  // Worsen mood.
-
-- Stress (inverse stat):
-<<set $player.stress -= 25>>  // Reduce stress (good).
-<<set $player.stress += 40>>  // Increase stress (bad).
-
-- Trauma (inverse stat):
-<<set $player.trauma -= 10>>  // Lessen trauma (good).
-<<set $player.trauma += 20>>  // Intensify trauma (bad).
-
-- Fatigue (inverse stat):
-<<set $player.fatigue -= 30>>  // Decrease fatigue (good).
-<<set $player.fatigue += 15>>  // Increase fatigue (bad).
-
-- Filth (inverse stat):
-<<set $player.filth -= 5>>  // Cleanliness improves (good).
-<<set $player.filth += 10>>  // Filthiness worsens (bad).
-
-- Power Reserves (normal stat):
-<<set $player.powerReserves += 50>>  // Boost power reserves.
-<<set $player.powerReserves -= 20>>  // Deplete power reserves.
-
-- Credits (normal stat):
-<<set $player.credits += 100>>  // Gain credits.
-<<set $player.credits -= 50>>  // Lose credits.
-
-Remember to use the <<changemoods>> widget after adjusting the stats to visually represent the change to the player.
-*/
-
-
-

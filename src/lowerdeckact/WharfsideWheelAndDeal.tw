@@ -44,108 +44,86 @@
     <p>With an assortment of scrap, parts, and cyberware at your disposal, you dive into the bustling trade hall. It's a veritable treasure trove for a savvy dealer; you just need to find the right buyer to turn your collection into a windfall.</p>
     
     <!-- Random Wheel and Deal Trading Events -->
-    <<switch _randomEvent>>
-        <<case 1>> <!-- Profitable Trade-Up -->
-            <!-- Outcome: Net gain of 180 value. Gains: +2 cyberware, +50 credits. Total value gain: 650. -->
-            <<set $lowerdecksCyberware += 3>> <!-- +600 value (2 gained, 1 offset) -->
-            <<set $player.credits += 50>> <!-- +50 value -->
-            <p>Your keen eye and negotiation tactics lead to a profitable exchange. You trade in your scrap and parts for high-demand cyberware, and the trader, impressed by your items, tops off the deal with some credits.<span class="i-gain"> +2 Cyberware</span></p>
-            <<creditchange 50 "positive">><br>
-            
-    
-        <<case 2>> <!-- Balanced Bargain -->
-            <!-- Outcome: Net gain of 180 value. Gains: +1 cyberware, +2 parts, +50 credits. Total value gain: 650. -->
-            <<set $lowerdecksCyberware += 2>> <!-- +300 value (1 gained, 1 offset) -->
-            <<set $lowerdecksParts += 3>> <!-- +300 value (2 gained, 1 offset) -->
-            <<set $player.credits += 50>> <!-- +50 value -->
-            <p>You find just the right buyers to strike a balanced bargain. Your scrap is exchanged for a valuable piece of cyberware and some much-needed parts, along with a bonus in credits for your effort.<span class="i-gain"> +1 Cyberware</span><span class="i-gain"> +2 Parts</span></p>
-            <<creditchange 50 "positive">><br>
-            
-    
-        <<case 3>> <!-- Surplus Success -->
-            <!-- Outcome: Net gain of 180 value. Gains: +3 parts, +50 credits. Total value gain: 500. -->
-            <<set $lowerdecksParts += 4>> <!-- +450 value (3 gained, 1 offset) -->
-            <<set $player.credits += 50>> <!-- +50 value -->
-            <p>The day's surplus sell-off works in your favor as you manage to secure a bundle of parts in exchange for your cyberware and scrap. The pile of credits you receive feels like a bonus at this point.<span class="i-gain"> +3 Parts</span></p>
-            <<creditchange 50 "positive">><br>
-            
-    
-        <<case 4>> <!-- Tech Tinkerer's Triumph -->
-            <!-- Outcome: Net gain of 180 value. Gains: +2 cyberware, +1 parts. Total value gain: 750. -->
-            <<set $lowerdecksCyberware += 3>> <!-- +600 value (2 gained, 1 offset) -->
-            <<set $lowerdecksParts += 2>> <!-- +150 value (1 gained, 1 offset) -->
-            <p>Your knack for spotting hidden gems in the tech bazaar pays off. A tinkerer's eyes light up at the scrap you offer, rewarding you with top-tier cyberware and a few extra parts.<span class="i-gain"> +2 Cyberware</span><span class="i-gain"> +1 Parts</span></p>
-            <<creditchange 0 "positive">><br> <!-- No credit change, but using macro for consistency -->
-            
-    
-        <<case 5>> <!-- Scrapper's Luck -->
-            <!-- Outcome: Net gain of 180 value. Gains: +3 parts, +1 scrap. Total value gain: 600. -->
-            <<set $lowerdecksParts += 4>> <!-- +450 value (3 gained, 1 offset) -->
-            <<set $lowerdecksScrap += 2>> <!-- +50 value (1 gained, 1 offset) -->
-            <p>Luck is on your side as you trade cyberware for a heap of useful parts. A scrapper, impressed with your haggling, throws in a bit of extra scrap to seal the deal.<span class="i-gain"> +3 Parts</span><span class="i-gain"> +1 Scrap</span></p>
-            <<creditchange 0 "positive">><br> <!-- No credit change, but using macro for consistency -->
-            
-    
-        <<case 6>> <!-- Cybernetic Jackpot -->
-            <!-- Outcome: Net gain of 180 value. Gains: +2 cyberware, +100 credits. Total value gain: 700. -->
-            <<set $lowerdecksCyberware += 3>> <!-- +600 value (2 gained, 1 offset) -->
-            <<set $player.credits += 100>> <!-- +100 value -->
-            <p>The cyberware market is booming, and you ride the wave to a jackpot. You exchange parts and scrap for advanced cybernetics and a tidy sum of credits.<span class="i-gain"> +2 Cyberware</span></p>
-            <<creditchange 100 "positive">><br>
-            
-    
-        <<case 7>> <!-- Parts Procurement Prowess -->
-            <!-- Outcome: Net gain of approximately 300 value. Gains: +4 parts, +100 credits. Total value gain: 700. -->
-            <<set $lowerdecksParts += 5>> <!-- +600 value (4 gained, 1 offset) -->
-            <<set $player.credits += 100>> <!-- +100 value -->
-            <p>Your parts procurement prowess is unmatched today. A sequence of favorable exchanges leaves you with an abundance of high-quality parts and a wallet that's pleasantly heavier.<span class="i-gain"> +4 Parts</span></p>
-            <<creditchange 100 "positive">><br>
-            
-    
-        <<case 8>> <!-- Scrapyard Fortune -->
-            <!-- Outcome: Net gain of approximately 300 value. Gains: +1 cyberware, +2 scrap, +1 parts, +100 credits. Total value gain: 800. -->
-            <<set $lowerdecksCyberware += 2>> <!-- +300 value (1 gained, 1 offset) -->
-            <<set $lowerdecksScrap += 3>> <!-- +100 value (2 gained, 1 offset) -->
-            <<set $lowerdecksParts += 2>> <!-- +150 value (1 gained, 1 offset) -->
-            <<set $player.credits += 100>> <!-- +100 value -->
-            <p>A visit to the scrapyard turns into an unexpected fortune. You parlay your wares into a selection that includes a piece of top-notch cyberware, extra scrap, and parts, rounded off with a hefty sum of credits.<span class="i-gain"> +1 Cyberware</span><span class="i-gain"> +2 Scrap</span><span class="i-gain"> +1 Parts</span></p>
-            <<creditchange 100 "positive">><br>
-            
-    
-        <<case 9>> <!-- Grand Haul -->
-            <!-- Outcome: Net gain of approximately 400 value. Gains: +4 cyberware, +50 credits. Total value gain: 1250. -->
-            <<set $lowerdecksCyberware += 5>> <!-- +1200 value (4 gained, 1 offset) -->
-            <<set $player.credits += 50>> <!-- +50 value -->
-            <p>Your shrewd bargaining at the cyberware stall pays off handsomely. You trade your less valuable items for a set of premium cybernetic enhancements, and the grateful vendor slips you a bonus in credits for choosing their shop.<span class="i-gain"> +4 Cyberware</span></p>
-            <<creditchange 50 "positive">><br>
-            
-    
-        <<case 10>> <!-- Master Merchant -->
-            <!-- Outcome: Net gain of approximately 400 value. Gains: +3 parts, +2 cyberware, +100 credits. Total value gain: 1100. -->
-            <<set $lowerdecksParts += 4>> <!-- +600 value (3 gained, 1 offset) -->
-            <<set $lowerdecksCyberware += 3>> <!-- +600 value (2 gained, 1 offset) -->
-            <<set $player.credits += 100>> <!-- +100 value -->
-            <p>Today you're the master merchant, turning each offer to your advantage. You leave the market with a surplus of sought-after parts and some impressive cyberware, along with a hefty extra in credits.<span class="i-gain"> +3 Parts</span><span class="i-gain"> +2 Cyberware</span></p>
-            <<creditchange 100 "positive">><br>
-            
-    
-        <<case 11>> <!-- Scrap to Riches -->
-            <!-- Outcome: Net gain of approximately 400 value. Gains: +4 parts, +2 scrap, +100 credits. Total value gain: 1000. -->
-            <<set $lowerdecksParts += 5>> <!-- +750 value (4 gained, 1 offset) -->
-            <<set $lowerdecksScrap += 3>> <!-- +100 value (2 gained, 1 offset) -->
-            <<set $player.credits += 100>> <!-- +100 value -->
-            <p>A stroke of luck turns your pile of scrap into a treasure trove. You swap it for a large quantity of high-quality parts and more scrap, and the deal is sweetened with credits to boot.<span class="i-gain"> +4 Parts</span><span class="i-gain"> +2 Scrap</span></p>
-            <<creditchange 100 "positive">><br>
-            
-    
-        <<default>> <!-- Even-Steven Exchange -->
-            <!-- Outcome: Net gain of 180 value. Gains: +1 cyberware, +1 parts, +100 credits. Total value gain: 600. -->
-            <<set $lowerdecksCyberware += 2>> <!-- +300 value (1 gained, 1 offset) -->
-            <<set $lowerdecksParts += 2>> <!-- +150 value (1 gained, 1 offset) -->
-            <<set $player.credits += 100>> <!-- +100 value -->
-            <p>You play it safe and opt for an even-steven exchange. Each item finds a new owner, and you walk away with a more valuable selection and a satisfying amount of credits to boot.<span class="i-gain"> +1 Cyberware</span><span class="i-gain"> +1 Parts</span></p>
-            <<creditchange 100 "positive">><br>
-    <</switch>>
+<<switch _randomEvent>>
+    <<case 1>> <!-- Profitable Trade-Up -->
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 50 "positive">>
+        <p>Your keen eye and negotiation tactics lead to a profitable exchange. You trade in your scrap and parts for high-demand cyberware, and the trader, impressed by your items, tops off the deal with some credits.</p>
+        <br>
+
+    <<case 2>> <!-- Balanced Bargain -->
+        <<itemchange "cyberware" 1 "gain">>
+        <<itemchange "parts" 2 "gain">>
+        <<creditchange 50 "positive">>
+        <p>You find just the right buyers to strike a balanced bargain. Your scrap is exchanged for a valuable piece of cyberware and some much-needed parts, along with a bonus in credits for your effort.</p>
+        <br>
+
+    <<case 3>> <!-- Surplus Success -->
+        <<itemchange "parts" 3 "gain">>
+        <<creditchange 50 "positive">>
+        <p>The day's surplus sell-off works in your favor as you manage to secure a bundle of parts in exchange for your cyberware and scrap. The pile of credits you receive feels like a bonus at this point.</p>
+        <br>
+
+    <<case 4>> <!-- Tech Tinkerer's Triumph -->
+        <<itemchange "cyberware" 2 "gain">>
+        <<itemchange "parts" 1 "gain">>
+        <p>Your knack for spotting hidden gems in the tech bazaar pays off. A tinkerer's eyes light up at the scrap you offer, rewarding you with top-tier cyberware and a few extra parts.</p>
+        <br>
+
+    <<case 5>> <!-- Scrapper's Luck -->
+        <<itemchange "parts" 3 "gain">>
+        <<itemchange "scrap" 1 "gain">>
+        <p>Luck is on your side as you trade cyberware for a heap of useful parts. A scrapper, impressed with your haggling, throws in a bit of extra scrap to seal the deal.</p>
+        <br>
+
+    <<case 6>> <!-- Cybernetic Jackpot -->
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 100 "positive">>
+        <p>The cyberware market is booming, and you ride the wave to a jackpot. You exchange parts and scrap for advanced cybernetics and a tidy sum of credits.</p>
+        <br>
+
+    <<case 7>> <!-- Parts Procurement Prowess -->
+        <<itemchange "parts" 4 "gain">>
+        <<creditchange 100 "positive">>
+        <p>Your parts procurement prowess is unmatched today. A sequence of favorable exchanges leaves you with an abundance of high-quality parts and a wallet that's pleasantly heavier.</p>
+        <br>
+
+    <<case 8>> <!-- Scrapyard Fortune -->
+        <<itemchange "cyberware" 1 "gain">>
+        <<itemchange "scrap" 2 "gain">>
+        <<itemchange "parts" 1 "gain">>
+        <<creditchange 100 "positive">>
+        <p>A visit to the scrapyard turns into an unexpected fortune. You parlay your wares into a selection that includes a piece of top-notch cyberware, extra scrap, and parts, rounded off with a hefty sum of credits.</p>
+        <br>
+
+    <<case 9>> <!-- Grand Haul -->
+        <<itemchange "cyberware" 4 "gain">>
+        <<creditchange 50 "positive">>
+        <p>Your shrewd bargaining at the cyberware stall pays off handsomely. You trade your less valuable items for a set of premium cybernetic enhancements, and the grateful vendor slips you a bonus in credits for choosing their shop.</p>
+        <br>
+
+    <<case 10>> <!-- Master Merchant -->
+        <<itemchange "parts" 3 "gain">>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 100 "positive">>
+        <p>Today you're the master merchant, turning each offer to your advantage. You leave the market with a surplus of sought-after parts and some impressive cyberware, along with a hefty extra in credits.</p>
+        <br>
+
+    <<case 11>> <!-- Scrap to Riches -->
+        <<itemchange "parts" 4 "gain">>
+        <<itemchange "scrap" 2 "gain">>
+        <<creditchange 100 "positive">>
+        <p>A stroke of luck turns your pile of scrap into a treasure trove. You swap it for a large quantity of high-quality parts and more scrap, and the deal is sweetened with credits to boot.</p>
+        <br>
+
+    <<default>> <!-- Even-Steven Exchange -->
+        <<itemchange "cyberware" 1 "gain">>
+        <<itemchange "parts" 1 "gain">>
+        <<creditchange 100 "positive">>
+        <p>You play it safe and opt for an even-steven exchange. Each item finds a new owner, and you walk away with a more valuable selection and a satisfying amount of credits to boot.</p>
+        <br>
+<</switch>>
+
     <br>
     
     <!-- Continue Link -->

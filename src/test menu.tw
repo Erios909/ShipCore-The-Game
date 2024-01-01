@@ -1,0 +1,40 @@
+:: test menu {"position":"1450,50","size":"100,100"}
+<div id="test">
+<<set $lowerdecksParts to 0>>
+<<set $lowerdecksScrap to 0>>
+<<set $lowerdecksCyberware to 0>>
+<<set $lowerdecksStolenItems to 0>>
+<<set $lowerdecksContraband to 0>>
+
+/* Gain multiple items */
+<<itemchange "parts" 3 "gain">><br> /* Expected output: ++ Parts in lightgreen */
+<<itemchange "scrap" 1 "gain">><br> /* Expected output: + Scrap in lightgreen */
+<<itemchange "cyberware" 5 "gain">><br> /* Expected output: ++ Cyberware in lightgreen */
+
+/* Lose multiple items */
+<<itemchange "stolenItems" 2 "loss">><br> /* Expected output: -- StolenItems in orange */
+<<itemchange "contraband" 1 "loss">><br> /* Expected output: - Contraband in orange */
+
+/* Display the updated inventory */
+Current Inventory:<br>
+Parts: <<=$lowerdecksParts>>
+Scrap: <<=$lowerdecksScrap>>
+Cyberware: <<=$lowerdecksCyberware>>
+Stolen Items: <<=$lowerdecksStolenItems>>
+Contraband: <<=$lowerdecksContraband>>
+</div>
+
+<<set $lowerdecksParts to 5>>
+<<set $lowerdecksScrap to 5>>
+<<set $lowerdecksCyberware to 5>>
+<<set $lowerdecksStolenItems to 5>>
+<<set $lowerdecksContraband to 5>>
+
+/* Display the updated inventory */
+Current Inventory:<br>
+Parts: <<=$lowerdecksParts>>
+Scrap: <<=$lowerdecksScrap>>
+Cyberware: <<=$lowerdecksCyberware>>
+Stolen Items: <<=$lowerdecksStolenItems>>
+Contraband: <<=$lowerdecksContraband>>
+</div>

@@ -42,60 +42,72 @@
 
 <<switch _randomEvent>>
     <<case 1>> <!-- Lucky Break -->
-        <p>A collector is on the lookout for exactly what you're selling. You strike a deal for a bit more than the usual rate.<span style="color: green;"> +550 Credits</span></p>
+        <p>A collector is on the lookout for exactly what you're selling. You strike a deal for a bit more than the usual rate.</p>
         <<set $player.credits += 550>>
-        <<set $lowerdeckBlackActivity += 550>>
+        <<creditchange 550 "positive">>
+        <<itemchange "blackmarketactivity" 550 "gain">>
 
     <<case 2>> <!-- Desperate Times -->
-        <p>You're desperate to sell and it shows. A buyer haggles you down to less than you wanted.<span style="color: yellow;"> +450 Credits</span></p>
+        <p>You're desperate to sell and it shows. A buyer haggles you down to less than you wanted.</p>
         <<set $player.credits += 450>>
-        <<set $lowerdeckBlackActivity += 450>>
+        <<creditchange 450 "positive">>
+        <<itemchange "blackmarketactivity" 450 "gain">>
 
     <<case 3>> <!-- Fair Trade -->
-        <p>You find a trader willing to do business at the standard rate, no questions asked.<span style="color: green;"> +500 Credits</span></p>
+        <p>You find a trader willing to do business at the standard rate, no questions asked.</p>
         <<set $player.credits += 500>>
-        <<set $lowerdeckBlackActivity += 500>>
+        <<creditchange 500 "positive">>
+        <<itemchange "blackmarketactivity" 500 "gain">>
 
     <<case 4>> <!-- Finder's Fee -->
-        <p>The buyer offers a finder's fee on top of the base price, sweetening the deal.<span style="color: green;"> +525 Credits</span></p>
+        <p>The buyer offers a finder's fee on top of the base price, sweetening the deal.</p>
         <<set $player.credits += 525>>
-        <<set $lowerdeckBlackActivity += 525>>
+        <<creditchange 525 "positive">>
+        <<itemchange "blackmarketactivity" 525 "gain">>
 
     <<case 5>> <!-- Bargain Hunter -->
-        <p>A bargain hunter sniffs out your urgency to sell and offers you a lower price, which you begrudgingly accept.<span style="color: yellow;"> +475 Credits</span></p>
+        <p>A bargain hunter sniffs out your urgency to sell and offers you a lower price, which you begrudgingly accept.</p>
         <<set $player.credits += 475>>
-        <<set $lowerdeckBlackActivity += 475>>
+        <<creditchange 475 "positive">>
+        <<itemchange "blackmarketactivity" 475 "gain">>
 
     <<case 6>> <!-- Under Surveillance -->
-        <p>You suspect you're being watched and quickly offload the goods for a safe but slightly lower price.<span style="color: yellow;"> +480 Credits</span></p>
+        <p>You suspect you're being watched and quickly offload the goods for a safe but slightly lower price.</p>
         <<set $player.credits += 480>>
-        <<set $lowerdeckBlackActivity += 480>>
+        <<creditchange 480 "positive">>
+        <<itemchange "blackmarketactivity" 480 "gain">>
 
     <<case 7>> <!-- Generous Patron -->
-        <p>A wealthy patron is feeling generous today and offers you more than the going rate.<span style="color: green;"> +550 Credits</span></p>
+        <p>A wealthy patron is feeling generous today and offers you more than the going rate.</p>
         <<set $player.credits += 550>>
-        <<set $lowerdeckBlackActivity += 550>>
+        <<creditchange 550 "positive">>
+        <<itemchange "blackmarketactivity" 550 "gain">>
 
     <<case 8>> <!-- Market Glut -->
-        <p>The market is currently flooded with similar items, driving your selling price down.<span style="color: yellow;"> +470 Credits</span></p>
+        <p>The market is currently flooded with similar items, driving your selling price down.</p>
         <<set $player.credits += 470>>
-        <<set $lowerdeckBlackActivity += 470>>
+        <<creditchange 470 "positive">>
+        <<itemchange "blackmarketactivity" 470 "gain">>
 
     <<case 9>> <!-- Sympathetic Buyer -->
-        <p>A buyer sympathizes with your plight and offers a fair price for your goods.<span style="color: green;"> +510 Credits</span></p>
+        <p>A buyer sympathizes with your plight and offers a fair price for your goods.</p>
         <<set $player.credits += 510>>
-        <<set $lowerdeckBlackActivity += 510>>
+        <<creditchange 510 "positive">>
+        <<itemchange "blackmarketactivity" 510 "gain">>
 
     <<case 10>> <!-- Haggling Headache -->
-        <p>After a lengthy haggling session, you walk away with a slightly lower payout than expected.<span style="color: yellow;"> +490 Credits</span></p>
+        <p>After a lengthy haggling session, you walk away with a slightly lower payout than expected.</p>
         <<set $player.credits += 490>>
-        <<set $lowerdeckBlackActivity += 490>>
+        <<creditchange 490 "positive">>
+        <<itemchange "blackmarketactivity" 490 "gain">>
 
     <<default>> <!-- Standard Deal -->
-        <p>You make a standard deal. It's not the best you've had, but it's not the worst either.<span style="color: green;"> +500 Credits</span></p>
+        <p>You make a standard deal. It's not the best you've had, but it's not the worst either.</p>
         <<set $player.credits += 500>>
-        <<set $lowerdeckBlackActivity += 500>>
+        <<creditchange 500 "positive">>
+        <<itemchange "blackmarketactivity" 500 "gain">>
 <</switch>>
+
 
 <!-- Continue Link -->
 [[Return to the Shrouded Market.|ShroudedMarket]]

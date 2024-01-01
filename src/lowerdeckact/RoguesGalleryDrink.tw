@@ -49,27 +49,22 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- A Friendly Bet -->
         <p>You're roped into a friendly bet with a group of smugglers. The stakes are low, but the thrill of victory boosts your mood.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>> <!-- Minor positive mood change -->
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- A Sudden Quarrel -->
         <p>A sudden quarrel breaks out near you, and your drink suffers the consequences. It's a minor annoyance.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>> <!-- Minor negative mood change -->
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 3>> <!-- A Veteran's Tale -->
         <p>An old spacer shares harrowing tales of survival, leaving you with a sense of resilience.</p>
-        <<set $player.trauma -= Math.round($player.trauma * 0.02 + 5)>> <!-- Minor negative trauma change (good for the player) -->
         <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
 
     <<case 4>> <!-- A Lucky Tip -->
         <p>A tip from a fellow patron leads you to a small windfall. It's always nice to have a bit of extra credit.</p>
-        <<set $player.credits += 20>> <!-- Fixed credit gain -->
         <<creditchange 20 "positive">><br>
 
     <<case 5>> <!-- A Moment's Peace -->
         <p>The ambient noise of the bar fades into the background as you find a moment of peace, reducing your stress.</p>
-        <<set $player.stress -= Math.round($player.stress * 0.02 + 5)>> <!-- Minor positive stress change (stress reduction is good for the player) -->
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<default>> <!-- Default Event -->

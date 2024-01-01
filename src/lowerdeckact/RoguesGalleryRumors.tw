@@ -37,57 +37,48 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- A Smuggler's Boast -->
         <p>A smuggler boasts about a recent haul. You make a mental note of the details; such information could be valuable.</p>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02 + 5)>> <!-- Minor positive power reserves change -->
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- A Coded Message -->
         <p>You catch a coded message meant for someone else. Deciphering it could lead to unexpected opportunities.</p>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.05 + 10)>> <!-- Major positive power reserves change -->
         <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
 
     <<case 3>> <!-- A Tense Standoff -->
         <p>A tense standoff at a nearby table ends without incident, but the stress of the moment leaves you more alert.</p>
-        <<set $player.stress += Math.round($player.stress * 0.02 + 5)>> <!-- Minor negative stress change (stress increase is bad for the player) -->
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
     <<case 4>> <!-- A Lucky Tip -->
         <p>A tip from a fellow patron about a lucrative job opportunity seems promising. It's worth looking into.</p>
-        <<set $player.credits += 30>> <!-- Fixed credit gain -->
         <<creditchange 30 "positive">><br>
 
     <<case 5>> <!-- A Shared Secret -->
         <p>In a hushed tone, someone shares a rumor of a stash of contraband. The thrill of the hunt invigorates you.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>> <!-- Minor positive health change -->
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
 
     <<case 6>> <!-- An Overheard Plot -->
         <p>You overhear a plot for a heist. The details are sketchy, but it's enough to keep your mind sharp.</p>
-        <<set $player.trauma += Math.round($player.trauma * 0.02 + 5)>> <!-- Minor negative trauma change (trauma increase is bad for the player) -->
         <<changemoods "trauma" "minor" "NegEffectOnPlayer">><br>
 
     <<case 7>> <!-- A Drunken Revelation -->
         <p>A drunken patron lets slip a key piece of information about a rival faction. Knowledge is power.</p>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.05 + 10)>> <!-- Major positive power reserves change -->
         <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
 
     <<case 8>> <!-- A Warning Whisper -->
         <p>A warning whisper about increased security measures on the docks. Staying informed keeps you one step ahead.</p>
-        <<set $player.stress += Math.round($player.stress * 0.02 + 5)>> <!-- Minor negative stress change (stress increase is bad for the player) -->
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
     <<case 9>> <!-- A Fortuitous Encounter -->
         <p>A chance encounter with an old friend leads to a promising business proposition. It could be a windfall.</p>
-        <<set $player.credits += 40>> <!-- Fixed credit gain -->
         <<creditchange 40 "positive">><br>
 
     <<case 10>> <!-- A Mysterious Stranger -->
         <p>A mysterious stranger offers a cryptic piece of advice before disappearing into the crowd. It's puzzling, but you feel prepared for what's to come.</p>
-        <<set $player.trauma += Math.round($player.trauma * 0.02 + 5)>> <!-- Minor negative trauma change (trauma increase is bad for the player) -->
         <<changemoods "trauma" "minor" "NegEffectOnPlayer">><br>
 
     <<default>> <!-- Default Rumor Event -->
         <p>The rumors are many, but none stand out as particularly useful tonight. Still, the act of listening keeps your wits sharp.</p>
 <</switch>>
+
 <br><br>
 
 <!-- Continue Link -->

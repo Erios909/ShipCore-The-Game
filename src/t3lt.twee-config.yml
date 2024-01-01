@@ -48,3 +48,7 @@ sugarcube-2:
       name: mapWidget
     koloss:
       name: koloss
+    itemchange:
+      name: itemchange
+    capitalize:
+      name: capitalize

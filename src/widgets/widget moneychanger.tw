@@ -7,6 +7,14 @@
     <<set _color to ''>>
     <<set _percentageChange to ($player.credits > 0) ? (_changeAmount / $player.credits) * 100 : 100>>
 
+    /* Apply the credit change to the player's credits, considering the effect type. */
+    <<if _effectType is "positive">>
+        <<set $player.credits += _changeAmount>>
+    <<else>>
+        <<set $player.credits -= _changeAmount>>
+    <</if>>
+
+
     /* Determine the symbol and color based on the percentage change and effect type. */
     <<if _effectType is "positive">>
         <<if _percentageChange <= 1>>
@@ -24,10 +32,10 @@
             <<set _symbol to '-'>>
             <<set _color to 'yellow'>>
         <<elseif _percentageChange <= 2>>
-            <<set _symbol to '- -'>>
+            <<set _symbol to '&hyphen;&hyphen;'>>
             <<set _color to 'orange'>>
         <<else>>
-            <<set _symbol to '- - -'>>
+            <<set _symbol to '&hyphen;&hyphen;&hyphen;'>>
             <<set _color to 'red'>>
         <</if>>
     <</if>>
@@ -40,6 +48,8 @@
 <</nobr>>
 <</widget>>
 
+
+    /* Debtchange widget */
 <<widget "debtchange">>
 <<nobr>>
     <<set _changeAmount to $args[0]>>
@@ -48,30 +58,37 @@
     <<set _color to ''>>
     <<set _percentageChange to ($player.debt > 0) ? (_changeAmount / $player.debt) * 100 : 100>>
 
-    /* Determine the symbol and color based on the percentage change and effect type. */
     <<if _effectType is "positive">>
-        <<if _percentageChange <= 1>>
-            <<set _symbol to '+++'>>
-            <<set _color to 'red'>>
-        <<elseif _percentageChange <= 2>>
-            <<set _symbol to '++'>>
-            <<set _color to 'orange'>>
-        <<else>>
-            <<set _symbol to '+'>>
-            <<set _color to 'yellow'>>
-        <</if>>
+        <<set $player.debt -= _changeAmount>>
     <<else>>
-        <<if _percentageChange <= 1>>
-            <<set _symbol to '- - -'>>
-            <<set _color to 'lightgreen'>>
-        <<elseif _percentageChange <= 2>>
-            <<set _symbol to '- -'>>
-            <<set _color to 'green'>>
-        <<else>>
-            <<set _symbol to '-'>>
-            <<set _color to 'darkgreen'>>
-        <</if>>
+        <<set $player.debt += _changeAmount>>
     <</if>>
+
+/* Determine the symbol and color based on the percentage change and effect type. */
+<<if _effectType is "positive">>
+    <<if _percentageChange <= 1>>
+        <<set _symbol to '+'>>
+        <<set _color to 'yellow'>>
+    <<elseif _percentageChange <= 2>>
+        <<set _symbol to '++'>>
+        <<set _color to 'orange'>>
+    <<else>>
+        <<set _symbol to '+++'>>
+        <<set _color to 'red'>>
+    <</if>>
+<<else>>  
+    <<if _percentageChange <= 1>>
+        <<set _symbol to '-'>>
+        <<set _color to 'lightgreen'>>
+    <<elseif _percentageChange <= 2>>
+        <<set _symbol to '&hyphen;&hyphen;'>>
+        <<set _color to 'green'>>
+    <<else>>
+        <<set _symbol to '&hyphen;&hyphen;&hyphen;'>>
+        <<set _color to 'darkgreen'>>
+    <</if>>
+<</if>>
+
 
     /* Format the number with commas. */
     <<set _formattedAmount to _changeAmount.toLocaleString()>>
@@ -81,4 +98,43 @@
 <</nobr>>
 <</widget>>
 
+/* item change widget */
+<<widget "itemchange">>
+<<nobr>>
+    /* Parameters:
+        $args[0]: The item name as a string in lowercase (e.g., "parts", "scrap").
+        $args[1]: The change amount as an integer.
+        $args[2]: The effect type as "gain" or "loss".
+    */
+    <<set _itemName to $args[0]>>
+    <<set _changeAmount to $args[1]>>
+    <<set _effectType to $args[2]>>
+    <<set _variableName to setup.itemVariables[_itemName]>>
 
+    /* Update the player's item variable based on the change amount and effect type. */
+    <<if _effectType is "gain">>
+        <<run State.variables[_variableName] += _changeAmount>>
+        <<set _class to "i-gain">>
+        <<set _symbol to (_changeAmount gt 1) ? "++" : "+">>
+    <<else>>
+        <<run State.variables[_variableName] -= _changeAmount>>
+        <<set _class to "i-loss">>
+        <<set _symbol to (_changeAmount gt 1) ? "&hyphen;&hyphen;" : "-">>
+    <</if>>
+
+    /* Capitalize the item name for display. */
+    <<set _capitalizedItemName to _itemName.charAt(0).toUpperCase() + _itemName.slice(1)>>
+
+    /* Output the result with the change amount in parentheses. */
+    /* This uses the <<print>> macro to insert content directly into the passage. */
+    <<print '<span class="' + _class + '">' + _symbol + ' ' + _capitalizedItemName + ' (' + _changeAmount + ')</span>'>>
+<</nobr>>
+<</widget>>
+
+<<widget "capitalize">>
+<<nobr>>
+    <<set _text to $args[0]>>
+    <<set _capitalizedText to _text.charAt(0).toUpperCase() + _text.slice(1)>>
+    <<print _capitalizedText>>
+<</nobr>>
+<</widget>>

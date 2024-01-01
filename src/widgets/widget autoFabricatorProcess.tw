@@ -5,7 +5,10 @@
 <<set _basePartsProduced = 5>> <!-- Base parts produced per interval -->
 
 <!-- Initialize or retrieve the accumulated time since the last processing -->
-<<if $fabricatorAccumulatedTime === undefined>> <<set $fabricatorAccumulatedTime = 0>><</if>>
+<<if $fabricatorAccumulatedTime === undefined>> 
+    <<set $fabricatorAccumulatedTime = 0>>
+<</if>>
+
 <<set $fabricatorAccumulatedTime += ($timeadd * 60)>> <!-- Convert $timeadd from minutes to seconds and add to the accumulated time -->
 
 <!-- Deduct energy fees -->
@@ -52,28 +55,30 @@
 
     <!-- Only process if there's enough scrap -->
     <<if $lowerdecksFabricatorHopperScrap >= _baseRate and $lowerdecksEnergyFeeCredits > 0>>
-        <!-- Processing logic block -->
+
+    <!-- Processing logic block -->
         <<set _multiplier = 1>> <!-- Default multiplier is 1x -->
         <<set _cyberwareInstalled = $lowerdecksFabricatorCyberware>> <!-- Get the amount of cyberware installed -->
 
-<!-- Calculate the multiplier based on cyberware installed -->
-<<if _cyberwareInstalled >= 1 and _cyberwareInstalled < 10>> <<set _multiplier = 2>>
-<<elseif _cyberwareInstalled >= 10 and _cyberwareInstalled < 200>> <<set _multiplier = 3>>
-<<elseif _cyberwareInstalled >= 200 and _cyberwareInstalled < 4000>> <<set _multiplier = 4>>
-<<elseif _cyberwareInstalled >= 4000 and _cyberwareInstalled < 8000>> <<set _multiplier = 5>>
-<<elseif _cyberwareInstalled >= 8000 and _cyberwareInstalled < 32000>> <<set _multiplier = 6>>
-<<elseif _cyberwareInstalled >= 32000 and _cyberwareInstalled < 64000>> <<set _multiplier = 7>>
-<<elseif _cyberwareInstalled >= 64000 and _cyberwareInstalled < 128000>> <<set _multiplier = 8>>
-<<elseif _cyberwareInstalled >= 128000 and _cyberwareInstalled < 256000>> <<set _multiplier = 9>>
-<<elseif _cyberwareInstalled >= 256000>> <<set _multiplier = 10>>
-<</if>>
-
-<<if $lowerdecksEnergyFeeCredits >= 1>>
+    <!-- Calculate the multiplier based on cyberware installed -->
+    <<if _cyberwareInstalled >= 1 and _cyberwareInstalled < 10>> <<set _multiplier = 2>>
+        <<elseif _cyberwareInstalled >= 10 and _cyberwareInstalled < 200>> <<set _multiplier = 3>>
+        <<elseif _cyberwareInstalled >= 200 and _cyberwareInstalled < 4000>> <<set _multiplier = 4>>
+        <<elseif _cyberwareInstalled >= 4000 and _cyberwareInstalled < 8000>> <<set _multiplier = 5>>
+        <<elseif _cyberwareInstalled >= 8000 and _cyberwareInstalled < 32000>> <<set _multiplier = 6>>
+        <<elseif _cyberwareInstalled >= 32000 and _cyberwareInstalled < 64000>> <<set _multiplier = 7>>
+        <<elseif _cyberwareInstalled >= 64000 and _cyberwareInstalled < 128000>> <<set _multiplier = 8>>
+        <<elseif _cyberwareInstalled >= 128000 and _cyberwareInstalled < 256000>> <<set _multiplier = 9>>
+    <<elseif _cyberwareInstalled >= 256000>> 
+        <<set _multiplier = 10>>
+    <</if>>
+        <!-- ensure there is money in the account -->
+        <<if $lowerdecksEnergyFeeCredits >= 1>>
         <!-- Calculate the amount of scrap to process and the parts produced -->
-        <<set _scrapToProcess = Math.min($lowerdecksFabricatorHopperScrap, _intervalsPassed * _baseRate * _multiplier)>>
-        <<set $lowerdecksFabricatorHopperScrap -= _scrapToProcess>>
-        <<set _partsProduced = (_scrapToProcess / _baseRate) * _basePartsProduced>>
-        <<set $lowerdecksFabricatorHopperParts += _partsProduced>>
+            <<set _scrapToProcess = Math.min($lowerdecksFabricatorHopperScrap, _intervalsPassed * _baseRate * _multiplier)>>
+            <<set $lowerdecksFabricatorHopperScrap -= _scrapToProcess>>
+            <<set _partsProduced = (_scrapToProcess / _baseRate) * _basePartsProduced>>
+            <<set $lowerdecksFabricatorHopperParts += _partsProduced>>
         <</if>>
     <</if>>
 <</if>>

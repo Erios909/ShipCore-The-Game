@@ -45,25 +45,21 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Premium Purchase -->
         <!-- The trader recognizes the exceptional quality of the parts, offering above the standard rate. -->
-        <<set $player.credits += 900>> <!-- Gain of 150 credits above the base value -->
         <<creditchange 900 "positive">>
         <p>A discerning buyer immediately spots the premium quality of your parts, offering a price well above the going rate.</p>
 
     <<case 2>> <!-- Competitive Market -->
         <!-- Multiple traders are interested, creating a competitive situation that benefits you. -->
-        <<set $player.credits += 850>> <!-- Gain of 100 credits above the base value -->
         <<creditchange 850 "positive">>
         <p>The competitive spirit is high in the Emporium today, and a bidding war ensues over your parts. You play it cool and end up with an excellent profit.</p>
 
     <<case 3>> <!-- Bulk Bargain -->
         <!-- A trader is looking to acquire bulk parts quickly, offering a fair price for immediate purchase. -->
-        <<set $player.credits += 800>> <!-- Gain of 50 credits above the base value -->
         <<creditchange 800 "positive">>
         <p>A trader in a hurry to restock offers you a fair price for your bulk parts. It's a quick and easy sale with a decent margin.</p>
 
     <<default>> <!-- Standard Bulk Sale -->
         <!-- No special circumstances affect the sale; the parts sell for the standard market value. -->
-        <<set $player.credits += 750>> <!-- Base value for the sale -->
         <<creditchange 750 "positive">>
         <p>The Emporium's standard rates apply today, and you sell your parts without any haggling. It's a straightforward transaction, and you walk away with the market rate.</p>
 <</switch>>

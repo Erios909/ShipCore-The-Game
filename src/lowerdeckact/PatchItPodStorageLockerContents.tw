@@ -45,37 +45,29 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Mysterious Artifact -->
         <p>Amongst forgotten debris, a mysterious artifact captures your attention. Its origins and function unclear, but undoubtedly valuable to the right buyer.</p>
-        <<set $player.credits += 40>>
         <<creditchange 40 "positive">>
 
     <<case 2>> <!-- Personal Effects with a Story -->
         <p>You come across personal effects—a photo here, a trinket there—each with a story you'll never know. It's a somber reminder of transient lives aboard the station.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
 
     <<case 3>> <!-- Stashed Credits Cache -->
         <p>A small stack of credits is tucked away in a corner of a locker. Either forgotten or left in a rush, the find is a simple but welcomed windfall.</p>
-        <<set $player.credits += 35>>
         <<creditchange 35 "positive">>
 
     <<case 4>> <!-- Unexpected Occupant -->
         <p>Opening a locker releases a cloud of bio-luminescent spores. The harmless but surprising occupants were part of a failed bioluminescence experiment.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $player.health += Math.round($player.health * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
 
     <<case 5>> <!-- Hazardous Material Leak -->
         <p>Your salvage is cut short by the discovery of a hazardous material leak. Evacuating the area, you alert the station's maintenance crew, preventing a potential disaster.</p>
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02)>>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">>
 
     <<default>> <!-- Default Locker Salvaging Event -->
         <p>The contents of the lockers are mundane, but amongst the assorted bric-a-brac, you find useful knick-knacks and oddments. Nothing of great value, but enough to cover a meal.</p>
-        <<set $player.credits += 10>>
         <<creditchange 10 "positive">>
 <</switch>>
-
 
 <br><br>
 <!-- Continue Link -->

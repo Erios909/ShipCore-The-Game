@@ -45,24 +45,21 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Complex Circuitry Challenge -->
         <p>You are handed a tangled mess of wires and circuit boards. It's a challenge, but with focus and a steady hand, you manage to repair the device. The owner is grateful, and your work does not go unrewarded.</p><br>
-        <<set $player.credits += 25>>
         <<creditchange 25 "positive">><br>
 
     <<case 2>> <!-- Stitch in Time Saves Nine -->
         <p>Today's task is a mountain of torn uniforms and fabric. It's monotonous work, but as the pile dwindles, you find a rhythm. A job well done earns you a pat on the back and a token payment.</p><br>
-        <<set $player.credits += 10>>
         <<creditchange 10 "positive">><br>
 
     <<case 3>> <!-- The Ever-Whirring Gadget -->
         <p>An intricate gadget from a bygone era requires your attention. It's a tricky fix, and while the work takes longer than expected, the satisfaction of seeing it whir to life again is worth it.</p><br>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<default>> <!-- Default Repair Work Event -->
         <p>Your shift at the Patch-It Pod comes to an end. The mundane repairs were nothing out of the ordinary, but you're content with the work and the steady pay it brings.</p><br>
-        <<set $player.credits += 15>><br>
         <<creditchange 15 "positive">>
 <</switch>>
+
 
 <br><br>
 <!-- Continue Link -->

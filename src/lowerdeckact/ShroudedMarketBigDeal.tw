@@ -40,63 +40,85 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>The stakes are high as you approach the secluded booth, your arms laden with goods. The eyes that meet yours are sharp and calculating, and you know that this deal could change everything. The tension is palpable, and you can feel the stress coursing through your veins as you begin the dance of negotiation.</p>
 
-<!-- Random Big Deal Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- Monumental Gain -->
-        <p>The deal goes better than you could have hoped. You walk away with your pockets significantly heavier.<span style="color: green;"> +4000 Credits</span></p>
+        <p>The deal goes better than you could have hoped. You walk away with your pockets significantly heavier.</p>
         <<set $player.credits += 4000>>
-        <<set $lowerdeckBlackActivity += 4000>>
+        <<creditchange 4000 "positive">>
+        <<itemchange "blackmarketactivity" 4000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 2>> <!-- Undercut Offer -->
-        <p>The buyer is shrewd and cuts down your asking price. You accept, but it's a bitter pill to swallow.<span style="color: yellow;"> +2500 Credits</span></p>
+        <p>The buyer is shrewd and cuts down your asking price. You accept, but it's a bitter pill to swallow.</p>
         <<set $player.credits += 2500>>
-        <<set $lowerdeckBlackActivity += 2500>>
+        <<creditchange 2500 "positive">>
+        <<itemchange "blackmarketactivity" 2500 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 3>> <!-- Even Exchange -->
-        <p>You manage to negotiate an even exchange. It's not a windfall, but it's fair.<span style="color: green;"> +3000 Credits</span></p>
+        <p>You manage to negotiate an even exchange. It's not a windfall, but it's fair.</p>
         <<set $player.credits += 3000>>
-        <<set $lowerdeckBlackActivity += 3000>>
+        <<creditchange 3000 "positive">>
+        <<itemchange "blackmarketactivity" 3000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 4>> <!-- Generous Bonus -->
-        <p>The buyer is impressed with the quality and throws in a generous bonus on top of the agreed price.<span style="color: green;"> +3500 Credits</span></p>
+        <p>The buyer is impressed with the quality and throws in a generous bonus on top of the agreed price.</p>
         <<set $player.credits += 3500>>
-        <<set $lowerdeckBlackActivity += 3500>>
+        <<creditchange 3500 "positive">>
+        <<itemchange "blackmarketactivity" 3500 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 5>> <!-- Tough Loss -->
-        <p>The deal turns sour, and you're forced to take a loss. It's a tough hit to your finances and pride.<span style="color: yellow;"> +2000 Credits</span></p>
+        <p>The deal turns sour, and you're forced to take a loss. It's a tough hit to your finances and pride.</p>
         <<set $player.credits += 2000>>
-        <<set $lowerdeckBlackActivity += 2000>>
+        <<creditchange 2000 "positive">>
+        <<itemchange "blackmarketactivity" 2000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 6>> <!-- Law Enforcement Scare -->
-        <p>Mid-deal, you catch sight of law enforcement. You hastily conclude the deal at a lower price to avoid trouble.<span style="color: yellow;"> +2200 Credits</span></p>
+        <p>Mid-deal, you catch sight of law enforcement. You hastily conclude the deal at a lower price to avoid trouble.</p>
         <<set $player.credits += 2200>>
-        <<set $lowerdeckBlackActivity += 2200>>
+        <<creditchange 2200 "positive">>
+        <<itemchange "blackmarketactivity" 2200 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 7>> <!-- Windfall Profit -->
-        <p>A bidding war erupts over your goods, and you come out on top with a windfall profit.<span style="color: green;"> +4500 Credits</span></p>
+        <p>A bidding war erupts over your goods, and you come out on top with a windfall profit.</p>
         <<set $player.credits += 4500>>
-        <<set $lowerdeckBlackActivity += 4500>>
+        <<creditchange 4500 "positive">>
+        <<itemchange "blackmarketactivity" 4500 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 8>> <!-- Market Crash -->
-        <p>Just as you're about to close the deal, the market crashes. You're left with a deal that barely covers your costs.<span style="color: yellow;"> +2100 Credits</span></p>
+        <p>Just as you're about to close the deal, the market crashes. You're left with a deal that barely covers your costs.</p>
         <<set $player.credits += 2100>>
-        <<set $lowerdeckBlackActivity += 2100>>
+        <<creditchange 2100 "positive">>
+        <<itemchange "blackmarketactivity" 2100 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 9>> <!-- Fair Compensation -->
-        <p>The buyer recognizes the value of your goods and offers fair compensation. You shake hands, content with the deal.<span style="color: green;"> +3200 Credits</span></p>
+        <p>The buyer recognizes the value of your goods and offers fair compensation. You shake hands, content with the deal.</p>
         <<set $player.credits += 3200>>
-        <<set $lowerdeckBlackActivity += 3200>>
+        <<creditchange 3200 "positive">>
+        <<itemchange "blackmarketactivity" 3200 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<case 10>> <!-- Negotiation Fatigue -->
-        <p>After hours of back-and-forth, you're mentally exhausted. You agree to a deal that's good, but not great.<span style="color: yellow;"> +2800 Credits</span></p>
+        <p>After hours of back-and-forth, you're mentally exhausted. You agree to a deal that's good, but not great.</p>
         <<set $player.credits += 2800>>
-        <<set $lowerdeckBlackActivity += 2800>>
+        <<creditchange 2800 "positive">>
+        <<itemchange "blackmarketactivity" 2800 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 
     <<default>> <!-- Balanced Outcome -->
-        <p>The deal is tough but ultimately balanced. You walk away feeling that both sides got something out of it.<span style="color: green;"> +3000 Credits</span></p>
+        <p>The deal is tough but ultimately balanced. You walk away feeling that both sides got something out of it.</p>
         <<set $player.credits += 3000>>
-        <<set $lowerdeckBlackActivity += 3000>>
+        <<creditchange 3000 "positive">>
+        <<itemchange "blackmarketactivity" 3000 "gain">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
 <</switch>>
+
 
 <<set $player.stress += 20>>
 <<set $player.mood -= 10>>

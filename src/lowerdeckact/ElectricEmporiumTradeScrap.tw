@@ -47,7 +47,7 @@
         <p>Your negotiating skills are top-notch today. You manage to trade a small heap of scrap for some premium parts, and even pocket some credits.</p>
         <<set $player.credits += 50>><<set $lowerdecksParts += 1>>
         <<creditchange 50 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><span class="i-gain"> +1 Parts</span><br>
+        <span class="i-loss">-2 Scrap</span> <span class="i-gain"> +1 Parts</span><br>
 
     <<case 2>> <!-- Abysmal Exchange Rate -->
         <p>The market is tough, and you're forced to make a trade that's less than favorable. You leave with some credits but feel like you could have gotten more.</p>
@@ -68,7 +68,7 @@
     <<case 5>> <!-- Surplus Surprise -->
         <p>A surplus sell-off works in your favor. An opportunistic trader swaps your scrap for a few more advanced parts than usual.</p>
         <<set $lowerdecksParts += 2>>
-        <span class="i-gain">+2 Parts</span><span class="i-loss">-2 Scrap</span><br>
+        <span class="i-gain">+2 Parts</span> <span class="i-loss">-2 Scrap</span><br>
 
     <<case 6>> <!-- Unfair Exchange -->
         <p>The trader swindles you with fast talk and quicker hands. You walk away feeling cheated with less valuable parts and a stingy amount of credits.</p>
@@ -96,7 +96,7 @@
         <p>While picking through your scrap, you discover a mistakenly discarded gadget. You trade it with a merchant for a significant credit boost.</p>
         <<set $player.credits += 60>><<set $lowerdecksParts += 1>>
         <<creditchange 60 "positive">><br>
-        <span class="i-gain">+1 Parts</span><span class="i-loss">-2 Scrap</span><br>
+        <span class="i-gain">+1 Parts</span> <span class="i-loss">-2 Scrap</span><br>
 
     <<default>> <!-- Default Scrap Trading Event -->
         <p>Your trading efforts come to fruition. While not the best day on record, you secure an exchange of scrap for credits. It's clear no one really wants to trade anymore today, though. You might have better luck trying tomorrow.</p>

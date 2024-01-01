@@ -147,6 +147,16 @@ $lowerdecksFabricatorCyberware
     partsSold: 0 // Initialize or update with actual parts sold count
 }>>
 
+<<set setup.itemVariables = {
+    'parts': 'lowerdecksParts',
+    'scrap': 'lowerdecksScrap',
+    'cyberware': 'lowerdecksCyberware',
+    'stolenItems': 'lowerdecksStolenItems',
+    'contraband': 'lowerdecksContraband',
+    'blackmarketactivity': 'lowerdeckBlackActivity' // Add this line
+}>>
+
+
 <<set $lowerdeckBlackActivity to 0>>
 <<set $lowerdecksRep to 0>>
 <<set $LockboxHubSpecialRequests to false>>

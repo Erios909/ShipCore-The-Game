@@ -43,59 +43,70 @@
 <!-- Random Contraband Trading Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- High Demand -->
-        <p>The items you're offering are in high demand. You negotiate a price that's well above the standard rate.<span style="color: green;"> +2200 Credits</span></p>
+        <p>The items you're offering are in high demand. You negotiate a price that's well above the standard rate.</p>
         <<set $player.credits += 2200>>
-        <<set $lowerdeckBlackActivity += 2200>>
+        <<creditchange 2200 "positive">>
+        <<itemchange "blackmarketactivity" 2200 "gain">>
 
     <<case 2>> <!-- Buyer's Market -->
-        <p>It's a buyer's market today. You're forced to settle for a price that's slightly below what you were hoping for.<span style="color: yellow;"> +1800 Credits</span></p>
+        <p>It's a buyer's market today. You're forced to settle for a price that's slightly below what you were hoping for.</p>
         <<set $player.credits += 1800>>
-        <<set $lowerdeckBlackActivity += 1800>>
+        <<creditchange 1800 "positive">>
+        <<itemchange "blackmarketactivity" 1800 "gain">>
 
     <<case 3>> <!-- Standard Exchange -->
-        <p>You find a buyer willing to pay the standard rate for your contraband. No hassle, no haggling.<span style="color: green;"> +2000 Credits</span></p>
+        <p>You find a buyer willing to pay the standard rate for your contraband. No hassle, no haggling.</p>
         <<set $player.credits += 2000>>
-        <<set $lowerdeckBlackActivity += 2000>>
+        <<creditchange 2000 "positive">>
+        <<itemchange "blackmarketactivity" 2000 "gain">>
 
     <<case 4>> <!-- Generous Tip -->
-        <p>The buyer is pleased with the quality of your goods and throws in a little extra as a tip.<span style="color: green;"> +2100 Credits</span></p>
+        <p>The buyer is pleased with the quality of your goods and throws in a little extra as a tip.</p>
         <<set $player.credits += 2100>>
-        <<set $lowerdeckBlackActivity += 2100>>
+        <<creditchange 2100 "positive">>
+        <<itemchange "blackmarketactivity" 2100 "gain">>
 
     <<case 5>> <!-- Tough Bargain -->
-        <p>The buyer drives a hard bargain. You walk away with less than you wanted, but it's better than nothing.<span style="color: yellow;"> +1900 Credits</span></p>
+        <p>The buyer drives a hard bargain. You walk away with less than you wanted, but it's better than nothing.</p>
         <<set $player.credits += 1900>>
-        <<set $lowerdeckBlackActivity += 1900>>
+        <<creditchange 1900 "positive">>
+        <<itemchange "blackmarketactivity" 1900 "gain">>
 
     <<case 6>> <!-- Law Enforcement Discount -->
-        <p>You spot law enforcement nearby and quickly make a deal at a discount to avoid suspicion.<span style="color: yellow;"> +1850 Credits</span></p>
+        <p>You spot law enforcement nearby and quickly make a deal at a discount to avoid suspicion.</p>
         <<set $player.credits += 1850>>
-        <<set $lowerdeckBlackActivity += 1850>>
+        <<creditchange 1850 "positive">>
+        <<itemchange "blackmarketactivity" 1850 "gain">>
 
     <<case 7>> <!-- Windfall Sale -->
-        <p>A rare opportunity presents itself, and you sell your contraband for a significant profit.<span style="color: green;"> +2300 Credits</span></p>
+        <p>A rare opportunity presents itself, and you sell your contraband for a significant profit.</p>
         <<set $player.credits += 2300>>
-        <<set $lowerdeckBlackActivity += 2300>>
+        <<creditchange 2300 "positive">>
+        <<itemchange "blackmarketactivity" 2300 "gain">>
 
     <<case 8>> <!-- Saturated Market -->
-        <p>The market is saturated with similar goods, forcing you to accept a lower price.<span style="color: yellow;"> +1700 Credits</span></p>
+        <p>The market is saturated with similar goods, forcing you to accept a lower price.</p>
         <<set $player.credits += 1700>>
-        <<set $lowerdeckBlackActivity += 1700>>
+        <<creditchange 1700 "positive">>
+        <<itemchange "blackmarketactivity" 1700 "gain">>
 
     <<case 9>> <!-- Sympathetic Buyer -->
-        <p>A sympathetic buyer understands your situation and offers a fair price for the contraband.<span style="color: green;"> +2050 Credits</span></p>
+        <p>A sympathetic buyer understands your situation and offers a fair price for the contraband.</p>
         <<set $player.credits += 2050>>
-        <<set $lowerdeckBlackActivity += 2050>>
+        <<creditchange 2050 "positive">>
+        <<itemchange "blackmarketactivity" 2050 "gain">>
 
     <<case 10>> <!-- Haggling Success -->
-        <p>Your haggling pays off, and you manage to secure a slightly better deal than usual.<span style="color: green;"> +2150 Credits</span></p>
+        <p>Your haggling pays off, and you manage to secure a slightly better deal than usual.</p>
         <<set $player.credits += 2150>>
-        <<set $lowerdeckBlackActivity += 2150>>
+        <<creditchange 2150 "positive">>
+        <<itemchange "blackmarketactivity" 2150 "gain">>
 
     <<default>> <!-- Balanced Deal -->
-        <p>The trade is fair and square. You get a decent price for your contraband, and the buyer seems satisfied.<span style="color: green;"> +2000 Credits</span></p>
+        <p>The trade is fair and square. You get a decent price for your contraband, and the buyer seems satisfied.</p>
         <<set $player.credits += 2000>>
-        <<set $lowerdeckBlackActivity += 2000>>
+        <<creditchange 2000 "positive">>
+        <<itemchange "blackmarketactivity" 2000 "gain">>
 <</switch>>
 
 <!-- Continue Link -->

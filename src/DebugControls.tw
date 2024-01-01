@@ -115,7 +115,7 @@ Combined Difficulty: $combinedDifficultyScore
     <<set $playerConsumables.energyCellBoost += 1>>
     <<updatebar>>
 <</link>>
-[[testmenu|main menu]]
+[[testmenu|test menu]]
 <</nobr>>
 
 

@@ -20,61 +20,58 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>The dim lights and murmurs of The Rogue's Gallery envelop you as you step behind the bar. Bottles of exotic liquors line the shelves, and the regulars nod in recognition. It's time to mix drinks, listen to tales of spacefaring adventures, and maybe learn a secret or two.</p>
 
-<!-- Random Bartending Events -->
 <<switch _randomEvent>>
     <<case 1>>
         <p>Your signature cocktail is the talk of the station. Patrons line up just to try it, leaving hefty tips in their wake.</p>
-        <<set $player.credits += 60>><<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 60 "positive">><<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+        <<creditchange 60 "positive">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>>
         <p>A group of miners celebrate a big score and you're in on the action. They're generous with their newfound wealth.</p>
-        <<set $player.credits += 45>><<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 45 "positive">><<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+        <<creditchange 45 "positive">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 3>>
         <p>You deftly handle a rowdy customer, earning the respect of the crowd and a bonus from the owner.</p>
-        <<set $player.credits += 35>><<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 35 "positive">><<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+        <<creditchange 35 "positive">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 4>>
         <p>A rare ingredient allows you to prepare a legendary drink. It's a hit, and your reputation soars.</p>
-        <<set $player.credits += 50>><<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 50 "positive">><<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+        <<creditchange 50 "positive">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 5>>
         <p>The night is steady but uneventful. You earn your standard pay and share a few laughs with the regulars.</p>
-        <<set $player.credits += 25>>
         <<creditchange 25 "positive">><br>
 
     <<case 6>>
         <p>A mix-up with an order leads to a tense moment, but you smooth things over with a free round. The patrons appreciate the gesture.</p>
-        <<set $player.credits += 20>><<set $player.mood -= Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 20 "positive">><<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+        <<creditchange 20 "positive">>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 7>>
         <p>You're in the zone, mixing drinks with flair and efficiency. The tips reflect your skill and showmanship.</p>
-        <<set $player.credits += 55>><<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 55 "positive">><<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+        <<creditchange 55 "positive">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 8>>
         <p>An undercover security officer commends you for your vigilance. It's always good to be on the right side of the law.</p>
-        <<set $player.credits += 30>><<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 30 "positive">><<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+        <<creditchange 30 "positive">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 9>>
         <p>A spilled drink causes a slip-up, but you laugh it off and get back to work. The night's still young.</p>
-        <<set $player.credits += 15>><<set $player.mood -= Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 15 "positive">><<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+        <<creditchange 15 "positive">>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 10>>
         <p>The tap system goes haywire, spraying beer everywhere. It's a mess, but you handle it with grace and earn a few extra credits for the trouble.</p>
-        <<set $player.credits += 20>><<set $player.mood -= Math.round($player.mood * 0.02 + 5)>>
-        <<creditchange 20 "positive">><<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+        <<creditchange 20 "positive">>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<default>> <!-- Default Bartending Event -->
         <p>The shift passes without incident. You make the expected amount in tips and feel good about the work you've done.</p>
-        <<set $player.credits += 25>>
         <<creditchange 25 "positive">><br>
 <</switch>>
 <br>
