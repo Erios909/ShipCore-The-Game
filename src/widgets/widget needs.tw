@@ -17,7 +17,7 @@
         <<set _adjustmentFactor = _maxDecay * (1 - Math.exp(-0.693 * _timeDifference / _halfLife))>>
         /* This limits the adjustment factor based on an exponential decay curve */
 
-        <<set _reducedFactor = _adjustmentFactor / 12>> 
+        <<set _reducedFactor = _adjustmentFactor / 122>> 
         <<set $player.health = Math.clamp($player.health + _reducedFactor, 0, 1000)>>
         <<set $player.mood = Math.clamp($player.mood + _reducedFactor, 0, 1000)>>
         <<set $player.trauma = Math.clamp($player.trauma - _reducedFactor, 0, 1000)>>

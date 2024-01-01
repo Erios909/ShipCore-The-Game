@@ -202,10 +202,10 @@ $lowerdecksFabricatorCyberware
     appearance: 1,  // 1 for rugged, 2 for elegant, etc.
     health: 1000,  // Initial health
     mood: 500,    // Initial mood
-    stress: 500,  // Initial stress
-    trauma: 500,  // Initial trauma
-    fatigue: 750, // Initial fatigue
-    filth: 1000, //starting player clean, removed by shower etc
+    stress: 455,  // Initial stress
+    trauma: 455,  // Initial trauma
+    fatigue: 0, // Initial fatigue
+    filth: 0, //starting player clean, removed by shower etc
     powerReserves: 750, // Initial power reserves
     inventory: [],  // Empty inventory
     credits: 0,  // Initial credits
