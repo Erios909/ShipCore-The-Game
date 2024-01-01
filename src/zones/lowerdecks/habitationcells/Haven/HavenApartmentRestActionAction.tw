@@ -1,0 +1,36 @@
+:: HavenApartmentRest [safe] {"position":"1400,2250","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">><<addmins $timeadd>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/apartmentinterior.jpg'>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Your Apartment - Resting",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="restTitleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Moment of Respite</span></h2>
+<hr id="restTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="restLocationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="restLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+
+<!-- Applying fatigue reduction and mood improvement for resting -->
+<<set $player.fatigue += 10>> <!-- As higher fatigue means less tired -->
+<<set $player.mood += Math.round($player.mood * 0.15)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+        <<set $player.stress -= Math.round($player.stress * 0.15)>>
+        <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+        <<set $player.trauma -= Math.round($player.stress * 0.02)>>
+        <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
+<<addmins 30>>
+<</nobr>>
+Within the quiet confines of your apartment, you recline in a makeshift nook, creating a space of tranquility amidst the pressures of MOR-1's lower decks. In this brief hiatus, a <<if $player.stress >= 600>><span style="color: lightgreen;">gentle calm suffuses your being</span><<elseif $player.stress >= 400>><span style="color: yellow;">manageable peace settles in</span><<elseif $player.stress >= 200>><span style="color: orange;">tense relaxation grips you</span><<else>><span style="color: red;">stressful thoughts reluctantly subside</span><</if>>, providing some much-needed <<if $player.fatigue >= 600>><span style="color: lightgreen;">rest for your alert mind</span><<elseif $player.fatigue >= 400>><span style="color: yellow;">respite for your tiredness</span><<elseif $player.fatigue >= 200>><span style="color: orange;">reprieve for your exhaustion</span><<else>><span style="color: red;">momentary escape for your depleted energy</span><</if>>.
+
+Through the subtle vibrations of the station's life-support systems, you find a rhythm to your breathing—a meditative reprieve that soothes the mind and revitalizes the spirit.
+
+For a fleeting moment, the station's ever-churning economy and buzzing danger levels fade into insignificance. Here, you are shielded from demands and threats alike, albeit temporarily.
+
+[[Continue.|HabitationApartment][$timeadd = 1]]
+
+

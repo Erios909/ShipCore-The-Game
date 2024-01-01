@@ -1,0 +1,29 @@
+:: ColdStorageWash [safe] {"position":"850,425","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">> <!-- Keep the current area as lowerdecks -->
+<<addmins $timeadd>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Cold Storage - Wash",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="washTitleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Improvised Cleanliness</span></h2>
+<hr id="washTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="washLocationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="washLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+
+<!-- Improving player's filth status -->
+<<set $player.filth -= 250>> <!-- As higher filth means cleaner -->
+
+<</nobr>>In the utilitarian confines of Cold Storage, you find a repurposed water hose dangling from a maintenance panel. The water is shockingly cold, but it's a small price to pay for cleanliness. You detach the hose, directing the sparse stream into a makeshift basin you've fashioned from the remnants of a broken locker.
+
+The water's chill bites at your skin, but as you wipe away the grime, you feel a sense of <<if $player.filth <= 200>><span style="color: lightgreen;">renewal</span><<elseif $player.filth <= 400>><span style="color: yellow;">refreshment</span><<elseif $player.filth <= 600>><span style="color: orange;">improvement</span><<else>><span style="color: red;">alleviation</span><</if>>. It's a rudimentary setup, yet it serves its purpose well enough. With each pass of your makeshift cloth, you scrub away not just the physical filth but also the weight of the station's oppressive atmosphere.
+
+[[Continue.|Cold Storage][$timeadd = 1]]
+
+
+

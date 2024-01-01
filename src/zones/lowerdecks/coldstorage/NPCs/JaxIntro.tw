@@ -1,0 +1,65 @@
+:: JaxIntro [conversation] {"position":"850,650","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstoragedoor.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Cold Storage Exit",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage Exit</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+
+Stepping out of the pristine confines of cold storage, you're immediately struck by the disarray of the station. The corridor is grimy, the walls streaked with years of neglect. The air carries a heavy scent of oil and stale sweat—a stark contrast to the sterile chill you've left behind.
+
+A figure detaches itself from the shadows, their attire a patchwork of scavenged materials. They eye you with a mix of surprise and opportunism, a half-smirk playing on their lips.
+<br><br>
+<<say '???' setup.ImagePath+'/characters/minor/jax.jpg'>>"Ain't often we see folks stroll outta there. You must've got a story to tell. Or maybe you're just lucky."<</say>>
+<br>
+The stranger's gaze lingers on you, as if trying to read your history in the lines of your face.
+<br><br>
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"I... I'm not sure what I'm doing, to be honest. Just trying to get my bearings."<</say>>
+<br>
+The scavenger chuckles, shaking their head with a mix of amusement and disbelief.
+<br><br>
+<<say '???' setup.ImagePath+'/characters/minor/jax.jpg'>>"Well, if you're planning on sticking around, you'll need credits. And fast. Find somewhere to crash or cough up for a cell in the Habitation Cells. But be careful—lower decks aren't for the faint-hearted."<</say>>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"What about security?"<</say>>
+<br>
+The scavenger's laugh is a sharp bark in the quiet corridor.
+<br><br>
+<<say '???' setup.ImagePath+'/characters/minor/jax.jpg'>>"Security? That's a good one. You're looking at the closest thing to it. Keep your eyes open and you might just stay out of trouble."<</say>>
+<br>
+The scavenger extends a hand, the smirk now a full-fledged grin.
+<br><br>
+<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Name's Jax. Jax Weaver."<</say>>
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"<<=$player.name>>. At least I'm pretty sure."<</say>><br>
+You hesitantly shake his hand. At least the first person you found was friendly. In the distant a low murmur of humanity beckons, hinting there are far more people to meet than just Jax.
+<br><br>
+<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Not the first around here with memory problems. You lot show up a lot. Like I said... the 'decks can be a dangerous place."<</say>>
+<br>
+He nods toward the room you came out of, the sliding door still humming as it waits for you to move away.
+<br><br>
+<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"You mind if I check it out after you go? That place has been sealed off, new 'holes that aren't taken are hard to find 'round here."<</say>>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Sure, doesn't belong to me, knock yourself out."<</say>><br>
+<br>
+He smiles and nods at you.
+<br><br>
+<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got any questions for me? I can answer them for you now, or if I'm still around you can check back."<</say>>
+
+<<say $player.name setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+    [[Can you tell me more about the station?|JaxAskStation][$timeadd += 5]]<br>
+    [[Who are the people around here?|JaxAskPeople][$timeadd += 5]]<br>
+    [[How can I earn some credits quickly?|JaxAskWork][$timeadd += 5]]<br>
+    [[I'm good. Thanks for the advice. I'll see you around.|Cold Storage][$timeadd += 5]]
+<</say>>
+
+<</nobr>>
+
+
