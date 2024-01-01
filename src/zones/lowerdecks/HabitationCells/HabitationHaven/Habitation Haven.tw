@@ -1,0 +1,46 @@
+:: Habitation Haven [poi] {"position":"1350,2000","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/habitationhaven.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Habitation Haven",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Habitation Haven</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
+Things to do:
+<<nobr>><<switch $HavenApartmentState>>
+    <<case "none">>
+        [[Inquire about apartment availability and prices. (00:15)|HabitationInquire][$timeadd = 15;$HavenApartmentState = "inquired"]]
+    <<case "inquired">>
+        <<if $player.credits >= 200>> <!-- Check for sufficient credits -->
+            [[Sign a lease for an apartment. (00:45)|HabitationLease][$player.credits -= 200; $HavenApartmentState = "signed"; $timeadd = 45]]
+        <<else>> <!-- Option to sign lease is grayed out if not enough credits -->
+            <span class="disabledLink">Sign a lease for an apartment. (00:45 | Requires 200 credits)</span>
+        <</if>>
+    <<case "signed">>
+        [[Enter your personal apartment space. (00:01)|HabitationApartment][$timeadd = 1]]
+<</switch>><br>
+<<if $HavenApartmentState is "signed">>
+    [[Meet and socialize with your neighbors in the communal area. (00:30)|HabitationSocialize][$timeadd = 30]]
+    <<else>>
+        [[Meet and socialize in the communal area. (00:30)|HabitationSocialize][$timeadd = 30]]
+<</if>><br>
+Travel:<br>
+    [[Return to the densely packed corridors of the Habitation Cells.|Habitation Cells][$timeadd = 5]]<br>
+<</nobr>>
+Amidst the utilitarian sprawl of the lower decks, Habitation Haven emerges as an oasis of personal sanctuary. The walls, painted in calming hues, hold the subtle hum of the station's life support systems—a reminder of the protective shell that separates humanity from the cold void beyond.
+
+The air is tinged with a medley of scents from a hundred different homes, each doorway a portal to a private cosmos. Laughter leaks from the seams of these portals, weaving with the soft strains of music to create a tapestry of domesticity. Here, the station's heart beats not with the rhythm of machinery, but with the pulse of its people.
+
+<span style="color: skyblue;"><<if $HavenApartmentState is "none">>A few units stand empty, their doors ajar, inviting new stories and new memories.<<elseif $HavenApartmentState is "inquired">>Your own inquiry into a place here lingers in your mind, a step toward making a mark on this communal canvas.<<elseif $HavenApartmentState is "signed">>Your signature on the lease has sealed a pact with this place, the threshold to your apartment now a boundary to a realm that is uniquely yours.<</if>></span>
+
+For those who have made their homes within its confines, Habitation Haven offers a semblance of normalcy—a respite from the harsh realities of life on MOR-1. It is a haven indeed, where the weary can retreat and the spirited can commune, all under the watchful eye of Thomas Ralfot, guardian of this unlikely sanctuary.
+
+

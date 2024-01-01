@@ -1,0 +1,86 @@
+:: Cold Storage [poi safe] {"position":"750,425","size":"100,100"}
+<<nobr>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Cold Storage",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<<set $LastHomeZone to "Cold Storage">>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<!-- The room description is adjusted to color only strategic words for flavor based on the station's economy and danger level -->
+The room you awaken in is a capsule of function over form—a stark berth within the arteries of the starport. The metal bench, deriving from the floor itself, is the room's sole concession to <span style="color: lightblue;">rest</span>.
+
+<!-- Economy-based descriptions -->
+<<if $worldEconomyScore >= 800>>
+    The walls, <span style="color: green;">polished</span> to a high sheen, resonate with the prosperity of the station.
+<<elseif $worldEconomyScore >= 600>>
+    Soft <span style="color: lightgreen;">illumination</span> from well-placed LEDs casts a calming ambiance.
+<<elseif $worldEconomyScore >= 400>>
+    A <span style="color: orange;">flicker</span> here and there in the lighting speaks to the occasional scarcity.
+<<elseif $worldEconomyScore >= 200>>
+    The dim <span style="color: red;">glow</span> from the lights paints a picture of economic downturn.
+<<else>>
+    Sparse <span style="color: darkred;">lighting</span> gives the compartment a grim aspect.
+<</if>>
+
+<!-- Danger level-based descriptions -->
+<<if $dangerLevelScore >= 800>>
+    The station's outer hull is a <span style="color: blue;">serene</span> backdrop.
+<<elseif $dangerLevelScore >= 600>>
+    It denotes a <span style="color: lightblue;">moderate</span> level of activity, both tranquil and alert.
+<<elseif $dangerLevelScore >= 400>>
+    Frequent <span style="color: orange;">flashes</span> of patrolling security craft hint at higher risks.
+<<elseif $dangerLevelScore >= 200>>
+    The occasional <span style="color: red;">siren</span> and rapid movement of ships suggest heightened danger.
+<<else>>
+    The sight of <span style="color: darkred;">debris</span> and defensive fortifications speaks to extreme dangers.
+<</if>>
+<br><br>
+If you wanted, you could try to take a nap here in the corner. Won't be comfortable, though.
+<!-- Action options --><br>
+[[Sleep for 1 hour.|ColdStorageSleep][$player.fatigue -= 150; $timeadd = 60]]<br>
+[[Sleep for 2 hours.|ColdStorageSleep][$player.fatigue -= 315; $timeadd = 120]]<br>
+[[Sleep for 3 hours.|ColdStorageSleep][$player.fatigue -= 455; $timeadd = 180]]<br><br>
+Things to do:<br>
+[[Rest and relax for a short while. (00:30)|ColdStorageRest][$timeadd = 30]]<br>
+[[Try to wash off with the water reclaimation system. (00:30)|ColdStorageWash][$player.filth -= 150; $timeadd = 30]]<br>
+<span class="disabledLink">Access the terminal for news or entertainment. (Currently inoperative)</span><br>
+[[Rummage through the lockers. (00:15)|ColdStorageLockers][$timeadd = 15]]<br>
+<span class="disabledLink">Prepare a meal. (Facilities unavailable)</span><br>
+<br>
+<<if $introColdExit == 1>>
+Jax has made himself at home, piling up junk and building a nest in the corner of the Cold Storage room. His presence, or maybe some unknown hand of security seems to be keeping this place clear of the normal lower deck riffraff.
+You could ask him some questions if you want.
+[[Talk to Jax.|JaxChat]]
+
+<</if>><br><br>
+<<nobr>>
+Travel:<br>
+<<if $player.filth > 800>>
+    <span class="disabledLink">You feel too dirty to go out right now.</span>
+<<else>>
+    <<if $introColdExit == 1>>
+        <<link "Exit through the door to the Lower Decks.">>
+            <<set $timeadd += 5>>
+            <<goto "Lower Decks">>
+        <</link>>
+    <<else>>
+        <<link "Exit through the door to the Lower Decks.">>
+            <<set $timeadd += 5>>
+            <<set $introColdExit = 1>>
+            <<goto "JaxIntro">>
+        <</link>>
+    <</if>>
+<</if>>
+<</nobr>>
+<</nobr>>
+
+

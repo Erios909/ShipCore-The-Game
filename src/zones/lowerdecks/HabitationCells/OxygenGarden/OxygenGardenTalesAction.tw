@@ -1,0 +1,76 @@
+:: OxygenGardenTales [lowerdeckact] {"position":"775,2300","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/oxygengarden.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Oxygen Garden - Sharing Tales",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $oxygenGardenTalesEventsRecord>> <<set $oxygenGardenTalesEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $oxygenGardenTalesEventsRecord.today != _today>>
+    <<set $oxygenGardenTalesEventsRecord.today to _today>>
+    <<set $oxygenGardenTalesEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available tale-sharing events -->
+<<for _i to 1; _i <= 4; _i++>>
+    <<if not $oxygenGardenTalesEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available tale-sharing events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $oxygenGardenTalesEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available tale-sharing events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Oxygen Garden</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>Among the rows of carefully tended vegetation, the gardeners of MOR-1 share their knowledge with a pride born of nurturing life in a place where it's least expected. You join a group, your curiosity piqued by their green-thumbed expertise. As hands work the soil, stories of past harvests and botanic experiments weave through the air, as rich and vibrant as the garden itself.</p>
+
+<!-- Random Tale-Sharing Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Gardener's Wisdom -->
+        <p>An experienced gardener shares insights on the delicate balance of hydroponics. The knowledge could be useful for your own botanical endeavors.</p>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- Tales of the Green Thumb Thief -->
+        <p>You're enthralled by the tale of the Green Thumb Thief, an individual who once stole rare seeds from stations across the sector. It's a story of intrigue and mystery.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 3>> <!-- The Oxygen Garden Ghost -->
+        <p>A gardener whispers about a supposed ghost haunting the garden at night. Whether true or not, the story sends a shiver down your spine.</p>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Clandestine Deal Overheard -->
+        <p>While pretending to tend to the plants, you overhear a suspicious deal between two gardeners. The information could be valuable... or dangerous.</p>
+        <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Tale-Sharing Event -->
+        <p>As tales are swapped and laughter echoes through the foliage, you find yourself uplifted by the camaraderie of the gardeners. You leave with a few interesting stories and a lighter step.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">>
+<</switch>>
+
+
+<br>
+<!-- Continue Link -->
+[[Back to the Garden.|The Oxygen Garden]]
+<</nobr>>
+
+
+

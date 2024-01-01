@@ -1,0 +1,85 @@
+:: WharfsidePartsTrade [lowerdeckact] {"position":"1300,800","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/wharfsidetechemporium.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Wharfside Tech Emporium - Trade Parts for Tech",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $wharfsidePartsTradeEventsRecord>> <<set $wharfsidePartsTradeEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $wharfsidePartsTradeEventsRecord.today != _today>>
+    <<set $wharfsidePartsTradeEventsRecord.today to _today>>
+    <<set $wharfsidePartsTradeEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of trading parts for tech events -->
+<<for _i to 1; _i <= 3; _i++>>
+    <<if not $wharfsidePartsTradeEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are events to trigger -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $wharfsidePartsTradeEventsRecord.triggeredEvents.push(_randomEvent)>>
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Wharfside Tech Emporium - Trade Parts for Tech</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>
+Amidst the sea of neon signs and holographic displays, the Wharfside Tech Emporium buzzes with activity. Traders from across the galaxy haggle over components that could make or break the next technological breakthrough. The air is thick with the smell of solder and the murmur of deals being struck. Here, parts are more than just pieces of metal and circuitry—they're the lifeblood of innovation, and even the smallest cog can be the key to unlocking potential that changes the world. You adjust your bag of parts, knowing that somewhere in this emporium lies the chance to trade up for something that might just be the edge you need.
+</p>
+
+<!-- Random Trading Parts for Tech Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Rare Tech Opportunity -->
+        <!-- Player trades for a rare piece of tech, gaining additional value. -->
+        <<itemchange "cyberware" 2 "gain">> <!-- Gain of 1 additional cyberware -->
+        <<creditchange 50 "positive">> <!-- Gain of 25 additional credits -->
+        <p>Your parts draw the attention of a trader with a rare piece of cyberware. Sensing an opportunity, you negotiate and secure a trade that favors you.</p>
+        <br>
+
+    <<case 2>> <!-- Enthusiastic Exchange -->
+        <!-- An enthusiastic trader offers a good deal for the parts. -->
+        <<itemchange "cyberware" 1 "gain">> <!-- Standard gain of cyberware -->
+        <<creditchange 75 "positive">> <!-- Gain of 50 additional credits -->
+        <p>An enthusiastic trader offers you a new piece of tech for your parts. You shake hands, pleased with the straightforward and favorable exchange.</p>
+        <br>
+
+    <<case 3>> <!-- Bargain Hunter -->
+        <!-- A bargain hunter trades for the parts but offers less additional value. -->
+        <<itemchange "cyberware" 1 "gain">> <!-- Standard gain of cyberware -->
+        <<creditchange 15 "positive">> <!-- Gain of 10 less credits -->
+        <p>A keen bargain hunter trades you a cybernetic unit for your parts. It's a fair deal, but you can't help feeling you could have haggled for more.</p>
+        <br>
+
+    <<default>> <!-- Standard Parts for Tech Transaction -->
+        <!-- Standard trade, parts exchanged for cyberware and a small credit bonus. -->
+        <<itemchange "cyberware" 1 "gain">> <!-- Standard gain of cyberware -->
+        <<creditchange 25 "positive">> <!-- Standard gain of credits -->
+        <p>The trade is quick and efficient. Your parts are exchanged for a standard issue of cyberware and a small credit bonus, just as expected.</p>
+        <br>
+<</switch>>
+
+
+<!-- Subtract the parts traded during the event -->
+<<set $lowerdecksParts -= 1>>
+
+<!-- Continue Link -->
+[[Return to Wharfside Tech Emporium.|WharfsideTechEmporium]]
+<</nobr>>
+
+
+

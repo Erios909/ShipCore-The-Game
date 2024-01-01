@@ -1,0 +1,114 @@
+:: LastHomeHeartToHeart [lowerdeckact] {"position":"650,1800","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
+<<addmins $timeadd>>
+<<set $player.credits -= 5>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Last Home - Heart to Heart",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $lastHomeHeartEventsRecord>> <<set $lastHomeHeartEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $lastHomeHeartEventsRecord.today != _today>>
+    <<set $lastHomeHeartEventsRecord.today to _today>>
+    <<set $lastHomeHeartEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available heart to heart events -->
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $lastHomeHeartEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available heart to heart events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $lastHomeHeartEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available heart to heart events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>As time wears on, the crowd at The Last Home thins, leaving only the echo of departed patrons. You find yourself at the bar, face reflected in the well-worn countertop, as the bartender wipes down glasses. It's the perfect time for a quiet conversation, to share the weight of existence on MOR-1 with someone who understands the art of listening.</p>
+
+<!-- Random Heart to Heart Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Shared Sorrows -->
+        <p>The bartender shares a story of lost love, and you find common ground in shared sorrows. You both feel a weight lifted after the talk.</p>
+        <<set $player.mood += Math.round($player.mood * 0.05)>>
+        <<set $player.stress += Math.round($player.stress * 0.05)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- A Toast to Better Times -->
+        <p>A toast to better times results in a couple of free drinks and a boost to your spirits.</p>
+        <<set $player.mood += Math.round($player.mood * 0.075)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+
+    <<case 3>> <!-- Advice from the Bartender -->
+        <p>The bartender's practical advice on dealing with station politics could come in handy. You're grateful for the wisdom.</p>
+        <<set $player.powerReserves += 5>>
+        <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Old Friends Remembered -->
+        <p>Reminiscing about old friends brings both laughter and a twinge of sadness. It's a bittersweet evening.</p>
+        <<set $player.mood += Math.round($player.mood * 0.025)>>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 5>> <!-- Lending an Ear -->
+        <p>Listening to the bartender's troubles, you offer a sympathetic ear. Sometimes all someone needs is to be heard.</p>
+        <<set $player.stress += Math.round($player.stress * 0.05)>>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 6>> <!-- Connecting Over Music -->
+        <p>The bartender plays an old tune, and you both get lost in the music. For a moment, nothing else matters.</p>
+        <<set $player.mood += Math.round($player.mood * 0.075)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+
+    <<case 7>> <!-- A Shoulder to Cry On -->
+        <p>After a few too many, the bartender breaks down about personal losses. The evening becomes heavier than you expected.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.05)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 8>> <!-- Shared Laughter -->
+        <p>Jokes and laughter dominate the evening, making for light-hearted and refreshing conversation.</p>
+        <<set $player.mood += Math.round($player.mood * 0.1)>>
+        <<set $player.stress += Math.round($player.stress * 0.025)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 9>> <!-- The Wisdom of Age -->
+        <p>Stories of the bartender's early years on MOR-1 give you a sense of history and grounding.</p>
+        <<set $player.powerReserves += 10>>
+        <<changemoods "powerReserves" "major" "PosEffectOnPlayer">><br>
+
+    <<case 10>> <!-- Comforting Presence -->
+        <p>The quiet presence of another person provides a comforting backdrop to your thoughts. You leave feeling calmer.</p>
+        <<set $player.stress += Math.round($player.stress * 0.05)>>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Heart to Heart Event -->
+        <p>The conversation turns mundane, and while you spend a few credits on drinks, you gain little from the exchange.</p>
+        <<set $player.credits -= 5>>
+        <<creditchange 5 "negative">><br>
+<</switch>>
+<br>
+
+<!-- Continue Link -->
+[[Head back to the bar.|The Last Home]]
+<</nobr>>
+
+
+

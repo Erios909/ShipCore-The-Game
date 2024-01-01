@@ -1,0 +1,79 @@
+:: RoguesGalleryDrink [lowerdeckact] {"position":"1625,1450","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket/roguesgallery.jpg'>>
+<<addmins $timeadd>>
+<<set $player.credits -= 8>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Rogue's Gallery - Grabbing a Specialty Drink",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $roguesGalleryEventsRecord>> <<set $roguesGalleryEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $roguesGalleryEventsRecord.today != _today>>
+    <<set $roguesGalleryEventsRecord.today to _today>>
+    <<set $roguesGalleryEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to no event -->
+
+<!-- Create a list of available events that have not occurred today -->
+<<set _availableEvents to []>>
+<<for _i to 1; _i <= 5; _i++>>
+    <<if not $roguesGalleryEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<!-- Select a random event from the available ones or default if none are available -->
+<<if _availableEvents.length>> <!-- If there are still available events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $roguesGalleryEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available events -->
+    <<set _randomEvent to 0>> <!-- Default to no event -->
+<</if>>
+
+<!-- Standard Heading Template -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Rogue's Gallery</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The Rogue's Gallery is alive with the buzz of clandestine chatter and the clinking of glasses. You order a specialty drink, its exotic fumes promising a brief escape from the harsh realities of space.</p>
+
+<!-- Random Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- A Friendly Bet -->
+        <p>You're roped into a friendly bet with a group of smugglers. The stakes are low, but the thrill of victory boosts your mood.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 2>> <!-- A Sudden Quarrel -->
+        <p>A sudden quarrel breaks out near you, and your drink suffers the consequences. It's a minor annoyance.</p>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 3>> <!-- A Veteran's Tale -->
+        <p>An old spacer shares harrowing tales of survival, leaving you with a sense of resilience.</p>
+        <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 4>> <!-- A Lucky Tip -->
+        <p>A tip from a fellow patron leads you to a small windfall. It's always nice to have a bit of extra credit.</p>
+        <<creditchange 20 "positive">><br>
+
+    <<case 5>> <!-- A Moment's Peace -->
+        <p>The ambient noise of the bar fades into the background as you find a moment of peace, reducing your stress.</p>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Event -->
+        <p>The night progresses with no particular incident. You enjoy the drink and the company, feeling neither better nor worse for the experience.</p>
+<</switch>>
+<br><br>
+
+<!-- Continue Link -->
+[[Return to the bustle of The Rogue's Gallery.|RoguesGallery]]
+<</nobr>>
+
+

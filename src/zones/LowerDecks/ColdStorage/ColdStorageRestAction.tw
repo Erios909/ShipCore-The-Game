@@ -1,0 +1,29 @@
+:: ColdStorageRest [safe] {"position":"725,525","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">> <!-- Keep the current area as lowerdecks -->
+<<addmins $timeadd>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Cold Storage - Resting",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+<h2 id="restTitleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Moment of Solitude</span></h2>
+<hr id="restTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="restLocationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="restLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<</nobr>>
+
+<!-- Applying fatigue reduction and mood improvement for resting -->
+<<set $player.fatigue += 50>> <!-- As higher fatigue means less tired -->
+<<set $player.mood += 25>>
+<<set $player.stress += 25>> <!-- As higher stress means less stressed -->
+
+In the desolate quiet of Cold Storage, you find a spot to sit away from the prying eyes of the station's denizens. It's not comfortable, but the solitude allows for a moment of rest. You take what you can get, leaning against a storage unit, and let the stillness wash over you. Despite the chill, you manage to <<if $player.stress >= 600>><span style="color: lightgreen;">relax your guard</span><<elseif $player.stress >= 400>><span style="color: yellow;">ease the tension</span><<elseif $player.stress >= 200>><span style="color: orange;">calm your nerves</span><<else>><span style="color: red;">steal a moment's peace</span><</if>>, finding a precious <<if $player.fatigue >= 600>><span style="color: lightgreen;">respite</span><<elseif $player.fatigue >= 400>><span style="color: yellow;">break</span><<elseif $player.fatigue >= 200>><span style="color: orange;">breather</span><<else>><span style="color: red;">escape</span><</if>> from the relentless demands of life aboard the station.
+
+[[Continue.|Cold Storage][$timeadd = 1]]
+
+
+

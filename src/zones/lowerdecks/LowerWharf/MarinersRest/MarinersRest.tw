@@ -1,0 +1,41 @@
+:: MarinersRest [poi] {"position":"1200,625","size":"100,100"}
+<<nobr>><<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/marinersrest.jpg'>>
+<<addmins $timeadd>><<set $location to {
+    name: "Meltisar System, MOR-1, Mariner's Rest",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Mariner's Rest</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
+
+<!-- Things to do at Mariner's Rest -->
+<<nobr>>Things to do:<br>
+<!-- Check and provide an option to work the bar -->
+[[Work the bar. (01:00)|MarinersRestWorkBar][$player.credits += 10; $player.fatigue -= 15; $timeadd = 60]]<br>
+<!-- Check if player has enough credits to grab a drink -->
+<<if $player.credits >= 5>>
+    [[Grab a drink and unwind to the ambient sounds of the port. (00:15 Cr. 5)|MarinersRestDrink][$player.credits -= 5; $timeadd = 15]]<br>
+<<else>>
+    <span class="disabledLink">Grab a drink and unwind to the ambient sounds of the port. (00:15 Cr. 5)</span><br>
+<</if>>
+<!-- Check if player has enough credits to order a hearty meal -->
+<<if $player.credits >= 10>>
+    [[Order a hearty meal and boost your spirits. (01:00 Cr. 10)|MarinersRestMeal][$player.health += 20; $player.mood += 10; $player.credits -= 10; $timeadd = 60]]<br>
+<<else>>
+    <span class="disabledLink">Order a hearty meal and boost your spirits. (01:00 Cr. 10)</span><br>
+<</if>>
+<</nobr>>
+
+<!-- Travel options from Mariner's Rest -->
+Travel:
+[[Return to the bustling hub of the Lower Wharf.|Lower Wharf][$timeadd = 5]]
+
+<!-- Description of Mariner's Rest atmosphere -->
+Mariner's Rest is a haven amidst the hustle of the Lower Wharf, a place where weary travelers and station residents alike can find some semblance of peace. The wooden walls are adorned with relics of old ships, and the air carries the aroma of hearty meals being prepared. Laughter and the clinking of glasses fill the space, as stories are exchanged over meals and drinks. It's a small piece of respite where one can briefly escape the rigors of station life.
+
+
+

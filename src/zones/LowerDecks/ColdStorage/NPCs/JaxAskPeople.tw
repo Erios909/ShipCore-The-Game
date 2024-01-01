@@ -1,0 +1,32 @@
+:: JaxAskPeople [conversation] {"position":"850,750","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/commonarea.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Common Area",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks Common Area</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Who are the people around here?"<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"The Lower Decks? It's a melting pot. You've got your traders, drifters, and dreamers. Then there are those who've hit rock bottom, and those who make a living off them. It's a place where fortunes can turn on a credit chip."<</say>>
+
+<p>As you glance around, you see a diverse crowd. There are groups huddled in intense conversation, lone figures skulking in the shadows, and workers hauling cargo. The hum of activity is punctuated by the occasional shout or burst of laughter.</p>
+
+<p>Among the faces, you notice the wary eyes of those who've seen too much, the hopeful gazes of newcomers, and the sharp glances of those sizing up opportunities—or threats.</p>
+
+<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Everyone's got an angle here. Trust is earned, not given. If you're looking to make connections, show you can be useful. But watch your back; not everyone plays by the rules."<</say>>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Thanks for the heads-up, Jax."<</say>>
+
+[[Continue.|JaxChat]]
+<</nobr>>
+
+
+

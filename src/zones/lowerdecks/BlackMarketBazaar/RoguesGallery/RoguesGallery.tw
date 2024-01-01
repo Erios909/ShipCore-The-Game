@@ -1,0 +1,52 @@
+:: RoguesGallery [poi] {"position":"1600,1325","size":"100,100"}
+<<nobr>><<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket/roguesgallery.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Rogue's Gallery",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Rogue's Gallery</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
+<<nobr>>Things to do:<br>
+<!-- Work as a server -->
+[[Work a shift as a server. (01:00)|RoguesGalleryWork][$player.credits += 15; $player.fatigue += 10; $timeadd = 60]]<br>
+<!-- Grab a drink -->
+<<if $player.credits >= 8>>
+    [[Buy a specialty drink and mingle with the patrons. (00:15 Cr. 8)|RoguesGalleryDrink][$player.credits -= 8; $player.mood += 5; $timeadd = 15]]<br>
+<<else>>
+    <span class="disabledLink">Buy a specialty drink and mingle with the patrons. (00:15 Cr. 8)</span><br>
+<</if>>
+<!-- Listen to rumors -->
+[[Eavesdrop on conversations for the latest rumors. (00:30)|RoguesGalleryRumors][$player.mood += 5; $timeadd = 30]]<br>
+<!-- Play cards -->
+<<if $player.credits >= 30>>
+[[Join a card game and try your luck. (01:00) Cr. 30|RoguesGalleryCards][$timeadd = 60]]<br>
+<<else>>
+    <span class="disabledLink">Join a card game and try your luck. (01:00) Cr. 30</span><br>
+    <</if>>
+    
+    <!-- Euphorix Vape -->
+<<if $player.credits >= 1000>>
+    [[Purchase Euphorix Vape (00:15) 1000 Cr.|RoguesGallery][$player.credits -= 1000; $playerConsumables.euphorixVape += 1; $timeadd += 15]]<br>
+    "Elevate your mood with a puff of bliss."<br>
+<<else>>
+    <span class="disabledLink">Not enough credits for Euphorix Vape</span><br>
+<</if>>
+
+<!-- Hire help -->
+
+
+<!-- Travel options from The Rogue's Gallery --><</nobr>>
+Travel:
+[[Step back into the shadows of the Black Market Bazaar.|Black Market Bazaar][$timeadd = 5]]
+
+<!-- Description of The Rogue's Gallery atmosphere -->
+The Rogue's Gallery is a dimly lit establishment, with a reputation for being a neutral ground for all manner of shady characters. The air is thick with the smell of cheap liquor and the murmur of clandestine deals. The walls are lined with holographic wanted posters, some flickering with age. Patrons keep to themselves, their eyes hidden under wide-brimmed hats or cybernetic visors. It's a place where fortunes can be won or lost in the blink of an eye, and where the next big score is always just a conversation away.
+
+
+

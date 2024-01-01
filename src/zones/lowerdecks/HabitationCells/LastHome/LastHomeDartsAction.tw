@@ -1,0 +1,110 @@
+:: LastHomeDarts [lowerdeckact] {"position":"550,1850","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
+<<addmins $timeadd>>
+<<set $player.credits -= 5>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, The Last Home - Darts Game",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $lastHomeDartsEventsRecord>> <<set $lastHomeDartsEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $lastHomeDartsEventsRecord.today != _today>>
+    <<set $lastHomeDartsEventsRecord.today to _today>>
+    <<set $lastHomeDartsEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to the default event -->
+
+<<set _availableEvents to []>> <!-- List of available darts events -->
+<<for _i to 1; _i <= 10; _i++>>
+    <<if not $lastHomeDartsEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available darts events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $lastHomeDartsEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available darts events -->
+    <<set _randomEvent to 0>> <!-- Default to the default event -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The rhythmic thud of darts punctuates the murmur of The Last Home. Off-duty crewmen from various sectors of the station cluster around the dartboard, engaging in friendly competition. With a drink in hand, you step up to the line, greeted by grins and playful banter. It's a moment of camaraderie and skill, a reprieve from the demanding life aboard the station.</p>
+
+<!-- Random Darts Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Bullseye Victory -->
+        <p>With an uncanny streak of bullseyes, you impress the onlookers and earn a small prize from the bar's ongoing darts competition.</p>
+        <<set $player.credits += 20>>
+        <<creditchange 20 "positive">><br>
+
+    <<case 2>> <!-- Close Game -->
+        <p>The game comes down to the wire, with each player matching each other's skill shot for shot. In the end, you narrowly lose, but the thrill of competition was its own reward.</p>
+
+    <<case 3>> <!-- Comedic Misfire -->
+        <p>Apparently, darts is not your game. Your throw goes wildly off course, sparking a round of good-hearted laughter at your expense.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.02)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 4>> <!-- New Friendship -->
+        <p>Your casual game of darts turns into a lively chat with a fellow player, leading to a potential new friendship.</p>
+        <<set $player.mood += Math.round($player.mood * 0.05)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+
+    <<case 5>> <!-- Sore Loser -->
+        <p>You win the game, but your opponent doesn't take it well. The resulting tension is a bit draining.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.02)>>
+        <<set $player.stress += Math.round($player.stress * 0.02)>>
+        <<changemoods "mood" "minor" "NegEffectOnPlayer">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 6>> <!-- Betting Round -->
+        <p>A spur-of-the-moment bet adds some stakes to the game. Your steady hand ensures you come out on top.</p>
+        <<set $player.credits += 15>>
+        <<creditchange 15 "positive">><br>
+
+    <<case 7>> <!-- Drunken Distraction -->
+        <p>A group of rowdy patrons distracts you during a crucial throw, causing you to lose this round.</p>
+        <<set $player.mood -= Math.round($player.mood * 0.05)>>
+        <<changemoods "mood" "major" "NegEffectOnPlayer">><br>
+
+    <<case 8>> <!-- Unintended Trick Shot -->
+        <p>What was supposed to be an embarrassing miss turns into an unintentional trick shot, earning a round of applause and boosting your mood significantly.</p>
+        <<set $player.mood += Math.round($player.mood * 0.05)>>
+        <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
+
+    <<case 9>> <!-- Fatigue Takes Its Toll -->
+        <p>As the game drags on, your throws become less precise. You decide to call it quits and give your arm a rest.</p>
+        <<set $player.fatigue += Math.round($player.fatigue * 0.02)>>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 10>> <!-- Unexpected Challenge -->
+        <p>A station champion challenges you to a match. Despite your best efforts, you lose, but the experience leaves you feeling more prepared for the next challenge.</p>
+        <<set $player.stress -= Math.round($player.stress * 0.05)>>
+        <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Darts Event -->
+        <p>After a few throws, it's clear tonight isn't your night for darts. You decide to quit while you're behind, saving your credits and pride. No major loss, just a dent in your evening's plans.</p>
+        <<set $player.credits -= 5>>
+        <<creditchange 5 "negative">><br>
+<</switch>>
+<br>
+
+<!-- Continue Link -->
+[[Head back to the bar.|The Last Home]]
+<</nobr>>
+
+
+

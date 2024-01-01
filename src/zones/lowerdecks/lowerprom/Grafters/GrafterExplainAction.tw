@@ -1,0 +1,37 @@
+:: GrafterExplain [conversation] {"position":"450,1275","size":"100,100"}
+\:: GrafterCustomizeImplants
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/graftergear.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Grafter's Gear",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Grafter's Gear</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Can you run me through how things work here?"<</say>>
+
+<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Affirmative. Grafter's Gear operates on parts. Parts are currency, parts are trade, parts are survival."<</say>>
+
+<p>The Grafter's hands move with mechanical precision, pointing to various tools and components scattered across the workbench.</p>
+
+<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Patch-It Pod discards scrap. Retrieve scrap. Bring here. I assess. Trade for functional parts."<</say>>
+
+<p>He pauses, allowing the information to process, then continues.</p>
+
+<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Parts can be bought. Parts can be sold. Efficiency is key. You provide scrap, I provide Parts."<</say>>
+
+<p>The Grafter's single illuminated eye fixes on you, as if calculating your potential worth in this exchange of technology.</p>
+
+<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Understand? Good. Now go. Return with scrap. We trade."<</say>>
+
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>[[Got it. I'll bring back what I can find.|GrafterConversation]]<</say>>
+<</nobr>>
+
+
