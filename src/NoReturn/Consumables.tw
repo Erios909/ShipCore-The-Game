@@ -1,68 +1,130 @@
-:: Consumables [noreturn safe menu] {"position":"1400,175","size":"100,100"}
+:: Consumables [noreturn safe menu]
 <<nobr>>
-<h2 id="consumablesTitle" style="margin-top: 10px; margin-bottom: 10px;">
-    <span style="color: cyan; font-weight: bold; font-size: 24px;">Consumables</span>
-</h2>
-<hr id="consumablesDivider" style="margin-top: 5px; margin-bottom: 5px;">
-<h2 id="consumablesSubTitle" style="margin-top: 10px; margin-bottom: 10px;">
-    <span style="font-size: 14px;">Manage your inventory and boost your stats</span>
-</h2>
-<hr id="consumablesSubDivider" style="margin-top: 5px; margin-bottom: 20px;">
-<br>
-As you peruse your collection of high-tech consumables, you ponder which might best aid you in your current predicament.
-<br>
-<!-- NanoDoc Injector -->
-<<if $playerConsumables.nanoDocInjector > 0>>
-    [[Consider using the NanoDoc Injector|Consumables][$player.health = 1000; $playerConsumables.nanoDocInjector -= 1; $playerConsumablesTracker.nanoDocInjector += 1]]<br>
-    The NanoDoc Injector could knit your wounds and restore vitality with its medical nanobots.<br>
-<<else>>
-    <span class="disabledLink">NanoDoc Injector not available</span><br>
-<</if>>
+    <<liveblock>>
+        <!-- Carcinogen Level Display -->
+        <div id="carcinogenDisplay">Carcinogen Level: <<live $player.carcinogen + '%' >></div>
+        <br>
+        
+        <!-- Flex container for all consumable items -->
+        <div id="consumables-container">
+            <!-- NanoDoc Injector Button and Display -->
+            <div class="consumables-section" id="consumables-nanoDoc-section"> <!-- Updated to class for flex item styling -->
+                <<if $playerConsumables.nanoDocInjector > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use NanoDoc Injector">>
+                            <<set $player.health = Math.min($player.health + 1000, 1000)>>
+                            <<set $playerConsumables.nanoDocInjector -= 1>>
+                            <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">NanoDoc Injectors left: <<print $playerConsumables.nanoDocInjector>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">NanoDoc Injector not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
 
-<!-- Euphorix Vape -->
-<<if $playerConsumables.euphorixVape > 0>>
-    [[Contemplate the Euphorix Vape's effects|Consumables][$player.mood = 1000; $playerConsumables.euphorixVape -= 1; $playerConsumablesTracker.euphorixVape += 1]]<br>
-    Inhaling the Euphorix Vape might envelop you in a haze of euphoria, brightening your outlook.<br>
-<<else>>
-    <span class="disabledLink">Euphorix Vape not available</span><br>
-<</if>>
+            <!-- Euphorix Vape Button and Display -->
+            <div class="consumables-section" id="consumables-euphorixVape-section">
+                <<if $playerConsumables.euphorixVape > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use Euphorix Vape">>
+                            <<set $player.mood = 1000>>
+                            <<set $playerConsumables.euphorixVape -= 1>>
+                            <<set $playerConsumablesTracker.euphorixVape += 1>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">Euphorix Vapes left: <<print $playerConsumables.euphorixVape>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">Euphorix Vape not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
 
-<!-- Zenith Pulse -->
-<<if $playerConsumables.zenithPulse > 0>>
-    [[Ponder using the Zenith Pulse|Consumables][$player.stress = Math.max($player.stress - 0, 0); $playerConsumables.zenithPulse -= 1; $playerConsumablesTracker.zenithPulse += 1]]<br>
-    Activating the Zenith Pulse could soothe your mind, easing stress with its harmonic vibrations.<br>
-<<else>>
-    <span class="disabledLink">Zenith Pulse not available</span><br>
-<</if>>
+            <!-- Zenith Pulse Button and Display -->
+            <div class="consumables-section" id="consumables-zenithPulse-section">
+                <<if $playerConsumables.zenithPulse > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use Zenith Pulse">>
+                            <<set $player.stress = Math.max($player.stress - 1000, 0)>>
+                            <<set $playerConsumables.zenithPulse -= 1>>
+                            <<set $playerConsumablesTracker.zenithPulse += 1>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">Zenith Pulses left: <<print $playerConsumables.zenithPulse>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">Zenith Pulse not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
 
-<!-- PsycheLock Capsule -->
-<<if $playerConsumables.psycheLockCapsule > 0>>
-    [[Think about the PsycheLock Capsule|Consumables][$player.trauma = Math.max($player.trauma - 0, 0); $playerConsumables.psycheLockCapsule -= 1; $playerConsumablesTracker.psycheLockCapsule += 1]]<br>
-    The PsycheLock Capsule might offer a mental respite, shielding you from haunting memories.<br>
-<<else>>
-    <span class="disabledLink">PsycheLock Capsule not available</span><br>
-<</if>>
+            <!-- PsycheLock Capsule Button and Display -->
+            <div class="consumables-section" id="consumables-psycheLockCapsule-section">
+                <<if $playerConsumables.psycheLockCapsule > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use PsycheLock Capsule">>
+                            <<set $player.trauma = Math.max($player.trauma - 1000, 0)>>
+                            <<set $playerConsumables.psycheLockCapsule -= 1>>
+                            <<set $playerConsumablesTracker.psycheLockCapsule += 1>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">PsycheLock Capsules left: <<print $playerConsumables.psycheLockCapsule>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">PsycheLock Capsule not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
 
-<!-- VigorMax Shot -->
-<<if $playerConsumables.vigorMaxShot > 0>>
-    [[Consider the benefits of a VigorMax Shot|Consumables][$player.fatigue = 0; $playerConsumables.vigorMaxShot -= 1; $playerConsumablesTracker.vigorMaxShot += 1]]<br>
-    A dose of VigorMax Shot could rejuvenate you, dispelling weariness with a burst of energy.<br>
-<<else>>
-    <span class="disabledLink">VigorMax Shot not available</span><br>
-<</if>>
+            <!-- VigorMax Shot Button and Display -->
+            <div class="consumables-section" id="consumables-vigorMaxShot-section">
+                <<if $playerConsumables.vigorMaxShot > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use VigorMax Shot">>
+                            <<set $player.fatigue = 0>>
+                            <<set $playerConsumables.vigorMaxShot -= 1>>
+                            <<set $playerConsumablesTracker.vigorMaxShot += 1>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">VigorMax Shots left: <<print $playerConsumables.vigorMaxShot>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">VigorMax Shot not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
 
-<!-- PuriDerm Spray -->
-<<if $playerConsumables.puriDermSpray > 0>>
-    [[Weigh the use of PuriDerm Spray|Consumables][$player.filth = 0; $playerConsumables.puriDermSpray -= 1; $playerConsumablesTracker.puriDermSpray += 1]]<br>
-    A spritz of PuriDerm Spray might leave you spotless, eradicating the filth of the undercity.<br>
-<<else>>
-    <span class="disabledLink">PuriDerm Spray not available</span><br>
-<</if>>
+            <!-- PuriDerm Spray Button and Display -->
+            <div class="consumables-section" id="consumables-puriDermSpray-section">
+                <<if $playerConsumables.puriDermSpray > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use PuriDerm Spray">>
+                            <<set $player.filth = 0>>
+                            <<set $playerConsumables.puriDermSpray -= 1>>
+                            <<set $playerConsumablesTracker.puriDermSpray += 1>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">PuriDerm Sprays left: <<print $playerConsumables.puriDermSpray>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">PuriDerm Spray not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
 
-<!-- Energy Cell Boost -->
-<<if $playerConsumables.energyCellBoost > 0>>
-    [[Debate the merits of an Energy Cell Boost|Consumables][$player.powerReserves = 1000; $playerConsumables.energyCellBoost -= 1; $playerConsumablesTracker.energyCellBoost += 1]]<br>
-    Harnessing an Energy Cell Boost could supercharge your systems, replenishing your power reserves.<br>
-<<else>>
-    <span class="disabledLink">Energy Cell Boost not available</span><br>
-<</if>><</nobr>>
+            <!-- Energy Cell Boost Button and Display -->
+            <div class="consumables-section" id="consumables-energyCellBoost-section">
+                <<if $playerConsumables.energyCellBoost > 0>>
+                    <div class="consumables-button-wrapper">
+                        <<button "Use Energy Cell Boost">>
+                            <<set $player.powerReserves = 1000>>
+                            <<set $playerConsumables.energyCellBoost -= 1>>
+                            <<set $playerConsumablesTracker.energyCellBoost += 1>>
+                            <<update>>
+                        <</button>>
+                        <div class="consumables-count">Energy Cell Boosts left: <<print $playerConsumables.energyCellBoost>></div> <!-- Updated to class for consistency -->
+                    </div>
+                <<else>>
+                    <div class="consumables-unavailable">Energy Cell Boost not available</div> <!-- Updated to class for consistency -->
+                <</if>>
+            </div>
+        </div>
+    <</liveblock>>
+<</nobr>>

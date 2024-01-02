@@ -888,3 +888,194 @@ body.slideWin {
 	content: "\e835\00a0";
 }
 /* SugarCube's built-in Font Awesome icons - End */
+
+
+/* Add this to your story's Stylesheet section */
+
+/* Flex container for all consumable items */
+#consumables-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* Style for each consumable section */
+.consumables-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+}
+
+/* Style for the button wrapper to maintain size and layout */
+.consumables-button-wrapper {
+    width: 150px; /* Fixed width for the button wrapper */
+    height: auto; /* Height adjusts to content */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center content horizontally */
+    margin-bottom: 10px; /* Space between button wrappers */
+	z-index: 4;
+	    text-shadow:
+        -1px -1px 0 #000, /* Top-left shadow */
+         1px -1px 0 #000, /* Top-right shadow */
+        -1px  1px 0 #000, /* Bottom-left shadow */
+         1px  1px 0 #000; /* Bottom-right shadow */
+}
+
+/* Style for the button to make it a 150px square */
+.consumables-button-wrapper button {
+    width: 150px; /* Fixed width for the button */
+    height: 150px; /* Fixed height for the button */
+    padding: 10px; /* Padding inside the button */
+    margin-bottom: 5px; /* Space between button and text */
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    border-radius: 4px;
+	z-index: 4;
+    cursor: pointer;
+    font-size: 16px; /* Fixed font size */
+    text-align: center; /* Center text inside the button */
+    box-sizing: border-box; /* Include padding in width and height */
+	    text-shadow:
+        -1px -1px 0 #000, /* Top-left shadow */
+         1px -1px 0 #000, /* Top-right shadow */
+        -1px  1px 0 #000, /* Bottom-left shadow */
+         1px  1px 0 #000; /* Bottom-right shadow */
+}
+
+/* Style for the consumables count text to appear below the button */
+.consumables-count {
+    text-align: center;
+	z-index: 4;
+    color: white; /* Adjust text color as needed */
+}
+
+
+
+
+/* Style for the unavailable message */
+.consumables-unavailable {
+    min-width: 150px; /* Same minimum width as the button */
+    min-height: 150px; /* Same minimum height as the button */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	z-index: 4;
+    background-color: #ccc; /* Gray background */
+    color: red;
+	font-style: italic;
+ 	text-align: center;
+    border-radius: 4px;
+}
+
+
+/* General style for all consumable sections */
+.consumables-section {
+    /* Shared styles for all consumable sections */
+}
+
+/* NanoDoc Injector specific styles */
+#consumables-nanoDoc-section {
+    background-image: url('path/to/nanoDoc-image.png');
+	z-index: 3;
+    /* Additional styles specific to NanoDoc Injector */
+}
+
+/* Euphorix Vape specific styles */
+#consumables-euphorixVape-section {
+    background-image: url('path/to/euphorixVape-image.png');
+	z-index: 3;
+    /* Additional styles specific to Euphorix Vape */
+}
+
+/* Zenith Pulse specific styles */
+#consumables-zenithPulse-section {
+    background-image: url('path/to/zenithPulse-image.png');
+	z-index: 3;
+    /* Additional styles specific to Zenith Pulse */
+}
+
+/* PsycheLock Capsule specific styles */
+#consumables-psycheLockCapsule-section {
+    background-image: url('path/to/psycheLockCapsule-image.png');
+	z-index: 3;
+    /* Additional styles specific to PsycheLock Capsule */
+}
+
+/* VigorMax Shot specific styles */
+#consumables-vigorMaxShot-section {
+    background-image: url('path/to/vigorMaxShot-image.png');
+	z-index: 3;
+    /* Additional styles specific to VigorMax Shot */
+}
+
+/* PuriDerm Spray specific styles */
+#consumables-puriDermSpray-section {
+    background-image: url('path/to/puriDermSpray-image.png');
+	z-index: 3;
+    /* Additional styles specific to PuriDerm Spray */
+}
+
+/* Energy Cell Boost specific styles */
+#consumables-energyCellBoost-section {
+    background-image: url('path/to/energyCellBoost-image.png');
+	z-index: 3;
+    /* Additional styles specific to Energy Cell Boost */
+}
+
+/* General Button Style */
+.consumables-button-wrapper button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.consumables-button-wrapper button:hover {
+  opacity: 1;
+}
+
+/* Disabled Link Style */
+.disabledLink {
+  color: grey;
+  cursor: not-allowed;
+}
+
+/* Count Display for Consumables */
+.consumables-count {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Unavailable Consumable Message */
+.consumables-unavailable {
+  color: red;
+  font-style: italic;
+}
+
+.z-level-4 {
+    position: relative;
+	padding: 10%;
+	box-sizing: border-box;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.75);
+	animation: fadeInAnimation 3s ease forwards;
+	text-shadow:
+        -1px -1px 0 #000, /* Top-left shadow */
+         1px -1px 0 #000, /* Top-right shadow */
+        -1px  1px 0 #000, /* Bottom-left shadow */
+         1px  1px 0 #000; /* Bottom-right shadow */
+}
+
+@keyframes fadeInAnimation {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

@@ -1,40 +1,45 @@
 :: Stash [noreturn safe menu] {"position":"1100,175","size":"100,100"}
-<<nobr>><!-- Stash Passage -->
-<div class="stash-header">
-    Stash
-</div>
-<p>Most places have centralized storage systems, providing convenience and security to travelers and traders alike. When you gain an account on these systems, they will appear here and show you their contents.</p>
+<<nobr>>
+    <div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    
+        <!-- Stash Passage -->
+        
+        <div class="stash-header">
+            Stash
+        </div>
+        <p>Most places have centralized storage systems, providing convenience and security to travelers and traders alike. When you gain an account on these systems, they will appear here and show you their contents.</p>
 
-<p>Notice: Most services will not deliver to each other, requiring the User to manually transport items physically. When services are located on the same station, this could be done manually, but when stashes are not local, they will require transport via shipment--whether that is done privately or by mail courier--is up to the user.</p>
+        <p>Notice: Most services will not deliver to each other, requiring the User to manually transport items physically. When services are located on the same station, this could be done manually, but when stashes are not local, they will require transport via shipment--whether that is done privately or by mail courier--is up to the user.</p>
 
-<div class="zone-header">
-    Meltisar StationNet Storage Services - Unified
-</div>
-<h3>Lower Deck Services</h3>
-<div class="service-container">
-    <<if $lowerdecksParts gt 0 or $hasUsedLowerdecksParts>>
-        Meltisar General Locker Service:<br>
-        Parts: <<print $lowerdecksParts>><br>
-    <</if>>
-    <<if $lowerdecksScrap gt 0 or $hasUsedLowerdecksScrap>>
-        Scrap: <<print $lowerdecksScrap>><br>
-    <</if>>
-    <<if $lowerdecksCyberware gt 0 or $hasUsedLowerdecksCyberware>>
-        Cyberware: <<print $lowerdecksCyberware>><br>
-    <</if>>
-    <<if $lowerdecksStolenItems gt 0 or $hasUsedLowerdecksStolenItems>>
-        Stolen Items: <<print $lowerdecksStolenItems>><br>
-    <</if>>
-    <<if $lowerdecksContraband gt 0 or $hasUsedLowerdecksContraband>>
-        Contraband: <<print $lowerdecksContraband>><br>
-    <</if>>
-    <<if not $hasUsedLowerdecksParts and not $hasUsedLowerdecksScrap and not $hasUsedLowerdecksCyberware and not $hasUsedLowerdecksStolenItems and not $hasUsedLowerdecksContraband>>
-        <p>You have a subscription service and can place general items in the lockers. Automated drones will retrieve and store items as needed.</p>
-    <</if>>
-</div>
+        <div class="zone-header">
+            Meltisar StationNet Storage Services - Unified
+        </div>
+        <h3>Lower Deck Services</h3>
+        <div class="service-container">
+            <<if $lowerdecksParts gt 0 or $hasUsedLowerdecksParts>>
+                Meltisar General Locker Service:<br>
+                Parts: <<print $lowerdecksParts>><br>
+            <</if>>
+            <<if $lowerdecksScrap gt 0 or $hasUsedLowerdecksScrap>>
+                Scrap: <<print $lowerdecksScrap>><br>
+            <</if>>
+            <<if $lowerdecksCyberware gt 0 or $hasUsedLowerdecksCyberware>>
+                Cyberware: <<print $lowerdecksCyberware>><br>
+            <</if>>
+            <<if $lowerdecksStolenItems gt 0 or $hasUsedLowerdecksStolenItems>>
+                Stolen Items: <<print $lowerdecksStolenItems>><br>
+            <</if>>
+            <<if $lowerdecksContraband gt 0 or $hasUsedLowerdecksContraband>>
+                Contraband: <<print $lowerdecksContraband>><br>
+            <</if>>
+            <<if not $hasUsedLowerdecksParts and not $hasUsedLowerdecksScrap and not $hasUsedLowerdecksCyberware and not $hasUsedLowerdecksStolenItems and not $hasUsedLowerdecksContraband>>
+                <p>You have a subscription service and can place general items in the lockers. Automated drones will retrieve and store items as needed.</p>
+            <</if>>
+        </div>
 
-<!-- Placeholder for other zones -->
-<p>Other subscription zones will install here as they are discovered.</p>
+        <!-- Placeholder for other zones -->
+        <p>Other subscription zones will install here as they are discovered.</p>
+    </div>
 <</nobr>>
 
 

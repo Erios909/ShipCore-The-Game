@@ -27,3 +27,32 @@
 <</silently>><</widget>>
 
 
+<<widget "setBackgroundSlide">><<silently>>
+   /* Remove previous background and overlay from #slideWinContent */
+   <<run $('#slideWinContent .custom-background, #slideWinContent .background-overlay').remove()>>
+   /* Create a new div for the background inside #slideWinContent */
+   <<run $('<div class="custom-background"></div>').prependTo('#slideWinContent').css({
+       "position": "absolute",
+       "top": "0",
+       "left": "0",
+       "right": "0",
+       "bottom": "0",
+       "z-index": "0", /* Behind the content but above the default background */
+       "background-image": "url(" + $args[0] + ")",
+       "background-size": "cover",
+       "background-position": "center center",
+       "border": "8px solid black" /* Add an 8px black border */
+   })>>
+   /* Add dimming overlay inside #slideWinContent */
+   <<run $('<div class="background-overlay"></div>').prependTo('#slideWinContent').css({
+       "position": "absolute",
+       "top": "0",
+       "left": "0",
+       "right": "0",
+       "bottom": "0",
+       "z-index": "0", /* Same level as the background */
+       "background-color": "rgba(25, 25, 25, 0.75)"
+   })>>
+<</silently>><</widget>>
+
+

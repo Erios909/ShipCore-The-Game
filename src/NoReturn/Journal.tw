@@ -1,4 +1,5 @@
 :: Journal [noreturn safe menu nobr] {"position":"1200,175","size":"100,100"}
+<<nobr>><div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
 <<set _startDate = new Date(3562, 2, 17, 3, 24)>>  /* Start date */
 <<set _currentDate = $gameDate>>  /* Current game date */
 <<set _timeDiff = _currentDate - _startDate>>  /* Time difference in milliseconds */
@@ -11,18 +12,23 @@
 You have been surviving for:
 <<set _timeSurvived = "">>
 <<if _years > 0>>
-    <<set _timeSurvived += _years + " year(s)">>
+    <<set _timeSurvived += _years + " year" + (_years > 1 ? "s" : "")>>
     <<if _remainingMonths > 0 or _remainingDays > 0>><<set _timeSurvived += " and " >><</if>>
 <</if>>
 <<if _remainingMonths > 0>>
-    <<set _timeSurvived += _remainingMonths + " month(s)">>
+    <<set _timeSurvived += _remainingMonths + " month" + (_remainingMonths > 1 ? "s" : "")>>
     <<if _remainingDays > 0>><<set _timeSurvived += " and " >><</if>>
 <</if>>
 <<if _remainingDays > 0>>
-    <<set _timeSurvived += _remainingDays + " day(s)">>
+    <<set _timeSurvived += _remainingDays + " day" + (_remainingDays > 1 ? "s" : "")>>
+<</if>>
+<<if _years == 0 and _remainingMonths == 0 and _remainingDays == 0>>
+    <<set _timeSurvived = "less than a day">>
 <</if>>
 <<print _timeSurvived>> since your journey began.
 
 <<print "Today's Date: " + window.GameMonths[_currentDate.getMonth()] + " " + _currentDate.getDate() + ", " + _currentDate.getFullYear()>>
 
+
 <br>
+</div><</nobr>>
