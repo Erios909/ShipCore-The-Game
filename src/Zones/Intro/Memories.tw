@@ -1,19 +1,24 @@
 :: Memories {"position":"500,300","size":"100,100"}
-A new series of images flashes through your mind without warning. Men and women in powered combat armor, emblazoned with the logos of various interstellar corporations, yelling and fighting and dying in the void of space... the universe can be a dangerous place. 
+<<nobr>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>A new series of images flashes through your mind without warning. Men and women in powered combat armor, emblazoned with the logos of various interstellar corporations, yelling and fighting and dying in the void of space... the universe can be a dangerous place.</p>
 
-Starships clash in orbit around contested planets, their hulls scarred by laser fire and missile strikes. On the ground, soldiers in exoskeletons move through the ruins of once-great cities, their steps echoing in the silence of a world left desolate by war.
+<p>Starships clash in orbit around contested planets, their hulls scarred by laser fire and missile strikes. On the ground, soldiers in exoskeletons move through the ruins of once-great cities, their steps echoing in the silence of a world left desolate by war.</p>
 
-Although wars come and go, competition for limited resources will always haunt humanity. Right now, you feel that the danger level around you is \
-<<link "Low">><<set $dangerLevel to "Low">><<set $dangerLevelScore to 900>><<updatebar>><<replace "#dangerState">><span style="color: blue;">Low</span><</replace>>\
-<<replace "#doorDescription2">><span style="color: blue;">It looks like an average autodoor.</span><</replace>><</link>>, \
-<<link "Moderate">><<set $dangerLevel to "Moderate">><<set $dangerLevelScore to 700>><<updatebar>><<replace "#dangerState">><span style="color: lightgreen;">Moderate</span><</replace>>\
-<<replace "#doorDescription2">><span style="color: lightgreen;">It looks secure.</span><</replace>><</link>>, \
-<<link "High">><<set $dangerLevel to "High">><<set $dangerLevelScore to 500>><<updatebar>><<replace "#dangerState">><span style="color: orange;">High</span><</replace>>\
-<<replace "#doorDescription2">><span style="color: orange;">It looks fortified and secure.</span><</replace>><</link>>, or \
-<<link "Extreme">><<set $dangerLevel to "Extreme">><<set $dangerLevelScore to 300>><<updatebar>><<replace "#dangerState">><span style="color: red;">Extreme</span><</replace>>\
+<p>Although wars come and go, competition for limited resources will always haunt humanity. Right now, you feel that the danger level around you is 
+<<link "Low">><<set $dangerLevel to "Low">><<set $dangerLevelScore to 900>><<updatebar>><<replace "#dangerState">><span style="color: blue;">Low</span><</replace>>
+<<replace "#doorDescription2">><span style="color: blue;">It looks like an average autodoor.</span><</replace>><</link>>, 
+<<link "Moderate">><<set $dangerLevel to "Moderate">><<set $dangerLevelScore to 700>><<updatebar>><<replace "#dangerState">><span style="color: lightgreen;">Moderate</span><</replace>>
+<<replace "#doorDescription2">><span style="color: lightgreen;">It looks secure.</span><</replace>><</link>>, 
+<<link "High">><<set $dangerLevel to "High">><<set $dangerLevelScore to 500>><<updatebar>><<replace "#dangerState">><span style="color: orange;">High</span><</replace>>
+<<replace "#doorDescription2">><span style="color: orange;">It looks fortified and secure.</span><</replace>><</link>>, or 
+<<link "Extreme">><<set $dangerLevel to "Extreme">><<set $dangerLevelScore to 300>><<updatebar>><<replace "#dangerState">><span style="color: red;">Extreme</span><</replace>>
 <<replace "#doorDescription2">><span style="color: red;">It looks heavily fortified and secure.</span><</replace>><</link>>?
 
-You perceive that you will face a level of <span id="dangerState" style="color: lightgreen;">Moderate</span> danger outside.
+<p>You perceive that you will face a level of <span id="dangerState" style="color: lightgreen;">Moderate</span> danger outside.</p>
 
 <<nobr>>The room's only exit, a heavy sliding door,
 <<if $worldEconomyScore >= 800>>
@@ -26,8 +31,8 @@ You perceive that you will face a level of <span id="dangerState" style="color: 
     <span style="color: red;">bears marks of neglect, with peeling paint and a faint creaking noise as it moves.</span>
 <<else>>  <!-- For scores less than 200 -->
     <span style="color: darkred;">stands deteriorated and barely operational, reflecting the harsh economic times.</span>
-<</if>> <span id="doorDescription2" style="color: lightgreen;">It looks secure.</span> It remains firmly shut, severing your connection to the world outside.<</nobr>>
-
+<</if>> <span id="doorDescription2" style="color: lightgreen;">It looks secure.</span> It remains firmly shut, severing your connection to the world outside.</p><</nobr>>
+<br><</nobr>>
 [[Stand Up->Stand Up]]
 
 

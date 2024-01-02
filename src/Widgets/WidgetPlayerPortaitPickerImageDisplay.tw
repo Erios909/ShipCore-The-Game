@@ -1,5 +1,5 @@
-:: ImageDisplay [widget nobr]
-<<widget "ImageDisplay">>
+:: PlayerPortaitPickerImageDisplay [widget nobr]
+<<widget "PlayerPortaitPickerImageDisplay">>
 <<nobr>>
     /* Ensure setup.ImagePath is defined */
     <<if def setup.ImagePath>>
@@ -32,12 +32,6 @@
                 <<live '<img src="' + setup.ImagePath + 'ui/none.png" alt="Blank" class="second-image">'>>
             </div>
         <</liveblock>>
-
-        /* Debug output */
-        <<live "Current $playerPortraitPath: " + $playerPortraitPath>>
-        <<live "Current _imgIndex: " + _imgIndex>>
-        <<live "Path at _imgIndex: " + _imgPaths[_imgIndex]>>
-
         <!-- Check if there is more than one image to decide whether to show navigation buttons -->
         <<if _imgPaths.length > 1>>
             <div id="img-selectors">

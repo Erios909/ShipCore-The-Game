@@ -1,5 +1,5 @@
 :: Start [splash] {"position":"500,50","size":"100,100"}
-<<type 2ms start 1s>><<nobr>><<PlayTrack>><<setBackground setup.ImagePath+'/splash.jpg'>>
+<<type 1ms start 1s>><<nobr>><<PlayTrack>><<setBackground setup.ImagePath+'/splash.jpg'>>
 <!-- Version 4: Glowing Text with Stroke Shadows -->
 <h1 style="font-size: 4em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">ShipCore</h1>
 <h2 style="font-size: 2.5em; text-align: center; color: #add8e6; text-shadow: 0 0 8px #add8e6, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">The Depths of Space Await</h2>
