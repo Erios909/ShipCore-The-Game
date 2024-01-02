@@ -16,7 +16,7 @@ A soft chime from your watch draws your attention to an incoming message. You gl
 
 It seems like a potential start to tackle your debt. Until you think about the numbers for more than half a second.
 
-<<nobr>><<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"With my current debt, a 40-hour work week, and estimated living costs, exactly how long will that take to pay off?"
+<<nobr>><<say '$player.name' $playerPortraitPathZ>>"With my current debt, a 40-hour work week, and estimated living costs, exactly how long will that take to pay off?"
 <</say>>
 <<nobr>>
 <<set $weeklyEarnings = 5 * 40>>
@@ -29,11 +29,11 @@ You wait patiently, but the fact that it's taking more than a few seconds to pro
 <<nobr>><<maincomputer>>"You will require approximately <span style="color: red;"><<formatNumber $weeksToRepay>></span> weeks to repay the debt, provided there are no additional expenses or changes in income."<</maincomputer>>
 <<set $yearsToRepay = $weeksToRepay / 52>>
 <<set $yearsToRepay = $yearsToRepay.toFixed(0)>><!-- There are 52 weeks in a year -->
-<</nobr>><<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"That's roughly <<formatNumber $yearsToRepay>> years... That's not happening."<</say>>
+<</nobr>><<say '$player.name' $playerPortraitPathZ>>"That's roughly <<formatNumber $yearsToRepay>> years... That's not happening."<</say>>
 There is a sympathetic beep from the computer, and you sigh. You look around the room once again. Other than the door, there doesn't appear to be another way out.
 
 <<maincomputer>>"User mathmatics core appears to be operating satisfactorily. I have accessed the local job market with multiple listings that offer better rates of return; however, they require specialized skills. Shall I display them?"<</maincomputer>>\
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 [[Is that required for me to get out of here?|Intro5][$playerIntro6 = 1;$timeadd = 1]]
 [[I need to think about this.|Intro5][$playerIntro6 = 2;$timeadd = 1]]
 [[Is there anything else I can do besides work?|Intro5][$playerIntro6 = 3;$timeadd = 1]]

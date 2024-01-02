@@ -1,12 +1,6 @@
 :: widget PlayerPortrait [widget nobr] {"position":"50,375","size":"100,100"}
-<<widget "playerp">><<silently>><<nobr>>
-<<if $player.gender == 1>>
-<<set $playerP = "playerM">>
-<<elseif $player.gender == 2>>
-<<set $playerP = "playerF">>
-<<else>>
-<<set $playerP = "playerN">>
-<</if>>
-<</nobr>><</silently>><</widget>>
+<<widget "playerp">>
+<<set $playerPortraitPath to $args[0]>>
+<</widget>>
 
 

@@ -27,9 +27,9 @@
 <hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
     <<say maincomputer>>"Alert: Your account balance has fallen into the negative. As per station regulations, your debt has been incremented by <<print $debtIncurred.toLocaleString()>> credits to restore balance to zero."<</say>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Wait, that's insane! How can I spend money I don't have? And now I owe how much?!"<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"Wait, that's insane! How can I spend money I don't have? And now I owe how much?!"<</say>>
     <<say maincomputer>>"The system allows for temporary credit advances to ensure uninterrupted service. However, a debt of <span style='color: red;'><<print $debtIncurred.toLocaleString()>></span> credits has been added to your account."<</say>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"That's completely messed up. There's got to be a better way to handle this."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"That's completely messed up. There's got to be a better way to handle this."<</say>>
     <<say maincomputer>>"I apologize for any inconvenience. It is advisable to maintain a positive balance to avoid further debt accumulation."<</say>>
 <<else>> 
     <<set $debtIncurred to Math.abs($player.credits) * 100>> 

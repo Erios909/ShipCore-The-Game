@@ -4,25 +4,25 @@
     <br>
     The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
     <br><br>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Not much I can do while locked in here, right?"<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"Not much I can do while locked in here, right?"<</say>>
 <<elseif $playerIntro6 is 2>>
     <<maincomputer>>"Understood. Calculating your options is a prudent course of action."<</maincomputer>>
     <br>
     The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
     <br><br>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"I'm still trapped in this room, though."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"I'm still trapped in this room, though."<</say>>
 <<elseif $playerIntro6 is 3>>
     <<maincomputer>>"Exploring all available options is recommended. Employment is the most direct method to alleviate debt."<</maincomputer>>
     <br>
     The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
     <br><br>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"But I'm still stuck in here, so that's a problem."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"But I'm still stuck in here, so that's a problem."<</say>>
 <<else>>
     <<maincomputer>>"Processing time is essential for informed decision-making. I am here to assist when you are ready."<</maincomputer>>
     <br>
     The cool hum of the main computer's voice echoes in the sterile, dimly lit room, a stark reminder of your current confinement. The walls, a seamless expanse of metal, hold a clinical detachment that seems to mirror your isolation.
     <br><br>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"First step, getting out of this room, though."<</say>><</if>><</nobr>>\
+    <<say '$player.name' $playerPortraitPathZ>>"First step, getting out of this room, though."<</say>><</if>><</nobr>>\
 <<maincomputer>>"You may access a local bulletin board for job listings from any station terminal. However, your identification is required."<</maincomputer>>
 The locker before you clicks and whirs as its locking mechanism disengages. The door swings open with a faint creak, revealing its contents bathed in soft light. You approach cautiously, as if the items within are relics of a former life.
 

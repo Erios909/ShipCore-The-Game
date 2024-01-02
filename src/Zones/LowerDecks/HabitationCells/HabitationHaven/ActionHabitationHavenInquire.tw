@@ -18,7 +18,7 @@
 
 <<set $enoughCredits = $player.credits >= 200>>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 <<if $enoughCredits>>\
     [["Yes, I'd like to rent an apartment. Here's the down payment. When can I move in?"|HabitationLease][$player.credits -= 200; $HavenApartmentState = "signed"; $timeadd = 45]]\
 <<else>>\

@@ -23,13 +23,13 @@ A figure detaches itself from the shadows, their attire a patchwork of scavenged
 <br>
 The stranger's gaze lingers on you, as if trying to read your history in the lines of your face.
 <br><br>
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"I... I'm not sure what I'm doing, to be honest. Just trying to get my bearings."<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"I... I'm not sure what I'm doing, to be honest. Just trying to get my bearings."<</say>>
 <br>
 The scavenger chuckles, shaking their head with a mix of amusement and disbelief.
 <br><br>
 <<say '???' setup.ImagePath+'/characters/minor/jax.jpg'>>"Well, if you're planning on sticking around, you'll need credits. And fast. Find somewhere to crash or cough up for a cell in the Habitation Cells. But be careful—lower decks aren't for the faint-hearted."<</say>>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"What about security?"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"What about security?"<</say>>
 <br>
 The scavenger's laugh is a sharp bark in the quiet corridor.
 <br><br>
@@ -38,7 +38,7 @@ The scavenger's laugh is a sharp bark in the quiet corridor.
 The scavenger extends a hand, the smirk now a full-fledged grin.
 <br><br>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Name's Jax. Jax Weaver."<</say>>
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"<<=$player.name>>. At least I'm pretty sure."<</say>><br>
+<<say '$player.name' $playerPortraitPathZ>>"<<=$player.name>>. At least I'm pretty sure."<</say>><br>
 You hesitantly shake his hand. At least the first person you found was friendly. In the distant a low murmur of humanity beckons, hinting there are far more people to meet than just Jax.
 <br><br>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Not the first around here with memory problems. You lot show up a lot. Like I said... the 'decks can be a dangerous place."<</say>>
@@ -47,7 +47,7 @@ He nods toward the room you came out of, the sliding door still humming as it wa
 <br><br>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"You mind if I check it out after you go? That place has been sealed off, new 'holes that aren't taken are hard to find 'round here."<</say>>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Sure, doesn't belong to me, knock yourself out."<</say>><br>
+<<say '$player.name' $playerPortraitPathZ>>"Sure, doesn't belong to me, knock yourself out."<</say>><br>
 <br>
 He smiles and nods at you.
 <br><br>

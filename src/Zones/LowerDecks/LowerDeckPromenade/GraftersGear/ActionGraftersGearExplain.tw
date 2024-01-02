@@ -15,7 +15,7 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Can you run me through how things work here?"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"Can you run me through how things work here?"<</say>>
 
 <<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Affirmative. Grafter's Gear operates on parts. Parts are currency, parts are trade, parts are survival."<</say>>
 
@@ -31,7 +31,7 @@
 
 <<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Understand? Good. Now go. Return with scrap. We trade."<</say>>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>[[Got it. I'll bring back what I can find.|GrafterConversation]]<</say>>
+<<say '$player.name' $playerPortraitPathZ>>[[Got it. I'll bring back what I can find.|GrafterConversation]]<</say>>
 <</nobr>>
 
 

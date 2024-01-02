@@ -93,10 +93,10 @@
     <div id="name-input">
         <<textbox "$playerName" "Alex">>
     </div>
-
+    <<set $playerPortraitPathZ to $playerPortraitPath>>
     <!-- When the player clicks Continue, sanitize the input before saving it -->
     <div id="continue-button">
-        [[Continue|Intro2][$playerIntro = 1; $player.name = sanitizeInput($playerName)]]
+        [[Continue|Intro2][$playerIntro = 1;$playerPortraitPathZ to $playerPortraitPath; $player.name = sanitizeInput($playerName)]]
     </div>
 
 <</nobr>>

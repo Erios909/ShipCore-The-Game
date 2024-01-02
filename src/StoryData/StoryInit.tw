@@ -111,12 +111,11 @@ setup.songList = ["music1", "music2", "music3", "music4", "music5"]; // List of 
 
 <<setSidebarBackground setup.ImagePath+'/uisidebar.jpg'>>
 
+/* Initialize the player's portrait path in StoryInit */
+<<set $playerPortraitPath = setup.ImagePath + '/characters/playerN/playerN.jpg'>>
 
 /* creating MAIN CHARACTERS and associating them with images (goes in StoryInit) */
 <<character 'maincomputer' 'MainComputer' setup.ImagePath+'/characters/maincomputer/maincomputer.jpg'>>
-<<character 'playerM' '$player.name' setup.ImagePath+'/characters/playerM/playerM.jpg'>>
-<<character 'playerF' '$player.name' setup.ImagePath+'/characters/playerF/playerF.jpg'>>
-<<character 'playerN' '$player.name' setup.ImagePath+'/characters/playerN/playerN.jpg'>>
 /* using the generated macros in passages */
 
 /* variable names raw
