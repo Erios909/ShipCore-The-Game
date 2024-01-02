@@ -22,16 +22,16 @@ Things to do:
         [[Inquire about services. (00:15)|DocksideInquire][$timeadd = 15; $DocksideFabricatorState = "inquired"]]
     <<case "inquired">>
         <<if $player.credits >= 12500>> <!-- Check for sufficient credits -->
-            [[Purchase services. (00:30) Cr 12500|DocksidePurchase][$player.credits -= 12500; $DocksideFabricatorState = "purchased"; $timeadd = 30]]
+            [[Purchase services (00:30) Cr 12,500|DocksidePurchase][$player.credits -= 12500; $DocksideFabricatorState = "purchased"; $timeadd = 30]]
         <<else>> <!-- Option to purchase services is grayed out if not enough credits -->
             <span class="disabledLink">Purchase services. (00:30
 Requires 2500 credits)</span>
         <</if>>
     <<case "purchased">>
-        [[Fabricate Scrap. (00:15)|DocksideFabricateScrap][$timeadd = 15]]<br>
-        [[Purchase Scrap. (00:15)|DocksidePurchaseScrap][$timeadd = 15]]<br>
-        [[Sell Parts. (00:15)|DocksideSellParts][$timeadd = 15]]<br>
-        [[Talk to Management. (00:30)|DocksideManagement][$timeadd = 30]]
+        [[Fabricate Scrap (00:15)|DocksideFabricateScrap][$timeadd = 15]]<br>
+        [[Purchase Scrap (00:15)|DocksidePurchaseScrap][$timeadd = 15]]<br>
+        [[Sell Parts (00:15)|DocksideSellParts][$timeadd = 15]]<br>
+        [[Talk to Management (00:30)|DocksideManagement][$timeadd = 30]]
 <</switch>><</nobr>>
 
 Travel:

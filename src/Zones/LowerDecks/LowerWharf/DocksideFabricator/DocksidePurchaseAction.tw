@@ -34,7 +34,7 @@ As Lucas's tour concludes, he hands you a data slate with your access codes and 
 
 With a final nod, Lucas leaves you to absorb the sights and sounds of your new enterprise. The fabricators continue their work, indifferent to your presence but awaiting your command.
 
-[[Continue.|DocksideFabricator][$timeadd = 5]]
+[[Continue|DocksideFabricator][$timeadd = 5]]
 
 
 

@@ -65,10 +65,4 @@ As you peruse your collection of high-tech consumables, you ponder which might b
     Harnessing an Energy Cell Boost could supercharge your systems, replenishing your power reserves.<br>
 <<else>>
     <span class="disabledLink">Energy Cell Boost not available</span><br>
-<</if>>
-
-<!-- Return Link -->
-<<link "Return" $return>><</link>>
-<</nobr>>
-
-
+<</if>><</nobr>>

@@ -44,55 +44,64 @@
 <!-- Random Trading Parts Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- Lucrative Exchange -->
-        <p>The Grafter is particularly interested in the parts you offer and throws in a little extra as a bonus. You walk away with more cyberware than expected and a small credit bump.<span class="i-gain"> +2 Cyberware</span><<creditchange 50 "positive">></p>
-        <<set $lowerdecksCyberware += 2>><<set $player.credits += 50>>
+        <p>The Grafter is particularly interested in the parts you offer and throws in a little extra as a bonus. You walk away with more cyberware than expected and a small credit bump.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 50 "positive">>
 
     <<case 2>> <!-- Standard Trade -->
-        <p>Your trade is met with an average response. The deal is fair and you receive a standard issue of cyberware for your parts.<span class="i-gain"> +1 Cyberware</span></p>
-        <<set $lowerdecksCyberware += 1>>
+        <p>Your trade is met with an average response. The deal is fair and you receive a standard issue of cyberware for your parts.</p>
+        <<itemchange "cyberware" 1 "gain">>
 
     <<case 3>> <!-- Unfavorable Terms -->
         <<if $player.credits >= 50>> <!-- Player has enough credits to cover loss -->
-            <p>Terms don't turn out as favorable as you had hoped. The Grafter insists on a minor surcharge for the cyberware you're after. You grudgingly agree to the terms.<<creditchange -50 "negative">> <span class="i-gain"> +1 Cyberware</span></p>
-            <<set $player.credits -= 50>>
+            <p>Terms don't turn out as favorable as you had hoped. The Grafter insists on a minor surcharge for the cyberware you're after. You grudgingly agree to the terms.</p>
+            <<creditchange -50 "negative">>
         <<else>> <!-- Not enough credits, add to debt -->
-            <p>The Grafter is firm on the cost, your current credits falling short. The surplus is logged onto your tab, and you're reminded that everything comes at a price.<<debtchange 50 "positive">> <span class="i-gain"> +1 Cyberware</span></p>
-            <<set $player.debt += 50>> <!-- Assuming $player.debt exists -->
+            <p>The Grafter is firm on the cost, your current credits falling short. The surplus is logged onto your tab, and you're reminded that everything comes at a price.</p>
+            <<debtchange 50 "positive">>
         <</if>>
-        <<set $lowerdecksCyberware += 1>>
+        <<itemchange "cyberware" 1 "gain">>
 
     <<case 4>> <!-- Generous Offer -->
-        <p>A generous passerby offers you a good deal for your parts. You end up with a decent credit increase and some extra cyberware.<span class="i-gain"> +3 Cyberware</span><<creditchange 75 "positive">></p>
-        <<set $lowerdecksCyberware += 3>><<set $player.credits += 75>>
+        <p>A generous passerby offers you a good deal for your parts. You end up with a decent credit increase and some extra cyberware.</p>
+        <<itemchange "cyberware" 3 "gain">>
+        <<creditchange 75 "positive">>
 
     <<case 5>> <!-- Bargain Sale -->
-        <p>You manage to bargain with a vendor, but only get a slight increase in credits for your parts.<span class="i-gain"> +1 Cyberware</span><<creditchange 25 "positive">></p>
-        <<set $lowerdecksCyberware += 1>><<set $player.credits += 25>>
+        <p>You manage to bargain with a vendor, but only get a slight increase in credits for your parts.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 25 "positive">>
 
     <<case 6>> <!-- Desperate Times -->
-        <p>You're in a pinch and have to sell your parts for less than they're worth. You take the hit to your credits.<span class="i-loss"> -1 Cyberware</span><<creditchange -20 "negative">></p>
-        <<set $lowerdecksCyberware -= 1>><<set $player.credits -= 20>>
+        <p>You're in a pinch and have to sell your parts for less than they're worth. You take the hit to your credits.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange -20 "negative">>
 
     <<case 7>> <!-- Lucky Find -->
-        <p>You find a buyer who's looking for exactly what you're selling. They pay a premium for your parts.<span class="i-gain"> +2 Cyberware</span><<creditchange 150 "positive">></p>
-        <<set $lowerdecksCyberware += 2>><<set $player.credits += 150>>
+        <p>You find a buyer who's looking for exactly what you're selling. They pay a premium for your parts.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 150 "positive">>
 
     <<case 8>> <!-- Competitive Market -->
-        <p>The market is competitive today. You manage to get a fair price for your parts, but nothing extra.<span class="i-gain"> +1 Cyberware</span><<creditchange 100 "positive">></p>
-        <<set $lowerdecksCyberware += 1>><<set $player.credits += 100>>
+        <p>The market is competitive today. You manage to get a fair price for your parts, but nothing extra.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 100 "positive">>
 
     <<case 9>> <!-- High Demand -->
-        <p>There's a high demand for parts like yours. You sell them for a good price and gain a nice credit boost.<span class="i-gain"> +2 Cyberware</span><<creditchange 130 "positive">></p>
-        <<set $lowerdecksCyberware += 2>><<set $player.credits += 130>>
+        <p>There's a high demand for parts like yours. You sell them for a good price and gain a nice credit boost.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 130 "positive">>
 
     <<case 10>> <!-- Poor Negotiation -->
-        <p>Your negotiation skills fail you today. You end up with less credits than you hoped for.<span class="i-loss"> -1 Cyberware</span><<creditchange -30 "negative">></p>
-        <<set $lowerdecksCyberware -= 1>><<set $player.credits -= 30>>
+        <p>Your negotiation skills fail you today. You end up with less credits than you hoped for.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange -30 "negative">>
 
     <<default>> <!-- Default Trading Parts Event -->
-        <p>The trade goes smoothly without any hitches. You exchange your part for a piece of cyberware that catches your eye.<span class="i-gain"> +1 Cyberware</span></p>
-        <<set $lowerdecksCyberware += 1>>
+        <p>The trade goes smoothly without any hitches. You exchange your part for a piece of cyberware that catches your eye.</p>
+        <<itemchange "cyberware" 1 "gain">>
 <</switch>>
+
 <br><br>
 
 <!-- Continue Link -->

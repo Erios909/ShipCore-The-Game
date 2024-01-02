@@ -46,71 +46,55 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Culinary Delight -->
         <p>Your taste buds dance with delight as you savor a bowl of the chef's special noodles. The flavors are rich and the ingredients are clearly top-notch. You feel revitalized.</p>
-        <<set $player.health += Math.round($player.health * 0.05 + 20)>>
         <<changemoods "health" "major" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- Comfort in a Bowl -->
         <p>There's something comforting about the warmth of a well-prepared noodle bowl. It's not just food; it's a bowl of memories, a taste of home in the cold vastness of space.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 1)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 3>> <!-- A Recipe for Relaxation -->
         <p>As you take in the steam and the aroma of the spices, a sense of calm washes over you. The noodles not only nourish your body but also soothe your frayed nerves.</p>
-        <<set $player.health += Math.round($player.health * 0.03 + 15)>>
-        <<set $player.stress -= Math.round($player.stress * 0.02 + 2)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 4>> <!-- Unexpected Ingredient -->
         <p>Midway through your meal, you bite into something unexpected. It's not unpleasant, but it's a jarring surprise that leaves you slightly off-kilter for the remainder of the meal.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
-        <<set $player.mood -= Math.round($player.mood * 0.02 + 1)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 5>> <!-- Noodle Nirvana -->
         <p>The noodles are perfect, the broth is divine. You can't help but close your eyes and savor every slurp. It's a small moment of perfection in an otherwise chaotic universe.</p>
-        <<set $player.health += Math.round($player.health * 0.05 + 20)>>
         <<changemoods "health" "major" "PosEffectOnPlayer">><br>
 
     <<case 6>> <!-- Too Hot to Handle -->
         <p>Eager to dig in, you don't notice the steam rising from the bowl. The first mouthful is scalding, and you spend the next few minutes recovering from the burn.</p>
-        <<set $player.health -= Math.round($player.health * 0.02 + 5)>>
         <<changemoods "health" "minor" "NegEffectOnPlayer">><br>
 
     <<case 7>> <!-- A Dash of Comfort -->
         <p>The meal isn't particularly special, but it's hearty and fills you up. Sometimes, that's all you really need to keep going.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
 
     <<case 8>> <!-- Slippery Surprise -->
         <p>A slippery noodle escapes your chopsticks and splashes back into the bowl, spraying broth across your clothing. It's a small mishap, but it dampens your spirits.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
-        <<set $player.mood -= Math.round($player.mood * 0.02 + 1)>>
-        <<set $player.filth += Math.round($player.filth * 0.02 + 1)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
         <<changemoods "filth" "minor" "NegEffectOnPlayer">><br>
 
     <<case 9>> <!-- The Nourishing Bowl -->
         <p>Each spoonful seems to carry more than just sustenance; it's as if the soup is infused with a restorative energy. You leave feeling better than when you arrived.</p>
-        <<set $player.health += Math.round($player.health * 0.03 + 15)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
 
     <<case 10>> <!-- Broth of Fatigue -->
         <p>The rich broth is incredibly satisfying, but it's also heavier than you expected. You finish the meal feeling a bit sluggish as you fight off an impending food coma.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
-        <<set $player.fatigue += Math.round($player.fatigue * 0.02 + 1)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
 
     <<default>> <!-- Default Noodle Event -->
         <p>The noodles are decent; nothing extraordinary but they hit the spot. You take a moment to simply enjoy the meal and the break from your adventures.</p>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
 <</switch>>
+
 <br>
 
 

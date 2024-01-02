@@ -47,156 +47,101 @@
     <<case 1>> <!-- Critical Repair -->
         <p>As you hand over the parts to the engineering team, a critical alert blares through the station's PA system. A life support conduit has ruptured in one of the habitation sectors. Thanks to your timely donation, the engineers are able to patch the breach swiftly, averting a potential disaster. The station's residents breathe easier, both literally and figuratively, and the market reflects the positive sentiment. You leave the engineering bay with a sense of pride and a little extra weight in your credit pouch.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 2>> <!-- Efficiency Boost -->
         <p>Your parts donation coincides with a station-wide efficiency audit. The engineers are in the midst of recalibrating the power distribution network when your components arrive. With your high-quality parts, they're able to enhance the grid's performance, reducing energy waste and improving output. The station administrator personally thanks you for your contribution, noting the positive ripple effect it will have on the economy. As you check your account balance, you can't help but smile at the generous compensation for your foresight.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 3>> <!-- Maintenance Upgrade -->
         <p>The engineering deck is abuzz with activity as you arrive with your parts. A major maintenance overhaul is underway, targeting several of the older systems that have been limping along for far too long. Your parts are a perfect match for the outdated components, and the upgrade goes off without a hitch. The engineers share stories of past close calls that your donation has now rendered obsolete. The station's economy takes a noticeable upturn as confidence in the infrastructure grows. Your account receives a healthy credit deposit, a tangible thank you for your contribution to the station's well-being.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 4>> <!-- Emergency Use -->
         <p>The station's warning sirens wail as you deliver your parts to the engineering bay. An unexpected power surge has put the main reactor at risk of overload. Your components are exactly what's needed to stabilize the situation. As the engineers work with focused intensity, you assist where you can, handing them tools and offering support. After tense moments, the lights flicker back to normal, and a collective sigh of relief echoes through the corridors. The station's economy takes an optimistic turn, reflecting the averted crisis. Your comm device pings with a notification of a substantial credit transfer, a reward for your crucial role in the emergency.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 5>> <!-- Research Contribution -->
         <p>In the quieter section of the engineering deck, a team of researchers eagerly accepts your parts. They're working on a prototype that could revolutionize energy consumption on the station. Your donation accelerates their progress, and within hours, they achieve a breakthrough. The news spreads quickly, boosting morale and economic forecasts alike. The research team ensures you're credited for your support, and the station's finance office disburses a generous sum into your account, reflecting the potential your contribution has unlocked.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 6>> <!-- System Optimization -->
         <p>The engineering bay hums with a focused energy as you arrive with your parts. Today's task is a full system optimization, a preventative measure to keep the station's critical systems running at peak efficiency. Your parts are integrated into the life support systems, enhancing their reliability and reducing the risk of future failures. The engineers commend your foresight, and the station's economic indicators tick upwards as news of the successful optimization spreads. Your personal finances also see an uptick, as the station's administration awards you a tidy sum for your contribution to the safety and efficiency of the station.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 7>> <!-- Power Grid Reinforcement -->
         <p>With the station's power grid nearing its capacity, your timely donation of high-grade parts is a godsend to the overworked engineers. They set to work reinforcing the grid's weakest segments, integrating your components with practiced skill. As the final connections are secured, the grid's efficiency readings jump to levels not seen in years. The economic impact is immediate, with energy traders and businesses across the station feeling a surge of optimism. Your account balance swells with a hefty credit bonus, a tangible thank you for your part in securing the station's energetic future.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 8>> <!-- Habitat Improvement -->
         <p>The habitat sections of the station have been plagued by environmental control issues for weeks. Your delivery of specialized parts is met with cheers from the habitat technicians. With your help, they're able to replace the faulty systems, instantly improving air quality and temperature regulation. Residents express their gratitude with small gifts and tokens of appreciation. The station's economic indicators reflect the uplifted mood, and you receive a generous credit deposit for your contribution to the community's well-being.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 9>> <!-- Safety Measures -->
         <p>Station safety is no small matter, and your donation arrives just as the engineering team is reviewing the latest safety protocols. With your high-quality parts, they upgrade several critical systems, enhancing the automated response to potential hazards. The station's safety rating improves, and with it, the confidence of its inhabitants and investors. The market responds positively to the news, and your personal finances benefit from the station's increased economic stability. A substantial credit reward is transferred to your account, a small price for the peace of mind you've helped provide.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<case 10>> <!-- Tech Advancement -->
         <p>As you navigate through the maze of conduits and machinery in Lower Engineering, you find a small team huddled around a prototype device that promises to revolutionize the station's tech. Your parts are a perfect fit for the final piece of the puzzle. With a few adjustments, the device whirs to life, its potential impact on station life almost palpable. Word of the successful test spreads like wildfire, boosting the station's economic outlook. The team showers you with thanks, and the station's treasury credits your account with a handsome sum for your pivotal role in this technological leap forward.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 
     <<default>> <!-- Default Donation Event -->
         <p>Your routine donation of parts to the engineering bay may not make the headlines, but it's the consistent support from individuals like you that keeps the station running smoothly. The engineers put your parts to good use, maintaining the myriad systems that ensure life aboard the station remains comfortable and secure. The station's economy benefits from these small, unseen acts of maintenance, and your account sees a modest increase in credits. It's a simple transaction, but one that leaves you feeling connected to the lifeblood of the station.</p>
         <<set _creditsEarned to random(100, 250)>>
-        <<set _fatigueReduction to random(5, 15)>>
-        <<set _economyBoost to random(5, 10)>>
-        <<set $player.credits += _creditsEarned>>
-        <<set $player.fatigue -= _fatigueReduction>>
-        <<set $worldEconomyScore += _economyBoost>>
         <<creditchange _creditsEarned "positive">>
         <<changemoods "fatigue" "minor" "PosEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
-        !-- I will provide the entire switch without placeholders or stopping until it is done. --!
+        
 <</switch>>
 <span class="i-gain">+Lower Rep</span>
 <<set $lowerdecksRep += 5>>

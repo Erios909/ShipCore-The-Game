@@ -15,14 +15,12 @@
                 Personal Management
             <</link>>
             <ul class="content hidden">
-                <li><<button 'View Change Log'>>
-  					  <<run slideWin("changelist")>>
-				<</button>></li>
-				<li>[[Consumables]]</li>
-                <li>[[Stash]]</li>
-                <li>[[Reputation]]</li>
-                <li>[[Journal]]</li>
-                <li>[[Appearance]]</li>
+                <li><<link 'View Change Log'>><<run slideWin("changelist")>><</link>></li>
+                <li><<link 'Consumables'>><<run slideWin("Consumables")>><</link>></li>
+                <li><<link 'Stash'>><<run slideWin("Stash")>><</link>></li>
+                <li><<link 'Reputation'>><<run slideWin("Reputation")>><</link>></li>
+                <li><<link 'Journal'>><<run slideWin("Journal")>><</link>></li>
+                <li><<link 'Appearance'>><<run slideWin("Appearance")>><</link>></li>
             </ul>
         </li>
         <li class="sub-menu">

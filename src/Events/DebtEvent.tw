@@ -33,7 +33,7 @@
     <<say maincomputer>>"I apologize for any inconvenience. It is advisable to maintain a positive balance to avoid further debt accumulation."<</say>>
 <<else>> 
     <<set $debtIncurred to Math.abs($player.credits) * 100>> 
-    <<set $player.debt += $debtIncurred>> 
+    <<debtchange $debtIncurred "negative">>
     <<set $player.credits to 0>> 
 
     <p>Your smartwatch beeps softly, displaying a new debt alert. Your negative balance of <span style='color: red;'>-<<print Math.abs($player.credits).toLocaleString()>></span> credits has resulted in an additional debt increase of <span style='color: red;'><<print $debtIncurred.toLocaleString()>></span> credits.</p>

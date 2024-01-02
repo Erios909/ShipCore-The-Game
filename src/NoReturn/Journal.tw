@@ -26,7 +26,3 @@ You have been surviving for:
 <<print "Today's Date: " + window.GameMonths[_currentDate.getMonth()] + " " + _currentDate.getDate() + ", " + _currentDate.getFullYear()>>
 
 <br>
-<!-- Return Link -->
-<<link "Return" $return>><</link>>
-
-

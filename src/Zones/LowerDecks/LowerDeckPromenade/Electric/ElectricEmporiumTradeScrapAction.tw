@@ -44,66 +44,66 @@
 <!-- Random Scrap Trading Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- Fortunate Barter -->
-        <p>Your negotiating skills are top-notch today. You manage to trade a small heap of scrap for some premium parts, and even pocket some credits.</p>
-        <<set $player.credits += 50>><<set $lowerdecksParts += 1>>
-        <<creditchange 50 "positive">><br>
-        <span class="i-loss">-2 Scrap</span> <span class="i-gain"> +1 Parts</span><br>
+        <p>As you sift through the piles of scrap metal and discarded gadgets, you spot some promising pieces that catch your eye. Picking them up, you examine them closely, turning them over in your hands as your experienced gaze identifies parts that could be useful. Clutching your finds, you make your way over to one of the scrap traders, an cyborg with a heavily scarred exoskeleton. 
+
+"Let's make a deal," you say confidently, presenting the parts spread out on the table. The cyborg looks them over carefully. After some back and forth negotiation, you manage to trade the scrap for two premium servo motors in pristine condition, as well as a handful of credits for your trouble. The trader seems pleased with the exchange.
+
+As you gather your new parts, you feel satisfied at having secured some valuable components for your ship. Your negotiating skills have paid off once again, allowing you to turn scrap into treasure here in the Electric Emporium.</p>
+
+        <<creditchange 50 "positive">>
+        <<itemchange "parts" 4 "gain">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 2>> <!-- Abysmal Exchange Rate -->
         <p>The market is tough, and you're forced to make a trade that's less than favorable. You leave with some credits but feel like you could have gotten more.</p>
-        <<set $player.credits += 15>>
-        <<creditchange 15 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 15 "positive">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 3>> <!-- Shrewd Deal -->
         <p>You spot a high-demand part amongst the scrap. The trade you make greatly favors you, and you walk away with a hefty sum of credits. When you get some time to examine the part, you realize it's defective.</p>
-        <<set $player.credits += 75>>
-        <<creditchange 75 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 75 "positive">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 4>> <!-- No Deal -->
         <p>No one is interested in what you have to offer. You spend the time getting to know the market better, but ultimately walk back with your scrap.</p>
-        <<set $lowerdecksScrap += 2>><br>
+        <!-- No change in credits or items, so no need for <<creditchange>> or <<itemchange>> macros here -->
 
     <<case 5>> <!-- Surplus Surprise -->
         <p>A surplus sell-off works in your favor. An opportunistic trader swaps your scrap for a few more advanced parts than usual.</p>
-        <<set $lowerdecksParts += 2>>
-        <span class="i-gain">+2 Parts</span> <span class="i-loss">-2 Scrap</span><br>
+        <<itemchange "parts" 2 "gain">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 6>> <!-- Unfair Exchange -->
         <p>The trader swindles you with fast talk and quicker hands. You walk away feeling cheated with less valuable parts and a stingy amount of credits.</p>
-        <<set $player.credits += 10>>
-        <<creditchange 10 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 10 "positive">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 7>> <!-- Generous Offer -->
         <p>A trader recognizes the potential in your collection of components and makes a generous offer. The deal leaves you with more credits than expected.</p>
-        <<set $player.credits += 65>>
-        <<creditchange 65 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 65 "positive">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 8>> <!-- Botched Negotiation -->
         <p>Your negotiation doesn't pan out. Faced with a stubborn trader, you decide to hold onto your scrap for another day.</p>
-        <<set $lowerdecksScrap += 2>><br>
+        <!-- No change in credits or items, so no need for <<creditchange>> or <<itemchange>> macros here -->
 
     <<case 9>> <!-- Gadget Goldmine -->
         <p>You find a defunct gadget that contains rare parts. After some haggling, a tech enthusiast eagerly exchanges it for a useful sum of credits.</p>
-        <<set $player.credits += 40>>
-        <<creditchange 40 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 40 "positive">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<case 10>> <!-- Lucky Find -->
         <p>While picking through your scrap, you discover a mistakenly discarded gadget. You trade it with a merchant for a significant credit boost.</p>
-        <<set $player.credits += 60>><<set $lowerdecksParts += 1>>
-        <<creditchange 60 "positive">><br>
-        <span class="i-gain">+1 Parts</span> <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 60 "positive">>
+        <<itemchange "parts" 1 "gain">>
+        <<itemchange "scrap" 2 "loss">><br>
 
     <<default>> <!-- Default Scrap Trading Event -->
         <p>Your trading efforts come to fruition. While not the best day on record, you secure an exchange of scrap for credits. It's clear no one really wants to trade anymore today, though. You might have better luck trying tomorrow.</p>
-        <<set $player.credits += 30>>
-        <<creditchange 30 "positive">><br>
-        <span class="i-loss">-2 Scrap</span><br>
+        <<creditchange 30 "positive">>
+        <<itemchange "scrap" 2 "loss">><br>
 <</switch>>
+
 <br>
 
 <!-- Continue Link -->

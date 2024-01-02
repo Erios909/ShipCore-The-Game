@@ -42,67 +42,58 @@
 <p>The cool glow of bio-luminescent lights casts an otherworldly hue over the shelves of Grafter's Gear, illuminating the intricate web of cybernetic components for sale. With a discerning eye, you peruse the latest advancements in augmentation technology, each piece promising an edge in the harsh realities of space. The Grafter nods in recognition as you approach, ready to negotiate a deal for the essential parts your equipment needs.</p>
 
 <!-- Random Buying Parts Events -->
+<!-- Random Buying Parts Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- Bulk Discount -->
         <p>The Grafter is in a good mood and offers you a slight discount for buying in bulk. It's a small gesture but welcome nonetheless.</p>
-        <<set $player.credits += 30>>
         <<creditchange 30 "positive">><br>
 
     <<case 2>> <!-- Market Shift -->
         <<if $player.credits >= 330>> <!-- Player has enough credits for the markup -->
             <p>A recent shift in market demand slightly inflates the cost of cybernetic parts. You grumble but pay the slight premium, knowing the value these parts hold.</p>
-            <<set $player.credits -= 30>>
-            <<creditchange 30 "negative">><br>
+            <<creditchange -30 "negative">><br>
         <<else>> <!-- Player does not have enough credits, adding to debt -->
             <p>The Grafter raises the price due to market demand, but a quick check of your funds reveals you're short. With a chuckle, the Grafter adds the 30 credit markup to your tab, commenting on trust and future business.</p>
-            <<set $player.debt += 30>>
             <<debtchange 30 "positive">><br>
         <</if>>
 
     <<case 3>> <!-- Grateful for Patience -->
         <p>While completing the transaction, a technical issue arises. You patiently wait it out, and the Grafter thanks you with a reduction in price for your time.</p>
-        <<set $player.credits += 30>>
         <<creditchange 30 "positive">><br>
 
     <<case 4>> <!-- Lucky Find -->
         <p>You find a rare part among the common stock, and the Grafter lets it go for a standard price, knowing you'll be back for more.</p>
-        <<set $player.credits += 50>>
         <<creditchange 50 "positive">><br>
 
     <<case 5>> <!-- Supplier Error -->
         <p>A supplier's error works in your favor, as the Grafter passes on the savings from a mislabeled shipment to you.</p>
-        <<set $player.credits += 40>>
         <<creditchange 40 "positive">><br>
 
     <<case 6>> <!-- Haggling Success -->
         <p>Your haggling skills save you some credits on today's purchase, leaving you feeling quite pleased with yourself.</p>
-        <<set $player.credits += 20>>
         <<creditchange 20 "positive">><br>
 
     <<case 7>> <!-- Overpriced Goods -->
         <p>The parts seem overpriced today, but you need them urgently. Reluctantly, you hand over the extra credits.</p>
-        <<set $player.credits -= 50>>
-        <<creditchange 50 "negative">><br>
+        <<creditchange -50 "negative">><br>
 
     <<case 8>> <!-- Defective Part Refund -->
         <p>You return a defective part and the Grafter, apologizing for the oversight, offers a full refund plus a little extra for your troubles.</p>
-        <<set $player.credits += 70>>
         <<creditchange 70 "positive">><br>
 
     <<case 9>> <!-- Pricey Upgrade -->
         <p>You decide to invest in a high-quality upgrade, knowing it will pay off in the long run despite the hefty price tag.</p>
-        <<set $player.credits -= 100>>
-        <<creditchange 100 "negative">><br>
+        <<creditchange -100 "negative">><br>
 
     <<case 10>> <!-- Bargain Bin Jackpot -->
         <p>Digging through the bargain bin pays off when you find exactly what you need at a fraction of the cost.</p>
-        <<set $player.credits += 60>>
         <<creditchange 60 "positive">><br>
 
     <<default>> <!-- Default Buying Parts Event -->
         <p>The exchange goes as expected. No surprises; you hand over the standard rate and gain the parts you sought after.</p>
         <!-- No credit change, so no need for <<creditchange>> or <<debtchange>> macros here -->
-<</switch>><br>
+<</switch>>
+
 
 <!-- Continue Link -->
 [[Keep perusing the offerings at Grafter's Gear.|Grafters Gear]]

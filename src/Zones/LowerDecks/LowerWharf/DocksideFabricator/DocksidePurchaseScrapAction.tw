@@ -59,7 +59,7 @@ You stand before the scrap purchasing terminal, a list of quantities and prices 
 
 [[Inquire about bulk purchases.|DocksideFabricatorBulkInquiry][$timeadd = 1]]<br>
 
-[[Reconsider.|DocksideFabricator][$timeadd = 5]]
+[[Reconsider|DocksideFabricator][$timeadd = 5]]
 <</nobr>>
 
 

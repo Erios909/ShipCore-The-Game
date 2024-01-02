@@ -56,54 +56,43 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Random Event 1 -->
         <p>While sharing a table with a few off-duty dock workers, you're drawn into a card game with small stakes. Luck is on your side, and you leave with a bit more credit than you came with.</p><br>
-        <<set $player.credits += 15>>
-        <<creditchange 15 "positive">><br>
+        <<creditchange 25 "positive">><br>
 
     <<case 2>> <!-- Random Event 2 -->
         <p>You overhear a heated argument about the recent docking tariffs, and despite trying to keep out of it, you're pulled into the fray. It's a tiresome exchange, and you can't help feeling worn out afterward.</p><br>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 3>> <!-- Random Event 3 -->
         <p>A small child kicks a ball your way, and you spend the next hour engaged in an impromptu game of keep-away with the station's children. It's exhausting but fun, and you feel invigorated by the activity.</p><br>
-        <<set $player.health += Math.round($player.health * 0.05) + 5>>
         <<changemoods "health" "major" "PosEffectOnPlayer">><br>
 
     <<case 4>> <!-- Random Event 4 -->
         <p>The community has gathered to celebrate a wedding. You're welcomed into the festivities, sharing in the communal feast and joyous dancing. The event leaves your spirit lifted.</p><br>
-        <<set $player.mood += Math.round($player.mood * 0.05) + 20>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 
     <<case 5>> <!-- Random Event 5 -->
         <p>An old timer, a veteran miner from the asteroid belts, regales anyone who'll listen with tales of close calls and rich finds. The stories captivate you, and you leave feeling a renewed sense of adventure.</p><br>
-        <<set $player.stress += Math.round($player.stress * 0.02)>>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
     <<case 6>> <!-- Random Event 6 -->
         <p>A malfunctioning cleaning drone whirs erratically through the area, spraying cleaning fluid over your clothes. It's a minor inconvenience, but a reminder that the station's tech isn't always reliable.</p><br>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 7>> <!-- Random Event 7 -->
         <p>A couple of traders are arguing about the best route to avoid the recent pirate activity. You chime in with your own knowledge, earning their respect and potentially useful trade route information.</p><br>
-        <<set $player.trauma += Math.round($player.trauma * 0.02)>>
         <<changemoods "trauma" "minor" "NegEffectOnPlayer">><br>
 
     <<case 8>> <!-- Random Event 8 -->
         <p>It's someone's birthday, and the communal area is filled with the sweet scent of baked goods. A generous neighbor offers you a piece of cake, and for a moment, life on MOR-1 feels almost homely.</p><br>
-        <<set $player.mood += Math.round($player.mood * 0.05) + 15>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 
     <<case 9>> <!-- Random Event 9 -->
         <p>A sudden power dip leaves the communal area in darkness. The station's emergency lights kick in, casting eerie shadows and causing a moment of panic until power is restored.</p><br>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 10>> <!-- Random Event 10 -->
         <p>You find a datapad left behind on a bench. After a quick scan for the owner, you decide to turn it into the lost and found. The attendant thanks you and discretely slips you a few credits for your honesty.</p><br>
-        <<set $player.credits += 25>>
         <<creditchange 25 "positive">><br><br>
 
     <<default>> <!-- Default Event for Habitation Haven -->

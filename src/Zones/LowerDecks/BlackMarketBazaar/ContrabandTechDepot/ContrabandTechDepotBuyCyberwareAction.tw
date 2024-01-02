@@ -42,82 +42,72 @@
 
 <<switch _randomEvent>>
     <<case 1>> <!-- Cutting-Edge Tech -->
-        <p>You've managed to acquire some cutting-edge cyberware. The seller assures you it's top of the line, and the price reflects it. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 25>>
-        <<creditchange 25 "positive">>
-        <<set $lowerdeckBlackActivity += 325>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>You've managed to acquire some cutting-edge cyberware. The seller assures you it's top of the line, and the price reflects it.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 30 "negative">>
+        <<itemchange "blackmarketactivity" 330 "gain">>
 
     <<case 2>> <!-- Bulk Deal -->
-        <p>A seller offers you a bulk deal on some slightly outdated, but still valuable, cyberware. It's a bargain too good to pass up. <span class="i-gain">+2 Cyberware</span></p>
-        <<set $player.credits += 50>>
-        <<creditchange 50 "positive">>
-        <<set $lowerdeckBlackActivity += 650>>
-        <<set $lowerdecksCyberware += 2>>
+        <p>A seller offers you a bulk deal on some slightly outdated, but still valuable, cyberware. It's a bargain too good to pass up.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 30 "negative">>
+        <<itemchange "blackmarketactivity" 630 "gain">>
 
     <<case 3>> <!-- Last Season's Model -->
-        <p>You find a deal on last season's model. It may not be the latest, but it'll turn a profit. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 30>>
-        <<creditchange 30 "positive">>
-        <<set $lowerdeckBlackActivity += 330>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>You find a deal on last season's model. It may not be the latest, but it'll turn a profit.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 30 "negative">>
+        <<itemchange "blackmarketactivity" 330 "gain">>
 
     <<case 4>> <!-- Experimental Tech -->
-        <p>An eccentric tinkerer sells you some experimental tech. It's untested, but if it works, it could be worth a fortune. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 45>>
-        <<creditchange 45 "positive">>
-        <<set $lowerdeckBlackActivity += 345>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>An eccentric tinkerer sells you some experimental tech. It's untested, but if it works, it could be worth a fortune.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 45 "negative">>
+        <<itemchange "blackmarketactivity" 345 "gain">>
 
     <<case 5>> <!-- High Demand -->
-        <p>You've acquired cyberware that's currently in high demand. The price is steep, but so is the potential markup. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 40>>
-        <<creditchange 40 "positive">>
-        <<set $lowerdeckBlackActivity += 340>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>You've acquired cyberware that's currently in high demand. The price is steep, but so is the potential markup.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 40 "negative">>
+        <<itemchange "blackmarketactivity" 340 "gain">>
 
     <<case 6>> <!-- Refurbished Units -->
-        <p>You take a chance on some refurbished units. They're a bit of a gamble, but the low price makes it worth the risk. <span class="i-gain">+2 Cyberware</span></p>
-        <<set $player.credits += 35>>
-        <<creditchange 35 "positive">>
-        <<set $lowerdeckBlackActivity += 635>>
-        <<set $lowerdecksCyberware += 2>>
+        <p>You take a chance on some refurbished units. They're a bit of a gamble, but the low price makes it worth the risk.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 35 "negative">>
+        <<itemchange "blackmarketactivity" 635 "gain">>
 
     <<case 7>> <!-- Hot Merchandise -->
-        <p>The cyberware is hot, and the seller is looking to offload it fast. You take it off their hands for a song. <span class="i-gain">+2 Cyberware</span></p>
-        <<set $player.credits += 25>>
-        <<creditchange 25 "positive">>
-        <<set $lowerdeckBlackActivity += 625>>
-        <<set $lowerdecksCyberware += 2>>
+        <p>The cyberware is hot, and the seller is looking to offload it fast. You take it off their hands for a song.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 25 "negative">>
+        <<itemchange "blackmarketactivity" 625 "gain">>
 
     <<case 8>> <!-- Rare Find -->
-        <p>You stumble upon a rare piece of cyberware. It's an older model, but a collector's item nonetheless. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 50>>
-        <<creditchange 50 "positive">>
-        <<set $lowerdeckBlackActivity += 350>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>You stumble upon a rare piece of cyberware. It's an older model, but a collector's item nonetheless.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 50 "negative">>
+        <<itemchange "blackmarketactivity" 350 "gain">>
 
     <<case 9>> <!-- Surplus Stock -->
-        <p>A vendor is clearing out surplus stock. The cyberware is standard, but the price is unbeatable. <span class="i-gain">+2 Cyberware</span></p>
-        <<set $player.credits += 45>>
-        <<creditchange 45 "positive">>
-        <<set $lowerdeckBlackActivity += 645>>
-        <<set $lowerdecksCyberware += 2>>
+        <p>A vendor is clearing out surplus stock. The cyberware is standard, but the price is unbeatable.</p>
+        <<itemchange "cyberware" 2 "gain">>
+        <<creditchange 45 "negative">>
+        <<itemchange "blackmarketactivity" 645 "gain">>
 
     <<case 10>> <!-- Questionable Quality -->
-        <p>The cyberware looks a bit questionable, but the seller is persuasive. You decide to take a chance on it. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 25>>
-        <<creditchange 25 "positive">>
-        <<set $lowerdeckBlackActivity += 325>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>The cyberware looks a bit questionable, but the seller is persuasive. You decide to take a chance on it.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 25 "negative">>
+        <<itemchange "blackmarketactivity" 325 "gain">>
 
     <<default>> <!-- Standard Purchase -->
-        <p>You make a standard purchase. Nothing fancy, but it'll do the job. <span class="i-gain">+1 Cyberware</span></p>
-        <<set $player.credits += 30>>
-        <<creditchange 30 "positive">>
-        <<set $lowerdeckBlackActivity += 330>>
-        <<set $lowerdecksCyberware += 1>>
+        <p>You make a standard purchase. Nothing fancy, but it'll do the job.</p>
+        <<itemchange "cyberware" 1 "gain">>
+        <<creditchange 30 "negative">>
+        <<itemchange "blackmarketactivity" 330 "gain">>
 <</switch>>
+
 
 <br><br>
 <!-- Continue Link -->

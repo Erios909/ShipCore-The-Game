@@ -48,10 +48,6 @@
     <<case 1>> <!-- Calibration Precision -->
         <p>The day's task is a meticulous calibration of the station's atmospheric processors. The tedious work requires your undivided attention, but the satisfaction of a job well done is its own reward.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.05)>>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -60,10 +56,6 @@
     <<case 2>> <!-- System Overhaul -->
         <p>You're part of a team performing a major overhaul on the power distribution network. The pressure is intense as the station relies on your swift and accurate work.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.10)>>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
@@ -72,10 +64,6 @@
     <<case 3>> <!-- Unexpected Malfunction -->
         <p>An unexpected malfunction in the life support system turns your routine shift into a race against time. You manage to fix the issue, but not without some high-stress moments.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.15)>>
-        <<set $player.mood -= Math.round($player.mood * 0.05)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
@@ -84,10 +72,6 @@
     <<case 4>> <!-- Routine Inspection -->
         <p>Your shift involves a routine inspection of the coolant systems. It's uneventful, but the monotony wears on you by the end of the day.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress += Math.round($player.stress * 0.02)>>
-        <<set $player.mood -= Math.round($player.mood * 0.05)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
@@ -96,10 +80,6 @@
     <<case 5>> <!-- Emergency Patch-Up -->
         <p>A critical leak is detected in one of the fuel lines, and you're tasked with an emergency patch-up. The successful repair boosts your confidence, despite the high-pressure situation.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.10)>>
-        <<set $player.mood += Math.round($player.mood * 0.04)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -108,10 +88,6 @@
     <<case 6>> <!-- Software Debugging -->
         <p>The day is spent debugging software glitches that have been plaguing the waste recycling systems. It's frustrating work, but the relief of resolving the issues is palpable.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.10)>>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -120,10 +96,6 @@
     <<case 7>> <!-- Network Upgrades -->
         <p>The day's focus is on upgrading the station's communication network. While the improvements are significant, the complexity of the task leaves you mentally exhausted.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.10)>>
-        <<set $player.mood -= Math.round($player.mood * 0.04)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
@@ -132,10 +104,6 @@
     <<case 8>> <!-- Energy Efficiency -->
         <p>You work on a project aimed at increasing energy efficiency throughout the station. The success of your efforts brings a sense of accomplishment, though the day is long and tiring.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress += Math.round($player.stress * 0.05)>>
-        <<set $player.mood += Math.round($player.mood * 0.02)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -144,10 +112,6 @@
     <<case 9>> <!-- Unexpected Breakdown -->
         <p>An unexpected breakdown of a primary coolant pump throws your shift into chaos. The stressful situation is resolved thanks to your quick thinking, but it takes a toll on your overall well-being.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.15)>>
-        <<set $player.mood -= Math.round($player.mood * 0.10)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "major" "NegEffectOnPlayer">>
@@ -156,10 +120,6 @@
     <<case 10>> <!-- Prototype Testing -->
         <p>You're selected to assist in testing a new prototype designed to enhance reactor efficiency. The excitement of working with cutting-edge technology is palpable, but the pressure to deliver results is immense.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress -= Math.round($player.stress * 0.10)>>
-        <<set $player.mood += Math.round($player.mood * 0.05)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "major" "NegEffectOnPlayer">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -168,15 +128,12 @@
     <<default>> <!-- Standard Maintenance -->
         <p>Your shift is filled with standard maintenance tasks. It's a steady day's work, with no surprises, but the repetitive nature of the tasks doesn't do much for your mood.</p>
         <<set _earnedCredits = random(25, 50)>>
-        <<set $player.credits += _earnedCredits>>
-        <<set $player.stress += Math.round($player.stress * 0.02)>>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
-        <<set $worldEconomyScore += 1>>
         <<creditchange _earnedCredits "positive">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">><br>
 <</switch>>
+
 
 <br>
 <!-- Continue Link -->

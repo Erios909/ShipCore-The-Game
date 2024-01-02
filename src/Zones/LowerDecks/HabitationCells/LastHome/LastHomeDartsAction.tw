@@ -47,7 +47,6 @@
 <<switch _randomEvent>>
     <<case 1>> <!-- Bullseye Victory -->
         <p>With an uncanny streak of bullseyes, you impress the onlookers and earn a small prize from the bar's ongoing darts competition.</p>
-        <<set $player.credits += 20>>
         <<creditchange 20 "positive">><br>
 
     <<case 2>> <!-- Close Game -->
@@ -55,49 +54,39 @@
 
     <<case 3>> <!-- Comedic Misfire -->
         <p>Apparently, darts is not your game. Your throw goes wildly off course, sparking a round of good-hearted laughter at your expense.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 4>> <!-- New Friendship -->
         <p>Your casual game of darts turns into a lively chat with a fellow player, leading to a potential new friendship.</p>
-        <<set $player.mood += Math.round($player.mood * 0.05)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 
     <<case 5>> <!-- Sore Loser -->
         <p>You win the game, but your opponent doesn't take it well. The resulting tension is a bit draining.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
-        <<set $player.stress += Math.round($player.stress * 0.02)>>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
     <<case 6>> <!-- Betting Round -->
         <p>A spur-of-the-moment bet adds some stakes to the game. Your steady hand ensures you come out on top.</p>
-        <<set $player.credits += 15>>
-        <<creditchange 15 "positive">><br>
+        <<creditchange 25 "positive">><br>
 
     <<case 7>> <!-- Drunken Distraction -->
         <p>A group of rowdy patrons distracts you during a crucial throw, causing you to lose this round.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.05)>>
         <<changemoods "mood" "major" "NegEffectOnPlayer">><br>
 
     <<case 8>> <!-- Unintended Trick Shot -->
         <p>What was supposed to be an embarrassing miss turns into an unintentional trick shot, earning a round of applause and boosting your mood significantly.</p>
-        <<set $player.mood += Math.round($player.mood * 0.05)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 
     <<case 9>> <!-- Fatigue Takes Its Toll -->
         <p>As the game drags on, your throws become less precise. You decide to call it quits and give your arm a rest.</p>
-        <<set $player.fatigue += Math.round($player.fatigue * 0.02)>>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
 
     <<case 10>> <!-- Unexpected Challenge -->
         <p>A station champion challenges you to a match. Despite your best efforts, you lose, but the experience leaves you feeling more prepared for the next challenge.</p>
-        <<set $player.stress -= Math.round($player.stress * 0.05)>>
         <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
 
     <<default>> <!-- Default Darts Event -->
         <p>After a few throws, it's clear tonight isn't your night for darts. You decide to quit while you're behind, saving your credits and pride. No major loss, just a dent in your evening's plans.</p>
-        <<set $player.credits -= 5>>
         <<creditchange 5 "negative">><br>
 <</switch>>
 <br>

@@ -7,19 +7,72 @@ Opening the locker, you find a small mirror. <<if $worldEconomyScore >= 800>>The
 <<elseif $worldEconomyScore >= 200>>The mirror is tarnished, obscuring parts of your reflection.
 <<else>>The mirror is cracked, making your reflection fragmented and unclear.
 <</if>>
-In the mirror, you see <<cycle "$player.gender" autoselect>><<option "a man" 1>><<option "a woman" 2>><<option "a gender-neutral figure" 3>><</cycle>> with \
-<<cycle "$player.hairLength" autoselect>><<option "short" 1>><<option "medium-length" 2>><<option "long" 3>><<option "nearly shaved" 4>><</cycle>>, \
-<<cycle "$player.hairColor" autoselect>><<option "black" 1>><<option "blonde" 2>><<option "red" 3>><<option "brown" 4>><<option "silver" 5>><</cycle>> hair, \
-<<cycle "$player.eyeColor" autoselect>><<option "blue" 1>><<option "green" 2>><<option "brown" 3>><<option "hazel" 4>><<option "gray" 5>><</cycle>> eyes, and \
-<<cycle "$player.skinColor" autoselect>><<option "light" 1>><<option "olive" 2>><<option "tan" 3>><<option "brown" 4>><<option "dark" 5>><</cycle>> skin looking back at you. It takes a second, but you realize that you are looking at yourself.
+<<nobr>>
+In the mirror, you see
+<<listbox "$player.gender">>
+    <<option "a man" 1 selected>>
+    <<option "a woman" 2>>
+    <<option "a gender-neutral figure" 3>>
+<</listbox>> with
+<<listbox "$player.hairLength">>
+    <<option "short" 1 selected>>
+    <<option "medium-length" 2>>
+    <<option "long" 3>>
+    <<option "nearly shaved" 4>>
+<</listbox>> hair,
+<<listbox "$player.hairColor">>
+    <<option "black" 1 selected>>
+    <<option "blonde" 2>>
+    <<option "red" 3>>
+    <<option "brown" 4>>
+    <<option "silver" 5>>
+<</listbox>> hair color,
+<<listbox "$player.eyeColor">>
+    <<option "blue" 1 selected>>
+    <<option "green" 2>>
+    <<option "brown" 3>>
+    <<option "hazel" 4>>
+    <<option "gray" 5>>
+<</listbox>> eyes, and
+<<listbox "$player.skinColor">>
+    <<option "light" 1 selected>>
+    <<option "olive" 2>>
+    <<option "tan" 3>>
+    <<option "brown" 4>>
+    <<option "dark" 5>>
+<</listbox>> skin looking back at you. It takes a second, but you realize that you are looking at yourself.
 
-You have a build that is \
-<<cycle "$player.build" autoselect>><<option "slender and soft" 1>><<option "slender and toned" 2>><<option "just average without much definition" 3>><<option "stocky and bulky" 4>><<option "athletic and fit" 5>><<option "muscular and ripped" 6>><</cycle>> and you are \
-<<cycle "$player.height" autoselect>><<option "short" 1>><<option "average height" 2>><<option "tall" 3>><</cycle>>.
+You have a build that is
+<<listbox "$player.build">>
+    <<option "slender and soft" 1 selected>>
+    <<option "slender and toned" 2>>
+    <<option "just average without much definition" 3>>
+    <<option "stocky and bulky" 4>>
+    <<option "athletic and fit" 5>>
+    <<option "muscular and ripped" 6>>
+<</listbox>> and you are
+<<listbox "$player.height">>
+    <<option "short" 1 selected>>
+    <<option "average height" 2>>
+    <<option "tall" 3>>
+<</listbox>> tall.
 
-Your overall appearance is marked by \
-<<cycle "$player.distinctiveFeature" autoselect>><<option "freckles" 1>><<option "a scar" 2>><<option "a birthmark" 3>><<option "clear skin" 4>><</cycle>> and can be described as \
-<<cycle "$player.appearance" autoselect>><<option "rugged" 1>><<option "elegant" 2>><<option "youthful" 3>><<option "weathered" 4>><</cycle>>.
+Your overall appearance is marked by
+<<listbox "$player.distinctiveFeature">>
+    <<option "freckles" 1 selected>>
+    <<option "a scar" 2>>
+    <<option "a birthmark" 3>>
+    <<option "clear skin" 4>>
+<</listbox>> and can be described as
+<<listbox "$player.appearance">>
+    <<option "rugged" 1 selected>>
+    <<option "elegant" 2>>
+    <<option "youthful" 3>>
+    <<option "weathered" 4>>
+<</listbox>>.
+
+<</nobr>>
+
 
 As you turn around to examine yourself, the mirror captures the full extent of your physique. The fact that you don't recognize yourself is disconcerting, but you can't deny that it is you.
 
@@ -29,5 +82,6 @@ Your attention is drawn to the nameplate bolted above the mirror. It has a name,
 
 <!-- When the player clicks Continue, sanitize the input before saving it -->
 [[Continue|Intro2][$playerIntro = 1; $player.name = sanitizeInput($playerName)]]
+
 
 

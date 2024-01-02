@@ -15,7 +15,7 @@
 <hr id="sleepLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 
-<<set $player.health += ($timeadd / 60) * 15>> <!-- Sleep improves health slightly -->
+<<changemoods "health" "minor" "PosEffectOnPlayer">>
 <<addmins $timeadd>>
 <</nobr>>
 The metal bench in Cold Storage is far from the ideal bed, but exhaustion takes its toll, and you succumb to sleep. The cold seeps in as you rest, offering a harsh reminder of the station's indifference to comfort.

@@ -59,7 +59,7 @@ You approach the parts selling terminal, where you can trade your fabricated par
 
 [[Inquire about bulk sales.|DocksideFabricatorBulkInquiry][$timeadd = 1]]<br>
 
-[[Reconsider.|DocksideFabricator][$timeadd = 5]]
+[[Reconsider|DocksideFabricator][$timeadd = 5]]
 <</nobr>>
 
 

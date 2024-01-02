@@ -35,9 +35,6 @@
 
 <!-- Placeholder for other zones -->
 <p>Other subscription zones will install here as they are discovered.</p>
-
-<!-- Return Link -->
-<<link "Return" $return>><</link>>
 <</nobr>>
 
 
