@@ -21,7 +21,7 @@ You step into the managerial office, a space that exudes efficiency and order. T
 <br>
 You lean in, intrigued by the scale of operations he's suggesting.
 <br><br>
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"What kind of volume are we talking about?"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"What kind of volume are we talking about?"<</say>>
 <br>
 Lucas gestures towards a series of charts displaying shipping schedules and volumes.
 <br><br>
@@ -29,17 +29,17 @@ Lucas gestures towards a series of charts displaying shipping schedules and volu
 <br>
 You balk at the numbers, doing the quick math in your head.
 <br><br>
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"That's... that's over a million credits' worth of parts!"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"That's... that's over a million credits' worth of parts!"<</say>>
 <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>Lucas laughs heartily, the sound echoing off the walls. "Indeed, it is! The fabricator license you're familiar with is just one aspect of our operations—small scale. When you're ready to run a corporation, come and see me. We'll talk numbers that'll make your head spin."<</say>>
 <br>
 You nod, the prospect both daunting and exhilarating.
 <br><br>
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"I'll keep that in mind. Thanks for the insight, Lucas."<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"I'll keep that in mind. Thanks for the insight, Lucas."<</say>>
 <br>
 Lucas gives you a final nod as you turn to leave, the sounds of productivity filling the air once more as you make your way back to the fabrication floor.
 <br>
 <</nobr>>
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+<<say '$player.name' $playerPortraitPathZ>>
     [["Understood. I'll be back when I'm ready."|DocksideFabricator]]
 <</say>>
 

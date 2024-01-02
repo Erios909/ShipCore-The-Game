@@ -22,7 +22,7 @@ Your new watch lights up again, and a strange tingling sensation can be felt in 
 <<set $combinedDifficultyScore = ((2000 - $worldEconomyScore - $dangerLevelScore) / 200)>>
 <<set $player.debt = Math.max(50000, Math.min(50000000, $combinedDifficultyScore * 2000000))>>
 <</nobr>>\
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 [[How much debt exactly? Am I in danger?|Intro4][$playerIntro5 = 1;$timeadd = 1]]
 [[Great, I woke up and I'm already broke?|Intro4][$playerIntro5 = 2;$timeadd = 1]]
 [[Does this place have debt slavery?|Intro4][$playerIntro5 = 3;$timeadd = 1]]

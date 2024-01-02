@@ -28,9 +28,9 @@
 <<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Side effects exist. Cost: 1000 credits each."<</say>>
 
 <<if $player.credits >= 1000>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>[[I'll think about it. Thanks for the info.|GrafterConversation]]<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>[[I'll think about it. Thanks for the info.|GrafterConversation]]<</say>>
 <<else>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>[[That's out of my price range right now. Maybe later.|GrafterConversation]]<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>[[That's out of my price range right now. Maybe later.|GrafterConversation]]<</say>>
 <</if>><</nobr>>\
 
 

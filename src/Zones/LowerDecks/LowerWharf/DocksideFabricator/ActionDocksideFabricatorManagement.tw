@@ -30,7 +30,7 @@ As you step away from the industrious hum of the fabrication floor, the door to 
 <</if>>
 
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 <<if _maxStat == 0>>\
     "I'm still checking things out, getting a feel for how everything works."
 <<elseif $docksideStats.partsFabricated is _maxStat>>\
@@ -52,7 +52,7 @@ As you step away from the industrious hum of the fabrication floor, the door to 
 <</if>>
 
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 [[I'd like to inquire about bulk transactions.|DocksideFabricatorBulkInquiry][$timeadd = 1]]<br>
 [[Nothing right now, thanks.|DocksideFabricator][$timeadd = 1]]
 <</say>><</nobr>>

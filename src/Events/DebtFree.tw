@@ -22,14 +22,14 @@
 <hr id="eventLocationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
     <<say maincomputer>>"Congratulations, $player.name. Your debt has been fully repaid. Your credit balance is now positive. How do you plan to proceed with your financial management?"<</say>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"It feels like a weight has been lifted off my shoulders. I'll be more careful with my spending and maybe start saving for the future."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"It feels like a weight has been lifted off my shoulders. I'll be more careful with my spending and maybe start saving for the future."<</say>>
     <<say maincomputer>>"A prudent decision. If you require financial advice or assistance, do not hesitate to consult the station's financial services."<</say>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"Thanks, I'll keep that in mind. For now, I just want to enjoy this moment of freedom."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"Thanks, I'll keep that in mind. For now, I just want to enjoy this moment of freedom."<</say>>
     <<say maincomputer>>"Understood. Enjoy your financial independence, $player.name. Remember, a balanced budget is key to maintaining it."<</say>>
 
 <<else>>
     <<say maincomputer>>"Welcome back, $player.name. It is good to see your account in good standing. How may I assist you today?"<</say>>
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"I'm just here to check my balance and make sure everything's on track."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>"I'm just here to check my balance and make sure everything's on track."<</say>>
     <<say maincomputer>>"Certainly. Your current balance is positive, and no debt is recorded. Keep up the good financial habits."<</say>>
 <</if>>
 

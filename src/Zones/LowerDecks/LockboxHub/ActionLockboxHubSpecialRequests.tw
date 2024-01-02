@@ -17,7 +17,7 @@
     "For those who require space for bulk goods or larger items, we offer specialized warehousing services. The fee is 1000 credits per week for each cubic meter of storage. For items that are larger but not in bulk, the cost varies depending on the item."
     <</say>>
 
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+    <<say '$player.name' $playerPortraitPathZ>>
     "That seems like quite a steep price for storage."
     <</say>>
 
@@ -25,7 +25,7 @@
     "Believe me, I'm well aware. However, our clients who need such services are usually well above the average station dweller. Folks who are managing shiploads and business shipments don't usually flinch at the cost."
     <</say>>
 
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+    <<say '$player.name' $playerPortraitPathZ>>
     "Looks like I've got some climbing to do on the economic ladder."
     <</say>>
 
@@ -34,7 +34,7 @@
     <</say>>
 
     <!-- Continue Link -->
-    <<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>[[I'll keep that in mind. Thanks, Sable.|The Lockbox Hub][$timeadd = 5]]<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>[[I'll keep that in mind. Thanks, Sable.|The Lockbox Hub][$timeadd = 5]]<</say>>
 
 <<else>> <!-- Subsequent visits -->
     <<set $currentArea to "lowerdecks">>

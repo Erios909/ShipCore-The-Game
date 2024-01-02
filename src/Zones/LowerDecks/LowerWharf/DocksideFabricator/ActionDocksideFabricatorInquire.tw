@@ -20,11 +20,11 @@
 
 <<set $enoughCredits = $player.credits >= 12500>>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"<span style="color:red;">12,500 credits</span>? That's quite a sum. Why so expensive?"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"<span style="color:red;">12,500 credits</span>? That's quite a sum. Why so expensive?"<</say>>
 
 <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Running a fabricator isn't cheap—energy costs, maintenance, and not to mention the skilled technicians we employ to keep things going. You can buy scrap at competitive rates, fabricate it into valuable parts, and sell for a profit, even with the fee. If you have a Lockbox Hub subscription, you can store it all in your locker if you want to try your luck at trading even."<</say>>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 <<if $enoughCredits>>\
     "I do have enough, but I am going to need to think about it."
 <<else>>\
@@ -37,7 +37,7 @@
 
 <p>As you watch a sheet of scrap being fed into a fabricator, it's reshaped and emerges as a sleek panel, ready for use. It's a process of creation, almost alchemical in its transformation. You ponder the potential of having such resources at your fingertips. The cost is significant, but the ability to craft and trade with such efficiency could open new avenues for profit and self-reliance beyond scavenging through lockers or digging through trash.</p>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>\
+<<say '$player.name' $playerPortraitPathZ>>\
 <<if $enoughCredits>>
     [[Proceed with the purchase. Cr 12500|DocksidePurchase][$player.credits -= 12500; $DocksideFabricatorState = "purchased"; $timeadd = 30]]<br>
 <<else>>
