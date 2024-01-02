@@ -1,14 +1,21 @@
-:: widget displayAreaImage [widget nobr] {"position":"50,475","size":"100,100"}
+:: widget displayAreaImage [widget nobr]
 <<widget "displayAreaImage">>
 <<nobr>>
-<<set _area = $args[0]>>
-<<set _imagePath = setup.areaImagePaths[_area] ? setup.areaImagePaths[_area] : setup.defaultImagePath>>
-
-<div id="area-image-container">
-    <img src="@{_imagePath}" alt="Map of the area">
-</div>
+    /* Check if $areaImages and $currentArea are defined and have a corresponding image */
+    <<if (typeof $areaImages !== "undefined" && $areaImages.hasOwnProperty($currentArea))>>
+        /* If defined, construct the image path */
+        <<set _imagePath to setup.ImagePath + 'locs/areaminimaps/' + $areaImages[$currentArea]>>
+        <<run console.log('Image path: ' + _imagePath)>>
+        <div id="area-image-container">
+            <img @src="$_imagePath" alt="Map of the area">
+        </div>
+    <<else>>
+        /* If not defined, use the default image path and print to console */
+        <<set _defaultImagePath to setup.ImagePath + 'locs/areaminimaps/default.jpg'>>
+        <<run console.log('Image path: ' + _imagePath)>>
+        <div id="area-image-container">
+            <img src="$_defaultImagePath" alt="Map of the area">
+        </div>
+    <</if>>
 <</nobr>>
 <</widget>>
-
-
-
