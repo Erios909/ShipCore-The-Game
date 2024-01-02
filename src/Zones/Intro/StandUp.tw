@@ -1,88 +1,104 @@
 :: Stand Up {"position":"500,425","size":"100,100"}
-You stand up, steadying yourself against the bench. The dizziness fades, and you take in more details of the small room. Your gaze is drawn to a locker in the corner, glowing with a soft <span style="color: lightgreen;">green</span> light.
+ <<nobr>>
+    <div id="narrative-text">
+        You stand up, steadying yourself against the bench. The dizziness fades, and you take in more details of the small room. Your gaze is drawn to a locker in the corner, glowing with a soft <span style="color: lightgreen;">green</span> light.
 
-Opening the locker, you find a small mirror. <<if $worldEconomyScore >= 800>>The mirror is immaculate, showing a clear reflection of yourself.
-<<elseif $worldEconomyScore >= 600>>The mirror is mostly clear, with minor signs of wear.
-<<elseif $worldEconomyScore >= 400>>The mirror has a few scratches but still reflects well.
-<<elseif $worldEconomyScore >= 200>>The mirror is tarnished, obscuring parts of your reflection.
-<<else>>The mirror is cracked, making your reflection fragmented and unclear.
-<</if>>
-<<nobr>>
-In the mirror, you see
-<<listbox "$player.gender">>
-    <<option "a man" 1 selected>>
-    <<option "a woman" 2>>
-    <<option "a person" 3>>
-<</listbox>> with
-<<listbox "$player.hairLength">>
-    <<option "short" 1 selected>>
-    <<option "medium-length" 2>>
-    <<option "long" 3>>
-    <<option "nearly shaved" 4>>
-<</listbox>> hair,
-<<listbox "$player.hairColor">>
-    <<option "black" 1 selected>>
-    <<option "blonde" 2>>
-    <<option "red" 3>>
-    <<option "brown" 4>>
-    <<option "silver" 5>>
-<</listbox>> hair color,
-<<listbox "$player.eyeColor">>
-    <<option "blue" 1 selected>>
-    <<option "green" 2>>
-    <<option "brown" 3>>
-    <<option "hazel" 4>>
-    <<option "gray" 5>>
-<</listbox>> eyes, and
-<<listbox "$player.skinColor">>
-    <<option "light" 1 selected>>
-    <<option "olive" 2>>
-    <<option "tan" 3>>
-    <<option "brown" 4>>
-    <<option "dark" 5>>
-<</listbox>> skin looking back at you. It takes a second, but you realize that you are looking at yourself.
+        Opening the locker, you find a small mirror. <<if $worldEconomyScore >= 800>>The mirror is immaculate, showing a clear reflection of yourself.
+        <<elseif $worldEconomyScore >= 600>>The mirror is mostly clear, with minor signs of wear.
+        <<elseif $worldEconomyScore >= 400>>The mirror has a few scratches but still reflects well.
+        <<elseif $worldEconomyScore >= 200>>The mirror is tarnished, obscuring parts of your reflection.
+        <<else>>The mirror is cracked, making your reflection fragmented and unclear.
+        <</if>>
+    </div>
 
-You have a build that is
-<<listbox "$player.build">>
-    <<option "slender and soft" 1 selected>>
-    <<option "slender and toned" 2>>
-    <<option "just average without much definition" 3>>
-    <<option "stocky and bulky" 4>>
-    <<option "athletic and fit" 5>>
-    <<option "muscular and ripped" 6>>
-<</listbox>> and you are
-<<listbox "$player.height">>
-    <<option "short" 1 selected>>
-    <<option "average height" 2>>
-    <<option "tall" 3>>
-<</listbox>> tall.
+    <div id="character-customization">
+        <<nobr>>
+        In the mirror, you see
+        <<listbox "$player.gender">>
+            <<option "a man" 1 selected>>
+            <<option "a woman" 2>>
+            <<option "a person" 3>>
+        <</listbox>> with
+        <<listbox "$player.hairLength">>
+            <<option "short" 1 selected>>
+            <<option "medium-length" 2>>
+            <<option "long" 3>>
+            <<option "nearly shaved" 4>>
+        <</listbox>> hair,
+        <<listbox "$player.hairColor">>
+            <<option "black" 1 selected>>
+            <<option "blonde" 2>>
+            <<option "red" 3>>
+            <<option "brown" 4>>
+            <<option "silver" 5>>
+        <</listbox>> hair color,
+        <<listbox "$player.eyeColor">>
+            <<option "blue" 1 selected>>
+            <<option "green" 2>>
+            <<option "brown" 3>>
+            <<option "hazel" 4>>
+            <<option "gray" 5>>
+        <</listbox>> eyes, and
+        <<listbox "$player.skinColor">>
+            <<option "light" 1 selected>>
+            <<option "olive" 2>>
+            <<option "tan" 3>>
+            <<option "brown" 4>>
+            <<option "dark" 5>>
+        <</listbox>> skin looking back at you. It takes a second, but you realize that you are looking at yourself.
 
-Your overall appearance is marked by
-<<listbox "$player.distinctiveFeature">>
-    <<option "freckles" 1 selected>>
-    <<option "a scar" 2>>
-    <<option "a birthmark" 3>>
-    <<option "clear skin" 4>>
-<</listbox>> and can be described as
-<<listbox "$player.appearance">>
-    <<option "rugged" 1 selected>>
-    <<option "elegant" 2>>
-    <<option "youthful" 3>>
-    <<option "weathered" 4>>
-<</listbox>>.
-<<appearance>>
+        You have a build that is
+        <<listbox "$player.build">>
+            <<option "slender and soft" 1 selected>>
+            <<option "slender and toned" 2>>
+            <<option "just average without much definition" 3>>
+            <<option "stocky and bulky" 4>>
+            <<option "athletic and fit" 5>>
+            <<option "muscular and ripped" 6>>
+        <</listbox>> and you are
+        <<listbox "$player.height">>
+            <<option "short" 1 selected>>
+            <<option "average height" 2>>
+            <<option "tall" 3>>
+        <</listbox>> tall.
+
+        Your overall appearance is marked by
+        <<listbox "$player.distinctiveFeature">>
+            <<option "freckles" 1 selected>>
+            <<option "a scar" 2>>
+            <<option "a birthmark" 3>>
+            <<option "clear skin" 4>>
+        <</listbox>> and can be described as
+        <<listbox "$player.appearance">>
+            <<option "rugged" 1 selected>>
+            <<option "elegant" 2>>
+            <<option "youthful" 3>>
+            <<option "weathered" 4>>
+        <</listbox>>.
+        <<appearance>>
+        <</nobr>>
+    </div>
+
+    <div id="portrait-display-container" style="min-width: 250px; max-width: 250px; border: 1px solid #000;">
+        <<set $currentImageIndex = 0>> <!-- Initialize the index variable -->
+        <<ImageDisplay Object.values(setup.MercImages) $currentImageIndex "currentImageIndex">>
+    </div>
+
+    <div id="reflection-text">
+        As you turn around to examine yourself, the mirror captures the full extent of your physique. The fact that you don't recognize yourself is disconcerting, but you can't deny that it is you.
+
+        Your attention is drawn to the nameplate bolted above the mirror. It has a name, and deep down you realize that it is yours.
+    </div>
+
+    <div id="name-input">
+        <<textbox "$playerName" "Alex">>
+    </div>
+
+    <!-- When the player clicks Continue, sanitize the input before saving it -->
+    <div id="continue-button">
+        [[Continue|Intro2][$playerIntro = 1; $player.name = sanitizeInput($playerName)]]
+    </div>
+
 <</nobr>>
-
-
-
-As you turn around to examine yourself, the mirror captures the full extent of your physique. The fact that you don't recognize yourself is disconcerting, but you can't deny that it is you.
-
-Your attention is drawn to the nameplate bolted above the mirror. It has a name, and deep down you realize that it is yours.
-
-<<textbox "$playerName" "Alex">>
-
-<!-- When the player clicks Continue, sanitize the input before saving it -->
-[[Continue|Intro2][$playerIntro = 1; $player.name = sanitizeInput($playerName)]]
-
 
 
