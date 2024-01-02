@@ -18,7 +18,7 @@
     <div id="character-customization">
         <<nobr>>
         In the mirror, you see
-        <<listbox "$player.gender">>
+        <<listbox "$player.gender2">>
         <<option "a man" 1 selected>>
         <<option "a woman" 2>>
         <<option "a person" 3>>
@@ -112,13 +112,32 @@
 
 <</nobr>>
 
+<!-- Button to set $playerGender to 1 -->
+<<button "Man">>
+    <<set $playerGenderA to 1>>
+<</button>>
 
+<!-- Button to set $playerGender to 2 -->
+<<button "Woman">>
+    <<set $playerGenderA to 2>>
+<</button>>
+
+<!-- Button to set $playerGender to 3 -->
+<<button "Non-binary">>
+    <<set $playerGenderA to 3>>
+<</button>>
+
+<!-- Display the current value of $playerGender -->
+<p>Current Gender: <<= $playerGenderA>></p>
+
+<<set $playerGender to 0>>
 <!-- Listbox for gender selection -->
-<<listbox "$playergender">>
-    <<option "a man" "male" selected>>
-    <<option "a woman" "female">>
-    <<option "a person" "nonbinary">>
+<<listbox "$playerGenderA">>
+    <<option "a man" "1" selected>>
+    <<option "a woman" "2">>
+    <<option "a person" "3">>
 <</listbox>>
+<<live $playerGenderA>>
 
 <!-- Set the initial image path to the first key image in the male array -->
 <<set _firstMaleImage = setup.ImagePath + Object.values(setup.MaleMercImages)[0]>>
@@ -131,13 +150,13 @@
 $(document).one(":passagerender", function (event) {
     $(event.content).find("#listbox-playergender").on("change", function () {
         // Get the selected gender
-        var selectedGender = $(this).val();
+        var selectedGender = State.playerGender;
         var imageArray;
 
         // Determine which image array to use based on the selected gender
-        if (selectedGender === "male") {
+        if (selectedGender === "1") {
             imageArray = setup.MaleMercImages;
-        } else if (selectedGender === "female") {
+        } else if (selectedGender === "2") {
             imageArray = setup.FemaleMercImages;
         } else {
             imageArray = setup.MercImages; // Default or nonbinary selection
@@ -147,10 +166,11 @@ $(document).one(":passagerender", function (event) {
         var firstImagePath = Object.values(imageArray)[0];
 
         // Update the image display
-        $("#gender-portrait").attr("src", setup.MediaPath + firstImagePath);
+        $("#gender-portrait").attr("src", setup.ImagePath + firstImagePath);
     });
 
     // Trigger the change event to display the initial image
-    $(event.content).find("#listbox-playergender").trigger("change");
+    $(event.content).find("#gender-portrait").trigger("change");
+    $(document).trigger(":liveupdate");
 });
 <</script>>
