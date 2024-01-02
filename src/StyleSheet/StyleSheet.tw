@@ -3,6 +3,100 @@
             max-width: 75%;
         }
 
+#narrative-text, #character-customization, #reflection-text, #name-input, #continue-button {
+    margin-bottom: 20px;
+}
+
+#img-selectors {
+    /* Apply a margin to separate the selectors from other content */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* Center the buttons within the div */
+    text-align: center;
+}
+
+/* Style for all buttons within the #img-selectors div */
+#img-selectors button {
+    /* Visual styles for the buttons */
+    background-color: #f2f2f2; /* Light grey background */
+    color: #333; /* Dark grey text */
+    border: 1px solid #ccc; /* Light grey border */
+    padding: 5px 10px; /* Padding inside the buttons */
+    margin-right: 5px; /* Space between buttons */
+    cursor: pointer; /* Cursor indicates clickable items */
+    transition: background-color 0.3s; /* Smooth background color transition on hover */
+}
+
+/* Style for buttons when hovered */
+#img-selectors button:hover {
+    background-color: #ddd; /* Darker grey background on hover */
+}
+
+/* Style for the active button or the currently selected button */
+#img-selectors button.active {
+    background-color: #4CAF50; /* Green background for active button */
+    color: white; /* White text for active button */
+}
+
+#image-stacker {
+    position: relative; /* Establishes a new stacking context */
+}
+
+.portrait-image {
+    /* Your styles for the first image */
+    z-index: 1; /* Ensures this image is above the second image */
+    position: relative; /* Required for z-index to take effect */
+}
+
+.second-image {
+    /* Your styles for the second image */
+	min-width: 250px;
+    max-width: 250px;
+    min-height: 250px;
+    z-index: -100; /* Places this image below the first image */
+    position: absolute; /* Position it relative to #image-container */
+    top: 0; /* Aligns the top edge with the container */
+    left: 0; /* Aligns the left edge with the container */
+}
+
+#portrait-display-container {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 250px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Prevents content from spilling out */
+}
+
+/* Style for the span element with the class 'macro-live macro-live-block' */
+#portrait-display-container .macro-live.macro-live-block {
+    width: 100%; /* Ensures the span takes full width of the container */
+    height: 100%; /* Ensures the span takes full height of the container */
+    justify-content: center; /* Centers children horizontally */
+    align-items: center; /* Centers children vertically */
+}
+
+/* Style for any images inside the span with the class 'macro-live macro-live-block' */
+#portrait-display-container .macro-live.macro-live-block img {
+    max-width: 100%; /* Ensures the image is not wider than the span */
+    max-height: 100%; /* Ensures the image is not taller than the span */
+    object-fit: contain; /* Ensures the image maintains its aspect ratio without being cropped */
+}
+
+
+/* Style for the direct children of the image display container */
+#image-display-container > * {
+    max-width: 100%;
+    max-height: 100%;
+	    object-fit: contain; /* Ensures the image maintains its aspect ratio without being cropped */
+    margin: auto; /* Centers the image within the container */
+    display: block; /* Removes bottom space under the image */
+}
+
+/* You can add more CSS here to style other elements as needed */
 
 .i-gain {
     color: green;

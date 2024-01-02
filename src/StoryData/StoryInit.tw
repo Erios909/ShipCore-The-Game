@@ -240,3 +240,4 @@ $lowerdecksFabricatorCyberware
 <<playerp>>
 
 
+<<set $currentImageIndex = 0>>
