@@ -17,7 +17,7 @@
                             <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">NanoDoc Injectors left: <<print $playerConsumables.nanoDocInjector>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.nanoDocInjector>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">NanoDoc Injector not available</div> <!-- Updated to class for consistency -->
@@ -34,7 +34,7 @@
                             <<set $playerConsumablesTracker.euphorixVape += 1>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">Euphorix Vapes left: <<print $playerConsumables.euphorixVape>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.euphorixVape>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">Euphorix Vape not available</div> <!-- Updated to class for consistency -->
@@ -51,7 +51,7 @@
                             <<set $playerConsumablesTracker.zenithPulse += 1>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">Zenith Pulses left: <<print $playerConsumables.zenithPulse>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.zenithPulse>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">Zenith Pulse not available</div> <!-- Updated to class for consistency -->
@@ -68,7 +68,7 @@
                             <<set $playerConsumablesTracker.psycheLockCapsule += 1>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">PsycheLock Capsules left: <<print $playerConsumables.psycheLockCapsule>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.psycheLockCapsule>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">PsycheLock Capsule not available</div> <!-- Updated to class for consistency -->
@@ -85,7 +85,7 @@
                             <<set $playerConsumablesTracker.vigorMaxShot += 1>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">VigorMax Shots left: <<print $playerConsumables.vigorMaxShot>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.vigorMaxShot>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">VigorMax Shot not available</div> <!-- Updated to class for consistency -->
@@ -102,7 +102,7 @@
                             <<set $playerConsumablesTracker.puriDermSpray += 1>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">PuriDerm Sprays left: <<print $playerConsumables.puriDermSpray>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.puriDermSpray>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">PuriDerm Spray not available</div> <!-- Updated to class for consistency -->
@@ -119,7 +119,7 @@
                             <<set $playerConsumablesTracker.energyCellBoost += 1>>
                             <<update>>
                         <</button>>
-                        <div class="consumables-count">Energy Cell Boosts left: <<print $playerConsumables.energyCellBoost>></div> <!-- Updated to class for consistency -->
+                        <div class="consumables-count">Remaining: <<print $playerConsumables.energyCellBoost>></div> <!-- Updated to class for consistency -->
                     </div>
                 <<else>>
                     <div class="consumables-unavailable">Energy Cell Boost not available</div> <!-- Updated to class for consistency -->
