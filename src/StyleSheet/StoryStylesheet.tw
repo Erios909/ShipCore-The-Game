@@ -927,6 +927,8 @@ body.slideWin {
 .consumables-button-wrapper button {
     width: 150px; /* Fixed width for the button */
     height: 150px; /* Fixed height for the button */
+	max-width: 150px;
+    max-height: 150px;
     padding: 10px; /* Padding inside the button */
     margin-bottom: 5px; /* Space between button and text */
     background-color: #4CAF50; /* Green background */
@@ -939,10 +941,14 @@ body.slideWin {
     text-align: center; /* Center text inside the button */
     box-sizing: border-box; /* Include padding in width and height */
 	    text-shadow:
-        -1px -1px 0 #000, /* Top-left shadow */
-         1px -1px 0 #000, /* Top-right shadow */
-        -1px  1px 0 #000, /* Bottom-left shadow */
-         1px  1px 0 #000; /* Bottom-right shadow */
+    -2px -2px 3px #000, /* Top-left shadow */
+     2px -2px 3px #000, /* Top-right shadow */
+    -2px  2px 3px #000, /* Bottom-left shadow */
+     2px  2px 3px #000, /* Bottom-right shadow */
+    -3px -3px 3px #000, /* Additional layer for thicker shadow */
+     3px -3px 3px #000,
+    -3px  3px 3px #000,
+     3px  3px 3px #000; /* Additional layer for thicker shadow */
 }
 
 /* Style for the consumables count text to appear below the button */
@@ -959,15 +965,27 @@ body.slideWin {
 .consumables-unavailable {
     min-width: 150px; /* Same minimum width as the button */
     min-height: 150px; /* Same minimum height as the button */
+	max-width: 150px;
+    max-height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
 	z-index: 4;
-    background-color: #ccc; /* Gray background */
+    background-color: #222;
     color: red;
 	font-style: italic;
  	text-align: center;
     border-radius: 4px;
+	text-shadow:
+    -2px -2px 3px #000, /* Top-left shadow */
+     2px -2px 3px #000, /* Top-right shadow */
+    -2px  2px 3px #000, /* Bottom-left shadow */
+     2px  2px 3px #000, /* Bottom-right shadow */
+    -3px -3px 3px #000, /* Additional layer for thicker shadow */
+     3px -3px 3px #000,
+    -3px  3px 3px #000,
+     3px  3px 3px #000; /* Additional layer for thicker shadow */
+
 }
 
 
@@ -976,53 +994,67 @@ body.slideWin {
     /* Shared styles for all consumable sections */
 }
 
-/* NanoDoc Injector specific styles */
-#consumables-nanoDoc-section {
-    background-image: url('path/to/nanoDoc-image.png');
+/* NanoDoc Injector specific button styles */
+#consumables-nanoDoc-section .consumables-button-wrapper button {
+    /* Specific styles for NanoDoc Injector buttons */
+	background-image: url('images/ui/boosts/nanodoc.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to NanoDoc Injector */
 }
 
-/* Euphorix Vape specific styles */
-#consumables-euphorixVape-section {
-    background-image: url('path/to/euphorixVape-image.png');
+/* Euphorix Vape specific button styles */
+#consumables-euphorixVape-section .consumables-button-wrapper button {
+    /* Specific styles for Euphorix Vape buttons */
+	background-image: url('images/ui/boosts/euphorix.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to Euphorix Vape */
 }
 
-/* Zenith Pulse specific styles */
-#consumables-zenithPulse-section {
-    background-image: url('path/to/zenithPulse-image.png');
+/* Zenith Pulse specific button styles */
+#consumables-zenithPulse-section .consumables-button-wrapper button {
+    /* Specific styles for Zenith Pulse buttons */
+	background-image: url('images/ui/boosts/zenith.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to Zenith Pulse */
 }
 
-/* PsycheLock Capsule specific styles */
-#consumables-psycheLockCapsule-section {
-    background-image: url('path/to/psycheLockCapsule-image.png');
+/* PsycheLock Capsule specific button styles */
+#consumables-psycheLockCapsule-section .consumables-button-wrapper button {
+    /* Specific styles for PsycheLock Capsule buttons */
+	background-image: url('images/ui/boosts/psychelock.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to PsycheLock Capsule */
 }
 
-/* VigorMax Shot specific styles */
-#consumables-vigorMaxShot-section {
-    background-image: url('path/to/vigorMaxShot-image.png');
+/* VigorMax Shot specific button styles */
+#consumables-vigorMaxShot-section .consumables-button-wrapper button {
+    /* Specific styles for VigorMax Shot buttons */
+	background-image: url('images/ui/boosts/vigormax.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to VigorMax Shot */
 }
 
-/* PuriDerm Spray specific styles */
-#consumables-puriDermSpray-section {
-    background-image: url('path/to/puriDermSpray-image.png');
+/* PuriDerm Spray specific button styles */
+#consumables-puriDermSpray-section .consumables-button-wrapper button {
+    /* Specific styles for PuriDerm Spray buttons */
+	background-image: url('images/ui/boosts/puriderm.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to PuriDerm Spray */
 }
 
-/* Energy Cell Boost specific styles */
-#consumables-energyCellBoost-section {
-    background-image: url('path/to/energyCellBoost-image.png');
+/* Energy Cell Boost specific button styles */
+#consumables-energyCellBoost-section .consumables-button-wrapper button {
+    /* Specific styles for Energy Cell Boost buttons */
+	background-image: url('images/ui/boosts/energycell.jpg');
+	background-position: center;
+    background-size: contain;
 	z-index: 3;
-    /* Additional styles specific to Energy Cell Boost */
 }
 
 /* General Button Style */
@@ -1051,14 +1083,23 @@ body.slideWin {
 
 /* Count Display for Consumables */
 .consumables-count {
-  margin-top: 10px;
-  font-size: 14px;
+    margin-top: 10px;
+    font-size: 14px;
+    background-color: black;
+    border-radius: 10px; /* Adjust as needed for desired roundness */
+    /* Additional styles for padding and text color for better readability */
+    padding: 5px; /* Optional: Adjust as needed */
+    color: white; /* Optional: Change text color if needed */
 }
 
 /* Unavailable Consumable Message */
 .consumables-unavailable {
   color: red;
   font-style: italic;
+  	background-image: url('images/ui/boosts/empty.jpg');
+	background-position: center;
+    background-size: contain;
+	z-index: 3;
 }
 
 .z-level-4 {
