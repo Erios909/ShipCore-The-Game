@@ -18,7 +18,7 @@ The Lockbox Hub offers a reliable service for the reservation and management of 
 <<nobr>>
 <br>Things to do:<br>
 <<if $talkedToManager == false>>
-[[Inquire about locker and delivery service. (00:30)|LockboxHubInquire][$talkedToManager = true; $timeadd = 30]]
+[[Inquire about locker and delivery service (00:30)|LockboxHubInquire][$talkedToManager = true; $timeadd = 30]]
 <<else>>
     <<link "Check your locker storage. (00:15)" "Stash">>
     <<set $timeadd += 15>>

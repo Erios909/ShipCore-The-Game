@@ -14,7 +14,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
 Places of Interest:
 [[Approach a Lonely ATM|LowerObservationATM]]
-[[Loiter. (00:15)|Lower Observation Deck][$timeadd = 15]]
+[[Loiter (00:15)|Lower Observation Deck][$timeadd = 15]]
 
 Travel:
 [[Retract to the bustling life of the Lower Decks Hub.|Lower Decks][$timeadd = 5]]

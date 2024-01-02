@@ -16,7 +16,7 @@ Places of Interest:
 [[Sneak into The Shrouded Market|ShroudedMarket][$timeadd = 5]]
 [[Deal at the Contraband Tech Depot|ContrabandTechDepot][$timeadd = 10]]
 [[Hang out at The Rogue's Gallery|RoguesGallery][$timeadd = 5]]
-[[Loiter. (00:15)|Black Market Bazaar][$timeadd = 15]]
+[[Loiter (00:15)|Black Market Bazaar][$timeadd = 15]]
 
 Travel:
 [[Slip back into the shadows of the Lower Decks Hub.|Lower Decks][$timeadd = 5]]

@@ -11,14 +11,14 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
 Places of Interest:
-[[Proceed to Detention and Interrogation.|Detention and Interrogation][$timeadd = 5]]
-[[Access the Internal Affairs Bureau.|Internal Affairs Bureau][$timeadd = 5]]
+[[Proceed to Detention and Interrogation|Detention and Interrogation][$timeadd = 5]]
+[[Access the Internal Affairs Bureau|Internal Affairs Bureau][$timeadd = 5]]
 
 Things to Do:
 There is nothing to do here at the moment.
 
 Travel:
-[[Return to the Upper Deck Checkpoint.|Upper Deck Checkpoint][$timeadd = 5]]
+[[Return to the Upper Deck Checkpoint|Upper Deck Checkpoint][$timeadd = 5]]
 
 Within the metallic walls of the Security Command Center, the stark sounds of disciplined order echo throughout. This is the strategic heart of MOR-1's security operations, where officers and analysts monitor streams of data from countless sensors and cameras scattered throughout the station.
 

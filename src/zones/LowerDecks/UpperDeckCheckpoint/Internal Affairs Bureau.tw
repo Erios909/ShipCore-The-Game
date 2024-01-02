@@ -19,7 +19,7 @@ The Internal Affairs Bureau is the silent, watchful conscience of MOR-1’s secu
 
 Behind closed doors, investigations are meticulously pieced together, revealing the hidden transgressions of those tasked with maintaining order. It's a place of secrets and revelations, where loyalty is to the truth, even when it's inconvenient to the station's narrative.
 
-[[Return to the Security Command Center.|Security Command Center][$timeadd = 5]]
+[[Return to the Security Command Center|Security Command Center][$timeadd = 5]]
 
 The Bureau is an island of principle in a sea of gray morality. With no further paths to explore here, the only route is back through the imposing doors to the Security Command Center, where the line between watcher and watched blurs.
 

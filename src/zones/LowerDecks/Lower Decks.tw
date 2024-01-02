@@ -40,13 +40,13 @@ Places of Interest:
 [[Loiter. (00:15)|Lower Decks][$lowerdecksfirstvisit = 1; $timeadd = 15]]
 
 Travel:
-[[Promenade.|Lower Deck Promenade][$lowerdecksfirstvisit = 1; $timeadd = 5]]
-[[Hab Cells.|Habitation Cells][$lowerdecksfirstvisit = 1; $timeadd = 5]]
-[[Lower Wharf.|Lower Wharf][$lowerdecksfirstvisit = 1; $timeadd = 5]]
-[[Lower Engineering.|Station Infrastructure][$lowerdecksfirstvisit = 1; $timeadd = 5]]
-[[Lower Observation Deck.|Lower Observation Deck][$lowerdecksfirstvisit = 1; $timeadd = 5]]
-[[Slums.|Forgotten Slums][$lowerdecksfirstvisit = 1; $timeadd = 5]]
-[[Cold Storage.|Cold Storage][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Promenade|Lower Deck Promenade][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Hab Cells|Habitation Cells][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Lower Wharf|Lower Wharf][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Lower Engineering|Station Infrastructure][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Lower Observation Deck|Lower Observation Deck][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Slums|Forgotten Slums][$lowerdecksfirstvisit = 1; $timeadd = 5]]
+[[Cold Storage|Cold Storage][$lowerdecksfirstvisit = 1; $timeadd = 5]]
 
 <<if $lowerdecksfirstvisit == 1>>
 The Lower Decks of MOR-1 unfold before you as a sprawling lattice of corridors and sections, pulsing with the lifeblood of the station's underprivileged. Overhead, naked light tubes flicker erratically, casting unstable shadows over the crowded thoroughfare. Vendors hawk their wares from ramshackle stalls tucked into every conceivable nook, peddling everything from cheap repair parts to grey-market augmentations.
