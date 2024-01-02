@@ -19,7 +19,7 @@ Things to do:<br>
 <<else>>
     <span class="disabledLink">Donate parts to the station. (00:30)</span><br>
 <</if>>
-<<if $player.fatigue >= 500>> <!-- need energy -->
+<<if $player.fatigue <= 500>> <!-- need energy -->
     [[Work an engineering shift. (01:00)|LowerEngineeringWorkShift][$timeadd = 60]]
 <<else>>
     <span class="disabledLink">Work an engineering shift. (04:00) (Too tired.)</span><br>

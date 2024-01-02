@@ -1,5 +1,9 @@
 :: Stand Up {"position":"500,425","size":"100,100"}
  <<nobr>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
     <div id="narrative-text">
         You stand up, steadying yourself against the bench. The dizziness fades, and you take in more details of the small room. Your gaze is drawn to a locker in the corner, glowing with a soft <span style="color: lightgreen;">green</span> light.
 
@@ -15,9 +19,9 @@
         <<nobr>>
         In the mirror, you see
         <<listbox "$player.gender">>
-            <<option "a man" 1 selected>>
-            <<option "a woman" 2>>
-            <<option "a person" 3>>
+        <<option "a man" 1 selected>>
+        <<option "a woman" 2>>
+        <<option "a person" 3>>
         <</listbox>> with
         <<listbox "$player.hairLength">>
             <<option "short" 1 selected>>
@@ -79,26 +83,74 @@
         <</nobr>>
     </div>
 
-    <div id="portrait-display-container" style="min-width: 250px; max-width: 250px; border: 1px solid #000;">
-        <<set $currentImageIndex = 0>> <!-- Initialize the index variable -->
-        <<ImageDisplay Object.values(setup.MercImages) $currentImageIndex "currentImageIndex">>
+    <div style="width: 50%; margin-left: auto; margin-right: auto;">
+        <h2 id="locationHeading" style="width: 50%; margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 16px;">Player Portrait Selection</span></h2>
+        <div id="portrait-display-container" style="min-width: 250px; max-width: 250px; border: 1px solid #000;">
+            <<set $currentImageIndex = 0>> <!-- Initialize the index variable -->
+            <<if $player.gender is 1>> /* If the player selected "a man" */
+                    <<PlayerPortaitPickerImageDisplay Object.values(setup.MaleMercImages) $currentImageIndex "currentImageIndex">>
+                <<elseif $player.gender is 2>> /* If the player selected "a woman" */
+                    <<PlayerPortaitPickerImageDisplay Object.values(setup.FemaleMercImages) $currentImageIndex "currentImageIndex">>
+                <<else>> /* If the player selected "a person" or any other value */
+                    <<PlayerPortaitPickerImageDisplay Object.values(setup.MercImages) $currentImageIndex "currentImageIndex">>
+            <</if>>
+        </div>
     </div>
-
     <div id="reflection-text">
         As you turn around to examine yourself, the mirror captures the full extent of your physique. The fact that you don't recognize yourself is disconcerting, but you can't deny that it is you.
-
         Your attention is drawn to the nameplate bolted above the mirror. It has a name, and deep down you realize that it is yours.
     </div>
 
     <div id="name-input">
         <<textbox "$playerName" "Alex">>
-    </div>
-    <<set $playerPortraitPathZ to $playerPortraitPath>>
-    <!-- When the player clicks Continue, sanitize the input before saving it -->
-    <div id="continue-button">
-        [[Continue|Intro2][$playerIntro = 1;$playerPortraitPathZ to $playerPortraitPath; $player.name = sanitizeInput($playerName)]]
+        </div>
+        <<set $playerPortraitPathZ to $playerPortraitPath>>
+        <!-- When the player clicks Continue, sanitize the input before saving it -->
+        <div id="continue-button">
+            [[Continue|Intro2][$playerIntro = 1;$playerPortraitPathZ to $playerPortraitPath; $player.name = sanitizeInput($playerName)]]
     </div>
 
 <</nobr>>
 
 
+<!-- Listbox for gender selection -->
+<<listbox "$playergender">>
+    <<option "a man" "male" selected>>
+    <<option "a woman" "female">>
+    <<option "a person" "nonbinary">>
+<</listbox>>
+
+<!-- Set the initial image path to the first key image in the male array -->
+<<set _firstMaleImage = setup.ImagePath + Object.values(setup.MaleMercImages)[0]>>
+
+<!-- Display the initial image -->
+<img id="gender-portrait" @src="_firstMaleImage">
+
+<!-- JavaScript to handle listbox change and update the image -->
+<<script>>
+$(document).one(":passagerender", function (event) {
+    $(event.content).find("#listbox-playergender").on("change", function () {
+        // Get the selected gender
+        var selectedGender = $(this).val();
+        var imageArray;
+
+        // Determine which image array to use based on the selected gender
+        if (selectedGender === "male") {
+            imageArray = setup.MaleMercImages;
+        } else if (selectedGender === "female") {
+            imageArray = setup.FemaleMercImages;
+        } else {
+            imageArray = setup.MercImages; // Default or nonbinary selection
+        }
+
+        // Get the first image path from the selected array
+        var firstImagePath = Object.values(imageArray)[0];
+
+        // Update the image display
+        $("#gender-portrait").attr("src", setup.MediaPath + firstImagePath);
+    });
+
+    // Trigger the change event to display the initial image
+    $(event.content).find("#listbox-playergender").trigger("change");
+});
+<</script>>

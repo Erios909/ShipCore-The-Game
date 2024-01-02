@@ -45,7 +45,7 @@ window.isPlaying = function (trackID) {
 	return track !== null && track.isPlaying();
 };
 
-Config.history.maxStates = 2;
+Config.history.maxStates = 12;
 
 $(document).on(':passageend', function () {
     // Accordion toggle for sub-menus
@@ -820,4 +820,70 @@ setup.MercImages = {
     HighFemaleAsianA: '/mercenaries/high/HighFemaleAsianA.jpg',
     HighFemaleBlackB: '/mercenaries/high/HighFemaleBlackB.jpg',
     HighMaleBlackA: '/mercenaries/high/HighMaleBlackA.jpg'
+};
+
+// JavaScript section for Male Mercenaries
+setup.MaleMercImages = {
+    MidMaleWhiteB: '/mercenaries/mid/MidMaleWhiteB.jpg',
+    MidMaleBlackB: '/mercenaries/mid/MidMaleBlackB.jpg',
+    MidMaleAsianB: '/mercenaries/mid/MidMaleAsianB.jpg',
+    MidMaleBlackA: '/mercenaries/mid/MidMaleBlackA.jpg',
+    MidMaleWhiteA: '/mercenaries/mid/MidMaleWhiteA.jpg',
+    MidMaleAsianA: '/mercenaries/mid/MidMaleAsianA.jpg',
+    LowMaleLatinB: '/mercenaries/low/LowMaleLatinB.jpg',
+    LowMaleBlackB: '/mercenaries/low/LowMaleBlackB.jpg',
+    LowMaleLatinD: '/mercenaries/low/LowMaleLatinD.jpg',
+    LowMaleBlackA: '/mercenaries/low/LowMaleBlackA.jpg',
+    LowMaleAsianB: '/mercenaries/low/LowMaleAsianB.jpg',
+    LowMaleLatinC: '/mercenaries/low/LowMaleLatinC.jpg',
+    LowMaleAsianA: '/mercenaries/low/LowMaleAsianA.jpg',
+    LowMaleWhiteA: '/mercenaries/low/LowMaleWhiteA.jpg',
+    LowMaleWhiteB: '/mercenaries/low/LowMaleWhiteB.jpg',
+    LowMaleLatinA: '/mercenaries/low/LowMaleLatinA.jpg',
+    HighMaleEasternB: '/mercenaries/high/HighMaleEasternB.jpg',
+    HighMaleWhiteB: '/mercenaries/high/HighMaleWhiteB.jpg',
+    HighMaleLatinA: '/mercenaries/high/HighMaleLatinA.jpg',
+    HighMaleAsianA: '/mercenaries/high/HighMaleAsianA.jpg',
+    HighMaleAsianB: '/mercenaries/high/HighMaleAsianB.jpg',
+    HighMaleWhiteA: '/mercenaries/high/HighMaleWhiteA.jpg',
+    HighMaleEasternA: '/mercenaries/high/HighMaleEasternA.jpg',
+    HighMaleLatinB: '/mercenaries/high/HighMaleLatinB.jpg',
+    HighMaleBlackB: '/mercenaries/high/HighMaleBlackB.jpg',
+    HighMaleBlackA: '/mercenaries/high/HighMaleBlackA.jpg'
+};
+
+// JavaScript section for Female Mercenaries
+setup.FemaleMercImages = {
+    MidFemaleWhiteA: '/mercenaries/mid/MidFemaleWhiteA.jpg',
+    MidFemaleLatinA: '/mercenaries/mid/MidFemaleLatinA.jpg',
+    MidFemaleWhiteD: '/mercenaries/mid/MidFemaleWhiteD.jpg',
+    MidFemaleLatinB: '/mercenaries/mid/MidFemaleLatinB.jpg',
+    MidFemaleBlackA: '/mercenaries/mid/MidFemaleBlackA.jpg',
+    MidFemaleAsianB: '/mercenaries/mid/MidFemaleAsianB.jpg',
+    MidFemaleBlackB: '/mercenaries/mid/MidFemaleBlackB.jpg',
+    MidFemaleWhiteC: '/mercenaries/mid/MidFemaleWhiteC.jpg',
+    MidFemaleAsianA: '/mercenaries/mid/MidFemaleAsianA.jpg',
+    MidFemaleWhiteB: '/mercenaries/mid/MidFemaleWhiteB.jpg',
+    LowFemaleWhiteA: '/mercenaries/low/LowFemaleWhiteA.jpg',
+    LowFemaleBlackA: '/mercenaries/low/LowFemaleBlackA.jpg',
+    LowFemaleAsianA: '/mercenaries/low/LowFemaleAsianA.jpg',
+    LowFemaleLatinB: '/mercenaries/low/LowFemaleLatinB.jpg',
+    LowFemaleWhiteB: '/mercenaries/low/LowFemaleWhiteB.jpg',
+    LowFemaleBlackB: '/mercenaries/low/LowFemaleBlackB.jpg',
+    LowFemaleAsianB: '/mercenaries/low/LowFemaleAsianB.jpg',
+    LowFemaleLatinA: '/mercenaries/low/LowFemaleLatinA.jpg',
+    HighFemaleEasternA: '/mercenaries/high/HighFemaleEasternA.jpg',
+    HighFemaleEasternB: '/mercenaries/high/HighFemaleEasternB.jpg',
+    HighFemaleWhiteC: '/mercenaries/high/HighFemaleWhiteC.jpg',
+    HighFemaleLatinB: '/mercenaries/high/HighFemaleLatinB.jpg',
+    HighFemaleAsianB: '/mercenaries/high/HighFemaleAsianB.jpg',
+    HighFemaleLatinA: '/mercenaries/high/HighFemaleLatinA.jpg',
+    HighFemaleWhiteD: '/mercenaries/high/HighFemaleWhiteD.jpg',
+    HighFemaleAsianC: '/mercenaries/high/HighFemaleAsianC.jpg',
+    HighFemaleWhiteA: '/mercenaries/high/HighFemaleWhiteA.jpg',
+    HighFemaleBlackA: '/mercenaries/high/HighFemaleBlackA.jpg',
+    HighFemaleWhiteB: '/mercenaries/high/HighFemaleWhiteB.jpg',
+    HighFemaleAsianD: '/mercenaries/high/HighFemaleAsianD.jpg',
+    HighFemaleAsianA: '/mercenaries/high/HighFemaleAsianA.jpg',
+    HighFemaleBlackB: '/mercenaries/high/HighFemaleBlackB.jpg'
 };
