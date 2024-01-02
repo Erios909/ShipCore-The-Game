@@ -3,6 +3,22 @@
 <div style="background-color: black; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
     <h2 style="color: white; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px;">Changelist</h2>
 
+    <h3 style="color: #007bff;">V0.00263 </h3>
+    <h4 style="color: white;">Cleaning</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Cleaned up lots of bugs.</li>
+        <li>Fixed bugs reported in discord.</li>
+        <li>Redid the moods function and implemented it to all events (there are a lot so probably missed some).</li>
+        <li>Moved to a new menu system with slidwin to avoid reversions.</li>
+        <li>Added consumable logic, you will gain bad juju for taking them.</li>
+        <li>Added art for slidwin menus.</li>
+        <li>Added art for consumables</li>
+        <li> You can now pay off your debt! It won't let you pay more credits than you have anymore!</li>
+        <li> Changed character appearance selection to list boxes.</li>
+        <li> Changed mood decay/gain again. </li>
+        <li>Please report bugs on discord! https://discord.gg/BsZAt3u6cF </li>
+    </ul>
+
     <h3 style="color: #007bff;">V0.0025 Hotpatch</h3>
     <h4 style="color: white;">Moodchanges</h4>
     <ul style="margin-bottom: 20px;">
