@@ -240,3 +240,5 @@ $lowerdecksFabricatorCyberware
 
 
 <<set $currentImageIndex = 0>>
+<<set $playerGenderA to 0>>
+<<set $playerGender to 1>>
