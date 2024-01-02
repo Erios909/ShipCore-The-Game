@@ -12,7 +12,7 @@ In the mirror, you see
 <<listbox "$player.gender">>
     <<option "a man" 1 selected>>
     <<option "a woman" 2>>
-    <<option "a gender-neutral figure" 3>>
+    <<option "a person" 3>>
 <</listbox>> with
 <<listbox "$player.hairLength">>
     <<option "short" 1 selected>>

@@ -29,7 +29,7 @@
 
 <p>Confusion flickers across your face.</p>
 
-<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"No? No what? You don't have what I need or...?"</p><</say>>
+<<say '$player.name' setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>"No? No what? You don't have what I need or...?"<</say>>
 
 <<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"No."<</say>>
 
