@@ -52,3 +52,5 @@ sugarcube-2:
       name: itemchange
     capitalize:
       name: capitalize
+    setBackgroundSlide:
+      name: setBackgroundSlide

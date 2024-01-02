@@ -218,6 +218,7 @@ $lowerdecksFabricatorCyberware
     filth: 0, //starting player clean, removed by shower etc
     powerReserves: 750, // Initial power reserves
     inventory: [],  // Empty inventory
+    carcinogen: 0, // penalty for using boosters
     credits: 0,  // Initial credits
     debt: 0 // Initial Debt
 }>>

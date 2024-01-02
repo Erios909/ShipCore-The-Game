@@ -1,5 +1,5 @@
 :: Appearance [noreturn safe menu] {"position":"1000,175","size":"100,100"}
-
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
 In front of the mirror, you pause and take a moment to really look at yourself. The reflection staring back at you feels both familiar and distant, a tangible echo of who you are.
 
 Your name is <<= $player.name >>, a name that resonates with a sense of identity, though the memories attached to it feel blurred.
@@ -16,3 +16,4 @@ With a final glance, you turn away from the mirror, ready to continue your journ
 
 
 
+</div>
