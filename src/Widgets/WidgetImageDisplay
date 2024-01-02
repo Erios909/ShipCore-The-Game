@@ -1,0 +1,65 @@
+:: ImageDisplay [widget nobr]
+<!-- Define a widget named "ImageDisplay" that will display images and optionally allow navigation between them -->
+<<widget "ImageDisplay">>
+<<nobr>>
+    <!-- Check if the first argument is an array; if not, wrap it in an array -->
+    <<set _imgPaths to (Array.isArray($args[0]) ? $args[0] : [$args[0]])>>
+
+    <!-- The second argument is the index of the image to display; if not provided, default to 0 -->
+    <<set _imgIndex to $args.length > 1 ? $args[1] : 0>>
+
+    <!-- The third argument is the name of the variable to store the current index; if not provided, use a default variable -->
+    <<set _imgIndexVar to $args.length > 2 ? $args[2] : "_defaultImgIndex">>
+
+    <!-- Retrieve the current image path using the index -->
+    <<set _imgPath to _imgPaths[_imgIndex]>>
+
+    <!-- Update the variable with the current index -->
+    <<set $[_imgIndexVar] to _imgIndex>>
+
+    <!-- Create a live block to display the image and navigation buttons if there are multiple images -->
+    <<liveblock>>
+        <!-- Display the current image -->
+        [img[_imgPath]]
+
+        <!-- Check if there is more than one image to decide whether to show navigation buttons -->
+        <<if _imgPaths.length > 1>>
+            <div>
+                <!-- Create a "Previous" button to navigate to the previous image -->
+                <<button "Previous">>
+                    <!-- Calculate the previous image index and wrap around if necessary -->
+                    <<run _imgIndex = (_imgIndex - 1 + _imgPaths.length) % _imgPaths.length>>
+                    <!-- Update the image path based on the new index -->
+                    <<set _imgPath to _imgPaths[_imgIndex]>>
+                    <!-- Update the variable with the new index -->
+                    <<set $[_imgIndexVar] to _imgIndex>>
+                    <!-- Refresh the live block to show the new image -->
+                    <<update>>
+                <</button>>
+
+                <!-- Create a "Next" button to navigate to the next image -->
+                <<button "Next">>
+                    <!-- Calculate the next image index and wrap around if necessary -->
+                    <<run _imgIndex = (_imgIndex + 1) % _imgPaths.length>>
+                    <!-- Update the image path based on the new index -->
+                    <<set _imgPath to _imgPaths[_imgIndex]>>
+                    <!-- Update the variable with the new index -->
+                    <<set $[_imgIndexVar] to _imgIndex>>
+                    <!-- Refresh the live block to show the new image -->
+                    <<update>>
+                <</button>>
+            </div>
+        <</if>>
+    <</liveblock>>
+<</nobr>>
+<</widget>>
+
+
+<!-- Display a single image without navigation buttons -->
+<!-- <<ImageDisplay "path/to/single/image.jpg">> -->
+
+<!-- Display an array of images with navigation buttons, starting with the first image -->
+<!-- <<ImageDisplay ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"]>> -->
+
+<!-- Display an array of images with navigation buttons, starting with the second image, and update the variable $selectedImagePath with the current image path -->
+<!-- <<ImageDisplay ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"] 1 "$selectedImagePath">> -->

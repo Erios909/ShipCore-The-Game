@@ -56,4 +56,6 @@ sugarcube-2:
       name: setBackgroundSlide
     appearance:
       name: appearance
+    ImageDisplay:
+      name: ImageDisplay
       
