@@ -82,56 +82,43 @@
         <<appearance>>
         <</nobr>>
     </div>
+
     <<liveblock>>
-        <<print "Gender: " + $player.gender>>
-        <<print "Hair Length: " + $player.hairLength>>
-        <<print "Hair Color: " + $player.hairColor>>
-        <<print "Eye Color: " + $player.eyeColor>>
-        <<print "Skin Color: " + $player.skinColor>>
-        <<print "Build: " + $player.build>>
-        <<print "Height: " + $player.height>>
-        <<print "Distinctive Feature: " + $player.distinctiveFeature>>
-        <<print "Appearance: " + $player.appearance>>
-    <</liveblock>>
+        <<if def setup.ImagePath>>
+            /* Initialize $currentImageIndex if it's undefined */
+            <<if typeof $currentImageIndex === "undefined">>
+                <<set $currentImageIndex = 0>>
+            <</if>>
 
+            /* Get the array of image paths from the setup object */
+            <<if $player.gender is 1>> 
+                <<set _imgPaths to Object.values(setup.MaleMercImages)>>
+            <<elseif $player.gender is 2>> 
+                <<set _imgPaths to Object.values(setup.FemaleMercImages)>>
+            <<else>> 
+                <<set _imgPaths to Object.values(setup.MercImages)>>
+            <</if>>
 
-    <<if def setup.ImagePath>>
-        /* Initialize $currentImageIndex if it's undefined */
-        <<if typeof $currentImageIndex === "undefined">>
-            <<set $currentImageIndex = 0>>
+            /* Initialize _imgIndex if it's undefined */
+            <<set _imgIndex to $currentImageIndex>>
+
+            /* Ensure the current index is within the bounds of the image array */
+            <<if _imgIndex gte _imgPaths.length>>
+                <<set _imgIndex = 0>> /* Reset to first image if out of bounds */
+            <</if>>
+
+            /* Get the current image path using the index and prepend the base path with a slash if needed */
+            <<set _imgPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
+
+            /* Update $playerPortraitPath with the current image path */
+            <<set $playerPortraitPath to _imgPath>>
+
+            /* Display the image using a liveblock */
+            
         <</if>>
-
-        /* Get the array of image paths from the setup object */
-        <<if $player.gender is 1>> 
-            <<set _imgPaths to Object.values(setup.MaleMercImages)>>
-        <<elseif $player.gender is 2>> 
-            <<set _imgPaths to Object.values(setup.FemaleMercImages)>>
-        <<else>> 
-            <<set _imgPaths to Object.values(setup.MercImages)>>
-        <</if>>
-
-        /* Initialize _imgIndex if it's undefined */
-        <<set _imgIndex to $currentImageIndex>>
-
-        /* Ensure the current index is within the bounds of the image array */
-        <<if _imgIndex gte _imgPaths.length>>
-            <<set _imgIndex = 0>> /* Reset to first image if out of bounds */
-        <</if>>
-
-        /* Get the current image path using the index and prepend the base path with a slash if needed */
-        <<set _imgPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
-
-        /* Update $playerPortraitPath with the current image path */
-        <<set $playerPortraitPath to _imgPath>>
-
-        /* Display the image using a liveblock */
         
-    <</if>>
-    
-        /* Error handling if setup.ImagePath is not defined */
-        <<print "Error: 'setup.ImagePath' is not defined. Please define it in the JavaScript section or StoryInit passage.">>
-
-
+    <</liveblock>>
+    <div id="portrait-display-container">
     <<liveblock>>
             <div id="image-stacker">
                 <<live '<img src="' + $playerPortraitPath + '" alt="Portrait Image" class="portrait-image">'>>
@@ -156,6 +143,7 @@
                 <</button>>
             </div>
         <</if>>
+    </div>
     <div id="reflection-text">
         As you turn around to examine yourself, the mirror captures the full extent of your physique. The fact that you don't recognize yourself is disconcerting, but you can't deny that it is you.
         Your attention is drawn to the nameplate bolted above the mirror. It has a name, and deep down you realize that it is yours.
