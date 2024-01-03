@@ -814,6 +814,30 @@ body.splash1 .passage {
 }
 /* Horizontal Health Bar - End */
 
+/* Consumable Carcinogen Bar - Start */
+.carbarbkg {  /* class for carcinogen bar background */
+    position: relative;
+    height: 20px; /* Increased height for better visibility */
+    width: 100%;
+    background-color: #555; /* Dark gray background */
+    border-radius: 5px; /* Rounded corners */
+    z-index: 10;
+    visibility: visible;
+}
+
+.carhzbar {  /* class for carcinogen bar */
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 100%; /* Full height of the background */
+    border-radius: 5px; /* Match background border-radius */
+    z-index: 20;
+    transition: width ease 1s, background-color ease 1s;
+    background-color: black; /* Default color, can change based on value */
+}
+/* Horizontal Carcinogen Bar - End */
+
+
 /* SlideWin styling v1.0 */
 body.slideWin {
 	overflow: hidden;
@@ -990,6 +1014,32 @@ body.slideWin {
 
 
 /* Add this to your story's Stylesheet section */
+
+
+#carcinogenDisplay {
+    position: relative; /* or 'absolute' depending on your layout */
+    z-index: 10; /* high value to ensure it's on top */
+    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black background */
+    color: white; /* white text color */
+    font-size: 1.2em; /* larger font size */
+    padding: 10px; /* padding around the text */
+    border-radius: 5px; /* rounded corners for the background */
+    margin-top: 10px; /* space from the top or other elements */
+    text-align: center; /* center the text */
+}
+
+#carcinogenWarning {
+    position: relative; /* or 'absolute' depending on your layout */
+    z-index: 10; /* high value to ensure it's on top */
+    background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black background */
+    color: red; /* white text color */
+    font-size: 1.2em; /* larger font size */
+    padding: 10px; /* padding around the text */
+    border-radius: 5px; /* rounded corners for the background */
+    margin-top: 10px; /* space from the top or other elements */
+    text-align: center; /* center the text */
+}
+
 
 /* Flex container for all consumable items */
 #consumables-container {
