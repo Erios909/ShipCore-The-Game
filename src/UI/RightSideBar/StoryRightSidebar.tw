@@ -9,6 +9,8 @@
 <<if $playerIntro3 >= 1>>
 <div class="sidebar" id="rightside-navigation">
     <ul class="nano-content">
+
+    <!-- Personal Management -->
         <li class="sub-menu">
             <<link "Personal Management">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
@@ -17,77 +19,120 @@
             <ul class="content hidden">
                 <li><<link 'View Change Log'>><<run slideWin("changelist")>><<setBackgroundSlide setup.ImagePath+'/ui/none.png'>><</link>></li>
                 <li><<link 'Consumables'>><<run slideWin("Consumables")>><<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab3.jpg'>><</link>></li>
-                <li><<link 'Stash'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
                 <li><<link 'Companions'>><<run slideWin("Companions")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
-                <li><<link 'Reputation'>><<run slideWin("Reputation")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Stash'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
                 <li><<link 'Journal'>><<run slideWin("Journal")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
                 <li><<link 'Appearance'>><<run slideWin("Appearance")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
+
+    <!-- Ship Management Section -->
         <li class="sub-menu">
-            <<link "Ship Managemnt">>
+            <<link "Ship Management">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Ship Management
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <li><<link 'Cargo Management'>><<run slideWin("CargoManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Crew Management'>><<run slideWin("CrewManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Hardware Management'>><<run slideWin("HardwareManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Player Ship Specs'>><<run slideWin("PlayerShipSpecs")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
-        <!-- Add more sections as needed -->
+
+    <!-- Fleet Management Section -->
         <li class="sub-menu">
             <<link "Fleet Management">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Fleet Management
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <li><<link 'Fleet Directives'>><<run slideWin("FleetDirectives")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Fleet Budgets'>><<run slideWin("FleetBudgets")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Fleet Commanders'>><<run slideWin("FleetCommanders")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Battlelog'>><<run slideWin("Battlelog")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
+
+
+        <!-- Business Management Section -->
         <li class="sub-menu">
             <<link "Business Management">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Business Management
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <<link 'Business Management'>><<run slideWin("BusinessManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Corporate Ledgers'>><<run slideWin("CorporateLedgers")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Transshipment'>><<run slideWin("Transshipment")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Business Directives'>><<run slideWin("BusinessDirectives")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Conflict Resolution'>><<run slideWin("ConflictManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
             </ul>
         </li>
+
+
+        <!-- Station Management Section -->
         <li class="sub-menu">
             <<link "Station Management">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Station Management
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <li><<link 'Pinned Station One'>><<run slideWin("PinnedStationOne")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Pinned Station Two'>><<run slideWin("PinnedStationTwo")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Station Ledger'>><<run slideWin("StationLedger")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Station Warehousing'>><<run slideWin("StationWarehousing")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
+
+
+        <!-- Colony Management Section -->
         <li class="sub-menu">
             <<link "Colony Management">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Colony Management
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <<link 'Pinned Colony 1'>><<run slideWin("PinnedColonyOne")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Pinned Colony 2'>><<run slideWin("PinnedColonyTwo")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Colonies Overview'>><<run slideWin("ColonyManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Economic Edicts'>><<run slideWin("EconomicEdicts")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Military Edicts'>><<run slideWin("MilitaryEdicts")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Population Edicts'>><<run slideWin("PopulationEdicts")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
             </ul>
         </li>
+
+
+        <!-- Diplomacy Section -->
         <li class="sub-menu">
             <<link "Diplomacy">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Diplomacy
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Factions'>><<run slideWin("FactionsMenu")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <<link 'Factions'>><<run slideWin("FactionsMenu")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Negotiations'>><<run slideWin("Negotiations")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Reputation'>><<run slideWin("Reputation")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Incident Log'>><<run slideWin("IncidentLogs")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
             </ul>
         </li>
+
+        
+        <!-- Computronics Section -->
         <li class="sub-menu">
             <<link "Computronics">>
                 <span class="sc-icon sc-caret-right pull-right"></span>
-                Another Section
+                Computronics
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <<link 'Main Computer'>><<run slideWin("MainComputer")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Physical ANUF'>><<run slideWin("PhysicalANUF")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Projection ANUF'>><<run slideWin("ProjectionANUF")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Utility ANUF'>><<run slideWin("UtilityANUF")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
+                <<link 'Authorization'>><<run slideWin("AUTHORIZATION")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>>
             </ul>
         </li>
+
     </ul>
 </div>
 <</if>>

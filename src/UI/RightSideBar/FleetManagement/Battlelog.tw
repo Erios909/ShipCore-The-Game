@@ -1,0 +1,6 @@
+:: Battlelog [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <h2>Fleet Battlelog</h2>
+    <p>Records of recent fleet engagements and outcomes.</p>
+    <!-- Placeholder for dynamic content on fleet battle history -->
+</div>

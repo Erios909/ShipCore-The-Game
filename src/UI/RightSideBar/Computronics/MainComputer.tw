@@ -1,0 +1,6 @@
+:: MainComputer [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <h2>Communicate with MainComputer</h2>
+    <p>Interface for direct communication with the ship's MainComputer.</p>
+    <!-- Placeholder for interactive dialogue or commands with MainComputer -->
+</div>

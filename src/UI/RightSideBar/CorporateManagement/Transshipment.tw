@@ -1,0 +1,6 @@
+:: Transshipment [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <h2>Transshipment Info</h2>
+    <p>Logistics and information on goods transportation.</p>
+    <!-- Placeholder for dynamic content related to transshipment -->
+</div>
