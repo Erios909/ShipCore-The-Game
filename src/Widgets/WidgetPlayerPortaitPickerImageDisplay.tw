@@ -2,57 +2,7 @@
 <<widget "PlayerPortaitPickerImageDisplay">>
 <<nobr>>
     /* Ensure setup.ImagePath is defined */
-    <<if def setup.ImagePath>>
-        /* Initialize $currentImageIndex if it's undefined */
-        <<if typeof $currentImageIndex === "undefined">>
-            <<set $currentImageIndex = 0>>
-        <</if>>
-
-        /* Get the array of image paths from the setup object */
-        <<set _imgPaths to Object.values(setup.MercImages)>>
-
-        /* Initialize _imgIndex if it's undefined */
-        <<set _imgIndex to $currentImageIndex>>
-
-        /* Ensure the current index is within the bounds of the image array */
-        <<if _imgIndex gte _imgPaths.length>>
-            <<set _imgIndex = 0>> /* Reset to first image if out of bounds */
-        <</if>>
-
-        /* Get the current image path using the index and prepend the base path with a slash if needed */
-        <<set _imgPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
-
-        /* Update $playerPortraitPath with the current image path */
-        <<set $playerPortraitPath to _imgPath>>
-
-        /* Display the image using a liveblock */
-        <<liveblock>>
-            <div id="image-stacker">
-                <<live '<img src="' + $playerPortraitPath + '" alt="Portrait Image" class="portrait-image">'>>
-                <<live '<img src="' + setup.ImagePath + 'ui/none.png" alt="Blank" class="second-image">'>>
-            </div>
-        <</liveblock>>
-        <!-- Check if there is more than one image to decide whether to show navigation buttons -->
-        <<if _imgPaths.length > 1>>
-            <div id="img-selectors">
-                <<button "Previous">>
-                    <<run _imgIndex = ($currentImageIndex - 1 + _imgPaths.length) % _imgPaths.length>>
-                    <<set $currentImageIndex to _imgIndex>>
-                    <<set $playerPortraitPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
-                    <<update "#image-stacker">>
-                <</button>>
-
-                <<button "Next">>
-                    <<run _imgIndex = ($currentImageIndex + 1) % _imgPaths.length>>
-                    <<set $currentImageIndex to _imgIndex>>
-                    <<set $playerPortraitPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
-                    <<update "#image-stacker">>
-                <</button>>
-            </div>
-        <</if>>
-    <<else>>
-        /* Error handling if setup.ImagePath is not defined */
-        <<print "Error: 'setup.ImagePath' is not defined. Please define it in the JavaScript section or StoryInit passage.">>
-    <</if>>
+    
+    
 <</nobr>>
 <</widget>>

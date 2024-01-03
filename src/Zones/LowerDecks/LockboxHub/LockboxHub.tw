@@ -20,7 +20,7 @@ The Lockbox Hub offers a reliable service for the reservation and management of 
 <<if $talkedToManager == false>>
 [[Inquire about locker and delivery service (00:30)|LockboxHubInquire][$talkedToManager = true; $timeadd = 30]]
 <<else>>
-    <<link "Check your locker storage. (00:15)" "Stash">>
+    <<link 'Check your Lockbox Storage.'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>>
     <<set $timeadd += 15>>
 <</link>><br>
     <<if $player.credits >= 300>>

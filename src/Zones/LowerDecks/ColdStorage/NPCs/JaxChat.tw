@@ -15,7 +15,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>Jax nods to you as you come back up to him.</p>
 <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got some more questions?"<</say>>
-<<say $player.name setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+<<say '$player.name' $playerPortraitPathZ>>
     [[Can you tell me more about the station?|JaxAskStation][$timeadd += 5]]<br>
     [[Who are the people around here?|JaxAskPeople][$timeadd += 5]]<br>
     [[How can I earn some credits quickly?|JaxAskWork][$timeadd += 5]]<br>
