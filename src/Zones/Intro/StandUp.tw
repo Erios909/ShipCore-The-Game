@@ -1,5 +1,5 @@
 :: Stand Up {"position":"500,425","size":"100,100"}
- <<nobr>>
+ <<nobr>><<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>

@@ -1,8 +1,0 @@
-:: PlayerPortaitPickerImageDisplay [widget nobr]
-<<widget "PlayerPortaitPickerImageDisplay">>
-<<nobr>>
-    /* Ensure setup.ImagePath is defined */
-    
-    
-<</nobr>>
-<</widget>>
