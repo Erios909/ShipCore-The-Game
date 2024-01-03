@@ -46,6 +46,9 @@
     /* Your styles for the first image */
     z-index: 1; /* Ensures this image is above the second image */
     position: relative; /* Required for z-index to take effect */
+	min-width: 250px;
+    max-width: 250px;
+    min-height: 250px;
 }
 
 .second-image {
@@ -63,6 +66,8 @@
     min-width: 250px;
     max-width: 250px;
     min-height: 250px;
+	margin-left: auto;
+    margin-right: auto;
     border: 1px solid #000;
     display: flex;
     flex-direction: column;
