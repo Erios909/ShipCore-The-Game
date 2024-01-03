@@ -278,11 +278,12 @@ input[type=range] {
 /* Styling and Colours of the Right UI Bar. */
 #right-ui-bar {
 	background-color: #222;
-	border-right: 2px solid #444;
+        border-right: 2px solid #444;
+        border-left: 1px solid #444;
 	text-align: center;
-    background-image: url(images//uisidebar.jpg);
-    background-size: cover;
-    background-position: center center;
+        background-image: url(images//uisidebar.jpg);
+        background-size: cover;
+        background-position: center center;
 }
 #right-ui-bar-toggle {
 	font-size: 1.2em;
