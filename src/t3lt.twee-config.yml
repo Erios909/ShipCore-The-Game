@@ -56,8 +56,8 @@ sugarcube-2:
       name: setBackgroundSlide
     appearance:
       name: appearance
-    PlayerPortaitPickerImageDisplay:
-      name: PlayerPortaitPickerImageDisplay
+    ImageDisplay:
+      name: ImageDisplay
     # start events
     on:
       container: true

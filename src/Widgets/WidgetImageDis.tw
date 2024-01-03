@@ -1,0 +1,29 @@
+:: ImageDis [widget nobr]
+<<widget "ImageDis">>
+    <<nobr>>
+        /* Parameters: _imageArray (array of image paths), _imageIndex (optional index or "random") */
+        <<set _imageArray to $args[0]>>
+        <<set _imageIndex to $args.length > 1 ? $args[1] : 0>>
+
+        /* Ensure setup.ImagePath is defined */
+        <<if def setup.ImagePath>>
+            /* Validate _imageIndex or handle "random" index */
+            <<if _imageIndex === "random">>
+                <<set _imageIndex to Math.floor(Math.random() * _imageArray.length)>>
+            <<elseif isNaN(parseInt(_imageIndex)) || _imageIndex gte _imageArray.length || _imageIndex lt 0>>
+                /* Default to first image if index is invalid or out of bounds */
+                <<set _imageIndex to 0>>
+            <</if>>
+
+            /* Get the current image path using the index */
+            <<set _imgPath to setup.ImagePath + (_imageArray[_imageIndex].startsWith('/') ? '' : '/') + _imageArray[_imageIndex]>>
+
+            /* Display the image */
+            <<print '<img src="' + _imgPath + '" alt="Image" class="generic-image">'>>
+        <<else>>
+            /* Error handling if setup.ImagePath is not defined */
+            <<print "Error: 'setup.ImagePath' is not defined. Please define it in the JavaScript section or StoryInit passage.">>
+        <</if>>
+    <</nobr>>
+<</widget>>
+
