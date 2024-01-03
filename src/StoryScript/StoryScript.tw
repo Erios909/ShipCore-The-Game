@@ -1,4 +1,26 @@
 :: StoryScript [script] {"position":"1925,100"}
+
+
+/*
+	Debug Settings.
+*/
+(function () {
+	Setting.addHeader("Debug Settings");
+
+	function initSettingDebug() {
+		Config.debug = settings.debug;
+	}
+	Setting.addToggle("debug", {
+		label    : "Enable test/debug mode?",
+		default  : false,
+		onInit   : initSettingDebug,
+		onChange : function () {
+			initSettingDebug();
+			window.location.reload();
+		}
+	});
+})();
+
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
 	// Change this to the path where the HTML file is
 	// located if you want to run this from inside Twine.
