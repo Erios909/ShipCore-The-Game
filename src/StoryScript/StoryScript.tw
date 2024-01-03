@@ -407,16 +407,26 @@ window.sanitizeInput = function(input) {
 
 
 window.UpdateStatBar = function (currentValue, maxValue, barId, isInverse) {
-    var percentage = Math.floor((currentValue / maxValue) * 100);
+    var percentage;
     var minPercentage = 5;
-    
+    var barElement = document.getElementById(barId);
+
+    if (currentValue === undefined || currentValue === 0) {
+        percentage = minPercentage; // Minimal width to show an empty bar
+        if (barElement) {
+            barElement.style.width = percentage + '%';
+            barElement.style.backgroundColor = 'black'; // Black color for undefined or zero value
+        }
+        return; // Exit the function early
+    }
+
+    percentage = Math.floor((currentValue / maxValue) * 100);
+
     if (isInverse) {
         percentage = 100 - percentage;
     }
 
     percentage = Math.max(percentage, minPercentage);
-
-    var barElement = document.getElementById(barId);
 
     if (barElement) {
         barElement.style.width = percentage + '%';
@@ -424,10 +434,9 @@ window.UpdateStatBar = function (currentValue, maxValue, barId, isInverse) {
         var color;
         if (isInverse) {
             // For inverted bars: Red when full (high percentage), Green when low (low percentage).
-                      color = percentage >= 75 ? 'red' :
+            color = percentage >= 75 ? 'red' :
                     percentage >= 50 ? 'orange' :
                     percentage >= 25 ? 'lightgreen' : 'green';
-
         } else {
             // For non-inverted bars: Green when full (high percentage), Red when low (low percentage).
             color = percentage >= 75 ? 'green' :
@@ -438,6 +447,7 @@ window.UpdateStatBar = function (currentValue, maxValue, barId, isInverse) {
         barElement.style.backgroundColor = color;
     }
 };
+
 
 
 

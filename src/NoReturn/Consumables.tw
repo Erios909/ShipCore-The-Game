@@ -1,9 +1,23 @@
 :: Consumables [noreturn safe menu]
 <<nobr>>
-    <<liveblock>>
+    
         <!-- Carcinogen Level Display -->
         <div id="carcinogenDisplay">Carcinogen Level: <<live $player.carcinogen + '%' >></div>
-        <br>
+        <<liveblock>>
+        <<if $player.carcinogen >= 90>>
+            <div id="carcinogenWarning">POTENTIAL FATAL OVERDOSE DETECTED INJECTION SYSTEM OFFLINE</div>
+        <</if>>
+        <</liveblock>>
+        <div class="carbarbkg">
+            <div id="carcinogenbar" class="carhzbar"></div>
+        </div>
+
+
+        <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
+    <<liveblock>>
+
+
+
         
         <!-- Flex container for all consumable items -->
         <div id="consumables-container">
@@ -12,10 +26,13 @@
                 <<if $playerConsumables.nanoDocInjector > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use NanoDoc Injector">>
-                            <<set $player.health = Math.min($player.health + 1000, 1000)>>
-                            <<set $playerConsumables.nanoDocInjector -= 1>>
-                            <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.health = Math.min($player.health + 1000, 1000)>>
+                                <<set $playerConsumables.nanoDocInjector -= 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.nanoDocInjector>></div> <!-- Updated to class for consistency -->
                     </div>
@@ -29,10 +46,14 @@
                 <<if $playerConsumables.euphorixVape > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use Euphorix Vape">>
-                            <<set $player.mood = 1000>>
-                            <<set $playerConsumables.euphorixVape -= 1>>
-                            <<set $playerConsumablesTracker.euphorixVape += 1>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.mood = 1000>>
+                                <<set $playerConsumables.euphorixVape -= 1>>
+                                <<set $playerConsumablesTracker.euphorixVape += 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.euphorixVape>></div> <!-- Updated to class for consistency -->
                     </div>
@@ -46,10 +67,14 @@
                 <<if $playerConsumables.zenithPulse > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use Zenith Pulse">>
-                            <<set $player.stress = Math.max($player.stress - 1000, 0)>>
-                            <<set $playerConsumables.zenithPulse -= 1>>
-                            <<set $playerConsumablesTracker.zenithPulse += 1>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.stress = Math.max($player.stress - 1000, 0)>>
+                                <<set $playerConsumables.zenithPulse -= 1>>
+                                <<set $playerConsumablesTracker.zenithPulse += 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.zenithPulse>></div> <!-- Updated to class for consistency -->
                     </div>
@@ -63,10 +88,14 @@
                 <<if $playerConsumables.psycheLockCapsule > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use PsycheLock Capsule">>
-                            <<set $player.trauma = Math.max($player.trauma - 1000, 0)>>
-                            <<set $playerConsumables.psycheLockCapsule -= 1>>
-                            <<set $playerConsumablesTracker.psycheLockCapsule += 1>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.trauma = Math.max($player.trauma - 1000, 0)>>
+                                <<set $playerConsumables.psycheLockCapsule -= 1>>
+                                <<set $playerConsumablesTracker.psycheLockCapsule += 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.psycheLockCapsule>></div> <!-- Updated to class for consistency -->
                     </div>
@@ -80,10 +109,14 @@
                 <<if $playerConsumables.vigorMaxShot > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use VigorMax Shot">>
-                            <<set $player.fatigue = 0>>
-                            <<set $playerConsumables.vigorMaxShot -= 1>>
-                            <<set $playerConsumablesTracker.vigorMaxShot += 1>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.fatigue = 0>>
+                                <<set $playerConsumables.vigorMaxShot -= 1>>
+                                <<set $playerConsumablesTracker.vigorMaxShot += 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.vigorMaxShot>></div> <!-- Updated to class for consistency -->
                     </div>
@@ -97,10 +130,14 @@
                 <<if $playerConsumables.puriDermSpray > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use PuriDerm Spray">>
-                            <<set $player.filth = 0>>
-                            <<set $playerConsumables.puriDermSpray -= 1>>
-                            <<set $playerConsumablesTracker.puriDermSpray += 1>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.filth = 0>>
+                                <<set $playerConsumables.puriDermSpray -= 1>>
+                                <<set $playerConsumablesTracker.puriDermSpray += 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.puriDermSpray>></div> <!-- Updated to class for consistency -->
                     </div>
@@ -114,10 +151,14 @@
                 <<if $playerConsumables.energyCellBoost > 0>>
                     <div class="consumables-button-wrapper">
                         <<button "Use Energy Cell Boost">>
-                            <<set $player.powerReserves = 1000>>
-                            <<set $playerConsumables.energyCellBoost -= 1>>
-                            <<set $playerConsumablesTracker.energyCellBoost += 1>>
+                            <<if $player.carcinogen < 90>>
+                                <<set $player.powerReserves = 1000>>
+                                <<set $playerConsumables.energyCellBoost -= 1>>
+                                <<set $playerConsumablesTracker.energyCellBoost += 1>>
+                                <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <</if>>
                             <<update>>
+                            <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>
                         <</button>>
                         <div class="consumables-count">Remaining: <<print $playerConsumables.energyCellBoost>></div> <!-- Updated to class for consistency -->
                     </div>

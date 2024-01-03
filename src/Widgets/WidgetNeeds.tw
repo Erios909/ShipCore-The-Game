@@ -16,6 +16,8 @@
         <<set _halfLife = 360>> /* Adjusted half-life to 60 minutes for a faster decay rate */
         <<set _adjustmentFactor = _maxDecay * (1 - Math.exp(-0.693 * _timeDifference / _halfLife))>>
         /* This limits the adjustment factor based on an exponential decay curve */
+                /* Calculate the carcinogen impact factor */
+        <<set _carcinogenFactor = 1 + ($player.carcinogen / 100) * 9>>
 
         <<set _reducedFactor = _adjustmentFactor / 122>> 
         <<set $player.health = Math.clamp($player.health + _reducedFactor, 0, 1000)>>
@@ -24,9 +26,15 @@
         <<set $player.stress = Math.clamp($player.stress - _reducedFactor, 0, 1000)>>
         
         
-        <<set _fatigueReductionFactor = _adjustmentFactor / 1>> /* Use the full adjustment factor for fatigue */
-        <<set $player.fatigue = Math.clamp($player.fatigue + _fatigueReductionFactor, 0, 1000)>>
-        <<set $player.filth = Math.clamp($player.filth + _fatigueReductionFactor, 0, 1000)>>
+        /* Apply changes to fatigue and filth with consideration for carcinogen factor (faster increase) */
+        <<set _fatigueFilthIncreaseFactor = (_adjustmentFactor / 1) * (_carcinogenFactor / 2)>>
+        <<set $player.fatigue = Math.clamp($player.fatigue + _fatigueFilthIncreaseFactor, 0, 1000)>>
+        <<set $player.filth = Math.clamp($player.filth + _fatigueFilthIncreaseFactor, 0, 1000)>>
+
+        /* Carcinogen adjustment: reduce by 1 point per hour */
+        <<set _carcinogenReduction = Math.floor(_timeDifference / 60)>>
+        <<set $player.carcinogen = Math.max($player.carcinogen - _carcinogenReduction, 0)>>
+
     <</if>>
 
     /* Check for any need dropping below 50 and set $breakdown accordingly */
