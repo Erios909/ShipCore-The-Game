@@ -53,7 +53,7 @@ He smiles and nods at you.
 <br><br>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got any questions for me? I can answer them for you now, or if I'm still around you can check back."<</say>>
 
-<<say $player.name setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+<<say '$player.name' $playerPortraitPathZ>>
     [[Can you tell me more about the station?|JaxAskStation][$timeadd += 5]]<br>
     [[Who are the people around here?|JaxAskPeople][$timeadd += 5]]<br>
     [[How can I earn some credits quickly?|JaxAskWork][$timeadd += 5]]<br>

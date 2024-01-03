@@ -58,4 +58,49 @@ sugarcube-2:
       name: appearance
     PlayerPortaitPickerImageDisplay:
       name: PlayerPortaitPickerImageDisplay
+    # start events
+    on:
+      container: true
+      children:
+        - which
+    one:
+      container: true
+      children:
+        - which
+    event:
+      container: true
+      children:
+        - which
+      deprecated: true
+      depecatedSuggestions:
+        - on
+        - off
+    which:
+      parents:  
+        - on
+        - off
+        - event
+    trigger: {}
+    off: {}
+    # end events
+    # star live update
+    live:
+      name: live
+    l:
+      name: l
+    lh:
+      name: lh
+    liveblock:
+      name: liveblock
+      container: true
+    lb:
+      name: lb
+      container: true
+    update:
+      name: update
+    upd:
+      name: upd
+    #end star live update
+    
+
       

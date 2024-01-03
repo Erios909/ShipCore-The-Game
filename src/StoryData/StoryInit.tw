@@ -240,5 +240,9 @@ $lowerdecksFabricatorCyberware
 
 
 <<set $currentImageIndex = 0>>
-<<set $playerGenderA to 0>>
+<<set $playerGenderA to 1>>
 <<set $playerGender to 1>>
+
+
+<<set $playerGenderA to 1>> <!-- Default gender value to "Man" -->
+

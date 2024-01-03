@@ -14,11 +14,11 @@
         <<else>>The mirror is cracked, making your reflection fragmented and unclear.
         <</if>>
     </div>
-
+    
     <div id="character-customization">
         <<nobr>>
         In the mirror, you see
-        <<listbox "$player.gender2">>
+        <<listbox "$player.gender">>
         <<option "a man" 1 selected>>
         <<option "a woman" 2>>
         <<option "a person" 3>>
@@ -82,20 +82,80 @@
         <<appearance>>
         <</nobr>>
     </div>
+    <<liveblock>>
+        <<print "Gender: " + $player.gender>>
+        <<print "Hair Length: " + $player.hairLength>>
+        <<print "Hair Color: " + $player.hairColor>>
+        <<print "Eye Color: " + $player.eyeColor>>
+        <<print "Skin Color: " + $player.skinColor>>
+        <<print "Build: " + $player.build>>
+        <<print "Height: " + $player.height>>
+        <<print "Distinctive Feature: " + $player.distinctiveFeature>>
+        <<print "Appearance: " + $player.appearance>>
+    <</liveblock>>
 
-    <div style="width: 50%; margin-left: auto; margin-right: auto;">
-        <h2 id="locationHeading" style="width: 50%; margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 16px;">Player Portrait Selection</span></h2>
-        <div id="portrait-display-container" style="min-width: 250px; max-width: 250px; border: 1px solid #000;">
-            <<set $currentImageIndex = 0>> <!-- Initialize the index variable -->
-            <<if $player.gender is 1>> /* If the player selected "a man" */
-                    <<PlayerPortaitPickerImageDisplay Object.values(setup.MaleMercImages) $currentImageIndex "currentImageIndex">>
-                <<elseif $player.gender is 2>> /* If the player selected "a woman" */
-                    <<PlayerPortaitPickerImageDisplay Object.values(setup.FemaleMercImages) $currentImageIndex "currentImageIndex">>
-                <<else>> /* If the player selected "a person" or any other value */
-                    <<PlayerPortaitPickerImageDisplay Object.values(setup.MercImages) $currentImageIndex "currentImageIndex">>
-            <</if>>
-        </div>
-    </div>
+
+    <<if def setup.ImagePath>>
+        /* Initialize $currentImageIndex if it's undefined */
+        <<if typeof $currentImageIndex === "undefined">>
+            <<set $currentImageIndex = 0>>
+        <</if>>
+
+        /* Get the array of image paths from the setup object */
+        <<if $player.gender is 1>> 
+            <<set _imgPaths to Object.values(setup.MaleMercImages)>>
+        <<elseif $player.gender is 2>> 
+            <<set _imgPaths to Object.values(setup.FemaleMercImages)>>
+        <<else>> 
+            <<set _imgPaths to Object.values(setup.MercImages)>>
+        <</if>>
+
+        /* Initialize _imgIndex if it's undefined */
+        <<set _imgIndex to $currentImageIndex>>
+
+        /* Ensure the current index is within the bounds of the image array */
+        <<if _imgIndex gte _imgPaths.length>>
+            <<set _imgIndex = 0>> /* Reset to first image if out of bounds */
+        <</if>>
+
+        /* Get the current image path using the index and prepend the base path with a slash if needed */
+        <<set _imgPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
+
+        /* Update $playerPortraitPath with the current image path */
+        <<set $playerPortraitPath to _imgPath>>
+
+        /* Display the image using a liveblock */
+        
+    <</if>>
+    
+        /* Error handling if setup.ImagePath is not defined */
+        <<print "Error: 'setup.ImagePath' is not defined. Please define it in the JavaScript section or StoryInit passage.">>
+
+
+    <<liveblock>>
+            <div id="image-stacker">
+                <<live '<img src="' + $playerPortraitPath + '" alt="Portrait Image" class="portrait-image">'>>
+                <<live '<img src="' + setup.ImagePath + 'ui/none.png" alt="Blank" class="second-image">'>>
+            </div>
+    <</liveblock>>
+        <!-- Check if there is more than one image to decide whether to show navigation buttons -->
+        <<if _imgPaths.length > 1>>
+            <div id="img-selectors">
+                <<button "Previous">>
+                    <<run _imgIndex = ($currentImageIndex - 1 + _imgPaths.length) % _imgPaths.length>>
+                    <<set $currentImageIndex to _imgIndex>>
+                    <<set $playerPortraitPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
+                    <<update>>
+                <</button>>
+
+                <<button "Next">>
+                    <<run _imgIndex = ($currentImageIndex + 1) % _imgPaths.length>>
+                    <<set $currentImageIndex to _imgIndex>>
+                    <<set $playerPortraitPath to setup.ImagePath + (_imgPaths[_imgIndex].startsWith('/') ? '' : '/') + _imgPaths[_imgIndex]>>
+                    <<update>>
+                <</button>>
+            </div>
+        <</if>>
     <div id="reflection-text">
         As you turn around to examine yourself, the mirror captures the full extent of your physique. The fact that you don't recognize yourself is disconcerting, but you can't deny that it is you.
         Your attention is drawn to the nameplate bolted above the mirror. It has a name, and deep down you realize that it is yours.
@@ -112,65 +172,4 @@
 
 <</nobr>>
 
-<!-- Button to set $playerGender to 1 -->
-<<button "Man">>
-    <<set $playerGenderA to 1>>
-<</button>>
-
-<!-- Button to set $playerGender to 2 -->
-<<button "Woman">>
-    <<set $playerGenderA to 2>>
-<</button>>
-
-<!-- Button to set $playerGender to 3 -->
-<<button "Non-binary">>
-    <<set $playerGenderA to 3>>
-<</button>>
-
-<!-- Display the current value of $playerGender -->
-<p>Current Gender: <<= $playerGenderA>></p>
-
-<<set $playerGender to 0>>
-<!-- Listbox for gender selection -->
-<<listbox "$playerGenderA">>
-    <<option "a man" "1" selected>>
-    <<option "a woman" "2">>
-    <<option "a person" "3">>
-<</listbox>>
-<<live $playerGenderA>>
-
-<!-- Set the initial image path to the first key image in the male array -->
-<<set _firstMaleImage = setup.ImagePath + Object.values(setup.MaleMercImages)[0]>>
-
-<!-- Display the initial image -->
-<img id="gender-portrait" @src="_firstMaleImage">
-
-<!-- JavaScript to handle listbox change and update the image -->
-<<script>>
-$(document).one(":passagerender", function (event) {
-    $(event.content).find("#listbox-playergender").on("change", function () {
-        // Get the selected gender
-        var selectedGender = State.playerGender;
-        var imageArray;
-
-        // Determine which image array to use based on the selected gender
-        if (selectedGender === "1") {
-            imageArray = setup.MaleMercImages;
-        } else if (selectedGender === "2") {
-            imageArray = setup.FemaleMercImages;
-        } else {
-            imageArray = setup.MercImages; // Default or nonbinary selection
-        }
-
-        // Get the first image path from the selected array
-        var firstImagePath = Object.values(imageArray)[0];
-
-        // Update the image display
-        $("#gender-portrait").attr("src", setup.ImagePath + firstImagePath);
-    });
-
-    // Trigger the change event to display the initial image
-    $(event.content).find("#gender-portrait").trigger("change");
-    $(document).trigger(":liveupdate");
-});
-<</script>>
+<<on 'mouseup'>><<update>><</on>>

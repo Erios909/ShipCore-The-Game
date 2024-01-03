@@ -15,7 +15,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>The Grafter's optical sensor locks onto you as you approach, his movements halting with mechanical precision.</p>
 <<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Query: Enhancements needed?"<</say>>
-<<say $player.name setup.ImagePath+'/characters/'+$playerP+'/'+$playerP+'.jpg'>>
+<<say '$player.name' $playerPortraitPathZ>>
 <<if $GrafterCyberTalk == 0>>
     [[I need help with my cyberware.|GrafterAskCyberware][$timeadd += 5]]<br>
 <<else>>
