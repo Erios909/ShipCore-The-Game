@@ -1,0 +1,34 @@
+:: CreateNPCWidget [widget]
+<<widget "CreateNPC">>
+    <<script>>
+/* Create a generic character object with default values. */
+window.characterTemplate = {
+    "portrait": "path/to/default_portrait.jpg",
+    "name": "Unnamed",
+    "maxHP": 100,
+    "ATK": 10,
+    "DEF": 10,
+    "SPD": 10,
+    "CardSet": [],
+    "shortDesc": "A short description of the character.",
+    "longDesc": "A long, detailed description of the character."
+};
+<</script>>
+    /* Retrieve the name of the NPC, which will be used as the variable name. */
+    <<set _NPCName to $args[1]>>
+
+    /* Create the NPC object with the provided attributes. */
+    <<set _NPC to clone(window.characterTemplate)>>
+    <<set _NPC.portrait to $args[0]>>
+    <<set _NPC.name to $args[1]>>
+    <<set _NPC.maxHP to $args[2]>>
+    <<set _NPC.ATK to $args[3]>>
+    <<set _NPC.DEF to $args[4]>>
+    <<set _NPC.SPD to $args[5]>>
+    <<set _NPC.CardSet to $args[6]>>
+    <<set _NPC.shortDesc to $args[7]>>
+    <<set _NPC.longDesc to $args[8]>>
+
+    /* Dynamically create a variable with the name of the NPC. */
+    <<set State.variables['NPC' + _NPCName.replace(/\s+/g, '')] to _NPC>>
+<</widget>>
