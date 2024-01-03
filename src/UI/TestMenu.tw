@@ -33,7 +33,7 @@
     <<CreateCompanion _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
     <<set $playerCompanions.push('companionJax')>>
     <<update>>
-<</button>>
+<</button>><br>
 
 <<button "Add Random Companion">>
     <<set _randomPortraitPaths to Object.values(setup.MercImages)>>
@@ -51,7 +51,7 @@
     <<CreateCompanion _randomPortrait _randomName _randomMaxHP _randomATK _randomDEF _randomSPD _randomCardSet _randomShortDesc _randomLongDesc>>
     <<set $playerCompanions.push(_companionID)>>
     <<update>>
-<</button>>
+<</button>><br>
 
 
 
@@ -82,9 +82,9 @@
     <<else>>
         <<set _noComp to 1>>
     <</if>>
-<</button>><br>
+<</button>><br><br>
 
-<<textbox "$companionIndex" "Enter index">>
+<<textbox "$companionIndex" "Enter index">><br>
 <<button "Remove Companion by Index">>
     <<if $playerCompanions.length > 0 and not isNaN($companionIndex) and parseInt($companionIndex) == $companionIndex and $companionIndex >= 0 and $companionIndex < $playerCompanions.length>>
         <<set _companionName to $playerCompanions.deleteAt(parseInt($companionIndex))>>
@@ -97,7 +97,7 @@
 <</button>><br>
 
 
-<<textbox "$companionNameToRemove" "Enter name">>
+<<textbox "$companionNameToRemove" "Enter name">><br>
 <<button "Remove Companion by Name">>
     <<set _indexToRemove to -1>>
     <<for _i = 0; _i < $playerCompanions.length; _i++>>
@@ -116,6 +116,35 @@
     <</if>>
 <</button>><br>
 
+
+<<textbox "$targetIndex" "Enter companion index">>
+
+<<button "Increase ATK">>
+    <<if $playerCompanions.length > 0 and parseInt($targetIndex) >= 0 and parseInt($targetIndex) < $playerCompanions.length>>
+        <<set _targetCompanion to State.variables[$playerCompanions[parseInt($targetIndex)]]>>
+        <<set _targetCompanion.ATK += 1>>
+        <<update>>
+    <<else>>
+        <<print "Invalid index or no companion at this index.">>
+    <</if>>
+<</button>>
+
+<<button "Decrease ATK">>
+    <<if $playerCompanions.length > 0 and parseInt($targetIndex) >= 0 and parseInt($targetIndex) < $playerCompanions.length>>
+        <<set _targetCompanion to State.variables[$playerCompanions[parseInt($targetIndex)]]>>
+        <<if _targetCompanion.ATK > 1>>
+            <<set _targetCompanion.ATK -= 1>>
+            <<update>>
+        <<else>>
+            <<print "ATK cannot be reduced below 1.">>
+        <</if>>
+    <<else>>
+        <<print "Invalid index or no companion at this index.">>
+    <</if>>
+<</button>>
+
+
+<br>
 <<liveblock>>
     <<switch _noComp>>
         <<case 0>> /* No action yet */

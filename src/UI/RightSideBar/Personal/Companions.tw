@@ -1,25 +1,26 @@
-:: Companions [noreturn safe menu] {"position":"1300,175","size":"100,100"}
-<div class="companions-container z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
-    <!-- Initialize $playerCompanions as an empty array if it's undefined -->
-    <<if not def $playerCompanions>>
-        <<set $playerCompanions to []>>
-    <</if>>
+:: Companions [noreturn safe menu nobr] {"position":"1300,175","size":"100,100"}
 
+<div class="companions-container z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
     <!-- Ensure there are always 8 companion slots -->
     <<for _i = 0; _i < 8; _i++>>
         <div class="companion-slot">
             <!-- Check if there is a companion for this slot -->
             <<if $playerCompanions.length > _i>>
                 <<set _companionKey to $playerCompanions[_i]>>
-                <<set _companion to $companions[_companionKey]>>
-                <<link _companion.name>>
-                    <img src="_companion.portrait" alt="_companion.name" class="companion-portrait">
-                <</link>>
+                <<set _companion to State.variables[_companionKey]>>
+                <!-- Portrait Block with background-image -->
+                <div class="companion-portrait" @style="'background-image: url(' + _companion.portrait + ');'"></div>
+                <!-- Name and Description Block -->
                 <div class="companion-info">
-                    <<print _companion.shortDesc>>
+                    <strong><<print _companion.name>></strong><br>
+                    <<print _companion.shortDesc>><br>
+                    <span>Max HP: <<print _companion.maxHP>></span><br>
+                    <span>ATK: <<print _companion.ATK>></span><br>
+                    <span>DEF: <<print _companion.DEF>></span><br>
+                    <span>SPD: <<print _companion.SPD>></span>
                 </div>
             <<else>>
-                <!-- Display an empty slot with a placeholder -->
+                <!-- Display an empty slot with placeholders for both portrait and info -->
                 <div class="companion-portrait empty">Empty Slot</div>
                 <div class="companion-info">No Companion</div>
             <</if>>

@@ -1314,9 +1314,15 @@ body.slideWin {
 .companion-portrait {
     width: 250px;
     height: 250px;
-    background-color: grey; /* Placeholder for images */
-    margin-bottom: 10px; /* Spacing between portrait and text */
+    background-color: grey;
+    margin-bottom: 10px;
+    z-index: 10;
+    background-position: center; /* Center the background image */
+    background-size: cover; /* Scale the image to cover the entire div */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
 }
+
+
 
 .companion-portrait img {
     width: 250px;
@@ -1324,6 +1330,7 @@ body.slideWin {
     background-color: grey; /* Placeholder for images */
     margin-bottom: 10px; /* Spacing between portrait and text */
 }
+
 
 
 .companion-info {
