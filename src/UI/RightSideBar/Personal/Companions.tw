@@ -11,7 +11,7 @@
     <<for _i = 0; _i < 8; _i++>>
         <div class="companion-slot">
             <!-- Check if there is a companion for this slot -->
-            <<if $playerCompanions.length > _i>>
+            <<if $playerCompanions && $playerCompanions.length > _i>>
                 <<set _companionKey to $playerCompanions[_i]>>
                 <<set _companion to State.variables[_companionKey]>>
                 <!-- Portrait Block with background-image as a button -->
