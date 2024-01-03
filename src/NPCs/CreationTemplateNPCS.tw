@@ -1,0 +1,22 @@
+:: CharacterTemplate
+/* This passage serves as a template for creating characters. It is not meant to be displayed, but to be cloned and filled with character-specific data. */
+
+<<script>>
+/* Create a generic character object with default values. */
+window.characterTemplate = {
+    "portrait": "path/to/default_portrait.jpg",
+    "name": "Unnamed",
+    "maxHP": 100,
+    "ATK": 10,
+    "DEF": 10,
+    "SPD": 10,
+    "CardSet": [],
+    "shortDesc": "A short description of the character.",
+    "longDesc": "A long, detailed description of the character."
+};
+<</script>>
+
+/*
+<<CreateCompanion setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
+<<set $playerCompanions.push(State.variables['companionJax'])>>
+ */

@@ -104,6 +104,8 @@ sugarcube-2:
     notify:
       name: notify
       container: true
+    CreateCompanion:
+      name: CreateCompanion
     
 
       

@@ -1,0 +1,38 @@
+:: FactionsMenu [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="factions-container z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <!-- Meltisar Faction -->
+    <div class="faction-slot faction-meltisar">
+        <div class="faction-portrait empty">Meltisar Emblem Placeholder</div>
+        <div class="faction-info">Meltisar Description Placeholder</div>
+    </div>
+
+    <!-- Starlight Revolution Faction -->
+    <div class="faction-slot faction-starlight">
+        <div class="faction-portrait empty">Starlight Revolution Emblem Placeholder</div>
+        <div class="faction-info">Starlight Revolution Description Placeholder</div>
+    </div>
+
+    <!-- Imperium Faction -->
+    <div class="faction-slot faction-imperium">
+        <div class="faction-portrait empty">Imperium Emblem Placeholder</div>
+        <div class="faction-info">Imperium Description Placeholder</div>
+    </div>
+
+    <!-- Solarian Federation Faction -->
+    <div class="faction-slot faction-solarian">
+        <div class="faction-portrait empty">Solarian Federation Emblem Placeholder</div>
+        <div class="faction-info">Solarian Federation Description Placeholder</div>
+    </div>
+
+    <!-- Ertan Republic Faction -->
+    <div class="faction-slot faction-ertan">
+        <div class="faction-portrait empty">Ertan Republic Emblem Placeholder</div>
+        <div class="faction-info">Ertan Republic Description Placeholder</div>
+    </div>
+
+    <!-- Corporate Systems Faction -->
+    <div class="faction-slot faction-corporate">
+        <div class="faction-portrait empty">Corporate Systems Emblem Placeholder</div>
+        <div class="faction-info">Corporate Systems Description Placeholder</div>
+    </div>
+</div>

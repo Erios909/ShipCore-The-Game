@@ -1275,17 +1275,132 @@ body.slideWin {
     version 1.0.0
  */
 #notify {
-    position : fixed;
+    position: fixed;
     display : block;
     width : 16em;
     right : -20em; top : 2em;
     padding : 0.5em;
     background-color : #fff;
     color : #000;
+    z-index: 455;
     -webkit-transition : right 0.3s;
     -moz-transition : right 0.3s;
     -o-transition : right 0.3s;
     transition : right 0.3s;
 }
 #notify.open { right : 0; }
+
+.companions-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 10px; /* Space between boxes */
+    padding: 10px; /* Padding around container */
+}
+
+.companion-slot {
+    width: 250px;
+    height: 450px;
+    border: 8px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.companion-portrait {
+    width: 250px;
+    height: 250px;
+    background-color: grey; /* Placeholder for images */
+    margin-bottom: 10px; /* Spacing between portrait and text */
+}
+
+.companion-info {
+    width: 250px;
+    /* Adjust height as needed, or let it grow with content */
+}
+
+.empty {
+    background-color: #444; /* Darker background for empty slots */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa; /* Lighter text color for empty slot message */
+    font-style: italic;
+}
+
+
+.factions-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    /* gap: 10px; */
+    padding: 10px;
+    flex-direction: row;
+}
+
+.faction-slot {
+    width: 340px;
+    height: 450px;
+    border: 8px solid transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: left;
+    text-align: center;
+    color: white;
+    background-color: black;
+}
+
+.faction-portrait {
+    width: 250px;
+    height: 250px;
+    background-color: black; /* Black background for images */
+    margin-bottom: 10px; /* Spacing between portrait and text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa; /* Lighter text color for empty slot message */
+    font-style: italic;
+}
+
+.faction-info {
+    width: 330px;
+    /* Adjust height as needed, or let it grow with content */
+}
+
+/* Theme colors for factions */
+.faction-meltisar {
+    border-color: #D3D3D3; /* Gray */
+    color: #FFD700; /* Gold */
+}
+
+.faction-starlight {
+    border-color: #0000FF; /* Blue */
+    color: #FFD700; /* Gold */
+}
+
+.faction-imperium {
+    border-color: #FF0000; /* Red */
+    color: white; /* Black */
+}
+
+.faction-solarian {
+    border-color: #FFFFFF; /* White */
+    color: white; /* Black */
+}
+
+.faction-ertan {
+    border-color: #008000; /* Green */
+    color: #800080; /* Purple */
+}
+
+.faction-corporate {
+    border-color: #000000; /* Black */
+    color: #FFD700; /* Gold */
+}
 

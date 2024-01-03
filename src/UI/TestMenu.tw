@@ -1,40 +1,41 @@
 :: test menu {"position":"1450,50","size":"100,100"}
-<div id="test">
-<<set $lowerdecksParts to 0>>
-<<set $lowerdecksScrap to 0>>
-<<set $lowerdecksCyberware to 0>>
-<<set $lowerdecksStolenItems to 0>>
-<<set $lowerdecksContraband to 0>>
+<<set $playerCompanions to []>>
+<<liveblock>>
+    <<if $playerCompanions.length > 0>>
+        <<for _companionName range $playerCompanions>>
+            <<set _companionVar to State.variables[_companionName]>>
+            <strong>Name:</strong> <<print _companionVar.name>><br>
+            <strong>Portrait:</strong> <img src="<<print _companionVar.portrait>>" alt="Portrait of <<print _companionVar.name>>"><br>
+            <strong>Max HP:</strong> <<print _companionVar.maxHP>><br>
+            <strong>ATK:</strong> <<print _companionVar.ATK>><br>
+            <strong>DEF:</strong> <<print _companionVar.DEF>><br>
+            <strong>SPD:</strong> <<print _companionVar.SPD>><br>
+            <strong>Card Set:</strong> <<print _companionVar.CardSet.join(", ")>><br>
+            <strong>Short Description:</strong> <<print _companionVar.shortDesc>><br>
+            <strong>Long Description:</strong> <<print _companionVar.longDesc>><br>
+            <a href="#" data-passage="Test Menu" @@.remove-companion; data-companion="_companionName">Remove Companion</a><br>
+            <hr> <!-- Horizontal line to separate companions -->
+        <</for>>
+    <<else>>
+        <p>No companions to display.</p>
+    <</if>>
+<</liveblock>>
 
-/* Gain multiple items */
-<<itemchange "parts" 3 "gain">><br> /* Expected output: ++ Parts in lightgreen */
-<<itemchange "scrap" 1 "gain">><br> /* Expected output: + Scrap in lightgreen */
-<<itemchange "cyberware" 5 "gain">><br> /* Expected output: ++ Cyberware in lightgreen */
+<<button "Add 'Jax' Companion">>
+    <<CreateCompanion setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
+    <<set $playerCompanions.push('companionJax')>>
+    <<update>>
+<</button>>
 
-/* Lose multiple items */
-<<itemchange "stolenItems" 2 "loss">><br> /* Expected output: -- StolenItems in orange */
-<<itemchange "contraband" 1 "loss">><br> /* Expected output: - Contraband in orange */
-
-/* Display the updated inventory */
-Current Inventory:<br>
-Parts: <<=$lowerdecksParts>>
-Scrap: <<=$lowerdecksScrap>>
-Cyberware: <<=$lowerdecksCyberware>>
-Stolen Items: <<=$lowerdecksStolenItems>>
-Contraband: <<=$lowerdecksContraband>>
-</div>
-
-<<set $lowerdecksParts to 5>>
-<<set $lowerdecksScrap to 5>>
-<<set $lowerdecksCyberware to 5>>
-<<set $lowerdecksStolenItems to 5>>
-<<set $lowerdecksContraband to 5>>
-
-/* Display the updated inventory */
-Current Inventory:<br>
-Parts: <<=$lowerdecksParts>>
-Scrap: <<=$lowerdecksScrap>>
-Cyberware: <<=$lowerdecksCyberware>>
-Stolen Items: <<=$lowerdecksStolenItems>>
-Contraband: <<=$lowerdecksContraband>>
-</div>
+<<script>>
+$(document).on('click', '.remove-companion', function (e) {
+    e.preventDefault();
+    var companionName = $(this).data('companion');
+    var index = $playerCompanions.indexOf(companionName);
+    if (index !== -1) {
+        $playerCompanions.splice(index, 1);
+        delete State.variables[companionName];
+    }
+    $(this).parents('liveblock').wiki('<<include "Test Menu">>');
+});
+<</script>>

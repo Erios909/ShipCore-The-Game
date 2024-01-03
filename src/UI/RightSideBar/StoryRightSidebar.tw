@@ -18,6 +18,7 @@
                 <li><<link 'View Change Log'>><<run slideWin("changelist")>><<setBackgroundSlide setup.ImagePath+'/ui/none.png'>><</link>></li>
                 <li><<link 'Consumables'>><<run slideWin("Consumables")>><<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab3.jpg'>><</link>></li>
                 <li><<link 'Stash'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
+                <li><<link 'Companions'>><<run slideWin("Companions")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
                 <li><<link 'Reputation'>><<run slideWin("Reputation")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
                 <li><<link 'Journal'>><<run slideWin("Journal")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
                 <li><<link 'Appearance'>><<run slideWin("Appearance")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
@@ -75,7 +76,7 @@
                 Another Section
             <</link>>
             <ul class="content hidden">
-                <li>Content for Another Section...</li>
+                <li><<link 'Factions'>><<run slideWin("FactionsMenu")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
         <li class="sub-menu">
