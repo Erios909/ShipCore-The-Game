@@ -160,4 +160,4 @@
 
 <</nobr>>
 
-<<on 'mouseup'>><<update>><</on>>
+<<on 'change'>><<update>><</on>>
