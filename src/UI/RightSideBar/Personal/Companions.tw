@@ -1,18 +1,41 @@
 :: Companions [noreturn safe menu nobr] {"position":"1300,175","size":"100,100"}
 
 <div class="companions-container z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <!-- Initialize the variable for selected companion slot -->
+    <<if not def _CompanionSlotSelected>>
+        <<set $CompanionSlotSelected = -1>>
+    <</if>>
+
     <!-- Ensure there are always 8 companion slots -->
+ 
     <<for _i = 0; _i < 8; _i++>>
         <div class="companion-slot">
             <!-- Check if there is a companion for this slot -->
             <<if $playerCompanions.length > _i>>
                 <<set _companionKey to $playerCompanions[_i]>>
                 <<set _companion to State.variables[_companionKey]>>
-                <!-- Portrait Block with background-image -->
+                <!-- Portrait Block with background-image as a button -->
+                    <<capture _i>>
+                        <<liveblock>>
+                            <div id="companionselectorbutton">
+                                <<if $CompanionSlotSelected != _i>>
+                                    <<button "Select">>
+                                        <<set $CompanionSlotSelected to _i>>
+                                        <<update>>
+                                    <</button>>
+                                <<else>>
+                                    <<button "Selected">> <!-- This one is selected already -->
+                                    <</button>>
+                                <</if>>
+                            </div>
+                        <</liveblock>>
+                    <</capture>>
                 <div class="companion-portrait" @style="'background-image: url(' + _companion.portrait + ');'"></div>
                 <!-- Name and Description Block -->
                 <div class="companion-info">
+                    <br>
                     <strong><<print _companion.name>></strong><br>
+                    <hr id="HuDHr">
                     <<print _companion.shortDesc>><br>
                     <span>Max HP: <<print _companion.maxHP>></span><br>
                     <span>ATK: <<print _companion.ATK>></span><br>
@@ -27,3 +50,52 @@
         </div>
     <</for>>
 </div>
+<hr id="HuDHr">
+<div class="companion-readout">
+    <<liveblock>>
+        <!-- Check if a valid companion is selected -->
+        <<if $CompanionSlotSelected >= 0 and $playerCompanions.length > $CompanionSlotSelected>>
+            <<set _selectedCompanionKey to $playerCompanions[$CompanionSlotSelected]>>
+            <<set _selectedCompanion to State.variables[_selectedCompanionKey]>>
+
+            <!-- Display the portrait of the selected companion -->
+            <div class="companion-portrait-selected" 
+     @style="'background-image: url(' + _selectedCompanion.portrait + '); background-size: cover; min-height: 250px; min-width: 250px; display: flex; justify-content: center; align-items: center; background-position: center; background-repeat: no-repeat; border: 8px solid black; border-radius: 15px;'">
+    <span class="companion-selected-bigbutton" @style="'background-image: url(' + _selectedCompanion.portrait + '); display: block; width: 250px; height: 250px; background-size: cover; background-position: center;'">
+        <<button "Contact">>
+            /* Button code replaces this line. */
+        <</button>>
+    </span>
+</div>
+
+
+
+
+        <<else>>
+            <p>No companion selected</p>
+        <</if>>
+        <hr id="HuDHr">
+    <</liveblock>>
+</div>
+
+<div class="companion-readout">
+    <<liveblock>>
+        <!-- New div for displaying detailed information about the selected companion -->
+        <<if $CompanionSlotSelected >= 0 and $playerCompanions.length > $CompanionSlotSelected>>
+            <<set _selectedCompanionKey to $playerCompanions[$CompanionSlotSelected]>>
+            <<set _selectedCompanion to State.variables[_selectedCompanionKey]>>
+
+            <!-- Display detailed information here -->
+            <h2>Details for <<print _selectedCompanion.name>></h2>
+            <p><strong>Max HP:</strong> <<print _selectedCompanion.maxHP>></p>
+            <p><strong>ATK:</strong> <<print _selectedCompanion.ATK>></p>
+            <p><strong>DEF:</strong> <<print _selectedCompanion.DEF>></p>
+            <p><strong>SPD:</strong> <<print _selectedCompanion.SPD>></p>
+            <p><strong>Description:</strong> <<print _selectedCompanion.longDesc>></p>
+        <<else>>
+            <p>Select a companion to see their details.</p>
+            
+        <</if>>
+    <</liveblock>>
+</div>
+
