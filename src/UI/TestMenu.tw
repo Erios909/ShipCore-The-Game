@@ -1,41 +1,127 @@
-:: test menu {"position":"1450,50","size":"100,100"}
+:: test menu [nobr] {"position":"1450,50","size":"100,100"}
 <<set $playerCompanions to []>>
 <<liveblock>>
     <<if $playerCompanions.length > 0>>
         <<for _companionName range $playerCompanions>>
             <<set _companionVar to State.variables[_companionName]>>
             <strong>Name:</strong> <<print _companionVar.name>><br>
-            <strong>Portrait:</strong> <img src="<<print _companionVar.portrait>>" alt="Portrait of <<print _companionVar.name>>"><br>
+            <strong>Portrait:</strong> 
+            <div class="companion-portrait">
+                <img @src="_companionVar.portrait"><br>
+            </div>
             <strong>Max HP:</strong> <<print _companionVar.maxHP>><br>
             <strong>ATK:</strong> <<print _companionVar.ATK>><br>
             <strong>DEF:</strong> <<print _companionVar.DEF>><br>
             <strong>SPD:</strong> <<print _companionVar.SPD>><br>
-            <strong>Card Set:</strong> <<print _companionVar.CardSet.join(", ")>><br>
+            <strong>Card Set:</strong> <<print _companionVar.CardSet.map(card => card.name).join(", ")>><br>
             <strong>Short Description:</strong> <<print _companionVar.shortDesc>><br>
             <strong>Long Description:</strong> <<print _companionVar.longDesc>><br>
-            <a href="#" data-passage="Test Menu" @@.remove-companion; data-companion="_companionName">Remove Companion</a><br>
-            <hr> <!-- Horizontal line to separate companions -->
+            <hr>
+            <<print _jaxPortrait>>
         <</for>>
     <<else>>
         <p>No companions to display.</p>
     <</if>>
 <</liveblock>>
 
+<br>
+
 <<button "Add 'Jax' Companion">>
-    <<CreateCompanion setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
+    <<set _jaxPortrait to setup.ImagePath+'/characters/minor/jax.jpg'>>
+    
+    <<set _cardSetJax to [{name: "CardJ1"}, {name: "CardJ2"}, {name: "CardJ3"}]>>
+    <<CreateCompanion _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
     <<set $playerCompanions.push('companionJax')>>
     <<update>>
 <</button>>
 
-<<script>>
-$(document).on('click', '.remove-companion', function (e) {
-    e.preventDefault();
-    var companionName = $(this).data('companion');
-    var index = $playerCompanions.indexOf(companionName);
-    if (index !== -1) {
-        $playerCompanions.splice(index, 1);
-        delete State.variables[companionName];
-    }
-    $(this).parents('liveblock').wiki('<<include "Test Menu">>');
-});
-<</script>>
+<<button "Add Random Companion">>
+    <<set _randomPortraitPaths to Object.values(setup.MercImages)>>
+    <<set _randomPortrait to setup.ImagePath + _randomPortraitPaths.random()>>
+    
+    <<set _randomName to ["Alex", "Morgan", "Riley", "Jordan", "Casey"].random()>>
+    <<set _randomMaxHP to random(100, 200)>>
+    <<set _randomATK to random(20, 40)>>
+    <<set _randomDEF to random(15, 30)>>
+    <<set _randomSPD to random(10, 20)>>
+    <<set _randomCardSet to [{name: "CardR1"}, {name: "CardR2"}, {name: "CardR3"}]>>
+    <<set _randomShortDesc to ["A skilled explorer.", "A cunning tactician.", "A brave warrior."].random()>>
+    <<set _randomLongDesc to ["An adventurer with a knack for survival.", "A strategic mind, always two steps ahead.", "A fearless fighter with a strong sense of justice."].random()>>
+    <<set _companionID to "companion" + _randomName>>
+    <<CreateCompanion _randomPortrait _randomName _randomMaxHP _randomATK _randomDEF _randomSPD _randomCardSet _randomShortDesc _randomLongDesc>>
+    <<set $playerCompanions.push(_companionID)>>
+    <<update>>
+<</button>>
+
+
+
+
+<br>
+
+
+
+<<set _noComp to 0>>
+
+<<button "Remove Last Companion">>
+    <<if $playerCompanions.length > 0>>
+        <<set _lastCompanionName to $playerCompanions.pop()>>
+        <<run delete State.variables[_lastCompanionName]>>
+        <<set _noComp to 2>> /* Companion removed */
+        <<update>>
+    <<else>>
+        <<set _noComp to 1>> /* No companions to remove */
+    <</if>>
+<</button>><br>
+
+<<button "Remove First Companion">>
+    <<if $playerCompanions.length > 0>>
+        <<set _firstCompanionName to $playerCompanions.shift()>>
+        <<run delete State.variables[_firstCompanionName]>>
+        <<set _noComp to 2>>
+        <<update>>
+    <<else>>
+        <<set _noComp to 1>>
+    <</if>>
+<</button>><br>
+
+<<textbox "$companionIndex" "Enter index">>
+<<button "Remove Companion by Index">>
+    <<if $playerCompanions.length > 0 and not isNaN($companionIndex) and parseInt($companionIndex) == $companionIndex and $companionIndex >= 0 and $companionIndex < $playerCompanions.length>>
+        <<set _companionName to $playerCompanions.deleteAt(parseInt($companionIndex))>>
+        <<run delete State.variables[_companionName]>>
+        <<set _noComp to 2>>
+        <<update>>
+    <<else>>
+        <<set _noComp to 3>> /* Invalid index */
+    <</if>>
+<</button>><br>
+
+
+<<textbox "$companionNameToRemove" "Enter name">>
+<<button "Remove Companion by Name">>
+    <<set _indexToRemove to -1>>
+    <<for _i = 0; _i < $playerCompanions.length; _i++>>
+        <<if State.variables[$playerCompanions[_i]].name == $companionNameToRemove>>
+            <<set _indexToRemove to _i>>
+            <<break>>
+        <</if>>
+    <</for>>
+    <<if _indexToRemove != -1>>
+        <<set _companionName to $playerCompanions.deleteAt(_indexToRemove)>>
+        <<run delete State.variables[_companionName]>>
+        <<set _noComp to 2>>
+        <<update>>
+    <<else>>
+        <<set _noComp to 4>> /* No companion found with that name */
+    <</if>>
+<</button>><br>
+
+<<liveblock>>
+    <<switch _noComp>>
+        <<case 0>> /* No action yet */
+        <<case 1>> <<print "No companions to remove.">>
+        <<case 2>> <<print "Companion removed.">>
+        <<case 3>> <<print "Invalid index.">>
+        <<case 4>> <<print "No companion found with that name.">>
+    <</switch>>
+<</liveblock>>

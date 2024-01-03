@@ -1318,6 +1318,14 @@ body.slideWin {
     margin-bottom: 10px; /* Spacing between portrait and text */
 }
 
+.companion-portrait img {
+    width: 250px;
+    height: 250px;
+    background-color: grey; /* Placeholder for images */
+    margin-bottom: 10px; /* Spacing between portrait and text */
+}
+
+
 .companion-info {
     width: 250px;
     /* Adjust height as needed, or let it grow with content */
