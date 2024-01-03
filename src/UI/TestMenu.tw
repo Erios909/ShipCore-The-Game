@@ -30,8 +30,8 @@
     <<set _jaxPortrait to setup.ImagePath+'/characters/minor/jax.jpg'>>
     
     <<set _cardSetJax to [{name: "CardJ1"}, {name: "CardJ2"}, {name: "CardJ3"}]>>
-    <<CreateCompanion _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
-    <<set $playerCompanions.push('companionJax')>>
+    <<CreateNPC _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
+    <<set $playerCompanions.push('NPCJax')>>
     <<update>>
 <</button>><br>
 
@@ -47,8 +47,8 @@
     <<set _randomCardSet to [{name: "CardR1"}, {name: "CardR2"}, {name: "CardR3"}]>>
     <<set _randomShortDesc to ["A skilled explorer.", "A cunning tactician.", "A brave warrior."].random()>>
     <<set _randomLongDesc to ["An adventurer with a knack for survival.", "A strategic mind, always two steps ahead.", "A fearless fighter with a strong sense of justice."].random()>>
-    <<set _companionID to "companion" + _randomName>>
-    <<CreateCompanion _randomPortrait _randomName _randomMaxHP _randomATK _randomDEF _randomSPD _randomCardSet _randomShortDesc _randomLongDesc>>
+    <<set _companionID to "NPC" + _randomName>>
+    <<CreateNPC _randomPortrait _randomName _randomMaxHP _randomATK _randomDEF _randomSPD _randomCardSet _randomShortDesc _randomLongDesc>>
     <<set $playerCompanions.push(_companionID)>>
     <<update>>
 <</button>><br>
