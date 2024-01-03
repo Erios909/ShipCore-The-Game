@@ -30,6 +30,8 @@
                                 <<set $player.health = Math.min($player.health + 1000, 1000)>>
                                 <<set $playerConsumables.nanoDocInjector -= 1>>
                                 <<set $player.carcinogen = Math.min($player.carcinogen + 10, 100)>>
+                            <<else>>
+                                <<notify 5s>>You cannot use more boosters right now!<</notify>>
                             <</if>>
                             <<update>>
                             <<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>>

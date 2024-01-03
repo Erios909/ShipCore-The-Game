@@ -101,6 +101,9 @@ sugarcube-2:
     upd:
       name: upd
     #end star live update
+    notify:
+      name: notify
+      container: true
     
 
       
