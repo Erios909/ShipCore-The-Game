@@ -1,0 +1,24 @@
+:: BraxtonChat [conversation] {"position":"950,725","size":"100,100"}
+<<nobr>>
+
+<<setBackground setup.ImagePath+'/locs/criminal/hideout/braxtonlair.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Underworld, Braxton's Lair",
+    outside: false,
+    vacuum: false,
+    temperature: false
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: darkred; font-weight: bold; font-size: 24px;">Braxton's Lair</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>Braxton gives you a sly grin as you approach, his eyes glinting with mischief.</p>
+<<say 'Braxton' setup.ImagePath+'/characters/antagonist/braxton.jpg'>>"What brings you to my corner of the galaxy?"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>
+    [[What's your angle here, Braxton?|BraxtonAskAngle][$timeadd += 5]]<br>
+    [[Who are your associates?|BraxtonAskAssociates][$timeadd += 5]]<br>
+    [[Got any jobs that need doing?|BraxtonAskJobs][$timeadd += 5]]<br>
+    [[I should be going. Stay out of trouble, Braxton.|ExitBraxtonLair][$timeadd += 5]]
+<</say>>
+<</nobr>>

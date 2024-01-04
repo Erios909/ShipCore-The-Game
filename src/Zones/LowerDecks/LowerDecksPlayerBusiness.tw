@@ -1,0 +1,34 @@
+:: LowerDecksPlayerBusiness [poi] {"position":"200,1200","size":"100,100"}
+<<nobr>>
+<<setBackground setup.ImagePath+'/locs/mor1/business/derelictbuilding.jpg'>>
+<<addmins $timeadd>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: #FFD700; font-weight: bold; font-size: 24px;">Your Business</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>You stand in the empty shell of what will soon become your business empire. The walls are bare, and the echo of your footsteps is a stark reminder of the work that lies ahead.</p>
+
+<!-- Location Scouting -->
+[[Scout for a better location|BusinessLocationScouting][$timeadd += 30]]
+
+<!-- Business Type Selection -->
+[[Select the type of business to establish|BusinessTypeSelection][$timeadd += 15]]
+
+<!-- Equipment Management -->
+[[Manage your equipment|EquipmentManagement][$timeadd += 10]]
+
+<!-- Resource Management -->
+[[Allocate your resources|ResourceManagement][$timeadd += 10]]
+
+<!-- Hiring Companions -->
+[[Hire companions to boost your business|HireCompanions][$timeadd += 20]]
+
+<!-- Customization and Upgrades -->
+[[Customize and upgrade your business|BusinessUpgrades][$timeadd += 25]]
+
+<!-- Defenses Against Braxton -->
+[[Invest in security to protect against Braxton|BusinessDefenses][$timeadd += 15]]
+
+<</nobr>>
+Travel:
+[[Return to the hustle and bustle of MOR-1.|Lower Decks][$timeadd = 5]]
+
+The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.

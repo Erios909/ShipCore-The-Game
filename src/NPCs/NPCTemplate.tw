@@ -20,3 +20,7 @@ window.characterTemplate = {
 <<CreateNPC setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
 <<set $playerCompanions.push(State.variables['NPCJax'])>>
  */
+
+/* Add flag for special companions, for unique NPCS having their "name" as passage flag instead of 'generic' companion chat/management passage.
+For managing generics: A passage to increase their wages, pay money for training them, moving them to other divisions/ship/fleet/etc.
+For Uniques: A passage that will take you to talking to them their main NPC node. */

@@ -1,0 +1,15 @@
+:: DaltonChat [conversation] {"position":"950,725","size":"100,100"}
+<<nobr>>
+<<setBackground setup.ImagePath+'/locs/slums/daltonshack.jpg'>>
+<<addmins $timeadd>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: #8B4513; font-weight: bold; font-size: 24px;">The Slums</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>Dalton eyes you warily from his makeshift shelter, the wear of hard living etched into his features.</p>
+<<say 'Dalton' setup.ImagePath+'/characters/slumdwellers/dalton.jpg'>>"You don't look like you're from around here. What do you want?"<</say>>
+<<say '$player.name' $playerPortraitPathZ>>
+    [[What's life like here in the slums?|DaltonAskLife][$timeadd += 5]]<br>
+    [[Seen anything unusual around here lately?|DaltonAskUnusual][$timeadd += 5]]<br>
+    [[Know where I can find some cheap supplies?|DaltonAskSupplies][$timeadd += 5]]<br>
+    [[I'll leave you be. Take care, Dalton.|LeaveSlums][$timeadd += 5]]
+<</say>>
+<</nobr>>
