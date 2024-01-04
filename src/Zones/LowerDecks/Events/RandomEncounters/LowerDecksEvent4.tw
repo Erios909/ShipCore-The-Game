@@ -28,67 +28,54 @@
 <<switch _randomEvent>>
     <<case 1>>
         <p>As you navigate the bustling marketplace, a vendor catches your eye, offering free samples of a new energy drink. The vibrant taste and rush of energy leave you feeling revitalized and ready to face the station's challenges.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>>
         <p>While traversing the crowded decks, you encounter a tourist with a bewildered expression, map in hand. Your guidance not only earns their heartfelt thanks but also a small token of appreciation.</p>
-        <<set $player.credits += 10>>
         <<creditchange 10 "positive">><br>
 
     <<case 3>>
         <p>A routine walk turns into a nerve-wracking ordeal when a security drone, its sensors glitching, marks you as a person of interest. The situation is resolved without incident, but not without a spike in your stress levels.</p>
-        <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">>
         <<set $timeadd to 5>>
         <<addmins $timeadd>><br>
 
     <<case 4>>
         <p>The market's energy is infectious today, and you find yourself haggling with a keen-eyed merchant over some spare parts. The deal you strike is favorable, boosting both your wallet and your mood.</p>
-        <<set $player.credits += 20>>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
         <<creditchange 20 "positive">>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 5>>
         <p>Amidst the hum of the Lower Decks, you're halted by a routine security check. The officers are professional, and the process is swift, leaving you with a small sense of relief as you continue on your way.</p>
-        <<set $player.mood += Math.round($player.mood * 0.01 + 2.5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 6>>
         <p>Warnings of a skilled pickpocket operating in the area have you on high alert. You take extra precautions with your belongings, avoiding any mishaps but at the cost of your energy.</p>
-        <<set $player.fatigue += Math.round($player.fatigue * 0.02 + 2.5)>>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
 
     <<case 7>>
         <p>A power outage casts the corridor into darkness, forcing you to navigate by the dim glow of emergency lights. The detour through the quiet, shadowy decks offers an unexpected moment of tranquility.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<set $timeadd to 10>>
         <<addmins $timeadd>><br>
 
     <<case 8>>
         <p>The sudden appearance of a celebrity sends a ripple of excitement through the crowd. You're swept up in the moment, the collective enthusiasm lifting your spirits.</p>
-        <<set $player.mood += Math.round($player.mood * 0.03 + 7.5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 9>>
         <p>In these trying times, a local charity's efforts to provide meals to those in need is a beacon of hope. Your decision to lend a hand not only helps others but also nourishes your own well-being.</p>
-        <<set $player.mood += Math.round($player.mood * 0.04 + 10)>>
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
 
     <<case 10>>
         <p>An emergency drill interrupts your journey, causing a slight delay. Despite the inconvenience, the display of readiness and coordination by the station's personnel is a reassuring sight.</p>
-        <<set $player.mood += Math.round($player.mood * 0.01 + 2.5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<set $timeadd to 15>>
         <<addmins $timeadd>><br>
 
     <<default>> <!-- Default Travel Event -->
         <p>Your passage through the Lower Decks is uneventful, granting you a rare opportunity for introspection. The relative calm allows you to gather your thoughts and focus on the path ahead.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 <</switch>>
 <br>

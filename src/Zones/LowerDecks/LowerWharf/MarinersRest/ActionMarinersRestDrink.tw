@@ -48,33 +48,26 @@
 <!-- Random Events -->
 <<switch _randomEvent>>
     <<case 1>> <!-- Spacer's Salute -->
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
         <p>A group of spacers celebrating a successful salvage operation welcome you to their table. The shared stories and laughter are a welcome distraction from the tough life at the port.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
     <<case 2>> <!-- Bitter Brew -->
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
         <p>Your drink is more bitter than expected. It's not terrible, but it's not the relaxing experience you were hoping for.</p>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
     <<case 3>> <!-- Old Spacer's Yarn -->
-        <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
         <p>An aged spacer regales you with stories of distant stars and close calls. Their wisdom could come in handy on your travels.</p>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
     <<case 4>> <!-- Lucrative Tip -->
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02 + 5)>>
         <p>You overhear a tip about a lucrative trade route from a loose-lipped freighter captain. This information could be worth something.</p>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
 
     <<case 5>> <!-- Serendipitous Silence -->
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <p>A sudden lull in the bar's noise grants you a moment of serenity, soothing your weary mind.</p>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 
     <<case 6>> <!-- Somber Remembrance -->
-        <<set $player.mood -= Math.round($player.mood * 0.02)>>
-        <<set $player.stress -= Math.round($player.stress * 0.02)>>
         <p>The bar observes a moment of silence for a vessel lost to the void. It's a poignant reminder of the risks all spacers share.</p>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
@@ -85,17 +78,14 @@
         <<creditchange 15 "positive">><br>
 
     <<case 8>> <!-- Eavesdropped Opportunity -->
-        <<set $player.powerReserves += Math.round($player.powerReserves * 0.02 + 5)>>
         <p>Listening in on a hushed conversation, you learn about a potential job opportunity. It pays to keep your ears open.</p>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
 
     <<case 9>> <!-- Arm-Wrestling Bout -->
-        <<set $player.health += Math.round($player.health * 0.02 + 5)>>
         <p>A challenge from a burly dockworker leads to a friendly arm-wrestling match. You don't win, but the physical exertion feels good.</p>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
 
     <<case 10>> <!-- Generous Patron -->
-        <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
         <p>A patron leaves a hefty tip at the bar and insists on buying a round for everyone. You can't help but feel a bit more cheerful.</p>
         <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 

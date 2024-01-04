@@ -29,8 +29,6 @@
 <<switch $dangerLevelScore>> <!-- Using 'true' to allow for complex condition checks -->
     <<case $dangerLevelScore < 100>> <!-- High Alert -->
         <p>The corridors echo with the sharp retort of gunfire, a stark reminder that the lower decks are a crucible of conflict. Caught in the crossfire of a violent skirmish between station security and insurgent forces, you dive for cover behind a bulkhead, the air sizzling with energy blasts. By some miracle, you emerge from the chaos unscathed, but the encounter takes its toll on your nerves and your body.</p>
-        <<set $player.health -= Math.round($player.health * 0.05 + 15)>>
-        <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
         <<set $timeadd to 30>>
         <<changemoods "health" "major" "NegEffectOnPlayer">><br>
         <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
@@ -39,7 +37,6 @@
 
     <<case $dangerLevelScore >= 100 and $dangerLevelScore < 200>> <!-- Extortion Witness -->
         <p>As you navigate the dimly lit passageways, a sudden commotion draws your attention. A group of hardened gang members, their faces obscured by menacing visors, are shaking down a local vendor. The air is thick with tension and fear. You press yourself against the wall, making yourself as inconspicuous as possible, and slip away before you draw their predatory gaze. The encounter leaves you with a heavy sense of dread, and you can't help but quicken your pace.</p>
-        <<set $player.stress += Math.round($player.stress * 0.05 + 15)>>
         <<set $timeadd to 20>>
         <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
         <<addmins $timeadd>>
@@ -47,31 +44,26 @@
 
     <<case $dangerLevelScore >= 200 and $dangerLevelScore < 300>> <!-- Tense Standoff -->
         <p>Turning a corner, you stumble upon a standoff. Two rival factions face each other down, their hands hovering over weapons, their eyes filled with mutual animosity. You hold your breath, hoping not to become collateral damage in someone else's fight. After what feels like an eternity, the groups disperse, leaving the corridor in an uneasy silence. The incident leaves you with a lingering sense of unease that clings to you like the station's recycled air.</p>
-        <<set $player.stress += Math.round($player.stress * 0.02 + 10)>>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
         <!-- I will continue until all events are done, no placeholders -->
 
     <<case $dangerLevelScore >= 300 and $dangerLevelScore < 400>> <!-- Security Drill -->
         <p>Without warning, alarms blare throughout the deck, their shrill cry sending a ripple of panic through the crowd. People scramble in all directions, seeking shelter from an unseen threat. Moments later, an announcement declares it to be a routine security drill, but the damage is done. The false alarm has frayed your nerves, leaving you with a heightened sense of vulnerability as you resume your journey through the station's labyrinthine corridors.</p>
-        <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
         <!-- I will continue until all events are done, no placeholders -->
 
     <<case $dangerLevelScore >= 400 and $dangerLevelScore < 500>> <!-- Urgent Response -->
         <p>As you round a bend, a squad of security personnel rushes past you, their boots thundering against the metal grating. They move with a purpose that suggests urgency, their faces set in grim determination. You overhear snippets of their comms chatter, something about an incident on another level. Though the situation doesn't involve you directly, the sight of the armed response is a stark reminder of the dangers that lurk within the station.</p>
-        <<set $player.stress += Math.round($player.stress * 0.01 + 5)>>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
         <!-- I will continue until all events are done, no placeholders -->
 
     <<case $dangerLevelScore >= 500 and $dangerLevelScore < 600>> <!-- Peaceful Demonstration -->
         <p>Amidst the usual din of the lower decks, a harmonious chant catches your ear. You come upon a gathering of individuals, their voices united in a call for better living conditions. Their peaceful demonstration, a rare sight on the station, offers a glimmer of hope in a place often marred by strife. The collective optimism is infectious, and you find your spirits lifted as you pass by the assembly.</p>
-        <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
         <!-- I will continue until all events are done, no placeholders -->
 
     <<case $dangerLevelScore >= 600 and $dangerLevelScore < 700>> <!-- Helpful Advice -->
         <p>While navigating the maze-like structure of the lower decks, you encounter a local security officer. With a knowing glance, they pull you aside and offer sage advice on avoiding the more perilous areas. "Keep clear of the eastern corridors during the late cycles," they whisper, before blending back into the shadows. The unexpected guidance leaves you with a sense of reassurance, a rare commodity in these parts.</p>
-        <<set $player.mood += Math.round($player.mood * 0.01 + 5)>>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
         <!-- I will continue until all events are done, no placeholders -->
 

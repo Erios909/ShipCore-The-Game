@@ -1315,34 +1315,33 @@ body.slideWin {
   }
 }
 
-.companion-selected-bigbutton .macro-button:active {
-    -webkit-animation-name: none;
-    animation-name: none;
-    /* Other styles to indicate an active state, if needed */
-}
-
-
 /* Apply hvr-buzz styles to .macro-button inside .companion-selected-bigbutton */
 .companion-selected-bigbutton .macro-button {
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-    /* Other styles for the button as needed */
-}
-
-/* Apply hvr-buzz hover, focus, and active effects to .macro-button */
-.companion-selected-bigbutton .macro-button:hover,
-.companion-selected-bigbutton .macro-button:focus,
-.companion-selected-bigbutton .macro-button:active {
-    -webkit-animation-name: hvr-buzz;
-    animation-name: hvr-buzz;
+    box-shadow: 0 0 1px transparent; /* Changed from rgba(0, 0, 0, 0) for clarity */
+    -webkit-animation-name: none;
+    animation-name: none;
     -webkit-animation-duration: 0.15s;
     animation-duration: 0.15s;
     -webkit-animation-timing-function: linear;
     animation-timing-function: linear;
+}
+
+/* Apply hvr-buzz hover effects to .macro-button */
+.companion-selected-bigbutton .macro-button:hover{
+    -webkit-animation-name: hvr-buzz;
+    animation-name: hvr-buzz;
     -webkit-animation-iteration-count: infinite;
     animation-iteration-count: infinite;
 }
+
+/* Reset the animation when not hovering or focusing */
+.companion-selected-bigbutton .macro-button:not(:hover):not(:focus) {
+    -webkit-animation-name: none;
+    animation-name: none;
+}
+
 
 
 .companions-container {
@@ -1356,7 +1355,7 @@ body.slideWin {
 
 .companion-slot {
     width: 250px;
-    height: 450px;
+    height: 100%;
     border: 8px solid black;
     display: flex;
     flex-direction: column;
@@ -1427,8 +1426,7 @@ body.slideWin {
     color: #fff; /* Text color on hover */
 }
 
-.companion-selected-bigbutton .button:focus,
-.companion-selected-bigbutton .button:active {
+.companion-selected-bigbutton .button:focus {
     background-color: black; /* Background color when focused or active */
     transition: none; /* No transition for focus/active states */
 }
