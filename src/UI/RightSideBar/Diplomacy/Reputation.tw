@@ -1,0 +1,24 @@
+:: Reputation [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <h2>Your Reputation</h2>
+    <p><strong>Lower Decks:</strong> The people of the lower deck have no strong feelings toward you.</p>
+    <p><strong>Mid Deck:</strong> The residents of the mid deck are currently indifferent to your presence.</p>
+    <p><strong>Upper Deck:</strong> You are yet to make a significant impact on the upper deck.</p>
+
+    <h3>Galactic Reputation</h3>
+    <p><strong>Meltisar System:</strong> You are a complete unknown in the Meltisar System.</p>
+    <p><strong>Imperium:</strong> To the people of the Imperium, you are a complete unknown.</p>
+    <p><strong>Solarian Federation:</strong> Within the Solarian Federation, you are yet to make a mark.</p>
+    <p><strong>Corporate Systems:</strong> Your presence is relatively unnoticed in the Corporate Systems.</p>
+    <p><strong>Ertan Republic:</strong> To the Ertan Republic, you are currently a complete unknown.</p>
+
+    <h3>Organizations and Groups</h3>
+    <p><strong>Starlight Revolution:</strong> The Starlight Revolution views you as an enigma.</p>
+    <p><strong>The Drakar:</strong> The Drakar consider you an interloper.</p>
+
+    <h3>Legendary Encounters</h3>
+    <p>You have met the following legends: none.</p>
+
+    <!-- Placeholder for additional content -->
+    <p>This section will expand as you make significant choices in the game.</p>
+</div>

@@ -28,18 +28,13 @@
     <<case 1>>
         <<if $combinedDifficultyScore <= 3>>
             <p>A street artist has created a vibrant mural that captures the essence of the Lower Decks. It draws a small, appreciative crowd, and you feel a sense of community as you pause to admire the work.</p>
-            <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
             <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<elseif $combinedDifficultyScore <= 6>>
             <p>You witness a skilled pickpocket deftly lift a wallet, but you manage to alert the victim in time. Grateful, they offer you a small reward for your vigilance.</p>
-            <<set $player.credits += 10>>
-            <<set $player.mood += Math.round($player.mood * 0.01 + 2.5)>>
             <<creditchange 10 "positive">>
             <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<else>>
             <p>A heated argument between merchants escalates, and you're caught in the crossfire. It's a stark reminder of the tension that pervades the Lower Decks.</p>
-            <<set $player.health -= Math.round($player.health * 0.02 + 5)>>
-            <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
             <<changemoods "health" "minor" "NegEffectOnPlayer">>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">>
         <</if>>
@@ -47,17 +42,13 @@
     <<case 2>>
         <<if $combinedDifficultyScore <= 3>>
             <p>You come across a vendor selling exotic fruits at a discounted price. The unexpected deal boosts your spirits and your energy levels.</p>
-            <<set $player.health += Math.round($player.health * 0.01 + 2.5)>>
-            <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
             <<changemoods "health" "minor" "PosEffectOnPlayer">>
             <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<elseif $combinedDifficultyScore <= 6>>
             <p>An unscheduled power fluctuation causes a momentary blackout. Though brief, it's a reminder of the underlying instability of the Lower Decks.</p>
-            <<set $player.stress += Math.round($player.stress * 0.01 + 2.5)>>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">>
         <<else>>
             <p>You stumble upon a clandestine deal gone wrong. The participants scatter, leaving you to hastily retreat from the chaos that ensues.</p>
-            <<set $player.stress += Math.round($player.stress * 0.03 + 7.5)>>
             <<changemoods "stress" "major" "NegEffectOnPlayer">>
             <<set $timeadd to 5>>
             <<addmins $timeadd>>
@@ -66,15 +57,12 @@
     <<case 3>>
         <<if $combinedDifficultyScore <= 3>>
             <p>A local musician plays a hauntingly beautiful melody that echoes through the corridors. The soothing sound lingers with you, lightening your step.</p>
-            <<set $player.mood += Math.round($player.mood * 0.03 + 7.5)>>
             <<changemoods "mood" "major" "PosEffectOnPlayer">>
         <<elseif $combinedDifficultyScore <= 6>>
             <p>Marketplace rumors of a potential security crackdown have everyone on edge. While nothing comes of it, the rumors alone are enough to dampen the mood.</p>
-            <<set $player.mood -= Math.round($player.mood * 0.01 + 2.5)>>
             <<changemoods "mood" "minor" "NegEffectOnPlayer">>
         <<else>>
             <p>Emergency sirens wail as you navigate through a section cordoned off by security. The sight of armed patrols and the air of urgency add to the day's stress.</p>
-            <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">>
             <<set $timeadd to 10>>
             <<addmins $timeadd>>

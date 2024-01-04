@@ -1,0 +1,6 @@
+:: FleetManagement [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <h2>Fleet Management</h2>
+    <p>Current Status: No fleet management activities recorded.</p>
+    <!-- Placeholder for dynamic content -->
+</div>

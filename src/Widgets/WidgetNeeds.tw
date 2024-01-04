@@ -29,7 +29,7 @@
         /* Apply changes to fatigue and filth with consideration for carcinogen factor (faster increase) */
         <<set _fatigueFilthIncreaseFactor = (_adjustmentFactor / 1) * (_carcinogenFactor / 2)>>
         <<set $player.fatigue = Math.clamp($player.fatigue + _fatigueFilthIncreaseFactor, 0, 1000)>>
-        <<set $player.filth = Math.clamp($player.filth + (_adjustmentFactor /1), 0, 1000)>>
+        <<set $player.filth = Math.clamp($player.filth + (_adjustmentFactor /2), 0, 1000)>>
 
         /* Carcinogen adjustment: reduce by 1 point per hour */
         <<set _carcinogenReduction = Math.floor(_timeDifference / 60)>>

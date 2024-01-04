@@ -29,20 +29,15 @@
     <<case 1>> <!-- Scenario 1 -->
         <<if $combinedDifficultyScore <= 5>>
             <p>The decks are alive with the sound of innocent mirth as a group of children chase each other, their laughter a rare and precious melody in the often grim quarters of the station. You pause to watch their game, the simple joy of their play cutting through the weight of your daily struggles and lifting your spirits.<br></p>
-            <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
             <<changemoods "mood" "major" "PosEffectOnPlayer">>
             <!-- I will continue until all events are done, no placeholders -->
         <<elseif $combinedDifficultyScore >= 6 and $combinedDifficultyScore < 8>>
             <p>A heated argument erupts in the marketplace, the air crackling with tension as two rival factions dispute over a contested stall. The clash is brief but intense, leaving bystanders, including yourself, on edge as the echoes of the confrontation fade away.<br></p>
-            <<set $player.health -= Math.round($player.health * 0.02 + 5)>>
-            <<set $player.stress += Math.round($player.stress * 0.02 + 10)>>
             <<changemoods "health" "minor" "NegEffectOnPlayer">><br>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
             <!-- I will continue until all events are done, no placeholders -->
         <<else>>
             <p>A sudden explosion rocks the station, the result of a sabotage attempt on the life support systems. As alarms blare and emergency lights flash, you join the throng of panicked residents in a desperate bid for safety, the fear palpable in the air.<br></p>
-            <<set $player.health -= Math.round($player.health * 0.05 + 10)>>
-            <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
             <<set $timeadd to 10>>
             <<changemoods "health" "major" "NegEffectOnPlayer">><br>
             <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
@@ -52,22 +47,17 @@
     <<case 2>> <!-- Scenario 2 -->
         <<if $combinedDifficultyScore <= 4>>
             <p>Hidden among the refuse of a neglected corridor, you discover an object of unexpected value. The small, intricate device is a relic from an earlier time, its craftsmanship speaking of a bygone era. The sale of such a find will no doubt bolster your credits and bring a rare smile to your face.<br></p>
-            <<set $player.credits += Math.round($player.credits * 0.05 + 10)>>
-            <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
-            <<creditchange Math.round($player.credits * 0.05 + 10) "positive">>
+            <<creditchange 25 "positive">>
             <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
             <!-- I will continue until all events are done, no placeholders -->
         <<elseif $combinedDifficultyScore <= 7>>
             <p>An abrupt security lockdown seals the bulkheads around you, trapping you in a confined space with strangers. Hours pass with no explanation, the uncertainty gnawing at your resolve and chipping away at your composure.<br></p>
-            <<set $player.stress += Math.round($player.stress * 0.02 + 10)>>
             <<set $timeadd to 20>>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
             <<addmins $timeadd>>
             <!-- I will continue until all events are done, no placeholders -->
         <<else>>
             <p>In the midst of a chaotic medical emergency, you find yourself thrust into the role of a makeshift medic. With no one else to turn to, you apply pressure to a stranger's wound, your hands shaking as you recall half-remembered first aid training. The gratitude in the survivor's eyes is your only reward as the crisis abates.<br></p>
-            <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
-            <<set $player.mood += Math.round($player.mood * 0.02 + 5)>>
             <<set $timeadd to 20>>
             <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
             <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
@@ -77,18 +67,14 @@
     <<case 3>> <!-- Scenario 3 -->
         <<if $combinedDifficultyScore <= 4>>
             <p>The haunting melody of a troubadour's song weaves through the corridors, a poignant reminder of the station's storied past. The lyrics speak of resilience and hope, a narrative that resonates with your own experiences and kindles a warm feeling of connection within you.<br></p>
-            <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
             <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
             <!-- I will continue until all events are done, no placeholders -->
         <<elseif $combinedDifficultyScore <= 7>>
             <p>A malfunction in the environmental systems sends a wave of foul-smelling air through the decks. The stench is a minor annoyance, yet it lingers unpleasantly, a reminder of the station's imperfections and the discomforts of space living.<br></p>
-            <<set $player.mood -= Math.round($player.mood * 0.02 + 5)>>
             <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
             <!-- I will continue until all events are done, no placeholders -->
         <<else>>
             <p>A peaceful protest turns violent as security forces intervene with a heavy hand. The brutality of the crackdown is shocking, leaving you and many others shaken as the cries of the oppressed echo off the cold metal walls.<br></p>
-            <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
-            <<set $player.mood -= Math.round($player.mood * 0.05 + 20)>>
             <<set $timeadd to 30>>
             <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
             <<changemoods "mood" "major" "NegEffectOnPlayer">><br>

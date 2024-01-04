@@ -62,48 +62,35 @@
 <!-- Event Description based on Combined Difficulty Score -->
 <<if $combinedDifficultyScore <= 2>>
     <p>Whispers of calm spread through the Lower Decks as if the station itself has taken a deep, soothing breath. The dim corridors are tranquil, the usual clamor giving way to a rare hush that invites a moment of respite for weary souls.</p>
-    <<set $player.mood += Math.round($player.mood * 0.05 + 10)>>
     <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 <<elseif $combinedDifficultyScore >= 3 and $combinedDifficultyScore <= 5>>
     <p>Glimmers of hope flicker amidst the routine bustle. Merchants display their wares with a touch more zeal, and the residents' conversations are tinged with a cautious optimism that better cycles may be on the horizon.</p>
-    <<set $player.mood += Math.round($player.mood * 0.03 + 5)>>
     <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 <<elseif $combinedDifficultyScore >= 6 and $combinedDifficultyScore <= 8>>
     <p>The pulse of the decks is steady and strong, mirroring the resolve of those who wander them. Every exchange, every hurried step speaks to the collective effort to thrive despite the shadows that loom in the background.</p>
-    <<set $player.mood += Math.round($player.mood * 0.02 + 3)>>
     <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 <<else>>
     <p>An uneasy current flows through the corridors, as if the very air is charged with the station's collective anxieties. Each glance shared between passersby is heavy with unspoken challenges, a silent testament to the resilience required to endure these trying times.</p>
-    <<set $player.mood -= Math.round($player.mood * 0.05 + 10)>>
     <<changemoods "mood" "major" "NegEffectOnPlayer">><br>
 <</if>>
 
 <!-- Additional Effect based on Danger Score -->
 <<if $dangerLevelScore < 300>>
     <p>Caution taints the atmosphere as frequent alarms and confrontations punctuate your path. The station's pulse races, a reflection of the heightened vigilance required to navigate these charged encounters.</p>
-    <<set $player.stress += Math.round($player.stress * 0.05 + 10)>>
-    <<set $player.fatigue += Math.round($player.fatigue * 0.05 + 5)>>
-    <<set $player.mood -= Math.round($player.mood * 0.05 + 10)>>
     <<changemoods "stress" "major" "NegEffectOnPlayer">>
     <<changemoods "fatigue" "minor" "NegEffectOnPlayer">>
     <<changemoods "mood" "major" "NegEffectOnPlayer">><br>
 <<elseif $dangerLevelScore >= 300 and $dangerLevelScore < 600>>
     <p>A subtle tension permeates the crowd, with security patrols threading through the masses like steel threads in a tapestry. The wary glances of your fellow travelers remind you that alertness here is not a choice, but a necessity.</p>
-    <<set $player.stress += Math.round($player.stress * 0.03 + 5)>>
-    <<set $player.fatigue += Math.round($player.fatigue * 0.03 + 3)>>
-    <<set $player.mood -= Math.round($player.mood * 0.03 + 5)>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">>
     <<changemoods "fatigue" "minor" "NegEffectOnPlayer">>
     <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 <<elseif $dangerLevelScore >= 600 and $dangerLevelScore < 900>>
     <p>Amidst the backdrop of commerce and chatter, signs of discord surface. A hastily scrubbed slogan here, a wary eye there—small reminders that while the surface may seem calm, the waters below are ever turbulent.</p>
-    <<set $player.stress += Math.round($player.stress * 0.02 + 3)>>
-    <<set $player.mood -= Math.round($player.mood * 0.02 + 3)>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">>
     <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 <<else>>
     <p>The decks today exude a relative peace, as if the station has found a momentary respite from its usual trials. Laughter echoes where once there were harsh words, and the guards' presence is reassuring rather than imposing.</p>
-    <<set $player.mood += Math.round($player.mood * 0.05 + 15)>>
     <<changemoods "mood" "major" "PosEffectOnPlayer">><br>
 <</if>>
 <</nobr>>

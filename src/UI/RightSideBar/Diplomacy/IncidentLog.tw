@@ -1,0 +1,10 @@
+:: IncidentLogs [noreturn safe menu] {"position":"1300,175","size":"100,100"}
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <h2>Incident Logs</h2>
+    <p>Records of significant incidents affecting diplomatic relations with various factions.</p>
+    <ul>
+        <li>Recent Incidents - Logs of recent diplomatic incidents.</li>
+        <li>Incident Analysis - Analytical reports on major incidents.</li>
+        <li>Resolution Status - Updates on incident resolutions and outcomes.</li>
+    </ul>
+</div>

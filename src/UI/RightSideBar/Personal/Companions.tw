@@ -60,13 +60,13 @@
 
             <!-- Display the portrait of the selected companion -->
             <div class="companion-portrait-selected" 
-     @style="'background-image: url(' + _selectedCompanion.portrait + '); background-size: cover; min-height: 250px; min-width: 250px; display: flex; justify-content: center; align-items: center; background-position: center; background-repeat: no-repeat; border: 8px solid black; border-radius: 15px;'">
-    <span class="companion-selected-bigbutton" @style="'background-image: url(' + _selectedCompanion.portrait + '); display: block; width: 250px; height: 250px; background-size: cover; background-position: center;'">
-        <<button "Contact">>
-            /* Button code replaces this line. */
-        <</button>>
-    </span>
-</div>
+                @style="'background-image: url(' + _selectedCompanion.portrait + '); background-size: cover; min-height: 250px; min-width: 250px; display: flex; justify-content: center; align-items: center; background-position: center; background-repeat: no-repeat; border: 8px solid black; border-radius: 15px;'">
+                <span class="companion-selected-bigbutton" @style="'background-image: url(' + _selectedCompanion.portrait + '); display: block; width: 250px; height: 250px; background-size: cover; background-position: center;'">
+                    <<button "Contact">>
+                        /* Button code replaces this line. */
+                    <</button>>
+                </span>
+            </div>
 
 
 
