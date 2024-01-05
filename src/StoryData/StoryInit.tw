@@ -182,6 +182,14 @@ $lowerdecksFabricatorCyberware
 
 <<set $talkedToManager = false>>
 <<set $introColdExit = 0>>
+<<set $GrafterIsCompanion = false>> /* false if not a companion, true if is a companion */
+<<set $JaxIsCompanion = false>> /* false if not a companion, true if is a companion */
+
+
+/* LOWER DECK BUSINESS */
+
+<<set $LowerDecksPlayerBusinessScouted = 0>> /* Increment as player scouts new locations */
+<<set $LowerDecksPlayerBusinessLongDesc = "">> /* Initialize with an empty string or a default description */
 
 /* AREA SETUP */
 <<set setup.areaEvents = {

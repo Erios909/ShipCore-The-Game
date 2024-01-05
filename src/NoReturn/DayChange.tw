@@ -1,4 +1,4 @@
-:: DayChange [event safe noreturn] {"position":"1200,325","size":"100,100"}
+:: DayChange [event safe] {"position":"1200,325","size":"100,100"}
 <<nobr>>
 <<if $prevUpdateYear === undefined or $prevUpdateMonth === undefined or $prevUpdateDay === undefined>>
     <<set $prevUpdateYear = $gameDate.getFullYear()>>
@@ -83,7 +83,7 @@
 and you feel 
 <<if $player.debt >= 50000>>the burden of your obligations<<else>>a weight lifting<</if>> as you prepare for the day ahead.</p>
 <br>
-<<link "Continue" $continue>><</link>>
+<<link "Continue" $nextPassage>><</link>>
 <</nobr>>
 
 

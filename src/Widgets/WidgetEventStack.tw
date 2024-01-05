@@ -1,0 +1,95 @@
+:: AddEventToStack [widget nobr]
+
+
+/*
+Widget to add events to the stack with priority handling.
+
+Fix Report:
+The issue was related to the handling of the 'priority' argument within the widget code.
+The original code attempted to check and parse the 'priority' argument within the object
+creation expression, which led to syntax errors and unexpected behavior.
+
+To resolve this, the check for the 'priority' argument was moved outside of the object
+creation. We introduced a separate check to determine if the 'priority' argument was
+provided and if it was a valid number. This check ensures that the 'priority' property
+is always assigned a proper numeric value, defaulting to 0 if the argument is not provided
+or is not a number.
+
+The corrected code uses $args.length > 7 to check if there are at least eight arguments
+provided to the widget, which means that a 'priority' argument is present. The eighth
+argument, which corresponds to 'priority', is accessed with $args[7] since array indices
+in JavaScript start at 0. The use of parseInt with a radix of 10 ensures that the argument
+is correctly interpreted as an integer.
+
+This fix ensures that the widget correctly initializes the event stack, creates an event
+object with the appropriate properties, and inserts the event into the stack in the correct
+priority order without causing syntax errors.
+*/
+
+
+/* Widget to add events to the stack with priority handling */
+<<widget "AddEventToStack">>
+    /* Ensure the event stack is initialized */
+    <<if typeof $eventStack === "undefined">>
+        /* Error message if $eventStack is not initialized */
+        <<run Dialog.alert("Error: Event stack not initialized. Initializing now.")>>
+        <<set $eventStack to []>>
+    <</if>>
+
+    /* Check if a priority argument was provided and is a number */
+    <<set _priority = 0>> /* Default priority */
+    <<if $args.length > 7 && !isNaN(parseInt($args[7], 10))>>
+        <<set _priority = parseInt($args[7], 10)>>
+    <</if>>
+
+    /* Create the event object with provided arguments */
+    <<set _event to {
+        name: $args[0],
+        passage: $args[1],
+        condition: $args[2] ? $args[2] : "",
+        allowedTags: $args[3] ? $args[3].split(/\s*,\s*/) : [],
+        bannedTags: $args[4] ? $args[4].split(/\s*,\s*/) : [],
+        allowedPassages: $args[5] ? $args[5].split(/\s*,\s*/) : [],
+        bannedPassages: $args[6] ? $args[6].split(/\s*,\s*/) : [],
+        priority: _priority
+    }>>
+
+    /* Add the event to the event stack, maintaining priority order */
+    <<set _inserted = false>>
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        /* Safeguard access to the priority property */
+        <<set _currentPriority to $eventStack[_i].priority || 0>> /* Default to 0 if undefined */
+        <<if _currentPriority < _event.priority>>
+            <<set $eventStack.splice(_i, 0, _event)>>
+            <<set _inserted = true>>
+            <<break>>
+        <</if>>
+    <</for>>
+    <<if not _inserted>>
+        <<set $eventStack.push(_event)>>
+    <</if>>
+<</widget>>
+
+
+
+
+
+
+/* Event with no condition or restrictions */
+/* <<AddEventToStack "Event 1" "Passage 1" "" "" "" "" "" >> */
+
+/* Event with a condition */
+/* <<AddEventToStack "Event 2" "Passage 2" "condition" "" "" "" "" >> */
+
+/* Event with allowed tags */
+/* <<AddEventToStack "Event 3" "Passage 3" "" "tag1, tag2" "" "" "" >> */
+
+/* Event with banned tags */
+/* <<AddEventToStack "Event 4" "Passage 4" "" "" "tag3, tag4" "" "" >> */
+
+/* Event with allowed passages */
+/* <<AddEventToStack "Event 5" "Passage 5" "" "" "" "PassageA, PassageB" "" >> */
+
+/* Event with banned passages */
+/* <<AddEventToStack "Event 6" "Passage 6" "" "" "" "" "PassageC, PassageD" >> */
+

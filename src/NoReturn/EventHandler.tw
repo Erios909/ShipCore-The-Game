@@ -1,54 +1,49 @@
-:: eventHandler [nobr event noreturn] {"position":"1100,325","size":"100,100"}
-<!-- poi to travel node eventHandler -->
-<<script>>
-    console.log("poi to travel node eventHandler fired.");
-<</script>>
+:: eventHandler [nobr event] {"position":"1100,325","size":"100,100"}
 
 <!-- Store the original continuation path in $nextPassage -->
-<<set $nextPassage to State.variables.continue>> 
+<<set $nextPassage to State.variables.continue>>
+
+<!-- Retrieve the stored tags from state variables -->
+<<set _currentTags to State.variables.currentPassageTags>>
+<<set _destinationTags to State.variables.destinationPassageTags>>
+
+<!-- Clear the stored tags immediately to avoid carrying over tags from previous navigations -->
+<<run delete State.variables.currentPassageTags>>
+<<run delete State.variables.destinationPassageTags>>
 
 <!-- Retrieve the last event time -->
-<<set $lastEventTime to State.variables.lastEventTime or 0>> 
+<<set $lastEventTime to State.variables.lastEventTime or 0>>
 
 <!-- Get the current time -->
 <<set $currentTime to State.temporary.now>>
 
 <!-- Calculate time since last event -->
-<<set $timeSinceLastEvent to $currentTime - $lastEventTime>> 
+<<set $timeSinceLastEvent to $currentTime - $lastEventTime>>
 
-<!-- Check if the player has negative credits and redirect to the debt event -->
-<<if $player.credits < 0>> 
-    <<goto "DebtEvent">>
-<<elseif $player.debt <= 0>> 
-    <<goto "DebtFreeEvent">>
-<<elseif $someStoryFlag>> 
-    <<goto $nextPassage>>
-<<elseif $anotherStoryFlag>> 
-    <<goto $nextPassage>>
-<<elseif $currentArea is "lowerdecks">>
-    <<set _randomChance to random(1, 3)>>
-    <<if $lowerdeckHeat >= 10 or ($lowerdeckHeat >= 2 and _randomChance <= $lowerdeckHeat - 1)>>
-        <<script>>
-            console.log("lowerdecks criminal event fired.");
-        <</script>>
-        <<set _randomEvent to random(1, 2)>>
-        <<if _randomEvent == 1>>
-            <<goto "LDBMpoliceaction">>
-         <<else>>
-            <<goto "LDBMcriminalaction">>
-         <</if>>
-    
-    <<else>>
-        <<script>>
-            console.log("criminal event fired not enough rnd.");
-        <</script>>
-        <<goto $nextPassage>>
-    <</if>>
-<<else>> 
-    <<script>>
-        console.log("default move.");
-    <</script>>
-    <<goto $nextPassage>>
+<!-- Ensure $eventStack is an array before proceeding -->
+<<if not Array.isArray($eventStack)>>
+    <<set $eventStack to []>>
+    <<run Dialog.alert("Event stack was not initialized. Initializing now.")>>
 <</if>>
 
+<!-- Sort the event stack by priority in descending order so higher priority events are checked first -->
+<<set $eventStack.sort((a, b) => b.priority - (a.priority || 0))>>
 
+<<set _targetPassage to "">> <!-- Initialize the target passage variable -->
+<<for _i = 0; _i < $eventStack.length; _i++>>
+    <<set _event to $eventStack[_i]>>
+    <<set _eventCondition to (_event.condition ? _event.condition : function() { return true; })>>
+    <<set _bannedTagsMet to _event.bannedTags.some(tag => _currentTags.includes(tag))>>
+    <<if _eventCondition() && not _bannedTagsMet>>
+        <<set _targetPassage to _event.passage>> <!-- Set the target passage to the event's passage -->
+        <<run $eventStack.splice(_i, 1)>> <!-- Remove the event from the stack -->
+        <<break>> <!-- Break out of the loop since we've found an event to fire -->
+    <</if>>
+<</for>>
+
+<!-- Redirect to the target passage if an event was fired, otherwise go to the original continuation path -->
+<<if _targetPassage>>
+    <<goto _targetPassage>>
+<<else>>
+    <<goto $nextPassage>>
+<</if>>

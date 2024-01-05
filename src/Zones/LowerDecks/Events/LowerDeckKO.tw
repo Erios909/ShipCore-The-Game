@@ -146,12 +146,7 @@
 -->
 <</nobr>>
 
-<<set $player.health = Math.min($player.health + 150, 1000)>>
-<<set $player.mood = Math.min($player.mood + 150, 1000)>>
-<<set $player.stress = Math.min($player.stress - 150, 1000)>>
-<<set $player.trauma = Math.min($player.trauma - 150, 1000)>>
-<<set $player.fatigue = Math.min($player.fatigue - 150, 1000)>>
-<<set $player.filth = Math.min($player.filth - 150, 1000)>>
+
 <<set $breakdown = false>>
 
 <<if $HavenApartmentState is "signed">>

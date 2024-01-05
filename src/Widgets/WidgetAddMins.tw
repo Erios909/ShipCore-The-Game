@@ -16,13 +16,26 @@
 
     /* Check if a new day has started */
     <<if _previousDate.getDate() != $gameDate.getDate() or _previousDate.getMonth() != $gameDate.getMonth() or _previousDate.getFullYear() != $gameDate.getFullYear()>>
+        /* If a new day has started, set the newDay variable to true */
         <<set State.variables.newDay = true>>
+        /* Use the AddEventToStack widget to add the DayChange event */
+        <<AddEventToStack "NewDayEvent" "DayChange" "" "" "event,noreturn,conversation" "" "" 10>> <!-- Priority 10 -->
     <</if>>
+
+    <<if $player.debt <= 0>>
+    <<AddEventToStack "DebtFreeEvent" "DebtFreeEvent" "" "" "event,noreturn,conversation" "" "" 2>> <!-- Priority 10 -->
+    <</if>>
+    <<if $player.credits < 0>>
+    <<AddEventToStack "DebtEvent" "DebtEvent" "" "" "event,noreturn,conversation" "" "" 1>> <!-- Priority 10 -->
+    <</if>>
+    
 
     <<autoFabricatorProcess>>
 
     <<set $timeadd to 0>>
 <</nobr>><</widget>>
+
+
 
 
 
