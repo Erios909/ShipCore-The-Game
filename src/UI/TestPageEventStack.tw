@@ -1,0 +1,190 @@
+:: eventstacktestpage [nobr]
+/* Initialize the event stack if it doesn't exist */
+<<if $eventStack === undefined>>
+    <<set $eventStack = []>>
+<</if>>
+<br><br>
+/* Display the current event stack */
+<<liveblock "eventStackDisplay">>
+    Event stack (<<print $eventStack.length>>):
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        <<print $eventStack[_i].name>> (<<print $eventStack[_i].passage>>)
+    <</for>>
+<</liveblock>>
+<br><br>
+/* Inputs for adding an event to the stack */
+Event Name: <<textbox "$eventName" "">><br>
+Passage Name: <<textbox "$eventPassage" "">><br>
+Condition Function: <<textbox "$eventCondition" "">><br>
+Allowed Tags (comma-separated): <<textbox "$eventAllowedTags" "">><br>
+Banned Tags (comma-separated): <<textbox "$eventBannedTags" "">><br>
+Allowed Passages (comma-separated): <<textbox "$eventAllowedPassages" "">><br>
+Banned Passages (comma-separated): <<textbox "$eventBannedPassages" "">><br>
+<br><br>
+/* Button to add event to the stack */
+<<button "Add Event to Stack">>
+    <<set _eventName = $eventName.trim()>>
+    <<set _eventPassage = $eventPassage.trim()>>
+    <<set _eventCondition = $eventCondition ? $eventCondition.trim() : "">>
+    <<set _eventAllowedTags = $eventAllowedTags ? $eventAllowedTags.trim() : "">>
+    <<set _eventBannedTags = $eventBannedTags ? $eventBannedTags.trim() : "">>
+    <<set _eventAllowedPassages = $eventAllowedPassages ? $eventAllowedPassages.trim() : "">>
+    <<set _eventBannedPassages = $eventBannedPassages ? $eventBannedPassages.trim() : "">>
+    <<if _eventName !== "" && _eventPassage !== "">>
+        <<AddEventToStack _eventName _eventPassage _eventCondition _eventAllowedTags _eventBannedTags _eventAllowedPassages _eventBannedPassages>>
+    <</if>>
+    <<update>>
+<</button>>
+
+<br><br>
+/* Button to remove the last event from the stack */
+<<button "Remove Last Event from Stack">>
+    <<if $eventStack.length > 0>>
+        <<set $eventStack.pop()>>
+        <<update>>
+    <</if>>
+<</button>>
+<br><br>
+/* Inputs for removing an event from the stack */
+Event Name to Remove: <<textbox "$eventToRemove" "">><br>
+<br><br>
+/* Button to remove an event from the stack */
+<<button "Remove Event from Stack">>
+    <<set _eventToRemove = $eventToRemove.trim()>>
+    <<set _eventIndex = -1>>
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        <<if $eventStack[_i].name === _eventToRemove>>
+            <<set _eventIndex = _i>>
+            <<break>>
+        <</if>>
+    <</for>>
+    <<if _eventIndex !== -1>>
+        <<set $eventStack.splice(_eventIndex, 1)>>
+        <<set $eventToRemoveResult = "Event removed: " + _eventToRemove>>
+    <<else>>
+        <<set $eventToRemoveResult = "Event not found: " + _eventToRemove>>
+    <</if>>
+    <<update>>
+<</button>>
+<br><br>
+/* Display the result of removing an event from the stack */
+<<liveblock "eventToRemoveResultDisplay">>
+    <<if $eventToRemoveResult !== undefined>>
+        <<print $eventToRemoveResult>>
+    <</if>>
+<</liveblock>>
+<br><br>
+
+
+/* Section to set the 'current' passage's tags and name */
+Current Passage Name: <<textbox "$currentPassageName" "">><br>
+Current Passage Tags (comma-separated): <<textbox "$currentPassageTags" "">><br>
+<br><br>
+
+/* Button to trigger event processing with current passage context */
+<<button "Trigger Event Processing">>
+    <<set _resultMessage to "">>
+    <<set _currentTagsArray to $currentPassageTags.trim().split(/\s*,\s*/)>>
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        <<set _event to $eventStack[_i]>>
+        /* If no condition is provided, default to a function that always returns true */
+        <<set _eventCondition to (_event.condition ? (typeof _event.condition === "function" ? _event.condition : new Function("return " + _event.condition)) : function() { return true; })>>
+        <<set _bannedTagFound to false>>
+        <<set _requiredTagMissing to (_event.allowedTags.length > 0)>>
+        <<set _bannedPassageFound to (_event.bannedPassages.includes($currentPassageName))>>
+        <<set _requiredPassageMissing to (_event.allowedPassages.length > 0 && !_event.allowedPassages.includes($currentPassageName))>>
+
+        /* Check for banned tags */
+        <<for _j = 0; _j < _currentTagsArray.length; _j++>>
+            <<if _event.bannedTags.includes(_currentTagsArray[_j])>>
+                <<set _bannedTagFound to true>>
+                <<break>>
+            <</if>>
+        <</for>>
+
+        /* Check for required tags */
+        <<if !_bannedTagFound && _requiredTagMissing>>
+            <<for _j = 0; _j < _currentTagsArray.length; _j++>>
+                <<if _event.allowedTags.includes(_currentTagsArray[_j])>>
+                    <<set _requiredTagMissing to false>>
+                    <<break>>
+                <</if>>
+            <</for>>
+        <</if>>
+
+        /* Determine the result message */
+        <<if _bannedPassageFound>>
+            <<set _resultMessage to "Banned passage, did not fire.">>
+        <<elseif _bannedTagFound>>
+            <<set _resultMessage to "Banned tag, did not fire.">>
+        <<elseif _requiredPassageMissing>>
+            <<set _resultMessage to "Required passage missing, did not fire.">>
+        <<elseif _requiredTagMissing>>
+            <<set _resultMessage to "Required tag missing, did not fire.">>
+        /* Check the event condition, if it's true or if there's no condition, fire the event */
+        <<elseif _eventCondition()>>
+            <<set _resultMessage to "Passage and tags correct, event fired: " + _event.name>>
+            /* Remove the event from the stack after firing */
+            <<set $eventStack.splice(_i, 1)>>
+            <<break>>
+        <</if>>
+    <</for>>
+    <<set $eventProcessingResults to _resultMessage>>
+    <<update>>
+<</button>>
+<br><br>
+
+
+/* Live block to display the results of event processing */
+<<liveblock>>
+    <<if $eventProcessingResults !== undefined>>
+        <<print $eventProcessingResults>>
+    <</if>>
+<</liveblock>>
+<br><br>
+
+
+
+/* Display the result of processing the event stack */
+<<liveblock "_triggeredEventName">>
+    <<if _triggeredEventName>>
+        Event triggered: <<= _triggeredEventName >>
+    <<else>>
+        No events triggered.
+    <</if>>
+<</liveblock>>
+<br><br>
+/* Live block to show the current event stack */
+<<liveblock>>
+    Current Event Stack:
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        Index: <<print _i>> | Name: <<print $eventStack[_i].name>><br>
+    <</for>>
+<</liveblock>>
+<br><br>
+
+
+/* Button to add a preset 'HappyEvent' to the stack */
+<<button "Add Happy Event">>
+    <<AddEventToStack "HappyEvent" "HappyPassage" `function() { return $player.health > 50; }` "" "" "" "" >>
+    <<update>>
+<</button>><br><br>
+
+/* Button to add a preset 'SadEvent' to the stack */
+<<button "Add Sad Event">>
+    <<AddEventToStack "SadEvent" "SadPassage" `function() { return $player.mood <= 50; }` "" "" "" "" >>
+    <<update>>
+<</button>><br><br>
+
+/* Button to add a preset 'RichEvent' to the stack */
+<<button "Add Rich Event">>
+    <<AddEventToStack "RichEvent" "RichPassage" `function() { return $player.credits > 1000; }` "" "" "" "" >>
+    <<update>>
+<</button>><br><br>
+
+/* Button to add a preset 'PoorEvent' to the stack */
+<<button "Add Poor Event">>
+    <<AddEventToStack "PoorEvent" "PoorPassage" `function() { return $player.credits <= 1000; }` "" "" "" "" >>
+    <<update>>
+<</button>><br><br>
+

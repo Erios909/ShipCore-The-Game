@@ -3,6 +3,7 @@
 <<nobr>>
 Combined Difficulty: $combinedDifficultyScore
 <strong>Debug Controls:</strong><br>
+
 <<link "IntroFinish">>
 	<<set $playerIntro4 to 1>>
 	<<set $playerIntro1 to 1>>
@@ -14,53 +15,65 @@ Combined Difficulty: $combinedDifficultyScore
     <<set $worldEconomyScore to 700>> 
 	<<set $dangerLevelScore to 700>>
     <<set $combinedDifficultyScore = ((2000 - $worldEconomyScore - $dangerLevelScore) / 200)>>
-<<set $player.debt = Math.max(50000, Math.min(50000000, $combinedDifficultyScore * 2000000))>>
+    <<set $player.debt = Math.max(50000, Math.min(50000000, $combinedDifficultyScore * 2000000))>>
 	<<updatebar>>
 <</link>>
+
 <<link "Increase Economy">>
     <<set $worldEconomyScore += 100>>
     <<updatebar>>
 <</link>>
+
 <<link "Decrease Economy">>
     <<set $worldEconomyScore -= 100>>
     <<updatebar>>
 <</link>>
+
 <<link "Increase Danger">>
     <<set $dangerLevelScore += 100>>
     <<updatebar>>
 <</link>>
+
 <<link "Decrease Danger">>
     <<set $dangerLevelScore -= 100>>
     <<updatebar>>
 <</link>>
+
 <<link "Add Credits">>
     <<set $player.credits += 10000>>
     <<updatebar>>
 <</link>>
+
 <<link "Reduce Debt">>
     <<set $player.debt -= 100000>>
     <<updatebar>>
 <</link>>
+
 <<link "Advance Time: 1 Hour">>
     <<addmins 60>>
     <<updatebar>>
 <</link>>
+
 <<link "Advance Time: 1 Day">>
     <<addmins 1440>>
     <<updatebar>>
 <</link>>
+
 <<link "Advance Time: 1 Week">>
     <<addmins 10080>>
     <<updatebar>>
 <</link>>
+
 <<link "Advance Time: 1 Year">>
     <<addmins 525600>>
     <<updatebar>>
 <</link>>
+
 <<link "BlackMarketIncrease">>
     <<set $lowerdeckBlackActivity += 1000>>
     <<updatebar>>
 <</link>>
+
 <<link "BlackMarketReset">>
     <<set $lowerdeckBlackActivity = 0>>
     <<updatebar>>
@@ -69,64 +82,67 @@ Combined Difficulty: $combinedDifficultyScore
 <<link "Restore Bio">>
     <<set $player.health to 1000>>
     <<set $player.mood to 1000>>
-    <<set $player.stress to 1000>>
-    <<set $player.trauma to 1000>>
-    <<set $player.fatigue to 1000>>
-    <<set $player.filth to 1000>>
-    <<set $player.powerReserves to 1000>>
-    <<updatebar>>
-<</link>>
-<<link "Crash Bio">>
-    <<set $player.health to 10>>
-    <<set $player.mood to 10>>
     <<set $player.stress to 10>>
     <<set $player.trauma to 10>>
     <<set $player.fatigue to 10>>
     <<set $player.filth to 10>>
+    <<set $player.powerReserves to 1000>>
+    <<updatebar>>
+<</link>>
+
+<<link "Crash Bio">>
+    <<set $player.health to 10>>
+    <<set $player.mood to 10>>
+    <<set $player.stress to 1000>>
+    <<set $player.trauma to 1000>>
+    <<set $player.fatigue to 1000>>
+    <<set $player.filth to 1000>>
     <<set $player.powerReserves to 10>>
     <<updatebar>>
 <</link>>
 
-<<link "Add 1 to all consumables">>
-<<set $playerConsumables = {
-    'nanoDocInjector': 0,
-    'euphorixVape': 0,
-    'zenithPulse': 0,
-    'psycheLockCapsule': 0,
-    'vigorMaxShot': 0,
-    'puriDermSpray': 0,
-    'energyCellBoost': 0
-}>>
-<<set $playerConsumablesTracker = {
-    'nanoDocInjector': 0,
-    'euphorixVape': 0,
-    'zenithPulse': 0,
-    'psycheLockCapsule': 0,
-    'vigorMaxShot': 0,
-    'puriDermSpray': 0,
-    'energyCellBoost': 0
-}>>
-    <<set $playerConsumables.nanoDocInjector += 1>>
-    <<set $playerConsumables.euphorixVape += 1>>
-    <<set $playerConsumables.zenithPulse += 1>>
-    <<set $playerConsumables.psycheLockCapsule += 1>>
-    <<set $playerConsumables.vigorMaxShot += 1>>
-    <<set $playerConsumables.puriDermSpray += 1>>
-    <<set $playerConsumables.energyCellBoost += 1>>
-    <<updatebar>>
+<<link "Set 10 to all consumables">>
+    <<set $playerConsumables = {
+        'nanoDocInjector': 0,
+        'euphorixVape': 0,
+        'zenithPulse': 0,
+        'psycheLockCapsule': 0,
+        'vigorMaxShot': 0,
+        'puriDermSpray': 0,
+        'energyCellBoost': 0
+    }>>
+    <<set $playerConsumablesTracker = {
+        'nanoDocInjector': 0,
+        'euphorixVape': 0,
+        'zenithPulse': 0,
+        'psycheLockCapsule': 0,
+        'vigorMaxShot': 0,
+        'puriDermSpray': 0,
+        'energyCellBoost': 0
+    }>>
+        <<set $playerConsumables.nanoDocInjector += 10>>
+        <<set $playerConsumables.euphorixVape += 10>>
+        <<set $playerConsumables.zenithPulse += 10>>
+        <<set $playerConsumables.psycheLockCapsule += 10>>
+        <<set $playerConsumables.vigorMaxShot += 10>>
+        <<set $playerConsumables.puriDermSpray += 10>>
+        <<set $playerConsumables.energyCellBoost += 10>>
+        <<updatebar>>
 <</link>>
+
 <<link "Add Jax as a Companion">>
-    /* Ensure the $playerCompanions array exists. */
-    <<set $playerCompanions to $playerCompanions || []>>
+        /* Ensure the $playerCompanions array exists. */
+        <<set $playerCompanions to $playerCompanions || []>>
+        /* Use the "createCompanion" widget to set up a companion named "Jax". */
+        <<CreateNPC setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
+        <<set $playerCompanions.push('NPCJax')>>
+        /* Refresh the current passage to reflect the changes. */
+        <<updatebar>>
+<</link>><br>
 
-    /* Use the "createCompanion" widget to set up a companion named "Jax". */
-<<CreateNPC setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
-<<set $playerCompanions.push('NPCJax')>>
-
-    /* Refresh the current passage to reflect the changes. */
-    <<updatebar>>
-<</link>>
-[[testmenu|test menu]]
+[[eventstacktestpage|eventstacktestpage]]<br>
+[[LowerDecksPlayerBusiness|LowerDecksPlayerBusiness]]<br>
+[[testmenu|test menu]]<br>
 <</nobr>>
 
 

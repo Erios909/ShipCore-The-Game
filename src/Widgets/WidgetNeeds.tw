@@ -1,7 +1,7 @@
 :: widget needs [widget nobr] {"position":"175,575","size":"100,100"}
 <<widget "manageNeeds">>
     /* Check if $lastUpdateTime is set; if not, initialize it */
-    <<if $lastUpdateTime === undefined>>
+    <<if typeof $lastUpdateTime === "undefined">>
         <<set $lastUpdateTime = new Date($gameDate.getTime())>> /* Initialize with the current game time */
     <</if>>
 
@@ -16,36 +16,51 @@
         <<set _halfLife = 360>> /* Adjusted half-life to 60 minutes for a faster decay rate */
         <<set _adjustmentFactor = _maxDecay * (1 - Math.exp(-0.693 * _timeDifference / _halfLife))>>
         /* This limits the adjustment factor based on an exponential decay curve */
-                /* Calculate the carcinogen impact factor */
+        /* Calculate the carcinogen impact factor */
         <<set _carcinogenFactor = 1 + ($player.carcinogen / 100) * 9>>
 
-        <<set _reducedFactor = _adjustmentFactor / 122>> 
-        <<set $player.health = Math.clamp($player.health + _reducedFactor, 0, 1000)>>
-        <<set $player.mood = Math.clamp($player.mood + _reducedFactor, 0, 1000)>>
-        <<set $player.trauma = Math.clamp($player.trauma - _reducedFactor, 0, 1000)>>
-        <<set $player.stress = Math.clamp($player.stress - _reducedFactor, 0, 1000)>>
-        
-        
+        <<set _reducedFactor = _adjustmentFactor / 122>>
+        <<set $player.health = Math.clamp($player.health - _reducedFactor, 0, 1000)>>
+        <<set $player.mood = Math.clamp($player.mood - _reducedFactor, 0, 1000)>>
+        <<set $player.trauma = Math.clamp($player.trauma + _reducedFactor, 0, 1000)>>
+        <<set $player.stress = Math.clamp($player.stress + _reducedFactor, 0, 1000)>>
+
         /* Apply changes to fatigue and filth with consideration for carcinogen factor (faster increase) */
-        <<set _fatigueFilthIncreaseFactor = (_adjustmentFactor / 1) * (_carcinogenFactor / 2)>>
+        <<set _fatigueFilthIncreaseFactor = (_adjustmentFactor * _carcinogenFactor)>>
         <<set $player.fatigue = Math.clamp($player.fatigue + _fatigueFilthIncreaseFactor, 0, 1000)>>
-        <<set $player.filth = Math.clamp($player.filth + (_adjustmentFactor /2), 0, 1000)>>
+        <<set $player.filth = Math.clamp($player.filth + (_adjustmentFactor / 2), 0, 1000)>>
 
         /* Carcinogen adjustment: reduce by 1 point per hour */
         <<set _carcinogenReduction = Math.floor(_timeDifference / 60)>>
         <<set $player.carcinogen = Math.max($player.carcinogen - _carcinogenReduction, 0)>>
-
     <</if>>
 
-    /* Check for any need dropping below 50 and set $breakdown accordingly */
-    <<if $player.health < 50 or $player.mood < 50 or $player.trauma > 950 or $player.stress > 950 or $player.fatigue > 950 or $player.filth > 950>>
+    /* Ensure that $eventStack is initialized at the start of the game. */
+    <<if typeof $eventStack === "undefined">>
+        <<set $eventStack to []>>
+    <</if>>
+
+    /* Set the breakdown condition based on the player's stats. */
+    <<set _breakdownCondition = $player.health < 50 || $player.mood < 50 || $player.trauma > 950 || $player.stress > 950 || $player.fatigue > 950 || $player.filth > 950>>
+
+    /* If the breakdown condition is met and there is not already a breakdown, add the event. */
+    <<if _breakdownCondition && !$breakdown>>
         <<set $breakdown = true>>
-    <<else>>
+        /* Check if the BreakdownEvent is already in the eventStack */
+        <<if !$eventStack.some(e => e.name === "BreakdownEvent")>>
+            /* Determine the correct passage name for the breakdown event */
+            <<set _koPassage to setup.breakdownEvents[$currentArea] ?? setup.breakdownEvents.default>>
+            /* Add the event to the event stack with banned tags */
+            <<AddEventToStack "BreakdownEvent" _koPassage "" "event, safe, noreturn" "" "" "" 9>> <!-- Priority 9 -->
+        <</if>>
+    /* If the breakdown condition is not met but a breakdown is currently flagged, remove the event. */
+    <<elseif !_breakdownCondition && $breakdown>>
         <<set $breakdown = false>>
+        /* Remove all instances of the breakdown event from the eventStack */
+        <<set $eventStack = $eventStack.filter(e => e.name !== "BreakdownEvent")>>
     <</if>>
 
     /* Update the last update time for the next check */
     <<set $lastUpdateTime = _currentTime>>  /* Store the current time for the next update */
+
 <</widget>>
-
-

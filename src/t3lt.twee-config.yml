@@ -106,6 +106,7 @@ sugarcube-2:
       container: true
     CreateNPC:
       name: CreateNPC
-    
+    AddEventToStack:
+      name: AddEventToStack
 
       

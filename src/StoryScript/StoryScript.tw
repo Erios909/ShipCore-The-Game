@@ -261,12 +261,16 @@ $(document.head).append('<meta name="msapplication-config" content="' + favIco +
 $(document.head).append('<meta name="theme-color" content="#ffffff">');
 
 
-
+// This funcitons fires every passage move and decides to hijack or let them continue.
 
 Config.navigation.override = function (dest) {
     console.log("Original Destination:", dest);
     console.log("Current passage tags:", tags());
     console.log("Destination passage tags:", tags(dest));
+
+        // Store the current and destination passage tags in state variables
+    State.variables.currentPassageTags = tags();
+    State.variables.destinationPassageTags = tags(dest);
 
   // Inside Config.navigation.override
 if (tags().includes("DebtEvent")) {
@@ -275,36 +279,31 @@ if (tags().includes("DebtEvent")) {
 }
 
   
-    // Check if the destination passage is not an event and if a new day has started.
-    if (!tags(dest).includes("event") && State.variables.newDay) {
-        console.log("New day detected. Triggering day change.");
-        State.variables.continue = dest;  // Store the original destination
-        State.variables.newDay = false;  // Reset the newDay flag to false to prevent re-triggering the day change.
+// Check if the destination passage is not an event and if a new day has started.
+if (!tags(dest).includes("event") && State.variables.newDay) {
+    console.log("New day detected. Triggering day change.");
+    State.variables.continue = dest;  // Store the original destination
+    State.variables.newDay = false;  // Reset the newDay flag to false to prevent re-triggering the day change.
+    return "eventHandler"; // Redirect to the "eventHandler" passage after handling new day logic.
+    console.log("Next Passage:", nextPassage);
+}
 
-        return "DayChange"; // Redirect to the "DayChange" passage.
-    }
+// Check for breakdown condition.
+if (State.variables.breakdown && !tags().includes("safe") && !tags().includes("conversation")) {
+    console.log("Breakdown detected. Redirecting to breakdown passage.");
+    State.variables.continue = dest;  // Store the original destination
+    var currentArea = State.variables.currentArea || 'default'; // Get the current area or default if not set
+    var breakdownEvent = setup.breakdownEvents[currentArea] || setup.breakdownEvents.default; // Get breakdown event for the current area or default if none
+    return "eventHandler"; // Redirect to the "eventHandler" passage after handling breakdown logic.
+    console.log("Next Passage:", nextPassage);
+}
 
-    // Check for breakdown condition.
-    if (State.variables.breakdown && !tags().includes("safe") && !tags().includes("conversation")) {
-        console.log("Breakdown detected. Redirecting to breakdown passage.");
-        State.variables.continue = dest;  // Store the original destination
-
-        var currentArea = State.variables.currentArea || 'default'; // Get the current area or default if not set
-        var breakdownEvent = setup.breakdownEvents[currentArea] || setup.breakdownEvents.default; // Get breakdown event for the current area or default if none
-
-        dest = breakdownEvent; // Redirect to the selected breakdown event
-        console.log("Selected breakdown event:", dest);
-
-        State.variables.breakdown = false; // Reset the breakdown flag
-    }
-
-    // New case: Redirecting from 'poi' to 'travel' tagged passage to an 'event handler' passage.
-    if (tags().includes("poi") && tags(dest).includes("travel")) {
-        console.log("Moving from 'poi' to 'travel'. Redirecting to 'event handler' passage.");
-        State.variables.continue = dest;  // Store the original destination
-
-        return "eventHandler"; // Redirect to the "eventHandler" passage.
-    }
+// New case: Redirecting from 'poi' to 'travel' tagged passage to an 'event handler' passage.
+if (tags().includes("poi") && tags(dest).includes("travel")) {
+    console.log("Moving from 'poi' to 'travel'. Redirecting to 'event handler' passage.");
+    State.variables.continue = dest;  // Store the original destination
+    return "eventHandler"; // Redirect to the "eventHandler" passage after handling travel logic.
+}
 
     // Existing logic for handling random events on travel passages.
     if (tags(dest).includes("travel") && !tags().includes("event")) {
