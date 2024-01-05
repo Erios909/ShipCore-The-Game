@@ -291,12 +291,22 @@ if (!tags(dest).includes("event") && State.variables.newDay) {
 // Check for breakdown condition.
 if (State.variables.breakdown && !tags().includes("safe") && !tags().includes("conversation")) {
     console.log("Breakdown detected. Redirecting to breakdown passage.");
-    State.variables.continue = dest;  // Store the original destination
-    var currentArea = State.variables.currentArea || 'default'; // Get the current area or default if not set
-    var breakdownEvent = setup.breakdownEvents[currentArea] || setup.breakdownEvents.default; // Get breakdown event for the current area or default if none
-    return "eventHandler"; // Redirect to the "eventHandler" passage after handling breakdown logic.
-    console.log("Next Passage:", nextPassage);
+    // Store the original destination
+    State.variables.continue = State.variables.destination;
+    // Reset the breakdown flag
+    State.variables.breakdown = false;
+    // Get the current area or default if not set
+    var currentArea = State.variables.currentArea || 'default';
+    // Get breakdown event for the current area or default if none
+    var breakdownEvent = setup.breakdownEvents[currentArea] || setup.breakdownEvents['default'];
+    // Set the destination to the breakdown event passage
+    State.variables.destination = breakdownEvent;
+    console.log("Next Passage:", State.variables.destination);
+    // Return the name of the breakdown passage
+    return State.variables.destination;
 }
+
+
 
 // New case: Redirecting from 'poi' to 'travel' tagged passage to an 'event handler' passage.
 if (tags().includes("poi") && tags(dest).includes("travel")) {

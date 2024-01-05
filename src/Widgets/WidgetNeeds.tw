@@ -35,32 +35,31 @@
         <<set $player.carcinogen = Math.max($player.carcinogen - _carcinogenReduction, 0)>>
     <</if>>
 
-    /* Ensure that $eventStack is initialized at the start of the game. */
-    <<if typeof $eventStack === "undefined">>
-        <<set $eventStack to []>>
-    <</if>>
 
-    /* Set the breakdown condition based on the player's stats. */
-    <<set _breakdownCondition = $player.health < 50 || $player.mood < 50 || $player.trauma > 950 || $player.stress > 950 || $player.fatigue > 950 || $player.filth > 950>>
+/* Ensure that $eventStack is initialized at the start of the game. */
+<<if typeof $eventStack === "undefined">>
+    <<set $eventStack to []>>
+<</if>>
 
-    /* If the breakdown condition is met and there is not already a breakdown, add the event. */
-    <<if _breakdownCondition && !$breakdown>>
-        <<set $breakdown = true>>
-        /* Check if the BreakdownEvent is already in the eventStack */
-        <<if !$eventStack.some(e => e.name === "BreakdownEvent")>>
-            /* Determine the correct passage name for the breakdown event */
-            <<set _koPassage to setup.breakdownEvents[$currentArea] ?? setup.breakdownEvents.default>>
-            /* Add the event to the event stack with banned tags */
-            <<AddEventToStack "BreakdownEvent" _koPassage "" "event, safe, noreturn" "" "" "" 9>> <!-- Priority 9 -->
-        <</if>>
-    /* If the breakdown condition is not met but a breakdown is currently flagged, remove the event. */
-    <<elseif !_breakdownCondition && $breakdown>>
-        <<set $breakdown = false>>
-        /* Remove all instances of the breakdown event from the eventStack */
-        <<set $eventStack = $eventStack.filter(e => e.name !== "BreakdownEvent")>>
-    <</if>>
+/* Ensure that $lastUpdateTime is initialized at the start of the game. */
+<<if typeof $lastUpdateTime === "undefined">>
+    <<set $lastUpdateTime to 0>>
+<</if>>
 
-    /* Update the last update time for the next check */
-    <<set $lastUpdateTime = _currentTime>>  /* Store the current time for the next update */
+/* Set the breakdown condition based on the player's stats. */
+<<set _breakdownCondition = ($player.health < 50) || ($player.mood < 50) || ($player.trauma > 950) || ($player.stress > 950) || ($player.fatigue > 950) || ($player.filth > 950)>>
+
+/* If the breakdown condition is met and there is not already a breakdown, add the event. */
+<<if _breakdownCondition && !$breakdown>>
+    <<set $breakdown = true>>
+<<elseif !_breakdownCondition && $breakdown>>
+    <<set $breakdown = false>>
+<</if>>
+
+/* Update the last update time for the next check */
+<<set $lastUpdateTime to _currentTime>>  /* Store the current time for the next update */
+
+
+
 
 <</widget>>

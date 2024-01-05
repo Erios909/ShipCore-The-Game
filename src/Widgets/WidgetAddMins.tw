@@ -22,6 +22,14 @@
         <<AddEventToStack "NewDayEvent" "DayChange" "" "" "event,noreturn,conversation" "" "" 10>> <!-- Priority 10 -->
     <</if>>
 
+    <<if $player.debt <= 0>>
+    <<AddEventToStack "DebtFreeEvent" "DebtFreeEvent" "" "" "event,noreturn,conversation" "" "" 2>> <!-- Priority 10 -->
+    <</if>>
+    <<if $player.credits < 0>>
+    <<AddEventToStack "DebtEvent" "DebtEvent" "" "" "event,noreturn,conversation" "" "" 1>> <!-- Priority 10 -->
+    <</if>>
+    
+
     <<autoFabricatorProcess>>
 
     <<set $timeadd to 0>>

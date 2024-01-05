@@ -1,9 +1,5 @@
 :: eventHandler [nobr event] {"position":"1100,325","size":"100,100"}
 
-<<script>>
-    console.log("Event handler fired.");
-<</script>>
-
 <!-- Store the original continuation path in $nextPassage -->
 <<set $nextPassage to State.variables.continue>>
 
@@ -12,8 +8,8 @@
 <<set _destinationTags to State.variables.destinationPassageTags>>
 
 <!-- Clear the stored tags immediately to avoid carrying over tags from previous navigations -->
-<<unset State.variables.currentPassageTags>>
-<<unset State.variables.destinationPassageTags>>
+<<run delete State.variables.currentPassageTags>>
+<<run delete State.variables.destinationPassageTags>>
 
 <!-- Retrieve the last event time -->
 <<set $lastEventTime to State.variables.lastEventTime or 0>>
@@ -31,17 +27,12 @@
 <</if>>
 
 <!-- Sort the event stack by priority in descending order so higher priority events are checked first -->
-<<set $eventStack.sort((a, b) => {
-    /* Default missing priorities to 0 */
-    var aPriority = typeof a.priority !== "undefined" ? a.priority : 0;
-    var bPriority = typeof b.priority !== "undefined" ? b.priority : 0;
-    return bPriority - aPriority;
-})>>
+<<set $eventStack.sort((a, b) => b.priority - (a.priority || 0))>>
 
 <<set _targetPassage to "">> <!-- Initialize the target passage variable -->
 <<for _i = 0; _i < $eventStack.length; _i++>>
     <<set _event to $eventStack[_i]>>
-    <<set _eventCondition to (_event.condition ? (typeof _event.condition === "function" ? _event.condition : new Function("return " + _event.condition)) : function() { return true; })>>
+    <<set _eventCondition to (_event.condition ? _event.condition : function() { return true; })>>
     <<set _bannedTagsMet to _event.bannedTags.some(tag => _currentTags.includes(tag))>>
     <<if _eventCondition() && not _bannedTagsMet>>
         <<set _targetPassage to _event.passage>> <!-- Set the target passage to the event's passage -->
