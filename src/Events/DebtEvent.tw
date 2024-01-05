@@ -39,6 +39,13 @@
     <p>Your smartwatch beeps softly, displaying a new debt alert. Your negative balance of <span style='color: red;'>-<<print Math.abs($player.credits).toLocaleString()>></span> credits has resulted in an additional debt increase of <span style='color: red;'><<print $debtIncurred.toLocaleString()>></span> credits.</p>
 <</if>>
 
+<<set _i = $eventStack.length - 1>>
+<<for _i; _i >= 0; _i-->> <!-- Loop through the event stack backwards -->
+    <<if $eventStack[_i].name === "DebtEvent">>
+        <<run $eventStack.splice(_i, 1)>> <!-- Remove the event from the stack -->
+    <</if>>
+<</for>>
+
 <<addmins $timeadd>>
 <<updatebar>>
 <</nobr>>

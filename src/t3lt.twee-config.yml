@@ -108,5 +108,11 @@ sugarcube-2:
       name: CreateNPC
     AddEventToStack:
       name: AddEventToStack
+    fadein:
+      name: fadein
+      container: true
+    fadeout:
+      name: fadeout
+      container: true
 
       

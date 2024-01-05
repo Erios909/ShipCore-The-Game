@@ -24,8 +24,6 @@
 
 <p>The battle is fierce, and you're forced to use every trick at your disposal to survive. The hitman is relentless, but eventually, you gain the upper hand and they flee into the darkness from which they came.</p>
     <p>Exhausted and injured, you realize this was no random encounter. Someone wants you out of the picture, and they're willing to pay a high price to see it done. The Lower Decks have just become even more dangerous for you.</p>
-    <<set $player.health -= Math.round($player.health * 0.07 + 20)>>
-    <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
     <<changemoods "health" "major" "NegEffectOnPlayer">>
     <<changemoods "stress" "major" "NegEffectOnPlayer">>
     

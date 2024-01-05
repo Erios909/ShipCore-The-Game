@@ -227,7 +227,7 @@ $lowerdecksFabricatorCyberware
     inventory: [],  // Empty inventory
     carcinogen: 0, // penalty for using boosters
     credits: 0,  // Initial credits
-    debt: 0 // Initial Debt
+    debt: 50000 // Initial Debt
 }>>
 
 /* We use $timeadd at the end of a passage to show how long it will take to go somewhere, and then when entering passages use addmins $timeadd to increase time */

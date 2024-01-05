@@ -1,0 +1,84 @@
+:: BraxtonThrashed [conversation event] {"position":"850,950","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/aftermath.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks - Dark Corner",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Aftermath</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+The echoes of Braxton's laughter still ring in your ears as you lie on the cold, unforgiving metal floor. Pain wracks your body with each shallow breath, and the taste of iron fills your mouth. You're alone, left for dead in the bowels of the station.
+
+<<changemoods "health" "major" "NegEffectOnPlayer">><br>
+<<changemoods "stress" "major" "NegEffectOnPlayer">><br>
+<<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
+
+With a Herculean effort, you drag yourself to the relative safety of a dark corner. The shadows envelop you, offering a meager shroud from further harm. You curl up, trying to still your ragged breathing and steady the pounding in your skull.
+
+<<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+<<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+<<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
+
+Time loses meaning as you rest in the darkness, the chill of the metal seeping into your bones. Just as you begin to drift into a fitful sleep, a noise startles you back to harsh reality—a footstep? Your heart hammers against your ribs, stress spiking once more.
+
+<<changemoods "health" "major" "PosEffectOnPlayer">><br>
+<<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+Peering through the gloom, you make out a figure approaching. He doesn't seem threatening, moving with a cautious gait, his hands clearly visible and empty. The man stops a few feet away, watching you with an expression that's hard to read in the dim light.
+
+<!-- Existing narrative content up to the point where the figure approaches -->
+
+<<if $DaltonReveal <= 0>>
+    <div id="playerChoices">
+        <<say '$player.name' $playerPortraitPathZ>>
+            <<link "Tell them to stop.">><<set $DaltonReveal to 1>><<replace "#playerChoices">>""<</replace>><<update>><</link>><br>
+            <<link "Stay silent and observe.">><<set $DaltonReveal to 2>><<replace "#playerChoices">>""<</replace>><<update>><</link>><br>
+            <<link "Ask for help.">><<set $DaltonReveal to 3>><<replace "#playerChoices">>""<</replace>><<update>><</link>><br>
+            <<link "Prepare for another fight.">><<set $DaltonReveal to 4>><<replace "#playerChoices">>""<</replace>><<update>><</link>>
+        <</say>>
+    </div>
+<</if>>
+
+<<liveblock>>
+    <<if $DaltonReveal == 1>>
+        <<fadein 1000ms 200ms>>
+        <<say '$player.name' $playerPortraitPathZ>>"Stop. Who are you?"<</say>>
+        <<changemoods "health" "major" "PosEffectOnPlayer">><br>
+        <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
+        <</fadein>>
+    <<elseif $DaltonReveal == 2>>
+        <<fadein 1000ms 200ms>>
+        <<say '$player.name' $playerPortraitPathZ>>[You remain silent, watching the figure cautiously.]<</say>>
+        <<changemoods "health" "major" "PosEffectOnPlayer">><br>
+        <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
+        <</fadein>>
+    <<elseif $DaltonReveal == 3>>
+        <<fadein 1000ms 200ms>>
+        <<say '$player.name' $playerPortraitPathZ>>"Can you help me? I'm in bad shape here."<</say>>
+        <<changemoods "health" "major" "PosEffectOnPlayer">><br>
+        <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+        <</fadein>>
+    <<elseif $DaltonReveal == 4>>
+        <<fadein 1000ms 200ms>>
+        <<say '$player.name' $playerPortraitPathZ>>[You tense up, ready to defend yourself if necessary.]<</say>>
+        <<changemoods "health" "major" "PosEffectOnPlayer">><br>
+        <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
+        <</fadein>>
+    <</if>>
+<</liveblock>>
+
+<<liveblock>>
+<<if $DaltonReveal > 0>>
+    <<fadein 5s>>
+<<include [[DaltonIntro]]>>
+    <</fadein>>
+<</if>>
+<</liveblock>>
+<</nobr>>

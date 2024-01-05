@@ -1,32 +1,5 @@
 :: AddEventToStack [widget nobr]
 
-
-/*
-Widget to add events to the stack with priority handling.
-
-Fix Report:
-The issue was related to the handling of the 'priority' argument within the widget code.
-The original code attempted to check and parse the 'priority' argument within the object
-creation expression, which led to syntax errors and unexpected behavior.
-
-To resolve this, the check for the 'priority' argument was moved outside of the object
-creation. We introduced a separate check to determine if the 'priority' argument was
-provided and if it was a valid number. This check ensures that the 'priority' property
-is always assigned a proper numeric value, defaulting to 0 if the argument is not provided
-or is not a number.
-
-The corrected code uses $args.length > 7 to check if there are at least eight arguments
-provided to the widget, which means that a 'priority' argument is present. The eighth
-argument, which corresponds to 'priority', is accessed with $args[7] since array indices
-in JavaScript start at 0. The use of parseInt with a radix of 10 ensures that the argument
-is correctly interpreted as an integer.
-
-This fix ensures that the widget correctly initializes the event stack, creates an event
-object with the appropriate properties, and inserts the event into the stack in the correct
-priority order without causing syntax errors.
-*/
-
-
 /* Widget to add events to the stack with priority handling */
 <<widget "AddEventToStack">>
     /* Ensure the event stack is initialized */
@@ -72,24 +45,49 @@ priority order without causing syntax errors.
 
 
 
+/* Example of adding an event with no condition or restrictions */
+/* <<AddEventToStack "Event 1" "Passage 1">> */
+
+/* Example of adding an event with a condition */
+/* <<AddEventToStack "Event 2" "Passage 2" "State.variables.someCondition">> */
+
+/* Example of adding an event with allowed tags */
+/* <<AddEventToStack "Event 3" "Passage 3" "" "tag1, tag2">> */
+
+/* Example of adding an event with banned tags */
+/* <<AddEventToStack "Event 4" "Passage 4" "" "" "tag3, tag4">> */
+
+/* Example of adding an event with allowed passages */
+/* <<AddEventToStack "Event 5" "Passage 5" "" "" "" "PassageA, PassageB">> */
+
+/* Example of adding an event with banned passages */
+/* <<AddEventToStack "Event 6" "Passage 6" "" "" "" "" "PassageC, PassageD">> */
+
+/* Example of adding an event with a specific priority (higher numbers indicate higher priority) */
+/* <<AddEventToStack "High Priority Event" "HighPriorityPassage" "" "" "" "" "" 10>> */
 
 
+/*
+Widget to add events to the stack with priority handling.
 
-/* Event with no condition or restrictions */
-/* <<AddEventToStack "Event 1" "Passage 1" "" "" "" "" "" >> */
+Fix Report:
+The issue was related to the handling of the 'priority' argument within the widget code.
+The original code attempted to check and parse the 'priority' argument within the object
+creation expression, which led to syntax errors and unexpected behavior.
 
-/* Event with a condition */
-/* <<AddEventToStack "Event 2" "Passage 2" "condition" "" "" "" "" >> */
+To resolve this, the check for the 'priority' argument was moved outside of the object
+creation. We introduced a separate check to determine if the 'priority' argument was
+provided and if it was a valid number. This check ensures that the 'priority' property
+is always assigned a proper numeric value, defaulting to 0 if the argument is not provided
+or is not a number.
 
-/* Event with allowed tags */
-/* <<AddEventToStack "Event 3" "Passage 3" "" "tag1, tag2" "" "" "" >> */
+The corrected code uses $args.length > 7 to check if there are at least eight arguments
+provided to the widget, which means that a 'priority' argument is present. The eighth
+argument, which corresponds to 'priority', is accessed with $args[7] since array indices
+in JavaScript start at 0. The use of parseInt with a radix of 10 ensures that the argument
+is correctly interpreted as an integer.
 
-/* Event with banned tags */
-/* <<AddEventToStack "Event 4" "Passage 4" "" "" "tag3, tag4" "" "" >> */
-
-/* Event with allowed passages */
-/* <<AddEventToStack "Event 5" "Passage 5" "" "" "" "PassageA, PassageB" "" >> */
-
-/* Event with banned passages */
-/* <<AddEventToStack "Event 6" "Passage 6" "" "" "" "" "PassageC, PassageD" >> */
-
+This fix ensures that the widget correctly initializes the event stack, creates an event
+object with the appropriate properties, and inserts the event into the stack in the correct
+priority order without causing syntax errors.
+*/

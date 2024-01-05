@@ -37,8 +37,6 @@
     <p>As you make your way through the crowded corridors, a sudden jostle from a passerby nearly knocks you off your feet. You steady yourself and catch a glimpse of a pickpocket disappearing into the crowd with a few of your credits.</p>
     <p>Though the loss is minor, it's enough to put you on edge. You make a mental note to be more cautious. The Lower Decks are teeming with those who prey on the unwary, and you've just become their latest victim.</p>
     <p>With a sigh, you adjust your belongings to prevent further thefts and continue on your way, the incident a small blemish on an otherwise uneventful journey.</p><br>
-    <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
-    <<set $player.credits -= 20>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
     <<creditchange 20 "negative">><br><br>
     <<link "Continue." $nextPassage>><</link>>
@@ -47,7 +45,6 @@
     <p>While navigating a narrow alley, you're approached by a grifter who offers you a chance at a game of chance. Sensing the likelihood of a scam, you politely decline, but the encounter leaves you wary.</p>
     <p>The grifter's eyes follow you as you walk away, and you can't shake the feeling that you've narrowly avoided a trap. The Lower Decks are full of such opportunists, looking to make a quick credit at someone else's expense.</p>
     <p>As you leave the alley behind, you're relieved to have kept your credits safe, but the encounter has taken a toll on your nerves.</p><br>
-    <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">><br><br>
     <<link "Continue." $nextPassage>><</link>>
 
@@ -55,7 +52,6 @@
     <p>Amidst the din of the Lower Decks, you overhear a heated exchange between two criminals. They're arguing over a botched job, and it's clear that the situation could escalate at any moment.</p>
     <p>You keep your distance, but the argument soon turns violent. A stray blaster shot zings past you, a near miss that sends adrenaline coursing through your veins.</p>
     <p>Once the scuffle ends and the parties disperse, you take a moment to collect yourself. The encounter was too close for comfort, and it's a stark reminder of the dangers that lurk around every corner here.</p><br>
-    <<set $player.stress += Math.round($player.stress * 0.03 + 10)>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">><br><br>
     <<link "Continue." $nextPassage>><</link>>
 
@@ -63,8 +59,6 @@
     <p>As you pass through a dimly lit section of the Lower Decks, a figure emerges from the shadows. It's a thief, and they're demanding your credits. You know better than to resist in such situations.</p>
     <p>With a calm demeanor, you hand over a small sum, enough to satisfy the thief without putting a significant dent in your finances. The thief nods and quickly disappears back into the darkness.</p>
     <p>The encounter leaves you feeling frustrated and violated. You've survived this time, but the loss, however small, is a reminder of the constant threat that hangs over all who travel these paths.</p><br>
-    <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
-    <<set $player.credits -= 30>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
     <<creditchange 30 "negative">><br><br>
     <<link "Continue." $nextPassage>><</link>>
@@ -73,8 +67,6 @@
     <p>While traversing a crowded market, a sudden outburst catches your attention. A local gang is shaking down a merchant, and the situation quickly turns ugly.</p>
     <p>You consider intervening, but the risk is too great. Instead, you offer a subtle distraction, allowing the merchant to slip away. The gang's anger is palpable, and in the confusion, you receive a glancing blow.</p>
     <p>As you make your escape, you feel the sting of the injury. It's a minor wound, but it's enough to remind you of the precarious balance of power in the Lower Decks.</p><br>
-    <<set $player.health -= Math.round($player.health * 0.03 + 10)>>
-    <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
     <<changemoods "health" "minor" "NegEffectOnPlayer">><br>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">><br><br>
     <<link "Continue." $nextPassage>><</link>>
@@ -83,7 +75,6 @@
     <p>As you approach an intersection, a desperate individual bumps into you, whispering a plea for help. They're being pursued by a loan shark's enforcers, and they see you as their only chance at escape.</p>
     <p>You quickly assess the situation and decide to intervene. Using your knowledge of the area, you create a diversion and guide the individual to safety. The enforcers pass by, none the wiser.</p>
     <p>The individual thanks you profusely before disappearing into the crowd. You've done a good deed, but the encounter has left you on high alert. The Lower Decks are no place for heroes, and you can't afford to let your guard down again.</p><br>
-    <<set $player.stress += Math.round($player.stress * 0.02 + 5)>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">><br><br>
     <<link "Continue." $nextPassage>><</link>>
 

@@ -26,7 +26,6 @@
         <p>The interrogation room is cold and unwelcoming, the bright lights making it hard to think. The officers question you for hours, their skepticism apparent in every accusation they throw your way. You maintain your innocence, but the seed of doubt has been planted.</p>
         <p>As the hours drag on, you can feel your resolve weakening. The relentless barrage of questions, the insinuations of guilt, it all starts to blur together. You're left wondering if they'll ever let you go, if you'll see the outside of these four walls again.</p>
         <p>Finally, after what feels like an eternity, they conclude the interrogation. They have no evidence, no reason to hold you further. You're released back into the station's corridors, the echoes of the officers' final warnings ringing in your ears. The ordeal has taken its toll, leaving you drained and on edge.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.05 + 15)>>
         <<set $timeadd to (8 * 60)>>
         <<changemoods "mood" "major" "NegEffectOnPlayer">>
         <<set $lowerdeckBlackActivity -= 10000>>
@@ -34,7 +33,6 @@
         <p>The small room feels like it's closing in on you, each question from the officers a hammer chipping away at your psyche. They're relentless, convinced of your guilt, and every denial you offer is met with more skepticism. The stress is palpable, a thick fog that fills the space between you and your accusers.</p>
         <p>Time loses meaning as the interrogation stretches on. You're tired, hungry, and the repeated insistence on your guilt is starting to wear you down. You catch yourself second-guessing your own memories, the pressure of the situation threatening to break you.</p>
         <p>When they finally release you, citing a lack of concrete evidence, you're not sure whether to feel relieved or insulted. The walk back to your quarters is a blur, your mind reeling from the intensity of the experience. It's going to take some time to recover from this.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.05 + 10)>>
         <<set $timeadd to (6 * 60)>>
         <<changemoods "mood" "major" "NegEffectOnPlayer">>
         <<set $lowerdeckBlackActivity -= 10000>>
@@ -42,7 +40,6 @@
         <p>The questioning starts off intense and only gets worse. The officers use every tactic in the book to try and trip you up, to make you confess to crimes you didn't commit. You're bombarded with questions, some so absurd you wonder if this is all some sort of twisted game.</p>
         <p>As the interrogation drags on, you feel your energy draining away. The room is claustrophobic, the air stale, and every glance from the officers feels like an accusation. You're fighting to keep your composure, to hold onto the truth amidst the barrage of lies they're trying to pin on you.</p>
         <p>Exhaustion sets in by the time they decide to let you go. They've found nothing, and they know it. The walk out of the detainment center is long and silent. You're free, but the weight of the experience lingers, a heavy cloak draped over your shoulders.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.05 + 20)>>
         <<set $timeadd to (10 * 60)>>
         <<changemoods "mood" "major" "NegEffectOnPlayer">>
         <<set $lowerdeckBlackActivity -= 10000>>
@@ -50,7 +47,6 @@
         <p>The officers are like vultures, circling around you, waiting for any sign of weakness. They dissect your every word, looking for inconsistencies, for the slip-up that will give them what they want. But you give them nothing, because there's nothing to give.</p>
         <p>Your mind races as you try to keep up with their questions. They're trying to confuse you, to make you doubt yourself. The strain is immense, and you can feel the fatigue setting in, your body and mind pushed to their limits.</p>
         <p>It's with a mixture of relief and resentment that you're finally released. They have no proof, no case to make against you. The relief of being out is tempered by the knowledge that they could do this again, at any time, for any reason. The station feels a little less like home now.</p>
-        <<set $player.mood -= Math.round($player.mood * 0.05 + 25)>>
         <<set $timeadd to (12 * 60)>>
         <<changemoods "mood" "major" "NegEffectOnPlayer">>
         <<set $lowerdeckBlackActivity -= 10000>>

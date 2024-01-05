@@ -1,0 +1,111 @@
+:: DaltonIntro [conversation event] {"position":"850,850","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/ruinedhallway.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Ruined Hallway",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Ruined Hallway</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+The figure emerges from the shadows, a man who looks little better than your current state. He offers a weary smile before extending a hand, offering you a small medkit.
+
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Here, take this. It's not much, but it should help with the pain."<</say>><br>
+<<set $player.health += 20>> /* Heal the player a bit */
+You accept the medkit with a nod, the relief immediate as the medication takes effect.
+<<changemoods "health" "major" "PosEffectOnPlayer">><br>
+<<changemoods "health" "major" "PosEffectOnPlayer">><br>
+<<changemoods "health" "major" "PosEffectOnPlayer">><br>
+<<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+<<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
+
+
+<br><br>
+<<say '$player.name' $playerPortraitPathZ>>"Thanks. Why didn't you help me back there?"<</say>>
+<br>
+Dalton's expression darkens, a hint of sorrow in his eyes.
+<br><br>
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"No one's going to risk Braxton's wrath for a stranger. It's every person for themselves down here."<</say>>
+<br>
+His words are a cold splash of reality, and you realize just how alone you are.
+<br><br>
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Keep your head down, and maybe check out the dojo. They might be able to help you out."<</say>>
+
+<<say '$player.name' $playerPortraitPathZ>>"Dojo? What's that?"<</say>>
+<br>
+Dalton's face softens at the mention of the dojo.
+<br><br>
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"It's run by a woman named Kyra. She's trying to make a difference, help people defend themselves. She's not friends with Braxton, and that's a good thing."<</say>>
+
+<<say '$player.name' $playerPortraitPathZ>>"Where can I find it?"<</say>>
+<br>
+Dalton points down a side corridor, his gesture indicating a path through the maze of the lower decks.
+<br><br>
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Lower observation deck. Can't miss it. But if you don't go, find someone to watch your back. Going it alone is asking for trouble—especially with Braxton after you."<</say>>
+
+You weigh Dalton's advice, knowing that your next choice could be a matter of survival.
+<br><br>
+<<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+<<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+<br>
+<div id="choice3">
+<<say '$player.name' $playerPortraitPathZ>>
+    [[Thanks for the advice. I'll check out the dojo.|Lower Observation Deck][$timeadd += 5]]<br>
+    [[I can handle myself, but thanks for the medkit.|Lower Decks][$timeadd += 5]]<br>
+    <<link "I need to lay low for a while. Any place you recommend?">>
+        <<set $DaltonReveal to 5>>
+        <<replace "#choice3">><div id="finalchoice">
+    <<if $DaltonReveal == 5>>
+        
+        <<fadein 5s>>
+
+        <<say '$player.name' $playerPortraitPathZ>>
+            "I need to lay low for a while. Any place you recommend?"
+            <</say>><br>
+
+
+        The station's ambient noise is a constant companion, a reminder of the life teeming within its metal walls. Dalton's gaze is sharp, his stance casual but alert as he addresses your concern.<br>
+
+        <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>
+        "Hidden cubby holes? Yeah, they exist. Tucked away in the nooks and crannies of this place. But finding one that's vacant? That's a stroke of luck you can't always count on."
+        <</say>><br>
+
+        You rub your chin thoughtfully, the gears turning in your head. Cold Storage flashes through your mind, a potential haven in the chaos. Jax, with his unassuming demeanor and watchful eyes, could be the ally you need.<br>
+
+        <<say "$player.name" $playerPortraitPathZ>>
+        "I might have a lead on a place... and someone who could watch my back."
+        <</say>><br>
+
+        Dalton's lips curl into a half-smile, a glint of approval in his eyes.<br>
+
+        <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>
+        "If you're looking to trade luck for certainty, scrape together some credits for Haven Apartments in the Habitation Cells. They've got security. Won't stop the big fish if they come hunting, but it'll fend off the small fry."
+        <</say>><br>
+
+        You nod, taking mental notes. Security is a commodity you can't afford to overlook, not with the wounds of your recent injuries still throbbing.<br>
+
+        <<say "$player.name" $playerPortraitPathZ>>
+        [[Thanks for the advice. I'll check out the dojo.|Lower Observation Deck][$timeadd += 5]]<br>
+        [[Thanks for the medkit, Dalton.|Lower Decks][$timeadd += 5]]<br>
+        [[I appreciate the help. I'll see you around, Dalton.|Lower Decks][$timeadd += 5]]
+        <</say>>
+
+        <</fadein>>
+
+    <</if>>
+</div><</replace>>
+        
+    <</link>><br>
+    [[I appreciate the help. I'll see you around, Dalton.|Lower Decks][$timeadd += 5]]
+<</say>>
+</div>
+
+
+
+<</nobr>>

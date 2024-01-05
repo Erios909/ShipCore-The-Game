@@ -1,0 +1,89 @@
+:: BraxtonIntro [conversation event] {"position":"850,750","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/ambushalley.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks Ambush</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+As you navigate the dimly lit corridors of the lower decks, the sense of unease grows. The grimy walls close in, and the shadows seem to move with a life of their own. The air is thick with the scent of rust and something else—something foul.
+
+Suddenly, a group of figures block your path, their postures menacing. The leader, a hulking brute with a scarred face, steps forward. His eyes glint with malice, and his goons fan out behind him, cracking their knuckles.
+
+<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"Well, well, what do we have here? Fresh meat stumbling through our turf."<</say>>
+<br><<changemoods "stress" "major" "NegEffectOnPlayer">><br>
+You can feel the threat in the air, as tangible as the grime on the walls.
+<br><br>
+<<say '$player.name' $playerPortraitPathZ>>"I'm just passing through. No trouble."<</say>>
+<br>
+Braxton laughs, a sound that echoes off the metal surfaces, sending chills down your spine.
+<br><br>
+<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"No trouble... Boys, looks like we got ourselves a comedian."<</say>>
+
+<<say '$player.name' $playerPortraitPathZ>>"What do you want?"<</say>>
+<br>
+Braxton's grin widens, revealing a set of crooked teeth.
+<br><br>
+<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"Your credits, your gear, and maybe a bit of fun. Don't worry, we'll make it quick."<</say>>
+<br><<changemoods "stress" "major" "NegEffectOnPlayer">><br><<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
+His goons move in, and you know that talking is no longer an option. It's time to fight or flee.
+<br><br>
+<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"Get 'em, boys!"<</say>><br><br>
+<hr id="hud">
+
+<style>
+  /* Scoped CSS for this passage */
+.image-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 100%
+}
+
+  .image-row img {
+    max-width: 20%; /* Set the maximum width for the images */
+    max-height: 20%; /* Set the maximum height for the images */
+    margin: 0 5px; /* Add some space between the images */
+  }
+</style>
+
+<div class="image-row">
+    <img @src="setup.ImagePath + 'npcs/criminals/criminal1.jpg'" alt="Criminal 1">
+    <img @src="setup.ImagePath + 'npcs/criminals/criminal2.jpg'" alt="Criminal 2">
+    <img @src="setup.ImagePath + 'npcs/criminals/criminal3.jpg'" alt="Criminal 3">
+    <img @src="setup.ImagePath + 'npcs/criminals/criminal4.jpg'" alt="Criminal 4">
+    <img @src="setup.ImagePath + 'npcs/criminals/criminal5.jpg'" alt="Criminal 5">
+    <img @src="setup.ImagePath + 'npcs/criminals/criminal6.jpg'" alt="Criminal 6">
+    <!-- Add as many images as you need -->
+</div>
+<hr id="hud">
+<br><br>
+
+<p>TODO: Implement Combat.</p>
+    <<changemoods "health" "major" "NegEffectOnPlayer">><br>
+    
+    <<changemoods "health" "major" "NegEffectOnPlayer">><br>
+    <<changemoods "trauma" "major" "NegEffectOnPlayer">><br> 
+    <<changemoods "health" "major" "NegEffectOnPlayer">><br>
+    <<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
+    <<changemoods "health" "major" "NegEffectOnPlayer">><br>
+    
+    <<changemoods "health" "major" "NegEffectOnPlayer">><br>
+     
+    <<changemoods "health" "major" "NegEffectOnPlayer">><br>
+    <<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
+
+    <<AddEventToStack "DaltonFirstEvent" "DaltonIntro">>
+<<set $DaltonReveal to 0>>
+<<link "Thrashed." "BraxtonThrashed">><<addmins 60>><</link>>
+<</nobr>>

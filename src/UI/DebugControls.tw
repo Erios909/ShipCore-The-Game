@@ -138,7 +138,10 @@ Combined Difficulty: $combinedDifficultyScore
         <<set $playerCompanions.push('NPCJax')>>
         /* Refresh the current passage to reflect the changes. */
         <<updatebar>>
-<</link>><br>
+<</link>><br><br>
+
+<<link "Encounter with Dalton" "DaltonIntro">>Go to Dalton Intro<</link>><br>
+<<link "Ambush by Braxton" "BraxtonAmbush">>Go to Braxton Ambush<</link>> <br><br>
 
 [[eventstacktestpage|eventstacktestpage]]<br>
 [[LowerDecksPlayerBusiness|LowerDecksPlayerBusiness]]<br>
