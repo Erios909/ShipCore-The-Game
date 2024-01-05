@@ -53,6 +53,27 @@ He smiles and nods at you.
 <br><br>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got any questions for me? I can answer them for you now, or if I'm still around you can check back."<</say>>
 
+/* Example of adding an event that should only occur after at least one day has passed in the game */
+<<set _oneDayLater = new Date($gameDate.getTime())>> /* Clone the current $gameDate as a JavaScript Date object */
+<<set _oneDayLater.setDate(_oneDayLater.getDate() + 1)>> /* Increment the day by one to set the target date for the event */
+
+/* Add the event to the stack with the target date as a property */
+<<set _event = {
+    name: "BraxtonFirstEvent",
+    passage: "BraxtonIntro",
+    targetDate: _oneDayLater, /* Store the target date for comparison */
+    allowedTags: "", /* Specify allowed tags if any, otherwise leave as an empty string */
+    bannedTags: "", /* Specify banned tags if any, otherwise leave as an empty string */
+    allowedPassages: "", /* Specify allowed passages if any, otherwise leave as an empty string */
+    bannedPassages: "", /* Specify banned passages if any, otherwise leave as an empty string */
+    priority: 5 /* Set the priority of the event */
+}>>
+<<run $eventStack.push(_event)>> /* Add the event object to the event stack */
+
+
+
+
+
 <<say '$player.name' $playerPortraitPathZ>>
     [[Can you tell me more about the station?|JaxAskStation][$timeadd += 5]]<br>
     [[Who are the people around here?|JaxAskPeople][$timeadd += 5]]<br>

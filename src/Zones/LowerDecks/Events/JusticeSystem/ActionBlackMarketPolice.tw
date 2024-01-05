@@ -46,7 +46,6 @@
             <<link "Continue." $nextPassage>><</link>>
         <<else>>
             <p>A checkpoint forces you to line up for inspection. The officers are thorough, and you can't help but sweat as they examine your belongings.</p>
-            <<set $player.stress += Math.round($player.stress * 0.03 + 10)>>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
             <<set $lowerdeckBlackActivity -= 200>><br><br>
             <<link "Continue." $nextPassage>><</link>>
@@ -61,7 +60,6 @@
             <<link "Continue." $nextPassage>><</link>>
         <<else>>
             <p>Security seems to be tightening. You're pulled aside for questioning and released only after an hour of heated demands.</p><br>
-            <<set $player.stress += Math.round($player.stress * 0.04 + 15)>>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">>
             <<set $timeadd += 60>>
             <<addmins $timeadd>>
@@ -70,25 +68,17 @@
         <</if>>
     <<case 6>>
         <p>Today's not your day. You're detained and taken in for questioning. The ordeal will be draining, both mentally and physically.</p><br>
-        <<set $player.stress += Math.round($player.stress * 0.05 + 20)>>
-        <<set $player.fatigue += Math.round($player.fatigue * 0.05 + 10)>>
         <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br><br>
         [[You have been detained.|LDBMPoliceDetained]]
     <<case 7>>
         <p>You're caught in a surprise sting operation. The evidence against you is damning, and you're whisked away before you can protest.</p><br>
-        <<set $player.stress += Math.round($player.stress * 0.06 + 25)>>
-        <<set $player.fatigue += Math.round($player.fatigue * 0.06 + 15)>>
-        <<set $player.credits -= 50>>
         <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
         <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br><br>
         <<creditchange 50 "negative">>
         [[You have been detained.|LDBMPoliceArrested]]
     <<case 8>>
         <p>It's a full-blown raid. Law enforcement descends upon you with overwhelming force, and any thoughts of escape are quickly dashed. The repercussions will be severe and long-lasting.</p><br>
-        <<set $player.stress += Math.round($player.stress * 0.07 + 30)>>
-        <<set $player.fatigue += Math.round($player.fatigue * 0.07 + 20)>>
-        <<set $player.credits -= 100>>
         <<changemoods "stress" "major" "NegEffectOnPlayer">><br>
         <<changemoods "fatigue" "major" "NegEffectOnPlayer">><br>
         <<creditchange 100 "negative">><br><br>

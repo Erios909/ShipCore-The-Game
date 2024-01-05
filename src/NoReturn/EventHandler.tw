@@ -7,19 +7,6 @@
 <<set _currentTags to State.variables.currentPassageTags>>
 <<set _destinationTags to State.variables.destinationPassageTags>>
 
-<!-- Clear the stored tags immediately to avoid carrying over tags from previous navigations -->
-<<run delete State.variables.currentPassageTags>>
-<<run delete State.variables.destinationPassageTags>>
-
-<!-- Retrieve the last event time -->
-<<set $lastEventTime to State.variables.lastEventTime or 0>>
-
-<!-- Get the current time -->
-<<set $currentTime to State.temporary.now>>
-
-<!-- Calculate time since last event -->
-<<set $timeSinceLastEvent to $currentTime - $lastEventTime>>
-
 <!-- Ensure $eventStack is an array before proceeding -->
 <<if not Array.isArray($eventStack)>>
     <<set $eventStack to []>>
@@ -27,17 +14,38 @@
 <</if>>
 
 <!-- Sort the event stack by priority in descending order so higher priority events are checked first -->
-<<set $eventStack.sort((a, b) => b.priority - (a.priority || 0))>>
+<<set $eventStack.sort((a, b) => b.priority - a.priority)>>
 
 <<set _targetPassage to "">> <!-- Initialize the target passage variable -->
+<<set _currentDate = new Date($gameDate.getFullYear(), $gameDate.getMonth(), $gameDate.getDate())>> <!-- Current date without time for comparison -->
+
+<!-- Iterate through the event stack to find an event to fire -->
 <<for _i = 0; _i < $eventStack.length; _i++>>
     <<set _event to $eventStack[_i]>>
-    <<set _eventCondition to (_event.condition ? _event.condition : function() { return true; })>>
-    <<set _bannedTagsMet to _event.bannedTags.some(tag => _currentTags.includes(tag))>>
-    <<if _eventCondition() && not _bannedTagsMet>>
-        <<set _targetPassage to _event.passage>> <!-- Set the target passage to the event's passage -->
-        <<run $eventStack.splice(_i, 1)>> <!-- Remove the event from the stack -->
-        <<break>> <!-- Break out of the loop since we've found an event to fire -->
+    <<set _bannedTagsMet to _event.bannedTags.some(tag => _currentTags.includes(tag) || _destinationTags.includes(tag))>>
+    <!-- Check if the event has banned tags in the current or destination passage -->
+    <<if not _bannedTagsMet>>
+        <!-- Check if the event is date-based and if the current date is on or after the target date -->
+        <<if _event.targetDate>>
+            <<set _targetDate = new Date(_event.targetDate.getFullYear(), _event.targetDate.getMonth(), _event.targetDate.getDate())>> <!-- Target date without time -->
+            <<if _currentDate >= _targetDate>>
+                <<set _targetPassage to _event.passage>> <!-- Set the target passage to the event's passage -->
+                <<run $eventStack.splice(_i, 1)>> <!-- Remove the event from the stack -->
+                <<break>> <!-- Break out of the loop since we've found an event to fire -->
+            <</if>>
+        <<elseif _event.condition>>
+            <!-- If the event has a condition function, evaluate it -->
+            <<if _event.condition()>>
+                <<set _targetPassage to _event.passage>> <!-- Set the target passage to the event's passage -->
+                <<run $eventStack.splice(_i, 1)>> <!-- Remove the event from the stack -->
+                <<break>> <!-- Break out of the loop since we've found an event to fire -->
+            <</if>>
+        <<else>>
+            <!-- If the event has no date or condition, it's always ready to fire -->
+            <<set _targetPassage to _event.passage>> <!-- Set the target passage to the event's passage -->
+            <<run $eventStack.splice(_i, 1)>> <!-- Remove the event from the stack -->
+            <<break>> <!-- Break out of the loop since we've found an event to fire -->
+        <</if>>
     <</if>>
 <</for>>
 

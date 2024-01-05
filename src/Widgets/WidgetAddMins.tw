@@ -14,20 +14,66 @@
     /* Call clamps widget to ensure all variables are within their defined ranges */
     <<clamps>>
 
-    /* Check if a new day has started */
-    <<if _previousDate.getDate() != $gameDate.getDate() or _previousDate.getMonth() != $gameDate.getMonth() or _previousDate.getFullYear() != $gameDate.getFullYear()>>
-        /* If a new day has started, set the newDay variable to true */
-        <<set State.variables.newDay = true>>
-        /* Use the AddEventToStack widget to add the DayChange event */
+/* Check if a new day has started */
+<<if _previousDate.getDate() != $gameDate.getDate() or _previousDate.getMonth() != $gameDate.getMonth() or _previousDate.getFullYear() != $gameDate.getFullYear()>>
+    /* If a new day has started, set the newDay variable to true */
+    <<set State.variables.newDay = true>>
+    /* Check if the NewDayEvent is already in the stack */
+    <<set _newDayEventExists to false>>
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        <<if $eventStack[_i].name === "NewDayEvent">>
+            <<set _newDayEventExists to true>>
+            <<break>>
+        <</if>>
+    <</for>>
+    /* Use the AddEventToStack widget to add the DayChange event if it doesn't exist */
+    <<if not _newDayEventExists>>
         <<AddEventToStack "NewDayEvent" "DayChange" "" "" "event,noreturn,conversation" "" "" 10>> <!-- Priority 10 -->
     <</if>>
+<</if>>
 
-    <<if $player.debt <= 0>>
-    <<AddEventToStack "DebtFreeEvent" "DebtFreeEvent" "" "" "event,noreturn,conversation" "" "" 2>> <!-- Priority 10 -->
+<<if $player.debt <= 0>>
+    /* Check if the DebtFreeEvent is already in the stack */
+    <<set _debtFreeEventExists to false>>
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        <<if $eventStack[_i].name === "DebtFreeEvent">>
+            <<set _debtFreeEventExists to true>>
+            <<break>>
+        <</if>>
+    <</for>>
+    /* Add the DebtFreeEvent if it doesn't exist */
+    <<if not _debtFreeEventExists>>
+        <<AddEventToStack "DebtFreeEvent" "DebtFreeEvent" "" "" "event,noreturn,conversation" "" "" 2>> <!-- Priority 2 -->
     <</if>>
-    <<if $player.credits < 0>>
-    <<AddEventToStack "DebtEvent" "DebtEvent" "" "" "event,noreturn,conversation" "" "" 1>> <!-- Priority 10 -->
+<</if>>
+
+<<if $player.credits < 0>>
+    /* Check if the DebtEvent is already in the stack */
+    <<set _debtEventExists to false>>
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        <<if $eventStack[_i].name === "DebtEvent">>
+            <<set _debtEventExists to true>>
+            <<break>>
+        <</if>>
+    <</for>>
+    /* Add the DebtEvent if it doesn't exist */
+    <<if not _debtEventExists>>
+        <<script>>
+            console.log("Adding DebtEvent because $player.credits is less than 0:", State.variables.player.credits);
+        <</script>>
+        <<AddEventToStack "DebtEvent" "DebtEvent" "" "" "event,noreturn,conversation" "" "" 1>> <!-- Priority 1 -->
     <</if>>
+<<elseif $player.credits === 0>>
+    <<script>>
+        console.log("Player credits are exactly 0, not adding DebtEvent.");
+    <</script>>
+<<else>>
+    <<script>>
+        console.log("Player credits are greater than 0:", State.variables.player.credits, "not adding DebtEvent.");
+    <</script>>
+<</if>>
+
+
     
 
     <<autoFabricatorProcess>>

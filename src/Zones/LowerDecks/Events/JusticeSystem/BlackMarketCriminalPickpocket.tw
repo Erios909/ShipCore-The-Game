@@ -24,8 +24,6 @@
 
 <p>The realization hits hard; in the Lower Decks, every credit counts. You curse under your breath, vowing to be more vigilant. The thief is long gone, lost in the sea of faces that crowd the marketplace.</p>
     <p>With a heavy heart, you make a mental note of the loss and push forward. The encounter has been costly, and not just in credits. Your confidence has taken a hit, and it will take time to rebuild.</p>
-    <<set $player.stress += Math.round($player.stress * 0.03 + 10)>>
-    <<set $player.credits -= 75>>
     <<changemoods "stress" "minor" "NegEffectOnPlayer">>
     <<creditchange 75 "negative">>
     
