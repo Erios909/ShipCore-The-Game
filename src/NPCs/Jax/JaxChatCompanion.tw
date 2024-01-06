@@ -10,20 +10,34 @@
 
 <!-- If Jax is now a companion -->
 <<if $JaxIsCompanion>><div id="jaxchatchoices">
+    <div id="chatstart">
     <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's our next move?"<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         <<if $currentArea == "lowerdecks">>
             <<link "Can you tell me more about the station?">>
-                <<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskStation").processText())>>
                 <<run $timeadd += 5>>
+                <<replace "#chatstart">><</replace>>
+                <<replace "#jaxchatchoices">><<fadein 1s>>
+                    <<run $("#jaxchatresponse").wiki(Story.get("JaxCompanionAskStation").processText())>>
+                    <<run $('#jaxchatchoices').remove()>><</fadein>>
+                <</replace>>
+                
             <</link>><br>
             <<link "Who are the people around here?">>
-                <<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskPeople").processText())>>
                 <<run $timeadd += 5>>
+                <<replace "#chatstart">><</replace>>
+                <<replace "#jaxchatresponse">><<fadein 1s>><<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskPeople").processText())>>
+                    <<run $('#jaxchatchoices').remove()>><</fadein>>
+                <</replace>>
+                
             <</link>><br>
             <<link "How can I earn some credits quickly?">>
-                <<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskWork").processText())>>
                 <<run $timeadd += 5>>
+                <<replace "#chatstart">><</replace>>
+                <<replace "#jaxchatresponse">><<fadein 1s>><<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskWork").processText())>>
+                    <<run $('#jaxchatchoices').remove()>><</fadein>>
+                <</replace>>
+                
             <</link>><br>
         <</if>>
         <<link "Just checking in.">>
@@ -35,6 +49,8 @@
             <</replace>>
         <</link>><br>
     <</say>></div>
+    </div>
+    <div id="jaxchatresponse"></div>
 <</if>>
 <</nobr>>
 

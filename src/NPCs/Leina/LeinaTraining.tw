@@ -62,6 +62,6 @@ You leave the dojo with aching muscles and a newfound respect for the art of com
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I'll hold you to that. Rest well, <<=$player.name>>."<</say>><br>
 
 You exit the dojo, the sounds of training fading behind you as you step back into the chaos of the lower decks, ready for whatever comes next.
-
+<<set $LeinaDojoTraining to true>>
 [[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
 <</nobr>>

@@ -54,7 +54,7 @@ You rise from the mat, feeling a newfound sense of purpose and camaraderie. Lein
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Nor will I. Now, go rest. Tomorrow's training awaits."<</say>><br>
 
 You exit her office, the echoes of Leina's story accompanying you as you navigate the corridors of the lower decks, your spirit lifted and your resolve strengthened.
-
+<<set $LeinaStory to true>>
 [[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
 
 <</nobr>>

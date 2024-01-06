@@ -17,10 +17,29 @@
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>
         "Is there something else you wish to discuss?"
 <</say>>
+
+<!-- Initialize variables for save compatibility -->
+<<if $LeinaBraxtonInfo === undefined>>
+    <<set $LeinaBraxtonInfo to false>>
+<</if>>
+<<if $LeinaStory === undefined>>
+    <<set $LeinaStory to false>>
+<</if>>
+<<if $LeinaDojoTraining === undefined>>
+    <<set $LeinaDojoTraining to false>>
+<</if>>
+
 <<say '$player.name' $playerPortraitPathZ>>
+    <<if not $LeinaBraxtonInfo>>
         [[Ask about Braxton.|LeinaBraxtonInfo][$timeadd += 10]]<br>
+    <</if>>
+    <<if not $LeinaStory>>
         [[Hear Leina's story.|LeinaStory][$timeadd += 5]]<br>
+    <</if>>
+    <<if not $LeinaDojoTraining>>
         [[Inquire about dojo training.|LeinaDojoTraining][$timeadd += 5]]<br>
-        [[I just wanted to thank you again. I'll be on my way.|DojoLowerDecks][$timeadd += 5]]
+    <</if>>
+    [[I just wanted to thank you again. I'll be on my way.|DojoLowerDecks][$timeadd += 5]]
 <</say>>
+
 <</nobr>>

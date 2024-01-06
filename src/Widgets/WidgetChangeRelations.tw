@@ -1,0 +1,60 @@
+:: widget changerelations [widget nobr] {"position":"175,675","size":"100,100"}
+<<widget "changerelations">>
+<<nobr>>
+    /* Initialize local variables for the character name, severity, and effect type. */
+    <<set _charName to $args[0]>>
+    <<set _severity to $args[1].toLowerCase()>>
+    <<set _effectType to $args[2]>>
+    <<set _changeAmount to 0>>
+    <<set _symbol to ''>>
+    <<set _color to ''>>
+    <<set _displayCharName to ''>>
+
+    /* Ensure the $playerRelationships object exists and is initialized. */
+    <<if typeof $playerRelationships === "undefined" || !($playerRelationships instanceof Map)>>
+        <<set $playerRelationships to new Map()>>
+    <</if>>
+
+    /* Determine the display character name and initialize relationship if not present. */
+    <<if not $playerRelationships.has(_charName)>>
+        <<set $playerRelationships.set(_charName, 0)>>
+    <</if>>
+    <<set _displayCharName to _charName>>
+
+    /* Calculate the change amount based on severity. */
+    <<if _severity is "minor">>
+        <<set _changeAmount to 5>>
+    <<elseif _severity is "major">>
+        <<set _changeAmount to 10>>
+    <</if>>
+
+    /* Apply the change to the player's relationship stat, considering the effect type. */
+    <<if _effectType is "PosEffectOnPlayer">>
+        <<set $playerRelationships.set(_charName, $playerRelationships.get(_charName) + _changeAmount)>>
+    <<elseif _effectType is "NegEffectOnPlayer">>
+        <<set $playerRelationships.set(_charName, $playerRelationships.get(_charName) - _changeAmount)>>
+    <</if>>
+
+    /* Determine the symbol and color based on severity and effect type. */
+    <<if _effectType is "PosEffectOnPlayer">>
+        <<if _severity is "minor">>
+            <<set _symbol to '+'>>
+            <<set _color to 'lightgreen'>>
+        <<elseif _severity is "major">>
+            <<set _symbol to '++'>>
+            <<set _color to 'green'>>
+        <</if>>
+    <<elseif _effectType is "NegEffectOnPlayer">>
+        <<if _severity is "minor">>
+            <<set _symbol to '-'>>
+            <<set _color to 'yellow'>>
+        <<elseif _severity is "major">>
+            <<set _symbol to '--'>>
+            <<set _color to 'red'>>
+        <</if>>
+    <</if>>
+
+    /* Print the result. */
+    <<print '<span style="color: ' + _color + '">' + _symbol + ' ' + _displayCharName + ' Relation</span>'>>
+<</nobr>>
+<</widget>>

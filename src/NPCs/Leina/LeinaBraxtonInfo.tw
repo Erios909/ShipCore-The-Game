@@ -14,40 +14,159 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-With the dojo quieting down after a day of rigorous training, you find Leina tidying up the space. She's putting away equipment, her movements still carrying the grace of a practiced martial artist. You approach her, the name 'Braxton' weighing on your mind.
 
-<<say '$player.name' $playerPortraitPathZ>>"Leina, earlier you mentioned Braxton and his goons. Who is he, and why is he a problem for the dojo?"<</say>><br>
-Leina pauses, her expression turning solemn. She gestures for you to follow her to a quieter corner of the dojo.
+<<say '$player.name' $playerPortraitPathZ>>"Leina, I wanted to talk about Braxton. Who is he, and why is he a problem for the dojo?"<</say>>
+<p>Leina pauses, her expression turning solemn. She gestures for you to follow her to a quieter corner of the dojo.</p>
 
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Braxton is a local gang leader. He and his crew have been trying to control the lower decks through fear and violence. They don't like that we teach self-defense here. It undermines their power."<</say>><br>
-Her fists clench at her sides, a subtle sign of the anger she feels towards the man and his actions.
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Braxton is a local gang leader. He and his crew have been trying to control the lower decks through fear and violence. They don't like that we teach self-defense here. It undermines their power."<</say>>
+<p>Her fists clench at her sides, a subtle sign of the anger she feels towards the man and his actions.</p>
 
 <<set $player.stress += 5>> /* The tension of the topic slightly increases your stress */
 <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 <<set $player.mood -= 5>> /* The gravity of the situation dampens your mood */
 <<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
 
-Leina leads you to a wall where a series of images are displayed, each one showing the faces of those who have suffered at Braxton's hands.
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"These are the people who have stood up to him and paid the price. We honor their courage here. And we prepare so that no one else becomes a victim."<</say>><br>
-You study the images, the stories behind each face igniting a fire within you.
+<p>Leina leads you to a wall where a series of images are displayed, each one marked as 'missing.' If Braxton's thugs had been more thorough, then there was every likelihood that your name could have been added to the list—if you had known anyone, that is. There wouldn't really have been anyone to put up a poster for you, after all.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"These are the people who have stood up to him and paid the price. We honor their courage here. And we prepare so that no one else becomes a victim."<</say>>
+<p>You look at the images, each one a reminder of the danger that lurks in the lower decks.</p>
 
-<<say '$player.name' $playerPortraitPathZ>>"What can be done about him? Is there no way to stop his reign of terror?"<</say>><br>
-Leina's gaze meets yours, a steely determination in her eyes.
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"We do what we can. We train, we protect each other, and we stay vigilant. Braxton's time will come. And when it does, we'll be ready."<</say>><br>
-Her confidence is infectious, and you feel a surge of solidarity with her and the dojo's cause.
+<div id="playerReactions">
+    <<say '$player.name' $playerPortraitPathZ>>
+        <<link "What can be done about him?">>
+            <<replace "#playerReactions">>
+                <<include "LeinaBraxtonInfoPlayerAsksAboutBraxton">>
+            <</replace>>
+        <</link>><br>
+        <<link "It won't happen to me.">>
+            <<replace "#playerReactions">>
+                <<include "LeinaBraxtonInfoPlayerConfidentResponse">>
+            <</replace>>
+        <</link>><br>
+        <<link "Braxton seems powerful.">>
+            <<replace "#playerReactions">>
+                <<include "LeinaBraxtonInfoPlayerAcknowledgesBraxtonPower">>
+            <</replace>>
+        <</link>><br>
+        <<link "I see.">>
+            <<replace "#playerReactions">>
+                <<include "LeinaBraxtonInfoPlayerNoncommittalResponse">>
+            <</replace>>
+        <</link>><br>
+    <</say>>
+</div>
+<</nobr>>
 
-<<set $player.health += 5>> /* The resolve in Leina's words has a strengthening effect on you */
-<<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+:: LeinaBraxtonInfoPlayerAsksAboutBraxton [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"What can be done about him? Is there no way to stop his reign of terror?"<</say>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"We're doing what we can. Teaching self-defense is just the start. There are those who are working to unite the lower decks against Braxton, but it's dangerous work."<</say>>
+<<include "LeinaNextSteps">>
+<</fadein>>
+<</nobr>>
 
-Leina places a hand on your shoulder, her touch firm and reassuring.
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"You're one of us now, <<=$player.name>>. If Braxton comes knocking, he'll find more than he bargained for."<</say>><br>
-You nod, feeling a part of something greater than yourself, ready to stand with Leina and the dojo against any threat.
+:: LeinaBraxtonInfoPlayerConfidentResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"It won't happen to me. I can take care of myself."<</say>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Confidence is good, but don't underestimate Braxton. He's dangerous, and he doesn't play fair. Stay alert."<</say>>
+<<include "LeinaNextSteps">>
+<</fadein>>
+<</nobr>>
 
-<<say '$player.name' $playerPortraitPathZ>>"Thank you, Leina. I won't let you down."<</say>><br>
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I know you won't. Now, get some rest. We train again at dawn."<</say>><br>
+:: LeinaBraxtonInfoPlayerAcknowledgesBraxtonPower [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Braxton seems powerful. It must be difficult to stand up to someone like that."<</say>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"It is. But we have strength in numbers, and every person we teach is another potential ally against him. We won't let fear rule us."<</say>>
+<<include "LeinaNextSteps">>
+<</fadein>>
+<</nobr>>
 
-You leave the dojo with a new sense of purpose, the name 'Braxton' etched in your mind as a challenge to be met, a wrong to be righted. The lower decks may be a place of darkness, but in the dojo, there is light.
+:: LeinaBraxtonInfoPlayerNoncommittalResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I see."<</say>>
+<p>Leina nods, understanding your need to process the information. "Take your time. It's a lot to take in. Just know that you're not alone in this fight."</p>
+<<include "LeinaNextSteps">>
+<</fadein>>
+<</nobr>>
 
+:: LeinaNextSteps [conversation event]
+<<nobr>>
+<p>Leina's gaze meets yours, a steely determination in her eyes.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"We do what we can. We train, we protect each other, and we stay vigilant. Braxton's time will come. And when it does, we'll be ready."<</say>>
+
+<div id="playerChoices">
+    <<link "I'm ready to stand with you and fight.">>
+        <<replace "#playerChoices">><<fadein 1s>>
+            <<changerelations "Leina" "major" "PosEffectOnPlayer">>
+            <<say '$player.name' $playerPortraitPathZ>>"I'm ready to stand with you and fight. Braxton won't know what hit him."<</say>>
+            <<include "LeinaResponseToCommitment">>
+        <</fadein>><</replace>>
+    <</link>><br>
+    <<link "I want to help, but I'm not sure how.">>
+        <<replace "#playerChoices">><<fadein 1s>>
+            <<changerelations "Leina" "minor" "PosEffectOnPlayer">>
+            <<say '$player.name' $playerPortraitPathZ>>"I want to help, but I'm not sure how."<</say>>
+            <<include "LeinaResponseToUncertainty">>
+        <</fadein>><</replace>>
+    <</link>><br>
+    <<link "I need to think about this. It's a lot to take on.">>
+        <<replace "#playerChoices">><<fadein 1s>>
+            <<say '$player.name' $playerPortraitPathZ>>"I need to think about this. It's a lot to take on."<</say>>
+            <<include "LeinaResponseToHesitation">>
+        <</fadein>><</replace>>
+    <</link>><br>
+    <<link "I can't commit to this cause right now.">>
+        <<replace "#playerChoices">><<fadein 1s>>
+            <<changerelations "Leina" "minor" "NegEffectOnPlayer">>
+            <<say '$player.name' $playerPortraitPathZ>>"I can't commit to this cause right now. I have other priorities."<</say>>
+            <<include "LeinaResponseToRejection">>
+        <</fadein>><</replace>>
+    <</link>><br>
+</div>
+
+<</nobr>>
+
+:: LeinaResponseToCommitment [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Your bravery strengthens us all. With your help, we'll be a force Braxton can't ignore."<</say>>
+<p>You feel a sense of unity and determination as you join Leina's cause fully.</p>
+<<set $LeinaBraxtonInfo to true>>
+<<set $LeinaDojoRep += 1>>
 [[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
+<</fadein>>
+<</nobr>>
 
+:: LeinaResponseToUncertainty [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Every bit of help counts. I'll show you how you can make a difference."<</say>>
+<p>Leina's willingness to guide you eases your uncertainty, and you feel ready to learn and contribute in your own way.</p>
+<<set $LeinaBraxtonInfo to true>>
+<<set $LeinaDojoRep += 1>>
+[[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
+<</fadein>>
+<</nobr>>
+
+:: LeinaResponseToHesitation [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"It's a big decision, and it's okay to take your time. We're here when you're ready."<</say>>
+<p>Leina's understanding gives you the space you need to think things through without pressure.</p>
+<<set $LeinaBraxtonInfo to true>>
+[[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
+<</fadein>>
+<</nobr>>
+
+:: LeinaResponseToRejection [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I respect your choice. Just remember, everyone is welcome to become party of the community here."<</say>>
+<p>Despite your decision to not commit, Leina's open-hearted response leaves the door open for future collaboration.</p>
+<<set $LeinaBraxtonInfo to true>>
+[[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
+<</fadein>>
 <</nobr>>
