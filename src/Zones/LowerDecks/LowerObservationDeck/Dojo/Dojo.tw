@@ -1,0 +1,55 @@
+:: DojoLowerDecks [location event] {"position":"750,750","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo.jpg'>>
+<<addmins $timeadd>> <!-- Assuming 5 minutes pass when visiting the dojo -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Dojo",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks Dojo</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>The dojo is a stark contrast to the dilapidated surroundings of the lower decks. Clean mats cover the floor, and the walls are adorned with various training implements. The air is filled with the sounds of exertion and the sharp slaps of disciplined strikes. Here, the downtrodden come to find strength, and the desperate come to find hope.</p>
+
+<<set $player.stress -= 10>> <!-- The disciplined environment reduces stress -->
+<<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+
+<<if $DaltonReveal > 0>>
+    <p>Leina, the dojo master, oversees the training with a keen eye. Her presence is commanding, yet there's an air of accessibility about her. Despite her youth, the confidence in her stance speaks of experience, and the subtle bulges beneath her clothing hint at cybernetic enhancements.</p>
+
+    <<set $player.mood += 10>> <!-- The presence of a strong leader improves mood -->
+    <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+<</if>>
+
+<<if typeof $LeinaIntro === "undefined">><<set $LeinaIntro = 0>><</if>>
+<<if typeof $CompanionIntro === "undefined">><<set $CompanionIntro = 0>><</if>>
+
+<div id="dojoChoices">
+    <<if $DaltonReveal > 0 && $LeinaIntro == 0>>
+        [[Speak with Leina, the dojo master.|LeinaIntro][$LeinaIntro += 1][$timeadd += 5]]<br>
+    <<elseif $LeinaIntro > 0>>
+        [[Speak with Leina, the dojo master.|LeinaChat][$timeadd += 5]]<br>
+    <</if>>
+    [[Socialize at the Dojo.|DojoSocialize][$timeadd += 10]]<br>
+    [[Train Solo at the Dojo.|DojoTrainingSolo][$timeadd += 5]]<br>
+    [[Meditate at the Dojo.|DojoMeditate][$timeadd += 5]]<br>
+    <<if $CompanionIntro > 1>>
+        [[Look for people to recruit.|DojoRecruit][$timeadd += 5]]<br>
+    <</if>>
+</div>
+
+<br>Travel:<br>
+<div id="travelOptions">
+    <<if $LeinaIntro > 0 && $CompanionIntro == 0>>
+        [[Return to the Lower Observation Deck.|DaltonCompanionMission][$timeadd += 5]]<br>
+    <<else>>
+        [[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>   
+    <</if>>
+</div>
+
+<</nobr>>

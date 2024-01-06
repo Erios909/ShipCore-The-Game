@@ -1,0 +1,77 @@
+:: DojoMeditate [lowerdeckact] {"position":"325,675","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_meditation.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Dojo - Meditation",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $dojoMeditationEventsRecord>> <<set $dojoMeditationEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $dojoMeditationEventsRecord.today != _today>>
+    <<set $dojoMeditationEventsRecord.today to _today>>
+    <<set $dojoMeditationEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to no event -->
+
+<<set _availableEvents to []>> <!-- List of available meditation events -->
+<<for _i to 1; _i <= 4; _i++>>
+    <<if not $dojoMeditationEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available meditation events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $dojoMeditationEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available meditation events -->
+    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Meditation at the Dojo</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The dojo offers a tranquil corner for meditation, away from the bustle of training. You find a comfortable spot, close your eyes, and begin to focus on your breathing, letting the stillness of the room envelop you.</p>
+
+<!-- Random Meditation Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Deep Tranquility -->
+        <p>Your mind settles into a deep tranquility, the worries of the station life fading away. When you open your eyes, you feel refreshed and at peace.</p>
+        <<changemoods "stress" "major" "PosEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 2>> <!-- Clarity of Thought -->
+        <p>As you meditate, your thoughts become clearer, and solutions to problems that have been troubling you seem to arise effortlessly.</p>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 3>> <!-- Emotional Balance -->
+        <p>You focus on balancing your emotions, letting go of anger and frustration. A sense of calm and emotional stability takes their place.</p>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Physical Relaxation -->
+        <p>Your meditation leads to a profound physical relaxation. Tension in your muscles unwinds, and you feel as if a weight has been lifted from your shoulders.</p>
+        <<changemoods "health" "minor" "PosEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Meditation Event -->
+        <p>Your meditation session is calming, if somewhat routine. You manage to find a moment of quiet in the midst of your hectic life.</p>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+<</switch>>
+
+<br>
+
+<!-- Continue Link -->
+[[Back to the Dojo.|DojoLowerDecks]]
+<</nobr>>

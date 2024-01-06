@@ -4,6 +4,9 @@
 <<set setup.currentSongIndex = 0>>
 <<set $LastHomeZone to "Cold Storage">>
 
+
+<<set $eventStack to []>>
+
 /*
 	Date & Time Widget Setup
 */

@@ -1,0 +1,264 @@
+:: JaxReturnToColdStorage [conversation event]
+<<nobr>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Cold Storage",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>As you enter the frigid expanse of Cold Storage, Jax's figure detaches from the shadows.</p>
+
+<<if $player.health <= 800 or $player.stress >= 200 or $player.trauma >= 200>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"You look like shit. You sure you don't need any help?"<</say>>
+    <div id="playerResponse">
+        <<link "I'm alright, just need some time to heal.">>
+            <<replace "#playerResponse">>
+                <<include "JaxPlayerHealingResponse">>
+            <</replace>>
+        <</link>><br>
+    </div>
+<<else>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Hey there. You look like you've been through the wringer. What happened?"<</say>>
+    <div id="playerResponse">
+        <<link "Got into a bit of a scuffle, but I'll manage.">>
+            <<replace "#playerResponse">>
+                <<include "JaxPlayerHealingResponse">>
+            <</replace>>
+        <</link>><br>
+    </div>
+<</if>>
+
+:: JaxPlayerHealingResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<if $player.health <= 800 or $player.stress >= 200 or $player.trauma >= 200>>
+    <<say '$player.name' $playerPortraitPathZ>>"I'm alright, just need some time to heal."<</say>>
+<<else>>
+    <<say '$player.name' $playerPortraitPathZ>>"Got into a bit of a scuffle, but I'll manage."<</say>>
+<</if>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"It's a good idea to have someone watch your back, you know."<</say>>
+
+<div id="playerCounter">
+    <<link "And who's watching your back, Jax?">>
+        <<replace "#playerCounter">>
+            <<include "JaxPlayerCounterResponse">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerCounterResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"And who's watching your back, Jax?"<</say>>
+Jax goes silent for a moment, his eyes losing focus as if gazing into a painful memory.
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"The person who did... they're dead."<</say>>
+
+<div id="playerReaction">
+    <<link "I'm sorry to hear that.">>
+        <<replace "#playerReaction">>
+            <<include "JaxPlayerApologyResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "Maybe we can team up then?">>
+        <<replace "#playerReaction">>
+            <<include "JaxPlayerTeamUpSuggestion">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</fadein>>
+<</nobr>>
+
+
+:: JaxPlayerApologyResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm sorry to hear that."<</say>>
+<<include "JaxTeamUpProposal">>
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerTeamUpSuggestion [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Maybe we can team up then?"<</say>>
+<<include "JaxTeamUpProposal">>
+<</fadein>>
+<</nobr>>
+
+:: JaxTeamUpProposal [conversation event]
+<<nobr>>
+Jax's expression softens, and he nods slowly.
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Teaming up isn't a bad idea. I just have one condition."<</say>>
+
+<div id="playerInquiry">
+    <<link "What's the condition?">>
+        <<replace "#playerInquiry">>
+            <<include "JaxCondition">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</nobr>>
+
+:: JaxCondition [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"What's the condition?"<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"I need a nanoDoc injector. You can get one from Grafter's Gear on the promenade for 1000 credits."<</say>>
+
+<<set _creditsResponse = ($player.credits >= 1000) ? "I can afford that." : "That's a lot of credits.">>
+<<set _hasNanoDoc = $player.inventory.includes("nanoDoc")>>
+
+<div id="playerOptions">
+    <<if _hasNanoDoc>>
+        <<link "Here, I have a nanoDoc injector.">>
+            <<replace "#playerOptions">>
+                <<include "JaxGiveNanoDoc">>
+            <</replace>>
+        <</link>><br>
+    <</if>>
+    <<link _creditsResponse>>
+        <<replace "#playerOptions">>
+            <<include "ConsiderNanoDocPurchase">>
+        <</replace>>
+    <</link>><br>
+    <<link "I'll think about it.">>
+        <<replace "#playerOptions">>
+            <<include "JaxPlayerNoncommittalResponse">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</fadein>>
+<</nobr>>
+
+:: JaxConsiderNanoDocPurchase [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"That's a lot of credits, but I'll see what I can do."<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Appreciate it. Just remember, it's an investment in our survival."<</say>>
+[[Return to Cold Storage|Cold Storage]]
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerNoncommittalResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'll think about it. No promises though."<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Fair enough. But don't take too long; we're not exactly in a safe line of work here."<</say>>
+[[Return to Cold Storage|Cold Storage]]
+<</fadein>>
+<</nobr>>
+
+:: JaxGiveNanoDoc [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Here, I have a nanoDoc injector."<</say>>
+Jax looks at the injector with a mix of surprise and respect.
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Didn't think you'd have one on you. Good on you for being prepared."<</say>>
+Without warning, Jax jabs the injector into your arm and presses the release.
+<<say '$player.name' $playerPortraitPathZ>>"Hey! What gives?"<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"If we're teaming up, I need you in top shape. Those boosters can leave some nasty carcinogens behind. Use too many at once, and you'll be out cold for days. Happened to me once—three days out like a light."<</say>>
+
+<div id="playerReactions">
+    <<link "I understand, thanks for looking out.">>
+        <<replace "#playerReactions">>
+            <<include "JaxPlayerUnderstandingResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "I'm not happy about this, Jax.">>
+        <<replace "#playerReactions">>
+            <<include "JaxPlayerAnnoyedResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "That was out of line!">>
+        <<replace "#playerReactions">>
+            <<include "JaxPlayerAngryResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "Forget it, I'm out.">>
+        <<replace "#playerReactions">>
+            <<include "JaxPlayerRejectJax">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerUnderstandingResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I understand, thanks for looking out."<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"No problem. We've got to watch each other's backs if we're going to survive down here."<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"So, what's next?"<</say>>
+<<include "JaxNextSteps">>
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerAnnoyedResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm not happy about this, Jax. A little warning next time."<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Got it. I'll keep that in mind for the future."<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"Alright, what's our next move?"<</say>>
+<<include "JaxNextSteps">>
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerAngryResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"That was out of line, Jax! You can't just do that without asking."<</say>>
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Sorry, I'll respect your space next time. But we need to keep moving. What's our plan?"<</say>>
+<<include "JaxNextSteps">>
+<</fadein>>
+<</nobr>>
+
+:: JaxPlayerRejectJax [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Forget it, I'm out. I don't work like this."<</say>>
+Jax looks apologetic but then nods in understanding.
+<<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Sure, if you change your mind, I'll be around."<</say>>
+[[Return to Cold Storage|Cold Storage]]
+<</fadein>>
+<</nobr>>
+
+:: JaxNextSteps [conversation event]
+<<nobr>>
+Jax chuckles, "The easiest way of all, we need credits. Maybe find some promising people in the bars."
+<<say '$player.name' $playerPortraitPathZ>>"Is that the only way?"<</say>>
+Jax frowns, "Maybe the folks around the Dojo on the Lower Observation Deck would join, but they're desperate. Not sure how helpful they'll be."
+He continues, "We can also scout the lower decks for a place to set up, or even consider using Cold Storage."
+<<say '$player.name' $playerPortraitPathZ>>"Set up what exactly?"<</say>>
+"A business, of course. Something to earn money," Jax explains.
+<<say '$player.name' $playerPortraitPathZ>>"What kind of business?"<</say>>
+"That, my friend, will be up to you. I know the lower decks, I can advise, but the choice is yours. Each place has its pros and cons."
+
+<<say '$player.name' $playerPortraitPathZ>>
+    "This is a lot to think about. I'll need some time to figure out what we do."
+    <div id="businessDecisions">
+        <<link "Let's see about earning some credits first.">>
+            [[Earn Credits|Lower Decks]]
+        <</link>><br>
+        <<link "Let's go look for some people to hire.">>
+            [[Hire People|The Last Home]]
+        <</link>><br>
+        <<link "Let's head to the dojo and check it out.">>
+            [[Check Dojo|Lower Observation Deck]]
+        <</link>><br>
+        <<link "This is a lot to think about, I'll need some time.">>
+            [[Think About It|Cold Storage]]
+        <</link>><br>
+    </div>
+<</say>>
+<</nobr>>
+
+<</nobr>>

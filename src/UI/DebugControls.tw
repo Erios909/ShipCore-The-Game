@@ -145,7 +145,20 @@ Combined Difficulty: $combinedDifficultyScore
 
 [[eventstacktestpage|eventstacktestpage]]<br>
 [[LowerDecksPlayerBusiness|LowerDecksPlayerBusiness]]<br>
-[[testmenu|test menu]]<br>
+[[DaltonCompanionMission|DaltonCompanionMission]]<br>
+[[testmenu|test menu]]<br><br>
+
+
+<<if $eventStack === undefined>>
+    <<set $eventStack = []>>
+<</if>>
+/* Live block to show the current event stack */
+<<liveblock>>
+    Current Event Stack:
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        Index: <<print _i>> | Name: <<print $eventStack[_i].name>><br>
+    <</for>>
+<</liveblock>>
 <</nobr>>
 
 

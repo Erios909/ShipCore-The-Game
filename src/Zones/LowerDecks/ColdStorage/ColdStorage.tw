@@ -56,10 +56,20 @@ Things to do:<br>
 [[Rummage through the lockers. (00:15)|ColdStorageLockers][$timeadd = 15]]<br>
 <span class="disabledLink">Prepare a meal. (Facilities unavailable)</span><br>
 <br>
+
+<<if $DaltonReveal === undefined>>
+    <<set $DaltonReveal = 0>>
+    <</if>>
+
+<<if $DaltonReveal > 0>>
+<<goto "JaxReturnToColdStorage">>
+<</if>>
+
 <<if $introColdExit == 1>>
 Jax has made himself at home, piling up junk and building a nest in the corner of the Cold Storage room. His presence, or maybe some unknown hand of security seems to be keeping this place clear of the normal lower deck riffraff.
 You could ask him some questions if you want.
 [[Talk to Jax.|JaxChat]]
+
 
 <</if>><br><br>
 <<nobr>>

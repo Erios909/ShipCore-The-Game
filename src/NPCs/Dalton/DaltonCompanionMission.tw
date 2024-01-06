@@ -1,0 +1,147 @@
+:: DaltonCompanionMission [conversation event] {"position":"850,850","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/ruinedhallway.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Ruined Hallway",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Ruined Hallway</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>Dalton's presence is a stark contrast to the disarray of the Ruined Hallway. His posture is rigid, a testament to his military background, and his eyes carry the weight of someone who has seen too much yet refuses to look away from adversity. As he approaches, the dim lighting of the hallway casts angular shadows across his face, accentuating his determined expression.</p>
+
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Things are far more dire than Leina realizes. Braxton's gearing up to destroy the dojo. We can't let that happen."<</say>>
+
+<div id="daltonChoices">
+    <<link "How can we stop him?">>
+        <<replace "#daltonChoices">>
+            <<include "DaltonPlan">>
+        <</replace>>
+    <</link>><br>
+    <<link "I'm not sure what that has to do with me.">>
+        <<replace "#daltonChoices">>
+            <<include "DaltonExplanation">>
+        <</replace>>
+    <</link>><br>
+</div>
+
+:: DaltonPlan [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"How can we stop him?"<</say>><br>
+Dalton nods, understanding the urgency in your voice.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"We need to recruit more people. Strength in numbers. You've got a certain... aura about you. I saw you coming out of Cold Storage. You're special."<</say>>
+<</fadein>>
+
+<div id="recruitChoices">
+    <<link "Why do you think I'm meant to be recruiting anyone?">>
+        <<replace "#recruitChoices">>
+            <<include "DaltonRecruit">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</nobr>>
+
+:: DaltonExplanation [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm not sure what that has to do with me."<</say>><br>
+Dalton sighs, a weary look crossing his face.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Because if we don't do something, no one will. And I can't stand by and watch another good thing get torn down."<</say>>
+<</fadein>>
+
+<div id="explanationChoices">
+    <<link "Alright, tell me more about this recruiting.">>
+        <<replace "#explanationChoices">>
+            <<include "DaltonRecruit">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</nobr>>
+
+:: DaltonRecruit [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Why do you think I'm meant to be recruiting anyone?"<</say>><br>
+Dalton leans in closer, lowering his voice.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"The dojo's a start. They're not the most skilled, but they've got heart. Or you could try the bars for people to hire."<</say>>
+<<say '$player.name' $playerPortraitPathZ>>"With what money?"<</say>>
+Dalton chuckles softly.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"It'll be rough starting out, but once you've got some people, you can start building your own business. Compete with Braxton. That'll bring in more credits to hire more people... and eventually, we might be able to stop him from tearing down Leina's dojo and make the lower decks safer."<</say>>
+<</fadein>>
+
+<div id="finalChoices">
+    <<link "I'm interested in helping and saving the day.">>
+        <<replace "#finalChoices">>
+            <<include "PlayerHeroicResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "I'm interested in business and making credits.">>
+        <<replace "#finalChoices">>
+            <<include "PlayerBusinessResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "I'm interested in gaining more power.">>
+        <<replace "#finalChoices">>
+            <<include "PlayerPowerResponse">>
+        <</replace>>
+    <</link>><br>
+    <<link "I'll think about it.">>
+        <<replace "#finalChoices">>
+            <<include "PlayerNoncommittalResponse">>
+        <</replace>>
+    <</link>><br>
+</div>
+<</nobr>>
+
+:: PlayerHeroicResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm interested in helping and saving the day. What's our first move?"<</say>>
+Dalton's eyes light up with a spark of hope.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"That's the spirit! First, we need to gather a few willing fighters. Let's start at the dojo—there might be some folks there willing to stand up against Braxton."<</say>>
+<<addmins 5>>
+[[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
+<</fadein>>
+<</nobr>>
+
+:: PlayerBusinessResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm interested in business and making credits. Tell me more about this plan of yours."<</say>>
+Dalton nods with a shrewd smile.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Smart thinking. We'll need funds to support our cause. I know a few places where we can start making some deals. Let's head to the market district and see what opportunities we can find."<</say>>
+<<addmins 5>>
+[[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
+<</fadein>>
+<</nobr>>
+
+:: PlayerPowerResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm interested in gaining more power. How do we begin?"<</say>>
+Dalton gives you a calculating look.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Power, eh? Well, you'll need allies and resources. We should start by making some connections. The dojo is a good place to find fighters, and the bars might have people looking for work."<</say>>
+<<addmins 5>>
+[[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
+<</fadein>>
+<</nobr>>
+
+:: PlayerNoncommittalResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'll think about it. I need some time to weigh my options."<</say>>
+Dalton nods, a hint of disappointment in his eyes.
+<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Fair enough. But don't take too long. Time is a luxury we don't have much of. If you decide to help, you'll find me around the dojo."<</say>>
+<<addmins 5>>
+[[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
+<</fadein>>
+<</nobr>>
+
+<</nobr>>

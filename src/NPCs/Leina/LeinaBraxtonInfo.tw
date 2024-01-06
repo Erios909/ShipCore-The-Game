@@ -1,0 +1,53 @@
+:: LeinaBraxtonInfo [conversation] {"position":"850,650","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_braxton.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Dojo - Braxton Inquiry",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Braxton Inquiry</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+With the dojo quieting down after a day of rigorous training, you find Leina tidying up the space. She's putting away equipment, her movements still carrying the grace of a practiced martial artist. You approach her, the name 'Braxton' weighing on your mind.
+
+<<say '$player.name' $playerPortraitPathZ>>"Leina, earlier you mentioned Braxton and his goons. Who is he, and why is he a problem for the dojo?"<</say>><br>
+Leina pauses, her expression turning solemn. She gestures for you to follow her to a quieter corner of the dojo.
+
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"Braxton is a local gang leader. He and his crew have been trying to control the lower decks through fear and violence. They don't like that we teach self-defense here. It undermines their power."<</say>><br>
+Her fists clench at her sides, a subtle sign of the anger she feels towards the man and his actions.
+
+<<set $player.stress += 5>> /* The tension of the topic slightly increases your stress */
+<<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+<<set $player.mood -= 5>> /* The gravity of the situation dampens your mood */
+<<changemoods "mood" "minor" "NegEffectOnPlayer">><br>
+
+Leina leads you to a wall where a series of images are displayed, each one showing the faces of those who have suffered at Braxton's hands.
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"These are the people who have stood up to him and paid the price. We honor their courage here. And we prepare so that no one else becomes a victim."<</say>><br>
+You study the images, the stories behind each face igniting a fire within you.
+
+<<say '$player.name' $playerPortraitPathZ>>"What can be done about him? Is there no way to stop his reign of terror?"<</say>><br>
+Leina's gaze meets yours, a steely determination in her eyes.
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"We do what we can. We train, we protect each other, and we stay vigilant. Braxton's time will come. And when it does, we'll be ready."<</say>><br>
+Her confidence is infectious, and you feel a surge of solidarity with her and the dojo's cause.
+
+<<set $player.health += 5>> /* The resolve in Leina's words has a strengthening effect on you */
+<<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+
+Leina places a hand on your shoulder, her touch firm and reassuring.
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"You're one of us now, <<=$player.name>>. If Braxton comes knocking, he'll find more than he bargained for."<</say>><br>
+You nod, feeling a part of something greater than yourself, ready to stand with Leina and the dojo against any threat.
+
+<<say '$player.name' $playerPortraitPathZ>>"Thank you, Leina. I won't let you down."<</say>><br>
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"I know you won't. Now, get some rest. We train again at dawn."<</say>><br>
+
+You leave the dojo with a new sense of purpose, the name 'Braxton' etched in your mind as a challenge to be met, a wrong to be righted. The lower decks may be a place of darkness, but in the dojo, there is light.
+
+[[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
+
+<</nobr>>
