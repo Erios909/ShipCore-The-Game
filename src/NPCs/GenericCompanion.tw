@@ -12,6 +12,7 @@
             <<run $(".companions-container").show()>>
             <<run $(".companion-readout").show()>>
             <<run $(".CompanionChatOptions").hide()>>
+            <<run $('.CompanionChatOptions').remove()>>
         <</replace>>
     <</link>><br>
 </div>
@@ -24,6 +25,7 @@ Generic companions have no chat right now.
             <<run $(".companions-container").show()>>
             <<run $(".companion-readout").show()>>
             <<run $(".CompanionChatOptions").hide()>>
+            <<run $('.CompanionChatOptions').remove()>>
         <</replace>>
     <</link>><br>
 </div>
