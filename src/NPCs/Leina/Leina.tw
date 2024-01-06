@@ -15,7 +15,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>Leina gives you a nod of recognition as you approach her after the training session.</p>
 <div class="character-dialogue">
-    <img src="<<setup.ImagePath>>/characters/lowerdecks/leina.jpg" alt="Leina">
+    <img @src="'"+setup.ImagePath+"/characters/lowerdecks/leina.jpg'" alt="Leina">
     <p>"Is there something else you wish to discuss?"</p>
 </div>
 <div class="player-dialogue">

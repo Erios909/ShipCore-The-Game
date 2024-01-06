@@ -1449,6 +1449,26 @@ body.slideWin {
     text-align: center;   /* Aligns text to the center */
 }
 
+.CompanionChatOptions {
+    background-image: url(images/ui/compbar.jpg);
+    background-color: grey;
+    /* margin-bottom: 10px; */
+    z-index: 10;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 225px;
+    text-shadow:
+    -2px -2px 3px #000, /* Top-left shadow */
+     2px -2px 3px #000, /* Top-right shadow */
+    -2px  2px 3px #000, /* Bottom-left shadow */
+     2px  2px 3px #000, /* Bottom-right shadow */
+    -3px -3px 3px #000, /* Additional layer for thicker shadow */
+     3px -3px 3px #000,
+    -3px  3px 3px #000,
+     3px  3px 3px #000; /* Additional layer for thicker shadow */
+}
 
 .companion-info {
     background-image: url(images/ui/compbar.jpg);

@@ -1,4 +1,4 @@
-:: CreateNPCWidget [widget]
+:: CreateNPCWidget [widget nobr]
 <<widget "CreateNPC">>
     <<script>>
 /* Create a generic character object with default values. */
