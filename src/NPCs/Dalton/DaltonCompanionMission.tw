@@ -14,11 +14,11 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-<p>Dalton's presence is a stark contrast to the disarray of the Ruined Hallway. His posture is rigid, a testament to his military background, and his eyes carry the weight of someone who has seen too much yet refuses to look away from adversity. As he approaches, the dim lighting of the hallway casts angular shadows across his face, accentuating his determined expression.</p>
+<p>Dalton's mimics the disarray of the Ruined Hallway. His posture is rigid, and defensive as he approaches.</p>
 
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Things are far more dire than Leina realizes. Braxton's gearing up to destroy the dojo. We can't let that happen."<</say>>
+<div id="daltonChoices"><<say '$player.name' $playerPortraitPathZ>>
 
-<div id="daltonChoices">
     <<link "How can we stop him?">>
         <<replace "#daltonChoices">>
             <<include "DaltonPlan">>
@@ -29,7 +29,9 @@
             <<include "DaltonExplanation">>
         <</replace>>
     <</link>><br>
-</div>
+
+<</say>></div>
+<</nobr>>
 
 :: DaltonPlan [conversation event]
 <<nobr>>
@@ -39,13 +41,13 @@ Dalton nods, understanding the urgency in your voice.
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"We need to recruit more people. Strength in numbers. You've got a certain... aura about you. I saw you coming out of Cold Storage. You're special."<</say>>
 <</fadein>>
 
-<div id="recruitChoices">
+<div id="recruitChoices"><<say '$player.name' $playerPortraitPathZ>>
     <<link "Why do you think I'm meant to be recruiting anyone?">>
         <<replace "#recruitChoices">>
             <<include "DaltonRecruit">>
         <</replace>>
     <</link>><br>
-</div>
+<</say>></div>
 <</nobr>>
 
 :: DaltonExplanation [conversation event]
@@ -56,13 +58,13 @@ Dalton sighs, a weary look crossing his face.
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Because if we don't do something, no one will. And I can't stand by and watch another good thing get torn down."<</say>>
 <</fadein>>
 
-<div id="explanationChoices">
-    <<link "Alright, tell me more about this recruiting.">>
+<div id="explanationChoices"><<say '$player.name' $playerPortraitPathZ>>
+    <<link "Tell me more about this recruiting.">>
         <<replace "#explanationChoices">>
             <<include "DaltonRecruit">>
         <</replace>>
     <</link>><br>
-</div>
+<</say>></div>
 <</nobr>>
 
 :: DaltonRecruit [conversation event]
@@ -76,7 +78,7 @@ Dalton chuckles softly.
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"It'll be rough starting out, but once you've got some people, you can start building your own business. Compete with Braxton. That'll bring in more credits to hire more people... and eventually, we might be able to stop him from tearing down Leina's dojo and make the lower decks safer."<</say>>
 <</fadein>>
 
-<div id="finalChoices">
+<div id="finalChoices"><<say '$player.name' $playerPortraitPathZ>>
     <<link "I'm interested in helping and saving the day.">>
         <<replace "#finalChoices">>
             <<include "PlayerHeroicResponse">>
@@ -97,7 +99,7 @@ Dalton chuckles softly.
             <<include "PlayerNoncommittalResponse">>
         <</replace>>
     <</link>><br>
-</div>
+<</say>></div>
 <</nobr>>
 
 :: PlayerHeroicResponse [conversation event]
@@ -144,4 +146,3 @@ Dalton nods, a hint of disappointment in his eyes.
 <</fadein>>
 <</nobr>>
 
-<</nobr>>

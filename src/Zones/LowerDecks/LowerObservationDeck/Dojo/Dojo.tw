@@ -31,7 +31,7 @@
 
 <div id="dojoChoices">
     <<if $DaltonReveal > 0 && $LeinaIntro == 0>>
-        [[Speak with Leina, the dojo master.|LeinaIntro][$LeinaIntro += 1][$timeadd += 5]]<br>
+        [[Speak with Leina, the dojo master.|LeinaIntro][$LeinaIntro = 1; $timeadd += 5]]<br>
     <<elseif $LeinaIntro > 0>>
         [[Speak with Leina, the dojo master.|LeinaChat][$timeadd += 5]]<br>
     <</if>>

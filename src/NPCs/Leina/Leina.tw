@@ -14,17 +14,13 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>Leina gives you a nod of recognition as you approach her after the training session.</p>
-<div class="character-dialogue">
-    <img @src="'"+setup.ImagePath+"/characters/lowerdecks/leina.jpg'" alt="Leina">
-    <p>"Is there something else you wish to discuss?"</p>
-</div>
-<div class="player-dialogue">
-    <img src="<<$playerPortraitPathZ>>" alt="Player">
-    <p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>
+        "Is there something else you wish to discuss?"
+<</say>>
+<<say '$player.name' $playerPortraitPathZ>>
         [[Ask about Braxton.|LeinaBraxtonInfo][$timeadd += 10]]<br>
         [[Hear Leina's story.|LeinaStory][$timeadd += 5]]<br>
         [[Inquire about dojo training.|LeinaDojoTraining][$timeadd += 5]]<br>
         [[I just wanted to thank you again. I'll be on my way.|DojoLowerDecks][$timeadd += 5]]
-    </p>
-</div>
+<</say>>
 <</nobr>>
