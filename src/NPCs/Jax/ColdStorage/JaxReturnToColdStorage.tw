@@ -127,7 +127,7 @@ Jax's expression softens, and he nods slowly.
     <</if>>
     <<link _creditsResponse>>
         <<replace "#playerOptions">>
-            <<include "ConsiderNanoDocPurchase">>
+            <<include "JaxConsiderNanoDocPurchase">>
         <</replace>>
     <</link>><br>
     <<link "I'll think about it.">>
