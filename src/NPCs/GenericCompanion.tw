@@ -1,0 +1,29 @@
+:: GenericCompanion [conversation] {"position":"950,725","size":"100,100"}
+<div class="CompanionChatOptions">
+    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's on your mind, partner?"<</say>><br>
+    <<link "Just chat for a while.">>
+        <<replace ".CompanionChatOptions">>
+            <<include "GenericCompanionChitChat">>
+        <</replace>>
+    <</link>><br>
+
+    <<link "Back to the main menu.">>
+        <<replace ".CompanionChatOptions">>
+            <<run $(".companions-container").show()>>
+            <<run $(".companion-readout").show()>>
+            <<run $(".CompanionChatOptions").hide()>>
+        <</replace>>
+    <</link>><br>
+</div>
+
+:: GenericCompanionChitChat [conversation] {"position":"950,725","size":"100,100"}
+<div class="CompanionChatOptions">
+Generic companions have no chat right now.
+<<link "Back to the menu.">>
+        <<replace ".CompanionChatOptions">>
+            <<run $(".companions-container").show()>>
+            <<run $(".companion-readout").show()>>
+            <<run $(".CompanionChatOptions").hide()>>
+        <</replace>>
+    <</link>><br>
+</div>

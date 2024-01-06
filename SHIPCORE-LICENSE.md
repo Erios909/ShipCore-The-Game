@@ -1,10 +1,10 @@
 ShipCore - The Game License Agreement
 
 1. License Grant for ShipCore - The Game's Source Code
-The source code of "ShipCore - The Game" ("Game") is made available under the [Attribution-NonCommercial-ShareAlike 4.0 International] License. This allows users to use, modify, and distribute the source code of the Game in accordance with the terms of that license.
+The source code of "ShipCore - The Game" ("Game") is made available under the [Attribution-ShareAlike 4.0 International] License. This allows users to use, modify, and distribute the source code of the Game in accordance with the terms of that license.
 
 2. Limited Use License for ShipCore Intellectual Property
-The characters, storylines, and related intellectual property from the "ShipCore" book series ("Intellectual Property") are integral to the Game. While the Game's source code is open source, the ShipCore Intellectual Property is not. Contributors to the Game are granted a limited use license by Erios Writes LLC to use, adapt, and incorporate the Intellectual Property solely within the context of ShipCore - The Game. This license is revokable by Erios Writes LLC at any time.
+The characters, storylines, and related intellectual property from the "ShipCore" book series ("Intellectual Property") are integral to the Game. While the Game's source code is open source, the ShipCore Intellectual Property is not. Contributors to the Game are granted a limited use license by Erios Writes LLC to use, adapt, and incorporate the Intellectual Property solely within the context of ShipCore - The Game.
 
 3. Restrictions on Intellectual Property
 This limited use license does not permit the use of the Intellectual Property in any other works or media, including but not limited to books, films, or other video games, without explicit written permission from Erios Writes LLC. The use of the Intellectual Property is confined strictly to development and gameplay within ShipCore - The Game.
@@ -13,16 +13,16 @@ This limited use license does not permit the use of the Intellectual Property in
 Contributors are encouraged to develop and enhance the Game while respecting the boundaries of the limited use license. Any contributions to the Game, including modifications or expansions of the story and characters, must remain exclusive to the Game and cannot be extracted for use in other works.
 
 5. Intellectual Property Ownership
-The Intellectual Property, including all rights, titles, and interests therein, remains the sole property of Erios Writes LLC. The limited use license granted herein does not constitute a transfer of ownership or any proprietary rights in the Intellectual Property.
+The Intellectual Property of ShipCore, including all rights, titles, and interests therein, remains the sole property of Erios Writes LLC. The limited use license granted herein does not constitute a transfer of ownership or any proprietary rights in the Intellectual Property.
 
 6. No Endorsement
 Contributors and users of the Game's source code must not imply any endorsement or direct affiliation with Erios Writes LLC without explicit written permission.
 
 7. Disclaimer of Warranty
-The Game's source code is provided "as is" without warranty of any kind, express or implied. Erios Writes LLC disclaims all warranties, including but not limited to the implied warranties of merchantability and fitness for a particular purpose.
+This License is provided "as is" without warranty of any kind, express or implied. Erios Writes LLC disclaims all warranties, including but not limited to the implied warranties of merchantability and fitness for a particular purpose.
 
 8. Limitation of Liability
-In no event shall Erios Writes LLC be liable for any claim, damages, or other liability arising from, out of, or in connection with the Game or the use of the source code.
+In no event shall Erios Writes LLC be liable for any claim, damages, or other liability arising from, out of, or in connection with the Game or the use of the License.
 
 9. Jurisdiction and Dispute Resolution
 This license shall be governed by the laws of the State of West Virginia. Any disputes arising from this license shall be resolved through the courts of West Virginia in the United States.
@@ -35,3 +35,6 @@ By contributing to "ShipCore - The Game," contributors agree to grant Erios Writ
 
 12. Acknowledgement of Contribution Integration
 Contributors acknowledge and agree that any Contributor Content they provide may be integrated into the "ShipCore" IP at the sole discretion of Erios Writes LLC. Contributors understand that this integration may involve modifications or adaptations of their contributions and waive any moral rights or similar rights they may have in the Contributor Content to the extent permitted by law.
+
+13. Revokability
+This license is revokable in full or by part by Erios Writes LLC at any time.

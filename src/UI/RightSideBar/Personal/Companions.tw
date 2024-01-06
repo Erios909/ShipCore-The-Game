@@ -53,18 +53,26 @@
 <hr id="HuDHr">
 <div class="companion-readout">
     <<liveblock>>
+        <<fadein 1s>>
         <!-- Check if a valid companion is selected -->
         <<if $CompanionSlotSelected >= 0 and $playerCompanions.length > $CompanionSlotSelected>>
             <<set _selectedCompanionKey to $playerCompanions[$CompanionSlotSelected]>>
             <<set _selectedCompanion to State.variables[_selectedCompanionKey]>>
 
             <!-- Display the portrait of the selected companion -->
-            <div class="companion-portrait-selected" 
+            <div class="companion-portrait-selected"
                 @style="'background-image: url(' + _selectedCompanion.portrait + '); background-size: cover; min-height: 250px; min-width: 250px; display: flex; justify-content: center; align-items: center; background-position: center; background-repeat: no-repeat; border: 8px solid black; border-radius: 15px;'">
                 <span class="companion-selected-bigbutton" @style="'background-image: url(' + _selectedCompanion.portrait + '); display: block; width: 250px; height: 250px; background-size: cover; background-position: center;'">
                     <!-- Call the Companion, unique or generic, here. -->
                     <<button "Contact">>
-                        /* Button code replaces this line. */
+                        <<set $ConversingCompanion to clone(_selectedCompanion)>>
+                        <<run $(".companions-container").hide()>>
+                        <<run $(".companion-readout").hide()>>
+                        <<if Story.has(_selectedCompanion.name + "Companion")>>
+                            <<run $("#slideWinContent").wiki(Story.get(_selectedCompanion.name + "Companion").processText())>>
+                        <<else>>
+                            <<run $("#slideWinContent").wiki(Story.get("GenericCompanion").processText())>>
+                        <</if>>
                     <</button>>
                 </span>
             </div>
@@ -76,6 +84,7 @@
             <p>No companion selected</p>
         <</if>>
         <hr id="HuDHr">
+        <</fadein>>
     <</liveblock>>
 </div>
 

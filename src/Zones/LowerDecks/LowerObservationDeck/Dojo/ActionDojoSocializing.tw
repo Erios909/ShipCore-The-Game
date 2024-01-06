@@ -1,0 +1,80 @@
+:: DojoSocialize [lowerdeckact] {"position":"325,675","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_social.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Dojo - Socializing",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>>
+<<updatebar>>
+
+<<if not $dojoSocialEventsRecord>> <<set $dojoSocialEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $dojoSocialEventsRecord.today != _today>>
+    <<set $dojoSocialEventsRecord.today to _today>>
+    <<set $dojoSocialEventsRecord.triggeredEvents to []>>
+<</if>>
+
+<<set _randomEvent to 0>> <!-- Default to no event -->
+
+<<set _availableEvents to []>> <!-- List of available social events -->
+<<for _i to 1; _i <= 4; _i++>>
+    <<if not $dojoSocialEventsRecord.triggeredEvents.includes(_i)>>
+        <<set _availableEvents.push(_i)>>
+    <</if>>
+<</for>>
+
+<<if _availableEvents.length>> <!-- If there are still available social events -->
+    <<set _randomEvent to _availableEvents.random()>>
+    <<set $dojoSocialEventsRecord.triggeredEvents.push(_randomEvent)>>
+<<else>> <!-- If there are no more available social events -->
+    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+<</if>>
+
+<!-- Area Header -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Dojo Socializing</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>The dojo is abuzz with conversation and laughter as students and instructors alike take a break from training to connect with one another. You find yourself drawn into the camaraderie, sharing stories and experiences with those around you.</p>
+
+<!-- Random Social Events -->
+<<switch _randomEvent>>
+    <<case 1>> <!-- Shared Stories -->
+        <p>You exchange tales of past exploits with a group of students, each story more elaborate than the last. The shared laughter brings a sense of belonging.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 2>> <!-- Encouraging Words -->
+        <p>An instructor takes a moment to offer you some personal encouragement, noting your progress. Their words bolster your confidence and determination.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 3>> <!-- New Friendships -->
+        <p>You strike up a conversation with a newcomer to the dojo. By the time you part ways, you've made a new friend and expanded your network of allies.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
+
+    <<case 4>> <!-- Group Meditation -->
+        <p>A group invites you to join them in a meditation session. The collective focus and quiet breathing help clear your mind and reduce stress.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "PosEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+
+    <<default>> <!-- Default Social Event -->
+        <p>You spend some time chatting with the regulars, exchanging training tips and discussing life on the station. It's a pleasant way to spend the time and connect with your peers.</p>
+        <<changemoods "mood" "minor" "PosEffectOnPlayer">>
+        <<changemoods "stress" "minor" "NegEffectOnPlayer">>
+        <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
+<</switch>>
+
+<br>
+
+<!-- Continue Link -->
+[[Back to the Dojo.|DojoLowerDecks]]
+<</nobr>>

@@ -1,0 +1,30 @@
+:: LeinaChat [conversation] {"position":"950,725","size":"100,100"}
+<<nobr>>
+
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo.jpg'>>
+<<addmins 5>> <!-- Assuming 5 minutes pass when starting the conversation -->
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Dojo",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks Dojo</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+<p>Leina gives you a nod of recognition as you approach her after the training session.</p>
+<div class="character-dialogue">
+    <img @src="'"+setup.ImagePath+"/characters/lowerdecks/leina.jpg'" alt="Leina">
+    <p>"Is there something else you wish to discuss?"</p>
+</div>
+<div class="player-dialogue">
+    <img src="<<$playerPortraitPathZ>>" alt="Player">
+    <p>
+        [[Ask about Braxton.|LeinaBraxtonInfo][$timeadd += 10]]<br>
+        [[Hear Leina's story.|LeinaStory][$timeadd += 5]]<br>
+        [[Inquire about dojo training.|LeinaDojoTraining][$timeadd += 5]]<br>
+        [[I just wanted to thank you again. I'll be on my way.|DojoLowerDecks][$timeadd += 5]]
+    </p>
+</div>
+<</nobr>>

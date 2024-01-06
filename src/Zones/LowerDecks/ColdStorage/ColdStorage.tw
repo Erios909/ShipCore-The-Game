@@ -16,7 +16,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 <!-- The room description is adjusted to color only strategic words for flavor based on the station's economy and danger level -->
-The room you awaken in is a capsule of function over form—a stark berth within the arteries of the starport. The metal bench, deriving from the floor itself, is the room's sole concession to <span style="color: lightblue;">rest</span>.
+The room of your awakening in is a capsule of function over form—a stark berth within the arteries of the starport. The metal bench, deriving from the floor itself, is the room's sole concession to <span style="color: lightblue;">rest</span>.
 
 <!-- Economy-based descriptions -->
 <<if $worldEconomyScore >= 800>>
@@ -56,12 +56,68 @@ Things to do:<br>
 [[Rummage through the lockers. (00:15)|ColdStorageLockers][$timeadd = 15]]<br>
 <span class="disabledLink">Prepare a meal. (Facilities unavailable)</span><br>
 <br>
-<<if $introColdExit == 1>>
-Jax has made himself at home, piling up junk and building a nest in the corner of the Cold Storage room. His presence, or maybe some unknown hand of security seems to be keeping this place clear of the normal lower deck riffraff.
-You could ask him some questions if you want.
-[[Talk to Jax.|JaxChat]]
 
+<!-- fix undefined for save compatible -->
+<<if $DaltonReveal === undefined>>
+    <<set $DaltonReveal = 0>>
+<</if>>
+
+<<if $JaxRecruitmentPlot === undefined>>
+    <<set $JaxRecruitmentPlot = 0>>
+<</if>>
+
+<<if $JaxMetCondition === undefined>>
+    <<set $JaxMetCondition = false>>
+<</if>>
+
+<<if $DaltonReveal > 0 & $JaxRecruitmentPlot < 1>>
+<<goto "JaxReturnToColdStorage">>
+<</if>>
+
+
+
+<<if $introColdExit == 1>>
+    <<if $JaxIsDead>>
+        <!-- Jax is dead -->
+        <p>The room reminds you of Jax, bringing a tinge of sadness with the memory.</p>
+    <<elseif $JaxRecruitmentPlot == 0>>
+        <!-- Jax's recruitment plot is not active -->
+        <p>Jax has made himself at home, piling up junk and building a nest in the corner of the Cold Storage room. His presence, or maybe some unknown hand of security, seems to be keeping this place clear of the normal lower deck riffraff. You could ask him some questions if you want.</p>
+        [[Talk to Jax.|JaxChat]]
+    <<elseif $JaxRecruitmentPlot == 1>>
+        <!-- Jax's recruitment plot is active, but not yet completed -->
+        <<if $JaxJoinRejected && $JaxKnowsJoinCondition>>
+            <!-- Know Jax Join Condition and Rejected -->
+            <p>Jax seems to be giving you space, respecting your earlier decision to reject his offer. He's immersed in his work, but you notice a glance in your direction, as if he's still hopeful you might reconsider. If you've had a change of heart, now might be the time to let him know.</p>
+            [[Talk to Jax.|JaxChat]]
+        <<elseif $JaxKnowsJoinCondition>>
+            <!-- Know Jax Join Condition -->
+            <p>Jax looks up briefly as you enter, a questioning look in his eyes. He's surrounded by equipment, but it's clear he's anticipating your acquisition of a Nano-doc. Maybe it's time to discuss your plans.</p>
+            [[Talk to Jax.|JaxChat]]
+        <<elseif $JaxJoinRejected>>
+            <!-- Rejected Jax's offer -->
+            <p>Despite your rejection, Jax doesn't seem to hold it against you. He's busy with his gadgets, but there's an unspoken invitation in his posture, suggesting he's open to talking if you are. Perhaps you could explore other ways to work together.</p>
+            [[Talk to Jax.|JaxChat]]
+        <<else>>
+            <!-- Default case if no specific condition is met -->
+            <p>Jax is busy sorting through various bits of tech and gear, clearly planning something. He seems focused on the task at hand, perhaps waiting for an update from you. You could ask him some questions if you want.</p>
+            [[Talk to Jax.|JaxChat]]
+        <</if>>
+    <<elseif not $JaxIsCompanion>>
+        <!-- Jax's recruitment plot is complete but not companion -->
+        <p>Jax greets you with a nod. He seems to be waiting for you to say something.</p>
+        [[Talk to Jax.|JaxChat]]
+    <<else>>
+        <!-- Jax is companion -->
+        <p>Jax, now your steadfast companion, watches over the area with a keen eye. He seems to be enjoying the relative peace and quiet.</p>
+        [[Talk to Jax.|JaxChat]]
+    <</if>>
 <</if>><br><br>
+
+
+
+
+
 <<nobr>>
 Travel:<br>
 <<if $player.filth > 800>>

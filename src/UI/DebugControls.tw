@@ -141,11 +141,26 @@ Combined Difficulty: $combinedDifficultyScore
 <</link>><br><br>
 
 <<link "Encounter with Dalton" "DaltonIntro">>Go to Dalton Intro<</link>><br>
-<<link "Ambush by Braxton" "BraxtonAmbush">>Go to Braxton Ambush<</link>> <br><br>
+<<link "Ambush by Braxton" "BraxtonIntro">>Go to Braxton Ambush<</link>> <br><br>
 
 [[eventstacktestpage|eventstacktestpage]]<br>
 [[LowerDecksPlayerBusiness|LowerDecksPlayerBusiness]]<br>
-[[testmenu|test menu]]<br>
+[[DaltonCompanionMission|DaltonCompanionMission]]<br>
+[[JaxReturnToColdStorage|JaxReturnToColdStorage]]<br>
+
+[[testmenu|test menu]]<br><br>
+
+
+<<if $eventStack === undefined>>
+    <<set $eventStack = []>>
+<</if>>
+/* Live block to show the current event stack */
+<<liveblock>>
+    Current Event Stack:
+    <<for _i = 0; _i < $eventStack.length; _i++>>
+        Index: <<print _i>> | Name: <<print $eventStack[_i].name>><br>
+    <</for>>
+<</liveblock>>
 <</nobr>>
 
 

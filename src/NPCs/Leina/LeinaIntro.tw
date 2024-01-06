@@ -1,0 +1,57 @@
+:: LeinaIntro [conversation] {"position":"850,650","size":"100,100"}
+<<nobr>>
+<<set $currentArea to "lowerdecks">>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Lower Decks Dojo",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Decks Dojo</span></h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+As you step into the dojo, the contrast between the chaos of the lower decks and the disciplined calm within is palpable. The dojo is a sanctuary, a place where the downtrodden find strength and the desperate find hope. At the center of it all stands Leina, the dojo master, her gaze sweeping across her domain with pride and purpose.
+
+She notices you and approaches, her movements fluid and graceful—a testament to her skill and the cybernetic enhancements hidden beneath her attire.
+<br><br>
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"Welcome to my dojo. I don't recognize you, which means you're either new or you've been lucky enough to avoid trouble... until now."<</say>>
+<br>
+Her eyes hold a spark of curiosity as she assesses you, taking in your appearance and demeanor.
+<br><br>
+<<say '$player.name' $playerPortraitPathZ>>"I'm <<=$player.name>>. I heard this might be a place to learn how to handle the dangers of the lower decks."<</say>>
+<br>
+Leina nods, a slight smile tugging at the corner of her mouth.
+<br><br>
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"You heard right. I teach those willing to learn. The skills I offer can mean the difference between life and death down here."<</say>>
+
+<<say '$player.name' $playerPortraitPathZ>>"What does it cost?"<</say>>
+<br>
+Leina's expression softens, and she gestures to the training mats.
+<br><br>
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"For you? Let's start with determination and hard work. We can discuss credits later. I'm more interested in your resolve."<</say>>
+<br>
+You feel a surge of respect for the dojo master, her priorities clear and her intentions noble.
+<br><br>
+<<say '$player.name' $playerPortraitPathZ>>"I have plenty of both. Where do I begin?"<</say>><br>
+Leina's smile broadens, and she points to a group of novices.
+<br><br>
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"Over there. Show me you're serious, and we'll talk about advancing your training."<</say>>
+<br>
+You nod, ready to take the first step on a new path.
+<br><br>
+<<say 'Leina' setup.ImagePath+'/characters/lowerdecks/leina.jpg'>>"And <<=$player.name>>, keep an eye out for Braxton's goons. They don't like what I'm doing here, giving power to the powerless."<</say>>
+<br>
+Her warning is a reminder of the station's harsh realities, but in her presence, you find a glimmer of hope.
+<br><br>
+<<say '$player.name' $playerPortraitPathZ>>
+    [[Join the novices and begin training.|LeinaDojoTraining][$timeadd += 120]]<br>
+    [[Ask Leina about her story and the dojo.|LeinaStory][$timeadd += 5]]<br>
+    [[Inquire about Braxton and his goons.|LeinaBraxtonInfo][$timeadd += 5]]<br>
+    [[Thank Leina and leave.|DojoLowerDecks][$timeadd += 5]]
+<</say>>
+
+<</nobr>>

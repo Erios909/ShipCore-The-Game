@@ -1,0 +1,76 @@
+:: JaxRecruitment [conversation]
+<<nobr>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstoragedoor.jpg'>>
+<<addmins $timeadd>>
+<<set $location to {
+    name: "Meltisar System, MOR-1, Station Overview",
+    outside: false,
+    vacuum: false,
+    temperature: true
+}>><<updatebar>>
+
+<div id="convostarter">
+<<if $JaxJoinRejected && $JaxMetCondition>>
+    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Changed your mind, huh? I'm listening."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>
+        <!-- offer response that player changed mind and wants to team up -->
+        <<link "I've changed my mind, Jax. Let's team up.">>
+            <<replace "#convostarter">>
+                <<include "JaxNextSteps">>
+            <</replace>>
+        <</link>><br>
+        <!-- say maybe later -->
+        [[Maybe later, Jax.|Cold Storage]]<br>
+        <!-- noncommital return to cold storage reponse -->
+        [[I need to think about it some more.|Cold Storage]]<br>
+    <</say>>
+<!-- If the player has rejected the offer after knowing the conditions -->
+<<elseif $JaxJoinRejected && $JaxKnowsJoinCondition>>
+    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"You're back. So, what's the verdict on that nano-doc?"<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>
+        <!-- if player has nano doc, add choice to give it to him -->
+        <<if $playerConsumables.nanoDocInjector > 0>>
+            <<link "I have the nanoDoc injector you wanted.">>
+                <<replace "#convostarter">>
+                    <<include "JaxGiveNanoDoc">>
+                <</replace>>
+            <</link>><br>
+        <</if>>
+        <!-- else if player doesn't have nano doc, add choice that says he is working on it -->
+        <<if $playerConsumables.nanoDocInjector == 0>>
+            [[I'm still working on getting that nanoDoc injector.|Cold Storage]]<br>
+        <</if>>
+        <!-- add noncomittal return to cold storage response for player -->
+        [[I'm still not interested, Jax.|Cold Storage]]<br>
+    <</say>>
+<!-- If the player has rejected the offer without knowing the conditions -->
+<<elseif $JaxJoinRejected && not $JaxKnowsJoinCondition>>
+    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Still on the fence? I can sweeten the deal if you're interested."<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>
+        <!-- player asks what the condition is -->
+        [[What was the condition for teaming up again?|JaxCondition]]<br>
+        <!-- player says never mind and return to cold storage -->
+        [[Never mind, I'll return to Cold Storage.|Cold Storage]]<br>
+    <</say>>
+<!-- If the player knows Jax's joining condition but has not rejected the offer -->
+<<elseif $JaxKnowsJoinCondition>>
+    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Ready to take me up on that offer? Or do you need more time?"<</say>>
+    <<say '$player.name' $playerPortraitPathZ>>
+        <!-- if player has nano doc, add choice to give it to him -->
+        <<if $playerConsumables.nanoDocInjector >= 1>>
+            <<link "Here's the nanoDoc injector you asked for.">>
+                <<replace "#convostarter">>
+                    <<include "JaxGiveNanoDoc">>
+                <</replace>>
+            <</link>><br>
+        <</if>>
+        <!-- else if player doesn't have nano doc, add choice that says he is working on it -->
+        <<if $playerConsumables.nanoDocInjector == 0>>
+            [[I'm on it, Jax. I'll get that nanoDoc injector soon.|Cold Storage]]<br>
+        <</if>>
+        <!-- add noncomittal return to cold storage response for player -->
+        [[I need more time to think about this.|Cold Storage]]<br>
+    <</say>>
+<</if>>
+</div>
+<</nobr>>
