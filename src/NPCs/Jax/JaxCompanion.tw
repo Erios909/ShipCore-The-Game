@@ -7,11 +7,12 @@
         <</replace>>
     <</link>><br>
 
-    <<link "Back to the main menu.">>
+    <<link "Back to the menu.">>
         <<replace ".CompanionChatOptions">>
             <<run $(".companions-container").show()>>
             <<run $(".companion-readout").show()>>
             <<run $(".CompanionChatOptions").hide()>>
+            <<run $('.CompanionChatOptions').remove()>>
         <</replace>>
     <</link>><br>
 </div>
