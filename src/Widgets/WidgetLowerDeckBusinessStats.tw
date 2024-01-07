@@ -4,10 +4,10 @@
     <<set _locationName = "Unknown Location">> <!-- Default location name -->
     <<set _locationData = undefined>> <!-- Default to undefined -->
 
-    <!-- Check for $LowerDecksBusinessStats -->
-    <<if $LowerDecksBusinessStats and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessStats)>>
-        <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessStats]>>
-        <<set _locationName = $LowerDecksBusinessStats>> <!-- Set the location name using $LowerDecksBusinessStats -->
+    <!-- Check for $LowerDecksPlayerBusinessLocationStats -->
+    <<if $LowerDecksPlayerBusinessLocationStats and setup.LowerDeckLocations.hasOwnProperty($LowerDecksPlayerBusinessLocationStats)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksPlayerBusinessLocationStats]>>
+        <<set _locationName = $LowerDecksPlayerBusinessLocationStats>> <!-- Set the location name using $LowerDecksPlayerBusinessLocationStats -->
     
     <!-- Check for $LowerDecksBusinessLocation -->
     <<elseif $LowerDecksBusinessLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessLocation)>>
@@ -30,7 +30,7 @@
         <<set _taxRate = _locationData[3] || 5>>
         <<set _setupCost = _locationData[4] || 5>>
 
-        <p>You are currently at the <<=_locationName>>. This location is known for its 
+        <p><<if $LowerDecksPlayerBusinessActive>>You are at your business at <<=_locationName>>.<<else>>You are currently at the <<=_locationName>>.<</if>> This location is known for its 
         <<switch (_customerAvailability)>>
             <<case 1 to 2>><span style="color:red;">very low</span>
             <<case 3 to 4>><span style="color:orange;">low</span>
@@ -73,33 +73,72 @@
     <</if>>
 <</widget>>
 
+:: widget PrintBusinessEstimates [widget nobr]
+
 <<widget "PrintBusinessEstimates">>
-    /* Use the stored state variables to display the business estimates */
     <<nobr>>
+        <<set _businessType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
         <div class="business-estimates">
             <div class="business-stats">
-                <h3>Business Stats</h3>
-                <p><strong>Batch Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize || 0>></span></p>
-                <p><strong>Employees Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade || 0>></span></p>
+                <h2>Business Stats</h2>
+                <p><strong>Batch Production Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize ?? "Error: Batch Size not set">></span></p>
+                <p><strong>Employees Needed Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade ?? "Error: Employees Per Upgrade not set">></span></p>
             </div>
             <div class="location-factors">
-                <h3>Location Factors</h3>
-                <p><strong>Customer Availability:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessCustomerAvailability || 0)>>%</span></p>
-                <p><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessSupplyHubAccess || 0)>>%</span></p>
-                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel || 0>>%</span></p>
-                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate || 0>>%</span></p>
+                <h2>Location Factors</h2>
+                <p><strong>Customer Availability:</strong> <span class="value"><<print 100 - $LowerDecksPlayerBusinessCustomerAvailability + "%">></span></p>
+                <p><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - $LowerDecksPlayerBusinessSupplyHubAccess + "%">></span></p>
+                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel + "%">></span></p>
+                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate + "%">></span></p>
             </div>
             <div class="calculated-stats">
-                <h3>Calculated Stats</h3>
-                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessAdjustedPricePerUnit || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalSalesPriceForAllBatches || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalInputCostsForOneBatch || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print ($LowerDecksPlayerBusinessTotalEmployeeCostPerHour || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Profit Margin Per Hour:</strong> $<span class="<<print ($LowerDecksPlayerBusinessProfitMarginPerHour >= 0 ? 'positive-value' : 'negative-value')>>"><<print ($LowerDecksPlayerBusinessProfitMarginPerHour || 0).toFixed(2)>></span> credits</p>
+                <h2>Calculated Stats</h2>
+                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessAdjustedPricePerUnit.toFixed(2)>> credits</span></p>
+                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches.toFixed(2)>> credits</span></p>
+                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalInputCostsForOneBatch.toFixed(2)>> credits</span></p>
+                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print $LowerDecksPlayerBusinessTotalEmployeeCostPerHour.toFixed(2)>> credits</span></p>
+                <<if $LowerDecksPlayerBusinessProfitMarginPerHour >= 0>>
+                    <p><strong>Profit Margin Per Hour:</strong> <span class="positive-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></p>
+                <<else>>
+                    <p><strong>Profit Margin Per Hour:</strong> <span class="negative-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></p>
+                <</if>>
+            </div>
+            <!-- Input Costs Section -->
+            <div class="input-costs">
+                <h2>Input Costs</h2>
+                <<if $LowerDecksBusinessTypeStats.hasOwnProperty(_businessType)>>
+                    <<set _inputCosts = $LowerDecksBusinessTypeStats[_businessType].InputCosts>>
+                    <<set _inputKeys = Object.keys(_inputCosts)>>
+                    <<for _i = 0; _i < _inputKeys.length; _i++>>
+                        <<set _input = _inputKeys[_i]>>
+                        <<set _cost = _inputCosts[_input]>>
+                        <p><strong> _input:</strong> $<<print _cost.toFixed(2)>> credits per unit</p>
+                    <</for>>
+                <<else>>
+                    <p>Error: Business type not found or input costs not defined.</p>
+                <</if>>
+            </div>
+
+            <!-- Level Upgrade Cost Section -->
+            <div class="level-upgrade-cost">
+                <h2>Level Upgrade Cost</h2>
+                <<if $LowerDecksBusinessTypeStats.hasOwnProperty(_businessType) && $LowerDecksBusinessTypeStats[_businessType].hasOwnProperty('UpgradeCost')>>
+                    <<set _upgradeCostMultiplier = $LowerDecksBusinessTypeStats[_businessType].UpgradeCost>>
+                    <<set _locationModifier = (100 - $LowerDecksPlayerBusinessCustomerAvailability) / 100>>
+                    <<set _pricePerLevelUpgrade = _locationModifier * _upgradeCostMultiplier * 10000>>
+                    <<set _pricePerDivUpgrade = _locationModifier * _upgradeCostMultiplier * 100000>>
+                    <p><strong>Price Per Level Upgrade:</strong> $<<print _pricePerLevelUpgrade.toFixed(2)>> credits</p>
+                    <p><strong>Cost per new Division:</strong> $<<print _pricePerDivUpgrade.toFixed(2)>> credits</p>
+                <<else>>
+                    <p>Error: Business type not found or upgrade cost not defined.</p>
+                <</if>>
             </div>
         </div>
     <</nobr>>
 <</widget>>
+
+
+
 
 
 

@@ -27,7 +27,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Lower Observation Deck">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -66,7 +66,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Cold Storage">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -79,7 +79,7 @@
 
 :: Lower Deck Promenade Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerdeckpromenade.jpg'>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade.jpg'>>
 <<addmins $timeadd>>
 
 <p>You find yourself in the bustling heart of the Lower Deck Promenade, where the energy is palpable. The area is a hive of activity, with a constant flow of station residents and visitors moving between shops, eateries, and entertainment venues.</p>
@@ -106,7 +106,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Lower Deck Promenade">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -146,7 +146,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Lower Wharf">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -160,7 +160,7 @@
 
 :: Habitation Cells Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/habitationcells.jpg'>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Habitation Cells are a network of living quarters where many of the station's residents call home. The corridors are filled with the sounds of daily life: children playing, neighbors chatting, and the aroma of home-cooked meals wafting through the air.</p>
@@ -187,7 +187,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Habitation Cells">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -227,7 +227,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Black Market Bazaar">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -239,7 +239,7 @@
 
 :: Forgotten Slums Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/forgottenslums.jpg'>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerslums.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Forgotten Slums are a stark contrast to the rest of the station, a place where the gleam of technology gives way to the grit of survival. The air is heavy with desperation, and the eyes that watch you from the shadows are filled with caution and hunger. This is a place where law is a foreign concept, and Braxton's influence casts a long, dark shadow.</p>
@@ -266,7 +266,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Forgotten Slums">>
     <<goto "LowerDeckBusinessSetupConfirmation">>
@@ -279,7 +279,7 @@
 
 :: Station Infrastructure Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/stationinfrastructure.jpg'>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerengineering.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Station Infrastructure sector is a maze of corridors and maintenance rooms, humming with the lifeblood of the station's operational systems. Here, technicians and engineers work diligently to keep the station running smoothly, largely unnoticed by the general populace.</p>
@@ -306,7 +306,7 @@
 <<LowerDeckBusinessStats>>
 
 <!-- Player decision to choose this location or continue scouting -->
-<h3><p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p></h3>
+
 <<link "Yes, I'll choose this location.">>
     <<set $LowerDecksBusinessLocation to "Station Infrastructure">>
     <<goto "LowerDeckBusinessSetupConfirmation">>

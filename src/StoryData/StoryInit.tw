@@ -66,16 +66,7 @@ setup.statNames = {
 };
 <</script>>
 
-<<set setup.LowerDeckLocations = {
-    "Lower Deck Promenade": [8, 9, 3, 7, 8],
-    "Habitation Cells": [5, 5, 4, 4, 6],
-    "Lower Wharf": [7, 8, 5, 6, 7],
-    "Station Infrastructure": [3, 7, 2, 5, 5],
-    "Lower Observation Deck": [6, 4, 1, 3, 4],
-    "Forgotten Slums": [2, 3, 9, 2, 3],
-    "Cold Storage": [4, 6, 3, 5, 6],
-    "Black Market Bazaar": [9, 7, 6, 8, 9]
-}>>
+
 
 <<set $playerConsumables = {
     'nanoDocInjector': 0,
@@ -155,9 +146,9 @@ $lowerdecksFabricatorCyberware
 
 /* LOWER DECKS SETUP */
 <<set $docksideStats = {
-    partsFabricated: 0, // Initialize or update with actual fabricated parts count
-    scrapBought: 0, // Initialize or update with actual scrap bought count
-    partsSold: 0 // Initialize or update with actual parts sold count
+    partsFabricated: 0,
+    scrapBought: 0,
+    partsSold: 0
 }>>
 
 <<set setup.itemVariables = {
@@ -166,31 +157,45 @@ $lowerdecksFabricatorCyberware
     'cyberware': 'lowerdecksCyberware',
     'stolenItems': 'lowerdecksStolenItems',
     'contraband': 'lowerdecksContraband',
-    'blackmarketactivity': 'lowerdeckBlackActivity' // Add this line
+    'blackmarketactivity': 'lowerdeckBlackActivity'
 }>>
 
-<<set $LowerDecksBusinessStats = {
+<<set $LowerDecksBusinessTypeStats = {
     "Space Bar and Lounge": {
         "EmployeesPerUpgrade": 5,
-        "InputCosts": { "Food": 2, "Water": 1 },
-        "InstallCostMultiplier": 1,
-        "ProfitPerBatch": 50,
+            "EmployeeCost": 10,
+            "InputCosts": { "Food": 3, "Water": 1 },
+            "BasePriceOfOutput": 50,
+            "CyclesPerHour": 1,
+            "BatchSize": 10
+        },
+        "Hydroponic Farm": {
+            "EmployeesPerUpgrade": 3,
+            "EmployeeCost": 10,
+            "InputCosts": { "Minerals": 3, "Water": 1 },
+            "BasePriceOfOutput": 50,
+            "CyclesPerHour": 1,
+            "BatchSize": 10
+        },
+        "Scrap Reprocessing": {
+            "EmployeesPerUpgrade": 2,
+            "EmployeeCost": 10,
+            "InputCosts": { "Scrap": 4 },
+            "BasePriceOfOutput": 50,
+            "CyclesPerHour": 1,
         "BatchSize": 10
-    },
-    "Hydroponic Farm": {
-        "EmployeesPerUpgrade": 3,
-        "InputCosts": { "Minerals": 3, "Water": 2 },
-        "InstallCostMultiplier": 1.5,
-        "ProfitPerBatch": 40,
-        "BatchSize": 8
-    },
-    "Scrap Reprocessing": {
-        "EmployeesPerUpgrade": 2,
-        "InputCosts": { "Scrap": 5 },
-        "InstallCostMultiplier": 2,
-        "ProfitPerBatch": 60,
-        "BatchSize": 5
     }
+}>>
+
+<<set setup.LowerDeckLocations = {
+    "Lower Deck Promenade": [8, 9, 3, 7, 8],
+    "Habitation Cells": [5, 5, 4, 4, 6],
+    "Lower Wharf": [7, 8, 5, 6, 7],
+    "Station Infrastructure": [3, 7, 2, 5, 5],
+    "Lower Observation Deck": [6, 4, 1, 3, 4],
+    "Forgotten Slums": [2, 3, 9, 2, 3],
+    "Cold Storage": [4, 6, 3, 5, 6],
+    "Black Market Bazaar": [9, 7, 6, 8, 9]
 }>>
 
 /* SugarCube StoryInit Special Passage */
@@ -203,6 +208,23 @@ $lowerdecksFabricatorCyberware
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 
 
+<<set $LowerDecksPlayerBusinessBatchSize to 0>>
+<<set $LowerDecksPlayerBusinessEmployeesPerUpgrade to 0>>
+<<set $LowerDecksPlayerBusinessCustomerAvailability to 0>>
+<<set $LowerDecksPlayerBusinessSupplyHubAccess to 0>>
+<<set $LowerDecksPlayerBusinessDangerLevel to 0>>
+<<set $LowerDecksPlayerBusinessTaxRate to 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit to 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches to 0>>
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch to 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour to 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour to 0>> 
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0>>
+<<set $LowerDecksPlayerBusinessPriceOfOutput = 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit = 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 
 <<set $LeinaDojoRep = 0>>
 <<set $LowerDecksCurrentScoutLocation = "">> <!-- Initialize the variable to store the current scout location -->
@@ -216,7 +238,7 @@ $lowerdecksFabricatorCyberware
 <<set $JaxIsCompanion to false>>
 <<set $businessLocation to "Lower Deck Promenade">>
 <<set $playerBusinessNameInput to "">>
-<<set $LowerDecksBusinessStats to {}>>
+<<set $LowerDecksPlayerBusinessLocationStats to {}>>
 <<set $LowerDecksBusinessType to "Space Bar and Lounge">>
 <<set $lowerdeckBlackActivity to 0>>
 <<set $lowerdecksRep to 0>>

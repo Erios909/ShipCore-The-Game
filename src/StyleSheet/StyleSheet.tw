@@ -1596,13 +1596,19 @@ body.slideWin {
     background-color: #222; /* Dark background */
     font-family: 'Arial', sans-serif; /* Consistent font */
     color: #ddd; /* Light text color for readability on dark background */
+    text-shadow:
+    -2px -2px 1px #000, /* Top-left shadow */
+     2px -2px 1px #000, /* Top-right shadow */
+    -2px  2px 1px #000, /* Bottom-left shadow */
+     2px  2px 1px #000, /* Bottom-right shadow */
 }
 
 /* Individual sections within business estimates */
 .business-estimates > div {
     flex: auto; /* Allow boxes to grow to fill space */
-    border: 8px solid #000080; /* Dark blue border */
+    border: 4px solid #445555; /* Dark blue border */
     padding: 15px;
+    margin: -1px; /* Removes the border between boxes */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
     background-color: #333; /* Slightly lighter background for contrast */
@@ -1618,8 +1624,8 @@ body.slideWin {
 /* Paragraphs within business estimates */
 .business-estimates p {
     margin: 8px 0;
-    line-height: 1.6; /* Improved line spacing for readability */
-    font-size: calc(0.8em + 0.5vw); /* Adjusts size based on container width */
+    line-height: 1.3; /* Improved line spacing for readability */
+    font-size: calc(0.5em + 0.5vw); /* Adjusts size based on container width */
 }
 
 /* Strong (bold) elements within paragraphs for emphasis */
@@ -1644,3 +1650,199 @@ body.slideWin {
     color: #2ecc71; /* Green color for positive values */
 }
 
+.positive-value {
+    color: green;
+}
+
+.negative-value {
+    color: red;
+}
+
+/* Add this to your stylesheet */
+.business-setup-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 8px solid gray;
+    margin: 10px; /* Optional: adds some space around the container */
+}
+
+.business-setup-image-container img {
+    max-width: 100%; /* Ensures the image is not wider than the container */
+    height: auto; /* Maintains the aspect ratio of the image */
+}
+
+/* Add this to your stylesheet */
+#businessTypeSelection {
+    text-align: center; /* Centers the buttons horizontally */
+}
+
+#businessTypeSelection ul {
+    list-style-type: none; /* Removes bullet points from the list */
+    padding: 0; /* Removes default padding */
+    margin: 0; /* Removes default margin */
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers the buttons horizontally */
+}
+
+#businessTypeSelection li {
+    margin: 0 10px; /* Adds some space between the buttons */
+}
+
+#businessTypeSelection button {
+    background-color: gray; /* Sets the background color of the buttons to gray */
+    color: white; /* Sets the text color of the buttons */
+    font-weight: bold; /* Makes the text bold */
+    height: 50px; /* Sets the height of the buttons */
+    width: 150px; /* Sets a fixed width of the buttons (adjust as needed) */
+    border: none; /* Removes the default border */
+    cursor: pointer; /* Changes the cursor to a pointer when hovering over the buttons */
+    padding: 0 20px; /* Adds horizontal padding inside the buttons */
+}
+
+#businessTypeSelection button:hover {
+    background-color: darkgray; /* Changes the background color when hovering */
+}
+
+.ldbs-low {
+    color: #a83232; /* Dark red for low prospects */
+}
+
+.ldbs-moderate {
+    color: #d9822b; /* Orange for moderate prospects */
+}
+
+.ldbs-average {
+    color: #f2d024; /* Yellow for average prospects */
+}
+
+.ldbs-high {
+    color: #9cb83c; /* Light green for high prospects */
+}
+
+.ldbs-very-high {
+    color: #2d882d; /* Dark green for very high prospects */
+}
+
+#business-setup-final {
+    text-align: center;
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust the space between buttons if needed */
+}
+
+.button-container .cancel-button button {
+    background-color: gray; /* Red color for cancel button */
+}
+
+.button-container .cancel-button button:hover {
+    background-color: red; /* Red color for cancel button */
+}
+
+.button-container .confirm-button button {
+    background-color: gray; /* Green color for confirm button */
+}
+
+.button-container .confirm-button button:hover {
+    background-color: green; /* Green color for confirm button */
+}
+
+.button-container div button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 150px;
+    min-height: 100px;
+    color: #fff;
+    border: solid;
+    border-radius: 5px;
+     background-color: gray; /* Green color, you can change it to fit */
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    text-shadow:
+    -2px -2px 3px #000, /* Top-left shadow */
+     2px -2px 3px #000, /* Top-right shadow */
+    -2px  2px 3px #000, /* Bottom-left shadow */
+     2px  2px 3px #000, /* Bottom-right shadow */
+    -3px -3px 3px #000, /* Additional layer for thicker shadow */
+     3px -3px 3px #000,
+    -3px  3px 3px #000,
+     3px  3px 3px #000; /* Additional layer for thicker shadow */
+}
+
+.button-container div button:hover {
+    opacity: 0.8; /* Slight transparency on hover for both buttons */
+}
+
+.button-container div button:active {
+    opacity: 0.6; /* More transparency when active/clicked for both buttons */
+}
+
+.business-estimates {
+    background-image: url('images/ui/ui-square-1.jpg.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.business-stats {
+    background-image: url('images/ui/ui-chart-1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.location-factors {
+    background-image: url('images/ui/ui-location-1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.calculated-stats {
+    background-image: url('images/ui/ui-math-1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.input-costs {
+    background-image: url('images/ui/ui-resources-1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.level-upgrade-cost {
+    background-image: url('images/ui/ui-upgrade-1.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.business-estimates, .business-stats, .location-factors, .calculated-stats, .input-costs, .level-upgrade-cost {
+    position: relative;
+}
+
+.business-estimates::before, .business-stats::before, .location-factors::before, .calculated-stats::before, .input-costs::before, .level-upgrade-cost::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8); /* Black with 80% opacity */
+    z-index: 1;
+}
+
+.business-estimates > *, .business-stats > *, .location-factors > *, .calculated-stats > *, .input-costs > *, .level-upgrade-cost > * {
+    position: relative;
+    z-index: 2;
+}

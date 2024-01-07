@@ -21,7 +21,7 @@ Places of Interest:<br>
     <<set $LowerDecksCurrentScoutLocation = passage()>>
 <</if>>
 
-<<if $LowerDeckRecruitmentActive>>
+<<if $LowerDeckScoutActive>>
     <<set $LowerDecksCurrentScoutLocation = passage()>>
     Business Scouting:<br>
     <<link "Scout the Lower Observation Deck">><<goto "Lower Observation Deck Scout">><</link>><br><br>

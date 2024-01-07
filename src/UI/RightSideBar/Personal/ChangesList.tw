@@ -3,6 +3,29 @@
 <div style="background-color: black; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
     <h2 style="color: white; text-align: center; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 20px;">Changelist</h2>
 
+    <h3 style="color: #007bff;">V0.0027 </h3>
+    <h4 style="color: white;">New Features and Improvements</h4>
+    <ul style="margin-bottom: 20px;">
+        <li>Business Estimates Refactor: Enhanced styling with a script to display initial business type.</li>
+        <li>New Business-Related Features: Additional features and styles for in-game businesses.</li>
+        <li>Lower Deck Business Stats and Locations: New statistics and locations for businesses on the Lower Deck.</li>
+        <li>Relationship Journal: A new journal feature to track player relationships with in-game characters.</li>
+        <li>Jax's Effect on Player: New character interaction dynamic with Jax.</li>
+        <li>Leina's Training and Story Flags: New training sessions and story developments with Leina.</li>
+        <li>Character Image Updates: Updated dialogue and images for Leina.</li>
+        <li>Companion Chat Feature: Development started on a companion chat feature.</li>
+        <li>Dynamic Conversations: Enabling more realistic and variable NPC interactions. (this is a stretch, but heh)</li>
+        <li>Menu Bug Fixes: Resolved issues with the game's menu system.</li>
+        <li>Event Handler Enhancements: Improved event handler system for more complex events.</li>
+        <li>NPC Abstracting and Renaming: Refined the companion system and reorganized NPC-related files.</li>
+        <li>UI Improvements: Enhanced right sidebar UI, including new border design.</li>
+        <li>Companion System Updates: Bug fixes and refinements in the companion menu.</li>
+        <li>Portrait System Overhaul: Improved player and NPC portrait systems.</li>
+        <li>Codebase Organization: Renamed and reorganized files and folders for better clarity.</li>
+        <li>Miscellaneous Bug Fixes and Enhancements: Various gameplay and stability improvements.</li>
+    </ul>
+
+
     <h3 style="color: #007bff;">V0.00264 </h3>
     <h4 style="color: white;">Cleaned up files, fixed portrait</h4>
     <ul style="margin-bottom: 20px;">

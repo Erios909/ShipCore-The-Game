@@ -1,5 +1,5 @@
 :: LowerDeckBusinessSetupConfirmation [safe nobr] {"position":"200,1200","size":"100,100"}
-
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/playerbusiness/disarray.jpg'>>
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
     <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
         Unnamed Business
@@ -73,7 +73,7 @@
 
 
 :: LowerDeckBusinessSetupConfirmation2 [safe nobr] {"position":"200,1200","size":"100,100"}
-
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/playerbusiness/hallwaycons.jpg'>>
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
     <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
         <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
@@ -100,9 +100,37 @@
 
 <p>With a name in place, you're ready to begin the process of setting up your business. You'll need to hire staff, stock the shelves, and advertise your new establishment. The Lower Decks are a dangerous place, and you'll need to be prepared for anything.</p>
 
-<<set $LowerDecksBusinessStats to setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+<<set $LowerDecksPlayerBusinessLocationStats to setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
 
-
+<<set $LowerDecksBusinessTypeStats = {
+    "Space Bar and Lounge": {
+            "EmployeesPerUpgrade": 5,
+            "EmployeeCost": 10,
+            "InputCosts": { "Food": 3, "Water": 1 },
+            "BasePriceOfOutput": 50,
+            "CyclesPerHour": 1,
+            "BatchSize": 10,
+            "UpgradeCost": 1
+        },
+        "Hydroponic Farm": {
+            "EmployeesPerUpgrade": 3,
+            "EmployeeCost": 10,
+            "InputCosts": { "Minerals": 3, "Water": 1 },
+            "BasePriceOfOutput": 50,
+            "CyclesPerHour": 1,
+            "BatchSize": 10,
+            "UpgradeCost": 1.5
+        },
+        "Scrap Reprocessing": {
+            "EmployeesPerUpgrade": 2,
+            "EmployeeCost": 10,
+            "InputCosts": { "Scrap": 4 },
+            "BasePriceOfOutput": 50,
+            "CyclesPerHour": 1,
+            "BatchSize": 10,
+            "UpgradeCost": 2
+    }
+}>>
 
 <<liveblock>>
     <h2 id="businessNameHeading" style="margin-top: 10px; margin-bottom: 10px;">
@@ -128,30 +156,19 @@ $(document).one(':passagedisplay', function (ev) {
 </div>
 <div id="businessTypeDescription"></div>
 
-<<set $LowerDecksBusinessTypeStats = {
-    "Space Bar and Lounge": {
-        "EmployeesPerUpgrade": 5,
-        "InputCosts": { "Food": 2, "Water": 1 },
-        "InstallCostMultiplier": 1,
-        "ProfitPerBatch": 300,
-        "BatchSize": 10
-    },
-    "Hydroponic Farm": {
-        "EmployeesPerUpgrade": 3,
-        "InputCosts": { "Minerals": 3, "Water": 2 },
-        "InstallCostMultiplier": 1.5,
-        "ProfitPerBatch": 200,
-        "BatchSize": 25
-    },
-    "Scrap Reprocessing": {
-        "EmployeesPerUpgrade": 2,
-        "InputCosts": { "Scrap": 5 },
-        "InstallCostMultiplier": 2,
-        "ProfitPerBatch": 500,
-        "BatchSize": 10
-    }
-}>>
+
 <<if $LowerDecksPlayerBusinessTotalInputCostsForOneBatch === undefined>>
+<<set $LowerDecksPlayerBusinessBatchSize to 0>>
+<<set $LowerDecksPlayerBusinessEmployeesPerUpgrade to 0>>
+<<set $LowerDecksPlayerBusinessCustomerAvailability to 0>>
+<<set $LowerDecksPlayerBusinessSupplyHubAccess to 0>>
+<<set $LowerDecksPlayerBusinessDangerLevel to 0>>
+<<set $LowerDecksPlayerBusinessTaxRate to 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit to 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches to 0>>
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch to 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour to 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour to 0>> 
 <<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0>>
 <<set $LowerDecksPlayerBusinessPriceOfOutput = 0>>
 <<set $LowerDecksPlayerBusinessAdjustedPricePerUnit = 0>>
@@ -160,27 +177,200 @@ $(document).one(':passagedisplay', function (ev) {
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 <</if>>
 
+<div id="business-setup-final">
+    <h3>This is an important decision. Once you choose a location for your business, it's permanent.</h3>
+    <p>You will be able to establish new business divisions for other business types later. However, your starting business will have a significant effect on your starting income.</p>
+    <p><strong>Are you sure you want to set up here?</strong></p>
+    <div class="button-container">
+        <div class="cancel-button">
+            <<button "Cancel">>
+               <<goto "Lower Decks">>
+            <</button>>
+        </div>
+        <div class="confirm-button">
+            <<button "Confirm Location and Business Type">>
+                <<set $LowerDecksPlayerBusinessActive = true>>
+                <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
+                <<set $LowerDecksPlayerBusinessStartType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
+                <<goto "LowerDecksPlayerBusiness">>
+            <</button>>
+        </div>
+    </div>
+</div>
+
+
 
 
 :: SpaceBarAndLounge [nobr]
-<img src="path/to/space-bar-image.jpg" alt="Space Bar and Lounge">
-<p>Your business is a popular space bar and lounge located on the orbital space station, offering a place for residents and visitors to relax, socialize, and enjoy drinks and entertainment.</p>
+<div class="business-setup-image-container">
+    <img @src="setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/humanservices.jpg'" alt="Space Bar and Lounge">
+</div><<nobr>><<set _businessType = "Space Bar and Lounge">>
+<<set _customerAvailability = $LowerDecksPlayerBusinessLocationStats[0] ?? 5>>
+<<set _supplyHubAccess = $LowerDecksPlayerBusinessLocationStats[1] ?? 5>>
+<<set _danger = $LowerDecksPlayerBusinessLocationStats[2] ?? 5>>
+<<set _taxRate = $LowerDecksPlayerBusinessLocationStats[3] ?? 5>>
+<<set _setupCost = $LowerDecksPlayerBusinessLocationStats[4] ?? 5>>
+<p>You are in the planning stages of establishing a space bar and lounge on the orbital space station. This venue aims to provide a place for residents and visitors to relax, socialize, and enjoy drinks and entertainment. The potential for <<=_businessType>> to thrive is <<switch (_customerAvailability)>>
+    <<case 1 to 2>><span class="ldbs-low">uncertain, with much work needed to generate interest,</span>
+    <<case 3 to 4>><span class="ldbs-moderate">moderate, with some early signs of curiosity,</span>
+    <<case 5 to 6>><span class="ldbs-average">good, with a steady buzz among the community,</span>
+    <<case 7 to 8>><span class="ldbs-high">high, with strong word-of-mouth potential,</span>
+    <<case 9 to 10>><span class="ldbs-very-high">excellent, with widespread anticipation and support,</span>
+<</switch>> suggesting that it could become <<switch (_customerAvailability)>>
+    <<case 1 to 2>><span class="ldbs-low">a niche spot for the few who discover it.</span>
+    <<case 3 to 4>><span class="ldbs-moderate">a charming local hangout.</span>
+    <<case 5 to 6>><span class="ldbs-average">a popular choice for regular patrons.</span>
+    <<case 7 to 8>><span class="ldbs-high">a leading social venue.</span>
+    <<case 9 to 10>><span class="ldbs-very-high">the heart of the station's nightlife.</span>
+<</switch>></p>
+
+<p>The prospects for establishing a reliable supply chain are <<switch (_supplyHubAccess)>>
+    <<case 1 to 2>><span class="ldbs-low">daunting, with significant logistics to navigate.</span>
+    <<case 3 to 4>><span class="ldbs-moderate">unclear, requiring careful planning.</span>
+    <<case 5 to 6>><span class="ldbs-average">fair, with a solid foundation for a standard offering.</span>
+    <<case 7 to 8>><span class="ldbs-high">promising, with potential for a varied menu.</span>
+    <<case 9 to 10>><span class="ldbs-very-high">outstanding, with opportunities for exclusive selections.</span>
+<</switch>></p>
+
+<p>The safety of the proposed location is <<switch (_danger)>>
+    <<case 1 to 2>><span class="ldbs-very-high">excellent, with minimal security concerns.</span>
+    <<case 3 to 4>><span class="ldbs-high">generally good, though some precautions are advisable.</span>
+    <<case 5 to 6>><span class="ldbs-average">adequate, with a need for standard safety measures.</span>
+    <<case 7 to 8>><span class="ldbs-moderate">a concern, necessitating a robust security plan.</span>
+    <<case 9 to 10>><span class="ldbs-low">a major consideration, requiring significant investment in security infrastructure.</span>
+<</switch>></p>
+
+<p>In terms of finances, the <<switch (_taxRate)>>
+    <<case 1 to 2>><span class="ldbs-low">favorable tax conditions</span>
+    <<case 3 to 4>><span class="ldbs-moderate">manageable tax obligations</span>
+    <<case 5 to 6>><span class="ldbs-average">standard tax rates</span>
+    <<case 7 to 8>><span class="ldbs-high">heavy tax liabilities</span>
+    <<case 9 to 10>><span class="ldbs-very-high">severe tax demands</span>
+<</switch>> and the <<switch (_setupCost)>>
+    <<case 1 to 2>><span class="ldbs-low">low initial outlay,</span>
+    <<case 3 to 4>><span class="ldbs-moderate">reasonable startup costs,</span>
+    <<case 5 to 6>><span class="ldbs-average">average investment needs,</span>
+    <<case 7 to 8>><span class="ldbs-high">high front-end expenses,</span>
+    <<case 9 to 10>><span class="ldbs-very-high">substantial financial commitment,</span>
+<</switch>> will play a crucial role in shaping the business plan for the Space Bar and Lounge.</p>
 <<LowerDeckBusinessProfitability "Space Bar and Lounge">>
 <<PrintBusinessEstimates>>
 <!-- Add more gameplay focus and potential game features here -->
+<</nobr>>
 
 :: HydroponicFarm [nobr]
-<img src="path/to/hydroponic-farm-image.jpg" alt="Hydroponic Farm">
-<p>Your business focuses on operating a hydroponic farm and supplying fresh, nutritious food to the space station's inhabitants.</p>
+<div class="business-setup-image-container">
+    <img @src="setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/hydroponics.jpg'" alt="Hydroponic Farm">
+</div><<nobr>><<set _businessType = "Hydroponic Farm">>
+<<set _customerAvailability = $LowerDecksPlayerBusinessLocationStats[0] ?? 5>>
+<<set _supplyHubAccess = $LowerDecksPlayerBusinessLocationStats[1] ?? 5>>
+<<set _danger = $LowerDecksPlayerBusinessLocationStats[2] ?? 5>>
+<<set _taxRate = $LowerDecksPlayerBusinessLocationStats[3] ?? 5>>
+<<set _setupCost = $LowerDecksPlayerBusinessLocationStats[4] ?? 5>>
+<p>You are in the planning stages of establishing a hydroponic farm on the orbital space station. This facility aims to provide a sustainable source of fresh produce for residents and visitors, contributing to the station's self-sufficiency. The potential for <<=_businessType>> to flourish is <<switch (_customerAvailability)>>
+    <<case 1 to 2>><span class="ldbs-low">uncertain, with significant effort required to raise awareness,</span>
+    <<case 3 to 4>><span class="ldbs-moderate">moderate, with a growing interest in local food sources,</span>
+    <<case 5 to 6>><span class="ldbs-average">good, with community support for sustainable initiatives,</span>
+    <<case 7 to 8>><span class="ldbs-high">high, with a strong demand for fresh, quality produce,</span>
+    <<case 9 to 10>><span class="ldbs-very-high">excellent, with station-wide enthusiasm for health and wellness,</span>
+<</switch>> suggesting that it could become <<switch (_customerAvailability)>>
+    <<case 1 to 2>><span class="ldbs-low">a niche provider for a select group of patrons.</span>
+    <<case 3 to 4>><span class="ldbs-moderate">a valued source of nutrition for health-conscious individuals.</span>
+    <<case 5 to 6>><span class="ldbs-average">a key player in the station's food supply chain.</span>
+    <<case 7 to 8>><span class="ldbs-high">a central pillar in the community's push for sustainability.</span>
+    <<case 9 to 10>><span class="ldbs-very-high">the leading agricultural operation on the station.</span>
+<</switch>></p>
+
+<p>The prospects for establishing a reliable supply chain for nutrients and equipment are <<switch (_supplyHubAccess)>>
+    <<case 1 to 2>><span class="ldbs-low">challenging, with intricate logistics to work out.</span>
+    <<case 3 to 4>><span class="ldbs-moderate">uncertain, necessitating strategic partnerships.</span>
+    <<case 5 to 6>><span class="ldbs-average">stable, with reliable suppliers identified.</span>
+    <<case 7 to 8>><span class="ldbs-high">strong, with opportunities for bulk purchasing and discounts.</span>
+    <<case 9 to 10>><span class="ldbs-very-high">excellent, with a network of premium suppliers eager to collaborate.</span>
+<</switch>></p>
+
+<p>The safety of the proposed location is <<switch (_danger)>>
+    <<case 1 to 2>><span class="ldbs-very-high">excellent, with minimal security concerns.</span>
+    <<case 3 to 4>><span class="ldbs-high">generally good, though some precautions are advisable.</span>
+    <<case 5 to 6>><span class="ldbs-average">adequate, with a need for standard safety measures.</span>
+    <<case 7 to 8>><span class="ldbs-moderate">a concern, necessitating a robust security plan.</span>
+    <<case 9 to 10>><span class="ldbs-low">a major consideration, requiring significant investment in security infrastructure.</span>
+<</switch>></p>
+
+<p>In terms of finances, the <<switch (_taxRate)>>
+    <<case 1 to 2>><span class="ldbs-low">favorable tax incentives for agricultural ventures</span>
+    <<case 3 to 4>><span class="ldbs-moderate">reasonable tax rates for small businesses</span>
+    <<case 5 to 6>><span class="ldbs-average">standard tax rates applicable to commercial operations</span>
+    <<case 7 to 8>><span class="ldbs-high">significant tax considerations for larger enterprises</span>
+    <<case 9 to 10>><span class="ldbs-very-high">heavy tax burdens for major agricultural producers</span>
+<</switch>> and the <<switch (_setupCost)>>
+    <<case 1 to 2>><span class="ldbs-low">minimal initial investment,</span>
+    <<case 3 to 4>><span class="ldbs-moderate">manageable startup expenses,</span>
+    <<case 5 to 6>><span class="ldbs-average">average capital requirements,</span>
+    <<case 7 to 8>><span class="ldbs-high">considerable upfront costs,</span>
+    <<case 9 to 10>><span class="ldbs-very-high">substantial financial outlay for cutting-edge technology,</span>
+<</switch>> will play a crucial role in shaping the business plan for the Hydroponic Farm.</p>
 <<LowerDeckBusinessProfitability "Hydroponic Farm">>
 <<PrintBusinessEstimates>>
 <!-- Add more gameplay focus and potential game features here -->
+<</nobr>>
 
 :: ScrapReprocessing [nobr]
-<img src="path/to/scrap-reprocessing-image.jpg" alt="Scrap Reprocessing">
-<p>Your business specializes in collecting and reprocessing scrap materials from decommissioned spacecraft, satellites, and space debris.</p>
+<div class="business-setup-image-container">
+    <img @src="setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/scrapprocessing.jpg'" alt="Scrap Reprocessing">
+</div><<nobr>><<set _businessType = "Scrap Reprocessing">>
+<<set _customerAvailability = $LowerDecksPlayerBusinessLocationStats[0] ?? 5>>
+<<set _supplyHubAccess = $LowerDecksPlayerBusinessLocationStats[1] ?? 5>>
+<<set _danger = $LowerDecksPlayerBusinessLocationStats[2] ?? 5>>
+<<set _taxRate = $LowerDecksPlayerBusinessLocationStats[3] ?? 5>>
+<<set _setupCost = $LowerDecksPlayerBusinessLocationStats[4] ?? 5>>
+<p>You are in the planning stages of establishing a scrap reprocessing facility on the orbital space station. This operation aims to recycle waste materials into useful parts, supporting the station's maintenance and manufacturing needs. The potential for <<=_businessType>> to succeed is <<switch (_customerAvailability)>>
+    <<case 1 to 2>><span class="ldbs-low">uncertain, with a need to build trust in the quality of refurbished parts,</span>
+    <<case 3 to 4>><span class="ldbs-moderate">moderate, with interest from budget-conscious sectors,</span>
+    <<case 5 to 6>><span class="ldbs-average">good, with a growing awareness of the benefits of recycling,</span>
+    <<case 7 to 8>><span class="ldbs-high">high, with strong demand from various station departments,</span>
+    <<case 9 to 10>><span class="ldbs-very-high">excellent, with station-wide initiatives to reduce waste and optimize resources,</span>
+<</switch>> suggesting that it could become <<switch (_customerAvailability)>>
+    <<case 1 to 2>><span class="ldbs-low">a niche service for specialized needs.</span>
+    <<case 3 to 4>><span class="ldbs-moderate">a go-to for cost-effective repairs and maintenance.</span>
+    <<case 5 to 6>><span class="ldbs-average">a key contributor to the station's sustainability efforts.</span>
+    <<case 7 to 8>><span class="ldbs-high">an essential part of the station's industrial ecosystem.</span>
+    <<case 9 to 10>><span class="ldbs-very-high">the primary center for resource recovery and parts fabrication.</span>
+<</switch>></p>
+
+<p>The prospects for establishing a steady influx of scrap materials are <<switch (_supplyHubAccess)>>
+    <<case 1 to 2>><span class="ldbs-low">limited, requiring aggressive sourcing strategies.</span>
+    <<case 3 to 4>><span class="ldbs-moderate">uncertain, with the need to negotiate with waste management entities.</span>
+    <<case 5 to 6>><span class="ldbs-average">stable, with agreements in place for a consistent supply.</span>
+    <<case 7 to 8>><span class="ldbs-high">strong, with a surplus of materials awaiting reprocessing.</span>
+    <<case 9 to 10>><span class="ldbs-very-high">excellent, with a wealth of scrap from station operations and decommissioned tech.</span>
+<</switch>></p>
+
+<p>The safety of the proposed location is <<switch (_danger)>>
+    <<case 1 to 2>><span class="ldbs-very-high">excellent, with minimal security concerns.</span>
+    <<case 3 to 4>><span class="ldbs-high">generally good, though some precautions are advisable.</span>
+    <<case 5 to 6>><span class="ldbs-average">adequate, with a need for standard safety measures.</span>
+    <<case 7 to 8>><span class="ldbs-moderate">a concern, necessitating a robust security plan.</span>
+    <<case 9 to 10>><span class="ldbs-low">a major consideration, requiring significant investment in security infrastructure.</span>
+<</switch>></p>
+
+<p>In terms of finances, the <<switch (_taxRate)>>
+    <<case 1 to 2>><span class="ldbs-low">favorable tax incentives for recycling operations</span>
+    <<case 3 to 4>><span class="ldbs-moderate">manageable tax rates for industrial services</span>
+    <<case 5 to 6>><span class="ldbs-average">standard tax rates applicable to manufacturing businesses</span>
+    <<case 7 to 8>><span class="ldbs-high">significant tax considerations for large-scale processors</span>
+    <<case 9 to 10>><span class="ldbs-very-high">heavy tax burdens for major industrial facilities</span>
+<</switch>> and the <<switch (_setupCost)>>
+    <<case 1 to 2>><span class="ldbs-low">minimal initial investment for basic operations,</span>
+    <<case 3 to 4>><span class="ldbs-moderate">reasonable startup expenses for essential machinery,</span>
+    <<case 5 to 6>><span class="ldbs-average">average capital requirements for a fully functional facility,</span>
+    <<case 7 to 8>><span class="ldbs-high">considerable upfront costs for advanced reprocessing technology,</span>
+    <<case 9 to 10>><span class="ldbs-very-high">substantial financial outlay for a state-of-the-art reprocessing plant,</span>
+<</switch>> will play a crucial role in shaping the business plan for the Scrap Reprocessing Facility.</p>
 <<LowerDeckBusinessProfitability "Scrap Reprocessing">>
 <<PrintBusinessEstimates>>
 <!-- Add more gameplay focus and potential game features here -->
+<</nobr>>
+
 
 

@@ -117,7 +117,7 @@ Things to do:<br>
 <<if $LowerDecksCurrentScoutLocation === undefined>>
     <<set $LowerDecksCurrentScoutLocation = passage()>>
 <</if>>
-<<if $LowerDeckRecruitmentActive>>
+<<if $LowerDeckScoutActive>>
     <<set $LowerDecksCurrentScoutLocation = passage()>>
 
     Business Scouting:<br>
