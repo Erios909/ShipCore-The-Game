@@ -118,5 +118,9 @@ sugarcube-2:
       name: changerelations
     LowerDeckBusinessStats:
       name: LowerDeckBusinessStats
+    LowerDeckBusinessProfitability:
+      name: LowerDeckBusinessProfitability
+    PrintBusinessEstimates:
+      name: PrintBusinessEstimates
 
       

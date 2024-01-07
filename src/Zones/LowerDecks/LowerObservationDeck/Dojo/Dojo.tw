@@ -14,8 +14,11 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-<<set $LeinaDojoRep += 1>>
+
 <<if $LeinaDojoRep === undefined>>
+    <<set $LeinaDojoRep = 0>>
+<</if>>
+<<if $LeinaDojoRep === null>>
     <<set $LeinaDojoRep = 0>>
 <</if>>
 
@@ -25,7 +28,7 @@
 
 <<switch $LeinaDojoRep>>
     <<case 0>>
-        The dojo is a stark contrast to the dilapidated surroundings of the lower decks. Clean mats cover the floor, and the walls are adorned with various training implements. The air is filled with the sounds of exertion and the sharp slaps of disciplined strikes. Here, the downtrodden come to find strength, and the desperate come to find hope. You feel like an outsider, barely noticed amidst the flurry of activity.
+        Here, the downtrodden come to find strength, and the desperate come to find hope. You feel like an outsider, barely noticed amidst the flurry of activity.
     <<case 1>>
         You're starting to recognize some faces, and a few of the regulars give you a nod as you walk in. The dojo still feels new and somewhat intimidating, but you're determined to prove your worth and continue your training.
     <<case 2>>

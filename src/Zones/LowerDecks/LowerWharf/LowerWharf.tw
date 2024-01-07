@@ -1,4 +1,4 @@
-:: Lower Wharf [travel] {"position":"1325,650","size":"100,100"}
+:: Lower Wharf [travel nobr] {"position":"1325,650","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf.jpg'>>
 <<addmins $timeadd>><<set $location to {
@@ -11,22 +11,32 @@
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Wharf</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
-<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
-Places of Interest:
-[[Wharfside Tech Emporium|WharfsideTechEmporium][$timeadd = 10]]
-[[Check out The Dockside Fabricator|DocksideFabricator][$timeadd = 10]]
-[[Enter Mariner's Rest|MarinersRest][$timeadd = 5]]
-[[Loiter (00:15)|Lower Wharf][$timeadd = 15]]
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>><br><br>
+Places of Interest:<br>
+[[Wharfside Tech Emporium|WharfsideTechEmporium][$timeadd = 10]]<br>
+[[Check out The Dockside Fabricator|DocksideFabricator][$timeadd = 10]]<br>
+[[Enter Mariner's Rest|MarinersRest][$timeadd = 5]]<br>
+[[Loiter (00:15)|Lower Wharf][$timeadd = 15]]<br><br>
 
-Travel:
-[[Take the Lift to the Lower Decks Hub.|Lower Decks][$timeadd = 5]]
-[[(Clockwise) The station's primary outer corridor leads to the Black Market Bazaar.|Black Market Bazaar][$timeadd = 5]]
-[[(Counter-Clockwise) The station's primary outer corridor leads to Lower Engineering.|Station Infrastructure][$timeadd = 5]]
 
-Pungent with the smell of engine fuel and sea brine synthetics, the Lower Wharf is the underbelly of interstellar trade. Rusting freighters dock alongside sleek smugglers' craft, the air echoing with the clang of metal and shout of loaders. Furtive figures negotiate in shadowed corners, conducting transactions best left unscrutinized.
+<<if $LowerDecksCurrentScoutLocation === undefined>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+<</if>>
+<<if $LowerDeckRecruitmentActive>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+    Business Scouting:<br>
+    <<link "Scout the Lower Wharf">><<goto "Lower Wharf Scout">><</link>><br><br>
+<</if>>
 
-Lights flicker across stacked containers, creating a patchwork of light and darkness. The distant hum of machinery is a constant reminder of the ceaseless commerce that flows through the veins of MOR-1. Here, goods from across the galaxy exchange hands, legally or otherwise, before disappearing into the labyrinth of the station.
+Travel:<br>
+[[Take the Lift to the Lower Decks Hub.|Lower Decks][$timeadd = 5]]<br>
+[[(Clockwise) The station's primary outer corridor leads to the Black Market Bazaar.|Black Market Bazaar][$timeadd = 5]]<br>
+[[(Counter-Clockwise) The station's primary outer corridor leads to Lower Engineering.|Station Infrastructure][$timeadd = 5]]<br>
 
-Despite the hustle, there's a sense of impermanence to the Lower Wharf. Everything is in transit—people, goods, dreams. The wharf's myriad pathways stand ready to take you to the heart of the Lower Decks or further into its depths.
+<p>Pungent with the smell of engine fuel and sea brine synthetics, the Lower Wharf is the underbelly of interstellar trade. Rusting freighters dock alongside sleek smugglers' craft, the air echoing with the clang of metal and shout of loaders. Furtive figures negotiate in shadowed corners, conducting transactions best left unscrutinized.</p>
+
+<p>Lights flicker across stacked containers, creating a patchwork of light and darkness. The distant hum of machinery is a constant reminder of the ceaseless commerce that flows through the veins of MOR-1. Here, goods from across the galaxy exchange hands, legally or otherwise, before disappearing into the labyrinth of the station.</p>
+
+<p>Despite the hustle, there's a sense of impermanence to the Lower Wharf. Everything is in transit—people, goods, dreams. The wharf's myriad pathways stand ready to take you to the heart of the Lower Decks or further into its depths.</p>
 
 

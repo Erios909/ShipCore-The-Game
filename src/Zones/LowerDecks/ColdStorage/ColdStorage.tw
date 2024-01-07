@@ -114,7 +114,15 @@ Things to do:<br>
     <</if>>
 <</if>><br><br>
 
+<<if $LowerDecksCurrentScoutLocation === undefined>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+<</if>>
+<<if $LowerDeckRecruitmentActive>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
 
+    Business Scouting:<br>
+    <<link "Scout the Cold Storage">><<goto "Cold Storage Scout">><</link>><br><br>
+<</if>>
 
 
 

@@ -1071,3 +1071,113 @@ Macro.add('ScrollTo', {
 	}
 });
 /* <<ScrollTo>> macro - End */
+
+
+/* BUSINESS STUFF HERE! */
+
+// Initialize business type variables for save game compatibility
+window.setupBusinessTypeVariables = function() {
+    // Check if the variables have already been initialized
+    if (typeof State.variables.LowerDeckBusinessTypes === "undefined") {
+        State.variables.LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"];
+    }
+    if (typeof State.variables.currentBusinessIndex === "undefined") {
+        State.variables.currentBusinessIndex = 0;
+    }
+};
+
+// Function to show the business type based on the current index
+window.showBusinessType = function(direction) {
+    // Update the current index based on direction
+    State.variables.currentBusinessIndex = (State.variables.currentBusinessIndex + direction + State.variables.LowerDeckBusinessTypes.length) % State.variables.LowerDeckBusinessTypes.length;
+
+    // Get the current business type
+    var currentType = State.variables.LowerDeckBusinessTypes[State.variables.currentBusinessIndex];
+
+    // Set the business type variable
+    State.variables.LowerDecksBusinessType = currentType;
+
+    // Replace the business type description based on the current selection
+    $('#businessTypeDescription').empty();
+    switch (currentType) {
+        case "Space Bar and Lounge":
+            $('#businessTypeDescription').wiki(Story.get("SpaceBarAndLounge").text);
+            break;
+        case "Hydroponic Farm":
+            $('#businessTypeDescription').wiki(Story.get("HydroponicFarm").text);
+            break;
+        case "Scrap Reprocessing":
+            $('#businessTypeDescription').wiki(Story.get("ScrapReprocessing").text);
+            break;
+    }
+};
+
+// Define the LowerDeckBusinessProfitability widget
+Macro.add('LowerDeckBusinessProfitability', {
+    handler: function () {
+        // Initialize LowerDecksPlayerBusiness variables
+        State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0;
+        State.variables.LowerDecksPlayerBusinessPriceOfOutput = 0;
+        State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit = 0;
+        State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0;
+        State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0;
+        State.variables.LowerDecksPlayerBusinessProfitMarginPerHour = 0;
+        // Check if the required arguments are provided
+        if (this.args.length < 1) {
+            return this.error('No business type specified for the LowerDeckBusinessProfitability widget.');
+        }
+
+        var businessType = this.args[0];
+
+        // Check if the business type is valid
+        if (!State.variables.LowerDecksBusinessTypeStats.hasOwnProperty(businessType)) {
+            return this.error('Invalid business type specified: ' + businessType);
+        }
+
+        var businessStats = State.variables.LowerDecksBusinessTypeStats[businessType];
+        var locationFactors = State.variables.LowerDecksBusinessStats; // This should be an array based on player's choice
+
+        // Set the batch size and employees per upgrade as state variables
+        State.variables.LowerDecksPlayerBusinessBatchSize = businessStats.BatchSize;
+        State.variables.LowerDecksPlayerBusinessEmployeesPerUpgrade = businessStats.EmployeesPerUpgrade;
+
+        // Set the location factors as state variables
+        State.variables.LowerDecksPlayerBusinessCustomerAvailability = locationFactors[0];
+        State.variables.LowerDecksPlayerBusinessSupplyHubAccess = locationFactors[1];
+        State.variables.LowerDecksPlayerBusinessDangerLevel = locationFactors[2];
+        State.variables.LowerDecksPlayerBusinessTaxRate = locationFactors[3];
+
+        // Calculate total input costs for one batch
+        State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0;
+        for (var input in businessStats.InputCosts) {
+            State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch += businessStats.InputCosts[input] * businessStats.BatchSize;
+        }
+
+        // Calculate the price of output based on profit and input costs
+        State.variables.LowerDecksPlayerBusinessPriceOfOutput = (businessStats.ProfitPerBatch + State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch) / businessStats.BatchSize;
+
+        // Calculate penalties based on location factors
+        var customerAvailabilityPenalty = 1 - (locationFactors[0] / 100);
+        var supplyHubAccessPenalty = 1 - (locationFactors[1] / 100);
+        var dangerLevelPenalty = 1 - (locationFactors[2] / 100);
+        var taxRatePenalty = 1 - (locationFactors[3] / 100);
+
+        // Calculate the adjusted sales price per unit
+        State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit = State.variables.LowerDecksPlayerBusinessPriceOfOutput * customerAvailabilityPenalty * supplyHubAccessPenalty * dangerLevelPenalty * taxRatePenalty;
+
+        // Calculate total sales price for all batches processed in one hour
+        State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit * businessStats.BatchSize;
+
+        // Calculate total employee cost per hour (not per batch)
+        State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour = businessStats.EmployeesPerUpgrade * -100;
+
+        // Calculate profit margin per hour
+        State.variables.LowerDecksPlayerBusinessProfitMarginPerHour = State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches - State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch - State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour;
+    }
+});
+
+
+
+
+
+

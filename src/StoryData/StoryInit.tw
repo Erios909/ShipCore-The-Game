@@ -169,7 +169,55 @@ $lowerdecksFabricatorCyberware
     'blackmarketactivity': 'lowerdeckBlackActivity' // Add this line
 }>>
 
+<<set $LowerDecksBusinessStats = {
+    "Space Bar and Lounge": {
+        "EmployeesPerUpgrade": 5,
+        "InputCosts": { "Food": 2, "Water": 1 },
+        "InstallCostMultiplier": 1,
+        "ProfitPerBatch": 50,
+        "BatchSize": 10
+    },
+    "Hydroponic Farm": {
+        "EmployeesPerUpgrade": 3,
+        "InputCosts": { "Minerals": 3, "Water": 2 },
+        "InstallCostMultiplier": 1.5,
+        "ProfitPerBatch": 40,
+        "BatchSize": 8
+    },
+    "Scrap Reprocessing": {
+        "EmployeesPerUpgrade": 2,
+        "InputCosts": { "Scrap": 5 },
+        "InstallCostMultiplier": 2,
+        "ProfitPerBatch": 60,
+        "BatchSize": 5
+    }
+}>>
 
+/* SugarCube StoryInit Special Passage */
+
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0>>
+<<set $LowerDecksPlayerBusinessPriceOfOutput = 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit = 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
+
+
+
+<<set $LeinaDojoRep = 0>>
+<<set $LowerDecksCurrentScoutLocation = "">> <!-- Initialize the variable to store the current scout location -->
+<<set $LowerDecksBusinessLocation = "">> <!-- Initialize the variable for the selected business location -->
+<<set $LowerDecksFinalBusinessStats = {}>> <!-- Initialize an object to store the final business stats -->
+<<set $LowerDecksCurrentScoutLocation = "">>
+<<set $LowerDecksSelectedBusinessLocation = "">>
+<<set $LowerDecksFinalBusinessStats = {}>>
+<<set $LowerDecksPlayerBusinessName to "Undefined Business">>
+<<set $DaltonIsCompanion to false>>
+<<set $JaxIsCompanion to false>>
+<<set $businessLocation to "Lower Deck Promenade">>
+<<set $playerBusinessNameInput to "">>
+<<set $LowerDecksBusinessStats to {}>>
+<<set $LowerDecksBusinessType to "Space Bar and Lounge">>
 <<set $lowerdeckBlackActivity to 0>>
 <<set $lowerdecksRep to 0>>
 <<set $LockboxHubSpecialRequests to false>>
@@ -188,6 +236,9 @@ $lowerdecksFabricatorCyberware
 <<set $lowerdecksFabricatorHopperParts to 0>>
 <<set $lowerdecksEnergyFeeCredits to 0>>
 <<set $lowerdecksFabricatorCyberware to 0>>
+
+<<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
+<<set $currentBusinessIndex = 0>>
 
 /* LOWER DECK NPCS */
 /* Grafter */

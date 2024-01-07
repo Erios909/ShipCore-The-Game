@@ -1587,3 +1587,61 @@ body.slideWin {
     color: #FFD700; /* Gold */
 }
 
+
+/* Main container for business estimates */
+.business-estimates {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow boxes to wrap to next line if needed */
+    gap: 20px; /* Space between boxes */
+    margin-bottom: 20px;
+    background-color: #222; /* Dark background */
+    font-family: 'Arial', sans-serif; /* Consistent font */
+    color: #ddd; /* Light text color for readability on dark background */
+}
+
+/* Individual sections within business estimates */
+.business-estimates > div {
+    flex: 0 0 50%; /* Each box takes up 50% of the width */
+    border: 8px solid #000080; /* Dark blue border */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Deeper shadow for depth */
+    background-color: #333; /* Slightly lighter background for contrast */
+}
+
+/* Headings within business estimates */
+.business-estimates h3 {
+    color: #fff; /* White color for headings */
+    margin-bottom: 10px;
+    font-size: 1.2em; /* Slightly larger font size */
+}
+
+/* Paragraphs within business estimates */
+.business-estimates p {
+    margin: 8px 0;
+    line-height: 1.6; /* Improved line spacing for readability */
+    font-size: calc(0.8em + 0.5vw); /* Adjusts size based on container width */
+}
+
+/* Strong (bold) elements within paragraphs for emphasis */
+.business-estimates p strong {
+    color: #fff; /* White color for strong emphasis */
+    font-weight: bold; /* Ensure it's bold */
+}
+
+/* Specific styles for values to make them stand out */
+.business-estimates .value {
+    color: #55acee; /* Light blue color for values */
+    font-weight: bold;
+}
+
+/* Style for negative values, such as losses or debts */
+.business-estimates .negative-value {
+    color: #e74c3c; /* Red color for negative values */
+}
+
+/* Style for positive values, such as profits or gains */
+.business-estimates .positive-value {
+    color: #2ecc71; /* Green color for positive values */
+}
+

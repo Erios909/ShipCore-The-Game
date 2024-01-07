@@ -2,7 +2,7 @@
 
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
     <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
-        <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
+        Unnamed Business
     </span>
 </h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -17,14 +17,14 @@
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Well, it's not much to look at now, but I've seen worse. Give it some time, and this place will be bustling. You'll see."<</say>>
 <</if>>
 <<if $JaxIsCompanion>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"It's going to take some work to get this place shipshape, but I'm up for the challenge if you are. There's potential here, hidden beneath the mess."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It's going to take some work to get this place shipshape, but I'm up for the challenge if you are. There's potential here, hidden beneath the mess."<</say>>
 <</if>>
 
 <p>Despite the current state of disrepair, there's an undeniable spark of potential that fuels your resolve. This won't just be a business; it will be a symbol of renewal and hope on the Lower Decks. With hard work and dedication, you'll turn this forsaken room into a thriving hub of commerce and community.</p>
 
 <p>But first, you'll need to get the place in order. You'll need to clean up the debris, repair the damage, and make the place presentable. You'll need to hire staff, stock the shelves, and advertise your business. You'll need to make a name for yourself, and you'll need to do it quickly. The Lower Decks are a dangerous place, and you'll need to be prepared for anything.</p>
 
-<<switch $businessLocation>>
+<<switch $LowerDecksBusinessLocation>>
     <<case "Lower Deck Promenade">>
         <p>The Lower Deck Promenade, with its constant flow of foot traffic, offers a prime location for any business. The diverse clientele could mean a steady stream of opportunities—if you can stand out from the competition.</p>
     <<case "Habitation Cells">>
@@ -47,11 +47,11 @@
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"A name can say a lot about a place. What are you thinking of calling it?"<</say>>
 <</if>>
 <<if $JaxIsCompanion and not $DaltonIsCompanion>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"The right name can draw a crowd on its own. Got any ideas?"<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"The right name can draw a crowd on its own. Got any ideas?"<</say>>
 <</if>>
 <<if $DaltonIsCompanion and $JaxIsCompanion>>
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I say we call it 'Dalton's Den'. Has a nice ring to it, don't you think?"<</say>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Please, 'Jax's Joint' would bring in twice the crowd. Right?"<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Please, 'Jax's Joint' would bring in twice the crowd. Right?"<</say>>
     <p>Both look to you, expecting a decision on the name of your new venture.</p>
 <</if>>
 
@@ -89,18 +89,20 @@
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I like it. '$LowerDecksPlayerBusinessName' has a nice ring to it."<</say>>
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I'll get started on cleaning up the place. You go find some staff. I'll keep an eye on things here."<</say>>
 <<elseif $JaxIsCompanion and not $DaltonIsCompanion>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Not bad. '$LowerDecksPlayerBusinessName' could definitely catch on."<</say>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"I'll handle the cleanup. You focus on staffing. We want the best crew for '$LowerDecksPlayerBusinessName'."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Not bad. '$LowerDecksPlayerBusinessName' could definitely catch on."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"I'll handle the cleanup. You focus on staffing. We want the best crew for '$LowerDecksPlayerBusinessName'."<</say>>
 <<elseif $DaltonIsCompanion and $JaxIsCompanion>>
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"'$LowerDecksPlayerBusinessName'? It's catchy, but it could use a little more... pizzazz."<</say>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Pizzazz? It just needs to be memorable, Dalton. And I think it is."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Pizzazz? It just needs to be memorable, Dalton. And I think it is."<</say>>
     <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"How about we split the tasks? I'll start with the cleanup, you handle the hiring."<</say>>
-    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Fine by me. Just try not to break anything, Dalton."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Fine by me. Just try not to break anything, Dalton."<</say>>
 <</if>>
 
 <p>With a name in place, you're ready to begin the process of setting up your business. You'll need to hire staff, stock the shelves, and advertise your new establishment. The Lower Decks are a dangerous place, and you'll need to be prepared for anything.</p>
 
-<<set $businessStats to setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+<<set $LowerDecksBusinessStats to setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+
+
 
 <<liveblock>>
     <h2 id="businessNameHeading" style="margin-top: 10px; margin-bottom: 10px;">
@@ -110,34 +112,69 @@
     <<LowerDeckBusinessStats>>
 <</liveblock>>
 
-<p>Choose the type of business you wish to start:</p>
-<<replace "#businessTypeSelection">>
-    <ul>
-        <li><<link "Space Bar and Lounge">><<set $businessType to "Space Bar and Lounge">><<include "SpaceBarAndLounge">><</link>></li>
-        <li><<link "Hydroponic Farm and Food Supply Company">><<set $businessType to "Hydroponic Farm">><<include "HydroponicFarm">><</link>></li>
-        <li><<link "Scrap Reprocessing Facility">><<set $businessType to "Scrap Reprocessing">><<include "ScrapReprocessing">><</link>></li>
-    </ul>
-<</replace>>
-<div id="businessTypeSelection"></div>
+<<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
+<<set $currentBusinessIndex = 0>>
 
-<!-- Include passages for each business type -->
-:: SpaceBarAndLounge [nobr]
-<<replace "#businessTypeDescription">>
-    <p>Your business is a popular space bar and lounge located on the orbital space station, offering a place for residents and visitors to relax, socialize, and enjoy drinks and entertainment.</p>
-    <!-- Add more gameplay focus and potential game features here -->
-<</replace>>
+<p>Choose the type of business you wish to start:</p>
+<div id="businessTypeSelection">
+    <ul>
+        <li><<button "Previous">><<run showBusinessType(-1)>><</button>></li>
+        <li><<button "Next">><<run showBusinessType(1)>><</button>></li>
+    </ul>
+</div>
 <div id="businessTypeDescription"></div>
+
+<<set $LowerDecksBusinessTypeStats = {
+    "Space Bar and Lounge": {
+        "EmployeesPerUpgrade": 5,
+        "InputCosts": { "Food": 2, "Water": 1 },
+        "InstallCostMultiplier": 1,
+        "ProfitPerBatch": 300,
+        "BatchSize": 10
+    },
+    "Hydroponic Farm": {
+        "EmployeesPerUpgrade": 3,
+        "InputCosts": { "Minerals": 3, "Water": 2 },
+        "InstallCostMultiplier": 1.5,
+        "ProfitPerBatch": 200,
+        "BatchSize": 25
+    },
+    "Scrap Reprocessing": {
+        "EmployeesPerUpgrade": 2,
+        "InputCosts": { "Scrap": 5 },
+        "InstallCostMultiplier": 2,
+        "ProfitPerBatch": 500,
+        "BatchSize": 10
+    }
+}>>
+<<if $LowerDecksPlayerBusinessTotalInputCostsForOneBatch === undefined>>
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0>>
+<<set $LowerDecksPlayerBusinessPriceOfOutput = 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit = 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
+<</if>>
+
+:: SpaceBarAndLounge [nobr]
+<img src="path/to/space-bar-image.jpg" alt="Space Bar and Lounge">
+<p>Your business is a popular space bar and lounge located on the orbital space station, offering a place for residents and visitors to relax, socialize, and enjoy drinks and entertainment.</p>
+<<LowerDeckBusinessProfitability "Space Bar and Lounge">>
+<<PrintBusinessEstimates>>
+<!-- Add more gameplay focus and potential game features here -->
 
 :: HydroponicFarm [nobr]
-<<replace "#businessTypeDescription">>
-    <p>Your business focuses on operating a hydroponic farm and supplying fresh, nutritious food to the space station's inhabitants.</p>
-    <!-- Add more gameplay focus and potential game features here -->
-<</replace>>
-<div id="businessTypeDescription"></div>
+<img src="path/to/hydroponic-farm-image.jpg" alt="Hydroponic Farm">
+<p>Your business focuses on operating a hydroponic farm and supplying fresh, nutritious food to the space station's inhabitants.</p>
+<<LowerDeckBusinessProfitability "Hydroponic Farm">>
+<<PrintBusinessEstimates>>
+<!-- Add more gameplay focus and potential game features here -->
 
 :: ScrapReprocessing [nobr]
-<<replace "#businessTypeDescription">>
-    <p>Your business specializes in collecting and reprocessing scrap materials from decommissioned spacecraft, satellites, and space debris.</p>
-    <!-- Add more gameplay focus and potential game features here -->
-<</replace>>
-<div id="businessTypeDescription"></div>
+<img src="path/to/scrap-reprocessing-image.jpg" alt="Scrap Reprocessing">
+<p>Your business specializes in collecting and reprocessing scrap materials from decommissioned spacecraft, satellites, and space debris.</p>
+<<LowerDeckBusinessProfitability "Scrap Reprocessing">>
+<<PrintBusinessEstimates>>
+<!-- Add more gameplay focus and potential game features here -->
+
+

@@ -137,13 +137,11 @@ Jax's expression softens, and he nods slowly.
 <div id="playerOptions">
     <<say '$player.name' $playerPortraitPathZ>>
     <<if $playerConsumables.nanoDocInjector > 0>>
-        <<say '$player.name' $playerPortraitPathZ>>
-        <<link "Here, I have a nanoDoc injector.">>
+                <<link "Here, I have a nanoDoc injector.">>
             <<replace "#playerOptions">>
                 <<include "JaxGiveNanoDoc">>
             <</replace>>
         <</link>><br>
-        <</say>>
     <</if>>
     <<link _creditsResponse>>
         <<replace "#playerOptions">>
@@ -289,7 +287,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"So... we are companions now? What does that even mean?"<</say>>
-<p>Jax shrugs.</p><<changerelations "Jax" "major" "PosEffectOnPlayer">></p>
+<p>Jax shrugs.</p><p><<changerelations "Jax" "major" "PosEffectOnPlayer">></p>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It means we're in this together. I'll watch your back, you watch mine."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"Alright, what's our next move?"<</say>>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"We need more people. Best way would be to get some credits and then maybe we can find some promising people in the bars."<</say>>

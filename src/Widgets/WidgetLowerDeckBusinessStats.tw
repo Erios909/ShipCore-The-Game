@@ -1,123 +1,106 @@
 :: widget LowerDeckBusinessStats [widget nobr] {"position":"50,75","size":"100,100"}
 <<widget "LowerDeckBusinessStats">>
-<<set _currentLocation = passage().title>>
-<<set _locationData = setup.LowerDeckLocations[_currentLocation]>>
+    
+    <<set _locationName = "Unknown Location">> <!-- Default location name -->
+    <<set _locationData = undefined>> <!-- Default to undefined -->
 
-    <<if _locationData>>
-        <<set _customerAvailability = _locationData[0]>>
-        <<set _supplyHubAccess = _locationData[1]>>
-        <<set _danger = _locationData[2]>>
-        <<set _taxRate = _locationData[3]>>
-        <<set _setupCost = _locationData[4]>>
-
-         <p>You are currently at $args[0]. This location is known for its 
-    <<switch (_customerAvailability)>>
-        <<case 1 to 2>><span style="color:red;">very low</span><<break>>
-        <<case 3 to 4>><span style="color:orange;">low</span><<break>>
-        <<case 5 to 6>><span style="color:yellow;">moderate</span><<break>>
-        <<case 7 to 8>><span style="color:lightgreen;">high</span><<break>>
-        <<case 9>><span style="color:green;">very high</span><<break>>
-    <</switch>>
-    customer availability. The access to supply hubs here is 
-    <<switch (_supplyHubAccess)>>
-        <<case 1 to 2>><span style="color:red;">very challenging</span><<break>>
-        <<case 3 to 4>><span style="color:orange;">challenging</span><<break>>
-        <<case 5 to 6>><span style="color:yellow;">manageable</span><<break>>
-        <<case 7 to 8>><span style="color:lightgreen;">good</span><<break>>
-        <<case 9>><span style="color:green;">excellent</span><<break>>
-    <</switch>>.</p>
-
-    <p>The area is 
-    <<switch (_danger)>>
-        <<case 1 to 2>><span style="color:green;">very safe</span><<break>>
-        <<case 3 to 4>><span style="color:lightgreen;">safe</span><<break>>
-        <<case 5 to 6>><span style="color:yellow;">moderately risky</span><<break>>
-        <<case 7 to 8>><span style="color:orange;">risky</span><<break>>
-        <<case 9>><span style="color:red;">very dangerous</span><<break>>
-    <</switch>>. Tax rates here are 
-    <<switch (_taxRate)>>
-        <<case 1 to 2>><span style="color:green;">very low</span><<break>>
-        <<case 3 to 4>><span style="color:lightgreen;">low</span><<break>>
-        <<case 5 to 6>><span style="color:yellow;">average</span><<break>>
-        <<case 7 to 8>><span style="color:orange;">high</span><<break>>
-        <<case 9>><span style="color:red;">very high</span><<break>>
-    <</switch>> and the cost to set up a business is 
-    <<switch (_setupCost)>>
-        <<case 1 to 2>><span style="color:green;">very minimal</span><<break>>
-        <<case 3 to 4>><span style="color:lightgreen;">minimal</span><<break>>
-        <<case 5 to 6>><span style="color:yellow;">moderate</span><<break>>
-        <<case 7 to 8>><span style="color:orange;">high</span><<break>>
-        <<case 9>><span style="color:red;">very high</span><<break>>
-    <</switch>>.</p>
-    <<else>>
-        <p>No data available for this location.</p>
+    <!-- Check for $LowerDecksBusinessStats -->
+    <<if $LowerDecksBusinessStats and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessStats)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessStats]>>
+        <<set _locationName = $LowerDecksBusinessStats>> <!-- Set the location name using $LowerDecksBusinessStats -->
+    
+    <!-- Check for $LowerDecksBusinessLocation -->
+    <<elseif $LowerDecksBusinessLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessLocation)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+        <<set _locationName = $LowerDecksBusinessLocation>> <!-- Set the location name using $LowerDecksBusinessLocation -->
+    
+    <!-- Check for $LowerDecksCurrentScoutLocation -->
+    <<elseif $LowerDecksCurrentScoutLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksCurrentScoutLocation)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksCurrentScoutLocation]>>
+        <<set _locationName = $LowerDecksCurrentScoutLocation>> <!-- Set the location name using $LowerDecksCurrentScoutLocation -->
     <</if>>
-<</widget>>
 
-:: LowerDeckBusinessStats [widget nobr] {"position":"50,75","size":"100,100"}
-<<widget "LowerDeckBusinessStats">>
-    <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
 
+    /* If location data is available */
     <<if _locationData>>
-        <<set _customerAvailability = _locationData[0]>>
-        <<set _supplyHubAccess = _locationData[1]>>
-        <<set _danger = _locationData[2]>>
-        <<set _taxRate = _locationData[3]>>
-        <<set _setupCost = _locationData[4]>>
+        /* Assign values from the _locationData array to individual variables with a default value of 5 if data is not available */
+        <<set _customerAvailability = _locationData[0] || 5>>
+        <<set _supplyHubAccess = _locationData[1] || 5>>
+        <<set _danger = _locationData[2] || 5>>
+        <<set _taxRate = _locationData[3] || 5>>
+        <<set _setupCost = _locationData[4] || 5>>
 
-        <p>Customer Availability:
+        <p>You are currently at the <<=_locationName>>. This location is known for its 
         <<switch (_customerAvailability)>>
-            <<case 1 to 2>><span style="color:red;">very low</span><<break>>
-            <<case 3 to 4>><span style="color:orange;">low</span><<break>>
-            <<case 5 to 6>><span style="color:yellow;">moderate</span><<break>>
-            <<case 7 to 8>><span style="color:lightgreen;">high</span><<break>>
-            <<case 9 to 10>><span style="color:green;">very high</span><<break>>
-        <</switch>>
-        </p>
-
-        <p>Supply Hub Access:
+            <<case 1 to 2>><span style="color:red;">very low</span>
+            <<case 3 to 4>><span style="color:orange;">low</span>
+            <<case 5 to 6>><span style="color:yellow;">moderate</span>
+            <<case 7 to 8>><span style="color:lightgreen;">high</span>
+            <<case 9 to 10>><span style="color:green;">very high</span>
+        <</switch>> customer availability. The access to supply hubs here is 
         <<switch (_supplyHubAccess)>>
-            <<case 1 to 2>><span style="color:red;">very challenging</span><<break>>
-            <<case 3 to 4>><span style="color:orange;">challenging</span><<break>>
-            <<case 5 to 6>><span style="color:yellow;">manageable</span><<break>>
-            <<case 7 to 8>><span style="color:lightgreen;">good</span><<break>>
-            <<case 9 to 10>><span style="color:green;">excellent</span><<break>>
-        <</switch>>
-        </p>
+            <<case 1 to 2>><span style="color:red;">very challenging.</span>
+            <<case 3 to 4>><span style="color:orange;">challenging.</span>
+            <<case 5 to 6>><span style="color:yellow;">manageable.</span>
+            <<case 7 to 8>><span style="color:lightgreen;">good.</span>
+            <<case 9 to 10>><span style="color:green;">excellent.</span>
+        <</switch>></p>
 
-        <p>Danger:
+        <p>The area is 
         <<switch (_danger)>>
-            <<case 1 to 2>><span style="color:green;">very safe</span><<break>>
-            <<case 3 to 4>><span style="color:lightgreen;">safe</span><<break>>
-            <<case 5 to 6>><span style="color:yellow;">moderately risky</span><<break>>
-            <<case 7 to 8>><span style="color:orange;">risky</span><<break>>
-            <<case 9 to 10>><span style="color:red;">very dangerous</span><<break>>
-        <</switch>>
-        </p>
-
-        <p>Tax Rate:
+            <<case 1 to 2>><span style="color:green;">very safe.</span>
+            <<case 3 to 4>><span style="color:lightgreen;">safe.</span>
+            <<case 5 to 6>><span style="color:yellow;">moderately risky.</span>
+            <<case 7 to 8>><span style="color:orange;">risky.</span>
+            <<case 9 to 10>><span style="color:red;">very dangerous.</span>
+        <</switch>> Tax rates here are 
         <<switch (_taxRate)>>
-            <<case 1 to 2>><span style="color:green;">very low</span><<break>>
-            <<case 3 to 4>><span style="color:lightgreen;">low</span><<break>>
-            <<case 5 to 6>><span style="color:yellow;">average</span><<break>>
-            <<case 7 to 8>><span style="color:orange;">high</span><<break>>
-            <<case 9 to 10>><span style="color:red;">very high</span><<break>>
-        <</switch>>
-        </p>
-
-        <p>Setup Cost:
+            <<case 1 to 2>><span style="color:green;">very low</span>
+            <<case 3 to 4>><span style="color:lightgreen;">low</span>
+            <<case 5 to 6>><span style="color:yellow;">average</span>
+            <<case 7 to 8>><span style="color:orange;">high</span>
+            <<case 9 to 10>><span style="color:red;">very high</span>
+        <</switch>> and the cost to set up a business is 
         <<switch (_setupCost)>>
-            <<case 1 to 2>><span style="color:green;">very minimal</span><<break>>
-            <<case 3 to 4>><span style="color:lightgreen;">minimal</span><<break>>
-            <<case 5 to 6>><span style="color:yellow;">moderate</span><<break>>
-            <<case 7 to 8>><span style="color:orange;">high</span><<break>>
-            <<case 9 to 10>><span style="color:red;">very high</span><<break>>
-        <</switch>>
-        </p>
+            <<case 1 to 2>><span style="color:green;">very minimal.</span>
+            <<case 3 to 4>><span style="color:lightgreen;">minimal.</span>
+            <<case 5 to 6>><span style="color:yellow;">moderate.</span>
+            <<case 7 to 8>><span style="color:orange;">high.</span>
+            <<case 9 to 10>><span style="color:red;">very high.</span>
+        <</switch>></p>
     <<else>>
-        <p>No data available for this location.</p>
+        <h2><p>No data available for this location.</p></h2>
     <</if>>
 <</widget>>
+
+<<widget "PrintBusinessEstimates">>
+    /* Use the stored state variables to display the business estimates */
+    <<nobr>>
+        <div class="business-estimates">
+            <div class="business-stats">
+                <h3>Business Stats</h3>
+                <p><strong>Batch Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize || 0>></span></p>
+                <p><strong>Employees Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade || 0>></span></p>
+            </div>
+            <div class="location-factors">
+                <h3>Location Factors</h3>
+                <p><strong>Customer Availability:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessCustomerAvailability || 0)>>%</span></p>
+                <p><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessSupplyHubAccess || 0)>>%</span></p>
+                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel || 0>>%</span></p>
+                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate || 0>>%</span></p>
+            </div>
+            <div class="calculated-stats">
+                <h3>Calculated Stats</h3>
+                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessAdjustedPricePerUnit || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalSalesPriceForAllBatches || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalInputCostsForOneBatch || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print ($LowerDecksPlayerBusinessTotalEmployeeCostPerHour || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Profit Margin Per Hour:</strong> $<span class="<<print ($LowerDecksPlayerBusinessProfitMarginPerHour >= 0 ? 'positive-value' : 'negative-value')>>"><<print ($LowerDecksPlayerBusinessProfitMarginPerHour || 0).toFixed(2)>></span> credits</p>
+            </div>
+        </div>
+    <</nobr>>
+<</widget>>
+
 
 
 <!-- 
