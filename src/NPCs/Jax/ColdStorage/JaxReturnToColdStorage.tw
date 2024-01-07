@@ -238,6 +238,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"I understand, thanks for looking out."<</say>>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"No problem. We've got to watch each other's backs if we're going to survive down here."<</say>>
+<p><<changerelations "Jax" "major" "PosEffectOnPlayer">></p>
 <<include "JaxNextSteps">>
 <</fadein>>
 <</nobr>>
@@ -288,7 +289,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"So... we are companions now? What does that even mean?"<</say>>
-<p>Jax shrugs.</p>
+<p>Jax shrugs.</p><<changerelations "Jax" "major" "PosEffectOnPlayer">></p>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It means we're in this together. I'll watch your back, you watch mine."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"Alright, what's our next move?"<</say>>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"We need more people. Best way would be to get some credits and then maybe we can find some promising people in the bars."<</say>>
@@ -303,6 +304,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 "This is a lot to think about. I'll need some time to figure out what we do."
 <</say>>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"I'll follow you. We should do whatever you think is best."<</say>>
+<<set $LowerDeckRecruitmentActive to true>>
 <<say '$player.name' $playerPortraitPathZ>>
     <<link "Let's see about earning some credits first." "Lower Decks">><</link>><br>
     <<link "Let's go look for some people to hire." "The Last Home">><</link>><br>

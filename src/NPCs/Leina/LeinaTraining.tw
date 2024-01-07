@@ -1,5 +1,4 @@
-:: LeinaDojoTraining [training] {"position":"750,650","size":"100,100"}
-<<nobr>>
+:: LeinaDojoTraining [training nobr] {"position":"750,650","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_training.jpg'>>
 <<addmins $timeadd>>
@@ -14,54 +13,178 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-You join the group of novices, a motley crew of hopefuls with the same determined glint in their eyes. The mats are worn but clean, each scuff a testament to the hard work and sweat poured into them. Leina stands at the front, her presence commanding attention.
+
+<p>You join the group of novices, a motley crew of hopefuls with the same determined glint in their eyes. The mats are worn but clean, each scuff a testament to the hard work and sweat poured into them. Leina stands at the front, her presence commanding attention.</p>
 
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"We begin with the basics. A strong foundation is key to survival. Watch closely."<</say>><br>
-She demonstrates a series of strikes and blocks, each movement precise and powerful. You and the others mimic her, the room soon filled with the rhythm of synchronized effort.
+<p>She demonstrates a series of strikes and blocks, each movement precise and powerful. You and the others mimic her, the room soon filled with the rhythm of synchronized effort.</p>
 
 <<set $player.health += 20>> /* Intense training improves health */
 <<changemoods "health" "major" "PosEffectOnPlayer">><br>
 <<set $player.stress += 5>> /* The challenge of learning new skills slightly increases stress */
 <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
 
-As the training progresses, Leina walks among you, correcting stances and offering encouragement. Her touch is firm, her words direct.
-<br><br>
+<p>As the training progresses, Leina walks among you, correcting stances and offering encouragement. Her touch is firm, her words direct.</p>
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Focus on your form. Speed and power will come with time."<</say>><br>
-You feel her hand guide your arm into the correct position, and the next strike feels more natural.
+<p>You feel her hand guide your arm into the correct position, and the next strike feels more natural.</p>
 
-The session continues with grueling repetition, sweat beading on your forehead as you push through the fatigue. The other novices are panting, their faces a mix of exhaustion and exhilaration.
+<p>The session continues with grueling repetition, sweat beading on your forehead as you push through the fatigue. The other novices are panting, their faces a mix of exhaustion and exhilaration.</p>
 
 <<set $player.fatigue += 10>> /* The exertion takes a toll on your energy */
 <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
 <<set $player.mood += 5>> /* The camaraderie and progress lift your spirits */
 <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 
-Leina calls for a break, and you all collapse onto the mats, chests heaving. She hands out water bottles, her gaze softening as she watches you drink.
-<br><br>
+<p>Leina calls for a break, and you all collapse onto the mats, chests heaving. She hands out water bottles, her gaze softening as she watches you drink.</p>
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Good work. Rest, then we spar. You'll learn more in a real fight than from any drill."<</say>><br>
-You nod, the water cooling your parched throat, the idea of sparring both thrilling and daunting.
+<p>You nod, the water cooling your parched throat, the idea of sparring both thrilling and daunting.</p>
 
-After the break, Leina pairs you with a novice of similar build. The sparring is friendly but intense, each of you eager to prove yourselves. You trade blows, learning to read your opponent's movements and to anticipate their strikes.
+<div id="playerReflections">
+    <<say '$player.name' $playerPortraitPathZ>>
+        <<link "Reflect on the training with pride.">>
+            <<set $LeinaDojoRep += 1>>
+            <<replace "#playerReflections">>
+                <<include "LeinaPlayerPrideResponse">>
+            <</replace>>
+        <</link>><br>
+        <<link "Express frustration but determination to improve.">>
+            <<set $LeinaDojoRep += 1>>
+            <<replace "#playerReflections">>
+                <<include "LeinaPlayerDeterminationResponse">>
+            <</replace>>
+        <</link>><br>
+        <<link "Feel overwhelmed by the challenge.">>
+            <<replace "#playerReflections">>
+                <<include "LeinaPlayerOverwhelmedResponse">>
+            <</replace>>
+        <</link>><br>
+    <</say>>
+</div>
+
+:: LeinaPlayerPrideResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"This is tough, but I can see myself improving already."<</say>>
+<p>Leina nods with approval, her eyes reflecting a hint of pride.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"That's the spirit. Improvement comes with perseverance."<</say>>
+<<include "LeinaDojoTraining2">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaPlayerDeterminationResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"I'm not where I want to be yet, but I won't give up."<</say>>
+<p>Leina's expression softens, and she places a reassuring hand on your shoulder.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Good. It's not about being the best today, but about being better tomorrow."<</say>>
+<<include "LeinaDojoTraining2">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaPlayerOverwhelmedResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"This is more intense than I expected. I need to dig deep."<</say>>
+<p>Leina gives you a firm nod, acknowledging your struggle.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"It's meant to be challenging. It's how we forge strength. Keep pushing."<</say>>
+<<include "LeinaDojoTraining2">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaDojoTraining2 [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<!-- ... continue with the second half of the training ... -->
 
 <<set $player.stress -= 10>> /* The thrill of sparring reduces stress */
 <<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
 <<set $player.health -= 5>> /* The physical contact of sparring results in minor bruises */
 <<changemoods "health" "minor" "NegEffectOnPlayer">><br>
 
-Leina watches the spars, occasionally stepping in to offer advice or to demonstrate a particularly effective maneuver.
-<br><br>
+<p>Leina watches the spars, occasionally stepping in to offer advice or to demonstrate a particularly effective maneuver.</p>
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Remember, it's not about overpowering your opponent. It's about outthinking them."<</say>><br>
-Her words resonate with you, and you find yourself moving with more purpose, your actions deliberate.
+<p>Her words resonate with you, and you find yourself moving with more purpose, your actions deliberate.</p>
 
-The session ends with a cool-down routine, and you feel a sense of accomplishment as you bow to your sparring partner. Leina gathers the group for a final word.
-<br><br>
+<p>The session ends with a cool-down routine, and you feel a sense of accomplishment as you bow to your sparring partner. Leina gathers the group for a final word.</p>
 <<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Today, you've taken the first step towards becoming warriors. Return tomorrow, and we continue the journey."<</say>><br>
-You leave the dojo with aching muscles and a newfound respect for the art of combat, Leina's teachings echoing in your mind.
 
-<<say '$player.name' $playerPortraitPathZ>>"Thank you, Leina. I'll be back."<</say>><br>
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I'll hold you to that. Rest well, <<=$player.name>>."<</say>><br>
+<div id="playerDeparture">
+    <<say '$player.name' $playerPortraitPathZ>>
+        <<link "Thank Leina and promise to return.">>
+            <<set $LeinaDojoRep += 1>>
+            <<replace "#playerDeparture">>
+                <<include "LeinaPlayerThankfulResponse">>
+            <</replace>>
+        <</link>><br>
+        <<link "Nod silently and leave.">>
+            <<replace "#playerDeparture">>
+                <<include "LeinaPlayerSilentResponse">>
+            <</replace>>
+        <</link>><br>
+        <<link "Express eagerness for the next session.">>
+            <<set $LeinaDojoRep += 1>>
+            <<replace "#playerDeparture">>
+                <<include "LeinaPlayerEagerResponse">>
+            <</replace>>
+        <</link>><br>
+        <<link "Admit feeling challenged but resolute.">>
+            <<set $LeinaDojoRep += 1>>
+            <<replace "#playerDeparture">>
+                <<include "LeinaPlayerResoluteResponse">>
+            <</replace>>
+        <</link>><br>
+    <</say>>
+</div>
+<</fadein>>
+<</nobr>>
 
-You exit the dojo, the sounds of training fading behind you as you step back into the chaos of the lower decks, ready for whatever comes next.
+:: LeinaPlayerThankfulResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Thank you, Leina. I'll be back."<</say>>
+<p>Leina smiles warmly.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I'll hold you to that. Rest well, <<=$player.name>>."<</say>>
+<<changerelations "Leina" "major" "PosEffectOnPlayer">>
+<<include "LeinaDojoTraining3">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaPlayerSilentResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<p>You nod silently to Leina, acknowledging her teachings, and make your way to the exit with a sense of determination.</p>
+<<include "LeinaDojoTraining3">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaPlayerEagerResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"Can't wait for the next session, Leina!"<</say>>
+<p>Leina chuckles.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Enthusiasm is good. Just make sure to rest up."<</say>>
+<<changerelations "Leina" "major" "PosEffectOnPlayer">>
+<<set $LeinaDojoRep += 1>>
+<<include "LeinaDojoTraining3">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaPlayerResoluteResponse [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<<say '$player.name' $playerPortraitPathZ>>"It was challenging, but I'm not backing down. I'll be ready for more."<</say>>
+<p>Leina gives a nod of approval.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"That's the resolve I like to see. Take care, <<=$player.name>>."<</say>>
+<<changerelations "Leina" "major" "PosEffectOnPlayer">>
+<<include "LeinaDojoTraining3">>
+<</fadein>>
+<</nobr>>
+
+:: LeinaDojoTraining3 [conversation event]
+<<nobr>>
+<<fadein 1s>>
+<p>You leave the dojo with aching muscles and a newfound respect for the art of combat. Maybe you won't be such an easy for Braxton's goons in the future.</p>
 <<set $LeinaDojoTraining to true>>
 [[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
+<</fadein>>
 <</nobr>>

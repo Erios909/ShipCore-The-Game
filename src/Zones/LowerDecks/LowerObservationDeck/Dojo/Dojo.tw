@@ -14,16 +14,44 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
+<<set $LeinaDojoRep += 1>>
+<<if $LeinaDojoRep === undefined>>
+    <<set $LeinaDojoRep = 0>>
+<</if>>
+
 <p>The dojo is a stark contrast to the dilapidated surroundings of the lower decks. Clean mats cover the floor, and the walls are adorned with various training implements. The air is filled with the sounds of exertion and the sharp slaps of disciplined strikes. Here, the downtrodden come to find strength, and the desperate come to find hope.</p>
 
-<<set $player.stress -= 10>> <!-- The disciplined environment reduces stress -->
-<<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+<p id="locationDescription" style="margin-top: 10px; margin-bottom: 10px;">The walls are lined with plastic rods and training equipment, and a small office is tucked away in the corner. A group of novices are gathered in the center of the room, their movements precise and deliberate.</p>
+
+<<switch $LeinaDojoRep>>
+    <<case 0>>
+        The dojo is a stark contrast to the dilapidated surroundings of the lower decks. Clean mats cover the floor, and the walls are adorned with various training implements. The air is filled with the sounds of exertion and the sharp slaps of disciplined strikes. Here, the downtrodden come to find strength, and the desperate come to find hope. You feel like an outsider, barely noticed amidst the flurry of activity.
+    <<case 1>>
+        You're starting to recognize some faces, and a few of the regulars give you a nod as you walk in. The dojo still feels new and somewhat intimidating, but you're determined to prove your worth and continue your training.
+    <<case 2>>
+        The initial awkwardness begins to fade as you find your rhythm in the dojo. The regulars start to acknowledge your efforts with brief smiles and occasional words of encouragement.
+    <<case 3>>
+        Your consistent presence has earned you a measure of respect among the dojo's attendees. Some of the novices even approach you for advice, and you're happy to share what you've learned so far.
+    <<case 4>>
+        The dojo has become a familiar place where you can focus on honing your skills. You've made a few friends, and the sense of camaraderie motivates you to push your limits.
+    <<case 5>>
+        You're no longer just another face in the crowd; you're part of the dojo's community. The master occasionally singles you out for demonstrations, recognizing your growing skill.
+    <<case 6>>
+        The dojo feels like a second home, and your dedication has not gone unnoticed. You're often paired with less experienced members to help guide their training.
+    <<case 7>>
+        Respect for your abilities spreads, and you find yourself taking on more responsibility within the dojo. Your input is sought after, and you feel a sense of pride in the role you've carved out for yourself.
+    <<case 8>>
+        You've become a key member of the dojo, known for your skill and dedication. The master trusts you to lead warm-ups and cool-downs, and you're often consulted on matters of training.
+    <<case 9>>
+        Your reputation in the dojo precedes you, and your advice is valued by both novices and veterans alike. You've become an example for others to follow, and your influence is evident.
+    <<case 10>>
+        The dojo is your domain, and you are a leader within its walls. You've earned the respect and admiration of all who train here. The master views you as an equal, and together you work to maintain the dojo's legacy of strength and hope.
+<</switch>>
+
+
 
 <<if $DaltonReveal > 0>>
     <p>Leina, the dojo master, oversees the training with a keen eye. Her presence is commanding, yet there's an air of accessibility about her. Despite her youth, the confidence in her stance speaks of experience, and the subtle bulges beneath her clothing hint at cybernetic enhancements.</p>
-
-    <<set $player.mood += 10>> <!-- The presence of a strong leader improves mood -->
-    <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
 <</if>>
 
 <<if typeof $LeinaIntro === "undefined">><<set $LeinaIntro = 0>><</if>>

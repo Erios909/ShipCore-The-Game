@@ -1,5 +1,10 @@
-:: LeinaStory [conversation] {"position":"850,650","size":"100,100"}
+:: LeinaStory [conversation]
 <<nobr>>
+<!--
+  Set the scene for the conversation:
+  - Establish the location and atmosphere.
+  - Describe the NPC's current activity and demeanor.
+-->
 <<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_story.jpg'>>
 <<addmins $timeadd>>
@@ -14,47 +19,247 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-After the training session, you approach Leina, who has just finished instructing a particularly difficult maneuver to an advanced student. She wipes a bead of sweat from her brow and turns to you with an inviting smile.
+<p>Leina wipes a bead of sweat from her brow and turns to you with an inviting smile.</p>
 
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I can see the curiosity in your eyes. What is it you wish to know?"<</say>><br>
-Her office is a small extension of the dojo, lined with holopictures of past champions and shelves of ancient texts on martial arts.
+<!--
+  Begin the conversation with the NPC:
+  - Use the <<say>> macro to display dialogue.
+  - Present the player with a choice to engage in the conversation.
+-->
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"I can see the curiosity in your eyes. What is it you wish to know?"<</say>>
+<p>Her office is a small extension of the dojo, lined with holopictures of past champions and shelves of ancient texts on martial arts.</p>
 
-<<say '$player.name' $playerPortraitPathZ>>"I want to know more about you and how this dojo came to be. It's a place of hope in a rather bleak environment."<</say>><br>
-Leina gestures to a pair of cushioned mats on the floor, inviting you to sit as she begins her tale.
+<!--
+  Player's initial response options:
+  - Present clear and distinct choices to the player.
+  - Each choice should lead to a different branch of the conversation.
+-->
+<div id="playerChoices">
+    <<say '$player.name' $playerPortraitPathZ>>
+        <<link "Express admiration.">>
+            <<replace "#playerChoices">>
+                <<fadein 1s>>
+                <<include "LeinaStoryAdmiration">>
+                <</fadein>>
+            <</replace>>
+        <</link>><br>
+        <<link "Ask for details.">>
+            <<replace "#playerChoices">>
+                <<fadein 1s>>
+                <<include "LeinaStoryDetails">>
+                <</fadein>>
+            <</replace>>
+        <</link>><br>
+        <<link "Acknowledge her efforts.">>
+            <<replace "#playerChoices">>
+                <<fadein 1s>>
+                <<include "LeinaStoryAcknowledgement">>
+                <</fadein>>
+            <</replace>>
+        <</link>><br>
+        <<link "Question the dojo's impact.">>
+            <<replace "#playerChoices">>
+                <<fadein 1s>>
+                <<include "LeinaStoryImpact">>
+                <</fadein>>
+            <</replace>>
+        <</link>><br>
+    <</say>>
+</div>
+<</nobr>>
 
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"My story is not unlike many you'll find here in the lower decks. I was born into hardship, but I refused to let it define me. This dojo is my rebellion against the despair that grips this place."<</say>><br>
-As she speaks, her eyes reflect the fire of her spirit, and you find yourself drawn into her narrative.
+:: LeinaStoryAdmiration [conversation]
+<<nobr>>
+<!--
+  Player expresses admiration for Leina's work:
+  - NPC responds positively to the player's admiration.
+  - Continue the conversation with further narrative progression.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"Your dedication to this place and its people is remarkable. It's clear you've built something special here."<</say>>
+<p>Leina's eyes light up at your words of admiration.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Thank you. It's always heartening to hear that our efforts resonate with others."<</say>>
+<<changerelations "Leina" "major" "PosEffectOnPlayer">>
+<<set $LeinaDojoRep += 1>>
+<<include "LeinaStoryContinue">>
+<</nobr>>
+
+:: LeinaStoryDetails [conversation]
+<<nobr>>
+<!--
+  Player asks for details about the dojo's history:
+  - NPC is engaged by the player's interest and shares more information.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"I'm curious about the history of this dojo. How did it all begin?"<</say>>
+<p>Leina nods appreciatively at your inquisitive nature.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Ah, a seeker of knowledge. Let me share with you the history of this place."<</say>>
+<<changerelations "Leina" "major" "PosEffectOnPlayer">>
+<<set $LeinaDojoRep += 1>>
+<<include "LeinaStoryContinue">>
+<</nobr>>
+
+:: LeinaStoryAcknowledgement [conversation]
+<<nobr>>
+<!--
+  Player acknowledges Leina's efforts neutrally:
+  - NPC responds with a neutral or slightly positive reaction.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"It must take a lot of work to maintain a place like this, especially in the lower decks."<</say>>
+<p>Leina gives a small nod, acknowledging your recognition of her work.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"It's not an easy task, but it's one I've dedicated myself to."<</say>>
+<<changerelations "Leina" "minor" "PosEffectOnPlayer">>
+<<set $LeinaDojoRep += 1>>
+<<include "LeinaStoryContinue">>
+<</nobr>>
+
+:: LeinaStoryImpact [conversation]
+<<nobr>>
+<!--
+  Player questions the impact of the dojo negatively:
+  - NPC responds with a defense of her life's work.
+  - This choice can lead to a different emotional tone in the conversation.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"Do you really think a dojo can make a difference in a place like this?"<</say>>
+<p>Leina's expression hardens slightly, but she maintains her composure.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"It's easy to doubt the value of such a place in our harsh world. But for those we help, the impact is immeasurable."<</say>>
+<<include "LeinaStoryContinue">>
+<</nobr>>
+
+:: LeinaStoryContinue [conversation]
+<<nobr>>
+
+<!--
+  Continue the conversation based on the player's choice:
+  - Describe the NPC's actions and dialogue as they share their story.
+  - Adjust player stats to reflect the impact of the story.
+-->
+<p>Leina gestures to a pair of cushioned mats on the floor, inviting you to sit as she begins her tale.</p>
+
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"My story is not unlike many you'll find here in the lower decks. I was born into hardship, but I refused to let it define me. This dojo is my rebellion against the despair that grips this place."<</say>>
+<p>As she speaks, her eyes reflect the fire of her spirit, and you find yourself drawn into her narrative.</p>
 
 <<set $player.stress -= 5>> /* Listening to Leina's inspiring story reduces stress */
-<<changemoods "stress" "minor" "PosEffectOnPlayer">><br>
+<<changemoods "stress" "minor" "PosEffectOnPlayer">>
 <<set $player.mood += 10>> /* The connection with Leina and her story improves your mood */
-<<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
+<<changemoods "mood" "minor" "PosEffectOnPlayer">>
 
-Leina stands and moves to a wall, touching a holopicture of a young girl standing beside an older, battle-scarred warrior.
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"This was my mentor, Master Chen. He saw potential in me when I was just a scrappy kid getting into fights. He taught me discipline, control, and the art of combat."<</say>><br>
-You watch as her hand lingers on the image, her respect for the man evident in her reverent touch.
+<p>Leina stands and moves to a wall, touching a holopicture of a young girl standing beside an older, battle-scarred warrior.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"This was my mentor, Master Chen. He saw potential in me when I was just a scrappy kid getting into fights. He taught me discipline, control, and the art of combat."<</say>>
+<p>You watch as her hand lingers on the image, her respect for the man evident in her reverent touch.</p>
 
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"When he passed, I inherited his legacy. This dojo is as much his as it is mine. I've dedicated my life to teaching others what he taught me—to give them strength to face whatever comes their way."<</say>><br>
-Leina's words resonate with you, and you feel a surge of respect for her dedication.
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"When he passed, I inherited his legacy. This dojo is as much his as it is mine. I've dedicated my life to teaching others what he taught me—to give them strength to face whatever comes their way."<</say>>
+<p>It's easy to see how words would resonate with many, especially the desperate on the lower decks.</p>
 
 <<set $player.health += 5>> /* The peaceful atmosphere of the office has a restorative effect on your health */
-<<changemoods "health" "minor" "PosEffectOnPlayer">><br>
+<<changemoods "health" "minor" "PosEffectOnPlayer">>
 
-She returns to her seat, her gaze meeting yours with an intensity that speaks of her commitment to her cause.
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"But it's not just about fighting. It's about building a community, about finding a family among those who have none. We protect each other here."<</say>><br>
-Her words paint a picture of unity and strength, and you feel a sense of belonging begin to take root within you.
+<p>She returns to her seat, her gaze meeting yours with an intensity that speaks of her commitment to her cause.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"But it's not just about fighting. It's about building a community, about finding a family among those who have none. We protect each other here."<</say>>
+<p>Her words paint a picture of unity and strength.</p>
 
-<<say '$player.name' $playerPortraitPathZ>>"It's more than I expected. I'm grateful to be a part of it, even if just for a short while."<</say>><br>
-Leina nods, her smile warm and genuine.
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"You're welcome here for as long as you need, <<=$player.name>>. We all have our paths, but they're easier to walk with allies by our side."<</say>><br>
 
-You rise from the mat, feeling a newfound sense of purpose and camaraderie. Leina's story has given you insight into the heart of the dojo and the spirit of the people who train here.
 
-<<say '$player.name' $playerPortraitPathZ>>"Thank you, Leina. I won't forget this conversation."<</say>><br>
-<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Nor will I. Now, go rest. Tomorrow's training awaits."<</say>><br>
+<!--
+  Conclude the conversation with multiple player choices:
+  - Provide different responses for the player to express their feelings about the conversation.
+  - Each choice should reflect a different attitude or emotion.
+-->
+<div id="playerFarewellChoices">
+    <<say '$player.name' $playerPortraitPathZ>>"Your story is truly inspiring, Leina. I'll carry its lessons with me."<</say>>
+    <<link "Offer gratitude (Positive)">>
+        <<replace "#playerFarewellChoices">>
+            <<fadein 1s>>
+            <<include "LeinaStoryFarewellPositive">>
+            <</fadein>>
+        <</replace>>
+    <</link>><br>
+    <<link "Ponder the teachings (Reflective)">>
+        <<replace "#playerFarewellChoices">>
+            <<fadein 1s>>
+            <<include "LeinaStoryFarewellReflective">>
+            <</fadein>>
+        <</replace>>
+    <</link>><br>
+    <<link "Commit to training (Determined)">>
+        <<replace "#playerFarewellChoices">>
+            <<fadein 1s>>
+            <<include "LeinaStoryFarewellDetermined">>
+            <</fadein>>
+        <</replace>>
+    <</link>><br>
+    <<link "Express skepticism (Critical)">>
+        <<replace "#playerFarewellChoices">>
+            <<fadein 1s>>
+            <<include "LeinaStoryFarewellCritical">>
+            <</fadein>>
+        <</replace>>
+    <</link>><br>
+</div>
 
-You exit her office, the echoes of Leina's story accompanying you as you navigate the corridors of the lower decks, your spirit lifted and your resolve strengthened.
+
+<</nobr>>
+
+:: LeinaStoryFarewellPositive [conversation]
+<<nobr>>
+<!--
+  Player offers gratitude positively:
+  - NPC responds warmly to the player's positive farewell.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"Leina, your guidance has been invaluable. I'm truly grateful for the wisdom you've shared."<</say>>
+<p>Leina's smile broadens, touched by your words.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"It's a joy to know that our paths have crossed in such a meaningful way. Stay strong, <<=$player.name>>."<</say>>
+<<include "LeinaStoryFarewellEnd">>
+<</nobr>>
+
+:: LeinaStoryFarewellReflective [conversation]
+<<nobr>>
+<!--
+  Player ponders the teachings reflectively:
+  - NPC appreciates the player's thoughtful approach.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"Your teachings give much to ponder. I'll take time to reflect on them deeply."<</say>>
+<p>Leina nods thoughtfully, appreciating your reflective stance.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Reflection is the first step to true understanding. May your contemplation bring you clarity."<</say>>
+<<include "LeinaStoryFarewellEnd">>
+<</nobr>>
+
+:: LeinaStoryFarewellDetermined [conversation]
+<<nobr>>
+<!--
+  Player commits to training determinedly:
+  - NPC is encouraged by the player's determination and commitment.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"I'm more determined than ever to continue my training and improve. Thank you for everything."<</say>>
+<p>Leina's eyes gleam with approval at your determination.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"That's the spirit! I have no doubt you'll grow stronger with each passing day."<</say>>
+<<include "LeinaStoryFarewellEnd">>
+<</nobr>>
+
+:: LeinaStoryFarewellCritical [conversation]
+<<nobr>>
+<!--
+  Player expresses skepticism critically:
+  - NPC responds with a gentle challenge to the player's critical view.
+-->
+<<say '$player.name' $playerPortraitPathZ>>"I appreciate your efforts, but I remain skeptical about the true impact we can have."<</say>>
+<p>Leina raises an eyebrow, challenging your skepticism with grace.</p>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Skepticism can be healthy, but don't let it blind you to the potential for change. We all have more to learn."<</say>>
+<<include "LeinaStoryFarewellEnd">>
+<</nobr>>
+
+
+:: LeinaStoryFarewellEnd [conversation]
+<<nobr>>
+<!--
+  End the conversation and transition back to the game world:
+  - Provide a satisfying conclusion to the conversation.
+  - Set any relevant game flags or variables to reflect the conversation's outcome.
+-->
+<p>You rise from the mat, feeling a newfound sense of purpose and camaraderie. Leina's story has given you insight into the heart of the dojo and the spirit of the people who train here.</p>
+
+<<say '$player.name' $playerPortraitPathZ>>"Thank you, Leina. I won't forget this conversation."<</say>>
+<<say 'Leina' setup.ImagePath+'characters/lowerdecks/leina.jpg'>>"Nor will I. Now, go rest. Tomorrow's training awaits."<</say>>
+
+<p>You exit her office, the echoes of Leina's story accompanying you as you navigate the corridors of the lower decks, your spirit lifted and your resolve strengthened.</p>
 <<set $LeinaStory to true>>
 [[Return to the Dojo.|DojoLowerDecks][$timeadd += 5]]
-
 <</nobr>>

@@ -1,5 +1,4 @@
-:: DaltonCompanionMission [conversation event] {"position":"850,850","size":"100,100"}
-<<nobr>>
+:: DaltonCompanionMission [conversation event nobr] {"position":"850,850","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/ruinedhallway.jpg'>>
 <<addmins $timeadd>>
@@ -14,24 +13,66 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-<p>Dalton's mimics the disarray of the Ruined Hallway. His posture is rigid, and defensive as he approaches.</p>
+<<nobr>>
+    <!-- Check if Jax is not a companion -->
+    <<if $JaxIsCompanion == false>>
+        <p>Dalton's posture mimics the disarray of the Ruined Hallway. His stance is rigid and defensive as he approaches.</p>
 
-<<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Things are far more dire than Leina realizes. Braxton's gearing up to destroy the dojo. We can't let that happen."<</say>>
-<div id="daltonChoices"><<say '$player.name' $playerPortraitPathZ>>
+        <!-- Dalton speaks to the player about the situation -->
+        <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Things are far more dire than Leina realizes. Braxton's gearing up to destroy the dojo. We can't let that happen."<</say>>
+        <!-- Player choices when Jax is not a companion -->
+        <div id="daltonChoices"><<say '$player.name' $playerPortraitPathZ>>
+            <<link 'How can we stop him?'>>
+                <<replace '#daltonChoices'>>
+                    <<include 'DaltonPlan'>>
+                <</replace>>
+            <</link>><br>
+            <<link 'I am not sure what that has to do with me.'>>
+                <<replace '#daltonChoices'>>
+                    <<include 'DaltonExplanation'>>
+                <</replace>>
+            <</link>><br>
+        <</say>></div>
+    <<else>>
+        <!-- Jax is present and skeptical -->
+        <p>With Jax at your side, you can feel the tension in the air. Jax's eyes narrow as he assesses Dalton, his stance guarded and cautious.</p>
 
-    <<link "How can we stop him?">>
-        <<replace "#daltonChoices">>
-            <<include "DaltonPlan">>
-        <</replace>>
-    <</link>><br>
-    <<link "I'm not sure what that has to do with me.">>
-        <<replace "#daltonChoices">>
-            <<include "DaltonExplanation">>
-        <</replace>>
-    <</link>><br>
+        <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"You're Dalton, I presume? Word is you're stirring up trouble. What's your angle?"<</say>>
 
-<</say>></div>
+        <p>Dalton meets Jax's gaze evenly, his expression unreadable for a moment before he replies.</p>
+
+        <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Trouble's already here, and it's named Braxton. My 'angle' is keeping what's left of this place from falling apart. You in or out?"<</say>>
+
+        <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"I'm not in the habit of jumping into the fray without good reason. Convince me."<</say>>
+
+        <p>Dalton turns to you, his eyes filled with a mix of determination and desperation.</p>
+
+        <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Braxton's got plans to level the dojo—plans that will hurt a lot of innocent people who find refuge there. We can't let that happen. I need people who can stand up to him, and I've heard you're the type who doesn't back down from a fight."<</say>>
+
+        <!-- Player choices when Jax is a companion -->
+        <div id="daltonChoices">
+            <<say '$player.name' $playerPortraitPathZ>>
+                <<link 'Whats the plan, Dalton?'>>
+                    <<replace '#daltonChoices'>>
+                        <<include 'DaltonPlan'>>
+                    <</replace>>
+                <</link>><br>
+                <<link 'Why should we get involved?'>>
+                    <<replace '#daltonChoices'>>
+                        <<include 'DaltonExplanation'>>
+                    <</replace>>
+                <</link>><br>
+                <<link 'I need to think about this.'>>
+                    <<replace '#daltonChoices'>>
+                        <<include 'PlayerNoncommittalResponse'>>
+                    <</replace>>
+                <</link>><br>
+            <</say>></div>
+    <</if>>
 <</nobr>>
+
+
+    
 
 :: DaltonPlan [conversation event]
 <<nobr>>
@@ -69,15 +110,25 @@ Dalton sighs, a weary look crossing his face.
 
 :: DaltonRecruit [conversation event]
 <<nobr>>
-<<fadein 1s>>
+
 <<say '$player.name' $playerPortraitPathZ>>"Why do you think I'm meant to be recruiting anyone?"<</say>><br>
 Dalton leans in closer, lowering his voice.
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"The dojo's a start. They're not the most skilled, but they've got heart. Or you could try the bars for people to hire."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"With what money?"<</say>>
 Dalton chuckles softly.
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"It'll be rough starting out, but once you've got some people, you can start building your own business. Compete with Braxton. That'll bring in more credits to hire more people... and eventually, we might be able to stop him from tearing down Leina's dojo and make the lower decks safer."<</say>>
-<</fadein>>
 
+<!-- If Jax is a companion, add a brief exchange between him and Dalton -->
+<<if $JaxIsCompanion>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Sounds like a lofty plan. But what's to say you're not playing us for some angle of your own, Dalton?"<</say>>
+    Dalton meets Jax's skeptical gaze with a firm nod.
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I get it, trust is hard to come by down here. But I'm fighting for something bigger than myself. You don't have to like me, but helping out here could be a good move for everyone."<</say>>
+    Jax crosses his arms, considering Dalton's words before turning to you.
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"He's not wrong. Setting up a crew could give us the edge we need. And if it helps take down Braxton, I'm all for it."<</say>>
+<</if>>
+<<set $LowerDeckRecruitmentActive to true>>
+
+<!-- Player choices after the conversation -->
 <div id="finalChoices"><<say '$player.name' $playerPortraitPathZ>>
     <<link "I'm interested in helping and saving the day.">>
         <<replace "#finalChoices">>
@@ -101,6 +152,7 @@ Dalton chuckles softly.
     <</link>><br>
 <</say>></div>
 <</nobr>>
+
 
 :: PlayerHeroicResponse [conversation event]
 <<nobr>>

@@ -1,0 +1,143 @@
+:: LowerDeckBusinessSetupConfirmation [safe nobr] {"position":"200,1200","size":"100,100"}
+
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
+        <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
+    </span>
+</h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<p>The room stands as a testament to abandonment, a once bustling establishment now reduced to a hollow shell. Debris litters the floor, tables are overturned, and a thick layer of dust veils the remnants of hurried departures. The air is heavy with the scent of decay, and the silence is punctuated only by the distant echoes of the station's activity. It's a place forgotten by time and fortune, yet it's here where your new venture will take root.</p>
+
+<<if $DaltonIsCompanion>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Well, it's not much to look at now, but I've seen worse. Give it some time, and this place will be bustling. You'll see."<</say>>
+<</if>>
+<<if $JaxIsCompanion>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"It's going to take some work to get this place shipshape, but I'm up for the challenge if you are. There's potential here, hidden beneath the mess."<</say>>
+<</if>>
+
+<p>Despite the current state of disrepair, there's an undeniable spark of potential that fuels your resolve. This won't just be a business; it will be a symbol of renewal and hope on the Lower Decks. With hard work and dedication, you'll turn this forsaken room into a thriving hub of commerce and community.</p>
+
+<p>But first, you'll need to get the place in order. You'll need to clean up the debris, repair the damage, and make the place presentable. You'll need to hire staff, stock the shelves, and advertise your business. You'll need to make a name for yourself, and you'll need to do it quickly. The Lower Decks are a dangerous place, and you'll need to be prepared for anything.</p>
+
+<<switch $businessLocation>>
+    <<case "Lower Deck Promenade">>
+        <p>The Lower Deck Promenade, with its constant flow of foot traffic, offers a prime location for any business. The diverse clientele could mean a steady stream of opportunities—if you can stand out from the competition.</p>
+    <<case "Habitation Cells">>
+        <p>In the Habitation Cells, where the residents of MOR-1 seek rest and respite, your business could serve as a much-needed oasis in their daily lives.</p>
+    <<case "Lower Wharf">>
+        <p>The Lower Wharf's proximity to the docks could attract a variety of patrons, from transient merchants to local workers looking for a place to unwind after a long shift.</p>
+    <<case "Station Infrastructure">>
+        <p>Being nestled within the Station Infrastructure means your business could cater to the backbone of MOR-1, serving those who keep the station running day and night.</p>
+    <<case "Lower Observation Deck">>
+        <p>The view from the Lower Observation Deck is unparalleled, and your business could capitalize on that by offering a serene environment for patrons to enjoy the starscape beyond.</p>
+    <<case "Forgotten Slums">>
+        <p>In the Forgotten Slums, your business could become a beacon of hope, a place where the downtrodden can gather and find a sense of community.</p>
+    <<case "Cold Storage">>
+        <p>The chill of Cold Storage makes for an unlikely spot for a business, but with the right concept, it could become a hotspot for those looking to escape the station's more crowded areas.</p>
+    <<case "Black Market Bazaar">>
+        <p>The Black Market Bazaar is a place of intrigue and opportunity. A business here would need to be shrewd and adaptable, ready to cater to a clientele that values discretion and variety.</p>
+<</switch>>
+
+<<if $DaltonIsCompanion and not $JaxIsCompanion>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"A name can say a lot about a place. What are you thinking of calling it?"<</say>>
+<</if>>
+<<if $JaxIsCompanion and not $DaltonIsCompanion>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"The right name can draw a crowd on its own. Got any ideas?"<</say>>
+<</if>>
+<<if $DaltonIsCompanion and $JaxIsCompanion>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I say we call it 'Dalton's Den'. Has a nice ring to it, don't you think?"<</say>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Please, 'Jax's Joint' would bring in twice the crowd. Right?"<</say>>
+    <p>Both look to you, expecting a decision on the name of your new venture.</p>
+<</if>>
+
+<<if not $DaltonIsCompanion and not $JaxIsCompanion>>
+    <p>The empty room seems to hold its breath, waiting for you to give it a new identity. It's time to pick a name—a name that will encapsulate the spirit of your business and beckon to potential patrons.</p>
+<</if>>
+
+<p>Please enter a name for your business:</p>
+<<textbox "$playerBusinessNameInput" "Enter Business Name">>
+<br>
+<br>
+<<link "Continue">>
+    <<run $LowerDecksPlayerBusinessName = sanitizeInput($playerBusinessNameInput).trim()>>
+    <<if $LowerDecksPlayerBusinessName == "">>
+        <<set $LowerDecksPlayerBusinessName to "Unnamed Business">>
+    <</if>>
+    <<goto "LowerDeckBusinessSetupConfirmation2">>
+<</link>>
+
+
+:: LowerDeckBusinessSetupConfirmation2 [safe nobr] {"position":"200,1200","size":"100,100"}
+
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
+        <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
+    </span>
+</h2>
+<hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+
+<<if $DaltonIsCompanion and not $JaxIsCompanion>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I like it. '$LowerDecksPlayerBusinessName' has a nice ring to it."<</say>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I'll get started on cleaning up the place. You go find some staff. I'll keep an eye on things here."<</say>>
+<<elseif $JaxIsCompanion and not $DaltonIsCompanion>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Not bad. '$LowerDecksPlayerBusinessName' could definitely catch on."<</say>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"I'll handle the cleanup. You focus on staffing. We want the best crew for '$LowerDecksPlayerBusinessName'."<</say>>
+<<elseif $DaltonIsCompanion and $JaxIsCompanion>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"'$LowerDecksPlayerBusinessName'? It's catchy, but it could use a little more... pizzazz."<</say>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Pizzazz? It just needs to be memorable, Dalton. And I think it is."<</say>>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"How about we split the tasks? I'll start with the cleanup, you handle the hiring."<</say>>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Fine by me. Just try not to break anything, Dalton."<</say>>
+<</if>>
+
+<p>With a name in place, you're ready to begin the process of setting up your business. You'll need to hire staff, stock the shelves, and advertise your new establishment. The Lower Decks are a dangerous place, and you'll need to be prepared for anything.</p>
+
+<<set $businessStats to setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+
+<<liveblock>>
+    <h2 id="businessNameHeading" style="margin-top: 10px; margin-bottom: 10px;">
+        <span style="color: #FFD700; font-weight: bold; font-size: 24px;"><<= $LowerDecksPlayerBusinessName>></span>
+    </h2>
+    <hr id="businessNameHr" style="margin-top: 5px; margin-bottom: 5px;">
+    <<LowerDeckBusinessStats>>
+<</liveblock>>
+
+<p>Choose the type of business you wish to start:</p>
+<<replace "#businessTypeSelection">>
+    <ul>
+        <li><<link "Space Bar and Lounge">><<set $businessType to "Space Bar and Lounge">><<include "SpaceBarAndLounge">><</link>></li>
+        <li><<link "Hydroponic Farm and Food Supply Company">><<set $businessType to "Hydroponic Farm">><<include "HydroponicFarm">><</link>></li>
+        <li><<link "Scrap Reprocessing Facility">><<set $businessType to "Scrap Reprocessing">><<include "ScrapReprocessing">><</link>></li>
+    </ul>
+<</replace>>
+<div id="businessTypeSelection"></div>
+
+<!-- Include passages for each business type -->
+:: SpaceBarAndLounge [nobr]
+<<replace "#businessTypeDescription">>
+    <p>Your business is a popular space bar and lounge located on the orbital space station, offering a place for residents and visitors to relax, socialize, and enjoy drinks and entertainment.</p>
+    <!-- Add more gameplay focus and potential game features here -->
+<</replace>>
+<div id="businessTypeDescription"></div>
+
+:: HydroponicFarm [nobr]
+<<replace "#businessTypeDescription">>
+    <p>Your business focuses on operating a hydroponic farm and supplying fresh, nutritious food to the space station's inhabitants.</p>
+    <!-- Add more gameplay focus and potential game features here -->
+<</replace>>
+<div id="businessTypeDescription"></div>
+
+:: ScrapReprocessing [nobr]
+<<replace "#businessTypeDescription">>
+    <p>Your business specializes in collecting and reprocessing scrap materials from decommissioned spacecraft, satellites, and space debris.</p>
+    <!-- Add more gameplay focus and potential game features here -->
+<</replace>>
+<div id="businessTypeDescription"></div>

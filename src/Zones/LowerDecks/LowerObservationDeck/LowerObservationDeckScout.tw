@@ -1,0 +1,51 @@
+:: LowerObservationScout [conversation event]
+<<nobr>>
+<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerobservation.jpg'>>
+<<addmins $timeadd>>
+
+<p>You step onto the Lower Observation Deck, the vastness of space laid out before you through the expansive viewports. The area is quiet, save for the soft hum of the station's life support systems and the occasional murmur of conversation from the few scattered individuals seeking solace here.</p>
+
+<p>As you ponder the potential of this location for your business, you can't help but feel the weight of the stars on your shoulders, a reminder of the endless opportunities that lie in the cosmos.</p>
+
+<!-- Dalton's input if he is a companion -->
+<<if $DaltonIsCompanion>>
+    <p>Dalton, sensing your contemplative mood, leans in with an encouraging nod.</p>
+    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"It's peaceful here, a good contrast to the chaos of the decks. Plus, being near the dojo brings a certain crowd. Could be a solid spot for the right kind of business."<</say>>
+<</if>>
+
+<!-- Jax's input if he is a companion -->
+<<if $JaxIsCompanion>>
+    <p>Jax, ever the pragmatist, crosses his arms as he surveys the area.</p>
+    <<say 'Jax' setup.ImagePath+'/characters/lowerdecks/jax.jpg'>>"Space like this is rare on the station. It's got potential, but we'll need a clear plan to make it work. Though, being this close to the dojo might mean dealing with more than our fair share of trouble."<</say>>
+<</if>>
+
+<!-- Additional narrative if both companions are present -->
+<<if $DaltonIsCompanion && $JaxIsCompanion>>
+    <p>The tension between Dalton's optimism and Jax's skepticism hangs in the air, almost as tangible as the cold of the void beyond the glass.</p>
+<</if>>
+
+<p>Pros:</p>
+<ul>
+    <li>Serene atmosphere</li>
+    <li>Beautiful view</li>
+    <li>Proximity to the dojo attracts a specific clientele</li>
+    <li>Potential for a unique business that capitalizes on the location's ambiance</li>
+</ul>
+
+<p>Cons:</p>
+<ul>
+    <li>Somber mood may not attract all types of customers</li>
+    <li>Location is somewhat removed from the busier areas of the station</li>
+    <li>Potential for dojo-related conflicts</li>
+</ul>
+
+<!-- Player decision to choose this location or continue scouting -->
+<p>This is an important decision. Once you choose a location for your business, it's permanent. Are you sure you want to set up here?</p>
+<<link "Yes, I'll choose this location.">>
+    <<set $LowerDecksBusinessLocation to "Lower Observation Deck">>
+    <<goto "LowerDeckBusinessSetupConfirmation">>
+<</link>>
+<<link "No, I want to scout other locations.">>
+    <<goto "Lower Observation Deck">> <!-- Replace with the actual passage for scouting other locations -->
+<</link>>
+<</nobr>>

@@ -1,35 +1,54 @@
 :: JaxChatCompanion [conversation] {"position":"950,725","size":"100,100"}
 <<nobr>>
-
+<!-- Update the status bar to reflect any changes in the game state -->
 <<updatebar>>
 
-<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span></h2>
+<!-- Title heading for the current location -->
+<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="color: lightblue; font-weight: bold; font-size: 24px;">Cold Storage</span>
+</h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
-<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
+
+<!-- Subheading showing the name of the location from the $location variable -->
+<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+    <span style="font-size: 14px;"><<= $location.name >></span>
+</h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-<!-- If Jax is now a companion -->
-<<if $JaxIsCompanion>><div id="jaxchatchoices">
-    <div id="chatstart">
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's our next move?"<</say>>
-    <<say '$player.name' $playerPortraitPathZ>>
-        <<if $currentArea == "lowerdecks">>
-            <<link "Can you tell me more about the station?">>
-                <<run $timeadd += 5>>
-                <<replace "#chatstart">><</replace>>
-                <<replace "#jaxchatchoices">><<fadein 1s>>
-                    <<run $("#jaxchatresponse").wiki(Story.get("JaxCompanionAskStation").processText())>>
-                    <<run $('#jaxchatchoices').remove()>><</fadein>>
-                <</replace>>
-                
-            <</link>><br>
+<!-- Check if Jax is currently a companion -->
+<<if $JaxIsCompanion>>
+    <!-- Container for the chat choices with Jax -->
+    <div id="jaxchatchoices">
+        <!-- Container for the start of the chat -->
+        <div id="chatstart">
+            <!-- Jax initiates the conversation -->
+            <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's our next move?"<</say>>
+
+            <!-- Player's response options -->
+            <<say '$player.name' $playerPortraitPathZ>>
+                <!-- Check if the current area is 'lowerdecks' to show relevant options -->
+                <<if $currentArea == "lowerdecks">>
+                    <!-- Option to ask about the station -->
+                    <<link "Can you tell me more about the station?">>
+                        <!-- Increment time when the option is selected -->
+                        <<run $timeadd += 5>>
+                        <!-- Clear the chat start to prevent re-selection -->
+                        <<replace "#chatstart">><</replace>>
+                        <!-- Replace the chat choices with Jax's response -->
+                        <<replace "#jaxchatchoices">><<fadein 1s>>
+                            <!-- Fetch and display Jax's response from the 'JaxCompanionAskStation' passage -->
+                            <<run $("#jaxchatresponse").wiki(Story.get("JaxCompanionAskStation").processText())>>
+                            <!-- Remove the chat choices after displaying the response -->
+                            <<run $('#jaxchatchoices').remove()>><</fadein>>
+                        <</replace>>
+                    <</link>><br>
+                    <!-- ... Additional options follow a similar pattern ... -->
             <<link "Who are the people around here?">>
                 <<run $timeadd += 5>>
                 <<replace "#chatstart">><</replace>>
                 <<replace "#jaxchatresponse">><<fadein 1s>><<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskPeople").processText())>>
                     <<run $('#jaxchatchoices').remove()>><</fadein>>
                 <</replace>>
-                
             <</link>><br>
             <<link "How can I earn some credits quickly?">>
                 <<run $timeadd += 5>>
@@ -37,19 +56,23 @@
                 <<replace "#jaxchatresponse">><<fadein 1s>><<run $("#jaxchatchoices").wiki(Story.get("JaxCompanionAskWork").processText())>>
                     <<run $('#jaxchatchoices').remove()>><</fadein>>
                 <</replace>>
-                
             <</link>><br>
         <</if>>
-        <<link "Just checking in.">>
-            <<replace ".CompanionChatOptions">>
-                <<run $(".companions-container").show()>>
-                <<run $(".companion-readout").show()>>
-                <<run $(".CompanionChatOptions").hide()>>
-                <<run $('.CompanionChatOptions').remove()>>
-            <</replace>>
-        <</link>><br>
+        <!-- Default Option to check in with Jax without asking specific questions -->
+                <<link "Just checking in.">>
+                    <!-- Replace the chat options with companion readout -->
+                    <<replace ".CompanionChatOptions">>
+                        <!-- Show the companion container and readout -->
+                        <<run $(".companions-container").show()>>
+                        <<run $(".companion-readout").show()>>
+                        <!-- Hide and remove the chat options -->
+                        <<run $(".CompanionChatOptions").hide()>>
+                        <<run $('.CompanionChatOptions').remove()>>
+                    <</replace>>
+                <</link>><br>
     <</say>></div>
     </div>
+    <!-- Container for Jax's responses -->
     <div id="jaxchatresponse"></div>
 <</if>>
 <</nobr>>
@@ -68,6 +91,7 @@
 
 <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Everyone's got an angle here. Trust is earned, not given. If you're looking to make connections, show you can be useful. But watch your back; not everyone plays by the rules."<</say>>
 
+<!-- Return to the main companion chat options -->
 <<say '$player.name' $playerPortraitPathZ>><<link "Thanks for the heads-up, Jax.">>
             <<replace ".CompanionChatOptions">>
                 <<run $(".companions-container").show()>>
