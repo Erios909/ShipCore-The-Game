@@ -114,7 +114,11 @@
 
 <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
 <<set $currentBusinessIndex = 0>>
-
+<<script>>
+$(document).one(':passagedisplay', function (ev) {
+            showBusinessType(0);
+    });
+<</script>>
 <p>Choose the type of business you wish to start:</p>
 <div id="businessTypeSelection">
     <ul>
@@ -155,6 +159,8 @@
 <<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 <</if>>
+
+
 
 :: SpaceBarAndLounge [nobr]
 <img src="path/to/space-bar-image.jpg" alt="Space Bar and Lounge">

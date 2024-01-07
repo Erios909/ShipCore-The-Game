@@ -1592,7 +1592,6 @@ body.slideWin {
 .business-estimates {
     display: flex; /* Use flexbox for layout */
     flex-wrap: wrap; /* Allow boxes to wrap to next line if needed */
-    gap: 20px; /* Space between boxes */
     margin-bottom: 20px;
     background-color: #222; /* Dark background */
     font-family: 'Arial', sans-serif; /* Consistent font */
@@ -1601,7 +1600,7 @@ body.slideWin {
 
 /* Individual sections within business estimates */
 .business-estimates > div {
-    flex: 0 0 50%; /* Each box takes up 50% of the width */
+    flex: auto; /* Allow boxes to grow to fill space */
     border: 8px solid #000080; /* Dark blue border */
     padding: 15px;
     border-radius: 8px; /* Rounded corners */
