@@ -29,6 +29,37 @@ You have been surviving for:
 
 <<print "Today's Date: " + window.GameMonths[_currentDate.getMonth()] + " " + _currentDate.getDate() + ", " + _currentDate.getFullYear()>>
 
+<<set _relationshipEntries to ''>>
+
+/* Check if the $playerRelationships map is defined. */
+<<if typeof $playerRelationships !== "undefined">>
+    /* Check if there are any entries in the relationships map. */
+    <<if $playerRelationships.size > 0>>
+        /* There are entries in the relationships map, so display them. */
+        <<set _relationshipEntries to '<ul>'>>
+        <<set _relationshipKeys to Array.from($playerRelationships.keys())>>
+        <<for _i = 0; _i < _relationshipKeys.length; _i++>>
+            <<set _relationshipName to _relationshipKeys[_i]>>
+            <<set _relationshipValue to $playerRelationships.get(_relationshipName)>>
+            <<set _relationshipEntries += '<li>' + _relationshipName + ': ' + _relationshipValue + '</li>'>>
+        <</for>>
+        <<set _relationshipEntries += '</ul>'>>
+    <<else>>
+        /* The relationships map is empty. */
+        <<set _relationshipEntries to '<p>No relationships have been established yet.</p>'>>
+    <</if>>
+<<else>>
+    /* The relationships map is not defined. */
+    <<set _relationshipEntries to '<p>No relationships have been established yet.</p>'>>
+<</if>>
+
+/* Print the header and relationship entries wrapped in a div with the specified class and style. */
+<<fadein 1s>>
+<h2>Relationship Journal</h2>
+<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+    <<print _relationshipEntries>>
+</div>
+<</fadein>>
 
 <br>
 </div><</nobr>>

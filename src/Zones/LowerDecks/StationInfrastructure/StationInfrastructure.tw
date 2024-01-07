@@ -1,4 +1,4 @@
-:: Station Infrastructure [travel] {"position":"725,775","size":"100,100"}
+:: Station Infrastructure [travel nobr] {"position":"725,775","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerengineering.jpg'>>
 <<addmins $timeadd>><<set $location to {
@@ -24,6 +24,16 @@ Things to do:<br>
 <<else>>
     <span class="disabledLink">Work an engineering shift. (04:00) (Too tired.)</span><br>
 <</if>>
+<br>
+<<if $LowerDecksCurrentScoutLocation === undefined>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+<</if>>
+<<if $LowerDeckRecruitmentActive>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+    <br>Business Scouting:<br>
+    <<link "Scout the Station Infrastructure">><<goto "Station Infrastructure Scout">><</link>><br>
+<</if>>
+
 
 
 <br><br>
@@ -33,10 +43,10 @@ Travel:<br>
 [[(Counter-Clockwise) The Station's primary outer corridor leads to the Lower Deck Promenade.|Lower Deck Promenade][$timeadd = 5]]<br>
 <</nobr>>
 
-Deep within the bowels of MOR-1, the Station Infrastructure is a labyrinth of essential machinery and circuitry that powers the life of the station. The air is alive with the thrum of generators and the warmth of conduits carrying power to all corners of the metallic behemoth. Technicians scurry about, obscured by the whirring of cooling fans, attending to the pulsing heart of technology that must not fail.
+<p>Deep within the bowels of MOR-1, the Station Infrastructure is a labyrinth of essential machinery and circuitry that powers the life of the station. The air is alive with the thrum of generators and the warmth of conduits carrying power to all corners of the metallic behemoth. Technicians scurry about, obscured by the whirring of cooling fans, attending to the pulsing heart of technology that must not fail.</p>
 
-The area is dimly lit with the occasional safety sign casting a protective glow over the intricate work that keeps the station from descending into chaos. Pipes hiss with the release of steam, and warning klaxons sound off in the distance, signaling minor malfunctions that are just another part of daily life here.
+<p>The area is dimly lit with the occasional safety sign casting a protective glow over the intricate work that keeps the station from descending into chaos. Pipes hiss with the release of steam, and warning klaxons sound off in the distance, signaling minor malfunctions that are just another part of daily life here.</p>
 
-Ventilation shafts and maintenance tunnels offer clandestine routes to those who know the station's skeleton. It is within these walls that the divide between the upper and lower echelons fades to a simple matter of who knows the right corridor to take.
+<p>Ventilation shafts and maintenance tunnels offer clandestine routes to those who know the station's skeleton. It is within these walls that the divide between the upper and lower echelons fades to a simple matter of who knows the right corridor to take.</p>
 
 

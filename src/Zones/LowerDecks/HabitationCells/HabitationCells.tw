@@ -1,4 +1,4 @@
-:: Habitation Cells [travel] {"position":"975,1975","size":"100,100"}
+:: Habitation Cells [travel nobr] {"position":"975,1975","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation.jpg'>>
 <<addmins $timeadd>><<set $location to {
@@ -11,24 +11,35 @@
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Habitation Cells</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
-<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
-Places of Interest:
-[[Habitation Haven Apartments|Habitation Haven][$timeadd = 5]]
-[[The Last Home Pub|The Last Home][$timeadd = 5]]
-[[The Oxygen Garden|The Oxygen Garden][$timeadd = 5]]
-[[Patch-It Pod|Patch-It Pod][$timeadd = 5]]
-[[Loiter (00:15)|Habitation Cells][$timeadd = 15]]
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>><br><br>
+Places of Interest:<br>
+[[Habitation Haven Apartments|Habitation Haven][$timeadd = 5]]<br>
+[[The Last Home Pub|The Last Home][$timeadd = 5]]<br>
+[[The Oxygen Garden|The Oxygen Garden][$timeadd = 5]]<br>
+[[Patch-It Pod|Patch-It Pod][$timeadd = 5]]<br>
+[[Loiter (00:15)|Habitation Cells][$timeadd = 15]]<br>
 
-Travel:
-[[Navigate back to the central axis of the Lower Decks Hub.|Lower Decks][$timeadd = 5]]
-[[(Clockwise) The Station's primary outer corridor leads to the Lower Observation Deck.|Lower Observation Deck][$timeadd = 5]]
-[[(Counter-Clockwise) The Station's primary outer corridor leads to the station's underbelly.|Forgotten Slums][$timeadd = 5]]
+<<if $LowerDecksCurrentScoutLocation === undefined>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+<</if>>
+<<if $LowerDeckRecruitmentActive>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
 
-The Habitation Cells of MOR-1 are a patchwork of cramped quarters and narrow passageways, a warren of necessity rather than comfort. The air carries the sound of life in close quarters: muffled conversations, the clatter of makeshift repairs, and the occasional laughter that defies the pervasive hardships of station life.
+    Business Scouting:<br>
+    <<link "Scout the Habitation Cells">><<goto "Habitation Cells Scout">><</link>><br>
+<</if>>
 
-Each cell tells a story, with doors marked by the personal touches of their inhabitants; a sticker here, a token there, small assertions of identity in the face of systemic anonymity. The flickering lights cast long shadows that seem to move of their own accord, adding a sense of unease to the already claustrophobic atmosphere.
 
-The cells serve as both refuge and prison, holding the dreams and despairs of those who call the lower decks their home. Despite the squalor, a sense of community prevails for those who dwell within the Habitation Cells of MOR-1, offering a stark contrast to the solitude of space outside.
+Travel:<br>
+[[Navigate back to the central axis of the Lower Decks Hub.|Lower Decks][$timeadd = 5]]<br>
+[[(Clockwise) The Station's primary outer corridor leads to the Lower Observation Deck.|Lower Observation Deck][$timeadd = 5]]<br>
+[[(Counter-Clockwise) The Station's primary outer corridor leads to the station's underbelly.|Forgotten Slums][$timeadd = 5]]<br>
+
+<p>The Habitation Cells of MOR-1 are a patchwork of cramped quarters and narrow passageways, a warren of necessity rather than comfort. The air carries the sound of life in close quarters: muffled conversations, the clatter of makeshift repairs, and the occasional laughter that defies the pervasive hardships of station life.</p>
+
+<p>Each cell tells a story, with doors marked by the personal touches of their inhabitants; a sticker here, a token there, small assertions of identity in the face of systemic anonymity. The flickering lights cast long shadows that seem to move of their own accord, adding a sense of unease to the already claustrophobic atmosphere.</p>
+
+<p>The cells serve as both refuge and prison, holding the dreams and despairs of those who call the lower decks their home. Despite the squalor, a sense of community prevails for those who dwell within the Habitation Cells of MOR-1, offering a stark contrast to the solitude of space outside.</p>
 
 
 

@@ -1,4 +1,4 @@
-:: Lower Observation Deck [travel] {"position":"300,1650","size":"100,100"}
+:: Lower Observation Deck [travel nobr] {"position":"300,1650","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
 <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerobservation.jpg'>>
 <<addmins $timeadd>><<set $location to {
@@ -12,20 +12,32 @@
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;"><</nobr>>
-Places of Interest:
-[[Approach a Lonely ATM|LowerObservationATM]]
-[[Loiter (00:15)|Lower Observation Deck][$timeadd = 15]]
-[[Dojo (00:15)|DojoLowerDecks][$timeadd = 15]]
+Places of Interest:<br>
+[[Approach a Lonely ATM|LowerObservationATM]]<br>
+[[Loiter (00:15)|Lower Observation Deck][$timeadd = 15]]<br>
+[[Dojo (00:15)|DojoLowerDecks][$timeadd = 15]]<br><br>
 
-Travel:
-[[Retract to the bustling life of the Lower Decks Hub.|Lower Decks][$timeadd = 5]]
-[[(Clockwise) The Station's primary outer corridor leads to the Lower Deck Promenade.|Lower Deck Promenade][$timeadd = 5]]
-[[(Counter-Clockwise) The Station's primary outer corridor leads to the Habitation Cells.|Habitation Cells][$timeadd = 5]]
+<<if $LowerDecksCurrentScoutLocation === undefined>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+<</if>>
 
-A serene escape from the clamor of MOR-1's lower decks, the Lower Observation Deck offers a momentary reprieve with its panoramic view of the void beyond. The vast expanse of space stretches out, dotted with the flickering lights of distant stars and the occasional silhouette of a passing ship.
+<<if $LowerDeckRecruitmentActive>>
+    <<set $LowerDecksCurrentScoutLocation = passage()>>
+    Business Scouting:<br>
+    <<link "Scout the Lower Observation Deck">><<goto "Lower Observation Deck Scout">><</link>><br><br>
+<</if>>
 
-Tattered benches line the viewports, many occupied by solitary figures gazing out at the cosmos, lost in thought. Scratches and graffiti on the glass tell tales of those who came before, leaving their marks as silent witnesses to the solitude of space.
 
-Despite the inherent beauty of the celestial vista, a somber mood hangs over the Lower Observation Deck. It’s a space that invites introspection and provides a stark reminder of how small each visitor is in comparison to the galaxy's vastness. It’s a place to dream, to long, or to simply sit in quiet reflection.
+
+Travel:<br>
+[[Retract to the bustling life of the Lower Decks Hub.|Lower Decks][$timeadd = 5]]<br>
+[[(Clockwise) The Station's primary outer corridor leads to the Lower Deck Promenade.|Lower Deck Promenade][$timeadd = 5]]<br>
+[[(Counter-Clockwise) The Station's primary outer corridor leads to the Habitation Cells.|Habitation Cells][$timeadd = 5]]<br>
+
+<p>A serene escape from the clamor of MOR-1's lower decks, the Lower Observation Deck offers a momentary reprieve with its panoramic view of the void beyond. The vast expanse of space stretches out, dotted with the flickering lights of distant stars and the occasional silhouette of a passing ship.</p>
+
+<p>Tattered benches line the viewports, many occupied by solitary figures gazing out at the cosmos, lost in thought. Scratches and graffiti on the glass tell tales of those who came before, leaving their marks as silent witnesses to the solitude of space.</p>
+
+<p>Despite the inherent beauty of the celestial vista, a somber mood hangs over the Lower Observation Deck. It’s a space that invites introspection and provides a stark reminder of how small each visitor is in comparison to the galaxy's vastness. It’s a place to dream, to long, or to simply sit in quiet reflection.</p>
 
 

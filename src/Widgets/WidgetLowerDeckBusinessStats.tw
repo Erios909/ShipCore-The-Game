@@ -1,0 +1,164 @@
+:: widget LowerDeckBusinessStats [widget nobr] {"position":"50,75","size":"100,100"}
+<<widget "LowerDeckBusinessStats">>
+    
+    <<set _locationName = "Unknown Location">> <!-- Default location name -->
+    <<set _locationData = undefined>> <!-- Default to undefined -->
+
+    <!-- Check for $LowerDecksBusinessStats -->
+    <<if $LowerDecksBusinessStats and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessStats)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessStats]>>
+        <<set _locationName = $LowerDecksBusinessStats>> <!-- Set the location name using $LowerDecksBusinessStats -->
+    
+    <!-- Check for $LowerDecksBusinessLocation -->
+    <<elseif $LowerDecksBusinessLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessLocation)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+        <<set _locationName = $LowerDecksBusinessLocation>> <!-- Set the location name using $LowerDecksBusinessLocation -->
+    
+    <!-- Check for $LowerDecksCurrentScoutLocation -->
+    <<elseif $LowerDecksCurrentScoutLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksCurrentScoutLocation)>>
+        <<set _locationData = setup.LowerDeckLocations[$LowerDecksCurrentScoutLocation]>>
+        <<set _locationName = $LowerDecksCurrentScoutLocation>> <!-- Set the location name using $LowerDecksCurrentScoutLocation -->
+    <</if>>
+
+
+    /* If location data is available */
+    <<if _locationData>>
+        /* Assign values from the _locationData array to individual variables with a default value of 5 if data is not available */
+        <<set _customerAvailability = _locationData[0] || 5>>
+        <<set _supplyHubAccess = _locationData[1] || 5>>
+        <<set _danger = _locationData[2] || 5>>
+        <<set _taxRate = _locationData[3] || 5>>
+        <<set _setupCost = _locationData[4] || 5>>
+
+        <p>You are currently at the <<=_locationName>>. This location is known for its 
+        <<switch (_customerAvailability)>>
+            <<case 1 to 2>><span style="color:red;">very low</span>
+            <<case 3 to 4>><span style="color:orange;">low</span>
+            <<case 5 to 6>><span style="color:yellow;">moderate</span>
+            <<case 7 to 8>><span style="color:lightgreen;">high</span>
+            <<case 9 to 10>><span style="color:green;">very high</span>
+        <</switch>> customer availability. The access to supply hubs here is 
+        <<switch (_supplyHubAccess)>>
+            <<case 1 to 2>><span style="color:red;">very challenging.</span>
+            <<case 3 to 4>><span style="color:orange;">challenging.</span>
+            <<case 5 to 6>><span style="color:yellow;">manageable.</span>
+            <<case 7 to 8>><span style="color:lightgreen;">good.</span>
+            <<case 9 to 10>><span style="color:green;">excellent.</span>
+        <</switch>></p>
+
+        <p>The area is 
+        <<switch (_danger)>>
+            <<case 1 to 2>><span style="color:green;">very safe.</span>
+            <<case 3 to 4>><span style="color:lightgreen;">safe.</span>
+            <<case 5 to 6>><span style="color:yellow;">moderately risky.</span>
+            <<case 7 to 8>><span style="color:orange;">risky.</span>
+            <<case 9 to 10>><span style="color:red;">very dangerous.</span>
+        <</switch>> Tax rates here are 
+        <<switch (_taxRate)>>
+            <<case 1 to 2>><span style="color:green;">very low</span>
+            <<case 3 to 4>><span style="color:lightgreen;">low</span>
+            <<case 5 to 6>><span style="color:yellow;">average</span>
+            <<case 7 to 8>><span style="color:orange;">high</span>
+            <<case 9 to 10>><span style="color:red;">very high</span>
+        <</switch>> and the cost to set up a business is 
+        <<switch (_setupCost)>>
+            <<case 1 to 2>><span style="color:green;">very minimal.</span>
+            <<case 3 to 4>><span style="color:lightgreen;">minimal.</span>
+            <<case 5 to 6>><span style="color:yellow;">moderate.</span>
+            <<case 7 to 8>><span style="color:orange;">high.</span>
+            <<case 9 to 10>><span style="color:red;">very high.</span>
+        <</switch>></p>
+    <<else>>
+        <h2><p>No data available for this location.</p></h2>
+    <</if>>
+<</widget>>
+
+<<widget "PrintBusinessEstimates">>
+    /* Use the stored state variables to display the business estimates */
+    <<nobr>>
+        <div class="business-estimates">
+            <div class="business-stats">
+                <h3>Business Stats</h3>
+                <p><strong>Batch Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize || 0>></span></p>
+                <p><strong>Employees Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade || 0>></span></p>
+            </div>
+            <div class="location-factors">
+                <h3>Location Factors</h3>
+                <p><strong>Customer Availability:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessCustomerAvailability || 0)>>%</span></p>
+                <p><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessSupplyHubAccess || 0)>>%</span></p>
+                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel || 0>>%</span></p>
+                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate || 0>>%</span></p>
+            </div>
+            <div class="calculated-stats">
+                <h3>Calculated Stats</h3>
+                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessAdjustedPricePerUnit || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalSalesPriceForAllBatches || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalInputCostsForOneBatch || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print ($LowerDecksPlayerBusinessTotalEmployeeCostPerHour || 0).toFixed(2)>></span> credits</p>
+                <p><strong>Profit Margin Per Hour:</strong> $<span class="<<print ($LowerDecksPlayerBusinessProfitMarginPerHour >= 0 ? 'positive-value' : 'negative-value')>>"><<print ($LowerDecksPlayerBusinessProfitMarginPerHour || 0).toFixed(2)>></span> credits</p>
+            </div>
+        </div>
+    <</nobr>>
+<</widget>>
+
+
+
+<!-- 
+Justifications for Location Values:
+
+Lower Deck Promenade
+- Customer Availability: 8 (High traffic area, ideal for businesses reliant on foot traffic)
+- Supply Hub Access: 9 (Easily accessible from major supply hubs)
+- Danger: 3 (Relatively safe with regular patrolling)
+- Tax Rate: 7 (Higher due to prime location)
+- Setup Cost: 8 (High demand for space in this area)
+
+Habitation Cells
+- Customer Availability: 5 (Mainly residents, moderate traffic)
+- Supply Hub Access: 5 (Average accessibility)
+- Danger: 4 (Generally safe with minor issues)
+- Tax Rate: 4 (Lower, more residential focused)
+- Setup Cost: 6 (Moderate, suitable for small-medium businesses)
+
+Lower Wharf
+- Customer Availability: 7 (Busy area due to shipping and trade)
+- Supply Hub Access: 8 (Near major transport routes)
+- Danger: 5 (Safety concerns with heavy machinery)
+- Tax Rate: 6 (Moderately high due to economic activity)
+- Setup Cost: 7 (Strategic location for trade)
+
+Station Infrastructure
+- Customer Availability: 3 (Lower, mainly employees and technicians)
+- Supply Hub Access: 7 (Good, necessary for maintenance materials)
+- Danger: 2 (Very safe and highly secured)
+- Tax Rate: 5 (Average, utilitarian nature)
+- Setup Cost: 5 (Moderate, service-oriented business focus)
+
+Lower Observation Deck
+- Customer Availability: 6 (Attracts tourists, peaceful)
+- Supply Hub Access: 4 (Less convenient, more remote)
+- Danger: 1 (Very safe, monitored area)
+- Tax Rate: 3 (Lower to encourage businesses)
+- Setup Cost: 4 (Reasonable, reflecting remote nature)
+
+Forgotten Slums
+- Customer Availability: 2 (Low, impoverished local population)
+- Supply Hub Access: 3 (Difficult, not well-connected)
+- Danger: 9 (Very high, crime and Braxton's lair)
+- Tax Rate: 2 (Low, due to economic condition)
+- Setup Cost: 3 (Low, but high risk due to danger)
+
+Cold Storage
+- Customer Availability: 4 (Limited to specific storage needs)
+- Supply Hub Access: 6 (Reasonably accessible for logistics)
+- Danger: 3 (Safe, mainly storage area)
+- Tax Rate: 5 (Average, specialized nature)
+- Setup Cost: 6 (Moderate, specialized equipment needed)
+
+Black Market Bazaar
+- Customer Availability: 9 (Extremely high, hub for illicit dealings)
+- Supply Hub Access: 7 (Good for flow of goods)
+- Danger: 6 (Risky, illegal activities)
+- Tax Rate: 8 (High, lucrative business area)
+- Setup Cost: 9 (High demand for space)
+-->

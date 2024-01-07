@@ -1,4 +1,4 @@
-:: LowerDecksPlayerBusiness [poi] {"position":"200,1200","size":"100,100"}
+:: LowerDecksPlayerBusiness [poi nobr] {"position":"200,1200","size":"100,100"}
 <<nobr>>
     <!-- Set background based on state. -->
     <<if $LowerDecksPlayerBusinessFirstRun === undefined>>
@@ -69,3 +69,4 @@ Travel:<br>
 
 The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.
 <</nobr>>
+

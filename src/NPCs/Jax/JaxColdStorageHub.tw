@@ -112,7 +112,11 @@
             [[Who are the people around here?|JaxAskPeople][$timeadd += 5]]<br>
             [[How can I earn some credits quickly?|JaxAskWork][$timeadd += 5]]<br>
         <</if>>
+        <<if $LastHomeZone === "Cold Storage">>
+            <<link "Head back to Cold Storage" "Cold Storage">><</link>>
+        <<else>>
         <<return "Just checking in.">>
+        <</if>>
     <</say>></div>
 <</if>>
 <</nobr>>
