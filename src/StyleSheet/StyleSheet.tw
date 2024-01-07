@@ -1618,8 +1618,8 @@ body.slideWin {
 /* Paragraphs within business estimates */
 .business-estimates p {
     margin: 8px 0;
-    line-height: 1.6; /* Improved line spacing for readability */
-    font-size: calc(0.8em + 0.5vw); /* Adjusts size based on container width */
+    line-height: 1.3; /* Improved line spacing for readability */
+    font-size: calc(0.5em + 0.5vw); /* Adjusts size based on container width */
 }
 
 /* Strong (bold) elements within paragraphs for emphasis */
@@ -1644,3 +1644,10 @@ body.slideWin {
     color: #2ecc71; /* Green color for positive values */
 }
 
+.positive-value {
+    color: green;
+}
+
+.negative-value {
+    color: red;
+}

@@ -73,33 +73,41 @@
     <</if>>
 <</widget>>
 
+:: widget PrintBusinessEstimates [widget nobr]
+
 <<widget "PrintBusinessEstimates">>
     /* Use the stored state variables to display the business estimates */
     <<nobr>>
         <div class="business-estimates">
             <div class="business-stats">
-                <h3>Business Stats</h3>
-                <p><strong>Batch Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize || 0>></span></p>
-                <p><strong>Employees Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade || 0>></span></p>
+                <h2>Business Stats</h2>
+                <p><strong>Batch Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize ?? "Error: Batch Size not set">></span></p>
+                <p><strong>Employees Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade ?? "Error: Employees Per Upgrade not set">></span></p>
             </div>
             <div class="location-factors">
-                <h3>Location Factors</h3>
-                <p><strong>Customer Availability:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessCustomerAvailability || 0)>>%</span></p>
-                <p><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - ($LowerDecksPlayerBusinessSupplyHubAccess || 0)>>%</span></p>
-                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel || 0>>%</span></p>
-                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate || 0>>%</span></p>
+                <h2>Location Factors</h2>
+                <p><strong>Customer Availability:</strong> <span class="value"><<print $LowerDecksPlayerBusinessCustomerAvailability + "%">></span></p>
+                <p><strong>Supply Hub Access:</strong> <span class="value"><<print $LowerDecksPlayerBusinessSupplyHubAccess + "%">></span></p>
+                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel + "%">></span></p>
+                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate + "%">></span></p>
             </div>
             <div class="calculated-stats">
-                <h3>Calculated Stats</h3>
-                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessAdjustedPricePerUnit || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalSalesPriceForAllBatches || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print ($LowerDecksPlayerBusinessTotalInputCostsForOneBatch || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print ($LowerDecksPlayerBusinessTotalEmployeeCostPerHour || 0).toFixed(2)>></span> credits</p>
-                <p><strong>Profit Margin Per Hour:</strong> $<span class="<<print ($LowerDecksPlayerBusinessProfitMarginPerHour >= 0 ? 'positive-value' : 'negative-value')>>"><<print ($LowerDecksPlayerBusinessProfitMarginPerHour || 0).toFixed(2)>></span> credits</p>
+                <h2>Calculated Stats</h2>
+                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessAdjustedPricePerUnit.toFixed(2)>> credits</span></p>
+                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches.toFixed(2)>> credits</span></p>
+                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalInputCostsForOneBatch.toFixed(2)>> credits</span></p>
+                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print $LowerDecksPlayerBusinessTotalEmployeeCostPerHour.toFixed(2)>> credits</span></p>
+                <<if $LowerDecksPlayerBusinessProfitMarginPerHour >= 0>>
+                    <p><strong>Profit Margin Per Hour:</strong> <span class="positive-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></p>
+                <<else>>
+                    <p><strong>Profit Margin Per Hour:</strong> <span class="negative-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></p>
+                <</if>>
             </div>
         </div>
     <</nobr>>
 <</widget>>
+
+
 
 
 

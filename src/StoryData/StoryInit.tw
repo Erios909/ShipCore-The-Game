@@ -155,9 +155,9 @@ $lowerdecksFabricatorCyberware
 
 /* LOWER DECKS SETUP */
 <<set $docksideStats = {
-    partsFabricated: 0, // Initialize or update with actual fabricated parts count
-    scrapBought: 0, // Initialize or update with actual scrap bought count
-    partsSold: 0 // Initialize or update with actual parts sold count
+    partsFabricated: 0,
+    scrapBought: 0,
+    partsSold: 0
 }>>
 
 <<set setup.itemVariables = {
@@ -166,30 +166,33 @@ $lowerdecksFabricatorCyberware
     'cyberware': 'lowerdecksCyberware',
     'stolenItems': 'lowerdecksStolenItems',
     'contraband': 'lowerdecksContraband',
-    'blackmarketactivity': 'lowerdeckBlackActivity' // Add this line
+    'blackmarketactivity': 'lowerdeckBlackActivity'
 }>>
 
-<<set $LowerDecksBusinessStats = {
+<<set $LowerDecksBusinessTypeStats = {
     "Space Bar and Lounge": {
         "EmployeesPerUpgrade": 5,
+        "EmployeeCost": 10,
         "InputCosts": { "Food": 2, "Water": 1 },
-        "InstallCostMultiplier": 1,
-        "ProfitPerBatch": 50,
+        "BasePriceOfOutput": 50,
+        "CyclesPerHour": 4,
         "BatchSize": 10
     },
     "Hydroponic Farm": {
         "EmployeesPerUpgrade": 3,
+        "EmployeeCost": 8,
         "InputCosts": { "Minerals": 3, "Water": 2 },
-        "InstallCostMultiplier": 1.5,
-        "ProfitPerBatch": 40,
-        "BatchSize": 8
+        "BasePriceOfOutput": 40,
+        "CyclesPerHour": 3,
+        "BatchSize": 25
     },
     "Scrap Reprocessing": {
         "EmployeesPerUpgrade": 2,
+        "EmployeeCost": 12,
         "InputCosts": { "Scrap": 5 },
-        "InstallCostMultiplier": 2,
-        "ProfitPerBatch": 60,
-        "BatchSize": 5
+        "BasePriceOfOutput": 60,
+        "CyclesPerHour": 2,
+        "BatchSize": 10
     }
 }>>
 
@@ -203,6 +206,23 @@ $lowerdecksFabricatorCyberware
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 
 
+<<set $LowerDecksPlayerBusinessBatchSize to 0>>
+<<set $LowerDecksPlayerBusinessEmployeesPerUpgrade to 0>>
+<<set $LowerDecksPlayerBusinessCustomerAvailability to 0>>
+<<set $LowerDecksPlayerBusinessSupplyHubAccess to 0>>
+<<set $LowerDecksPlayerBusinessDangerLevel to 0>>
+<<set $LowerDecksPlayerBusinessTaxRate to 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit to 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches to 0>>
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch to 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour to 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour to 0>> 
+<<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0>>
+<<set $LowerDecksPlayerBusinessPriceOfOutput = 0>>
+<<set $LowerDecksPlayerBusinessAdjustedPricePerUnit = 0>>
+<<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0>>
+<<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
+<<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 
 <<set $LeinaDojoRep = 0>>
 <<set $LowerDecksCurrentScoutLocation = "">> <!-- Initialize the variable to store the current scout location -->

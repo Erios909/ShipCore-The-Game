@@ -1115,13 +1115,6 @@ window.showBusinessType = function(direction) {
 // Define the LowerDeckBusinessProfitability widget
 Macro.add('LowerDeckBusinessProfitability', {
     handler: function () {
-        // Initialize LowerDecksPlayerBusiness variables
-        State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0;
-        State.variables.LowerDecksPlayerBusinessPriceOfOutput = 0;
-        State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit = 0;
-        State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0;
-        State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0;
-        State.variables.LowerDecksPlayerBusinessProfitMarginPerHour = 0;
         // Check if the required arguments are provided
         if (this.args.length < 1) {
             return this.error('No business type specified for the LowerDeckBusinessProfitability widget.');
@@ -1135,46 +1128,90 @@ Macro.add('LowerDeckBusinessProfitability', {
         }
 
         var businessStats = State.variables.LowerDecksBusinessTypeStats[businessType];
-        var locationFactors = State.variables.LowerDecksBusinessStats; // This should be an array based on player's choice
 
-        // Set the batch size and employees per upgrade as state variables
-        State.variables.LowerDecksPlayerBusinessBatchSize = businessStats.BatchSize;
-        State.variables.LowerDecksPlayerBusinessEmployeesPerUpgrade = businessStats.EmployeesPerUpgrade;
+        // State.variables.LowerDecksBusinessStats is used here because it contains the dynamic location factors
+        // for the player's current business location. These factors are set when the player selects a location
+        // and are used in the profitability calculations to reflect the current state of the business.
+        var locationFactorsArray = State.variables.LowerDecksBusinessStats;
 
-        // Set the location factors as state variables
-        State.variables.LowerDecksPlayerBusinessCustomerAvailability = locationFactors[0];
-        State.variables.LowerDecksPlayerBusinessSupplyHubAccess = locationFactors[1];
-        State.variables.LowerDecksPlayerBusinessDangerLevel = locationFactors[2];
-        State.variables.LowerDecksPlayerBusinessTaxRate = locationFactors[3];
+        // Extract location factors from the array
+        var customerAvailability = locationFactorsArray[0];
+        var supplyHubAccess = locationFactorsArray[1];
+        var dangerLevel = locationFactorsArray[2];
+        var taxRate = locationFactorsArray[3];
 
-        // Calculate total input costs for one batch
-        State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0;
-        for (var input in businessStats.InputCosts) {
-            State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch += businessStats.InputCosts[input] * businessStats.BatchSize;
-        }
+        // Initialize calculated stats
+        var batchSize = businessStats.BatchSize;
+        var employeesPerUpgrade = businessStats.EmployeesPerUpgrade;
+        var employeeCost = businessStats.EmployeeCost; // Ensure this property is defined in your business stats
 
-        // Calculate the price of output based on profit and input costs
-        State.variables.LowerDecksPlayerBusinessPriceOfOutput = (businessStats.ProfitPerBatch + State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch) / businessStats.BatchSize;
+        // Initialize total input costs for one batch
+        var totalInputCostsForOneBatch = Object.values(businessStats.InputCosts).reduce(function (acc, cost) {
+            return acc + cost;
+        }, 0) * batchSize;
 
-        // Calculate penalties based on location factors
-        var customerAvailabilityPenalty = 1 - (locationFactors[0] / 100);
-        var supplyHubAccessPenalty = 1 - (locationFactors[1] / 100);
-        var dangerLevelPenalty = 1 - (locationFactors[2] / 100);
-        var taxRatePenalty = 1 - (locationFactors[3] / 100);
+        // Initialize total employee cost per hour
+        var totalEmployeeCostPerHour = employeesPerUpgrade * employeeCost;
 
-        // Calculate the adjusted sales price per unit
-        State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit = State.variables.LowerDecksPlayerBusinessPriceOfOutput * customerAvailabilityPenalty * supplyHubAccessPenalty * dangerLevelPenalty * taxRatePenalty;
+        // Define multipliers for each business type
+        var businessTypeMultipliers = {
+            "Space Bar and Lounge": {
+                "CustomerAvailabilityMultiplier": 111.01,
+                "SupplyHubAccessMultiplier": 1.01,
+                "DangerLevelMultiplier": 1.01,
+                "TaxRateMultiplier": 1.01
+            },
+            "Hydroponic Farm": {
+                "CustomerAvailabilityMultiplier": 1.02,
+                "SupplyHubAccessMultiplier": 1.02,
+                "DangerLevelMultiplier": 1.02,
+                "TaxRateMultiplier": 1.02
+            },
+            "Scrap Reprocessing": {
+                "CustomerAvailabilityMultiplier": 1.05,
+                "SupplyHubAccessMultiplier": 1.05,
+                "DangerLevelMultiplier": 1.05,
+                "TaxRateMultiplier": 1.05
+            }
+            // Add additional business types with their respective multipliers here
+        };
+
+        // Get the multipliers for the current business type
+        var multipliers = businessTypeMultipliers[businessType];
+
+        // Calculate penalties based on location factors and multipliers
+        var customerAvailabilityPenalty = Math.pow(1 - (customerAvailability / 100), multipliers.CustomerAvailabilityMultiplier);
+        var supplyHubAccessPenalty = Math.pow(1 - (supplyHubAccess / 100), multipliers.SupplyHubAccessMultiplier);
+        var dangerLevelPenalty = Math.pow(1 - (dangerLevel / 100), multipliers.DangerLevelMultiplier);
+        var taxRatePenalty = Math.pow(1 - (taxRate / 100), multipliers.TaxRateMultiplier);
+
+        // Calculate the adjusted sales price per unit using the penalties
+        var adjustedSalesPricePerUnit = businessStats.BasePriceOfOutput * customerAvailabilityPenalty * supplyHubAccessPenalty * dangerLevelPenalty * taxRatePenalty;
 
         // Calculate total sales price for all batches processed in one hour
-        State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit * businessStats.BatchSize;
-
-        // Calculate total employee cost per hour (not per batch)
-        State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour = businessStats.EmployeesPerUpgrade * -100;
+        var totalSalesPriceForAllBatches = adjustedSalesPricePerUnit * batchSize * businessStats.CyclesPerHour;
 
         // Calculate profit margin per hour
-        State.variables.LowerDecksPlayerBusinessProfitMarginPerHour = State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches - State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch - State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour;
+        var profitMarginPerHour = totalSalesPriceForAllBatches - (totalInputCostsForOneBatch * businessStats.CyclesPerHour) - totalEmployeeCostPerHour;
+
+        // Update state variables with the calculated stats
+        State.variables.LowerDecksPlayerBusinessBatchSize = batchSize;
+        State.variables.LowerDecksPlayerBusinessEmployeesPerUpgrade = employeesPerUpgrade;
+        State.variables.LowerDecksPlayerBusinessCustomerAvailability = customerAvailability;
+        State.variables.LowerDecksPlayerBusinessSupplyHubAccess = supplyHubAccess;
+        State.variables.LowerDecksPlayerBusinessDangerLevel = dangerLevel;
+        State.variables.LowerDecksPlayerBusinessTaxRate = taxRate;
+        State.variables.LowerDecksPlayerBusinessAdjustedPricePerUnit = adjustedSalesPricePerUnit;
+        State.variables.LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = totalSalesPriceForAllBatches;
+        State.variables.LowerDecksPlayerBusinessTotalInputCostsForOneBatch = totalInputCostsForOneBatch;
+        State.variables.LowerDecksPlayerBusinessTotalEmployeeCostPerHour = totalEmployeeCostPerHour;
+        State.variables.LowerDecksPlayerBusinessProfitMarginPerHour = profitMarginPerHour;
     }
 });
+
+
+
+
 
 
 
