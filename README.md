@@ -3,8 +3,34 @@
 ## Introduction
 Welcome aboard the space station MOR-1 in ShipCore, an immersive text-based adventure game set in a richly detailed universe. As a newly awakened member from cold storage, you'll face the remnants of a society clinging to survival. Your choices will determine your path through the station's decks and the stories you'll encounter.
 
-## Latest Updates
-### V0.0025 Hotpatch
+# Latest Updates
+## ShipCore: The Game - Update v0.0027 Change Log
+
+### New Features:
+
+- **Business Estimates Refactor:** Enhanced styling with a script to display initial business type.
+- **New Business-Related Features:** Additional features and styles for in-game businesses.
+- **Lower Deck Business Stats and Locations:** New statistics and locations for businesses on the Lower Deck.
+- **Relationship Journal:** A new journal feature to track player relationships with in-game characters.
+- **Jax's Positive Effect on Player:** New character interaction dynamic with Jax.
+- **Leina's Training and Story Flags:** New training sessions and story developments with Leina.
+- **Character Image Updates:** Updated dialogue and images for Leina.
+- **Companion Chat Feature:** Development started on a companion chat feature.
+- **Dynamic Conversations:** Enabling more realistic and variable NPC interactions.
+
+## Fixes and Improvements:
+
+- **Menu Bug Fixes:** Resolved issues with the game's menu system.
+- **Event Handler Enhancements:** Improved event handler system for more complex events.
+- **NPC Abstracting and Renaming:** Refined the companion system and reorganized NPC-related files.
+- **UI Improvements:** Enhanced right sidebar UI, including new border design.
+- **Companion System Updates:** Bug fixes and refinements in the companion menu.
+- **Portrait System Overhaul:** Improved player and NPC portrait systems.
+- **Codebase Organization:** Renamed and reorganized files and folders for better clarity.
+- **Miscellaneous Bug Fixes and Enhancements:** Various gameplay and stability improvements.
+
+
+## V0.0025 Hotpatch
 - Enhanced mood change system for more consistent gameplay.
 - Introduced a black market penalty system—watch out for law enforcement and rival criminals.
 - Added new character interactions, including a conversation with TheGrafter.
@@ -12,10 +38,10 @@ Welcome aboard the space station MOR-1 in ShipCore, an immersive text-based adve
 - You can now pay off your debt at the ATM located on the Lower Observation Deck.
 - Enjoy a new feature to view backgrounds, adding depth to your exploration.
 
-### V0.0022 & V0.0021 Hotpatches
+## V0.0022 & V0.0021 Hotpatches
 - Addressed and fixed reported bugs, including the Haven Apartment signing issue.
 
-### V0.002 Major Update
+## V0.002 Major Update
 - Time and needs mechanics introduced, simulating a living world where your actions have a real impact.
 - Employment opportunities expanded, offering various ways to earn credits.
 - Storage locker system implemented, providing a chance to uncover valuable items or face increased risk with illegal goods.
