@@ -1132,7 +1132,7 @@ Macro.add('LowerDeckBusinessProfitability', {
         // State.variables.LowerDecksBusinessStats is used here because it contains the dynamic location factors
         // for the player's current business location. These factors are set when the player selects a location
         // and are used in the profitability calculations to reflect the current state of the business.
-        var locationFactorsArray = State.variables.LowerDecksBusinessStats;
+        var locationFactorsArray = State.variables.LowerDecksPlayerBusinessLocationStats;
 
         // Extract location factors from the array
         var customerAvailability = locationFactorsArray[0];
@@ -1156,22 +1156,22 @@ Macro.add('LowerDeckBusinessProfitability', {
         // Define multipliers for each business type
         var businessTypeMultipliers = {
             "Space Bar and Lounge": {
-                "CustomerAvailabilityMultiplier": 111.01,
-                "SupplyHubAccessMultiplier": 1.01,
-                "DangerLevelMultiplier": 1.01,
-                "TaxRateMultiplier": 1.01
+                "CustomerAvailabilityMultiplier": .01,
+                "SupplyHubAccessMultiplier": .01,
+                "DangerLevelMultiplier": .01,
+                "TaxRateMultiplier": .01
             },
             "Hydroponic Farm": {
-                "CustomerAvailabilityMultiplier": 1.02,
-                "SupplyHubAccessMultiplier": 1.02,
-                "DangerLevelMultiplier": 1.02,
-                "TaxRateMultiplier": 1.02
+                "CustomerAvailabilityMultiplier": .02,
+                "SupplyHubAccessMultiplier": .02,
+                "DangerLevelMultiplier": .02,
+                "TaxRateMultiplier": .02
             },
             "Scrap Reprocessing": {
-                "CustomerAvailabilityMultiplier": 1.05,
-                "SupplyHubAccessMultiplier": 1.05,
-                "DangerLevelMultiplier": 1.05,
-                "TaxRateMultiplier": 1.05
+                "CustomerAvailabilityMultiplier": .05,
+                "SupplyHubAccessMultiplier": .05,
+                "DangerLevelMultiplier": .05,
+                "TaxRateMultiplier": .05
             }
             // Add additional business types with their respective multipliers here
         };
@@ -1180,13 +1180,14 @@ Macro.add('LowerDeckBusinessProfitability', {
         var multipliers = businessTypeMultipliers[businessType];
 
         // Calculate penalties based on location factors and multipliers
-        var customerAvailabilityPenalty = Math.pow(1 - (customerAvailability / 100), multipliers.CustomerAvailabilityMultiplier);
-        var supplyHubAccessPenalty = Math.pow(1 - (supplyHubAccess / 100), multipliers.SupplyHubAccessMultiplier);
-        var dangerLevelPenalty = Math.pow(1 - (dangerLevel / 100), multipliers.DangerLevelMultiplier);
-        var taxRatePenalty = Math.pow(1 - (taxRate / 100), multipliers.TaxRateMultiplier);
+        var customerAvailabilityPenalty = Math.pow(customerAvailability / 100, multipliers.CustomerAvailabilityMultiplier);
+        var supplyHubAccessPenalty = Math.pow(supplyHubAccess / 100, multipliers.SupplyHubAccessMultiplier);
+        var dangerLevelPenalty = Math.pow((100 - dangerLevel) / 100, multipliers.DangerLevelMultiplier);
+        var taxRatePenalty = Math.pow((100 - taxRate) / 100, multipliers.TaxRateMultiplier);
 
         // Calculate the adjusted sales price per unit using the penalties
         var adjustedSalesPricePerUnit = businessStats.BasePriceOfOutput * customerAvailabilityPenalty * supplyHubAccessPenalty * dangerLevelPenalty * taxRatePenalty;
+
 
         // Calculate total sales price for all batches processed in one hour
         var totalSalesPriceForAllBatches = adjustedSalesPricePerUnit * batchSize * businessStats.CyclesPerHour;

@@ -126,7 +126,7 @@
     <p>Jax crosses his arms, considering Dalton's words before turning to you.</p>
     <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"He's not wrong. Setting up a crew could give us the edge we need. And if it helps take down Braxton, I'm all for it."<</say>>
 <</if>>
-<<set $LowerDeckRecruitmentActive to true>>
+<<set $LowerDeckScoutActive to true>>
 
 <!-- Player choices after the conversation -->
 <div id="finalChoices"><<say '$player.name' $playerPortraitPathZ>>
@@ -161,6 +161,16 @@
 <p>Dalton's eyes light up with a spark of hope.</p>
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"That's the spirit! First, we need to gather a few willing fighters. Let's start at the dojo—there might be some folks there willing to stand up against Braxton."<</say>>
 <<addmins 5>>
+<<set $DaltonIsCompanion = true>>
+<!-- set Dalton to companion and add to slot -->
+    <<if $playerCompanions === undefined>>
+        <<set $playerCompanions to []>>
+    <</if>>
+    <<set _daltonPortrait to setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>
+    <<set _cardSetDalton to [{name: "CardD1"}, {name: "CardD2"}, {name: "CardD3"}]>>
+    <<CreateNPC _daltonPortrait "Dalton" 160 35 20 10 _cardSetDalton "Dalton is an experienced navigator." "Dalton Reed, a skilled navigator known for his tactical acumen, has an uncanny ability to find paths through the most challenging environments. His guidance could be essential in navigating the complexities of your journey.">>
+    <<set $playerCompanions.push('NPCDalton')>>
+    <<update>>
 [[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
 <</fadein>>
 <</nobr>>
@@ -172,6 +182,16 @@
 <p>Dalton nods with a shrewd smile.</p>
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Smart thinking. We'll need funds to support our cause. I know a few places where we can start making some deals. Let's head to the market district and see what opportunities we can find."<</say>>
 <<addmins 5>>
+<<set $DaltonIsCompanion = true>>
+<!-- set Dalton to companion and add to slot -->
+    <<if $playerCompanions === undefined>>
+        <<set $playerCompanions to []>>
+    <</if>>
+    <<set _daltonPortrait to setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>
+    <<set _cardSetDalton to [{name: "CardD1"}, {name: "CardD2"}, {name: "CardD3"}]>>
+    <<CreateNPC _daltonPortrait "Dalton" 160 35 20 10 _cardSetDalton "Dalton is an experienced navigator." "Dalton Reed, a skilled navigator known for his tactical acumen, has an uncanny ability to find paths through the most challenging environments. His guidance could be essential in navigating the complexities of your journey.">>
+    <<set $playerCompanions.push('NPCDalton')>>
+    <<update>>
 [[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
 <</fadein>>
 <</nobr>>
@@ -183,6 +203,16 @@
 <p>Dalton gives you a calculating look.</p>
 <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Power, eh? Well, you'll need allies and resources. We should start by making some connections. The dojo is a good place to find fighters, and the bars might have people looking for work."<</say>>
 <<addmins 5>>
+<<set $DaltonIsCompanion = true>>
+<!-- set Dalton to companion and add to slot -->
+    <<if $playerCompanions === undefined>>
+        <<set $playerCompanions to []>>
+    <</if>>
+    <<set _daltonPortrait to setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>
+    <<set _cardSetDalton to [{name: "CardD1"}, {name: "CardD2"}, {name: "CardD3"}]>>
+    <<CreateNPC _daltonPortrait "Dalton" 160 35 20 10 _cardSetDalton "Dalton is an experienced navigator." "Dalton Reed, a skilled navigator known for his tactical acumen, has an uncanny ability to find paths through the most challenging environments. His guidance could be essential in navigating the complexities of your journey.">>
+    <<set $playerCompanions.push('NPCDalton')>>
+    <<update>>
 [[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>
 <</fadein>>
 <</nobr>>

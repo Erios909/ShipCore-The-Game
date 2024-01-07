@@ -302,7 +302,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 "This is a lot to think about. I'll need some time to figure out what we do."
 <</say>>
 <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"I'll follow you. We should do whatever you think is best."<</say>>
-<<set $LowerDeckRecruitmentActive to true>>
+<<set $LowerDeckScoutActive to true>>
 <<say '$player.name' $playerPortraitPathZ>>
     <<link "Let's see about earning some credits first." "Lower Decks">><</link>><br>
     <<link "Let's go look for some people to hire." "The Last Home">><</link>><br>

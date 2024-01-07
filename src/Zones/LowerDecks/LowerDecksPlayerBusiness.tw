@@ -1,72 +1,70 @@
 :: LowerDecksPlayerBusiness [poi nobr] {"position":"200,1200","size":"100,100"}
 <<nobr>>
-    <!-- Set background based on state. -->
-    <<if $LowerDecksPlayerBusinessFirstRun === undefined>>
-        <<set $LowerDecksPlayerBusinessFirstRun to 1>>
-        <<set $LowerDecksPlayerBusinessBackgroundImageChoice to setup.ImagePath+'/locs/mor1/business/derelictbuilding.jpg'>>
-    <</if>>
+    <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
 
-    <<setBackground $LowerDecksPlayerBusinessBackgroundImageChoice>>
-<<if $LowerDecksPlayerBusinessState <= 2 || $LowerDecksPlayerBusinessState === undefined>>
-        <<set $location to {
-            name: "Meltisar System, MOR-1, Lower Decks",
-            outside: false,
-            vacuum: false,
-            temperature: true
-        }>>
-    <<else>>
-        <<set $location to {
-        name: "Meltisar System, MOR-1," + $LowerDecksPlayerBusinessLocation,
+    /* Mapping of business types to background images */
+    <<set $businessTypeToImage = {
+        "Space Bar and Lounge": "humanservices.jpg",
+        "Hydroponic Farm": "hydroponics.jpg",
+        "Scrap Reprocessing": "scrapprocessing.jpg"
+    }>>
+
+    /* Get the current business type */
+    <<set $businessType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
+
+    /* Set the background image based on the current business type */
+    <<set $backgroundImage = setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/' + $businessTypeToImage[$businessType]>>
+    <<setBackground $backgroundImage>>
+
+    /* Rest of the passage code... */
+
+    <<set $location to {
+        name: "Meltisar System, MOR-1," + $LowerDecksBusinessLocation,
         outside: false,
         vacuum: false,
         temperature: true
     }>>
-<</if>>
 
-<<addmins $timeadd>>
-<h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: #FFD700; font-weight: bold; font-size: 24px;"><<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>></span></h2>
-<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
-<h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
-<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+    <<addmins $timeadd>>
 
-<<if $LowerDecksPlayerBusinessState <= 1 && $LowerDecksPlayerBusinessFirstRun == 0 || $LowerDecksPlayerBusinessState <= 1 && $LowerDecksPlayerBusinessFirstRun === undefined>> <!-- First time here, no business setup -->
-        <p>You stand in the hall, considering your next moves on setting up the business.<<if $JaxIsCompanion === undefined>><<elseif $JaxIsCompanion == 1>> Jax leans against the wall waiting for you to decide where to scout first.</p><br><</if>>
-    <!-- No business setup -->
-    <<elseif $LowerDecksPlayerBusinessState == 2>> 
-        <p>You stand in the hall, considering your next moves. <<if $LowerDecksPlayerBusinessScouted >= 1 && <=4>>You've scouted some areas, but it might be good to scout more.<<elseif $LowerDecksPlayerBusinessScouted >=5>>You've scouted the entire Lower Decks exhaustively. It's just up to you to make a decision.</p><br><</if>>
-    <!-- Business Location Set, but no progress -->
-    <<elseif $LowerDecksPlayerBusinessState == 3>> 
-        <p>You stand in the empty shell of what will soon become your business empire. The walls are bare, and the echo of your footsteps is a stark reminder of the work that lies ahead.</p><br>
-    <!-- Player has setup some stuff -->
-    <<else>> 
-        <p><<=$LowerDecksPlayerBusinessLongDesc>></p><br>
-<</if>>
+    <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
+        <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
+            <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
+        </span>
+    </h2>
+    <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
+    <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;">
+        <span style="font-size: 14px;"><<= $location.name >></span>
+    </h2>
+    <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-<<if $LowerDecksPlayerBusinessState == 3>>
-<!-- LDPB Main Menu -->
-<!-- Location Scouting -->
-[[Scout for a location|LowerDecksPlayerBusinessScouting][$LowerDecksPlayerBusinessState = 2; $timeadd += 30]]<br>
+    <<LowerDeckBusinessStats>>
 
-<!-- Equipment Management -->
-[[Manage your equipment|LowerDecksPlayerBusinessEquipmentManagement][$timeadd += 1]]<br>
+    <<if $LowerDecksPlayerBusinessState == 3>>
+        <!-- LDPB Main Menu -->
+        <!-- Location Scouting -->
+        [[Scout for a location|LowerDecksPlayerBusinessScouting][$LowerDecksPlayerBusinessState = 2; $timeadd += 30]]<br>
 
-<!-- Resource Management -->
-[[Allocate your resources|LowerDecksPlayerBusinessResourceManagement][$timeadd += 1]]<br>
+        <!-- Equipment Management -->
+        [[Manage your equipment|LowerDecksPlayerBusinessEquipmentManagement][$timeadd += 1]]<br>
 
-<!-- Hiring Companions -->
-[[Manage your employees|LowerDecksPLayerBusinessManageEmployees][$timeadd += 2]]<br>
+        <!-- Resource Management -->
+        [[Allocate your resources|LowerDecksPlayerBusinessResourceManagement][$timeadd += 1]]<br>
 
-<!-- Customization and Upgrades -->
-[[Customize and upgrade your business|LowerDecksPLayerBusinessBusinessUpgrades][$timeadd += 2]]<br>
+        <!-- Hiring Companions -->
+        [[Manage your employees|LowerDecksPLayerBusinessManageEmployees][$timeadd += 2]]<br>
 
-<!-- Defenses Against Braxton -->
-[[Invest in security to protect against Braxton|LowerDecksPLayerBusinessBusinessDefenses][$timeadd += 1]]<br>
-<</if>>
+        <!-- Customization and Upgrades -->
+        [[Customize and upgrade your business|LowerDecksPLayerBusinessBusinessUpgrades][$timeadd += 2]]<br>
 
+        <!-- Defenses Against Braxton -->
+        [[Invest in security to protect against Braxton|LowerDecksPLayerBusinessBusinessDefenses][$timeadd += 1]]<br>
+    <</if>>
 
-Travel:<br>
-[[Return to the hustle and bustle of MOR-1.|Lower Decks][$timeadd = 5]]<br>
+    <<PrintBusinessEstimates>>
 
-The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.
+    Travel:<br>
+    [[Return to the hustle and bustle of MOR-1.|Lower Decks][$timeadd = 5]]<br>
+
+    The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.
 <</nobr>>
-

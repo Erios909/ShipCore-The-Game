@@ -22,7 +22,7 @@ Places of Interest:<br>
 <<if $LowerDecksCurrentScoutLocation === undefined>>
     <<set $LowerDecksCurrentScoutLocation = passage()>>
 <</if>>
-<<if $LowerDeckRecruitmentActive>>
+<<if $LowerDeckScoutActive>>
     <<set $LowerDecksCurrentScoutLocation = passage()>>
     Business Scouting:<br>
     <<link "Scout the Lower Wharf">><<goto "Lower Wharf Scout">><</link>><br><br>
