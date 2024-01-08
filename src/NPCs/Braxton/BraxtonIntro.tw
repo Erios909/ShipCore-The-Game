@@ -83,7 +83,7 @@ His goons move in, and you know that talking is no longer an option. It's time t
     <<changemoods "health" "major" "NegEffectOnPlayer">><br>
     <<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
 
-    <<AddEventToStack "DaltonFirstEvent" "DaltonIntro">>
+    
 <<set $DaltonReveal to 0>>
 <<link "Thrashed." "BraxtonThrashed">><<addmins 60>><</link>>
 <</nobr>>

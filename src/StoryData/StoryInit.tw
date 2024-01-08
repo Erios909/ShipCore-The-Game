@@ -187,6 +187,22 @@ $lowerdecksFabricatorCyberware
     }
 }>>
 
+<<set $LowerDecksBusinessProcessingSummary to {
+        production: 0,
+        revenue: 0,
+        expenses: {
+            total: 0,
+            wages: 0,
+            inputCosts: 0
+        },
+        netGains: 0,
+        taxes: 0,
+        netGainsAfterTax: 0,
+        debtIncrease: 0,
+        creditsIncrease: 0,
+        remainingMinutes: 0
+    }>>
+
 <<set setup.LowerDeckLocations = {
     "Lower Deck Promenade": [8, 9, 3, 7, 8],
     "Habitation Cells": [5, 5, 4, 4, 6],

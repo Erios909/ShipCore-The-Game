@@ -189,9 +189,10 @@ $(document).one(':passagedisplay', function (ev) {
         </div>
         <div class="confirm-button">
             <<button "Confirm Location and Business Type">>
+                <<set $LowerDeckScoutActive = false>>
                 <<set $LowerDecksPlayerBusinessActive = true>>
                 <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
-                <<set $LowerDecksPlayerBusinessStartType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
+                <<set $LowerDecksPlayerSelectedBusinessTypeName = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
                 <<goto "LowerDecksPlayerBusiness">>
             <</button>>
         </div>
@@ -241,11 +242,11 @@ $(document).one(':passagedisplay', function (ev) {
 <</switch>></p>
 
 <p>In terms of finances, the <<switch (_taxRate)>>
-    <<case 1 to 2>><span class="ldbs-low">favorable tax conditions</span>
-    <<case 3 to 4>><span class="ldbs-moderate">manageable tax obligations</span>
-    <<case 5 to 6>><span class="ldbs-average">standard tax rates</span>
-    <<case 7 to 8>><span class="ldbs-high">heavy tax liabilities</span>
-    <<case 9 to 10>><span class="ldbs-very-high">severe tax demands</span>
+    <<case 1 to 2>><span class="ldbs-very-high">favorable tax conditions</span>
+    <<case 3 to 4>><span class="ldbs-high">manageable tax obligations</span>
+    <<case 5 to 6>><span class="ldbs-moderate">standard tax rates</span>
+    <<case 7 to 8>><span class="ldbs-low">heavy tax liabilities</span>
+    <<case 9 to 10>><span class="ldbs-very-low">severe tax demands</span>
 <</switch>> and the <<switch (_setupCost)>>
     <<case 1 to 2>><span class="ldbs-low">low initial outlay,</span>
     <<case 3 to 4>><span class="ldbs-moderate">reasonable startup costs,</span>
@@ -298,11 +299,11 @@ $(document).one(':passagedisplay', function (ev) {
 <</switch>></p>
 
 <p>In terms of finances, the <<switch (_taxRate)>>
-    <<case 1 to 2>><span class="ldbs-low">favorable tax incentives for agricultural ventures</span>
-    <<case 3 to 4>><span class="ldbs-moderate">reasonable tax rates for small businesses</span>
-    <<case 5 to 6>><span class="ldbs-average">standard tax rates applicable to commercial operations</span>
-    <<case 7 to 8>><span class="ldbs-high">significant tax considerations for larger enterprises</span>
-    <<case 9 to 10>><span class="ldbs-very-high">heavy tax burdens for major agricultural producers</span>
+    <<case 1 to 2>><span class="ldbs-very-high">favorable tax incentives for agricultural ventures</span>
+    <<case 3 to 4>><span class="ldbs-high">reasonable tax rates for small businesses</span>
+    <<case 5 to 6>><span class="ldbs-moderate">standard tax rates applicable to commercial operations</span>
+    <<case 7 to 8>><span class="ldbs-low">significant tax considerations for larger enterprises</span>
+    <<case 9 to 10>><span class="ldbs-very-low">heavy tax burdens for major agricultural producers</span>
 <</switch>> and the <<switch (_setupCost)>>
     <<case 1 to 2>><span class="ldbs-low">minimal initial investment,</span>
     <<case 3 to 4>><span class="ldbs-moderate">manageable startup expenses,</span>
@@ -355,11 +356,11 @@ $(document).one(':passagedisplay', function (ev) {
 <</switch>></p>
 
 <p>In terms of finances, the <<switch (_taxRate)>>
-    <<case 1 to 2>><span class="ldbs-low">favorable tax incentives for recycling operations</span>
-    <<case 3 to 4>><span class="ldbs-moderate">manageable tax rates for industrial services</span>
-    <<case 5 to 6>><span class="ldbs-average">standard tax rates applicable to manufacturing businesses</span>
-    <<case 7 to 8>><span class="ldbs-high">significant tax considerations for large-scale processors</span>
-    <<case 9 to 10>><span class="ldbs-very-high">heavy tax burdens for major industrial facilities</span>
+    <<case 1 to 2>><span class="ldbs-very-high">favorable tax incentives for recycling operations</span>
+    <<case 3 to 4>><span class="ldbs-high">manageable tax rates for industrial services</span>
+    <<case 5 to 6>><span class="ldbs-moderate">standard tax rates applicable to manufacturing businesses</span>
+    <<case 7 to 8>><span class="ldbs-low">significant tax considerations for large-scale processors</span>
+    <<case 9 to 10>><span class="ldbs-very-low">heavy tax burdens for major industrial facilities</span>
 <</switch>> and the <<switch (_setupCost)>>
     <<case 1 to 2>><span class="ldbs-low">minimal initial investment for basic operations,</span>
     <<case 3 to 4>><span class="ldbs-moderate">reasonable startup expenses for essential machinery,</span>
@@ -367,6 +368,7 @@ $(document).one(':passagedisplay', function (ev) {
     <<case 7 to 8>><span class="ldbs-high">considerable upfront costs for advanced reprocessing technology,</span>
     <<case 9 to 10>><span class="ldbs-very-high">substantial financial outlay for a state-of-the-art reprocessing plant,</span>
 <</switch>> will play a crucial role in shaping the business plan for the Scrap Reprocessing Facility.</p>
+
 <<LowerDeckBusinessProfitability "Scrap Reprocessing">>
 <<PrintBusinessEstimates>>
 <!-- Add more gameplay focus and potential game features here -->

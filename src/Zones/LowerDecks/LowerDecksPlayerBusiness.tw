@@ -32,83 +32,143 @@
         temperature: true
     }>>
     <<addmins $timeadd>>
+<div class="bizheading">
     <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
         <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
             <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
         </span>
     </h2>
     <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
-    <div id="locationHeadingContainer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 10px;">
-    <h2 id="locationHeading" style="font-size: 14px; margin: 0;">
-        <<= $location.name >>
-    </h2>
-    <<link "Exit Business">><<goto "Lower Decks">><</link>>
+    <div id="bizlocationHeadingContainer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+        <h2 id="locationHeading" style="font-size: 14px; margin: 0;">
+            <<= $location.name >>
+        </h2>
+        <<link "Exit Business">><<goto "Lower Decks">><</link>>
+        <<link "Advance 1 Hour">><<addmins 60>><<update>><<updatebar>><</link>>
+        <<link "Advance 6 Hours">><<addmins 360>><<update>><<updatebar>><</link>>
+        <<link "Advance 12 Hours">><<addmins 720>><<update>><<updatebar>><</link>>
+        <<link "Advance 2 Days">><<addmins 2880>><<update>><<updatebar>><</link>>
+        <<link "Advance 1 Month">><<addmins 43200>><<update>><<updatebar>><</link>>
+    </div>
 </div>
+
 
 
     <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
         <!--- top display of stats -->
-        <div id="business-active-stats"><<liveblock>><<LowerDecksPlayerBusinessActiveStats>><</liveblock>></div>
+    <div id="business-active-stats"><<liveblock>><<LowerDecksPlayerBusinessActiveStats>><</liveblock>></div>
 
-    <div class="business-section-wrapper">
-        <!--- business management buttons -->
-        <div id="active-business-actions">
-            <<button "Employee Management">>
-                <<run $('#ldpb-employee-management').toggleClass('show').siblings('.business-section').removeClass('show')>>
-            <</button>>
+        <div class="business-section-wrapper">
+            <!-- business management buttons -->
+            <div id="active-business-actions">
+                <<button "Employee Management">>
+                    <<run updateType('ldpb-employee-management')>>
+                <</button>>
 
-            <<button "Business Upgrades">>
-                <<run $('#ldpb-business-upgrades').toggleClass('show').siblings('.business-section').removeClass('show')>>
-            <</button>>
+                <<button "Business Upgrades">>
+                    <<run updateType('ldpb-business-upgrades')>>
+                <</button>>
 
-            <<button "Business Banking">>
-                <<run $('#ldpb-business-banking').toggleClass('show').siblings('.business-section').removeClass('show')>>
-            <</button>>
+                <<button "Business Banking">>
+                    <<run updateType('ldpb-business-banking')>>
+                <</button>>
 
-            <<button "Business Addons">>
-                <<run $('#ldpb-business-addons').toggleClass('show').siblings('.business-section').removeClass('show')>>
-            <</button>>
+                <<button "Business Addons">>
+                    <<run updateType('ldpb-business-addons')>>
+                <</button>>
+            </div>
         </div>
 
 
+
         <hr id="#HuDHr">
-        <div id="ldpb-employee-management" class="business-section">
+        <div class="ldpb-employee-management" type="business-section">
             <!-- Employee Management Content -->
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
             <hr id="#HuDHr">
         </div>
-        <div id="ldpb-business-upgrades" class="business-section">
+        <div class="ldpb-business-upgrades" type="business-section">
             <!-- Business Upgrades Content -->
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
             <hr id="#HuDHr">
         </div>
-        <div id="ldpb-business-banking" class="business-section">
+        <div class="ldpb-business-banking" type="business-section">
             <!-- Business Banking Content -->
-            <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
-            <hr id="#HuDHr">
+            <<liveblock>><div class="banking-container">
+                <!-- Credits Box -->
+                <div class="banking-box-credits-box">
+                    <div class="ldpb-business-banking-player-name"><<=$player.name>> Credits: $<<print $player.credits.toFixed(2)>></div>
+                    <div class="ldpb-business-banking-paylink">
+                        <<link "Withdraw Credits">>
+                            <<set _creditAmount to Number(_creditAmount.toString().trim())>> <!-- Convert to string before trimming -->
+                            <<if not isNaN(_creditAmount) and _creditAmount > 0 and _creditAmount <= $LowerDecksPlayerBusinessCredits>>
+                                <<set $player.credits += _creditAmount>>
+                                <<set $LowerDecksPlayerBusinessCredits -= _creditAmount>>
+                                <<update>>
+                            <<else>>
+                                
+                            <</if>>
+                        <</link>>
+                    </div>
+                    <div class="banking-box-textbox"><<textbox "_creditAmount" "1000">></div>
+                    <div class="ldpb-business-banking-paylink"><<link "Deposit Credits">>
+                        <<set _creditAmount to Number(_creditAmount.toString().trim())>> <!-- Convert to string before trimming -->
+                        <<if not isNaN(_creditAmount) and _creditAmount > 0 and _creditAmount <=$player.credits >>
+                            <<set $player.credits -= _creditAmount>>
+                            <<set $LowerDecksPlayerBusinessCredits += _creditAmount>>
+                            <<update>>
+                        <<else>>
+                            
+                        <</if>>
+                    <</link>></div>
+                    <div class="ldpb-business-banking-buisness-name"><<=$LowerDecksPlayerBusinessName>> Credits: $<<print $LowerDecksPlayerBusinessCredits.toFixed(2)>></div>
+                </div>
+                <!-- Debt Box -->
+                <div class="banking-box-debt-box">
+                    <div class="ldpb-business-banking-player-name"><<=$player.name>> Debt: $<<print $player.debt.toFixed(2)>></div>
+                    <div class="ldpb-business-banking-paylink">
+                        <<link "Pay Off Business Debt">>
+                            <<set _debtAmount to Number(_debtAmount.toString().trim())>>
+                            <<if not isNaN(_debtAmount) and _debtAmount > 0 and _debtAmount <= $player.credits>>
+                                <<set $player.credits -= _debtAmount>>
+                                <<set $LowerDecksPlayerBusinessDebt = Math.max($LowerDecksPlayerBusinessDebt - _debtAmount, 0)>>
+                                <<update>>
+                            <</if>>
+                        <</link>>
+                    </div>
+                    <div class="banking-box-textbox"><<textbox "_debtAmount" "1000">></div>
+                    <div class="ldpb-business-banking-paylink-business"><<link "Business Pays Its Debt">>  
+                            <<set _debtAmount to Number(_debtAmount.toString().trim())>>
+                            <<if not isNaN(_debtAmount) and _debtAmount > 0 and _debtAmount <= $LowerDecksPlayerBusinessCredits>>
+                                <<set $LowerDecksPlayerBusinessCredits -= _debtAmount>>
+                                <<set $LowerDecksPlayerBusinessDebt = Math.max($LowerDecksPlayerBusinessDebt - _debtAmount, 0)>>
+                                <<update>>
+                            <</if>>
+                        <</link>>
+                    </div>
+                    <div class="ldpb-business-banking-buisness-name"><<=$LowerDecksPlayerBusinessName>> Debt: $<<print $LowerDecksPlayerBusinessDebt.toFixed(2)>></div>
+                </div>
+            </div><</liveblock>>
+            <hr id="HuDHr">
         </div>
-        <div id="ldpb-business-addons" class="business-section">
+
+        <div class="ldpb-business-addons" type="business-section">
             <!-- Business Addons Content -->
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
             <hr id="#HuDHr">
         </div>
         <hr id="#HuDHr">
-    </div>
-        
+    
+    
+
+    <<liveblock>><<LowerDecksBusinessReport>><</liveblock>>
+
+
     <<liveblock>><<PrintBusinessEstimates>><</liveblock>>
     
 
-
     <<liveblock>><<LowerDeckBusinessStats>><</liveblock>>
     
-
-    Travel:<br>
-    [[Return to the hustle and bustle of MOR-1.|Lower Decks][$timeadd = 5]]<br>
-
-   <!-- Narrative paragraph below travel -->
-    <div id="business-narrative">
-        The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.
-    </div>
 <</nobr>>
 
