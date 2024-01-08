@@ -31,7 +31,7 @@
               /* Play the random track */
               SimpleAudio.tracks.get(nextTrack).play();
               window.currentTrack = nextTrack;
-              /* window.setupTrackEndCallback(filteredSongList[nextTrackIndex]); */
+              window.setupTrackEndCallback(filteredSongList[nextTrackIndex]);
           }, trackDuration * 1000 + 1000);
           console.log("Playing next track in " + (trackDuration * 1000 + 1000) + "ms after we are finished playing " + track);
       };
