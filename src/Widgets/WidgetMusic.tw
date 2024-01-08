@@ -2,10 +2,9 @@
 <<widget "PlayTrack">>
     <<script>>
       window.currentTrackTimeout = null;
-      window.currentTrack = null;
-
+      
       window.setupTrackEndCallback = function(track) {
-          if (track == window.currentTrack){
+          if (window.currentTrack != null){
               return;
           }
           var trackObj = SimpleAudio.tracks.get(track);
