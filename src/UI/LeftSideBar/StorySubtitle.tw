@@ -1,6 +1,7 @@
 :: StorySubtitle {"position":"175,75","size":"100,100"}
-<<nobr>><<set $isMuted to false>>
+<<nobr>>
 <<set $isMuted to false>>
+<<PlayTrack>>    
 <<set $previousVolume to 0.5>> <!-- Set to your default volume level -->
 <<set $buttonLabel to "Mute Toggle">>
 

@@ -5,21 +5,44 @@
       window.currentTrack = null;
 
       window.setupTrackEndCallback = function(track) {
+          if (track == window.currentTrack){
+              return;
+          }
           var trackObj = SimpleAudio.tracks.get(track);
           var trackDuration = trackObj.duration();
+          trackObj.volume(0.2);
+          
           if (window.currentTrack){
               var currentTrackObj = SimpleAudio.tracks.get(window.currentTrack);
               currentTrackObj.stop();
               window.currentTrack = null;
           }
+          
           if (window.currentTrackTimeout !== null) {
               clearTimeout(window.currentTrackTimeout);
               window.currentTrackTimeout = null;
           }
 
+          window.currentTrack = track;
+          trackObj.play();
+          if (isNaN(trackDuration) || !trackObj.isPlaying()){
+              window.currentTrack = null;
+              /* Try again 3 seconds later if the user has interacted with browser. */
+              if (window.currentTrackTimeout !== null) {
+                  clearTimeout(window.currentTrackTimeout);
+                  window.currentTrackTimeout = null;
+              }
+              window.currentTrackTimeout = setTimeout(function() {
+                  window.setupTrackEndCallback(track);
+              }, 3000); /* Wait 3 seconds before bombarding the user with sound requests. */
+              console.log("omg!!");
+              return;
+          }
+
           window.currentTrackTimeout = setTimeout(function() {
               var nextTrackIndex;
               var nextTrack;
+              window.currentTrack = null;
 
               /* Get a filtered list of tracks excluding the current one */
               var filteredSongList = setup.songList.filter(function(t) { return t !== track; });
@@ -27,29 +50,11 @@
               /* Select a random track from the filtered list */
               nextTrackIndex = Math.floor(Math.random() * filteredSongList.length);
               nextTrack = filteredSongList[nextTrackIndex];
-
-              /* Play the random track */
-              SimpleAudio.tracks.get(nextTrack).play();
-              window.currentTrack = nextTrack;
               window.setupTrackEndCallback(filteredSongList[nextTrackIndex]);
           }, trackDuration * 1000 + 1000);
           console.log("Playing next track in " + (trackDuration * 1000 + 1000) + "ms after we are finished playing " + track);
       };
       <</script>>
-    /* If a track ID is passed as an argument, update the current song index */
-    <<if $args[0]>>
-    <<set setup.currentSongIndex to $args[0]>>
-    <</if>>
-
-    /* Get the current track ID */
-    <<set _nextTrack to setup.songList[setup.currentSongIndex]>>
-
-    /* Check if the track exists and is not currently playing */
-    <<if TrackExists(_nextTrack) and not isPlaying(_nextTrack)>>
-    /* Stop all playing audio */
-    <<masteraudio stop>>
-    /* Play the current track */
-    <<audio _nextTrack volume 0.2 play>>
-    <<run window.setupTrackEndCallback(_nextTrack)>>
-    <</if>>
+    <<run window.setupTrackEndCallback("music1")>>
+    <<run window.console.log("woah maaaaaaan")>>
 <</widget>>
