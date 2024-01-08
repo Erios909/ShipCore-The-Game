@@ -4,8 +4,8 @@
 <</if>>
 <<liveblock>>
     <<if $playerCompanions.length > 0>>
-        <<for _companionName range $playerCompanions>>
-            <<set _companionVar to State.variables[_companionName]>>
+        <<for _companionNPCID range $playerCompanions>>
+            <<set _companionVar to State.variables[_companionNPCID]>>
             <strong>Name:</strong> <<print _companionVar.name>><br>
             <strong>Portrait:</strong> 
             <div class="companion-portrait">
@@ -20,27 +20,27 @@
             <strong>Long Description:</strong> <<print _companionVar.longDesc>><br>
             <hr>
             <<print _jaxPortrait>>
+            <br>
         <</for>>
     <<else>>
         <p>No companions to display.</p>
     <</if>>
 <</liveblock>>
 
+
 <br>
 
 <<button "Add 'Jax' Companion">>
     <<set _jaxPortrait to setup.ImagePath+'/characters/minor/jax.jpg'>>
-    
     <<set _cardSetJax to [{name: "CardJ1"}, {name: "CardJ2"}, {name: "CardJ3"}]>>
     <<CreateNPC _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
-    <<set $playerCompanions.push('NPCJax')>>
+    <<set $playerCompanions.push(State.variables["newestNPCID"])>>
     <<update>>
 <</button>><br>
 
 <<button "Add Random Companion">>
     <<set _randomPortraitPaths to Object.values(setup.MercImages)>>
     <<set _randomPortrait to setup.ImagePath + _randomPortraitPaths.random()>>
-    
     <<set _randomName to ["Alex", "Morgan", "Riley", "Jordan", "Casey"].random()>>
     <<set _randomMaxHP to random(100, 200)>>
     <<set _randomATK to random(20, 40)>>
@@ -49,13 +49,11 @@
     <<set _randomCardSet to [{name: "CardR1"}, {name: "CardR2"}, {name: "CardR3"}]>>
     <<set _randomShortDesc to ["A skilled explorer.", "A cunning tactician.", "A brave warrior."].random()>>
     <<set _randomLongDesc to ["An adventurer with a knack for survival.", "A strategic mind, always two steps ahead.", "A fearless fighter with a strong sense of justice."].random()>>
-    <<set _companionID to "NPC" + _randomName>>
     <<CreateNPC _randomPortrait _randomName _randomMaxHP _randomATK _randomDEF _randomSPD _randomCardSet _randomShortDesc _randomLongDesc>>
-    <<set $playerCompanions.push(_companionID)>>
+    <<set _companionNPCID to State.variables["newestNPCID"]>>
+    <<set $playerCompanions.push(_companionNPCID)>>
     <<update>>
 <</button>><br>
-
-
 
 
 <br>
@@ -66,8 +64,8 @@
 
 <<button "Remove Last Companion">>
     <<if $playerCompanions.length > 0>>
-        <<set _lastCompanionName to $playerCompanions.pop()>>
-        <<run delete State.variables[_lastCompanionName]>>
+        <<set _lastCompanionNPCID to $playerCompanions.pop()>>
+        <<run delete State.variables[_lastCompanionNPCID]>>
         <<set _noComp to 2>> /* Companion removed */
         <<update>>
     <<else>>
@@ -77,8 +75,8 @@
 
 <<button "Remove First Companion">>
     <<if $playerCompanions.length > 0>>
-        <<set _firstCompanionName to $playerCompanions.shift()>>
-        <<run delete State.variables[_firstCompanionName]>>
+        <<set _firstCompanionNPCID to $playerCompanions.shift()>>
+        <<run delete State.variables[_firstCompanionNPCID]>>
         <<set _noComp to 2>>
         <<update>>
     <<else>>
@@ -89,8 +87,8 @@
 <<textbox "$companionIndex" "Enter index">><br>
 <<button "Remove Companion by Index">>
     <<if $playerCompanions.length > 0 and not isNaN($companionIndex) and parseInt($companionIndex) == $companionIndex and $companionIndex >= 0 and $companionIndex < $playerCompanions.length>>
-        <<set _companionName to $playerCompanions.deleteAt(parseInt($companionIndex))>>
-        <<run delete State.variables[_companionName]>>
+        <<set _companionNPCID to $playerCompanions.deleteAt(parseInt($companionIndex))>>
+        <<run delete State.variables[_companionNPCID]>>
         <<set _noComp to 2>>
         <<update>>
     <<else>>
@@ -109,8 +107,8 @@
         <</if>>
     <</for>>
     <<if _indexToRemove != -1>>
-        <<set _companionName to $playerCompanions.deleteAt(_indexToRemove)>>
-        <<run delete State.variables[_companionName]>>
+        <<set _companionNPCID to $playerCompanions.deleteAt(_indexToRemove)>>
+        <<run delete State.variables[_companionNPCID]>>
         <<set _noComp to 2>>
         <<update>>
     <<else>>

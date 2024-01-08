@@ -77,9 +77,6 @@
                 </span>
             </div>
 
-
-
-
         <<else>>
             <p>No companion selected</p>
         <</if>>

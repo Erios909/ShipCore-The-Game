@@ -2,55 +2,61 @@
 
 
 /*
-	Debug Settings.
+Debug Settings.
 */
 (function () {
-	Setting.addHeader("Debug Settings");
+Setting.addHeader("Debug Settings");
 
-	function initSettingDebug() {
-		Config.debug = settings.debug;
-	}
-	Setting.addToggle("debug", {
-		label    : "Enable test/debug mode?",
-		default  : false,
-		onInit   : initSettingDebug,
-		onChange : function () {
-			initSettingDebug();
-			window.location.reload();
-		}
-	});
+function initSettingDebug() {
+Config.debug = settings.debug;
+}
+Setting.addToggle("debug", {
+label    : "Enable test/debug mode?",
+default  : false,
+onInit   : initSettingDebug,
+onChange : function () {
+initSettingDebug();
+window.location.reload();
+}
+});
 })();
 
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
-	// Change this to the path where the HTML file is
-	// located if you want to run this from inside Twine.
-	setup.Path = "C:\Users\Documents\Twine\Scratch";  // Running inside Twine application
+// Change this to the path where the HTML file is
+// located if you want to run this from inside Twine.
+setup.Path = "C:\Users\Documents\Twine\Scratch";  // Running inside Twine application
 } else { 
-	setup.Path = "";  // Running in a browser
+setup.Path = "";  // Running in a browser
 }
 setup.ImagePath = setup.Path + "images/";
 setup.SoundPath = setup.Path + "sounds/music/";
 
 $(document).on(':passagestart', function (ev) {
-	if (!ev.passage.tags.includes('noreturn')) {
-		State.variables.return = ev.passage.title;
-	}
+if (!ev.passage.tags.includes('noreturn')) {
+State.variables.return = ev.passage.title;
+}
 });
 
 window.setup = window.setup || {};
 
+window.currentTrackTimeout = null;
+window.currentTrack = null;
+console.log("ohhh mh gerd");
+
 setup.advanceTrack = function() {
-    var currentTrack = setup.songList[setup.currentSongIndex];
+    var track = setup.songList[setup.currentSongIndex];
     var nextTrackIndex = (setup.currentSongIndex + 1) % setup.songList.length;
     var nextTrack = setup.songList[nextTrackIndex];
 
     // Stop the current track if it's playing
-    if (SimpleAudio.tracks.get(currentTrack).isPlaying()) {
-        SimpleAudio.tracks.get(currentTrack).stop();
+    if (SimpleAudio.tracks.get(track).isPlaying()) {
+        SimpleAudio.tracks.get(track).stop();
+        window.currentTrack = null;
+        clearTimeout(window.currentTrackTimeout);
+        window.currentTrackTimeout = null;
     }
 
-    // Play the next track
-    SimpleAudio.tracks.get(nextTrack).play({ volume: 0.2, loop: true });
+    window.setupTrackEndCallback(nextTrack);
 
     // Update the current track index
     setup.currentSongIndex = nextTrackIndex;
