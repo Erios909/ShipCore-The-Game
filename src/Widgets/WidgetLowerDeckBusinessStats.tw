@@ -20,7 +20,7 @@
         <<set _locationName = $LowerDecksCurrentScoutLocation>> <!-- Set the location name using $LowerDecksCurrentScoutLocation -->
     <</if>>
 
-
+    
     /* If location data is available */
     <<if _locationData>>
         /* Assign values from the _locationData array to individual variables with a default value of 5 if data is not available */

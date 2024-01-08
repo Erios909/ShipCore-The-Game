@@ -175,6 +175,11 @@ $(document).one(':passagedisplay', function (ev) {
 <<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0>>
 <<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
+<<set $employeeUpgradeLevel = 1>>
+<<set $inputCostUpgradeLevel = 1>>
+<<set $outputPriceUpgradeLevel = 1>>
+<<set $cycleUpgradeLevel = 1>>
+<<set $batchSizeUpgradeLevel = 1>>
 <</if>>
 
 <div id="business-setup-final">

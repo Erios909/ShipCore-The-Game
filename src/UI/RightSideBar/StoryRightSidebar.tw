@@ -62,7 +62,26 @@
                 Business Management
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Business Management'>><<run slideWin("BusinessManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li>
+                    <<link 'Business Management'>>
+                        <<run slideWin("BusinessManagement")>>
+                        <<if $LowerDecksPlayerBusinessActive>>
+                            /* Mapping of business types to background images */
+                            <<set $businessTypeToImage = {
+                                "Space Bar and Lounge": "humanservices.jpg",
+                                "Hydroponic Farm": "hydroponics.jpg",
+                                "Scrap Reprocessing": "scrapprocessing.jpg"
+                            }>>
+                            /* Get the current business type */
+                            <<set $businessType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
+                            /* Set the background image based on the current business type */
+                            <<set $backgroundImage = setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/' + $businessTypeToImage[$businessType]>>
+                            <<setBackground $backgroundImage>>
+                        <<else>>
+                            <<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>>
+                        <</if>>
+                    <</link>>
+                </li>
                 <li><<link 'Corporate Ledgers'>><<run slideWin("CorporateLedgers")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
                 <li><<link 'Transshipment'>><<run slideWin("Transshipment")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
                 <li><<link 'Business Directives'>><<run slideWin("BusinessDirectives")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>

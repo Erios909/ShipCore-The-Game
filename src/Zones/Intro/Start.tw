@@ -19,10 +19,13 @@
 </span>
 <</nobr>>
 <span style="display: none;">[[Continue.->awakening]]</span>
+
 <!-- Change Log Button using SlideWin -->
 <p><<button 'View Change Log'>>
     <<run slideWin("changelist")>>
 <</button>></p>
+<p><p><a href="https://www.amazon.com/Audible-ShipCore-A-LitRPG-Adventure/dp/B0CQKHG67L" target="_blank">Check out the Book / Audiobook!</a></p>
+</p>
 <</type>>
 
 

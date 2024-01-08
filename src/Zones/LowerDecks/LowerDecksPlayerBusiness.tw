@@ -1,17 +1,18 @@
 :: LowerDecksPlayerBusiness [poi nobr] {"position":"200,1200","size":"100,100"}
 <<nobr>>
+
     <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
 
-<<if $$LowerDecksPlayerBusinessMaxEmployees === undefined>>
-    <<set $LowerDecksPlayerBusinessEmployees = 0>>
-    <<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
-    <<set $LowerDecksPlayerBusinessLevel = 1>>
-    <<set $LowerDecksPlayerBusinessCredits = 15250>>
-    <<set $LowerDecksPlayerBusinessDebt = 2530>>
-    <<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
-    <<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
-    <<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
-<</if>>
+    <<if $$LowerDecksPlayerBusinessMaxEmployees === undefined>>
+        <<set $LowerDecksPlayerBusinessEmployees = 0>>
+        <<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
+        <<set $LowerDecksPlayerBusinessLevel = 1>>
+        <<set $LowerDecksPlayerBusinessCredits = 15250>>
+        <<set $LowerDecksPlayerBusinessDebt = 2530>>
+        <<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
+        <<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
+        <<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
+    <</if>>
 
     /* Mapping of business types to background images */
     <<set $businessTypeToImage = {
@@ -43,12 +44,12 @@
         <h2 id="locationHeading" style="font-size: 14px; margin: 0;">
             <<= $location.name >>
         </h2>
+        <span id="ldb-business-header-buttons">
         <<link "Exit Business">><<goto "Lower Decks">><</link>>
         <<link "Advance 1 Hour">><<addmins 60>><<update>><<updatebar>><</link>>
-        <<link "Advance 6 Hours">><<addmins 360>><<update>><<updatebar>><</link>>
         <<link "Advance 12 Hours">><<addmins 720>><<update>><<updatebar>><</link>>
         <<link "Advance 2 Days">><<addmins 2880>><<update>><<updatebar>><</link>>
-        <<link "Advance 1 Month">><<addmins 43200>><<update>><<updatebar>><</link>>
+        </span>
     </div>
 </div>
 
@@ -77,6 +78,10 @@
                 <<button "Business Addons">>
                     <<run updateType('ldpb-business-addons')>>
                 <</button>>
+
+                <<button "Business Info">>
+                    <<run updateType('ldpb-business-info')>>
+                <</button>>
             </div>
         </div>
 
@@ -90,15 +95,133 @@
         </div>
         <div class="ldpb-business-upgrades" type="business-section">
             <!-- Business Upgrades Content -->
-            <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
-            <hr id="#HuDHr">
+            <<set _locationData = undefined>> <!-- Default to undefined -->
+
+            <!-- Check for $LowerDecksPlayerBusinessLocationStats -->
+            <<if $LowerDecksPlayerBusinessLocationStats and setup.LowerDeckLocations.hasOwnProperty($LowerDecksPlayerBusinessLocationStats)>>
+                <<set _locationData = setup.LowerDeckLocations[$LowerDecksPlayerBusinessLocationStats]>>
+                <<set _locationName = $LowerDecksPlayerBusinessLocationStats>> <!-- Set the location name using $LowerDecksPlayerBusinessLocationStats -->
+            
+            <!-- Check for $LowerDecksBusinessLocation -->
+            <<elseif $LowerDecksBusinessLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessLocation)>>
+                <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+                <<set _locationName = $LowerDecksBusinessLocation>> <!-- Set the location name using $LowerDecksBusinessLocation -->
+            
+            <!-- Check for $LowerDecksCurrentScoutLocation -->
+            <<elseif $LowerDecksCurrentScoutLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksCurrentScoutLocation)>>
+                <<set _locationData = setup.LowerDeckLocations[$LowerDecksCurrentScoutLocation]>>
+                <<set _locationName = $LowerDecksCurrentScoutLocation>> <!-- Set the location name using $LowerDecksCurrentScoutLocation -->
+            <</if>>
+
+            /* Define new variables for upgrade levels if they don't exist */
+            <<if $employeeUpgradeLevel === undefined>>
+                <<set $LowerDecksPlayerBusinessEmployeeUpgradeLevel = 1>>
+                <<set $LowerDecksPlayerBusinessInputCostUpgradeLevel = 1>>
+                <<set $LowerDecksPlayerBusinessOutputPriceUpgradeLevel = 1>>
+                <<set $LowerDecksPlayerBusinessCycleUpgradeLevel = 1>>
+                <<set $LowerDecksPlayerBusinessBatchSizeUpgradeLevel = 1>>
+                <<set $LowerDecksPlayerBusinessLevel = 1>> /* Business level upgrade */
+            <</if>>
+
+            /* Assign values from the _locationData array to individual variables with a default value of 5 if data is not available */
+            <<set _customerAvailability = _locationData[0] || 5>>
+            <<set _supplyHubAccess = _locationData[1] || 5>>
+            <<set _danger = _locationData[2] || 5>>
+            <<set _taxRate = _locationData[3] || 5>>
+            <<set _setupCost = _locationData[4] || 5>>
+
+            /* Define a function to calculate the cost of an upgrade */
+            <<set _calculateUpgradeCost to function(baseCost, level, multiplier, locationModifier) {
+                return Math.round(baseCost * Math.pow(multiplier, level) * locationModifier);
+            }>>
+
+            /* Check if the business type stats have the necessary properties for upgrade cost calculation */
+            <<if $LowerDecksBusinessTypeStats.hasOwnProperty(_businessType) && $LowerDecksBusinessTypeStats[_businessType].hasOwnProperty('UpgradeCost')>>
+                <<set _upgradeCostMultiplier = $LowerDecksBusinessTypeStats[_businessType].UpgradeCost>>
+                <<set _locationModifier = (100 - _setupCost) / 100>> /* Use the _setupCost variable */
+                /* Calculate the cost for each upgrade using the location modifier */
+                <<set $LowerDecksPlayerBusinessEmployeeUpgradeCost = _calculateUpgradeCost(10000, $LowerDecksPlayerBusinessEmployeeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessInputCostUpgradeCost = _calculateUpgradeCost(5000, $LowerDecksPlayerBusinessInputCostUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessOutputPriceUpgradeCost = _calculateUpgradeCost(15000, $LowerDecksPlayerBusinessOutputPriceUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessCycleUpgradeCost = _calculateUpgradeCost(7500, $LowerDecksPlayerBusinessCycleUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessBatchSizeUpgradeCost = _calculateUpgradeCost(20000, $LowerDecksPlayerBusinessBatchSizeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessBusinessLevelUpgradeCost = _calculateUpgradeCost(50000, $LowerDecksPlayerBusinessLevel, _upgradeCostMultiplier, _locationModifier)>>
+            <</if>>
+
+            /* Display the upgrade options and costs to the player */
+            <div class="upgrade-options">
+                <!-- Max Employee Upgrade Button -->
+                <div class="upgrade-options-section">
+                <p>Max Employee Upgrade Cost: $<<print $LowerDecksPlayerBusinessEmployeeUpgradeCost>></p>
+                <<button "Upgrade Employees">>
+                    <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessEmployeeUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessEmployeeUpgradeCost>>
+                        <<set $employeeUpgradeLevel++>>
+                        <<update>>
+                    <</if>>
+                <</button>></div>
+
+                <!-- Input Costs Upgrade Button -->
+                <div class="upgrade-options-section">
+                <p>Input Costs Upgrade Cost: $<<print $LowerDecksPlayerBusinessInputCostUpgradeCost>></p>
+                <<button "Reduce Input Costs">>
+                    <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessInputCostUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessInputCostUpgradeCost>>
+                        <<set $inputCostUpgradeLevel++>>
+                        <<update>>
+                    <</if>>
+                <</button>></div>
+
+                <!-- Output Price Upgrade Button -->
+                <div class="upgrade-options-section">
+                <p>Output Price Upgrade Cost: $<<print $LowerDecksPlayerBusinessOutputPriceUpgradeCost>></p>
+                <<button "Increase Output Price">>
+                    <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessOutputPriceUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessOutputPriceUpgradeCost>>
+                        <<set $outputPriceUpgradeLevel++>>
+                        <<update>>
+                    <</if>>
+                <</button>></div>
+
+                <!-- Cycles Per Hour Upgrade Button -->
+                <div class="upgrade-options-section">
+                <p>Cycles Per Hour Upgrade Cost: $<<print $$LowerDecksPlayerBusinessCycleUpgradeCost>></p>
+                <<button "Increase Cycles Per Hour">>
+                    <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessCycleUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessCycleUpgradeCost>>
+                        <<set $cycleUpgradeLevel++>>
+                        <<update>>
+                    <</if>>
+                <</button>></div>
+
+                <!-- Batch Size Upgrade Button -->
+                <div class="upgrade-options-section">
+                <p>Batch Size Upgrade Cost: $<<print $$LowerDecksPlayerBusinessBatchSizeUpgradeCost>></p>
+                <<button "Increase Batch Size">>
+                    <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessBatchSizeUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessBatchSizeUpgradeCost>>
+                        <<set $batchSizeUpgradeLevel++>>
+                        <<update>>
+                    <</if>>
+                <</button>></div>
+                <!-- Business Level Upgrade Button -->
+                <div class="upgrade-options-section">
+                <p>Business Level Upgrade Cost: $<<print $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>></p>
+                <<button "Upgrade Business Level">>
+                    <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>>
+                        <<set $LowerDecksPlayerBusinessLevel++>>
+                        <<update>>
+                    <</if>>
+                <</button>></div>
+            </div>
         </div>
         <div class="ldpb-business-banking" type="business-section">
             <!-- Business Banking Content -->
-            <<liveblock>><div class="banking-container">
+            <div class="banking-container">
                 <!-- Credits Box -->
                 <div class="banking-box-credits-box">
-                    <div class="ldpb-business-banking-player-name"><<=$player.name>> Credits: $<<print $player.credits.toFixed(2)>></div>
+                    <div class="ldpb-business-banking-player-name"><<liveblock>><solid><<=$player.name>> Credits: $<<print $player.credits.toFixed(2)>></solid><</liveblock>></div>
                     <div class="ldpb-business-banking-paylink">
                         <<link "Withdraw Credits">>
                             <<set _creditAmount to Number(_creditAmount.toString().trim())>> <!-- Convert to string before trimming -->
@@ -122,11 +245,11 @@
                             
                         <</if>>
                     <</link>></div>
-                    <div class="ldpb-business-banking-buisness-name"><<=$LowerDecksPlayerBusinessName>> Credits: $<<print $LowerDecksPlayerBusinessCredits.toFixed(2)>></div>
+                    <div class="ldpb-business-banking-buisness-name"><<liveblock>><solid><<=$LowerDecksPlayerBusinessName>> Credits: $<<print $LowerDecksPlayerBusinessCredits.toFixed(2)>></solid><</liveblock>></div>
                 </div>
                 <!-- Debt Box -->
                 <div class="banking-box-debt-box">
-                    <div class="ldpb-business-banking-player-name"><<=$player.name>> Debt: $<<print $player.debt.toFixed(2)>></div>
+                    <div class="ldpb-business-banking-player-name"><<liveblock>><solid><<=$player.name>> Debt: $<<print $player.debt.toFixed(2)>></solid><</liveblock>></div>
                     <div class="ldpb-business-banking-paylink">
                         <<link "Pay Off Business Debt">>
                             <<set _debtAmount to Number(_debtAmount.toString().trim())>>
@@ -147,9 +270,9 @@
                             <</if>>
                         <</link>>
                     </div>
-                    <div class="ldpb-business-banking-buisness-name"><<=$LowerDecksPlayerBusinessName>> Debt: $<<print $LowerDecksPlayerBusinessDebt.toFixed(2)>></div>
+                    <div class="ldpb-business-banking-buisness-name"><<liveblock>><solid><<=$LowerDecksPlayerBusinessName>> Debt: $<<print $LowerDecksPlayerBusinessDebt.toFixed(2)>></solid><</liveblock>></div>
                 </div>
-            </div><</liveblock>>
+            </div>
             <hr id="HuDHr">
         </div>
 
@@ -158,6 +281,26 @@
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
             <hr id="#HuDHr">
         </div>
+
+        <div class="ldpb-business-info" type="business-section">
+            <p>Welcome to the heart of your new establishment, <strong><<print $player.name>></strong>! As the owner of this fine venture, it's crucial to understand how each decision you make can propel your business to new heights. Let's take a moment to walk through the various upgrades and how they can enhance your operations.</p>
+
+            <p><strong>Employee Capacity:</strong> Every business thrives on the strength of its workforce. Upgrading your <span style="color: #4CAF50;">employee capacity</span> allows you to hire more staff, increasing productivity and enabling you to meet the demands of a growing customer base. Think of it as expanding your team to bring more hands on deck.</p>
+
+            <p><strong>Input Efficiency:</strong> The cost of raw materials can eat into your profits if not managed wisely. By investing in <span style="color: #2196F3;">input efficiency</span>, you reduce the costs of inputs required for production. It's like finding a way to make the same delicious meals but at a fraction of the cost, maximizing your margins.</p>
+
+            <p><strong>Output Value:</strong> The value of your products is not just in their quality, but also in their perceived worth. Enhancing the <span style="color: #FFC107;">output value</span> means you can command higher prices in the market. It's about adding that sprinkle of exclusivity that makes customers happy to pay a premium.</p>
+
+            <p><strong>Production Speed:</strong> Time is money, and in the world of business, the faster you can produce, the more you can sell. Upgrading your <span style="color: #FF5722;">production speed</span> increases the number of cycles you can complete in an hour, ensuring that your goods are flying off the shelves faster than ever.</p>
+
+            <p><strong>Batch Size:</strong> Sometimes, more is more. By increasing your <span style="color: #9C27B0;">batch size</span>, you produce more products with each cycle. This upgrade is perfect for scaling up operations and meeting the needs of a larger audience without compromising on efficiency.</p>
+
+            <p><strong>Business Level:</strong> The overall level of your business acts as a multiplier to all business-related activities, making it the primary option for expansion. You will need more employees to handle the extra workload, though. It's the mark of a true entrepreneur.</p>
+
+            <p>Remember, each upgrade will increase in cost every level, but with careful planning and strategic investment, you'll see your business flourish. Consider the local market conditions, your current resources, and your long-term goals as you decide which upgrades to prioritize. Your journey from a small startup to a commercial powerhouse starts with these wise choices. Good luck, and may your business prosper!</p>
+            <hr id="#HuDHr">
+        </div>
+
         <hr id="#HuDHr">
     
     
@@ -169,6 +312,8 @@
     
 
     <<liveblock>><<LowerDeckBusinessStats>><</liveblock>>
+
+
     
 <</nobr>>
 
