@@ -1,26 +1,28 @@
 :: CreateNPCWidget [widget nobr]
 <<widget "CreateNPC">>
- <<script>>
-/* Create a generic character object with default values. */
-window.characterTemplate = {
-    "portrait": "path/to/default_portrait.jpg",
-    "name": "Unnamed",
-    "maxHP": 100,
-    "ATK": 10,
-    "DEF": 10,
-    "SPD": 10,
-    "CardSet": [],
-    "shortDesc": "A short description of the character.",
-    "longDesc": "A long, detailed description of the character."
-};
-window.findNextNPCIndex = function(baseName) {
-    var index = 0;
-    while (State.variables[baseName + index] !== undefined) {
-        index++;
-    }
-    return index;
-}
-<</script>>
+    <<script>>
+      /* Create a generic character object with default values. */
+      
+      window.characterTemplate = {
+          "portrait": "path/to/default_portrait.jpg",
+          "name": "Unnamed",
+          "maxHP": 100,
+          "ATK": 10,
+          "DEF": 10,
+          "SPD": 10,
+          "CardSet": [],
+          "shortDesc": "A short description of the character.",
+          "longDesc": "A long, detailed description of the character."
+      };
+      window.findNextNPCIndex = function(baseName) {
+          var index = 0;
+          while (State.variables[baseName + index] !== undefined) {
+              index++;
+          }
+          return index;
+      }
+      <</script>>
+    
     /* Retrieve the name of the NPC, which will be used as the variable name. */
     <<set _NPCName to $args[1]>>
 

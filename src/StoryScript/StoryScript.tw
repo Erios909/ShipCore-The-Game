@@ -49,6 +49,7 @@ setup.advanceTrack = function() {
         SimpleAudio.tracks.get(currentTrack).stop();
     }
 
+    window.setupTrackEndCallback(nextTrack);
     // Play the next track
     SimpleAudio.tracks.get(nextTrack).play({ volume: 0.2, loop: true });
 
