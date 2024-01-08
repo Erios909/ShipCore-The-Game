@@ -1846,3 +1846,161 @@ body.slideWin {
     position: relative;
     z-index: 2;
 }
+
+
+#business-active-stats-container {
+    display: flex;
+    flex-wrap: nowrap; /* Ensures the container does not wrap */
+    background-color: #000; /* Black background color */
+    margin: 20px auto; /* Centers the container */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    flex-direction: row; /* Children laid out in a row */
+    align-content: center; /* Aligns content lines within the container */
+    justify-content: center; /* Centers items along the main axis */
+    align-items: stretch; /* Stretches items to fill the container height */
+    border: 2px solid darkgray; /* Dark gray border */
+}
+
+
+/* Individual Stat Blocks */
+.business-stat {
+    flex-basis: calc(50% - 40px);
+    /* margin: 10px; */
+    /* padding: 15px; */
+    background-color: #333;
+    border: 4px solid #445555;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Specific images for each stat */
+.stat-employees { background-image: url('images/ui/ui-square-1.jpg'); }
+.stat-max-employees { background-image: url('images/ui/ui-chart-1.jpg'); }
+.stat-business-level { background-image: url('images/ui/ui-location-1.jpg'); }
+.stat-credits { background-image: url('images/ui/ui-math-1.jpg'); }
+.stat-debt { background-image: url('images/ui/ui-resources-1.jpg'); }
+.stat-division-count { background-image: url('images/ui/ui-upgrade-1.jpg'); }
+
+/* Overlay for darkening the background image */
+.business-stat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.business-stat > * {
+    position: relative;
+    z-index: 2;
+}
+
+.business-stat h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.business-stat p {
+    color: #ddd;
+    line-height: 1.3;
+    font-size: calc(0.5em + 0.5vw);
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    .business-stat {
+        flex-basis: 100%; /* Stack stats vertically on small screens */
+    }
+}
+
+#active-business-actions {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Center buttons vertically */
+    flex-direction: row; /* Align buttons in a row */
+    gap: 20px; /* Add some space between buttons */
+}
+
+#active-business-actions button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 150px;
+    min-height: 75px;
+    color: #fff;
+    border: solid;
+    border-radius: 5px;
+    background-color: #4a4a4a;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    text-shadow: -2px -2px 3px #000, 2px -2px 3px #000, -2px 2px 3px #000, 2px 2px 3px #000, -3px -3px 3px #000, 3px -3px 3px #000, -3px 3px 3px #000, 3px 3px 3px #000;
+}
+
+.business-section-wrapper {
+    overflow: hidden;
+}
+
+.business-section {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 3;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-height: 0; /* Initially collapsed */
+    opacity: 0; /* Initially transparent */
+    visibility: hidden; /* Initially hidden */
+
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-in 0.5s, visibility 0s linear 0.5s;
+}
+
+.business-section.show {
+    max-height: 1000px; /* Adjust based on content height */
+    opacity: 1; /* Make content visible */
+    visibility: visible; /* Make section visible */
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-in;
+}
+
+#active-business-actions button:hover {
+    opacity: 0.8; /* Slight transparency on hover for both buttons */
+    background-color: green;
+}
+
+#active-business-actions button:active {
+    opacity: 0.6; /* More transparency when active/clicked for both buttons */
+    background-color: green;
+}
+
+#locationHeadingContainer .link-internal {
+    display: inline-block;
+    height: auto;
+    min-width: auto;
+    background-color: #5b0303;
+    padding: 5px;
+    color: white;
+    line-height: 35px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#locationHeadingContainer .link-internal:hover {
+    opacity: 0.7; /* Transparency effect on hover */
+}
+

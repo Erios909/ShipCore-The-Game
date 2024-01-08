@@ -207,6 +207,15 @@ $lowerdecksFabricatorCyberware
 <<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
 
+<<set $LowerDecksPlayerBusinessEmployees = 0>>
+<<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
+<<set $LowerDecksPlayerBusinessLevel = 1>>
+<<set $LowerDecksPlayerBusinessCredits = 1000>>
+<<set $LowerDecksPlayerBusinessDebt = 500>>
+<<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
+<<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
+<<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
+
 
 <<set $LowerDecksPlayerBusinessBatchSize to 0>>
 <<set $LowerDecksPlayerBusinessEmployeesPerUpgrade to 0>>

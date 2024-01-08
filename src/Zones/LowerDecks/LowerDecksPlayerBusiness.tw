@@ -2,69 +2,113 @@
 <<nobr>>
     <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
 
+<<if $$LowerDecksPlayerBusinessMaxEmployees === undefined>>
+    <<set $LowerDecksPlayerBusinessEmployees = 0>>
+    <<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
+    <<set $LowerDecksPlayerBusinessLevel = 1>>
+    <<set $LowerDecksPlayerBusinessCredits = 15250>>
+    <<set $LowerDecksPlayerBusinessDebt = 2530>>
+    <<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
+    <<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
+    <<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
+<</if>>
+
     /* Mapping of business types to background images */
     <<set $businessTypeToImage = {
         "Space Bar and Lounge": "humanservices.jpg",
         "Hydroponic Farm": "hydroponics.jpg",
         "Scrap Reprocessing": "scrapprocessing.jpg"
     }>>
-
     /* Get the current business type */
     <<set $businessType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
-
     /* Set the background image based on the current business type */
     <<set $backgroundImage = setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/' + $businessTypeToImage[$businessType]>>
     <<setBackground $backgroundImage>>
-
     /* Rest of the passage code... */
-
     <<set $location to {
-        name: "Meltisar System, MOR-1," + $LowerDecksBusinessLocation,
+        name: "Meltisar System, MOR-1, " + $LowerDecksPlayerBusinessName,
         outside: false,
         vacuum: false,
         temperature: true
     }>>
-
     <<addmins $timeadd>>
-
     <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;">
         <span style="color: #FFD700; font-weight: bold; font-size: 24px;">
             <<if $LowerDecksPlayerBusinessName === undefined>>Your Business<<else>><<=$LowerDecksPlayerBusinessName>><</if>>
         </span>
     </h2>
     <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
-    <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;">
-        <span style="font-size: 14px;"><<= $location.name >></span>
+    <div id="locationHeadingContainer" style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; margin-bottom: 10px;">
+    <h2 id="locationHeading" style="font-size: 14px; margin: 0;">
+        <<= $location.name >>
     </h2>
+    <<link "Exit Business">><<goto "Lower Decks">><</link>>
+</div>
+
+
     <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
-    <<LowerDeckBusinessStats>>
+        <!--- top display of stats -->
+        <div id="business-active-stats"><<liveblock>><<LowerDecksPlayerBusinessActiveStats>><</liveblock>></div>
 
-    <<if $LowerDecksPlayerBusinessState == 3>>
-        <!-- LDPB Main Menu -->
-        <!-- Location Scouting -->
-        [[Scout for a location|LowerDecksPlayerBusinessScouting][$LowerDecksPlayerBusinessState = 2; $timeadd += 30]]<br>
+    <div class="business-section-wrapper">
+        <!--- business management buttons -->
+        <div id="active-business-actions">
+            <<button "Employee Management">>
+                <<run $('#ldpb-employee-management').toggleClass('show').siblings('.business-section').removeClass('show')>>
+            <</button>>
 
-        <!-- Equipment Management -->
-        [[Manage your equipment|LowerDecksPlayerBusinessEquipmentManagement][$timeadd += 1]]<br>
+            <<button "Business Upgrades">>
+                <<run $('#ldpb-business-upgrades').toggleClass('show').siblings('.business-section').removeClass('show')>>
+            <</button>>
 
-        <!-- Resource Management -->
-        [[Allocate your resources|LowerDecksPlayerBusinessResourceManagement][$timeadd += 1]]<br>
+            <<button "Business Banking">>
+                <<run $('#ldpb-business-banking').toggleClass('show').siblings('.business-section').removeClass('show')>>
+            <</button>>
 
-        <!-- Hiring Companions -->
-        [[Manage your employees|LowerDecksPLayerBusinessManageEmployees][$timeadd += 2]]<br>
+            <<button "Business Addons">>
+                <<run $('#ldpb-business-addons').toggleClass('show').siblings('.business-section').removeClass('show')>>
+            <</button>>
+        </div>
 
-        <!-- Customization and Upgrades -->
-        [[Customize and upgrade your business|LowerDecksPLayerBusinessBusinessUpgrades][$timeadd += 2]]<br>
 
-        <!-- Defenses Against Braxton -->
-        [[Invest in security to protect against Braxton|LowerDecksPLayerBusinessBusinessDefenses][$timeadd += 1]]<br>
-    <</if>>
+        <hr id="#HuDHr">
+        <div id="ldpb-employee-management" class="business-section">
+            <!-- Employee Management Content -->
+            <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
+            <hr id="#HuDHr">
+        </div>
+        <div id="ldpb-business-upgrades" class="business-section">
+            <!-- Business Upgrades Content -->
+            <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
+            <hr id="#HuDHr">
+        </div>
+        <div id="ldpb-business-banking" class="business-section">
+            <!-- Business Banking Content -->
+            <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
+            <hr id="#HuDHr">
+        </div>
+        <div id="ldpb-business-addons" class="business-section">
+            <!-- Business Addons Content -->
+            <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
+            <hr id="#HuDHr">
+        </div>
+        <hr id="#HuDHr">
+    </div>
+        
+    <<liveblock>><<PrintBusinessEstimates>><</liveblock>>
+    
 
-    <<PrintBusinessEstimates>>
+
+    <<liveblock>><<LowerDeckBusinessStats>><</liveblock>>
+    
 
     Travel:<br>
     [[Return to the hustle and bustle of MOR-1.|Lower Decks][$timeadd = 5]]<br>
 
-    The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.
+   <!-- Narrative paragraph below travel -->
+    <div id="business-narrative">
+        The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.
+    </div>
 <</nobr>>
+

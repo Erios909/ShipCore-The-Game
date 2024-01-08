@@ -122,5 +122,7 @@ sugarcube-2:
       name: LowerDeckBusinessProfitability
     PrintBusinessEstimates:
       name: PrintBusinessEstimates
+    LowerDecksPlayerBusinessActiveStats:
+      name: LowerDecksPlayerBusinessActiveStats
 
       
