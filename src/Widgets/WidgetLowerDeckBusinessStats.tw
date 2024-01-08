@@ -81,26 +81,26 @@
         <div class="business-estimates">
             <div class="business-stats">
                 <h2>Business Stats</h2>
-                <p><strong>Batch Production Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize ?? "Error: Batch Size not set">></span></p>
-                <p><strong>Employees Needed Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade ?? "Error: Employees Per Upgrade not set">></span></p>
+                <li><strong>Batch Production Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize ?? "Error: Batch Size not set">></span></li>
+                <li><strong>Employees Needed Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade ?? "Error: Employees Per Upgrade not set">></span></li>
             </div>
             <div class="location-factors">
                 <h2>Location Factors</h2>
-                <p><strong>Customer Availability:</strong> <span class="value"><<print 100 - $LowerDecksPlayerBusinessCustomerAvailability + "%">></span></p>
-                <p><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - $LowerDecksPlayerBusinessSupplyHubAccess + "%">></span></p>
-                <p><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel + "%">></span></p>
-                <p><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate + "%">></span></p>
+                <li><strong>Customer Availability:</strong> <span class="value"><<print 100 - (10 - $LowerDecksPlayerBusinessCustomerAvailability) + "%">></span></li>
+                <li><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - (10 - $LowerDecksPlayerBusinessSupplyHubAccess) + "%">></span></li>
+                <li><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel + "%">></span></li>
+                <li><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate + "%">></span></li>
             </div>
             <div class="calculated-stats">
                 <h2>Calculated Stats</h2>
-                <p><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessAdjustedPricePerUnit.toFixed(2)>> credits</span></p>
-                <p><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches.toFixed(2)>> credits</span></p>
-                <p><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalInputCostsForOneBatch.toFixed(2)>> credits</span></p>
-                <p><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print $LowerDecksPlayerBusinessTotalEmployeeCostPerHour.toFixed(2)>> credits</span></p>
+                <li><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessAdjustedPricePerUnit.toFixed(2)>> credits</span></li>
+                <li><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches.toFixed(2)>> credits</span></li>
+                <li><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalInputCostsForOneBatch.toFixed(2)>> credits</span></li>
+                <li><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print $LowerDecksPlayerBusinessTotalEmployeeCostPerHour.toFixed(2)>> credits</span></li>
                 <<if $LowerDecksPlayerBusinessProfitMarginPerHour >= 0>>
-                    <p><strong>Profit Margin Per Hour:</strong> <span class="positive-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></p>
+                    <li><strong>Profit Margin Per Hour:</strong> <span class="positive-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></li>
                 <<else>>
-                    <p><strong>Profit Margin Per Hour:</strong> <span class="negative-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></p>
+                    <li><strong>Profit Margin Per Hour:</strong> <span class="negative-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></li>
                 <</if>>
             </div>
             <!-- Input Costs Section -->
@@ -112,10 +112,10 @@
                     <<for _i = 0; _i < _inputKeys.length; _i++>>
                         <<set _input = _inputKeys[_i]>>
                         <<set _cost = _inputCosts[_input]>>
-                        <p><strong> _input:</strong> $<<print _cost.toFixed(2)>> credits per unit</p>
+                        <li><strong> _input: $<<print _cost.toFixed(2)>> credits per unit</strong></li>
                     <</for>>
                 <<else>>
-                    <p>Error: Business type not found or input costs not defined.</p>
+                    <li>Error: Business type not found or input costs not defined.</li>
                 <</if>>
             </div>
 
@@ -127,10 +127,10 @@
                     <<set _locationModifier = (100 - $LowerDecksPlayerBusinessCustomerAvailability) / 100>>
                     <<set _pricePerLevelUpgrade = _locationModifier * _upgradeCostMultiplier * 10000>>
                     <<set _pricePerDivUpgrade = _locationModifier * _upgradeCostMultiplier * 100000>>
-                    <p><strong>Price Per Level Upgrade:</strong> $<<print _pricePerLevelUpgrade.toFixed(2)>> credits</p>
-                    <p><strong>Cost per new Division:</strong> $<<print _pricePerDivUpgrade.toFixed(2)>> credits</p>
+                    <li><strong>Price Per Level Upgrade: $<<print _pricePerLevelUpgrade.toFixed(2)>> credits</strong></li>
+                    <li><strong>Cost per new Division: $<<print _pricePerDivUpgrade.toFixed(2)>> credits</strong></li>
                 <<else>>
-                    <p>Error: Business type not found or upgrade cost not defined.</p>
+                    <li>Error: Business type not found or upgrade cost not defined.</li>
                 <</if>>
             </div>
         </div>

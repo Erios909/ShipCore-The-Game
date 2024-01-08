@@ -24,7 +24,7 @@ You accept the medkit with a nod, the relief immediate as the medication takes e
 <<changemoods "health" "major" "PosEffectOnPlayer">><br>
 <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
 <<changemoods "trauma" "major" "PosEffectOnPlayer">><br>
-
+<<updatebar>>
 
 <br><br>
 <<say '$player.name' $playerPortraitPathZ>>"Thanks. Why didn't you help me back there?"<</say>>
@@ -53,6 +53,7 @@ You weigh Dalton's advice, knowing that your next choice could be a matter of su
 <br><br>
 <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
 <<changemoods "stress" "major" "PosEffectOnPlayer">><br>
+<<updatebar>>
 <br>
 <div id="choice3">
 <<say '$player.name' $playerPortraitPathZ>>
@@ -89,7 +90,7 @@ You weigh Dalton's advice, knowing that your next choice could be a matter of su
         <</say>><br>
 
         You nod, taking mental notes. Security is a commodity you can't afford to overlook, not with the wounds of your recent injuries still throbbing.<br>
-
+        <<updatebar>>
         <<say "$player.name" $playerPortraitPathZ>>
         [[Thanks for the advice. I'll check out the dojo.|Lower Observation Deck][$timeadd += 5]]<br>
         [[Thanks for the medkit, Dalton.|Lower Decks][$timeadd += 5]]<br>

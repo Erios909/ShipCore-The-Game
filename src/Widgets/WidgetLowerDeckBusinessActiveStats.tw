@@ -1,0 +1,41 @@
+:: widget LowerDecksPlayerBusinessActiveStats [widget nobr]
+<<widget "LowerDecksPlayerBusinessActiveStats">>
+    /* Retrieve the business type details */
+    <<set _businessTypeDetails = $LowerDecksBusinessTypeStats[$LowerDecksPlayerBusinessStartType]>>
+    <<if _businessTypeDetails !== undefined>>
+        /* Calculate the maximum number of employees based on the business level and EmployeesPerUpgrade */
+        <<set $LowerDecksPlayerBusinessMaxEmployees = $LowerDecksPlayerBusinessLevel * _businessTypeDetails.EmployeesPerUpgrade>>
+    <<else>>
+        
+    <</if>>
+
+
+    /* Display the active business stats */
+    <div id="business-active-stats-container">
+    <div class="business-stat stat-employees">
+        <h3>Current Employees:</h3>
+        <p><<print $LowerDecksPlayerBusinessEmployees>></p>
+    </div>
+    <div class="business-stat stat-max-employees">
+        <h3>Max Employees:</h3>
+        <p><<print $LowerDecksPlayerBusinessMaxEmployees>></p>
+    </div>
+    <div class="business-stat stat-business-level">
+        <h3>Business Level:</h3>
+        <p><<print $LowerDecksPlayerBusinessLevel>></p>
+    </div>
+    <div class="business-stat stat-credits">
+        <h3>Credits:</h3>
+        <p><<print Math.floor($LowerDecksPlayerBusinessCredits).toLocaleString()>></p>
+    </div>
+    <div class="business-stat stat-debt">
+        <h3>Debt:</h3>
+        <p><<print Math.floor($LowerDecksPlayerBusinessDebt).toLocaleString()>></p>
+    </div>
+    <div class="business-stat stat-division-count">
+        <h3>Current Division Count:</h3>
+        <p><<print $LowerDecksPlayerBusinessCurrentDivisionCount>></p>
+    </div>
+</div>
+
+<</widget>>

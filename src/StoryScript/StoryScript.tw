@@ -423,12 +423,32 @@ $(document).on(":passageend", function (event) {
 
 // Sanitize input to allow only alphanumeric characters. Default to "ErRoR" if input is empty.
 window.sanitizeInput = function(input) {
-    var sanitized = input.replace(/[^a-zA-Z0-9]/g, ''); // Remove non-alphanumeric characters
+    var sanitized = input.replace(/[^a-zA-Z0-9 ']/g, ''); // Allow alphanumeric characters, spaces, and apostrophes
     return sanitized.length > 0 ? sanitized : 'ErRoR'; // Default to 'ErRoR' if empty
 }
 
 
 
+window.updateType = function(targetClass) {
+    console.log("updateType called for: " + targetClass);
+
+    // Targeting the div with the specified class
+    var current = $('div.' + targetClass);
+    console.log("Current element:", current);
+
+    // Checking and updating the type attribute
+    if (current.attr('type') === 'business-section') {
+        current.attr('type', 'business-section.show');
+        console.log("Setting type to 'business-section.show'");
+    } else {
+        current.attr('type', 'business-section');
+        console.log("Setting type back to 'business-section'");
+    }
+
+    // Hide other sections
+    $('div[type="business-section.show"]').not(current).attr('type', 'business-section');
+    console.log("Other sections set to 'business-section'");
+};
 
 
 
@@ -446,11 +466,7 @@ window.UpdateStatBar = function (currentValue, maxValue, barId, isInverse) {
     var barElement = document.getElementById(barId);
 
     if (currentValue === undefined || currentValue === 0) {
-        percentage = minPercentage; // Minimal width to show an empty bar
-        if (barElement) {
-            barElement.style.width = percentage + '%';
-            barElement.style.backgroundColor = 'black'; // Black color for undefined or zero value
-        }
+        
         return; // Exit the function early
     }
 

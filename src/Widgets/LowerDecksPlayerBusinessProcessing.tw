@@ -1,0 +1,187 @@
+:: LowerDecksPlayerBusinessProcessing [widget nobr]
+<<widget "LowerDecksPlayerBusinessProcessing">>
+    <<if $LowerDecksPlayerBusinessActive == true>>
+    <<run console.log("LowerDecksPlayerBusinessProcessing has fired.")>>
+
+    /* Ensure $gameDate is defined and is a valid Date object */
+    <<if typeof $gameDate === "undefined" or not ($gameDate instanceof Date)>>
+        /* Initialize $gameDate to a default value or current date */
+        <<set $gameDate to new Date("3000-01-01T00:00:00Z")>> /* Example date, adjust as needed */
+        <<run console.log("Initialized $gameDate to default value.")>>
+    <</if>>
+
+    /* Ensure $LowerDecksPlayerBusinessLastTime is defined and is a valid Date object */
+    <<if typeof $LowerDecksPlayerBusinessLastTime === "undefined" or not ($LowerDecksPlayerBusinessLastTime instanceof Date)>>
+        /* Initialize $LowerDecksPlayerBusinessLastTime to $gameDate if undefined or invalid */
+        <<set $LowerDecksPlayerBusinessLastTime to new Date($gameDate.getTime())>>
+        <<run console.log("Initialized $LowerDecksPlayerBusinessLastTime to $gameDate.")>>
+    <</if>>
+
+    /* Calculate the time difference in various units */
+    <<set _currentTime to new Date($gameDate.getTime())>> /* Use $gameDate as the current time reference */
+    <<set _lastTime to new Date($LowerDecksPlayerBusinessLastTime.getTime())>> /* Clone the last time to avoid reference issues */
+    <<set _millisecondsPassed to _currentTime.getTime() - _lastTime.getTime()>>
+    <<set _minutesPassed to Math.floor(_millisecondsPassed / 60000)>>
+    <<set _hoursPassed to Math.floor(_minutesPassed / 60)>>
+    <<set _daysPassed to Math.floor(_hoursPassed / 24)>>
+    <<set _weeksPassed to Math.floor(_daysPassed / 7)>>
+    <<set _monthsPassed to Math.floor(_daysPassed / 30)>> /* Approximate month as 30 days */
+    <<set _yearsPassed to Math.floor(_monthsPassed / 12)>>
+
+    /* Retrieve business type details */
+    <<set _businessType to $LowerDecksPlayerSelectedBusinessTypeName>>
+    <<set _businessTypeDetails to $LowerDecksBusinessTypeStats[_businessType]>>
+
+    <<if _hoursPassed > 0>>
+    /* Assign business type details to variables */
+    <<set _cyclesPerHour to _businessTypeDetails.CyclesPerHour>>
+    <<set _batchSize to _businessTypeDetails.BatchSize>>
+    <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost>>
+    <<set _inputCosts to _businessTypeDetails.InputCosts>>
+    <<set _basePriceOfOutput to _businessTypeDetails.BasePriceOfOutput>>
+    <<set _taxRate to $LowerDecksPlayerBusinessTaxRate / 100>> /* Convert percentage to decimal */
+    <<set _totalInputCostsPerHour to 0>>
+        <<for _key, _value range _inputCosts>>
+            <<set _totalInputCostsPerHour += _value>>
+        <</for>>
+
+    /* Initialize variables for calculations */
+    <<set _production = 0>>
+    <<set _revenue = 0>>
+    <<set _expenses = 0>>
+    <<set _netGains = 0>>
+    <<set _taxes = 0>>
+    <<set _netGainsAfterTax = 0>>
+    <<set _remainingMinutes = 0>>
+
+    /* Process business operations based on the hours passed */
+    
+        /* Calculate production and other business logic */
+        <<set _production = _hoursPassed * _cyclesPerHour * _batchSize>>
+        <<set _revenue = _production * _basePriceOfOutput>>
+        <<set _expenses = (_hoursPassed * _employeeCostPerHour) + (_hoursPassed * _totalInputCostsPerHour)>>
+        /* Update credits and debt */
+        <<set $LowerDecksPlayerBusinessCredits += _revenue>>
+        <<set $LowerDecksPlayerBusinessCredits = Math.floor($LowerDecksPlayerBusinessCredits)>>
+
+        <<set $LowerDecksPlayerBusinessDebt += _expenses>>
+        <<set $LowerDecksPlayerBusinessDebt = Math.floor($LowerDecksPlayerBusinessDebt)>>
+
+
+
+        /* Calculate net gains */
+        <<set _netGains to _revenue - _expenses>>
+
+        /* Apply tax rate to net gains */
+        <<set _taxes to _netGains * _taxRate>>
+        <<set _netGainsAfterTax to _netGains - _taxes>>
+
+        /* Update credits with net gains after tax */
+        <<set $LowerDecksPlayerBusinessCredits += _netGainsAfterTax>>
+
+        /* Store remaining minutes for the next cycle */
+        <<set _remainingMinutes to _minutesPassed % 60>>
+        <<set $LowerDecksPlayerBusinessRemainingMinutes to _remainingMinutes>>
+         /* After processing, update the last recorded time */
+        <<set $LowerDecksPlayerBusinessLastTime to new Date(_currentTime.getTime())>>
+        <<run console.log("Updated $LowerDecksPlayerBusinessLastTime to:", $LowerDecksPlayerBusinessLastTime)>>
+    
+
+    /* Initialize the summary object to store the changes */
+    <<set $LowerDecksBusinessProcessingSummary to {
+        production: 0,
+        revenue: 0,
+        expenses: {
+            total: 0,
+            wages: 0,
+            inputCosts: 0
+        },
+        netGains: 0,
+        taxes: 0,
+        netGainsAfterTax: 0,
+        debtIncrease: 0,
+        creditsIncrease: 0,
+        remainingMinutes: 0
+    }>>
+
+    <<set $LowerDecksBusinessProcessingSummary.production to _production>>
+    <<run console.log("Production:", $LowerDecksBusinessProcessingSummary.production)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.revenue to _revenue>>
+    <<run console.log("Revenue:", $LowerDecksBusinessProcessingSummary.revenue)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.expenses.total to _expenses>>
+    <<run console.log("Total Expenses:", $LowerDecksBusinessProcessingSummary.expenses.total)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.netGains to _netGains>>
+    <<run console.log("Net Gains:", $LowerDecksBusinessProcessingSummary.netGains)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.taxes to _taxes>>
+    <<run console.log("Taxes:", $LowerDecksBusinessProcessingSummary.taxes)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.netGainsAfterTax to _netGainsAfterTax>>
+    <<run console.log("Net Gains After Tax:", $LowerDecksBusinessProcessingSummary.netGainsAfterTax)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.debtIncrease to _expenses>> <!-- Assuming all expenses are added to debt -->
+    <<run console.log("Debt Increase:", $LowerDecksBusinessProcessingSummary.debtIncrease)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.creditsIncrease to _netGainsAfterTax>>
+    <<run console.log("Credits Increase:", $LowerDecksBusinessProcessingSummary.creditsIncrease)>>
+
+    <<set $LowerDecksBusinessProcessingSummary.remainingMinutes to _remainingMinutes>>
+    <<run console.log("Remaining Minutes:", $LowerDecksBusinessProcessingSummary.remainingMinutes)>>
+
+    <<run console.log("Assigned business type details to variables.")>>
+    <<update>>
+    <</if>>
+    <</if>>
+<</widget>>
+
+
+
+:: LowerDecksBusinessReport [widget nobr]
+<<widget "LowerDecksBusinessReport">>
+    <<run console.log("Business Processing Summary:", $LowerDecksBusinessProcessingSummary)>>
+    <<if $LowerDecksBusinessProcessingSummary>>
+        <<set _summary to $LowerDecksBusinessProcessingSummary>>
+
+        <div id="LowerDeckBusinessReportReadout-Container" class="business-report-container">
+            <div id="LowerDeckBusinessReportReadout-Header" class="report-header">
+                <h2>Business Report</h2>
+            </div>
+
+            <div id="LowerDeckBusinessReportReadout-Content" class="report-content">
+                <div class="report-stat">
+                    <p><strong>Total Production:</strong> <span class="value">_summary.production</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Total Revenue:</strong> <span class="value">_summary.revenue</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Total Expenses:</strong> <span class="value">_summary.expenses.total</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Net Gains:</strong> <span class="value">_summary.netGains</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Taxes Paid:</strong> <span class="value">_summary.taxes</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Net Gains After Tax:</strong> <span class="value">_summary.netGainsAfterTax</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Debt Increase:</strong> <span class="value">_summary.debtIncrease</span></p>
+                </div>
+                <div class="report-stat">
+                    <p><strong>Credits Increase:</strong> <span class="value">_summary.creditsIncrease</span></p>
+                </div>
+            </div>
+        </div>
+    <<else>>
+        <div id="LowerDeckBusinessReportReadout-NoData" class="no-data">
+            <p>No recent business activity to report.</p>
+        </div>
+    <</if>>
+<</widget>>
+
+

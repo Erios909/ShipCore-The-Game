@@ -198,7 +198,7 @@ input[type=range] {
     text-decoration: none;
     display: block;
     padding: 18px 25px;
-    font-size: 1em;
+    font-size: 16px;
     transition: color 200ms ease-in;
   	
 }
@@ -226,7 +226,7 @@ input[type=range] {
     padding: 13px 25px;
     display: block;
     color: #aeb2b7;
-    font-size: 12px;
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -286,7 +286,7 @@ input[type=range] {
         background-position: center center;
 }
 #right-ui-bar-toggle {
-	font-size: 1.2em;
+	font-size: 18px;
 	line-height: inherit;
 	color: #eee;
 	background-color: transparent;
@@ -373,11 +373,19 @@ input[type=range] {
 	margin-right: 4.5em;
 }
 
+.li {
+    margin-top: 0px;
+}
 
 /* Style for all text within the accordion */
 #rightside-navigation.sidebar .nano-content {
-    font-weight: bold; /* Make the text bold */
-    font-size: 1.1em; /* Increase the font size slightly */
+    font-weight: bold;
+    font-size: 3em;
+    margin: 0px;
+    padding: 30px;
+    display: flex;
+    flex: auto;
+    flex-direction: column;
 }
 
 /* Style for all links within the accordion */
@@ -1845,4 +1853,312 @@ body.slideWin {
 .business-estimates > *, .business-stats > *, .location-factors > *, .calculated-stats > *, .input-costs > *, .level-upgrade-cost > * {
     position: relative;
     z-index: 2;
+}
+
+
+#business-active-stats-container {
+    display: flex;
+    flex-wrap: nowrap; /* Ensures the container does not wrap */
+    background-color: #000; /* Black background color */
+    margin: 20px auto; /* Centers the container */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    flex-direction: row; /* Children laid out in a row */
+    align-content: center; /* Aligns content lines within the container */
+    justify-content: center; /* Centers items along the main axis */
+    align-items: stretch; /* Stretches items to fill the container height */
+    border: 2px solid darkgray; /* Dark gray border */
+}
+
+
+/* Individual Stat Blocks */
+.business-stat {
+    flex-basis: calc(50% - 40px);
+    /* margin: 10px; */
+    /* padding: 15px; */
+    background-color: #333;
+    border: 4px solid #445555;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Specific images for each stat */
+.stat-employees { background-image: url('images/ui/ui-square-1.jpg'); }
+.stat-max-employees { background-image: url('images/ui/ui-chart-1.jpg'); }
+.stat-business-level { background-image: url('images/ui/ui-location-1.jpg'); }
+.stat-credits { background-image: url('images/ui/ui-math-1.jpg'); }
+.stat-debt { background-image: url('images/ui/ui-resources-1.jpg'); }
+.stat-division-count { background-image: url('images/ui/ui-upgrade-1.jpg'); }
+
+/* Overlay for darkening the background image */
+.business-stat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.business-stat > * {
+    position: relative;
+    z-index: 2;
+}
+
+.business-stat h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.business-stat p {
+    color: #ddd;
+    line-height: 1.3;
+    font-size: calc(0.5em + 0.5vw);
+}
+
+#LowerDeckBusinessReportReadout-Container {
+    display: flex;
+    flex-direction: column;
+    background-color: #000;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 2px solid darkgray;
+}
+
+#LowerDeckBusinessReportReadout-Header {
+    background-color: #445555;
+    text-align: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 10px;
+}
+
+.report-header h2 {
+    color: #FFD700;
+    margin: 0;
+}
+
+#LowerDeckBusinessReportReadout-Content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+}
+
+.report-stat {
+    flex-basis: calc(33% - 20px);
+    margin: 10px;
+    background-color: #333;
+    border: 4px solid #445555;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    padding: 15px;
+}
+
+.report-stat p {
+    color: #ddd;
+    line-height: 1.3;
+    font-size: calc(0.5em + 0.5vw);
+    margin: 5px 0;
+}
+
+#LowerDeckBusinessReportReadout-NoData {
+    background-color: #333;
+    color: #ddd;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    border: 2px solid darkgray;
+}
+
+.banking-container {
+    display: flex;
+}
+
+.ldpb-business-banking[type="business-section.show"] {
+    max-height: 1000px;
+    opacity: 1;
+    visibility: visible;
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-in;
+    background-image: url(images/ui/ui-credit-crash-1.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    justify-content: center;
+}
+
+
+.ldpb-business-banking {
+    display: flex; /* Use flexbox to layout children horizontally */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    justify-content: space-between; /* Space out children evenly */
+    background-color: #000;
+    /* margin: 20px auto; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 2px solid darkgray;
+    /* padding: 10px; */
+}
+
+.ldpb-business-banking .banking-box-credits-box,
+.ldpb-business-banking .banking-box-debt-box {
+    flex: 1; /* Allow boxes to grow and take up equal space */
+    margin: 5px;
+    background-color: #333;
+    border: 4px solid #445555;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 15px;
+    color: #ddd;
+}
+
+/* Styling for links */
+.ldpb-business-banking .ldpb-business-banking-paylink a, 
+.ldpb-business-banking .ldpb-business-banking-paylink-business a {
+    display: block;
+    margin: 10px 0;
+    background-color: #445555;
+    color: #FFD700;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.ldpb-business-banking .ldpb-business-banking-paylink a:hover,
+.ldpb-business-banking .ldpb-business-banking-paylink-business a:hover {
+    background-color: #556666;
+}
+
+/* Styling for textboxes */
+.ldpb-business-banking .banking-box-textbox input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #445555;
+    background-color: #333;
+    color: #FFF;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .ldpb-business-banking {
+        flex-direction: column;
+    }
+
+    .ldpb-business-banking .banking-box-credits-box,
+    .ldpb-business-banking .banking-box-debt-box {
+        flex-basis: 100%;
+    }
+}
+
+
+#active-business-actions {
+    display: flex;
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Center buttons vertically */
+    flex-direction: row; /* Align buttons in a row */
+    gap: 20px; /* Add some space between buttons */
+}
+
+#active-business-actions button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 150px;
+    min-height: 75px;
+    color: #fff;
+    border: solid;
+    border-radius: 5px;
+    background-color: #4a4a4a;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    text-shadow: -2px -2px 3px #000, 2px -2px 3px #000, -2px 2px 3px #000, 2px 2px 3px #000, -3px -3px 3px #000, 3px -3px 3px #000, -3px 3px 3px #000, 3px 3px 3px #000;
+}
+
+.business-section-wrapper {
+    overflow: hidden;
+}
+
+div[type="business-section"] {
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    z-index: 3;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-height: 0; /* Initially collapsed */
+    opacity: 0; /* Initially transparent */
+    visibility: hidden; /* Initially hidden */
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-in 0.5s, visibility 0s linear 0.5s;
+}
+
+
+div[type="business-section.show"] {
+    max-height: 1000px; /* Adjust based on content height */
+    opacity: 1; /* Make content visible */
+    visibility: visible; /* Make section visible */
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-in;
+}
+
+#active-business-actions button:hover {
+    opacity: 0.8; /* Slight transparency on hover for both buttons */
+    background-color: green;
+}
+
+#active-business-actions button:active {
+    opacity: 0.6; /* More transparency when active/clicked for both buttons */
+    background-color: green;
+}
+
+#bizlocationHeadingContainer .link-internal {
+    display: inline-block;
+    height: auto;
+    min-width: auto;
+    background-color: #5b0303;
+    padding: 5px;
+    color: white;
+    line-height: 35px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+#bizlocationHeadingContainer .link-internal:hover {
+    opacity: 0.7; /* Transparency effect on hover */
+}
+
+#slideWinContent .business-estimates {
+    display: flex;
+    flex-wrap: nowrap; /* Prevents flex items from wrapping */
+    /* Add any other styles you need for this selector */
+}
+
+#slideWinContent h2 {
+    max-width: 100%;          /* Limit the width of h2 to the container width */
+    overflow: hidden;         /* Hide overflow text */
+    text-overflow: ellipsis;  /* Add an ellipsis to text that overflows */
+    white-space: nowrap;      /* Prevent text from wrapping to new lines */
+    font-size: 1.2em;         /* Adjust font size as needed */
+    margin: 0.5em 0;          /* Add some margin to separate from other elements */
+    /* Add other styling properties as needed */
 }
