@@ -1,6 +1,8 @@
 :: GenericCompanion [conversation] {"position":"950,725","size":"100,100"}
 <div class="CompanionChatOptions">
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's on your mind, partner?"<</say>><br>
+    /* TODO: Use the variable $CompanionSlotSelected to get  */
+    <<set _companion to State.variables[$playerCompanions[$CompanionSlotSelected]]>>
+    <<say _companion.name _companion.portrait>>"What's up, boss?"<</say>><br>
     <<link "Just chat for a while.">>
         <<replace ".CompanionChatOptions">>
             <<include "GenericCompanionChitChat">>
