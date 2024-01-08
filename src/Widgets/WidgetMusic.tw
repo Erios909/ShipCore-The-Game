@@ -35,7 +35,6 @@
               window.currentTrackTimeout = setTimeout(function() {
                   window.setupTrackEndCallback(track);
               }, 3000); /* Wait 3 seconds before bombarding the user with sound requests. */
-              console.log("omg!!");
               return;
           }
 
@@ -56,5 +55,4 @@
       };
       <</script>>
     <<run window.setupTrackEndCallback("music1")>>
-    <<run window.console.log("woah maaaaaaan")>>
 <</widget>>
