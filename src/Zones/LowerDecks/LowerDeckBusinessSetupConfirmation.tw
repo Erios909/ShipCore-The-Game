@@ -105,30 +105,30 @@
 <<set $LowerDecksBusinessTypeStats = {
     "Space Bar and Lounge": {
             "EmployeesPerUpgrade": 5,
-            "EmployeeCost": 10,
+            "EmployeeCost": 35,
             "InputCosts": { "Food": 3, "Water": 1 },
             "BasePriceOfOutput": 50,
             "CyclesPerHour": 1,
             "BatchSize": 10,
-            "UpgradeCost": 1
+            "UpgradeCost": 2.25
         },
         "Hydroponic Farm": {
             "EmployeesPerUpgrade": 3,
-            "EmployeeCost": 10,
-            "InputCosts": { "Minerals": 3, "Water": 1 },
+            "EmployeeCost": 40,
+            "InputCosts": { "Minerals": 7, "Water": 1 },
             "BasePriceOfOutput": 50,
             "CyclesPerHour": 1,
-            "BatchSize": 10,
-            "UpgradeCost": 1.5
+            "BatchSize": 15,
+            "UpgradeCost": 2.3
         },
         "Scrap Reprocessing": {
             "EmployeesPerUpgrade": 2,
-            "EmployeeCost": 10,
-            "InputCosts": { "Scrap": 4 },
+            "EmployeeCost": 50,
+            "InputCosts": { "Scrap": 11 },
             "BasePriceOfOutput": 50,
             "CyclesPerHour": 1,
-            "BatchSize": 10,
-            "UpgradeCost": 2
+            "BatchSize": 20,
+            "UpgradeCost": 2.35
     }
 }>>
 

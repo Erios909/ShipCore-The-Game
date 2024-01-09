@@ -59,6 +59,7 @@
 
 <<if typeof $LeinaIntro === "undefined">><<set $LeinaIntro = 0>><</if>>
 <<if typeof $CompanionIntro === "undefined">><<set $CompanionIntro = 0>><</if>>
+<<if typeof $DaltonStartedRecruitmentTalk === "undefined">><<set $DaltonStartedRecruitmentTalk to false>><</if>>
 
 <div id="dojoChoices">
     <<if $DaltonReveal > 0 && $LeinaIntro == 0>>
@@ -76,7 +77,7 @@
 
 <br>Travel:<br>
 <div id="travelOptions">
-    <<if $LeinaIntro > 0 and $DaltonStartedRecruitmentTalk == true>>
+    <<if $LeinaIntro > 0 and $DaltonStartedRecruitmentTalk == false>>
         [[Return to the Lower Observation Deck.|DaltonCompanionMission][$timeadd += 5]]<br>
     <<else>>
         [[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>   

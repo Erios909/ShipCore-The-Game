@@ -7,8 +7,8 @@
         <<set $LowerDecksPlayerBusinessEmployees = 0>>
         <<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
         <<set $LowerDecksPlayerBusinessLevel = 1>>
-        <<set $LowerDecksPlayerBusinessCredits = 15250>>
-        <<set $LowerDecksPlayerBusinessDebt = 2530>>
+        <<set $LowerDecksPlayerBusinessCredits = 0>>
+        <<set $LowerDecksPlayerBusinessDebt = 0>>
         <<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
         <<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
         <<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
@@ -46,9 +46,6 @@
         </h2>
         <span id="ldb-business-header-buttons">
         <<link "Exit Business">><<goto "Lower Decks">><</link>>
-        <<link "Advance 1 Hour">><<addmins 60>><<update>><<updatebar>><</link>>
-        <<link "Advance 12 Hours">><<addmins 720>><<update>><<updatebar>><</link>>
-        <<link "Advance 2 Days">><<addmins 2880>><<update>><<updatebar>><</link>>
         </span>
     </div>
 </div>
@@ -92,7 +89,7 @@
             <!-- Employee Management Content -->
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
             
-            <p>Current Employees: <<print $LowerDecksPlayerBusinessEmployees>></p>
+            <<liveblock>><p>Current Employees: <<print $LowerDecksPlayerBusinessEmployees>></p><</liveblock>>
 
             <<button "Add Employee">>
                 <<if $LowerDecksPlayerBusinessEmployees < $LowerDecksPlayerBusinessMaxEmployees>>
@@ -153,19 +150,23 @@
             }>>
 
             /* Check if the business type stats have the necessary properties for upgrade cost calculation */
-            <<if $LowerDecksBusinessTypeStats.hasOwnProperty(_businessType) && $LowerDecksBusinessTypeStats[_businessType].hasOwnProperty('UpgradeCost')>>
+                
+                <<liveblock>>
                 <<set _upgradeCostMultiplier = $LowerDecksBusinessTypeStats[_businessType].UpgradeCost>>
                 <<set _locationModifier = (100 - _setupCost) / 100>> /* Use the _setupCost variable */
                 /* Calculate the cost for each upgrade using the location modifier */
-                <<set $LowerDecksPlayerBusinessEmployeeUpgradeCost = _calculateUpgradeCost(10000, $LowerDecksPlayerBusinessEmployeeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
-                <<set $LowerDecksPlayerBusinessInputCostUpgradeCost = _calculateUpgradeCost(5000, $LowerDecksPlayerBusinessInputCostUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
-                <<set $LowerDecksPlayerBusinessOutputPriceUpgradeCost = _calculateUpgradeCost(15000, $LowerDecksPlayerBusinessOutputPriceUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
-                <<set $LowerDecksPlayerBusinessCycleUpgradeCost = _calculateUpgradeCost(7500, $LowerDecksPlayerBusinessCycleUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
-                <<set $LowerDecksPlayerBusinessBatchSizeUpgradeCost = _calculateUpgradeCost(20000, $LowerDecksPlayerBusinessBatchSizeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
-                <<set $LowerDecksPlayerBusinessBusinessLevelUpgradeCost = _calculateUpgradeCost(50000, $LowerDecksPlayerBusinessLevel, _upgradeCostMultiplier, _locationModifier)>>
-            <</if>>
+                <<set $LowerDecksPlayerBusinessEmployeeUpgradeCost = _calculateUpgradeCost(10000 * $LowerDecksPlayerBusinessEmployeeUpgradeLevel, $LowerDecksPlayerBusinessEmployeeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessInputCostUpgradeCost = _calculateUpgradeCost(5000 * $LowerDecksPlayerBusinessInputCostUpgradeLevel, $LowerDecksPlayerBusinessInputCostUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessOutputPriceUpgradeCost = _calculateUpgradeCost(15000 * $LowerDecksPlayerBusinessOutputPriceUpgradeLevel, $LowerDecksPlayerBusinessOutputPriceUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessCycleUpgradeCost = _calculateUpgradeCost(7500 * $LowerDecksPlayerBusinessCycleUpgradeLevel, $LowerDecksPlayerBusinessCycleUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessBatchSizeUpgradeCost = _calculateUpgradeCost(20000 * $LowerDecksPlayerBusinessBatchSizeUpgradeLevel, $LowerDecksPlayerBusinessBatchSizeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <<set $LowerDecksPlayerBusinessBusinessLevelUpgradeCost = _calculateUpgradeCost(50000 * $LowerDecksPlayerBusinessLevel, $LowerDecksPlayerBusinessLevel, _upgradeCostMultiplier, _locationModifier)>>
+                <</liveblock>>
+
+                
             /* Display the upgrade levels for various business aspects */
-            <<liveblock>><div id="business-upgrade-stats-container">
+        <<liveblock>>
+            <div id="business-upgrade-stats-container">
                 <div class="business-stat stat-employee-upgrade-level">
                     <h3>Employee Upgrade Level:</h3>
                     <p><<print $LowerDecksPlayerBusinessEmployeeUpgradeLevel>></p>
@@ -190,75 +191,77 @@
                     <h3>Business Level:</h3>
                     <p><<print $LowerDecksPlayerBusinessLevel>></p>
                 </div>
-            </div><</liveblock>>
+            </div>
+        <</liveblock>>
+
             /* Display the upgrade options and costs to the player */
             <div class="upgrade-options">
                 <!-- Max Employee Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Max Employee Upgrade Cost: $<<print $LowerDecksPlayerBusinessEmployeeUpgradeCost>></p>
+                <<liveblock>><p>Max Employee Upgrade Cost: $<<print $LowerDecksPlayerBusinessEmployeeUpgradeCost>></p><</liveblock>>
                 <<button "Upgrade Employees">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessEmployeeUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessEmployeeUpgradeCost>>
-                        <<set $LowerDecksPlayerBusinessEmployeeUpgradeLevel += $LowerDecksPlayerBusinessEmployeeUpgradeLevel>>
+                        <<set $LowerDecksPlayerBusinessEmployeeUpgradeLevel += 1>>
                         <<update>>
                     <</if>>
                 <</button>></div>
 
                 <!-- Input Costs Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Input Costs Upgrade Cost: $<<print $LowerDecksPlayerBusinessInputCostUpgradeCost>></p>
+                <<liveblock>><p>Input Costs Upgrade Cost: $<<print $LowerDecksPlayerBusinessInputCostUpgradeCost>></p><</liveblock>>
                 <<button "Reduce Input Costs">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessInputCostUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessInputCostUpgradeCost>>
-                        <<set $LowerDecksPlayerBusinessInputCostUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessInputCostUpgradeLevel += 1>>
                         <<update>>
                     <</if>>
                 <</button>></div>
 
                 <!-- Output Price Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Output Price Upgrade Cost: $<<print $LowerDecksPlayerBusinessOutputPriceUpgradeCost>></p>
+                <<liveblock>><p>Output Price Upgrade Cost: $<<print $LowerDecksPlayerBusinessOutputPriceUpgradeCost>></p><</liveblock>>
                 <<button "Increase Output Price">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessOutputPriceUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessOutputPriceUpgradeCost>>
-                        <<set $LowerDecksPlayerBusinessOutputPriceUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessOutputPriceUpgradeLevel += 1>>
                         <<update>>
                     <</if>>
                 <</button>></div>
 
                 <!-- Cycles Per Hour Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Cycles Per Hour Upgrade Cost: $<<print $LowerDecksPlayerBusinessCycleUpgradeCost>></p>
+                <<liveblock>><p>Cycles Per Hour Upgrade Cost: $<<print $LowerDecksPlayerBusinessCycleUpgradeCost>></p><</liveblock>>
                 <<button "Increase Cycles Per Hour">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessCycleUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessCycleUpgradeCost>>
-                        <<set $LowerDecksPlayerBusinessCycleUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessCycleUpgradeLevel += 1>>
                         <<update>>
                     <</if>>
                 <</button>></div>
 
                 <!-- Batch Size Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Batch Size Upgrade Cost: $<<print $LowerDecksPlayerBusinessBatchSizeUpgradeCost>></p>
+                <<liveblock>><p>Batch Size Upgrade Cost: $<<print $LowerDecksPlayerBusinessBatchSizeUpgradeCost>></p><</liveblock>>
                 <<button "Increase Batch Size">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessBatchSizeUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessBatchSizeUpgradeCost>>
-                        <<set $LowerDecksPlayerBusinessBatchSizeUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessBatchSizeUpgradeLevel += 1>>
                         <<update>>
                     <</if>>
                 <</button>></div>
                 <!-- Business Level Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Business Level Upgrade Cost: $<<print $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>></p>
+                <<liveblock>><p>Business Level Upgrade Cost: $<<print $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>></p><</liveblock>>
                 <<button "Upgrade Business Level">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessBusinessLevelUpgradeCost>>
-                        <<set $LowerDecksPlayerBusinessLevel++>>
+                        <<set $LowerDecksPlayerBusinessLevel += 1>>
                         <<update>>
                     <</if>>
                 <</button>></div>
+                </div>
             </div>
-        </div>
         <div class="ldpb-business-banking" type="business-section">
             <!-- Business Banking Content -->
             <div class="banking-container">

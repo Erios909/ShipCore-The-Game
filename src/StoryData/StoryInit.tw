@@ -162,28 +162,31 @@ $lowerdecksFabricatorCyberware
 
 <<set $LowerDecksBusinessTypeStats = {
     "Space Bar and Lounge": {
-        "EmployeesPerUpgrade": 5,
-            "EmployeeCost": 10,
-            "InputCosts": { "Food": 3, "Water": 1 },
+            "EmployeesPerUpgrade": 5,
+            "EmployeeCost": 35,
+            "InputCosts": { "Food": 4, "Water": 4 },
             "BasePriceOfOutput": 50,
             "CyclesPerHour": 1,
-            "BatchSize": 10
+            "BatchSize": 10,
+            "UpgradeCost": 2.25
         },
         "Hydroponic Farm": {
             "EmployeesPerUpgrade": 3,
-            "EmployeeCost": 10,
-            "InputCosts": { "Minerals": 3, "Water": 1 },
+            "EmployeeCost": 40,
+            "InputCosts": { "Minerals": 7, "Water": 1 },
             "BasePriceOfOutput": 50,
             "CyclesPerHour": 1,
-            "BatchSize": 10
+            "BatchSize": 10,
+            "UpgradeCost": 2.3
         },
         "Scrap Reprocessing": {
             "EmployeesPerUpgrade": 2,
-            "EmployeeCost": 10,
-            "InputCosts": { "Scrap": 4 },
+            "EmployeeCost": 50,
+            "InputCosts": { "Scrap": 8 },
             "BasePriceOfOutput": 50,
             "CyclesPerHour": 1,
-        "BatchSize": 10
+            "BatchSize": 10,
+            "UpgradeCost": 2.35
     }
 }>>
 
@@ -216,21 +219,21 @@ $lowerdecksFabricatorCyberware
 
 /* SugarCube StoryInit Special Passage */
 
+<<set $LowerDecksPlayerBusinessEmployees = 0>>
+<<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
+<<set $LowerDecksPlayerBusinessLevel = 1>>
+<<set $LowerDecksPlayerBusinessCredits = 0>>
+<<set $LowerDecksPlayerBusinessDebt = 0>>
+<<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
+<<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
+<<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
+
 <<set $LowerDecksPlayerBusinessTotalInputCostsForOneBatch = 0>>
 <<set $LowerDecksPlayerBusinessPriceOfOutput = 0>>
 <<set $LowerDecksPlayerBusinessAdjustedPricePerUnit = 0>>
 <<set $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches = 0>>
 <<set $LowerDecksPlayerBusinessTotalEmployeeCostPerHour = 0>>
 <<set $LowerDecksPlayerBusinessProfitMarginPerHour = 0>>
-
-<<set $LowerDecksPlayerBusinessEmployees = 0>>
-<<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
-<<set $LowerDecksPlayerBusinessLevel = 1>>
-<<set $LowerDecksPlayerBusinessCredits = 1000>>
-<<set $LowerDecksPlayerBusinessDebt = 500>>
-<<set $LowerDecksPlayerBusinessNextBusinessLevelUpgradeCost = 0>> <!-- This will be calculated. -->
-<<set $LowerDecksPlayerBusinessNextDivisionCost = 0>> <!-- This will be calculated. -->
-<<set $LowerDecksPlayerBusinessCurrentDivisionCount = 1>>
 
 
 <<set $LowerDecksPlayerBusinessBatchSize to 0>>
@@ -257,7 +260,6 @@ $lowerdecksFabricatorCyberware
 <<set $LowerDecksFinalBusinessStats = {}>> <!-- Initialize an object to store the final business stats -->
 <<set $LowerDecksCurrentScoutLocation = "">>
 <<set $LowerDecksSelectedBusinessLocation = "">>
-<<set $LowerDecksFinalBusinessStats = {}>>
 <<set $LowerDecksPlayerBusinessName to "Undefined Business">>
 <<set $DaltonIsCompanion to false>>
 <<set $JaxIsCompanion to false>>
