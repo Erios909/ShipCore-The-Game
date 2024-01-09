@@ -51,12 +51,6 @@ You stand before the scrap purchasing terminal, a list of quantities and prices 
     <span class="disabledLink">Buy 100 scrap for 5000 credits. (Not enough credits)</span><br>
 <</if>>
 
-<<if $player.credits >= (_scrapCost * 1000)>>
-    [[Buy 1000 scrap for 50000 credits.|DocksideFabricator][$player.credits -= (_scrapCost * 1000); $lowerdecksScrap += 1000; $docksideStats.scrapBought +=1000; $timeadd = 1]]<br>
-<<else>>
-    <span class="disabledLink">Buy 1000 scrap for 50000 credits. (Not enough credits)</span><br>
-<</if>>
-
 [[Inquire about bulk purchases.|DocksideFabricatorBulkInquiry][$timeadd = 1]]<br>
 
 [[Reconsider|DocksideFabricator][$timeadd = 5]]
