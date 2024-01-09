@@ -1,4 +1,8 @@
 :: BusinessManagement [noreturn safe menu nobr] {"position":"1300,175","size":"100,100"}
-<div class="z-level-4" style="background-color: rgba(0, 0, 0, 0.75);">
+<div class="z-level-4-business" style="background-color: rgba(0, 0, 0, 0.75);">
+    <<if $LowerDecksPlayerBusinessActive == true>>
     <<include LowerDecksPlayerBusiness>>
+    <<else>>
+        <p><h2>No business info yet. Please contact your General Manager for access information.</h2></p>
+    <</if>>
 </div>

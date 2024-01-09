@@ -1,141 +1,166 @@
 :: LowerDecksPlayerBusinessProcessing [widget nobr]
 <<widget "LowerDecksPlayerBusinessProcessing">>
     <<if $LowerDecksPlayerBusinessActive == true>>
-    <<run console.log("LowerDecksPlayerBusinessProcessing has fired.")>>
+        <<run console.log("LowerDecksPlayerBusinessProcessing has fired.")>>
 
-    /* Ensure $gameDate is defined and is a valid Date object */
-    <<if typeof $gameDate === "undefined" or not ($gameDate instanceof Date)>>
-        /* Initialize $gameDate to a default value or current date */
-        <<set $gameDate to new Date("3000-01-01T00:00:00Z")>> /* Example date, adjust as needed */
-        <<run console.log("Initialized $gameDate to default value.")>>
-    <</if>>
+        /* Ensure $gameDate is defined and is a valid Date object */
+        <<if typeof $gameDate === "undefined" or not ($gameDate instanceof Date)>>
+            /* Initialize $gameDate to a default value or current date */
+            <<set $gameDate to new Date("3000-01-01T00:00:00Z")>> /* Example date, adjust as needed */
+            <<run console.log("Initialized $gameDate to default value.")>>
+        <</if>>
 
-    /* Ensure $LowerDecksPlayerBusinessLastTime is defined and is a valid Date object */
-    <<if typeof $LowerDecksPlayerBusinessLastTime === "undefined" or not ($LowerDecksPlayerBusinessLastTime instanceof Date)>>
-        /* Initialize $LowerDecksPlayerBusinessLastTime to $gameDate if undefined or invalid */
-        <<set $LowerDecksPlayerBusinessLastTime to new Date($gameDate.getTime())>>
-        <<run console.log("Initialized $LowerDecksPlayerBusinessLastTime to $gameDate.")>>
-    <</if>>
+        /* Ensure $LowerDecksPlayerBusinessLastTime is defined and is a valid Date object */
+        <<if typeof $LowerDecksPlayerBusinessLastTime === "undefined" or not ($LowerDecksPlayerBusinessLastTime instanceof Date)>>
+            /* Initialize $LowerDecksPlayerBusinessLastTime to $gameDate if undefined or invalid */
+            <<set $LowerDecksPlayerBusinessLastTime to new Date($gameDate.getTime())>>
+            <<run console.log("Initialized $LowerDecksPlayerBusinessLastTime to $gameDate.")>>
+        <</if>>
 
-    /* Calculate the time difference in various units */
-    <<set _currentTime to new Date($gameDate.getTime())>> /* Use $gameDate as the current time reference */
-    <<set _lastTime to new Date($LowerDecksPlayerBusinessLastTime.getTime())>> /* Clone the last time to avoid reference issues */
-    <<set _millisecondsPassed to _currentTime.getTime() - _lastTime.getTime()>>
-    <<set _minutesPassed to Math.floor(_millisecondsPassed / 60000)>>
-    <<set _hoursPassed to Math.floor(_minutesPassed / 60)>>
-    <<set _daysPassed to Math.floor(_hoursPassed / 24)>>
-    <<set _weeksPassed to Math.floor(_daysPassed / 7)>>
-    <<set _monthsPassed to Math.floor(_daysPassed / 30)>> /* Approximate month as 30 days */
-    <<set _yearsPassed to Math.floor(_monthsPassed / 12)>>
+        /* Calculate the time difference in various units */
+        <<set _currentTime to new Date($gameDate.getTime())>> /* Use $gameDate as the current time reference */
+        <<set _lastTime to new Date($LowerDecksPlayerBusinessLastTime.getTime())>> /* Clone the last time to avoid reference issues */
+        <<set _millisecondsPassed to _currentTime.getTime() - _lastTime.getTime()>>
+        <<set _minutesPassed to Math.floor(_millisecondsPassed / 60000)>>
+        <<set _hoursPassed to Math.floor(_minutesPassed / 60)>>
+        <<set _daysPassed to Math.floor(_hoursPassed / 24)>>
+        <<set _weeksPassed to Math.floor(_daysPassed / 7)>>
+        <<set _monthsPassed to Math.floor(_daysPassed / 30)>> /* Approximate month as 30 days */
+        <<set _yearsPassed to Math.floor(_monthsPassed / 12)>>
 
-    /* Retrieve business type details */
-    <<set _businessType to $LowerDecksPlayerSelectedBusinessTypeName>>
-    <<set _businessTypeDetails to $LowerDecksBusinessTypeStats[_businessType]>>
+        /* Retrieve business type details */
+        <<set _businessType to $LowerDecksPlayerSelectedBusinessTypeName>>
+        <<set _businessTypeDetails to $LowerDecksBusinessTypeStats[_businessType]>>
 
-    <<if _hoursPassed > 0>>
-    /* Assign business type details to variables */
-    <<set _cyclesPerHour to _businessTypeDetails.CyclesPerHour>>
-    <<set _batchSize to _businessTypeDetails.BatchSize>>
-    <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost>>
-    <<set _inputCosts to _businessTypeDetails.InputCosts>>
-    <<set _basePriceOfOutput to _businessTypeDetails.BasePriceOfOutput>>
-    <<set _taxRate to $LowerDecksPlayerBusinessTaxRate / 100>> /* Convert percentage to decimal */
-    <<set _totalInputCostsPerHour to 0>>
-        <<for _key, _value range _inputCosts>>
-            <<set _totalInputCostsPerHour += _value>>
-        <</for>>
+        <<if _hoursPassed > 0>>
+            /* Calculate upgrade impacts */
+            <<if $LowerDecksPlayerBusinessEmployees > 0>>
+                <<set _employeeEfficiencyMultiplier to Math.max(0.1, $LowerDecksPlayerBusinessEmployees / $LowerDecksPlayerBusinessMaxEmployees)>>
+            <<else>>
+                <<set _employeeEfficiencyMultiplier to 0.1>>
+            <</if>>
+            <<set _inputCostMultiplier to 1 - (0.05 * ($LowerDecksPlayerBusinessInputCostUpgradeLevel - 1))>>
+            <<set _outputPriceMultiplier to 1 + (0.05 * ($LowerDecksPlayerBusinessOutputPriceUpgradeLevel - 1))>>
+            <<set _cyclesPerHour to _businessTypeDetails.CyclesPerHour + ($LowerDecksPlayerBusinessCycleUpgradeLevel - 1)>>
+            <<set _batchSize to _businessTypeDetails.BatchSize + ($LowerDecksPlayerBusinessBatchSizeUpgradeLevel - 1)>>
+            <<set _businessLevelMultiplier to $LowerDecksPlayerBusinessLevel>>
 
-    /* Initialize variables for calculations */
-    <<set _production = 0>>
-    <<set _revenue = 0>>
-    <<set _expenses = 0>>
-    <<set _netGains = 0>>
-    <<set _taxes = 0>>
-    <<set _netGainsAfterTax = 0>>
-    <<set _remainingMinutes = 0>>
+            /* Apply employee efficiency */
+            <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost * $LowerDecksPlayerBusinessEmployees * _employeeEfficiencyMultiplier>>
 
-    /* Process business operations based on the hours passed */
-    
-        /* Calculate production and other business logic */
-        <<set _production = _hoursPassed * _cyclesPerHour * _batchSize>>
-        <<set _revenue = _production * _basePriceOfOutput>>
-        <<set _expenses = (_hoursPassed * _employeeCostPerHour) + (_hoursPassed * _totalInputCostsPerHour)>>
-        /* Update credits and debt */
-        <<set $LowerDecksPlayerBusinessCredits += _revenue>>
-        <<set $LowerDecksPlayerBusinessCredits = Math.floor($LowerDecksPlayerBusinessCredits)>>
+            
 
-        <<set $LowerDecksPlayerBusinessDebt += _expenses>>
-        <<set $LowerDecksPlayerBusinessDebt = Math.floor($LowerDecksPlayerBusinessDebt)>>
+            <<run console.log("total _inputCostMultiplier costs per hour:" + _inputCostMultiplier)>>
+
+            
+            /* Apply output price increase and business level multiplier */
+            <<set _basePriceOfOutput to _businessTypeDetails.BasePriceOfOutput * _outputPriceMultiplier * _businessLevelMultiplier>>
+
+            /* Assign business type details to variables */
+            <<set _cyclesPerHour to _businessTypeDetails.CyclesPerHour * $LowerDecksPlayerBusinessCycleUpgradeLevel>>
+            <<set _batchSize to _businessTypeDetails.BatchSize * $LowerDecksPlayerBusinessBatchSizeUpgradeLevel>>
+            <<if $LowerDecksPlayerBusinessEmployees > 0>>
+            <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost * $LowerDecksPlayerBusinessEmployees>>
+            <<else>>
+            <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost * 0.1>>
+            <</if>>
+
+            <<set _basePriceOfOutput to _businessTypeDetails.BasePriceOfOutput * $LowerDecksPlayerBusinessOutputPriceUpgradeLevel * _employeeEfficiencyMultiplier>>
+            <<set _taxRate to $LowerDecksPlayerBusinessTaxRate / 100>> /* Convert percentage to decimal */
+
+            <<set _totalInputCostsPerHour to 0>>
+
+            <<set _inputCosts = {}>> /* Initialize an empty object to store the adjusted input costs */
+                <<if _businessTypeDetails.InputCosts>> /* Check if InputCosts is defined */
+                    <<for _key, _value range _businessTypeDetails.InputCosts>>
+                        <<set _inputCosts[_key] = _value * _inputCostMultiplier * _employeeEfficiencyMultiplier>> /* Calculate and store the adjusted cost */
+                    <</for>>
+                <</if>>
+                <<if _inputCosts>> /* Check if _inputCosts is defined */
+                    <<for _key, _value range _inputCosts>>
+                        <<set _totalInputCostsPerHour += _value>> /* Add the adjusted cost to the total */
+                    <</for>>
+                    <<set _totalInputCostsPerHour *= _batchSize * _cyclesPerHour>> /* Multiply by batch size and cycles per hour */
+                <</if>>
+                <<run console.log("Total input costs per hour: " + _totalInputCostsPerHour)>>
 
 
 
-        /* Calculate net gains */
-        <<set _netGains to _revenue - _expenses>>
+            /* Initialize variables for calculations */
+            <<set _production = 0>>
+            <<set _revenue = 0>>
+            <<set _expenses = 0>>
+            <<set _netGains = 0>>
+            <<set _taxes = 0>>
+            <<set _netGainsAfterTax = 0>>
+            <<set _remainingMinutes = 0>>
 
-        /* Apply tax rate to net gains */
-        <<set _taxes to _netGains * _taxRate>>
-        <<set _netGainsAfterTax to _netGains - _taxes>>
+            /* Process business operations based on the hours passed */
 
-        /* Update credits with net gains after tax */
-        <<set $LowerDecksPlayerBusinessCredits += _netGainsAfterTax>>
+                /* Apply business level multiplier to production, revenue, and expenses */
+                <<set _production = (_hoursPassed * _cyclesPerHour * _batchSize) * _businessLevelMultiplier>>
+                <<set _revenue = _production * _basePriceOfOutput>>
+                <<set _expenses = ((_hoursPassed * _employeeCostPerHour) + (_hoursPassed * _totalInputCostsPerHour)) * _businessLevelMultiplier>>
 
-        /* Store remaining minutes for the next cycle */
-        <<set _remainingMinutes to _minutesPassed % 60>>
-        <<set $LowerDecksPlayerBusinessRemainingMinutes to _remainingMinutes>>
-         /* After processing, update the last recorded time */
-        <<set $LowerDecksPlayerBusinessLastTime to new Date(_currentTime.getTime())>>
-        <<run console.log("Updated $LowerDecksPlayerBusinessLastTime to:", $LowerDecksPlayerBusinessLastTime)>>
-    
+                /* Update credits and debt */
+                <<set $LowerDecksPlayerBusinessCredits += _revenue>>
+                <<set $LowerDecksPlayerBusinessCredits = Math.round($LowerDecksPlayerBusinessCredits)>>
 
-    /* Initialize the summary object to store the changes */
-    <<set $LowerDecksBusinessProcessingSummary to {
-        production: 0,
-        revenue: 0,
-        expenses: {
-            total: 0,
-            wages: 0,
-            inputCosts: 0
-        },
-        netGains: 0,
-        taxes: 0,
-        netGainsAfterTax: 0,
-        debtIncrease: 0,
-        creditsIncrease: 0,
-        remainingMinutes: 0
-    }>>
+                <<set $LowerDecksPlayerBusinessDebt += _expenses>>
+                <<set $LowerDecksPlayerBusinessDebt = Math.round($LowerDecksPlayerBusinessDebt)>>
 
-    <<set $LowerDecksBusinessProcessingSummary.production to _production>>
-    <<run console.log("Production:", $LowerDecksBusinessProcessingSummary.production)>>
+                /* Calculate net gains */
+                <<set _netGains to _revenue - _expenses>>
 
-    <<set $LowerDecksBusinessProcessingSummary.revenue to _revenue>>
-    <<run console.log("Revenue:", $LowerDecksBusinessProcessingSummary.revenue)>>
+                /* Apply tax rate to net gains */
+                <<set _taxes to _netGains * _taxRate>>
+                <<set _netGainsAfterTax to _netGains - _taxes>>
 
-    <<set $LowerDecksBusinessProcessingSummary.expenses.total to _expenses>>
-    <<run console.log("Total Expenses:", $LowerDecksBusinessProcessingSummary.expenses.total)>>
+                /* Update credits with net gains after tax */
+                <<set $LowerDecksPlayerBusinessCredits += _netGainsAfterTax>>
 
-    <<set $LowerDecksBusinessProcessingSummary.netGains to _netGains>>
-    <<run console.log("Net Gains:", $LowerDecksBusinessProcessingSummary.netGains)>>
+                /* Store remaining minutes for the next cycle */
+                <<set _remainingMinutes to _minutesPassed % 60>>
+                <<set $LowerDecksPlayerBusinessRemainingMinutes to _remainingMinutes>>
+                /* After processing, update the last recorded time */
+                <<set $LowerDecksPlayerBusinessLastTime to new Date(_currentTime.getTime())>>
+                <<run console.log("Updated $LowerDecksPlayerBusinessLastTime to:", $LowerDecksPlayerBusinessLastTime)>>
 
-    <<set $LowerDecksBusinessProcessingSummary.taxes to _taxes>>
-    <<run console.log("Taxes:", $LowerDecksBusinessProcessingSummary.taxes)>>
 
-    <<set $LowerDecksBusinessProcessingSummary.netGainsAfterTax to _netGainsAfterTax>>
-    <<run console.log("Net Gains After Tax:", $LowerDecksBusinessProcessingSummary.netGainsAfterTax)>>
+            /* Initialize the summary object to store the changes */
+            <<set $LowerDecksBusinessProcessingSummary to {
+                production: 0,
+                revenue: 0,
+                expenses: {
+                    total: 0,
+                    wages: 0,
+                    inputCosts: 0
+                },
+                netGains: 0,
+                taxes: 0,
+                netGainsAfterTax: 0,
+                debtIncrease: 0,
+                creditsIncrease: 0,
+                remainingMinutes: 0
+            }>>
 
-    <<set $LowerDecksBusinessProcessingSummary.debtIncrease to _expenses>> <!-- Assuming all expenses are added to debt -->
-    <<run console.log("Debt Increase:", $LowerDecksBusinessProcessingSummary.debtIncrease)>>
+            <<set $LowerDecksBusinessProcessingSummary.production += _production>>
+            <<set $LowerDecksBusinessProcessingSummary.revenue += _revenue>>
+            <<set $LowerDecksBusinessProcessingSummary.expenses.total += _expenses>>
+            <<set $LowerDecksBusinessProcessingSummary.netGains += _netGains>>
+            <<set $LowerDecksBusinessProcessingSummary.taxes += _taxes>>
+            <<set $LowerDecksBusinessProcessingSummary.netGainsAfterTax += _netGainsAfterTax>>
+            <<set $LowerDecksBusinessProcessingSummary.debtIncrease += _expenses>> <!-- Still assuming all expenses are added to debt (they are) -->
+            <<set $LowerDecksBusinessProcessingSummary.creditsIncrease += _netGainsAfterTax>>
+            <<set $LowerDecksBusinessProcessingSummary.remainingMinutes += _remainingMinutes>>
 
-    <<set $LowerDecksBusinessProcessingSummary.creditsIncrease to _netGainsAfterTax>>
-    <<run console.log("Credits Increase:", $LowerDecksBusinessProcessingSummary.creditsIncrease)>>
 
-    <<set $LowerDecksBusinessProcessingSummary.remainingMinutes to _remainingMinutes>>
-    <<run console.log("Remaining Minutes:", $LowerDecksBusinessProcessingSummary.remainingMinutes)>>
-
-    <<run console.log("Assigned business type details to variables.")>>
-    <<update>>
-    <</if>>
+            <<run console.log("Assigned business type details to variables.")>>
+            
+        <</if>>
     <</if>>
 <</widget>>
+
 
 
 

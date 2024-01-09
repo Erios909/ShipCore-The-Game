@@ -1274,6 +1274,25 @@ body.slideWin {
          1px  1px 0 #000; /* Bottom-right shadow */
 }
 
+.z-level-4-business {
+    position: relative;
+	padding: 1%;
+	box-sizing: border-box;
+    z-index: 4;
+    background-color: rgba(0, 0, 0, 0.75);
+	animation: fadeInAnimation 3s ease forwards;
+	text-shadow:
+        -1px -1px 0 #000, /* Top-left shadow */
+         1px -1px 0 #000, /* Top-right shadow */
+        -1px  1px 0 #000, /* Bottom-left shadow */
+         1px  1px 0 #000; /* Bottom-right shadow */
+}
+
+.z-level-4-business #ldb-business-header-buttons {
+    display: none;
+}
+
+
 @keyframes fadeInAnimation {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -1997,6 +2016,7 @@ body.slideWin {
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: center;
+    font-weight: 600;
 }
 
 
@@ -2016,7 +2036,7 @@ body.slideWin {
 .ldpb-business-banking .banking-box-debt-box {
     flex: 1; /* Allow boxes to grow and take up equal space */
     margin: 5px;
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.8);
     border: 4px solid #445555;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -2051,6 +2071,7 @@ body.slideWin {
     border: 1px solid #445555;
     background-color: #333;
     color: #FFF;
+    text-align: center;
 }
 
 /* Responsive design for smaller screens */
@@ -2073,6 +2094,77 @@ body.slideWin {
     flex-direction: row; /* Align buttons in a row */
     gap: 20px; /* Add some space between buttons */
 }
+
+.ldpb-business-upgrades {
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border: 2px solid darkgray;
+    /* padding: 20px; */
+    /* margin: 20px auto; */
+    text-align: center;
+    color: #ddd;
+}
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .ldpb-business-upgrades {
+        flex-direction: column;
+        padding: 10px;
+    }
+}
+
+.upgrade-options {
+    display: flex; /* This turns upgrade-options into a flex container */
+    flex-direction: row; /* Align children vertically */
+    flex-wrap: wrap; /* Allow items to wrap to new lines */
+    align-items: center; /* Center-align children horizontally */
+    gap: 20px; /* Space between each child element */
+    padding: 20px; /* Padding inside the container */
+    background-color: #000; /* Background color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    border: 2px solid darkgray; /* Border */
+    color: #ddd; /* Text color */
+    justify-content: center;
+}
+
+/* Style the buttons inside the upgrade-options */
+.upgrade-options-section button {
+    border-radius: 8px; /* Rounded corners */
+    border: 2px solid darkgray; /* Border */
+    background-color: #445555; /* Button background color */
+    color: #FFD700; /* Button text color */
+    padding: 10px 15px; /* Padding inside the buttons */
+    border-radius: 4px; /* Rounded corners for buttons */
+    border: none; /* No border for buttons */
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: bold; /* Bold font */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.upgrade-options-section button:hover {
+    background-color: #556666; /* Change background color on hover */
+}
+
+.upgrade-options-section {
+    background-color: #000; /* Background color */
+    border-radius: 8px; /* Rounded corners */
+        border: 2px solid darkgray; /* Border */
+            padding: 10px 15px; /* Padding inside the buttons */
+    }
+
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .upgrade-options-section {
+        flex-direction: row; /* Align children horizontally on smaller screens */
+        flex-wrap: wrap; /* Allow items to wrap to new lines */
+        justify-content: center; /* Center items on the main axis */
+    }
+}
+
 
 #active-business-actions button {
     display: inline-block;
@@ -2106,15 +2198,18 @@ div[type="business-section"] {
     max-height: 0; /* Initially collapsed */
     opacity: 0; /* Initially transparent */
     visibility: hidden; /* Initially hidden */
-    transition: max-height 0.5s ease-out, opacity 0.5s ease-in 0.5s, visibility 0s linear 0.5s;
+    transition: transform ease-out;
+    transform: translateX(-400%);
 }
 
 
 div[type="business-section.show"] {
-    max-height: 1000px; /* Adjust based on content height */
-    opacity: 1; /* Make content visible */
-    visibility: visible; /* Make section visible */
+    max-height: 100%;
+    opacity: 1;
+    visibility: visible;
     transition: max-height 0.5s ease-out, opacity 0.5s ease-in;
+    padding: 1%;
+    font-size: 1.1em;
 }
 
 #active-business-actions button:hover {
@@ -2126,6 +2221,13 @@ div[type="business-section.show"] {
     opacity: 0.6; /* More transparency when active/clicked for both buttons */
     background-color: green;
 }
+
+.ldpb-business-info[type="business-section"] p {
+    font-size: 1.1em; /* Slightly larger font size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Text shadow for depth */
+    display: block; /* Ensure paragraphs are block-level elements */
+}
+
 
 #bizlocationHeadingContainer .link-internal {
     display: inline-block;
@@ -2161,4 +2263,18 @@ div[type="business-section.show"] {
     font-size: 1.2em;         /* Adjust font size as needed */
     margin: 0.5em 0;          /* Add some margin to separate from other elements */
     /* Add other styling properties as needed */
+}
+
+#business-upgrade-stats-container {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #000;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    border: 2px solid darkgray;
 }

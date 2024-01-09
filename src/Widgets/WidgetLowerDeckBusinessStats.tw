@@ -20,7 +20,7 @@
         <<set _locationName = $LowerDecksCurrentScoutLocation>> <!-- Set the location name using $LowerDecksCurrentScoutLocation -->
     <</if>>
 
-
+    
     /* If location data is available */
     <<if _locationData>>
         /* Assign values from the _locationData array to individual variables with a default value of 5 if data is not available */
@@ -77,45 +77,91 @@
 
 <<widget "PrintBusinessEstimates">>
     <<nobr>>
+        /* Define new variables for upgrade levels if they don't exist */
+        <<if $LowerDecksPlayerBusinessEmployeeUpgradeLevel === undefined>>
+            <<set $LowerDecksPlayerBusinessEmployeeUpgradeLevel = 1>>
+            <<set $LowerDecksPlayerBusinessInputCostUpgradeLevel = 1>>
+            <<set $LowerDecksPlayerBusinessOutputPriceUpgradeLevel = 1>>
+            <<set $LowerDecksPlayerBusinessCycleUpgradeLevel = 1>>
+            <<set $LowerDecksPlayerBusinessBatchSizeUpgradeLevel = 1>>
+            <<set $LowerDecksPlayerBusinessLevel = 1>> /* Business level upgrade */
+        <</if>>
+
+        /* Retrieve location data using the provided method */
+        <<if $LowerDecksPlayerBusinessLocationStats and setup.LowerDeckLocations.hasOwnProperty($LowerDecksPlayerBusinessLocationStats)>>
+            <<set _locationData = setup.LowerDeckLocations[$LowerDecksPlayerBusinessLocationStats]>>
+            <<set _locationName = $LowerDecksPlayerBusinessLocationStats>> <!-- Set the location name using $LowerDecksPlayerBusinessLocationStats -->
+        <<elseif $LowerDecksBusinessLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksBusinessLocation)>>
+            <<set _locationData = setup.LowerDeckLocations[$LowerDecksBusinessLocation]>>
+            <<set _locationName = $LowerDecksBusinessLocation>> <!-- Set the location name using $LowerDecksBusinessLocation -->
+        <<elseif $LowerDecksCurrentScoutLocation and setup.LowerDeckLocations.hasOwnProperty($LowerDecksCurrentScoutLocation)>>
+            <<set _locationData = setup.LowerDeckLocations[$LowerDecksCurrentScoutLocation]>>
+            <<set _locationName = $LowerDecksCurrentScoutLocation>> <!-- Set the location name using $LowerDecksCurrentScoutLocation -->
+        <</if>>
+
+        /* Business type and details */
         <<set _businessType = $LowerDeckBusinessTypes[$currentBusinessIndex]>>
+        <<set _businessTypeDetails = $LowerDecksBusinessTypeStats[_businessType]>>
+
+        
+
+        /* Batch size and employee efficiency */
+        <<set _batchSize to _businessTypeDetails.BatchSize + ($LowerDecksPlayerBusinessBatchSizeUpgradeLevel - 1)>>
+        <<if $LowerDecksPlayerBusinessActive == true>>
+        <<set _employeeEfficiencyMultiplier to Math.max(0.1, $LowerDecksPlayerBusinessEmployees / $LowerDecksPlayerBusinessMaxEmployees)>>
+        <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost * _employeeEfficiencyMultiplier * $LowerDecksPlayerBusinessMaxEmployees>>
+        <<else>>
+        <<set _employeeEfficiencyMultiplier to 1>>
+        <<set _employeeCostPerHour to _businessTypeDetails.EmployeeCost * $LowerDecksPlayerBusinessMaxEmployees * _employeeEfficiencyMultiplier>>
+        <</if>>
+        
+        /* Modifiers based on upgrade levels */
+        <<set _inputCostMultiplier to 1 - ((0.05 * ($LowerDecksPlayerBusinessInputCostUpgradeLevel - 1)) * _employeeEfficiencyMultiplier)>>
+        <<set _outputPriceMultiplier to 1 + ((0.05 * ($LowerDecksPlayerBusinessOutputPriceUpgradeLevel - 1)) * _employeeEfficiencyMultiplier)>>
+        
+        /* Location-based modifiers */
+        <<set _customerAvailabilityModifier = (100 - (10 - _locationData[0])) / 100>>
+        <<set _supplyHubAccessModifier = (100 + (10 - _locationData[1])) / 100>>
+        <<set _dangerModifier = (100 - _locationData[2]) / 100>>
+        <<set _taxRateModifier = (100 - _locationData[3]) / 100>>
+        <<set _setupCostModifier = (100 + _locationData[4]) / 100>>
+
+        /* Adjusted price per unit and total input costs */
+        <<set _adjustedPricePerUnit to (_businessTypeDetails.BasePriceOfOutput * _outputPriceMultiplier) * _customerAvailabilityModifier>>
+        <<set _totalInputCostsForOneBatch to 0>>
+        <<for _key, _value range _businessTypeDetails.InputCosts>>
+            <<set _totalInputCostsForOneBatch += (_value * _inputCostMultiplier * _supplyHubAccessModifier)>>
+        <</for>>
+
+        /* Total sales price and profit margin */
+        <<set _totalSalesPriceForAllBatches to (_adjustedPricePerUnit * _batchSize * _dangerModifier * _taxRateModifier * _employeeEfficiencyMultiplier)>>
+        <<set _profitMarginPerHour to (_totalSalesPriceForAllBatches - _employeeCostPerHour - _totalInputCostsForOneBatch) * $LowerDecksPlayerBusinessLevel * _employeeEfficiencyMultiplier>>
+
+        /* Display business estimates */
         <div class="business-estimates">
             <div class="business-stats">
                 <h2>Business Stats</h2>
-                <li><strong>Batch Production Size:</strong> <span class="value"><<print $LowerDecksPlayerBusinessBatchSize ?? "Error: Batch Size not set">></span></li>
+                <li><strong>Batch Production Size:</strong> <span class="value"><<print _batchSize>> units</span></li>
                 <li><strong>Employees Needed Per Upgrade:</strong> <span class="value"><<print $LowerDecksPlayerBusinessEmployeesPerUpgrade ?? "Error: Employees Per Upgrade not set">></span></li>
             </div>
             <div class="location-factors">
                 <h2>Location Factors</h2>
-                <li><strong>Customer Availability:</strong> <span class="value"><<print 100 - (10 - $LowerDecksPlayerBusinessCustomerAvailability) + "%">></span></li>
-                <li><strong>Supply Hub Access:</strong> <span class="value"><<print 100 - (10 - $LowerDecksPlayerBusinessSupplyHubAccess) + "%">></span></li>
+                <li><strong>Customer Availability:</strong> <span class="value"><<print (_customerAvailabilityModifier * 100).toFixed(2)>>%</span></li>
+                <li><strong>Supply Hub Access:</strong> <span class="value"><<print (_supplyHubAccessModifier * 100).toFixed(2)>>%</span></li>
                 <li><strong>Danger Level:</strong> <span class="value"><<print $LowerDecksPlayerBusinessDangerLevel + "%">></span></li>
                 <li><strong>Tax Rate:</strong> <span class="value"><<print $LowerDecksPlayerBusinessTaxRate + "%">></span></li>
             </div>
             <div class="calculated-stats">
                 <h2>Calculated Stats</h2>
-                <li><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessAdjustedPricePerUnit.toFixed(2)>> credits</span></li>
-                <li><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalSalesPriceForAllBatches.toFixed(2)>> credits</span></li>
-                <li><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print $LowerDecksPlayerBusinessTotalInputCostsForOneBatch.toFixed(2)>> credits</span></li>
-                <li><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print $LowerDecksPlayerBusinessTotalEmployeeCostPerHour.toFixed(2)>> credits</span></li>
-                <<if $LowerDecksPlayerBusinessProfitMarginPerHour >= 0>>
-                    <li><strong>Profit Margin Per Hour:</strong> <span class="positive-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></li>
+                <li><strong>Adjusted Sales Price Per Unit:</strong> $<span class="value"><<print _adjustedPricePerUnit.toFixed(2)>> credits</span></li>
+                <li><strong>Total Sales Price for All Batches:</strong> $<span class="value"><<print (_totalSalesPriceForAllBatches * $LowerDecksPlayerBusinessLevel).toFixed(2)>> credits</span></li>
+                <li><strong>Total Input Costs for One Batch:</strong> $<span class="value"><<print (_totalInputCostsForOneBatch * $LowerDecksPlayerBusinessLevel).toFixed(2)>> credits</span></li>
+                
+                <li><strong>Total Employee Cost Per Hour:</strong> $<span class="negative-value"><<print (_employeeCostPerHour * $LowerDecksPlayerBusinessLevel).toFixed(2)>> credits</span></li>
+                <<if _profitMarginPerHour >= 0>>
+                    <li><strong>Profit Margin Per Hour:</strong> <span class="positive-value"><<print _profitMarginPerHour.toFixed(2)>> credits</span></li>
                 <<else>>
-                    <li><strong>Profit Margin Per Hour:</strong> <span class="negative-value"><<print $LowerDecksPlayerBusinessProfitMarginPerHour.toFixed(2)>> credits</span></li>
-                <</if>>
-            </div>
-            <!-- Input Costs Section -->
-            <div class="input-costs">
-                <h2>Input Costs</h2>
-                <<if $LowerDecksBusinessTypeStats.hasOwnProperty(_businessType)>>
-                    <<set _inputCosts = $LowerDecksBusinessTypeStats[_businessType].InputCosts>>
-                    <<set _inputKeys = Object.keys(_inputCosts)>>
-                    <<for _i = 0; _i < _inputKeys.length; _i++>>
-                        <<set _input = _inputKeys[_i]>>
-                        <<set _cost = _inputCosts[_input]>>
-                        <li><strong> _input: $<<print _cost.toFixed(2)>> credits per unit</strong></li>
-                    <</for>>
-                <<else>>
-                    <li>Error: Business type not found or input costs not defined.</li>
+                    <li><strong>Profit Margin Per Hour:</strong> <span class="negative-value"><<print _profitMarginPerHour.toFixed(2)>> credits</span></li>
                 <</if>>
             </div>
 
@@ -124,7 +170,8 @@
                 <h2>Level Upgrade Cost</h2>
                 <<if $LowerDecksBusinessTypeStats.hasOwnProperty(_businessType) && $LowerDecksBusinessTypeStats[_businessType].hasOwnProperty('UpgradeCost')>>
                     <<set _upgradeCostMultiplier = $LowerDecksBusinessTypeStats[_businessType].UpgradeCost>>
-                    <<set _locationModifier = (100 - $LowerDecksPlayerBusinessCustomerAvailability) / 100>>
+                    /* Use the customer availability from the location data instead of the global player variable */
+                    <<set _locationModifier = (100 - (10 - _locationData[0])) / 100>>
                     <<set _pricePerLevelUpgrade = _locationModifier * _upgradeCostMultiplier * 10000>>
                     <<set _pricePerDivUpgrade = _locationModifier * _upgradeCostMultiplier * 100000>>
                     <li><strong>Price Per Level Upgrade: $<<print _pricePerLevelUpgrade.toFixed(2)>> credits</strong></li>
