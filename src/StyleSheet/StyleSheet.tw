@@ -2204,10 +2204,12 @@ div[type="business-section"] {
 
 
 div[type="business-section.show"] {
-    max-height: 1000px; /* Adjust based on content height */
-    opacity: 1; /* Make content visible */
-    visibility: visible; /* Make section visible */
+    max-height: 100%;
+    opacity: 1;
+    visibility: visible;
     transition: max-height 0.5s ease-out, opacity 0.5s ease-in;
+    padding: 1%;
+    font-size: 1.1em;
 }
 
 #active-business-actions button:hover {
@@ -2261,4 +2263,18 @@ div[type="business-section.show"] {
     font-size: 1.2em;         /* Adjust font size as needed */
     margin: 0.5em 0;          /* Add some margin to separate from other elements */
     /* Add other styling properties as needed */
+}
+
+#business-upgrade-stats-container {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: #000;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+    border: 2px solid darkgray;
 }

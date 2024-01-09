@@ -127,6 +127,7 @@
     <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"He's not wrong. Setting up a crew could give us the edge we need. And if it helps take down Braxton, I'm all for it."<</say>>
 <</if>>
 <<set $LowerDeckScoutActive to true>>
+<<set $DaltonStartedRecruitmentTalk to true>>
 
 <!-- Player choices after the conversation -->
 <div id="finalChoices"><<say '$player.name' $playerPortraitPathZ>>

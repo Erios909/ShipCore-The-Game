@@ -3,7 +3,7 @@
 
     <<set $LowerDeckBusinessTypes = ["Space Bar and Lounge", "Hydroponic Farm", "Scrap Reprocessing"]>>
 
-    <<if $$LowerDecksPlayerBusinessMaxEmployees === undefined>>
+    <<if $LowerDecksPlayerBusinessMaxEmployees === undefined>>
         <<set $LowerDecksPlayerBusinessEmployees = 0>>
         <<set $LowerDecksPlayerBusinessMaxEmployees = 5>> <!-- This will be calculated. -->
         <<set $LowerDecksPlayerBusinessLevel = 1>>
@@ -91,7 +91,24 @@
         <div class="ldpb-employee-management" type="business-section">
             <!-- Employee Management Content -->
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
-            <hr id="#HuDHr">
+            
+            <p>Current Employees: <<print $LowerDecksPlayerBusinessEmployees>></p>
+
+            <<button "Add Employee">>
+                <<if $LowerDecksPlayerBusinessEmployees < $LowerDecksPlayerBusinessMaxEmployees>>
+                    <<set $LowerDecksPlayerBusinessEmployees++>>
+                    <<update>>
+                <</if>>
+            <</button>>
+
+            <<button "Remove Employee">>
+                <<if $LowerDecksPlayerBusinessEmployees > 0>>
+                    <<set $LowerDecksPlayerBusinessEmployees-->>
+                    <<update>>
+                <</if>>
+            <</button>>
+
+            
         </div>
         <div class="ldpb-business-upgrades" type="business-section">
             <!-- Business Upgrades Content -->
@@ -114,7 +131,7 @@
             <</if>>
 
             /* Define new variables for upgrade levels if they don't exist */
-            <<if $employeeUpgradeLevel === undefined>>
+            <<if $LowerDecksPlayerBusinessEmployeeUpgradeLevel === undefined>>
                 <<set $LowerDecksPlayerBusinessEmployeeUpgradeLevel = 1>>
                 <<set $LowerDecksPlayerBusinessInputCostUpgradeLevel = 1>>
                 <<set $LowerDecksPlayerBusinessOutputPriceUpgradeLevel = 1>>
@@ -147,7 +164,33 @@
                 <<set $LowerDecksPlayerBusinessBatchSizeUpgradeCost = _calculateUpgradeCost(20000, $LowerDecksPlayerBusinessBatchSizeUpgradeLevel, _upgradeCostMultiplier, _locationModifier)>>
                 <<set $LowerDecksPlayerBusinessBusinessLevelUpgradeCost = _calculateUpgradeCost(50000, $LowerDecksPlayerBusinessLevel, _upgradeCostMultiplier, _locationModifier)>>
             <</if>>
-
+            /* Display the upgrade levels for various business aspects */
+            <<liveblock>><div id="business-upgrade-stats-container">
+                <div class="business-stat stat-employee-upgrade-level">
+                    <h3>Employee Upgrade Level:</h3>
+                    <p><<print $LowerDecksPlayerBusinessEmployeeUpgradeLevel>></p>
+                </div>
+                <div class="business-stat stat-input-cost-upgrade-level">
+                    <h3>Input Cost Upgrade Level:</h3>
+                    <p><<print $LowerDecksPlayerBusinessInputCostUpgradeLevel>></p>
+                </div>
+                <div class="business-stat stat-output-price-upgrade-level">
+                    <h3>Output Price Upgrade Level:</h3>
+                    <p><<print $LowerDecksPlayerBusinessOutputPriceUpgradeLevel>></p>
+                </div>
+                <div class="business-stat stat-cycle-upgrade-level">
+                    <h3>Cycle Upgrade Level:</h3>
+                    <p><<print $LowerDecksPlayerBusinessCycleUpgradeLevel>></p>
+                </div>
+                <div class="business-stat stat-batch-size-upgrade-level">
+                    <h3>Batch Size Upgrade Level:</h3>
+                    <p><<print $LowerDecksPlayerBusinessBatchSizeUpgradeLevel>></p>
+                </div>
+                <div class="business-stat stat-business-level">
+                    <h3>Business Level:</h3>
+                    <p><<print $LowerDecksPlayerBusinessLevel>></p>
+                </div>
+            </div><</liveblock>>
             /* Display the upgrade options and costs to the player */
             <div class="upgrade-options">
                 <!-- Max Employee Upgrade Button -->
@@ -156,7 +199,7 @@
                 <<button "Upgrade Employees">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessEmployeeUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessEmployeeUpgradeCost>>
-                        <<set $employeeUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessEmployeeUpgradeLevel += $LowerDecksPlayerBusinessEmployeeUpgradeLevel>>
                         <<update>>
                     <</if>>
                 <</button>></div>
@@ -167,7 +210,7 @@
                 <<button "Reduce Input Costs">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessInputCostUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessInputCostUpgradeCost>>
-                        <<set $inputCostUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessInputCostUpgradeLevel++>>
                         <<update>>
                     <</if>>
                 <</button>></div>
@@ -178,29 +221,29 @@
                 <<button "Increase Output Price">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessOutputPriceUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessOutputPriceUpgradeCost>>
-                        <<set $outputPriceUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessOutputPriceUpgradeLevel++>>
                         <<update>>
                     <</if>>
                 <</button>></div>
 
                 <!-- Cycles Per Hour Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Cycles Per Hour Upgrade Cost: $<<print $$LowerDecksPlayerBusinessCycleUpgradeCost>></p>
+                <p>Cycles Per Hour Upgrade Cost: $<<print $LowerDecksPlayerBusinessCycleUpgradeCost>></p>
                 <<button "Increase Cycles Per Hour">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessCycleUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessCycleUpgradeCost>>
-                        <<set $cycleUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessCycleUpgradeLevel++>>
                         <<update>>
                     <</if>>
                 <</button>></div>
 
                 <!-- Batch Size Upgrade Button -->
                 <div class="upgrade-options-section">
-                <p>Batch Size Upgrade Cost: $<<print $$LowerDecksPlayerBusinessBatchSizeUpgradeCost>></p>
+                <p>Batch Size Upgrade Cost: $<<print $LowerDecksPlayerBusinessBatchSizeUpgradeCost>></p>
                 <<button "Increase Batch Size">>
                     <<if $LowerDecksPlayerBusinessCredits >= $LowerDecksPlayerBusinessBatchSizeUpgradeCost>>
                         <<set $LowerDecksPlayerBusinessCredits -= $LowerDecksPlayerBusinessBatchSizeUpgradeCost>>
-                        <<set $batchSizeUpgradeLevel++>>
+                        <<set $LowerDecksPlayerBusinessBatchSizeUpgradeLevel++>>
                         <<update>>
                     <</if>>
                 <</button>></div>
@@ -273,32 +316,37 @@
                     <div class="ldpb-business-banking-buisness-name"><<liveblock>><solid><<=$LowerDecksPlayerBusinessName>> Debt: $<<print $LowerDecksPlayerBusinessDebt.toFixed(2)>></solid><</liveblock>></div>
                 </div>
             </div>
-            <hr id="HuDHr">
         </div>
 
         <div class="ldpb-business-addons" type="business-section">
             <!-- Business Addons Content -->
             <p>The potential of your business is palpable, the air charged with the promise of growth and prosperity. As you plan your next move, you can't help but feel a sense of excitement for the future. With the right decisions, this derelict building will become a cornerstone of commerce on MOR-1.</p>
-            <hr id="#HuDHr">
+            <p>Addons will represent the other two business types available on MOR-1 and will be 'divisions' allowing multiple businesses and are not implemented yet.</p>
+            
+            
         </div>
 
         <div class="ldpb-business-info" type="business-section">
-            <p>Welcome to the heart of your new establishment, <strong><<print $player.name>></strong>! As the owner of this fine venture, it's crucial to understand how each decision you make can propel your business to new heights. Let's take a moment to walk through the various upgrades and how they can enhance your operations.</p>
+            <div class="ldpb-business-info" type="business-section">
+                <p>Welcome to the heart of your new establishment, <span style="color: #FFD700;"><strong><<print $player.name>></strong></span>! As the owner of this fine venture, it's crucial to understand how each decision you make can propel your business to new heights. Let's take a moment to walk through the various upgrades and how they can enhance your operations.</p>
 
-            <p><strong>Employee Capacity:</strong> Every business thrives on the strength of its workforce. Upgrading your <span style="color: #4CAF50;">employee capacity</span> allows you to hire more staff, increasing productivity and enabling you to meet the demands of a growing customer base. Think of it as expanding your team to bring more hands on deck.</p>
+                <p><span style="color: #4CAF50;"><strong>Employee Capacity:</strong></span> Every business thrives on the strength of its workforce. Upgrading your <span style="color: #4CAF50;">employee capacity</span> allows you to <span style="color: #FFD700;"><strong>hire more staff, increasing productivity</strong></span> and enabling you to meet the demands of a growing customer base. Think of it as expanding your team to bring more hands on deck.</p>
 
-            <p><strong>Input Efficiency:</strong> The cost of raw materials can eat into your profits if not managed wisely. By investing in <span style="color: #2196F3;">input efficiency</span>, you reduce the costs of inputs required for production. It's like finding a way to make the same delicious meals but at a fraction of the cost, maximizing your margins.</p>
+                <p><span style="color: #2196F3;"><strong>Input Efficiency:</strong></span> The cost of raw materials can eat into your profits if not managed wisely. By investing in <span style="color: #2196F3;">input efficiency</span>, you <span style="color: #FFD700;"><strong>reduce the costs of inputs</strong></span> required for production. It's like finding a way to make the same delicious meals but at a fraction of the cost, maximizing your margins.</p>
 
-            <p><strong>Output Value:</strong> The value of your products is not just in their quality, but also in their perceived worth. Enhancing the <span style="color: #FFC107;">output value</span> means you can command higher prices in the market. It's about adding that sprinkle of exclusivity that makes customers happy to pay a premium.</p>
+                <p><span style="color: #FFC107;"><strong>Output Value:</strong></span> The value of your products is not just in their quality, but also in their perceived worth. Enhancing the <span style="color: #FFC107;">output value</span> means you can <span style="color: #FFD700;"><strong>command higher prices</strong></span> in the market. It's about adding that sprinkle of exclusivity that makes customers happy to pay a premium.</p>
 
-            <p><strong>Production Speed:</strong> Time is money, and in the world of business, the faster you can produce, the more you can sell. Upgrading your <span style="color: #FF5722;">production speed</span> increases the number of cycles you can complete in an hour, ensuring that your goods are flying off the shelves faster than ever.</p>
+                <p><span style="color: #FF5722;"><strong>Production Speed:</strong></span> Time is money, and in the world of business, the faster you can produce, the more you can sell. Upgrading your <span style="color: #FF5722;">production speed</span> increases the <span style="color: #FFD700;"><strong>number of cycles you can complete in an hour</strong></span>, ensuring that your goods are flying off the shelves faster than ever.</p>
 
-            <p><strong>Batch Size:</strong> Sometimes, more is more. By increasing your <span style="color: #9C27B0;">batch size</span>, you produce more products with each cycle. This upgrade is perfect for scaling up operations and meeting the needs of a larger audience without compromising on efficiency.</p>
+                <p><span style="color: #9C27B0;"><strong>Batch Size:</strong></span> Sometimes, more is more. By increasing your <span style="color: #9C27B0;">batch size</span>, you produce <span style="color: #FFD700;"><strong>more products with each cycle</strong></span>. This upgrade is perfect for scaling up operations and meeting the needs of a larger audience without compromising on efficiency.</p>
 
-            <p><strong>Business Level:</strong> The overall level of your business acts as a multiplier to all business-related activities, making it the primary option for expansion. You will need more employees to handle the extra workload, though. It's the mark of a true entrepreneur.</p>
+                <p><span style="color: #3F51B5;"><strong>Business Level:</strong></span> The overall level of your business acts as a <span style="color: #FFD700;"><strong>multiplier to all</strong></span> business-related activities, making it the primary option for expansion. You will need more employees to handle the extra workload, though. It's the mark of a true entrepreneur.</p>
 
-            <p>Remember, each upgrade will increase in cost every level, but with careful planning and strategic investment, you'll see your business flourish. Consider the local market conditions, your current resources, and your long-term goals as you decide which upgrades to prioritize. Your journey from a small startup to a commercial powerhouse starts with these wise choices. Good luck, and may your business prosper!</p>
-            <hr id="#HuDHr">
+                <p>Remember, each upgrade will increase in cost every level, but with careful planning and strategic investment, you'll see your business flourish. Consider the local market conditions, your current resources, and your long-term goals as you decide which upgrades to prioritize. Your journey from a small startup to a commercial powerhouse starts with these wise choices. Good luck, and may your business prosper!</p>
+                
+            </div>
+
+            
         </div>
 
         <hr id="#HuDHr">

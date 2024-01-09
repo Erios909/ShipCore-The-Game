@@ -76,7 +76,7 @@
 
 <br>Travel:<br>
 <div id="travelOptions">
-    <<if $LeinaIntro > 0 && $CompanionIntro == 0>>
+    <<if $LeinaIntro > 0 and $DaltonStartedRecruitmentTalk == true>>
         [[Return to the Lower Observation Deck.|DaltonCompanionMission][$timeadd += 5]]<br>
     <<else>>
         [[Return to the Lower Observation Deck.|Lower Observation Deck][$timeadd += 5]]<br>   

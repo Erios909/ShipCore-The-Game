@@ -15,6 +15,9 @@
     <div class="business-stat stat-employees">
         <h3>Current Employees:</h3>
         <p><<print $LowerDecksPlayerBusinessEmployees>></p>
+        <<if $LowerDecksPlayerBusinessEmployees == 0>>
+            <p><span style="color: red"> Warning: 10% output, No Employees</span></p>
+            <</if>>
     </div>
     <div class="business-stat stat-max-employees">
         <h3>Max Employees:</h3>

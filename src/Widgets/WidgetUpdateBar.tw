@@ -3,6 +3,18 @@
     <<clamps>>
     <<replace "#story-banner">><<include "StoryBanner">><</replace>>
     <<replace "#story-caption">><<include "StoryCaption">><</replace>>
+    <<script>>
+// Update the stat bars on passage end
+$(document).one(':passageend', function () {
+    UpdateStatBar(State.variables.player.health, 1000, "healthbar", false);
+    UpdateStatBar(State.variables.player.mood, 1000, "moodbar", false);
+    UpdateStatBar(1000 - State.variables.player.stress, 1000, "stressbar", true); // Inverted logic for stress
+    UpdateStatBar(1000 - State.variables.player.trauma, 1000, "traumabar", true); // Inverted logic for trauma
+    UpdateStatBar(1000 - State.variables.player.fatigue, 1000, "fatiguebar", true); // Inverted logic for fatigue
+    UpdateStatBar(State.variables.player.powerReserves, 1000, "powerReservesbar", false);
+    UpdateStatBar(1000 - State.variables.player.filth, 1000, "filthbar", true); // Inverted logic for filth
+});
+<</script>>
 <</nobr>><</silently>><</widget>>
 
 
