@@ -73,7 +73,7 @@ window.isPlaying = function (trackID) {
 	return track !== null && track.isPlaying();
 };
 
-Config.history.maxStates = 12;
+
 
 $(document).on(':passageend', function () {
     // Accordion toggle for sub-menus
@@ -102,13 +102,25 @@ $(document).on(':passageend', function () {
 });
 
 
+// SAVING AND BACK BUTTON
+Config.history.maxStates = 1;
+
+config.saves.isAllowed = function () {
+    // Check if the current passage has the 'safe' tag
+    if (tags().includes("safe")) {
+        return true; // Allow saving in passages with the 'safe' tag
+    }
+    return false; // Disallow saving in all other passages
+};
+
 Config.saves.autosave = function () {
     // Check if the current passage has the "POI" tag
-    if (tags().includes("poi")) {
+    if (tags().includes("safe")) {
         return true; // Autosave for passages with the "POI" tag
     }
     return false; // Do not autosave for other passages
 };
+
 
 
 if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
