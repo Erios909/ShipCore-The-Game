@@ -1,0 +1,33 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Ensure Output Directory",
+            "type": "shell",
+            "command": "if ((Test-Path ./out) -ne $true) { mkdir ./out }",
+        },
+        {
+            "label": "Tweego Compile",
+            "type": "shell",
+            "command": "tweego.exe -o './out/index.html' src",
+            "dependsOn": ["Ensure Output Directory"]
+        },
+        {
+            "label": "Copy Static Resources",
+            "type": "shell",
+            "command": "Copy-Item -Path ./web/* -Destination ./out -Recurse",
+            "dependsOn": ["Ensure Output Directory"]
+        },
+        {
+            "label": "build",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": ["Tweego Compile", "Copy Static Resources"]
+        }
+    ]
+}
