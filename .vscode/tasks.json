@@ -6,19 +6,23 @@
         {
             "label": "Ensure Output Directory",
             "type": "shell",
-            "command": "if ((Test-Path ./out) -ne $true) { mkdir ./out }",
+            "command": "if ((Test-Path ./out) -ne $true) { mkdir ./out }"
         },
         {
             "label": "Tweego Compile",
             "type": "shell",
             "command": "tweego.exe -o './out/index.html' src",
-            "dependsOn": ["Ensure Output Directory"]
+            "dependsOn": [
+                "Ensure Output Directory"
+            ]
         },
         {
             "label": "Copy Static Resources",
             "type": "shell",
-            "command": "Copy-Item -Path ./web/* -Destination ./out -Recurse",
-            "dependsOn": ["Ensure Output Directory"]
+            "command": "Copy-Item -Path ./web/* -Destination ./out -Recurse -Force",
+            "dependsOn": [
+                "Ensure Output Directory"
+            ]
         },
         {
             "label": "build",
@@ -27,7 +31,20 @@
                 "kind": "build",
                 "isDefault": true
             },
-            "dependsOn": ["Tweego Compile", "Copy Static Resources"]
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Copy Static Resources",
+                "Tweego Compile"
+            ]
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "open ./out/index.html",
+            "windows": {
+                "command": "start ./out/index.html"
+            },
+            "problemMatcher": []
         }
     ]
 }
