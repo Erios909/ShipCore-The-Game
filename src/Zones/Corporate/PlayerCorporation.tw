@@ -1,0 +1,359 @@
+:: CreateCorporationWidget [widget nobr]
+<<widget "CreateCorporation">>
+  /* Parameters: Name, Credits, Debt, Location, Coherency */
+  <<set _corporation to clone(setup.CorporationTemplate)>>
+  <<set _corporation.CorpName to $args[0]>>
+  <<set _corporation.CorpCredits to $args[1]>>
+  <<set _corporation.CorpDebt to $args[2]>>
+  <<set _corporation.CorpLocation to $args[3]>>
+  <<set _corporation.CorpCoherency to $args[4]>>
+
+  /* Add the new corporation to the player's corporations array */
+  <<set $PlayerCorporations.push(_corporation)>>
+<</widget>>
+
+:: CorporationDivisionTemplate [script template nobr]
+<<set setup.DivisionTypes to ["Resource Extraction", "Services", "Industrial"]>>
+<<set setup.CorpLicenseTypes to ["OrbitalHarvesting", "AsteroidProspecting", "CelestialBodyExtraction"]>>
+
+<<set setup.CorporationTemplate = {
+  CorpName: "",
+  CorpCredits: 0,
+  CorpDebt: 0,
+  CorpInventory: [],
+  CorpProcessingSummary: {
+    NewCredits: 0,
+    NewDebt: 0,
+    InventoryChanges: []
+  },
+  CorpLocation: "",
+  CorpLicenses: [],
+  CorpDivisions: [],
+  CorpCoherency: 0,
+  CorpControllingNPC: []
+}>>
+
+<<set setup.ResourceExtractionTemplate to {
+  DivisionName: "",
+  DivisionType: "",
+  DivisionSubdivisions: [],
+  DivisionCredits: 0,
+  DivisionDebt: 0,
+  DivisionInventory: [],
+  DivisionEmployees: [],
+  DivisionCoherency: 0,
+  DivisionRequiredLicense: [],
+  DivisionLevel: 1,
+  DivisionEquipmentSlots: 1,
+  DivisionRecipes: [],
+  DivisionInstalledUpgrades: [],
+  DivisionBusinessStats: {
+    RevenueBonus: 1,
+    Efficiency: 1,
+    BrandQuality: 1,
+    InputConservation: 1,
+    OutputEnhancement: 1,
+    EmployeeProductivity: 1,
+    MarketInfluence: 1,
+    Corruption: 1,
+    Security: 1
+  }
+}>>
+
+:: CreateDivisionWidget [widget nobr]
+<<widget "DefineDivision">>
+  /* Parameters: CorporationIndex, DivisionName, DivisionType, DivisionLevel, RequiredLicense, Coherency */
+  <<set _division to clone(setup.ResourceExtractionTemplate)>>
+  <<set _division.DivisionName to $args[1]>>
+  <<set _division.DivisionType to $args[2]>>
+  <<set _division.DivisionLevel to $args[3]>>
+  <<set _division.DivisionRequiredLicense to $args[4]>>
+  <<set _division.DivisionCoherency to $args[5]>>
+
+  /* Validate CorporationIndex and add the division to the corporation's divisions array */
+  <<if $args[0] gte 0 && $args[0] lt $PlayerCorporations.length>>
+    <<set $PlayerCorporations[$args[0]].CorpDivisions.push(_division)>>
+    <<run console.log("Division '" + _division.DivisionName + "' has been successfully created.")>>
+  <<else>>
+    <<run console.log("Error: Invalid CorporationIndex. Division creation failed.")>>
+  <</if>>
+<</widget>>
+
+:: CorporationResourceDefinitions [script template nobr]
+<<set setup.CorpResources to {
+  "Water": { baseValue: 1 },
+  "Raw Ore": { baseValue: 2 },
+  "Refined Metals": { baseValue: 5 },
+  "Minerals": { baseValue: 3 },
+  "Hydrogen": { baseValue: 4 },
+  "Helium-3": { baseValue: 5 },
+  "Processed Food": { baseValue: 6 },
+  "Consumer Goods": { baseValue: 10 },
+  "Luxury Goods": { baseValue: 15 },
+  "Heavy Mining Equipment": { baseValue: 20 },
+  "Fuel-Rods": { baseValue: 20 },
+  "Antimatter": { baseValue: 50 },
+  "Starship Parts": { baseValue: 30 },
+  "Artifacts": { baseValue: 40 },
+  "NAI-Tech": { baseValue: 60 },
+  "Computronics": { baseValue: 35 },
+  "Military Goods": { baseValue: 45 },
+  "Military Parts": { baseValue: 50 },
+  "Personal Weapons": { baseValue: 25 },
+  "Power-Armor Suits": { baseValue: 55 },
+  "Starship Weapons": { baseValue: 65 },
+  "Starship Equipment": { baseValue: 70 },
+  "Starship Hull Parts": { baseValue: 80 },
+  "Station Parts": { baseValue: 75 },
+  "Orbital Infrastructure Parts": { baseValue: 85 },
+  "Fusion Reactor Parts": { baseValue: 90 }
+}>>
+
+
+:: CorporateDivisionExtractionRecipes [script template nobr]
+<<set setup.OrbitalHarvestingRecipes to [
+    {
+        Name: "Hydrogen Collection",
+        Input: {ItemName: "Fuel Rods", Quantity: 10},
+        Output: {ItemName: "Hydrogen", Quantity: 200}
+    },
+    {
+        Name: "Helium-3 Collection",
+        Input: {ItemName: "Fuel Rods", Quantity: 10},
+        Output: {ItemName: "Helium-3", Quantity: 100}
+    },
+    {
+        Name: "Water Synthesis",
+        Input: {ItemName: "Fuel Rods", Quantity: 10},
+        Output: {ItemName: "Water", Quantity: 50}
+    },
+    {
+        Name: "Antimatter Synthesis",
+        Input: {ItemName: "Fuel Rods", Quantity: 1},
+        Output: {ItemName: "Antimatter", Quantity: 10}
+    }
+    ]>>
+
+<<set setup.AsteroidProspectingRecipes to [
+  {
+    Name: "Ore Mining",
+    Input: {ItemName: "Fuel Rods", Quantity: 1},
+    Output: {ItemName: "Raw Ore", Quantity: 75}
+  },
+  {
+    Name: "Ice Mining",
+    Input: {ItemName: "Fuel Rods", Quantity: 1},
+    Output: {ItemName: "Water", Quantity: 30}
+  }
+]>>
+
+<<set setup.CelestialBodyExtractionRecipes to [
+  {
+    Name: "Surface Ore Mining",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Raw Ore", Quantity: 50}
+  },
+  {
+    Name: "Water Extraction",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Water", Quantity: 25}
+  },
+  {
+    Name: "Hydrogen Extraction",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Hydrogen", Quantity: 20}
+  },
+  {
+    Name: "Mineral Harvesting",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Minerals", Quantity: 40}
+  }
+]>>
+
+:: CorporateDivisionProductionRecipes [script template nobr]
+
+<<set setup.IndustrialProductionRecipes to [
+  {
+    name: "Refined Metal Production",
+    inputs: [{itemName: "Raw Ore", quantity: 5}],
+    outputs: [{itemName: "Refined Metals", quantity: 1}],
+    badge: "None"
+  },
+  {
+    name: "Fuel Rod Production",
+    inputs: [{itemName: "Helium-3", quantity: 10}, {itemName: "Antimatter", quantity: 1}],
+    outputs: [{itemName: "Fuel-Rods", quantity: 10}],
+    badge: "None"
+  },
+  {
+    name: "Processed Food Production",
+    inputs: [{itemName: "Water", quantity: 3}, {itemName: "Minerals", quantity: 2}],
+    outputs: [{itemName: "Processed Food", quantity: 1}],
+    badge: "None"
+  },
+  {
+    name: "Basic Consumer Goods Production",
+    inputs: [{itemName: "Refined Metals", quantity: 2}, {itemName: "Water", quantity: 1}],
+    outputs: [{itemName: "Consumer Goods", quantity: 1}],
+    badge: "None"
+  },
+  {
+    name: "Luxury Goods Production",
+    inputs: [{itemName: "Consumer Goods", quantity: 2}, {itemName: "Artifacts", quantity: 1}],
+    outputs: [{itemName: "Luxury Goods", quantity: 1}],
+    badge: "None"
+  },
+  {
+    name: "Heavy Equipment Manufacturing",
+    inputs: [{itemName: "Refined Metals", quantity: 5}, {itemName: "Fuel-Rods", quantity: 2}],
+    outputs: [{itemName: "Heavy Mining Equipment", quantity: 1}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Antimatter Synthesis",
+    inputs: [{itemName: "Hydrogen", quantity: 100}, {itemName: "Energy", quantity: 50}],
+    outputs: [{itemName: "Antimatter", quantity: 1}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "Starship Part Assembly",
+    inputs: [{itemName: "Refined Metals", quantity: 20}, {itemName: "Computronics", quantity: 5}],
+    outputs: [{itemName: "Starship Parts", quantity: 1}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Cyberware Production",
+    inputs: [{itemName: "Minerals", quantity: 2}, {itemName: "Refined Metals", quantity: 5}],
+    outputs: [{itemName: "Cyberware", quantity: 1}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "NAI-Tech Fabrication",
+    inputs: [{itemName: "Refined Metals", quantity: 5}, {itemName: "Computronics", quantity: 10}],
+    outputs: [{itemName: "NAI-Tech", quantity: 1}],
+    badge: "NAI-Tech Industry"
+  },
+  {
+    name: "Computronics Circuitry",
+    inputs: [{itemName: "Refined Metals", quantity: 10}, {itemName: "Minerals", quantity: 10}],
+    outputs: [{itemName: "Computronics", quantity: 1}],
+    badge: "NAI-Tech Industry"
+  },
+  {
+    name: "Military Goods Manufacturing",
+    inputs: [{itemName: "Refined Metals", quantity: 15}, {itemName: "Fuel-Rods", quantity: 5}],
+    outputs: [{itemName: "Military Goods", quantity: 1}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Military Parts Production",
+    inputs: [{itemName: "Military Goods", quantity: 2}, {itemName: "Cyberware", quantity: 3}],
+    outputs: [{itemName: "Military Parts", quantity: 1}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Personal Weapons Fabrication",
+    inputs: [{itemName: "Military Parts", quantity: 2}, {itemName: "Refined Metals", quantity: 10}],
+    outputs: [{itemName: "Personal Weapons", quantity: 1}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Power-Armor Suit Assembly",
+    inputs: [{itemName: "Military Goods", quantity: 5}, {itemName: "Cyberware", quantity: 3}],
+    outputs: [{itemName: "Power-Armor Suits", quantity: 1}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Starship Weapons Manufacturing",
+    inputs: [{itemName: "Starship Parts", quantity: 4}, {itemName: "Military Parts", quantity: 2}],
+    outputs: [{itemName: "Starship Weapons", quantity: 1}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Starship Equipment Production",
+    inputs: [{itemName: "Starship Parts", quantity: 3}, {itemName: "Cyberware", quantity: 2}],
+    outputs: [{itemName: "Starship Equipment", quantity: 1}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Starship Hull Fabrication",
+    inputs: [{itemName: "Refined Metals", quantity: 30}, {itemName: "Industrial Components", quantity: 5}],
+    outputs: [{itemName: "Starship Hull Parts", quantity: 1}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Space Station Parts Production",
+    inputs: [{itemName: "Starship Hull Parts", quantity: 2}, {itemName: "Orbital Infrastructure Parts", quantity: 3}],
+    outputs: [{itemName: "Station Parts", quantity: 1}],
+    badge: "Orbital Industry"
+  },
+  {
+    name: "Orbital Infrastructure Assembly",
+    inputs: [{itemName: "Starship Equipment", quantity: 2}, {itemName: "Fusion Reactor Parts", quantity: 1}],
+    outputs: [{itemName: "Orbital Infrastructure Parts", quantity: 1}],
+    badge: "Orbital Industry"
+  },
+  {
+    name: "Fusion Reactor Part Manufacturing",
+    inputs: [{itemName: "Fuel-Rods", quantity: 10}, {itemName: "Heavy Mining Equipment", quantity: 1}],
+    outputs: [{itemName: "Fusion Reactor Parts", quantity: 1}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "Scrap Processing",
+    inputs: [{itemName: "Scrap", quantity: 5}],
+    outputs: [{itemName: "Refined Metals", quantity: 1}],
+    badge: "Recycling"
+  },
+  {
+    name: "Industrial Component Manufacturing",
+    inputs: [{itemName: "Refined Metals", quantity: 10}, {itemName: "Fuel-Rods", quantity: 3}],
+    outputs: [{itemName: "Industrial Components", quantity: 1}],
+    badge: "Heavy Industry"
+  }
+]>> 
+
+
+<<widget "ProcessCorporationCycles">>
+  /* Calculate the time difference since the last corporation processing */
+  <<set _currentTime to new Date($gameDate.getTime())>>
+  <<set _lastCorpTime to new Date($CorporationLastTime.getTime())>>
+  <<set _millisecondsPassed to _currentTime.getTime() - _lastCorpTime.getTime()>>
+  <<set _daysPassed to Math.floor(_millisecondsPassed / (24 * 60 * 60 * 1000))>>
+
+  /* Proceed only if at least one day has passed */
+  <<if _daysPassed >= 1>>
+    /* Additional Time Units Calculation */
+    <<set _hoursPassed to Math.floor(_millisecondsPassed / (60 * 60 * 1000))>>
+    <<set _weeksPassed to Math.floor(_daysPassed / 7)>>
+    <<set _monthsPassed to Math.floor(_daysPassed / 30)>> /* Approximate month as 30 days */
+    <<set _yearsPassed to Math.floor(_monthsPassed / 12)>>
+
+    /* Iterate through each corporation */
+    <<for _i = 0; _i < $PlayerCorporations.length; _i++>>
+      <<set _currentCorp to $PlayerCorporations[_i]>>
+      
+      /* Process each division of the corporation */
+      <<for _j = 0; _j < _currentCorp.CorpDivisions.length; _j++>>
+        <<set _currentDivision to _currentCorp.CorpDivisions[_j]>>
+        
+        /* Check Active Recipes in the Division */
+        <<for _k = 0; _k < _currentDivision.DivisionRecipes.length; _k++>>
+          /* [Placeholder for checking active recipes and processing based on time passed] */
+        <</for>>
+
+        /* [Placeholder for Auto-Sell or Store in Corporation Inventory based on time passed] */
+
+      <</for>> <!-- End Division Processing -->
+
+      /* [Placeholder for Updating Corporation Processing Summary based on time passed] */
+
+    <</for>> <!-- End Corporation Processing -->
+
+    /* Update Time Reference for Last Processing */
+    <<set $CorporationLastTime to new Date(_currentTime.getTime())>>
+  <<else>>
+    <<run console.log("Less than a day has passed. Skipping corporation cycle processing.")>>
+  <</if>>
+<</widget>>
+
