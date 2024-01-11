@@ -1,7 +1,7 @@
 :: LastHomeWork [lowerdeckact] {"position":"750,1800","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
 <<addmins $timeadd>> <!-- Working a shift takes time. -->
 <<set $location to {
     name: "Meltisar System, MOR-1, The Last Home - Working Shift",

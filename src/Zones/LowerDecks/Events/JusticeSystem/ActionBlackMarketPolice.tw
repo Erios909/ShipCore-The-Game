@@ -1,6 +1,6 @@
 :: LDBMpoliceaction [event nobr] {"position":"1800,825","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/events/security.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/events/security.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks",

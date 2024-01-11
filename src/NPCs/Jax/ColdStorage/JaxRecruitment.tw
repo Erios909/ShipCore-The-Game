@@ -1,6 +1,6 @@
 :: JaxRecruitment [conversation]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstoragedoor.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstoragedoor.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Station Overview",
@@ -11,7 +11,7 @@
 
 <div id="convostarter">
 <<if $JaxJoinRejected && $JaxMetCondition>>
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Changed your mind, huh? I'm listening."<</say>>
+    <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Changed your mind, huh? I'm listening."<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         <!-- offer response that player changed mind and wants to team up -->
         <<link "I've changed my mind, Jax. Let's team up.">>
@@ -26,7 +26,7 @@
     <</say>>
 <!-- If the player has rejected the offer after knowing the conditions -->
 <<elseif $JaxJoinRejected && $JaxKnowsJoinCondition>>
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"You're back. So, what's the verdict on that nano-doc?"<</say>>
+    <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"You're back. So, what's the verdict on that nano-doc?"<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         <!-- if player has nano doc, add choice to give it to him -->
         <<if $playerConsumables.nanoDocInjector > 0>>
@@ -45,7 +45,7 @@
     <</say>>
 <!-- If the player has rejected the offer without knowing the conditions -->
 <<elseif $JaxJoinRejected && not $JaxKnowsJoinCondition>>
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Still on the fence? I can sweeten the deal if you're interested."<</say>>
+    <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Still on the fence? I can sweeten the deal if you're interested."<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         <!-- player asks what the condition is -->
         [[What was the condition for teaming up again?|JaxCondition]]<br>
@@ -54,7 +54,7 @@
     <</say>>
 <!-- If the player knows Jax's joining condition but has not rejected the offer -->
 <<elseif $JaxKnowsJoinCondition>>
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Ready to take me up on that offer? Or do you need more time?"<</say>>
+    <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Ready to take me up on that offer? Or do you need more time?"<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         <!-- if player has nano doc, add choice to give it to him -->
         <<if $playerConsumables.nanoDocInjector >= 1>>

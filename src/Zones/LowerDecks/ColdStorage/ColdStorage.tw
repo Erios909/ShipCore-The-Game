@@ -1,6 +1,6 @@
 :: Cold Storage [poi safe] {"position":"750,425","size":"100,100"}
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstorage.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Cold Storage",

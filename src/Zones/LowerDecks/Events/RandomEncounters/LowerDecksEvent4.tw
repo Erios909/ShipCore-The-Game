@@ -1,7 +1,7 @@
 :: LowerEvent4 [event] {"position":"800,1200","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/event.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/event.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks",

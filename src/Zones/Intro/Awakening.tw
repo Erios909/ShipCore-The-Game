@@ -1,7 +1,7 @@
 :: awakening {"position":"500,175","size":"100,100"}
 <!-- Version 4: Glowing Text with Stroke Shadows -->
 <<nobr>><h1 style="font-size: 4em; text-align: center; color: #87cefa; text-shadow: 0 0 10px #87cefa, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0px -2px 0 #000, 0px 2px 0 #000, -2px 0px 0 #000, 2px 0px 0 #000, 0px 0px 2px #000;">Awakening</h1>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstorage.jpg'>>
 <p>You awaken in a small, dimly lit room aboard a bustling starport. </p>
 
 As your eyes adjust, the faint <span style="color: skyblue;">pulsating glow</span> of the sleek metal walls remind you of distant stars. You lay on a single metallic bench that rises from the floor and is the room's only furnishing. Through a small, circular window, you catch glimpses of the vastness of space and the dimly lit hull of the station outside.</p>

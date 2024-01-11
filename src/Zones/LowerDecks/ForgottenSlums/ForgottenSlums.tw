@@ -1,6 +1,6 @@
 :: Forgotten Slums [travel nobr] {"position":"1750,1800","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerslums.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerslums.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Forgotten Slums",
     outside: false,

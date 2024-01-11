@@ -1,6 +1,6 @@
 :: Lower Deck Promenade [travel nobr] {"position":"400,1050","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Lower Deck Promenade",
     outside: false,

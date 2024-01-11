@@ -2,7 +2,7 @@
 \:: GrafterUpgrade
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/graftergear_interior.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/graftergear_interior.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Grafter's Gear",
@@ -17,15 +17,15 @@
 
 <p>The Grafter retrieves a sleek device from a secure container, its surface gleaming under the shop's dim lights.</p>
 
-<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"NanoDoc Injector. Heals tissue, restores vitality. There are others. Enhancements for health, fatigue, power recharging."<</say>>
+<<say 'The Grafter' setup.ImagePath+'characters/minor/grafter.jpg'>>"NanoDoc Injector. Heals tissue, restores vitality. There are others. Enhancements for health, fatigue, power recharging."<</say>>
 
 <p>He lines up an array of similar devices, each with a distinct purpose and design.</p>
 
-<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Caution: mood enhancers, stress relievers, trauma blockers available. High risk. For cleansing, PuriDerm Spray. Like instant shower. Minimal risk."<</say>>
+<<say 'The Grafter' setup.ImagePath+'characters/minor/grafter.jpg'>>"Caution: mood enhancers, stress relievers, trauma blockers available. High risk. For cleansing, PuriDerm Spray. Like instant shower. Minimal risk."<</say>>
 
 <p>The Grafter's voice remains neutral, but the intensity in his gaze underscores the seriousness of his warning.</p>
 
-<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Side effects exist. Cost: 1000 credits each."<</say>>
+<<say 'The Grafter' setup.ImagePath+'characters/minor/grafter.jpg'>>"Side effects exist. Cost: 1000 credits each."<</say>>
 
 <<if $player.credits >= 1000>>
     <<say '$player.name' $playerPortraitPathZ>>[[I'll think about it. Thanks for the info.|GrafterConversation]]<</say>>

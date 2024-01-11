@@ -1,7 +1,7 @@
 :: HavenApartmentSleep [safe] {"position":"1550,2125","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/apartmentinterior.jpg.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/apartmentinterior.jpg.jpg'>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Your Apartment - Resting",
     outside: false,

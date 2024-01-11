@@ -1,7 +1,7 @@
 :: PatchItPodStorageLockerContents [lowerdeckact] {"position":"1100,2325","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/patchitpod.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/patchitpod.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Patch-It Pod - Locker Salvaging",

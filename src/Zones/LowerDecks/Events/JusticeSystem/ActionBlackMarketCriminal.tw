@@ -1,6 +1,6 @@
 :: LDBMcriminalaction [event nobr] {"position":"2050,1075","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/events/pickpocket.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/events/pickpocket.jpg'>>
 <<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks",

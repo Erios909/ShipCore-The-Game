@@ -14,10 +14,10 @@
 <p>The room stands as a testament to abandonment, a once bustling establishment now reduced to a hollow shell. Debris litters the floor, tables are overturned, and a thick layer of dust veils the remnants of hurried departures. The air is heavy with the scent of decay, and the silence is punctuated only by the distant echoes of the station's activity. It's a place forgotten by time and fortune, yet it's here where your new venture will take root.</p>
 
 <<if $DaltonIsCompanion>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Well, it's not much to look at now, but I've seen worse. Give it some time, and this place will be bustling. You'll see."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"Well, it's not much to look at now, but I've seen worse. Give it some time, and this place will be bustling. You'll see."<</say>>
 <</if>>
 <<if $JaxIsCompanion>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It's going to take some work to get this place shipshape, but I'm up for the challenge if you are. There's potential here, hidden beneath the mess."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"It's going to take some work to get this place shipshape, but I'm up for the challenge if you are. There's potential here, hidden beneath the mess."<</say>>
 <</if>>
 
 <p>Despite the current state of disrepair, there's an undeniable spark of potential that fuels your resolve. This won't just be a business; it will be a symbol of renewal and hope on the Lower Decks. With hard work and dedication, you'll turn this forsaken room into a thriving hub of commerce and community.</p>
@@ -44,14 +44,14 @@
 <</switch>>
 
 <<if $DaltonIsCompanion and not $JaxIsCompanion>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"A name can say a lot about a place. What are you thinking of calling it?"<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"A name can say a lot about a place. What are you thinking of calling it?"<</say>>
 <</if>>
 <<if $JaxIsCompanion and not $DaltonIsCompanion>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"The right name can draw a crowd on its own. Got any ideas?"<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"The right name can draw a crowd on its own. Got any ideas?"<</say>>
 <</if>>
 <<if $DaltonIsCompanion and $JaxIsCompanion>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I say we call it 'Dalton's Den'. Has a nice ring to it, don't you think?"<</say>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Please, 'Jax's Joint' would bring in twice the crowd. Right?"<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"I say we call it 'Dalton's Den'. Has a nice ring to it, don't you think?"<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Please, 'Jax's Joint' would bring in twice the crowd. Right?"<</say>>
     <p>Both look to you, expecting a decision on the name of your new venture.</p>
 <</if>>
 
@@ -86,16 +86,16 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 <<if $DaltonIsCompanion and not $JaxIsCompanion>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I like it. '$LowerDecksPlayerBusinessName' has a nice ring to it."<</say>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I'll get started on cleaning up the place. You go find some staff. I'll keep an eye on things here."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"I like it. '$LowerDecksPlayerBusinessName' has a nice ring to it."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"I'll get started on cleaning up the place. You go find some staff. I'll keep an eye on things here."<</say>>
 <<elseif $JaxIsCompanion and not $DaltonIsCompanion>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Not bad. '$LowerDecksPlayerBusinessName' could definitely catch on."<</say>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"I'll handle the cleanup. You focus on staffing. We want the best crew for '$LowerDecksPlayerBusinessName'."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Not bad. '$LowerDecksPlayerBusinessName' could definitely catch on."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"I'll handle the cleanup. You focus on staffing. We want the best crew for '$LowerDecksPlayerBusinessName'."<</say>>
 <<elseif $DaltonIsCompanion and $JaxIsCompanion>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"'$LowerDecksPlayerBusinessName'? It's catchy, but it could use a little more... pizzazz."<</say>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Pizzazz? It just needs to be memorable, Dalton. And I think it is."<</say>>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"How about we split the tasks? I'll start with the cleanup, you handle the hiring."<</say>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Fine by me. Just try not to break anything, Dalton."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"'$LowerDecksPlayerBusinessName'? It's catchy, but it could use a little more... pizzazz."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Pizzazz? It just needs to be memorable, Dalton. And I think it is."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"How about we split the tasks? I'll start with the cleanup, you handle the hiring."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Fine by me. Just try not to break anything, Dalton."<</say>>
 <</if>>
 
 <p>With a name in place, you're ready to begin the process of setting up your business. You'll need to hire staff, stock the shelves, and advertise your new establishment. The Lower Decks are a dangerous place, and you'll need to be prepared for anything.</p>

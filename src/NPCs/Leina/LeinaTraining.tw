@@ -1,6 +1,6 @@
 :: LeinaDojoTraining [training nobr] {"position":"750,650","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_training.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/dojo_training.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks Dojo Training Area",

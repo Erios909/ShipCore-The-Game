@@ -1,6 +1,6 @@
 :: HabitationInquire [safe] {"position":"1175,2050","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/haveninquiries.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/haveninquiries.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Habitation Haven - Inquiries",
@@ -14,7 +14,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <</nobr>>
 
-<<say 'Thomas Ralfot' setup.ImagePath+'/characters/minor/thomasralfot.jpg'>>"Welcome to Habitation Haven, potential tenant. I'm Thomas Ralfot, the manager here. Are you looking to rent one of our fine apartments? We have several units open, with a modest down payment of 200 credits."<</say>>
+<<say 'Thomas Ralfot' setup.ImagePath+'characters/minor/thomasralfot.jpg'>>"Welcome to Habitation Haven, potential tenant. I'm Thomas Ralfot, the manager here. Are you looking to rent one of our fine apartments? We have several units open, with a modest down payment of 200 credits."<</say>>
 
 <<set $enoughCredits = $player.credits >= 200>>
 

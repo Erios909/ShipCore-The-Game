@@ -6,7 +6,7 @@
   - Describe the NPC's current activity and demeanor.
 -->
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo_story.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/dojo_story.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks Dojo - Leina's Office",

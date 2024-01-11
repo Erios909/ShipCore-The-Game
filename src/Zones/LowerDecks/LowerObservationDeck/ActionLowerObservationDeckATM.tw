@@ -1,7 +1,7 @@
 :: LowerObservationATM [lowerdeckact] {"position":"300,1775","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerobservation.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerobservation.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "ATM Machine - Lower Observation Deck",

@@ -2,7 +2,7 @@
 <<nobr>>
 <!-- this is the first event and can serve as a template for other events -->
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/event.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/event.jpg'>>
 <!-- addmins is a function that adds the previous timeadd to the clock, its run at the top of a passage to update the clock, it shouldn't be changed to a value here, instead we are running the previous time add. Instead, at the bottom of the passage, based on how long the even took, set $timeadd there. addmins resets timeadd to 0 -->
 <<addmins $timeadd>>
 <<set $location to {

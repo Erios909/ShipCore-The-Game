@@ -2,7 +2,7 @@
 \:: GrafterAskCyberware
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/graftergear.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade/graftergear.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Grafter's Gear",
@@ -19,19 +19,19 @@
 
 <p>The Grafter pauses, then with a fluid motion of his augmented arm, he gestures towards a bench lined with various cybernetic devices. Each piece hums with the promise of enhanced abilities.</p>
 
-<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"Sit."<</say>>
+<<say 'The Grafter' setup.ImagePath+'characters/minor/grafter.jpg'>>"Sit."<</say>>
 
 <p>You feel a twinge of unease as you lower yourself onto the cold, metallic seat. It's an amalgam of technology and art, wires and sensors weaving through the framework like veins.</p>
 
 <p>The Grafter moves closer, his optical sensor emitting a soft glow as he scans you from head to toe, his expression unreadable behind the cybernetic visage.</p>
 
-<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"No."<</say>>
+<<say 'The Grafter' setup.ImagePath+'characters/minor/grafter.jpg'>>"No."<</say>>
 
 <p>Confusion flickers across your face.</p>
 
 <<say '$player.name' $playerPortraitPathZ>>"No? No what? You don't have what I need or...?"<</say>>
 
-<<say 'The Grafter' setup.ImagePath+'/characters/minor/grafter.jpg'>>"No."<</say>>
+<<say 'The Grafter' setup.ImagePath+'characters/minor/grafter.jpg'>>"No."<</say>>
 
 <<say '$player.name' $playerPortraitPathZ>>[[Okay then... I guess I'll look around some more.|Grafters Gear][$GrafterCyberTalk =1; $timeadd += 5]]<</say>>
 <</nobr>>

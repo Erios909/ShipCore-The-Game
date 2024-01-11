@@ -1,7 +1,7 @@
 :: BraxtonIntro [conversation event] {"position":"850,750","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/ambushalley.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/ambushalley.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks",

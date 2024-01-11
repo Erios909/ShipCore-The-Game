@@ -1,6 +1,6 @@
 :: JaxReturnToColdStorage [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstorage.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Cold Storage",
@@ -20,7 +20,7 @@
 <</if>>
 
 <<if $player.health <= 800 or $player.stress >= 200 or $player.trauma >= 200>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"You look like shit. You sure you don't need any help?"<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"You look like shit. You sure you don't need any help?"<</say>>
     <div id="playerResponse">
         <<say '$player.name' $playerPortraitPathZ>>
         <<link "I'm alright, just need some time to heal.">>
@@ -31,7 +31,7 @@
         <</say>>
     </div>
 <<else>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Hey there. You look like you've been through the wringer. What happened?"<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Hey there. You look like you've been through the wringer. What happened?"<</say>>
     <div id="playerResponse">
         <<say '$player.name' $playerPortraitPathZ>>
         <<link "Got into a bit of a scuffle, but I'll manage.">>
@@ -53,7 +53,7 @@
 <<else>>
     <<say '$player.name' $playerPortraitPathZ>>"Got into a bit of a scuffle, but I'll manage."<</say>>
 <</if>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It's a good idea to have someone watch your back, you know."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"It's a good idea to have someone watch your back, you know."<</say>>
 
 <div id="playerCounter">
     <<say '$player.name' $playerPortraitPathZ>>
@@ -72,7 +72,7 @@
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"And who's watching your back, Jax?"<</say>>
 Jax goes silent for a moment, his eyes losing focus as if gazing into a painful memory.
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"The person who did... they're dead."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"The person who did... they're dead."<</say>>
 
 <div id="playerReaction">
     <<say '$player.name' $playerPortraitPathZ>>
@@ -111,7 +111,7 @@ Jax goes silent for a moment, his eyes losing focus as if gazing into a painful 
 :: JaxTeamUpProposal [conversation event]
 <<nobr>>
 Jax's expression softens, and he nods slowly.
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Teaming up isn't a bad idea. I just have one condition."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Teaming up isn't a bad idea. I just have one condition."<</say>>
 
 <div id="playerInquiry">
     <<say '$player.name' $playerPortraitPathZ>>
@@ -129,7 +129,7 @@ Jax's expression softens, and he nods slowly.
 <<fadein 1s>>
 <<set $JaxKnowsJoinCondition to true>>
 <<say '$player.name' $playerPortraitPathZ>>"What's the condition?"<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"I need a nanoDoc injector. You can get one from Grafter's Gear on the promenade for 1000 credits."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"I need a nanoDoc injector. You can get one from Grafter's Gear on the promenade for 1000 credits."<</say>>
 
 <<set _creditsResponse = ($player.credits >= 1000) ? "I can afford that." : "That's a lot of credits.">>
 
@@ -171,10 +171,10 @@ Jax's expression softens, and he nods slowly.
 <<fadein 1s>>
 <<if $player.credits >= 1000>>
     <<say '$player.name' $playerPortraitPathZ>>"I have enough credits for the nanoDoc injector. I'll consider it."<</say>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Good to hear. It's not cheap, but that's my condition for teaming up."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Good to hear. It's not cheap, but that's my condition for teaming up."<</say>>
 <<else>>
     <<say '$player.name' $playerPortraitPathZ>>"That's a lot of credits, but I'll see what I can do."<</say>>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Appreciate it. Just remember, it's an investment in our survival."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Appreciate it. Just remember, it's an investment in our survival."<</say>>
 <</if>>
 [[Return to Cold Storage|Cold Storage]]
 <</fadein>>
@@ -185,7 +185,7 @@ Jax's expression softens, and he nods slowly.
 <<nobr>>
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"I'll think about it. No promises though."<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Fair enough. But don't take too long; we're not exactly in a safe line of work here."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Fair enough. But don't take too long; we're not exactly in a safe line of work here."<</say>>
 [[Return to Cold Storage|Cold Storage]]
 <</fadein>>
 <</nobr>>
@@ -196,13 +196,13 @@ Jax's expression softens, and he nods slowly.
 <<say '$player.name' $playerPortraitPathZ>>"Here, I have a nanoDoc injector."<</say>><br>
 Jax looks at the injector with a mix of surprise and respect.<br>
 <<if $JaxNoNanoDoc == false>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Didn't think you'd have one on you. Good on you for being prepared."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Didn't think you'd have one on you. Good on you for being prepared."<</say>>
 <<else>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Good work, I know those aren't exactly easy to come by."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Good work, I know those aren't exactly easy to come by."<</say>>
 <</if>><br><h2>
 Without warning, Jax jabs the injector into your arm and presses the release.</h2><br>
 <<say '$player.name' $playerPortraitPathZ>>"Hey! What gives?"<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"If we're teaming up, I need you in top shape. Those boosters can leave some nasty carcinogens behind though, so don't use too many at once, or you'll be out cold for days. Happened to me once—three days out like a light."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"If we're teaming up, I need you in top shape. Those boosters can leave some nasty carcinogens behind though, so don't use too many at once, or you'll be out cold for days. Happened to me once—three days out like a light."<</say>>
 
 <div id="playerReactions">
     <<say '$player.name' $playerPortraitPathZ>>
@@ -235,7 +235,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 <<nobr>>
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"I understand, thanks for looking out."<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"No problem. We've got to watch each other's backs if we're going to survive down here."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"No problem. We've got to watch each other's backs if we're going to survive down here."<</say>>
 <p><<changerelations "Jax" "major" "PosEffectOnPlayer">></p>
 <<include "JaxNextSteps">>
 <</fadein>>
@@ -245,7 +245,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 <<nobr>>
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"I'm not happy about this, Jax. A little warning next time."<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got it. I'll keep that in mind for the future."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Got it. I'll keep that in mind for the future."<</say>>
 <<include "JaxNextSteps">>
 <</fadein>>
 <</nobr>>
@@ -254,7 +254,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 <<nobr>>
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"That was out of line, Jax! You can't just do that without asking."<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Sorry, I'll respect your space next time."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Sorry, I'll respect your space next time."<</say>>
 <<include "JaxNextSteps">>
 <</fadein>>
 <</nobr>>
@@ -264,7 +264,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"Forget it, I'm out. I don't work like this."<</say>>
 <p>Jax looks apologetic but then nods in understanding.</p>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Sure, if you change your mind, I'll be around."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Sure, if you change your mind, I'll be around."<</say>>
 <<set $JaxJoinRejected to true>>
 <<set $JaxMetCondition to true>>
 [[Return to Cold Storage|Cold Storage]]
@@ -279,7 +279,7 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
     <<if $playerCompanions === undefined>>
         <<set $playerCompanions to []>>
     <</if>>
-    <<set _jaxPortrait to setup.ImagePath+'/characters/minor/jax.jpg'>>
+    <<set _jaxPortrait to setup.ImagePath+'characters/minor/jax.jpg'>>
     <<set _cardSetJax to [{name: "CardJ1"}, {name: "CardJ2"}, {name: "CardJ3"}]>>
     <<CreateNPC _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
     <<set $playerCompanions.push($newestNPCID)>>
@@ -288,20 +288,20 @@ Without warning, Jax jabs the injector into your arm and presses the release.</h
 <<fadein 1s>>
 <<say '$player.name' $playerPortraitPathZ>>"So... we are companions now? What does that even mean?"<</say>>
 <p>Jax shrugs.</p><p><<changerelations "Jax" "major" "PosEffectOnPlayer">></p>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It means we're in this together. I'll watch your back, you watch mine."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"It means we're in this together. I'll watch your back, you watch mine."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"Alright, what's our next move?"<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"We need more people. Best way would be to get some credits and then maybe we can find some promising people in the bars."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"We need more people. Best way would be to get some credits and then maybe we can find some promising people in the bars."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"Is that the only way?"<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Maybe the folks around the Dojo on the Lower Observation Deck would join, but they're desperate. Not sure how helpful they'll be."<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"We can also scout the lower decks for a place to set up, or even consider using Cold Storage."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Maybe the folks around the Dojo on the Lower Observation Deck would join, but they're desperate. Not sure how helpful they'll be."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"We can also scout the lower decks for a place to set up, or even consider using Cold Storage."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"Set up what exactly?"<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"A business, of course. Something to earn money."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"A business, of course. Something to earn money."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"What kind of business?"<</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"That, my friend, will be up to you. I know the lower decks, I can advise, but the choice is yours. Each place has its pros and cons."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"That, my friend, will be up to you. I know the lower decks, I can advise, but the choice is yours. Each place has its pros and cons."<</say>>
 <<say '$player.name' $playerPortraitPathZ>>
 "This is a lot to think about. I'll need some time to figure out what we do."
 <</say>>
-<<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"I'll follow you. We should do whatever you think is best."<</say>>
+<<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"I'll follow you. We should do whatever you think is best."<</say>>
 <<set $LowerDeckScoutActive to true>>
 <<say '$player.name' $playerPortraitPathZ>>
     <<link "Let's see about earning some credits first." "Lower Decks">><</link>><br>

@@ -1,7 +1,7 @@
 :: DocksidePurchase [lowerdeckact] {"position":"1450,375","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Dockside Fabricator - Services Purchased",
@@ -16,21 +16,21 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <</nobr>>
 
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Excellent decision, spacer. Let me show you around your new domain of creation. You'll see, it's more than just machines and metal—it's potential."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Excellent decision, spacer. Let me show you around your new domain of creation. You'll see, it's more than just machines and metal—it's potential."<</say>>
 
 Lucas guides you past the threshold where the public area ends and the heart of the fabricator begins. The space is a hive of activity, with machines of all sizes whirring and clicking in a mechanical symphony. Overhead, a network of conveyor belts moves parts to and fro, a testament to the organized chaos that is the lifeblood of this place.
 
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Here's the main fabrication floor. You'll have access to these stations for your projects. We keep our equipment state-of-the-art, recalibrated daily for precision. You won't find a finer setup on this side of the sector."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Here's the main fabrication floor. You'll have access to these stations for your projects. We keep our equipment state-of-the-art, recalibrated daily for precision. You won't find a finer setup on this side of the sector."<</say>>
 
 You can't help but be impressed by the array of fabricators, each humming with the promise of creation. Lucas points out a terminal where orders are placed, and a collection bin where the finished products can be retrieved. It's all incredibly efficient, and you begin to understand the cost of entry.
 
 A side door leads to a quieter room lined with lockers and benches. Lucas explains that this is where clients can store materials or take a break. The lockers are sturdy, designed to keep valuable scrap and parts secure.
 
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Your materials will be safe here, and you can access them any time. The service drones will store or fetch them as needed from the Lockbox Hub."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Your materials will be safe here, and you can access them any time. The service drones will store or fetch them as needed from the Lockbox Hub."<</say>>
 
 As Lucas's tour concludes, he hands you a data slate with your access codes and a map of the facility. The weight of the slate in your hand feels like a key to a new chapter in your journey.
 
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"If you need any assistance, my team and I are always on hand. We're here to ensure everything runs smoothly for you. It's what we get paid for, after all."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"If you need any assistance, my team and I are always on hand. We're here to ensure everything runs smoothly for you. It's what we get paid for, after all."<</say>>
 
 With a final nod, Lucas leaves you to absorb the sights and sounds of your new enterprise. The fabricators continue their work, indifferent to your presence but awaiting your command.
 

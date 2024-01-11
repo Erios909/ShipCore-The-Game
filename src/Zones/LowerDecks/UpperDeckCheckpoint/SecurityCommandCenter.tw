@@ -1,5 +1,5 @@
 :: Security Command Center [travel event] {"position":"2450,1850","size":"100,100"}
-<<nobr>><<set $currentArea to "lowerdecks">><<setBackground setup.ImagePath+'/locs/melt/mor1/mid/midsecuritycommand.jpg'>>
+<<nobr>><<set $currentArea to "lowerdecks">><<setBackground setup.ImagePath+'locs/melt/mor1/mid/midsecuritycommand.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Security Command Center",
     outside: false,

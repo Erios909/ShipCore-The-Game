@@ -1,6 +1,6 @@
 :: DebtEvent [DebtEvent safe] {"position":"1000,325","size":"100,100"}
 <<nobr>>
-<<setBackground setup.ImagePath+'/ui/crashbackground.jpg'>>
+<<setBackground setup.ImagePath+'ui/crashbackground.jpg'>>
 <<script>>
     console.log("We arrived in debt event.");
 <</script>>

@@ -1,7 +1,7 @@
 :: NebulaCook [lowerdeckact] {"position":"450,800","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/nebula.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade/nebula.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Nebula Noodle Stand - Cooking Shift",

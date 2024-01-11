@@ -1,6 +1,6 @@
 :: LDBMPoliceConvicted [event nobr] {"position":"1925,825","size":"100,100"}
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/convict.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/convict.jpg'>>
 <<addmins $timeadd>> <!-- Updates the in-game clock based on previously set timeadd -->
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks",
@@ -24,7 +24,7 @@
 
 <<nobr>>
 <<set $currentArea to "prison">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/prisoncell.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/prisoncell.jpg'>>
 <<set $location to {
     name: "Prison Cell",
     outside: false,
