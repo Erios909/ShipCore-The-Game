@@ -14,10 +14,11 @@
 
 :: CorporationDivisionTemplate [script template nobr]
 <<set setup.DivisionTypes to ["Resource Extraction", "Services", "Industrial"]>>
-<<set setup.CorpLicenseTypes to ["OrbitalHarvesting", "AsteroidProspecting", "CelestialBodyExtraction"]>>
+<<set setup.CorpLicenseTypes to ["OrbitalHarvesting", "AsteroidProspecting", "CelestialBodyExtraction", "NAI-Tech"]>>
 
 <<set setup.CorporationTemplate = {
   CorpName: "",
+  CorpFinance, {credits: 0, debt: 0},
   CorpCredits: 0,
   CorpDebt: 0,
   CorpInventory: [],
@@ -33,14 +34,14 @@
   CorpControllingNPC: []
 }>>
 
-<<set setup.ResourceExtractionTemplate to {
+<<set setup.DivisionTemplate to {
   DivisionName: "",
   DivisionType: "",
   DivisionSubdivisions: [],
-  DivisionCredits: 0,
-  DivisionDebt: 0,
+  DivisionFinance: {credits: 0, debt: 0},
   DivisionInventory: [],
   DivisionEmployees: [],
+  DivisionControllingNPC: [],
   DivisionCoherency: 0,
   DivisionRequiredLicense: [],
   DivisionLevel: 1,
@@ -61,7 +62,7 @@
 }>>
 
 :: CreateDivisionWidget [widget nobr]
-<<widget "DefineDivision">>
+<<widget "CreateDivision">>
   /* Parameters: CorporationIndex, DivisionName, DivisionType, DivisionLevel, RequiredLicense, Coherency */
   <<set _division to clone(setup.ResourceExtractionTemplate)>>
   <<set _division.DivisionName to $args[1]>>
