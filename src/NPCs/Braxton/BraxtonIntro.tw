@@ -18,7 +18,7 @@ As you navigate the dimly lit corridors of the lower decks, the sense of unease 
 
 Suddenly, a group of figures block your path, their postures menacing. The leader, a hulking brute with a scarred face, steps forward. His eyes glint with malice, and his goons fan out behind him, cracking their knuckles.
 
-<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"Well, well, what do we have here? Fresh meat stumbling through our turf."<</say>>
+<<say 'Braxton' setup.ImagePath+'characters/lowerdecks/braxton.jpg'>>"Well, well, what do we have here? Fresh meat stumbling through our turf."<</say>>
 <br><<changemoods "stress" "major" "NegEffectOnPlayer">><br>
 You can feel the threat in the air, as tangible as the grime on the walls.
 <br><br>
@@ -26,17 +26,17 @@ You can feel the threat in the air, as tangible as the grime on the walls.
 <br>
 Braxton laughs, a sound that echoes off the metal surfaces, sending chills down your spine.
 <br><br>
-<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"No trouble... Boys, looks like we got ourselves a comedian."<</say>>
+<<say 'Braxton' setup.ImagePath+'characters/lowerdecks/braxton.jpg'>>"No trouble... Boys, looks like we got ourselves a comedian."<</say>>
 
 <<say '$player.name' $playerPortraitPathZ>>"What do you want?"<</say>>
 <br>
 Braxton's grin widens, revealing a set of crooked teeth.
 <br><br>
-<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"Your credits, your gear, and maybe a bit of fun. Don't worry, we'll make it quick."<</say>>
+<<say 'Braxton' setup.ImagePath+'characters/lowerdecks/braxton.jpg'>>"Your credits, your gear, and maybe a bit of fun. Don't worry, we'll make it quick."<</say>>
 <br><<changemoods "stress" "major" "NegEffectOnPlayer">><br><<changemoods "trauma" "major" "NegEffectOnPlayer">><br>
 His goons move in, and you know that talking is no longer an option. It's time to fight or flee.
 <br><br>
-<<say 'Braxton' setup.ImagePath+'/characters/lowerdecks/braxton.jpg'>>"Get 'em, boys!"<</say>><br><br>
+<<say 'Braxton' setup.ImagePath+'characters/lowerdecks/braxton.jpg'>>"Get 'em, boys!"<</say>><br><br>
 <hr id="hud">
 
 <style>
