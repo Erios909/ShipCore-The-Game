@@ -1,6 +1,6 @@
 :: The Electric Emporium [poi] {"position":"200,1200","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/electricemporium.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade/electricemporium.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, The Electric Emporium",
     outside: false,

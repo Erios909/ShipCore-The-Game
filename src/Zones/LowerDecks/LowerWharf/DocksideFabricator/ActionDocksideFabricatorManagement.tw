@@ -1,7 +1,7 @@
 :: DocksideManagement [lowerdeckact] {"position":"1575,375","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Dockside Fabricator - Management",
@@ -22,11 +22,11 @@ As you step away from the industrious hum of the fabrication floor, the door to 
 
 <br>
 <<if $docksideStats.partsFabricated + $docksideStats.scrapBought + $docksideStats.partsSold >= 1000>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Ah, the star client graces us with their presence!" His smile is as wide as the profit margins he imagines you're reaping.<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Ah, the star client graces us with their presence!" His smile is as wide as the profit margins he imagines you're reaping.<</say>>
 <<elseif $docksideStats.partsFabricated + $docksideStats.scrapBought + $docksideStats.partsSold >= 500>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Good to see you again! I trust the fabricator has been keeping you busy?" There's a warm familiarity in his tone, a recognition of your growing presence in the docks.<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Good to see you again! I trust the fabricator has been keeping you busy?" There's a warm familiarity in his tone, a recognition of your growing presence in the docks.<</say>>
 <<else>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Ah, yes, I remember you. How are the facilities treating you?"<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Ah, yes, I remember you. How are the facilities treating you?"<</say>>
 <</if>>
 
 
@@ -42,13 +42,13 @@ As you step away from the industrious hum of the fabrication floor, the door to 
 <</if>><</say>>
 
 <<if _maxStat == 0>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Take all the time you need to get acquainted with our services. If you have any questions or need some tips, don't hesitate to ask. We're here to help you make the most of your time here."<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Take all the time you need to get acquainted with our services. If you have any questions or need some tips, don't hesitate to ask. We're here to help you make the most of your time here."<</say>>
 <<elseif $docksideStats.partsFabricated is _maxStat>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Fantastic! There's nothing quite like seeing raw materials transformed into something new and useful. If you're looking to expand your production or need advice on advanced fabrication techniques, just let me know."<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Fantastic! There's nothing quite like seeing raw materials transformed into something new and useful. If you're looking to expand your production or need advice on advanced fabrication techniques, just let me know."<</say>>
 <<elseif $docksideStats.scrapBought is _maxStat>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"That's the spirit! A steady supply of scrap is the backbone of any successful operation. If you're ever in need of larger quantities or specific types of materials, we can arrange that for you."<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"That's the spirit! A steady supply of scrap is the backbone of any successful operation. If you're ever in need of larger quantities or specific types of materials, we can arrange that for you."<</say>>
 <<else>>
-    <<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Excellent to hear that you're turning a profit. Remember, we're always looking for quality parts, so keep the goods coming. And if you're interested in special deals or exclusive buyer networks, I'm your man."<</say>>
+    <<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Excellent to hear that you're turning a profit. Remember, we're always looking for quality parts, so keep the goods coming. And if you're interested in special deals or exclusive buyer networks, I'm your man."<</say>>
 <</if>>
 
 

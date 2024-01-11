@@ -1,7 +1,7 @@
 :: JaxAskWork [conversation] {"position":"950,525","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/workareas.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/workareas.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks, Cold Storage",
@@ -15,17 +15,17 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 <<say '$player.name' $playerPortraitPathZ>>"How can I earn some credits quickly?"<</say>>
-<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Quick credits? Down here in the Lower Decks, you've got options, but they ain't all pretty. Lower Engineering's always looking for parts or help with a workshift. It's hard graft, but it pays. Bars like Mariners Rest are good for overhearing things... opportunities."<</say>>
+<<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Quick credits? Down here in the Lower Decks, you've got options, but they ain't all pretty. Lower Engineering's always looking for parts or help with a workshift. It's hard graft, but it pays. Bars like Mariners Rest are good for overhearing things... opportunities."<</say>>
 
-<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"The Promenade's got a few spots worth checking out, too. Nebula Noodles for a quick shift. Patch-It Pod's in the Hab Cells, that's also decent gig. Fix up some gear, sell it on. You can go through the recyclers for free stuff, find the gems... then trade them on up at Grafter's Gear for better things."<</say>>
+<<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"The Promenade's got a few spots worth checking out, too. Nebula Noodles for a quick shift. Patch-It Pod's in the Hab Cells, that's also decent gig. Fix up some gear, sell it on. You can go through the recyclers for free stuff, find the gems... then trade them on up at Grafter's Gear for better things."<</say>>
 
-<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"The Grafter's a good sort, always needs scrap. Trade it for parts, then flip those at the Wharfside Tech Emporium for Cyberware. Wheel and deal, and you'll make a profit."<</say>>
+<<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"The Grafter's a good sort, always needs scrap. Trade it for parts, then flip those at the Wharfside Tech Emporium for Cyberware. Wheel and deal, and you'll make a profit."<</say>>
 
 <p>Jax leans in closer, his voice dropping to a whisper.</p>
 
-<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"But if you're feeling brave—or desperate—the Black Market Bazaar's where the real money's at. It's risky, though. You didn't hear that from me."<</say>>
+<<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"But if you're feeling brave—or desperate—the Black Market Bazaar's where the real money's at. It's risky, though. You didn't hear that from me."<</say>>
 
-<<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"There's a fabricator at the wharf too, but that's for the high rollers. Licensing fees'll bleed you dry unless you've got creds to burn. Keep your eyes peeled, though. Opportunities are like vents on a ship—there's always one open somewhere."<</say>>
+<<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"There's a fabricator at the wharf too, but that's for the high rollers. Licensing fees'll bleed you dry unless you've got creds to burn. Keep your eyes peeled, though. Opportunities are like vents on a ship—there's always one open somewhere."<</say>>
 
 <<say '$player.name' $playerPortraitPathZ>>[[Thanks for the tips, Jax. I'll be careful.|JaxChat]]<</say>>
 <</nobr>>

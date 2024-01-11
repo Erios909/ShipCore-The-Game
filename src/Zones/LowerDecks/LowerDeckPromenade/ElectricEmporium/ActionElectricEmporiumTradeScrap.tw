@@ -1,7 +1,7 @@
 :: ElectricEmporiumTradeScrap [lowerdeckact] {"position":"75,1325","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/electricemporium.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade/electricemporium.jpg'>>
 <<addmins $timeadd>>
 <<set $lowerdecksScrap -= 2>>
 <<set $location to {

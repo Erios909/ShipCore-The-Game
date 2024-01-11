@@ -1,6 +1,6 @@
 :: Black Market Bazaar [travel nobr] {"position":"1700,1200","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerblackmarket.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Black Market Bazaar",
     outside: false,

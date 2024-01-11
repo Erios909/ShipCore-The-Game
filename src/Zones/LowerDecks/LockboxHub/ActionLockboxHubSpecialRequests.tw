@@ -3,7 +3,7 @@
 <<if not $visitedSpecialRequests>> <!-- First visit -->
     <<set $visitedSpecialRequests to true>>
     <<set $currentArea to "lowerdecks">>
-    <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lockbox.jpg'>>
+    <<setBackground setup.ImagePath+'locs/melt/mor1/lower/lockbox.jpg'>>
     <<addmins $timeadd>>
     <<set $location to {
         name: "Meltisar System, MOR-1, The Lockbox Hub - Special Storage Requests",
@@ -13,7 +13,7 @@
     }>>
     <<updatebar>>
 
-    <<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>
+    <<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>
     "For those who require space for bulk goods or larger items, we offer specialized warehousing services. The fee is 1000 credits per week for each cubic meter of storage. For items that are larger but not in bulk, the cost varies depending on the item."
     <</say>>
 
@@ -21,7 +21,7 @@
     "That seems like quite a steep price for storage."
     <</say>>
 
-    <<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>
+    <<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>
     "Believe me, I'm well aware. However, our clients who need such services are usually well above the average station dweller. Folks who are managing shiploads and business shipments don't usually flinch at the cost."
     <</say>>
 
@@ -29,7 +29,7 @@
     "Looks like I've got some climbing to do on the economic ladder."
     <</say>>
 
-    <<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>
+    <<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>
     "Don't we all? But it's always good to have aspirations, right?"
     <</say>>
 
@@ -38,7 +38,7 @@
 
 <<else>> <!-- Subsequent visits -->
     <<set $currentArea to "lowerdecks">>
-    <<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lockbox.jpg'>>
+    <<setBackground setup.ImagePath+'locs/melt/mor1/lower/lockbox.jpg'>>
     <<addmins $timeadd>>
     <<set $location to {
         name: "Meltisar System, MOR-1, The Lockbox Hub - Special Storage Requests",

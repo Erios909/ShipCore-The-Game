@@ -1,6 +1,6 @@
 :: LockboxHubInquire [lowerdeckact] {"position":"1075,1675","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lockbox.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lockbox.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, The Lockbox Hub - Managerial Office",
@@ -15,7 +15,7 @@
 
 You approach the managerial office, a clean and efficient space overlooking the rows of high-security lockers. Behind a sleek desk, the lockbox manager, greets you with a practiced smile. His uniform is immaculate, a stark contrast to the bustling activity of the hub outside.
 <br><br>
-<<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>"Greetings! I'm Sable Mercer, manager of The Lockbox Hub. Looking for a secure spot to store your valuables? Our storage service is complimentary for all residents—courtesy of the station's business taxes."<</say>>
+<<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>"Greetings! I'm Sable Mercer, manager of The Lockbox Hub. Looking for a secure spot to store your valuables? Our storage service is complimentary for all residents—courtesy of the station's business taxes."<</say>>
 <br>
 <<set $enoughCredits = $player.credits >= 300>>
 
@@ -25,23 +25,23 @@ You nod, taking in the array of lockers that line the walls.
 <br>
 Sable gestures for you to follow and walks you through the facility. 
 <br><br>
-<<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>"Each resident gets a locker assigned, free of charge. And if you're feeling adventurous, you can purchase access to an abandoned locker for 300 credits. Who knows what you might find."<</say>>
+<<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>"Each resident gets a locker assigned, free of charge. And if you're feeling adventurous, you can purchase access to an abandoned locker for 300 credits. Who knows what you might find."<</say>>
 <br>
 You eye the abandoned lockers, mulling over the possibilities. Sable catches your look and chuckles.
 <br><br>
 <<if $enoughCredits>>\
     <<say '$player.name' $playerPortraitPathZ>>"I have enough credits to afford it, but I'll need to think it over."<</say>>
-    <<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>"Take your time. The lockers aren't going anywhere. When you're ready, just let me know."<</say>>
+    <<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>"Take your time. The lockers aren't going anywhere. When you're ready, just let me know."<</say>>
 <<else>>\
     <<say '$player.name' $playerPortraitPathZ>>"I'll need to gather 300 credits first before even considering it."<</say>>
-    <<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>"No rush. We're here whenever you're prepared to dive into the unknown. It's always a bit of a gamble, but that's part of the excitement, isn't it?"<</say>>
+    <<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>"No rush. We're here whenever you're prepared to dive into the unknown. It's always a bit of a gamble, but that's part of the excitement, isn't it?"<</say>>
 <</if>>
 <br>
 You watch as a drone whizzes by, carrying a small crate to one of the upper lockers. Sable follows your gaze. "Our delivery drones are quite the efficient little workers. They handle all intra-deck transport, making storage here a breeze."
 <br><br>
-<<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>"However, they don't traverse between decks or provide off-station service. For that kind of heavy lifting, you might want to check out the Wharf or hire a transport service—unless you've got your own ship hidden somewhere?" he adds with a playful raise of his eyebrows.<</say>>
+<<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>"However, they don't traverse between decks or provide off-station service. For that kind of heavy lifting, you might want to check out the Wharf or hire a transport service—unless you've got your own ship hidden somewhere?" he adds with a playful raise of his eyebrows.<</say>>
 <<say '$player.name' $playerPortraitPathZ>>"Me, own a ship?" you feign surprise, "If I did, I might not be as worried about locker space."<</say>>
-<<say 'Sable Mercer' setup.ImagePath+'/characters/minor/sablemercer.jpg'>>"You'd be surprised at what comes through these doors. I've seen folks who don't look like they own a credit to their name, yet they have keys to some of the largest freighters docked at the station. And if you ever find yourself in need of more extensive storage solutions, for bulk goods or the like, we can certainly accommodate. Just give me a shout."<</say>>
+<<say 'Sable Mercer' setup.ImagePath+'characters/minor/sablemercer.jpg'>>"You'd be surprised at what comes through these doors. I've seen folks who don't look like they own a credit to their name, yet they have keys to some of the largest freighters docked at the station. And if you ever find yourself in need of more extensive storage solutions, for bulk goods or the like, we can certainly accommodate. Just give me a shout."<</say>>
 <br>
 You consider Sable's offer for a moment.
 <br>

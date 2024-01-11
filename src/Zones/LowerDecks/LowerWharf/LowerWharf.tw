@@ -1,6 +1,6 @@
 :: Lower Wharf [travel nobr] {"position":"1325,650","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerwharf.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Lower Wharf",
     outside: false,

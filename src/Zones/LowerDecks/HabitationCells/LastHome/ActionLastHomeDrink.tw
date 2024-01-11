@@ -1,7 +1,7 @@
 :: LastHomeDrink [lowerdeckact] {"position":"575,2050","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/thelasthome.jpg'>>
 <<addmins $timeadd>>
 <<set $player.credits -= 5>>
 <<set $location to {

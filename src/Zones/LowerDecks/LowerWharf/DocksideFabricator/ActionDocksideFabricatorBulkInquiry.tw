@@ -1,7 +1,7 @@
 :: DocksideFabricatorBulkInquiry [lowerdeckact] {"position":"1700,400","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Dockside Fabricator - Managerial Office",
@@ -17,7 +17,7 @@
 
 You step into the managerial office, a space that exudes efficiency and order. The office overlooks the vast expanse of the fabrication floor, where machines and workers are in constant, harmonious motion. Behind a desk that seems to command the room, Lucas Radiz greets you with a knowing smile, the mark of a man who understands the ebb and flow of industry.
 <br><br>
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"Welcome! I'm Lucas Radiz, overseeing the Dockside Fabricator operations. If you're in need of substantial quantities, you've come to the right place. We cater to businesses and shippers that require large, regular shipments of parts."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"Welcome! I'm Lucas Radiz, overseeing the Dockside Fabricator operations. If you're in need of substantial quantities, you've come to the right place. We cater to businesses and shippers that require large, regular shipments of parts."<</say>>
 <br>
 You lean in, intrigued by the scale of operations he's suggesting.
 <br><br>
@@ -25,12 +25,12 @@ You lean in, intrigued by the scale of operations he's suggesting.
 <br>
 Lucas gestures towards a series of charts displaying shipping schedules and volumes.
 <br><br>
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>"For our bulk clients, we start with minimum shipments of 10,000 parts per week, delivered to the warehouse of your choice. It's a seamless process designed for those who mean serious business."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>"For our bulk clients, we start with minimum shipments of 10,000 parts per week, delivered to the warehouse of your choice. It's a seamless process designed for those who mean serious business."<</say>>
 <br>
 You balk at the numbers, doing the quick math in your head.
 <br><br>
 <<say '$player.name' $playerPortraitPathZ>>"That's... that's over a million credits' worth of parts!"<</say>>
-<<say 'Lucas Radiz' setup.ImagePath+'/characters/minor/lucasradiz.jpg'>>Lucas laughs heartily, the sound echoing off the walls. "Indeed, it is! The fabricator license you're familiar with is just one aspect of our operations—small scale. When you're ready to run a corporation, come and see me. We'll talk numbers that'll make your head spin."<</say>>
+<<say 'Lucas Radiz' setup.ImagePath+'characters/minor/lucasradiz.jpg'>>Lucas laughs heartily, the sound echoing off the walls. "Indeed, it is! The fabricator license you're familiar with is just one aspect of our operations—small scale. When you're ready to run a corporation, come and see me. We'll talk numbers that'll make your head spin."<</say>>
 <br>
 You nod, the prospect both daunting and exhilarating.
 <br><br>

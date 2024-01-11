@@ -134,7 +134,7 @@ Combined Difficulty: $combinedDifficultyScore
         /* Ensure the $playerCompanions array exists. */
         <<set $playerCompanions to $playerCompanions || []>>
         /* Use the "createCompanion" widget to set up a companion named "Jax". */
-        <<CreateNPC setup.ImagePath+'/characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
+        <<CreateNPC setup.ImagePath+'characters/minor/jax.jpg' "Jax" 150 30 25 15 <<array "CardJ1" "CardJ2" "CardJ3">> "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
         <<set $playerCompanions.push($newestNPCID)>>
         /* Refresh the current passage to reflect the changes. */
         <<updatebar>>

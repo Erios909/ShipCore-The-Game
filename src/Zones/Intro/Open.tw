@@ -2,7 +2,7 @@
 <span id="revealButton"><<button "Start">>
     <<replace "#hiddenContent">><<goto "Start">><</replace>>
     <<run $("#revealButton").remove()>>
-<</button>></span><<setBackground setup.ImagePath+'/splash.jpg'>>
+<</button>></span><<setBackground setup.ImagePath+'splash.jpg'>>
 <!-- This is the button that the player will click. When clicked, it will disappear and reveal the hidden content. -->
 <!-- This is the hidden block that will be replaced with the included passage content. Initially, it's empty. -->
 <span id="hiddenContent"></span>
@@ -12,6 +12,8 @@
 <div class="passage">
     <span style="display: block; text-align: left; transform: translateX(-250%); max-width: 50%;">
         NOTICE: Save games are likely to cause issues or crashes if they are from a previous version.
+        <p><p><a href="https://github.com/Erios909/ShipCore-The-Game/issues" target="_blank">Visit the github to report bugs or support development!</a></p>
+        
     </span>
 </div>
 

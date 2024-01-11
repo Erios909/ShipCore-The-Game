@@ -1,7 +1,7 @@
 :: The Lockbox Hub [poi] {"position":"1125,1550","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lockbox.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lockbox.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, The Lockbox Hub",
@@ -20,7 +20,7 @@ The Lockbox Hub offers a reliable service for the reservation and management of 
 <<if $talkedToManager == false>>
 [[Inquire about locker and delivery service (00:30)|LockboxHubInquire][$talkedToManager = true; $timeadd = 30]]
 <<else>>
-    <<link 'Check your Lockbox Storage.'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>>
+    <<link 'Check your Lockbox Storage.'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab4.jpg'>>
     <<set $timeadd += 15>>
 <</link>><br>
     <<if $player.credits >= 300>>

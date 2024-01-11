@@ -1,7 +1,7 @@
 :: DocksideFabricateScrap [lowerdeckact] {"position":"1550,650","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerwharf/docksidefabricator.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Dockside Fabricator - Process Scrap",

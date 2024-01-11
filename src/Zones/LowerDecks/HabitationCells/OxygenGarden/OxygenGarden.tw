@@ -1,6 +1,6 @@
 :: The Oxygen Garden [poi] {"position":"775,2175","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/oxygengarden.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/oxygengarden.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, The Oxygen Garden",
     outside: false,

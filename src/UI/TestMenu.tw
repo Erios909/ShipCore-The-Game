@@ -31,7 +31,7 @@
 <br>
 
 <<button "Add 'Jax' Companion">>
-    <<set _jaxPortrait to setup.ImagePath+'/characters/minor/jax.jpg'>>
+    <<set _jaxPortrait to setup.ImagePath+'characters/minor/jax.jpg'>>
     <<set _cardSetJax to [{name: "CardJ1"}, {name: "CardJ2"}, {name: "CardJ3"}]>>
     <<CreateNPC _jaxPortrait "Jax" 150 30 25 15 _cardSetJax "Jax is a savvy scavenger." "Jax Weaver, a scavenger with a keen eye for opportunity, is as resourceful as they come. His knowledge of the lower decks could prove invaluable.">>
     <<set $playerCompanions.push(State.variables["newestNPCID"])>>
