@@ -1,7 +1,7 @@
 :: ShroudedMarketBigDeal [lowerdeckact] {"position":"1950,1325","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/shroudedmarket/marketveiledpromenade.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/shroudedmarket/marketveiledpromenade.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, The Shrouded Market - Broker a Big Deal",

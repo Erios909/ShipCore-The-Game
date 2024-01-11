@@ -1,7 +1,7 @@
 :: LockboxHubPurchaseAbandonedLocker [lowerdeckact] {"position":"1250,1525","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lockboxhub2.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lockboxhub2.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, The Lockbox Hub - Abandoned Locker",

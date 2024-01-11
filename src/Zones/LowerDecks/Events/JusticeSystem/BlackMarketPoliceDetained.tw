@@ -1,7 +1,7 @@
 :: LDBMPoliceDetained [event nobr] {"position":"1800,950","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "detainment">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/security.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/security.jpg'>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks",
     outside: false,

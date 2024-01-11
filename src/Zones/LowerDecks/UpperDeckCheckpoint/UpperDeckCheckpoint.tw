@@ -1,6 +1,6 @@
 :: Upper Deck Checkpoint [travel] {"position":"2150,1975","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/mid/midsecuritypoint.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/mid/midsecuritypoint.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Upper Deck Checkpoint",
     outside: false,

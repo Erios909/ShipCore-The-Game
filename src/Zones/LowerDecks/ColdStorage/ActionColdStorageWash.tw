@@ -2,7 +2,7 @@
 <<nobr>>
 <<set $currentArea to "lowerdecks">> <!-- Keep the current area as lowerdecks -->
 <<addmins $timeadd>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstorage.jpg'>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Cold Storage - Wash",
     outside: false,

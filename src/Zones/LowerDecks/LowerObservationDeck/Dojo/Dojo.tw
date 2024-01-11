@@ -1,7 +1,7 @@
 :: DojoLowerDecks [location event] {"position":"750,750","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/dojo.jpg'>>
 <<addmins $timeadd>> <!-- Assuming 5 minutes pass when visiting the dojo -->
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks Dojo",

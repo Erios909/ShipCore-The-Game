@@ -1,6 +1,6 @@
 :: Lower Observation Deck Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerobservation.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerobservation.jpg'>>
 <<addmins $timeadd>>
 
 <p>You step onto the Lower Observation Deck, the vastness of space laid out before you through the expansive viewports. The area is quiet, save for the soft hum of the station's life support systems and the occasional murmur of conversation from the few scattered individuals seeking solace here.</p>
@@ -10,13 +10,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton, sensing your contemplative mood, leans in with an encouraging nod.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"It's peaceful here, a good contrast to the chaos of the decks. Plus, being near the dojo brings a certain crowd. Could be a solid spot for the right kind of business."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"It's peaceful here, a good contrast to the chaos of the decks. Plus, being near the dojo brings a certain crowd. Could be a solid spot for the right kind of business."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax, ever the pragmatist, crosses his arms as he surveys the area.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Space like this is rare on the station. It's got potential, but we'll need a clear plan to make it work. Though, being this close to the dojo might mean being locked in to playing nice with Leina and Dalton."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Space like this is rare on the station. It's got potential, but we'll need a clear plan to make it work. Though, being this close to the dojo might mean being locked in to playing nice with Leina and Dalton."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -39,7 +39,7 @@
 
 :: Cold Storage Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstorage.jpg'>>
 <<addmins $timeadd>>
 
 <p>You enter the Cold Storage area, where the temperature drops noticeably. The sound of refrigeration units working in unison creates a constant backdrop to the otherwise silent halls. This place is a hub for goods that require preservation, from food supplies to sensitive materials.</p>
@@ -49,13 +49,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton rubs his arms for warmth, offering a shiver before speaking.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Brr, it's chilly, but that's good for business, right? Keeps things fresh. Plus, not many folks wander down here without a purpose. Could be an advantage."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"Brr, it's chilly, but that's good for business, right? Keeps things fresh. Plus, not many folks wander down here without a purpose. Could be an advantage."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax inspects the storage units, nodding in approval at the robust security measures.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"Cold Storage is secure and controlled. It's a good spot for something that needs a bit of isolation. Just make sure you've got a plan to draw in customers."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"Cold Storage is secure and controlled. It's a good spot for something that needs a bit of isolation. Just make sure you've got a plan to draw in customers."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -79,7 +79,7 @@
 
 :: Lower Deck Promenade Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade.jpg'>>
 <<addmins $timeadd>>
 
 <p>You find yourself in the bustling heart of the Lower Deck Promenade, where the energy is palpable. The area is a hive of activity, with a constant flow of station residents and visitors moving between shops, eateries, and entertainment venues.</p>
@@ -89,13 +89,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton's eyes light up at the sight of the crowd, and he grins with excitement.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Look at all these people! This is the place to be, no doubt about it. Whatever you set up here is gonna get noticed. Just gotta make sure it's something they'll come back for."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"Look at all these people! This is the place to be, no doubt about it. Whatever you set up here is gonna get noticed. Just gotta make sure it's something they'll come back for."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax scans the area with a critical eye, taking in the layout and the flow of the crowd.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"High traffic means high potential, but also high risk. You'll need a solid hook to pull people in and keep 'em coming. Location's prime, but it won't be cheap."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"High traffic means high potential, but also high risk. You'll need a solid hook to pull people in and keep 'em coming. Location's prime, but it won't be cheap."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -119,7 +119,7 @@
 
 :: Lower Wharf Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerwharf.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerwharf.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Lower Wharf is a hub of activity, where the clanking of machinery and the shouts of workers loading and unloading cargo create a symphony of industry. The air is thick with the scent of metal and sea, a reminder of the station's role as a key trade port.</p>
@@ -129,13 +129,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton watches the workers with interest, clearly impressed by the scale of operations.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"This place never sleeps, huh? If you're looking to get into trade or anything that needs quick access to shipments, the Wharf's where it's at. Just watch out for the heavy loaders."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"This place never sleeps, huh? If you're looking to get into trade or anything that needs quick access to shipments, the Wharf's where it's at. Just watch out for the heavy loaders."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax notes the security measures in place, considering the implications for a business.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"The Wharf's got potential, especially for supply chain businesses. But you'll need to be on your toes—accidents happen, and not all deals here are above board."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"The Wharf's got potential, especially for supply chain businesses. But you'll need to be on your toes—accidents happen, and not all deals here are above board."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -160,7 +160,7 @@
 
 :: Habitation Cells Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Habitation Cells are a network of living quarters where many of the station's residents call home. The corridors are filled with the sounds of daily life: children playing, neighbors chatting, and the aroma of home-cooked meals wafting through the air.</p>
@@ -170,13 +170,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton gives a friendly wave to a passing family, his demeanor warm and approachable.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"This is the heart of the station, where life happens. If you're looking to make a difference in folks' day-to-day, this is the place. Just gotta make sure you fit into the neighborhood."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"This is the heart of the station, where life happens. If you're looking to make a difference in folks' day-to-day, this is the place. Just gotta make sure you fit into the neighborhood."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax assesses the area with a thoughtful frown, considering the potential challenges and rewards.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It's a different game here, more personal. You won't see the same foot traffic as the promenade, but the residents could be your steady clientele. Keep it community-focused, and they'll keep coming back."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"It's a different game here, more personal. You won't see the same foot traffic as the promenade, but the residents could be your steady clientele. Keep it community-focused, and they'll keep coming back."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -200,7 +200,7 @@
 
 :: Black Market Bazaar Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/blackmarketbazaar.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/blackmarketbazaar.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Black Market Bazaar is a bustling hub of clandestine activity, hidden in the shadows of the station. Here, the air is thick with the promise of illicit deals and the allure of the forbidden. The market is alive with a diverse crowd, each individual with their own agenda and story.</p>
@@ -210,13 +210,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton's eyes gleam with a mix of caution and intrigue as he takes in the scene.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"This place has its own set of rules, and they ain't written down. You can make a killing here, but you gotta be sharp—and maybe a little bit lucky."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"This place has its own set of rules, and they ain't written down. You can make a killing here, but you gotta be sharp—and maybe a little bit lucky."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax's expression is unreadable, but you can tell he's calculating every possible outcome of doing business here.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"The Bazaar is a gold mine for those who can navigate its dangers. Just remember, the line between profit and peril is razor-thin here."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"The Bazaar is a gold mine for those who can navigate its dangers. Just remember, the line between profit and peril is razor-thin here."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -239,7 +239,7 @@
 
 :: Forgotten Slums Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerslums.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerslums.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Forgotten Slums are a stark contrast to the rest of the station, a place where the gleam of technology gives way to the grit of survival. The air is heavy with desperation, and the eyes that watch you from the shadows are filled with caution and hunger. This is a place where law is a foreign concept, and Braxton's influence casts a long, dark shadow.</p>
@@ -249,13 +249,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton's usual bravado is replaced by a tense alertness as he sticks close to your side.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"I gotta say, this is not where I expected to be scouting for business opportunities. It's like setting up shop in a minefield. You sure about this?"<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"I gotta say, this is not where I expected to be scouting for business opportunities. It's like setting up shop in a minefield. You sure about this?"<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax's hand instinctively rests near his weapon, his eyes scanning for potential threats.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"This place is a powder keg waiting to blow. Starting a business here without backup is like declaring war without an army. Think carefully."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"This place is a powder keg waiting to blow. Starting a business here without backup is like declaring war without an army. Think carefully."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->
@@ -279,7 +279,7 @@
 
 :: Station Infrastructure Scout [conversation event]
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerengineering.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerengineering.jpg'>>
 <<addmins $timeadd>>
 
 <p>The Station Infrastructure sector is a maze of corridors and maintenance rooms, humming with the lifeblood of the station's operational systems. Here, technicians and engineers work diligently to keep the station running smoothly, largely unnoticed by the general populace.</p>
@@ -289,13 +289,13 @@
 <!-- Dalton's input if he is a companion -->
 <<if $DaltonIsCompanion>>
     <p>Dalton peers curiously at the complex machinery, his hands itching to tinker.</p>
-    <<say 'Dalton' setup.ImagePath+'/characters/lowerdecks/dalton.jpg'>>"Not the flashiest part of the station, but it's got a steady beat. If you've got a knack for tech or services, you could carve out a solid niche here. Just gotta speak the language."<</say>>
+    <<say 'Dalton' setup.ImagePath+'characters/lowerdecks/dalton.jpg'>>"Not the flashiest part of the station, but it's got a steady beat. If you've got a knack for tech or services, you could carve out a solid niche here. Just gotta speak the language."<</say>>
 <</if>>
 
 <!-- Jax's input if he is a companion -->
 <<if $JaxIsCompanion>>
     <p>Jax nods approvingly at the security measures and the orderliness of the sector.</p>
-    <<say 'Jax Weaver' setup.ImagePath+'/characters/minor/jax.jpg'>>"It's all about reliability in these parts. Offer something the techs can't do without, and you'll have a customer for life. Plus, it's one of the safer bets on the station."<</say>>
+    <<say 'Jax Weaver' setup.ImagePath+'characters/minor/jax.jpg'>>"It's all about reliability in these parts. Offer something the techs can't do without, and you'll have a customer for life. Plus, it's one of the safer bets on the station."<</say>>
 <</if>>
 
 <!-- Additional narrative if both companions are present -->

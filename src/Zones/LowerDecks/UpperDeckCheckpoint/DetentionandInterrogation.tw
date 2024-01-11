@@ -1,5 +1,5 @@
 :: Detention and Interrogation [poi] {"position":"2625,1825","size":"100,100"}
-<<nobr>><<set $currentArea to "lowerdecks">><<setBackground setup.ImagePath+'/locs/melt/mor1/mid/middetention.jpg'>>
+<<nobr>><<set $currentArea to "lowerdecks">><<setBackground setup.ImagePath+'locs/melt/mor1/mid/middetention.jpg'>>
 <<addmins $timeadd>><<set $location to {
     name: "Meltisar System, MOR-1, Detention and Interrogation",
     outside: false,

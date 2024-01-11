@@ -1,7 +1,7 @@
 :: LastHomeGamble [lowerdeckact] {"position":"550,1950","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/thelasthomegamble.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/thelasthomegamble.jpg'>>
 <<addmins $timeadd>>
 <<set $player.credits -= 10>>
 <<set $location to {

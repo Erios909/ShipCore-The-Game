@@ -1,6 +1,6 @@
 :: JaxChat [conversation] {"position":"950,725","size":"100,100"}
 <<nobr>>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/coldstorage.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/coldstorage.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Cold Storage",
@@ -24,7 +24,7 @@
 <!-- If Jax's recruitment plot is not active, Jax offers general information -->
 <<elseif $JaxRecruitmentPlot == 0>><div id="jaxchatchoices">
     <p>Jax is tinkering with a device, his tools spread out around him in organized chaos.</p><br>
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got some more questions?"<</say>>
+    <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Got some more questions?"<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         [[Can you tell me more about the station?|JaxAskStation][$timeadd += 5]]<br>
         [[Who are the people around here?|JaxAskPeople][$timeadd += 5]]<br>
@@ -35,7 +35,7 @@
 <<elseif $JaxRecruitmentPlot == 1>>
     <!-- If the player has met the condition but rejected Jax -->
     <<if $JaxJoinRejected && $JaxMetCondition>><div id="jaxchatchoices">
-        <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"I respect your decision, but if you ever reconsider, I'm here."<</say>>
+        <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"I respect your decision, but if you ever reconsider, I'm here."<</say>>
         <<say '$player.name' $playerPortraitPathZ>>
             <<link "Reconsider Jax's offer.">>
             <<replace "#jaxchatchoices">><<fadein 1s>><<say '$player.name' $playerPortraitPathZ>>"I've been thinking about your offer, Jax."<</say>><<include "JaxRecruitment">><</fadein>><</replace>>
@@ -49,7 +49,7 @@
     <!-- If the player has rejected the offer after knowing the conditions -->
     <<elseif $JaxJoinRejected && $JaxKnowsJoinCondition>><div id="jaxchatchoices">
             <p>Jax gives you a measured look, trying to gauge your thoughts as he wipes his hands on a rag.</p><br>
-        <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Changed your mind about teaming up, or just here for some more info?"<</say>>
+        <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Changed your mind about teaming up, or just here for some more info?"<</say>>
         <<say '$player.name' $playerPortraitPathZ>>
             <<link "Discuss teaming up again.">>
             <<replace "#jaxchatchoices">><<fadein 1s>><<say '$player.name' $playerPortraitPathZ>>"I've been thinking about your offer, Jax."<</say>><<include "JaxRecruitment">><</fadein>><</replace>>
@@ -63,7 +63,7 @@
     <!-- If the player has rejected the offer without knowing the conditions -->
     <<elseif $JaxJoinRejected && not $JaxKnowsJoinCondition>><div id="jaxchatchoices">
             <p>Jax seems preoccupied with his work, but he pauses, giving you a nod as you approach.</p>
-        <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Still not interested in teaming up, or are you looking for something else?"<</say>>
+        <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Still not interested in teaming up, or are you looking for something else?"<</say>>
         <<say '$player.name' $playerPortraitPathZ>>
             <<link "Discuss teaming up again.">>
             <<replace "#jaxchatchoices">><<fadein 1s>><<say '$player.name' $playerPortraitPathZ>>"I've been thinking about your offer, Jax."<</say>><<include "JaxRecruitment">><</fadein>><</replace>>
@@ -77,7 +77,7 @@
     <!-- If the player knows Jax's joining condition but has not rejected the offer -->
     <<elseif $JaxKnowsJoinCondition>><div id="jaxchatchoices">
         <p>Jax is examining some gadget intently, but he looks up with interest as you draw near.</p>
-        <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"Got that nano-doc yet, or do you need something else?"<</say>>
+        <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"Got that nano-doc yet, or do you need something else?"<</say>>
         <<say '$player.name' $playerPortraitPathZ>>
             <<link "Discuss teaming up again.">>
             <<replace "#jaxchatchoices">><<fadein 1s>><<say '$player.name' $playerPortraitPathZ>>"I've been thinking about your offer, Jax."<</say>><<include "JaxRecruitment">><</fadein>><</replace>>
@@ -91,7 +91,7 @@
     <!-- Default case if no specific condition is met -->
     <<else>><div id="jaxchatchoices">
                 <p>Jax is sorting through a pile of parts, occasionally holding one up to the light and scrutinizing it closely.</p>
-        <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's on your mind?"<</say>>
+        <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"What's on your mind?"<</say>>
         <<say '$player.name' $playerPortraitPathZ>>
             <<link "Discuss teaming up again.">>
             <<replace "#jaxchatchoices">><<fadein 1s>><<say '$player.name' $playerPortraitPathZ>>"I've been thinking about your offer, Jax."<</say>><<include "JaxRecruitment">><</fadein>><</replace>>
@@ -105,7 +105,7 @@
     <</if>>
 <!-- If Jax is now a companion, focus on planning the next move -->
 <<elseif $JaxIsCompanion>><div id="jaxchatchoices">
-    <<say 'Jax' setup.ImagePath+'/characters/minor/jax.jpg'>>"What's our next move?"<</say>>
+    <<say 'Jax' setup.ImagePath+'characters/minor/jax.jpg'>>"What's our next move?"<</say>>
     <<say '$player.name' $playerPortraitPathZ>>
         <<if $currentArea == "lowerdecks">>
             [[Can you tell me more about the station?|JaxAskStation][$timeadd += 5]]<br>

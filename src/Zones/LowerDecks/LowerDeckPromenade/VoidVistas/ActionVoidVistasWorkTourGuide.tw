@@ -1,7 +1,7 @@
 :: VoidVistasWorkTourGuide [lowerdeckact] {"position":"575,875","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/voidvistas.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade/voidvistas.jpg'>>
 <<addmins 60>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Void Vistas - Virtual Tour Guide Shift",

@@ -17,12 +17,12 @@
                 Personal Management
             <</link>>
             <ul class="content hidden">
-                <li><<link 'View Change Log'>><<run slideWin("changelist")>><<setBackgroundSlide setup.ImagePath+'/ui/none.png'>><</link>></li>
-                <li><<link 'Consumables'>><<run slideWin("Consumables")>><<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab3.jpg'>><</link>></li>
-                <li><<link 'Companions'>><<run slideWin("Companions")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
-                <li><<link 'Stash'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab4.jpg'>><</link>></li>
-                <li><<link 'Journal'>><<run slideWin("Journal")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Appearance'>><<run slideWin("Appearance")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'View Change Log'>><<run slideWin("changelist")>><<setBackgroundSlide setup.ImagePath+'ui/none.png'>><</link>></li>
+                <li><<link 'Consumables'>><<run slideWin("Consumables")>><<run UpdateStatBar(100 - State.variables.player.carcinogen, 100, "carcinogenbar", true)>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab3.jpg'>><</link>></li>
+                <li><<link 'Companions'>><<run slideWin("Companions")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab4.jpg'>><</link>></li>
+                <li><<link 'Stash'>><<run slideWin("Stash")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab4.jpg'>><</link>></li>
+                <li><<link 'Journal'>><<run slideWin("Journal")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Appearance'>><<run slideWin("Appearance")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -33,10 +33,10 @@
                 Ship Management
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Cargo Management'>><<run slideWin("CargoManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Crew Management'>><<run slideWin("CrewManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Hardware Management'>><<run slideWin("HardwareManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Player Ship Specs'>><<run slideWin("PlayerShipSpecs")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Cargo Management'>><<run slideWin("CargoManagement")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Crew Management'>><<run slideWin("CrewManagement")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Hardware Management'>><<run slideWin("HardwareManagement")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Player Ship Specs'>><<run slideWin("PlayerShipSpecs")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -47,10 +47,10 @@
                 Fleet Management
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Fleet Directives'>><<run slideWin("FleetDirectives")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Fleet Budgets'>><<run slideWin("FleetBudgets")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Fleet Commanders'>><<run slideWin("FleetCommanders")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Battlelog'>><<run slideWin("Battlelog")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Fleet Directives'>><<run slideWin("FleetDirectives")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Fleet Budgets'>><<run slideWin("FleetBudgets")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Fleet Commanders'>><<run slideWin("FleetCommanders")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Battlelog'>><<run slideWin("Battlelog")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -78,14 +78,14 @@
                             <<set $backgroundImage = setup.ImagePath + 'locs/melt/mor1/lower/playerbusiness/' + $businessTypeToImage[$businessType]>>
                             <<setBackground $backgroundImage>>
                         <<else>>
-                            <<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>>
+                            <<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>>
                         <</if>>
                     <</link>>
                 </li>
-                <li><<link 'Corporate Ledgers'>><<run slideWin("CorporateLedgers")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Transshipment'>><<run slideWin("Transshipment")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Business Directives'>><<run slideWin("BusinessDirectives")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Conflict Resolution'>><<run slideWin("ConflictManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Corporate Ledgers'>><<run slideWin("CorporateLedgers")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Transshipment'>><<run slideWin("Transshipment")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Business Directives'>><<run slideWin("BusinessDirectives")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Conflict Resolution'>><<run slideWin("ConflictManagement")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -97,10 +97,10 @@
                 Station Management
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Pinned Station One'>><<run slideWin("PinnedStationOne")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Pinned Station Two'>><<run slideWin("PinnedStationTwo")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Station Ledger'>><<run slideWin("StationLedger")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Station Warehousing'>><<run slideWin("StationWarehousing")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Pinned Station One'>><<run slideWin("PinnedStationOne")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Pinned Station Two'>><<run slideWin("PinnedStationTwo")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Station Ledger'>><<run slideWin("StationLedger")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Station Warehousing'>><<run slideWin("StationWarehousing")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -112,12 +112,12 @@
                 Colony Management
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Pinned Colony 1'>><<run slideWin("PinnedColonyOne")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Pinned Colony 2'>><<run slideWin("PinnedColonyTwo")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Colonies Overview'>><<run slideWin("ColonyManagement")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Economic Edicts'>><<run slideWin("EconomicEdicts")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Military Edicts'>><<run slideWin("MilitaryEdicts")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Population Edicts'>><<run slideWin("PopulationEdicts")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Pinned Colony 1'>><<run slideWin("PinnedColonyOne")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Pinned Colony 2'>><<run slideWin("PinnedColonyTwo")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Colonies Overview'>><<run slideWin("ColonyManagement")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Economic Edicts'>><<run slideWin("EconomicEdicts")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Military Edicts'>><<run slideWin("MilitaryEdicts")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Population Edicts'>><<run slideWin("PopulationEdicts")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -129,10 +129,10 @@
                 Diplomacy
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Factions'>><<run slideWin("FactionsMenu")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Negotiations'>><<run slideWin("Negotiations")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Reputation'>><<run slideWin("Reputation")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Incident Log'>><<run slideWin("IncidentLogs")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Factions'>><<run slideWin("FactionsMenu")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Negotiations'>><<run slideWin("Negotiations")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Reputation'>><<run slideWin("Reputation")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Incident Log'>><<run slideWin("IncidentLogs")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 
@@ -144,11 +144,11 @@
                 Computronics
             <</link>>
             <ul class="content hidden">
-                <li><<link 'Main Computer'>><<run slideWin("MainComputer")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Physical ANUF'>><<run slideWin("PhysicalANUF")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Projection ANUF'>><<run slideWin("ProjectionANUF")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Utility ANUF'>><<run slideWin("UtilityANUF")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
-                <li><<link 'Authorization'>><<run slideWin("AUTHORIZATION")>><<setBackgroundSlide setup.ImagePath+'/ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Main Computer'>><<run slideWin("MainComputer")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Physical ANUF'>><<run slideWin("PhysicalANUF")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Projection ANUF'>><<run slideWin("ProjectionANUF")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Utility ANUF'>><<run slideWin("UtilityANUF")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
+                <li><<link 'Authorization'>><<run slideWin("AUTHORIZATION")>><<setBackgroundSlide setup.ImagePath+'ui/cabs/cab.jpg'>><</link>></li>
             </ul>
         </li>
 

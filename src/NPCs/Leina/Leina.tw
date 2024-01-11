@@ -1,7 +1,7 @@
 :: LeinaChat [conversation] {"position":"950,725","size":"100,100"}
 <<nobr>>
 
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/dojo.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/dojo.jpg'>>
 <<addmins 5>> <!-- Assuming 5 minutes pass when starting the conversation -->
 <<set $location to {
     name: "Meltisar System, MOR-1, Lower Decks Dojo",

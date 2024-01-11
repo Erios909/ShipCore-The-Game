@@ -1,6 +1,6 @@
 :: HabitationLease [safe] {"position":"1300,2200","size":"100,100"}
 <<nobr>><<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerhabitation/apartmentinterior.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerhabitation/apartmentinterior.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, Your Apartment",
@@ -14,19 +14,19 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <</nobr>>
 
-<<say 'Thomas Ralfot' setup.ImagePath+'/characters/minor/thomasralfot.jpg'>>"Right this way, please. I think you'll find this unit quite accommodating, all things considered. It's not a palace, but it's a slice of solace in the sprawl of the Lower Decks."<</say>>
+<<say 'Thomas Ralfot' setup.ImagePath+'characters/minor/thomasralfot.jpg'>>"Right this way, please. I think you'll find this unit quite accommodating, all things considered. It's not a palace, but it's a slice of solace in the sprawl of the Lower Decks."<</say>>
 
 Thomas leads you through a series of narrow, dimly lit corridors, each turn bringing a mix of aromas ranging from enticingly home-cooked meals to the less savory scent of recycled air. Finally, he stops before a modest door, its number faintly glowing. A quick code entry, and you're ushered inside.
 
 The apartment, a small marvel of efficiency, doesn't hide its worn edges or the faint stain in the corners — a life lived by many before you. The main room is sparse: a bed, folded neatly into the wall, a kitchenette with a hotplate and mini-fridge, and a station terminal/computer setup on a retractable arm over the bed. A window-sized screen offers a loop of serene natural vistas to counteract the claustral reality.
 
-<<say 'Thomas Ralfot' setup.ImagePath+'/characters/minor/thomasralfot.jpg'>>"Here you have your basics: a place to sleep, a place to cook, and a terminal to stay connected to the goings-on. The bed's a bit stiff, but it'll ease up with use."<</say>>
+<<say 'Thomas Ralfot' setup.ImagePath+'characters/minor/thomasralfot.jpg'>>"Here you have your basics: a place to sleep, a place to cook, and a terminal to stay connected to the goings-on. The bed's a bit stiff, but it'll ease up with use."<</say>>
 
 You test the mattress, finding truth in Thomas' words — it's firm, utilitarian. The kitchenette looks serviceable, albeit with the bare minimum of culinary tools. The terminal flickers to life as you approach, its screen welcoming you with a pleasant chime.
 
 A separate door reveals the bathroom, no larger than a closet but clean. The shower, a tight cylinder, promises a forceful spray thanks to the recycled water system in place. Efficiency is everything in a home like this.
 
-<<say 'Thomas Ralfot' setup.ImagePath+'/characters/minor/thomasralfot.jpg'>>"The water's consistently hot, thanks to our local SNO2 heating systems. It's a touch cramped, but you'll find it does the job after a long stint in the ducts or out in the field."<</say>>
+<<say 'Thomas Ralfot' setup.ImagePath+'characters/minor/thomasralfot.jpg'>>"The water's consistently hot, thanks to our local SNO2 heating systems. It's a touch cramped, but you'll find it does the job after a long stint in the ducts or out in the field."<</say>>
 
 Thomas' explanation carries through the small, compact space as you nod along, taking in everything with a pragmatic eye. This will be home. It has to be.
 

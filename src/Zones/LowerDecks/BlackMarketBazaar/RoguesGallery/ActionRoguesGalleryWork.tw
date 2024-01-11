@@ -1,7 +1,7 @@
 :: RoguesGalleryWork [lowerdeckact] {"position":"1475,1250","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerblackmarket/roguesgallery.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerblackmarket/roguesgallery.jpg'>>
 <<addmins $timeadd>>
 <<set $location to {
     name: "Meltisar System, MOR-1, The Rogue's Gallery - Bartending Shift",

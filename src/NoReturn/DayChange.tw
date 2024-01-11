@@ -17,7 +17,7 @@
 
 <!-- Rest of your code... -->
 
-<<setBackground setup.ImagePath+'/locs/melt/daychange.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/daychange.jpg'>>
 
 <<set _creditsChange = $player.credits - ($playerPreviousCredits ? $playerPreviousCredits : 0)>>
 <<set _debtChange = $player.debt - ($playerPreviousDebt ? $playerPreviousDebt : 0)>>

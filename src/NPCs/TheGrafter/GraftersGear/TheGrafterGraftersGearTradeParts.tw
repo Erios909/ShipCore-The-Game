@@ -1,7 +1,7 @@
 :: GraftersGearTradeParts [lowerdeckact] {"position":"200,925","size":"100,100"}
 <<nobr>>
 <<set $currentArea to "lowerdecks">>
-<<setBackground setup.ImagePath+'/locs/melt/mor1/lower/lowerpromenade/graftergear.jpg'>>
+<<setBackground setup.ImagePath+'locs/melt/mor1/lower/lowerpromenade/graftergear.jpg'>>
 <<addmins $timeadd>>
 <<set $lowerdecksParts -= 1>> <!-- Subtract the part used for trading -->
 <<set $location to {
