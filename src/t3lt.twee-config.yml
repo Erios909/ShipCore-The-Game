@@ -2,12 +2,12 @@ sugarcube-2:
   macros:
     setBackground:
       name: setBackground
-    updatebar:  
+    updatebar:
       name: updatebar
     changemoods:
       name: changemoods
     addmins:
-      name: addmins 
+      name: addmins
     playerp:
       name: playerp
     maincomputer:
@@ -19,7 +19,7 @@ sugarcube-2:
     clamps:
       name: clamps
     date:
-      name: date  
+      name: date
     time24hr:
       name: time24hr
     time12hr:
@@ -58,7 +58,6 @@ sugarcube-2:
       name: appearance
     ImageDisplay:
       name: ImageDisplay
-    # start events
     on:
       container: true
       children:
@@ -76,14 +75,12 @@ sugarcube-2:
         - on
         - off
     which:
-      parents:  
+      parents:
         - on
         - off
         - event
     trigger: {}
     off: {}
-    # end events
-    # star live update
     live:
       name: live
     l:
@@ -100,7 +97,6 @@ sugarcube-2:
       name: update
     upd:
       name: upd
-    #end star live update
     notify:
       name: notify
       container: true
@@ -128,5 +124,11 @@ sugarcube-2:
       name: LowerDecksBusinessReport
     LowerDecksPlayerBusinessProcessing:
       name: LowerDecksPlayerBusinessProcessing
-
-      
+    ConsumeInputWithChance:
+      name: ConsumeInputWithChance
+    ProduceOutputWithChance:
+      name: ProduceOutputWithChance
+    ManageOutputs:
+      name: ManageOutputs
+    LogEvent:
+      name: LogEvent
