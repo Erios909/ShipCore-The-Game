@@ -17,6 +17,14 @@
             ]
         },
         {
+            "label": "Tweego Compile Continious",
+            "type": "shell",
+            "command": "tweego.exe -w -o './out/index.html' src",
+            "dependsOn": [
+                "Ensure Output Directory"
+            ],
+        },
+        {
             "label": "Copy Static Resources",
             "type": "shell",
             "command": "Copy-Item -Path ./web/* -Destination ./out -Recurse -Force",
