@@ -17,7 +17,7 @@
             ]
         },
         {
-            "label": "Tweego Compile Continious",
+            "label": "Tweego Compile Continuous",
             "type": "shell",
             "command": "tweego.exe -w -o './out/index.html' src",
             "dependsOn": [
