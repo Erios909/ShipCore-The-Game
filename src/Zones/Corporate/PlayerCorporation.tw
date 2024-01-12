@@ -32,6 +32,41 @@
 <</widget>>
 
 :: CorporationDefinitions [widget templates nobr]
+
+<<set setup.SystemTemplate = {
+  SystemName: "",
+  SystemType: "", // e.g., "Frontier", "Core", "Void"
+  FactionOwner: "",
+  PlayerCorpActive: false,
+  DevelopmentLevel: 0, // Scale to represent development 1-500
+  DangerLevel: 500, // Scale to represent danger or security 1-1000
+  EconomyLevel: 500, // Scale to represent economic strength 1-1000
+  Population: 0,
+  SunType: "", // e.g., "Red Giant", "White Dwarf"
+  SunOutput: "", // e.g., "High", "Medium", "Low"
+  SpecialFeatures: [], // Array of special features or attributes
+  SystemEconomy: {
+    BaseResourcePrices: {}, // Base prices for resources
+    PriceModifiers: {}, // Modifiers based on local factors
+    TradeRoutes: [], // Potential trade routes and their impact
+    ResourceAbundance: {}, // Resource availability levels
+  },
+  SystemSecurity: {
+    PatrolFrequency: 50, // Scale to represent frequency 1-100
+    SecurityForces: [], // Array of security forces
+    PiracyRisk: 50, // Scale to represent risk 1-100
+  },
+  SystemPolitics: {
+    PlayerRelations: 50, // Local player relations
+    PoliticalStability: 50, // Local relations with Faction Owner 1-100
+  },
+  SystemEnvironment: {
+    PlanetaryBodies: [],
+    NotableLocations: [],
+    EnvironmentalHazards: []
+  }
+}>>
+
 /* this needs shoved in storyinit before the setup.variables will become available, and they won't work with old savegames */
 
 /* Division Types and Licenses */
@@ -63,6 +98,7 @@
 <<set setup.DivisionTemplate = {
   DivisionName: "",
   DivisionIsActive: true,
+  DivisionAutoSellActive: false,
   DivisionType: "",
   DivisionSubdivisions: [],
   DivisionFinance: {credits: 0, debt: 0},
@@ -90,6 +126,7 @@
     MarketInfluence: 1,
     Corruption: 1,
     Security: 1
+    ProtectedStorage: 0,
   }
 }>>
 
@@ -410,23 +447,39 @@
 <<widget "ManageOutputs">>
   <<set _currentDivision to $args[0]>>
   <<set _currentCorp to $args[1]>>
-  <<set _autoSellEnabled to ...>> <!-- Determine if auto-sell is enabled for the division -->
-  <<set _outputs to _currentDivision.ProcessedOutputs>> <!-- Assuming ProcessedOutputs holds the outputs from recipe processing -->
+  <<set _autoSellEnabled to _currentDivision.DivisionAutoSellActive>>
+  <<set _outputs to _currentDivision.ProcessedOutputs>>
 
   <<for _output in _outputs>>
     <<set _outputName to _output.name>>
     <<set _outputQuantity to _output.quantity>>
 
     <<if _autoSellEnabled>>
-      <<set _revenue to CalculateRevenue(_outputName, _outputQuantity)>>
-      <<set _currentCorp.CorpFinance.credits += _revenue>>
-      <<run LogOutputSale(_outputName, _outputQuantity, _revenue)>>
+      <<ProcessDivisionSale _outputName _outputQuantity _currentCorp>>
     <<else>>
       <<run AddResource(_outputName, _outputQuantity, _currentCorp.CorpInventory)>>
       <<run LogResourceStored(_outputName, _outputQuantity)>>
     <</if>>
   <</for>>
 <</widget>>
+
+<<widget "ProcessDivisionSale">>
+  <<set _resourceName to $args[0]>>
+  <<set _quantity to $args[1]>>
+  <<set _corp to $args[2]>>
+  <<set _systemEconomy to ...>> <!-- Retrieve the system economy object based on CorpLocation -->
+  
+  /* Calculate price based on base value and system's price modifier */
+  <<set _baseValue to setup.CorpResources[_resourceName].baseValue>>
+  <<set _priceModifier to _systemEconomy.ResourcePriceModifiers[_resourceName]>>
+  <<set _sellingPrice to _baseValue * _priceModifier * _quantity>>
+
+  /* Adjust corporation's finances */
+  <<set _corp.CorpFinance.credits += _sellingPrice>>
+  <<run LogSale _resourceName _quantity _sellingPrice>>
+<</widget>>
+
+
 
 <<widget "LogEvent">>
   <<set _division to $args[0]>>
@@ -473,16 +526,17 @@
       /* Iterate over each corporation */
       <<for _i = 0; _i < $PlayerCorporations.length; _i++>>
         <<set _currentCorp to $PlayerCorporations[_i]>>
+
         /* Check the state of the corporation before processing */
-        <<if _currentCorp.CorpIsActive>> <!-- Placeholder for corporation state check -->
+        <<if _currentCorp.CorpIsActive>> <!-- Check if the corporation is active -->
 
           /* Iterate over each division of the current corporation */
           <<for _j = 0; _j < _currentCorp.CorpDivisions.length; _j++>>
-            <<set _currentDivision to $PlayerCorporations[_i].CorpDivisions[_j]>>
+            <<set _currentDivision to _currentCorp.CorpDivisions[_j]>>
             <<set _stats to _currentDivision.DivisionBusinessStats>>
 
             /* Check if the division has recipes and is in an active state */
-            <<if _currentDivision.DivisionRecipes.length > 0 and _currentDivision.DivisionIsActive>> <!-- Placeholder for division state check -->
+            <<if _currentDivision.DivisionIsActive and _currentDivision.DivisionRecipes.length > 0>>
 
               /* Process each recipe in the division */
               <<for _recipe in _currentDivision.DivisionRecipes>>
@@ -511,6 +565,7 @@
                   <<ManageOutputs _currentDivision _currentCorp>>
 
                 <<else>>
+                  /* Log a message if the recipe cannot be processed due to insufficient resources */
                   <<run console.log("Insufficient resources for recipe: " + _recipe.Name + " on day " + (_day + 1))>>
                 <</if>>
               <</for>> <!-- End of recipe processing loop -->
@@ -530,6 +585,7 @@
     <<run console.log("Less than a day has passed. Skipping corporation cycle processing.")>>
   <</if>>
 <</widget>>
+
 
 
 
