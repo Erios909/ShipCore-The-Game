@@ -134,3 +134,13 @@ sugarcube-2:
       name: LogEvent
     ProcessDivisionSale:
       name: ProcessDivisionSale
+    ProcessCorporationCycles:
+      name: ProcessCorporationCycles
+    refresh:
+      name: refresh
+    CreateCorporation:
+      name: CreateCorporation
+    CreateDivision:
+      name: CreateDivision
+    CreateSystem:
+      name: CreateSystem

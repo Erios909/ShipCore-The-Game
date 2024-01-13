@@ -1,0 +1,271 @@
+:: Corporate Management Test [Start]
+Welcome to the Corporate Management Testing Page!
+
+<!-- Section for Creating a System -->
+<h2>Create System</h2>
+System Name: <<textbox "_systemName" "Default System">>
+System Type: <<textbox "_systemType" "Type A">>
+Faction Owner: <<textbox "_factionOwner" "Faction X">>
+Development Level: <<textbox "_developmentLevel" "1">>
+Danger Level: <<textbox "_dangerLevel" "500">>
+Economy Level: <<textbox "_economyLevel" "500">>
+Population: <<textbox "_population" "1000">>
+Sun Type: <<textbox "_sunType" "G-Type">>
+Sun Output: <<textbox "_sunOutput" "Medium">>
+<<link "Create System">>
+  <<CreateSystem _systemName _systemType _factionOwner _developmentLevel _dangerLevel _economyLevel _population _sunType _sunOutput>>
+  <<update>><<updatebar>>
+<</link>>
+<<liveblock>>
+    _systemName, _systemType, _factionOwner, _developmentLevel, _dangerLevel, 
+    _economyLevel, _population, _sunType, _sunOutput
+<</liveblock>>
+
+
+<!-- Section for Creating Corporation -->
+<h2>Create Corporation</h2>
+Name: <<textbox "_corpName" "Corp Inc.">>
+Credits: <<textbox "_corpCredits" "10000">>
+Debt: <<textbox "_corpDebt" "5000">>
+Location: <<textbox "_corpLocation" "Meltisar">>
+Coherency: <<textbox "_corpCoherency" "High">>
+<<link "Create Corporation">><<CreateCorporation _corpName _corpCredits _corpDebt _corpLocation _corpCoherency>><<update>><<updatebar>><</link>>
+
+
+<!-- Section for Creating Division -->
+<h2>Create Division</h2>
+<<liveblock>>
+<<if $PlayerCorporations !== undefined && $PlayerCorporations.length > 0>>
+    <<set _corpOptions = {}>> <!-- Initialize an empty object for the options -->
+    <<for _i = 0; _i < $PlayerCorporations.length; _i++>>
+        <<set _corpOptions[$PlayerCorporations[_i].CorpName] = _i>> <!-- Map corp names to their indices -->
+    <</for>>
+
+    Corporation: 
+    <<listbox "_selectedCorpIndex" autoselect>>
+        <<optionsfrom _corpOptions>>
+    <</listbox>>
+
+    Division Name: <<textbox "_divisionName" "Division Z">>
+    Type: <<textbox "_divisionType" "Industrial">>
+    Level: <<textbox "_divisionLevel" "2">>
+    Required License: <<textbox "_divisionLicense" "License A">>
+    Coherency: <<textbox "_divisionCoherency" "Moderate">>
+    <<link "Create Division">><<CreateDivision _selectedCorpIndex _divisionName _divisionType _divisionLevel _divisionLicense _divisionCoherency>><<update>><<updatebar>><</link>>
+<<else>>
+    <p>No Corporations Defined Yet. Please create a corporation first.</p>
+<</if>>
+<</liveblock>>
+
+<!-- Time Management Section -->
+<h2>Time Management</h2>
+<<link "Add 1 Day">><<set $timeadd += 1440>><<addmins $timeadd>><<update>><<updatebar>><</link>>
+<<link "Add 1 Week">><<set $timeadd += 10080>><<addmins $timeadd>><<update>><<updatebar>><</link>>
+
+<!-- Cycle Processing Section -->
+<h2>Process Corporation Cycle</h2>
+<<link "Process Cycle">><<ProcessCorporationCycles>><<update>><<updatebar>><</link>>
+
+<<liveblock>>
+
+<!-- Live Data Display -->
+<h3>Corporation Overview</h3>
+<<if $PlayerCorporations !== undefined>>
+    <<for _i = 0; _i < $PlayerCorporations.length; _i++>> <!-- Iterate over each corporation -->
+        <<set _currentCorp to $PlayerCorporations[_i]>>
+        <<if _currentCorp.CorpIsActive>> <!-- Check if the corporation is active -->
+            Corporation: _currentCorp.CorpName
+            Credits: _currentCorp.CorpCredits
+            Debt: _currentCorp.CorpDebt
+            Location: _currentCorp.CorpLocation
+            Coherency: _currentCorp.CorpCoherency
+            <<for _j = 0; _j < _currentCorp.CorpDivisions.length; _j++>> <!-- Iterate over each division -->
+            <<set _currentDivision to _currentCorp.CorpDivisions[_j]>>
+            Division: _currentDivision.DivisionName
+            Type: _currentDivision.DivisionType
+            Level: _currentDivision.DivisionLevel
+            Required License: _currentDivision.DivisionRequiredLicense
+            Coherency: _currentDivision.DivisionCoherency
+            <</for>>
+        <</if>>
+    <</for>>
+<<else>>
+    No Data yet.
+<</if>>
+
+<!-- Display Created Systems -->
+<h3>Systems Overview</h3>
+<<if $Systems !== undefined>>
+    <<for _i = 0; _i < $Systems.length; _i++>>
+    <p>
+        <strong>System Name:</strong> <<print $Systems[_i].SystemName>><br>
+        <strong>Type:</strong> <<print $Systems[_i].SystemType>><br>
+        <strong>Faction Owner:</strong> <<print $Systems[_i].FactionOwner>><br>
+        <strong>Development Level:</strong> <<print $Systems[_i].DevelopmentLevel>><br>
+        <strong>Danger Level:</strong> <<print $Systems[_i].DangerLevel>><br>
+        <strong>Economy Level:</strong> <<print $Systems[_i].EconomyLevel>><br>
+        <strong>Population:</strong> <<print $Systems[_i].Population>><br>
+        <strong>Sun Type:</strong> <<print $Systems[_i].SunType>><br>
+        <strong>Sun Output:</strong> <<print $Systems[_i].SunOutput>><br>
+    </p>
+    <</for>>
+<<else>>
+    No System Data yet.
+<</if>>
+
+<</liveblock>>
+
+<!-- Part 1: Corporation Selection -->
+<<liveblock>>
+    <<set _hasCorporations to $PlayerCorporations !== undefined && $PlayerCorporations.length > 0>>
+    <<set _selectedCorpIndex to _selectedCorpIndex ?? 0>> <!-- Initialize or maintain the selected index -->
+
+    <<if _hasCorporations>>
+        /* Prepare options for corporation selection */
+        <<set _corpOptions = {}>> <!-- Initialize an empty object for the options -->
+        <<for _i = 0; _i < $PlayerCorporations.length; _i++>>
+            <<set _corpOptions[$PlayerCorporations[_i].CorpName] = _i>> <!-- Map corp names to their indices -->
+        <</for>>
+
+        /* Listbox to select a corporation */
+        Corporation: 
+        <<listbox "_selectedCorpIndex" autoselect>>
+            <<optionsfrom _corpOptions>>
+        <</listbox>>
+
+        /* Debugging: Print selected corporation */
+        <<set _selectedCorp to $PlayerCorporations[_selectedCorpIndex]>>
+        <<run console.log("Selected Corporation: " + _selectedCorp.CorpName)>>
+    <<else>>
+        <p>No corporations available. Please add a corporation first.</p>
+    <</if>>
+
+<!-- Part 2: Division Selection -->
+
+    <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
+        <<set _selectedDivisionIndex to _selectedDivisionIndex ?? 0>> <!-- Initialize or maintain the selected division index -->
+        <<set _divisionOptions = {}>> <!-- Initialize an empty object for the division options -->
+
+        /* Prepare options for division selection */
+        <<for _i = 0; _i < $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length; _i++>>
+            <<set _divisionName to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_i].DivisionName>>
+            <<set _divisionOptions[_divisionName] = _i>> <!-- Map division names to their indices -->
+        <</for>>
+
+        /* Listbox to select a division from the chosen corporation */
+        Division: 
+        <<listbox "_selectedDivisionIndex" autoselect>>
+            <<optionsfrom _divisionOptions>>
+        <</listbox>>
+
+        /* Debugging: Print selected division */
+        <<set _selectedDivision to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex]>>
+        <<run console.log("Selected Division: " + _selectedDivision.DivisionName)>>
+    <<elseif _hasCorporations>>
+        <p>The selected corporation has no divisions. Please add a division first.</p>
+    <<else>>
+        <p>No corporations available. Please add a corporation first.</p>
+    <</if>>
+
+    <!-- Part 3: Recipe List Based on Division Type and Category -->
+    <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
+        /* Get the selected corporation's division type */
+        <<set _selectedDivisionType to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex].DivisionType>>
+        <<run console.log("Switch check for _selectedDivisionType: " + _selectedDivisionType)>>
+
+
+        /* Setting default recipe category based on division type for demonstration */
+        <<switch _selectedDivisionType>>
+            <<case "Resource Extraction">>
+                <<set $currentRecipeCategory to "Orbital Harvesting">> <!-- Example default category -->
+            <<case "Industrial">>
+                <<set $currentRecipeCategory to "Industrial Production">> <!-- Example default category -->
+            <<case "Services">>
+                <<set $currentRecipeCategory to "Service Type A">> <!-- Example default category -->
+            <<default>>
+                <<set $currentRecipeCategory to "General">> <!-- General default category -->
+        <</switch>>
+        <<run console.log("Switch check for $currentRecipeCategory: " + $currentRecipeCategory)>>
+
+        /* Update recipe list based on the selected corporation's division type and recipe category */
+        <<switch _selectedDivisionType>>
+            <<case "Resource Extraction">>
+                <<switch $currentRecipeCategory>>
+                    <<case "Orbital Harvesting">>
+                        <<set _recipeList to setup.OrbitalHarvestingRecipes>>
+                    <<case "Asteroid Prospecting">>
+                        <<set _recipeList to setup.AsteroidProspectingRecipes>>
+                    <<case "Celestial Body Extraction">>
+                        <<set _recipeList to setup.CelestialBodyExtractionRecipes>>
+                    <<default>>
+                        <<set _recipeList to []>> <!-- Default case for Resource Extraction -->
+                <</switch>>
+            <<case "Industrial">>
+                <<switch $currentRecipeCategory>>
+                    <<case "Industrial Production">>
+                        <<set _recipeList to setup.IndustrialProductionRecipes>>
+                    <<case "Heavy Industry Production">>
+                        <<set _recipeList to setup.HeavyIndustryProductionRecipes>>
+                    <<case "High Tech Industry Production">>
+                        <<set _recipeList to setup.HighTechIndustryProductionRecipes>>
+                    <<case "Military Industry Production">>
+                        <<set _recipeList to setup.MilitaryIndustryProductionRecipes>>
+                    <<case "Orbital Industry Production">>
+                        <<set _recipeList to setup.OrbitalIndustryProductionRecipes>>
+                    <<case "Recycling Industry Production">>
+                        <<set _recipeList to setup.RecyclingIndustryProductionRecipes>>
+                    <<default>>
+                        <<set _recipeList to []>> <!-- Default case for Industrial -->
+                <</switch>>
+            <<case "Services">>
+                <<set _recipeList to []>> <!-- No recipes for Services -->
+            <<default>>
+                <<set _recipeList to []>> <!-- Default case for other types -->
+        <</switch>>
+
+        /* Initialize the recipe index */
+        <<set _currentRecipeIndex to 0>>
+    <<else>>
+        <<set _recipeList to []>> <!-- Set to empty if no divisions are available -->
+<p>No recipes available for this division type.</p>
+<</if>>
+
+<!-- Part 4: Displaying Recipe and Navigation with Debugging -->
+
+    <<if _recipeList.length > 0>>
+        /* Display the current recipe */
+        <<set _currentRecipe to _recipeList[_currentRecipeIndex]>>
+        <<run console.log("Displaying Recipe: " + _currentRecipe.Name)>>
+        <p><strong>Current Recipe:</strong> <<print _currentRecipe.Name>></p>
+
+        /* Navigation buttons for recipes */
+        <<link "Previous Recipe">>
+            <<if _currentRecipeIndex > 0>>
+                <<set _currentRecipeIndex -= 1>>
+                <<run console.log("Previous Recipe Index: " + _currentRecipeIndex)>>
+                <<update>><<updatebar>>
+            <<else>>
+                <<run console.log("Already at the first recipe.")>>
+            <</if>>
+        <</link>>
+
+        <<link "Next Recipe">>
+            <<if _currentRecipeIndex < _recipeList.length - 1>>
+                <<set _currentRecipeIndex += 1>>
+                <<run console.log("Next Recipe Index: " + _currentRecipeIndex)>>
+                <<update>><<updatebar>>
+            <<else>>
+                <<run console.log("No more recipes to display.")>>
+            <</if>>
+        <</link>>
+    <<else>>
+        <<run console.log("No recipes available. Division Type: " + _selectedDivisionType + ", Recipe Category: " + $currentRecipeCategory)>>
+        <p>No recipes available for this division type.</p>
+    <</if>>
+
+
+
+
+
+
+<</liveblock>>

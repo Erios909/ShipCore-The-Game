@@ -1,415 +1,125 @@
 :: CreateCorporationWidget [widget nobr]
 <<widget "CreateCorporation">>
-  /* Parameters: Name, Credits, Debt, Location, Coherency */
-  <<set _corporation to clone(setup.CorporationTemplate)>>
-  <<set _corporation.CorpName to $args[0]>>
-  <<set _corporation.CorpCredits to $args[1]>>
-  <<set _corporation.CorpDebt to $args[2]>>
-  <<set _corporation.CorpLocation to $args[3]>>
-  <<set _corporation.CorpCoherency to $args[4]>>
+  /* Initialize $PlayerCorporations if it's not already an array */
+  <<if not Array.isArray($PlayerCorporations)>>
+    <<set $PlayerCorporations = []>>
+  <</if>>
 
-  /* Add the new corporation to the player's corporations array */
-  <<set $PlayerCorporations.push(_corporation)>>
+  /* Parameters: Name, Credits, Debt, Location, Coherency */
+  <<set _corporationName to $args[0]>>
+  <<set _corporationLocation to $args[3]>>
+
+  /* Check for duplicate corporation name or location */
+  <<set _isDuplicate = false>>
+  <<for _corp range $PlayerCorporations>>
+    <<if _corp.CorpName == _corporationName || _corp.CorpLocation == _corporationLocation>>
+      <<set _isDuplicate = true>>
+      <<break>>
+    <</if>>
+  <</for>>
+
+  <<if not _isDuplicate>>
+    <<set _corporation = clone(setup.CorporationTemplate)>>
+    <<set _corporation.CorpName to _corporationName>>
+    <<set _corporation.CorpCredits to $args[1]>>
+    <<set _corporation.CorpDebt to $args[2]>>
+    <<set _corporation.CorpLocation to _corporationLocation>>
+    <<set _corporation.CorpCoherency to $args[4]>>
+    <<set _corporation.CorpDivisions = []>>  <!-- Initialize CorpDivisions array within the corporation -->
+
+    /* Add the new corporation to the player's corporations array */
+    <<set $PlayerCorporations.push(_corporation)>>
+
+    /* Debugging: Log the new corporation */
+    <<run console.log("New corporation created:", _corporation)>>
+  <<else>>
+    /* Log error for duplicate corporation */
+    <<run console.log("Error: Corporation with name '" + _corporationName + "' or location '" + _corporationLocation + "' already exists.")>>
+  <</if>>
+
+  /* Debugging: Log the updated $PlayerCorporations array */
+  <<run console.log("$PlayerCorporations array after operation:", $PlayerCorporations)>>
 <</widget>>
+
+
 
 :: CreateDivisionWidget [widget nobr]
 <<widget "CreateDivision">>
   /* Parameters: CorporationIndex, DivisionName, DivisionType, DivisionLevel, RequiredLicense, Coherency */
-  <<set _division to clone(setup.ResourceExtractionTemplate)>>
-  <<set _division.DivisionName to $args[1]>>
-  <<set _division.DivisionType to $args[2]>>
-  <<set _division.DivisionLevel to $args[3]>>
-  <<set _division.DivisionRequiredLicense to $args[4]>>
-  <<set _division.DivisionCoherency to $args[5]>>
+  <<set _corpIndex to $args[0]>>
+  <<set _divisionName to $args[1]>>
+  <<set _divisionType to $args[2]>>
+  <<set _divisionLevel to $args[3]>>
+  <<set _divisionRequiredLicense to $args[4]>>
+  <<set _divisionCoherency to $args[5]>>
 
-  /* Validate CorporationIndex and add the division to the corporation's divisions array */
-  <<if $args[0] gte 0 && $args[0] lt $PlayerCorporations.length>>
-    <<set $PlayerCorporations[$args[0]].CorpDivisions.push(_division)>>
-    <<run console.log("Division '" + _division.DivisionName + "' has been successfully created.")>>
+  /* Validate CorporationIndex */
+  <<if _corpIndex gte 0 && _corpIndex lt $PlayerCorporations.length>>
+    /* Check for duplicate division name and type within the corporation */
+    <<set _isDuplicateDivision = false>>
+    <<for _div range $PlayerCorporations[_corpIndex].CorpDivisions>>
+      <<if _div.DivisionName == _divisionName && _div.DivisionType == _divisionType>>
+        <<set _isDuplicateDivision = true>>
+        <<break>>
+      <</if>>
+    <</for>>
+
+    <<if not _isDuplicateDivision>>
+      /* Attempt to clone the division template */
+      <<set _division = clone(setup.DivisionTemplate)>>
+      <<if _division>> <!-- Check if _division is successfully cloned -->
+        <<set _division.DivisionName to _divisionName>>
+        <<set _division.DivisionType to _divisionType>>
+        <<set _division.DivisionLevel to _divisionLevel>>
+        <<set _division.DivisionRequiredLicense to _divisionRequiredLicense>>
+        <<set _division.DivisionCoherency to _divisionCoherency>>
+        <<set $PlayerCorporations[_corpIndex].CorpDivisions.push(_division)>>
+        <<run console.log("Division created:", _division)>>
+      <<else>>
+        <<run console.log("Error: Failed to clone division template.")>>
+      <</if>>
+    <<else>>
+      <<run console.log("Error: Duplicate division name and type detected.")>>
+    <</if>>
   <<else>>
-    <<run console.log("Error: Invalid CorporationIndex. Division creation failed.")>>
+    <<run console.log("Error: Invalid CorporationIndex.")>>
   <</if>>
 <</widget>>
 
-:: CorporationDefinitions [widget templates nobr]
-
-<<set setup.SystemTemplate = {
-  SystemName: "",
-  SystemType: "", // e.g., "Frontier", "Core", "Void"
-  FactionOwner: "",
-  PlayerCorpActive: false,
-  DevelopmentLevel: 0, // Scale to represent development 1-500
-  DangerLevel: 500, // Scale to represent danger or security 1-1000
-  EconomyLevel: 500, // Scale to represent economic strength 1-1000
-  Population: 0,
-  SunType: "", // e.g., "Red Giant", "White Dwarf"
-  SunOutput: "", // e.g., "High", "Medium", "Low"
-  SpecialFeatures: [], // Array of special features or attributes
-  SystemEconomy: {
-    BaseResourcePrices: {}, // Base prices for resources
-    PriceModifiers: {}, // Modifiers based on local factors
-    TradeRoutes: [], // Potential trade routes and their impact
-    ResourceAbundance: {}, // Resource availability levels
-  },
-  SystemSecurity: {
-    PatrolFrequency: 50, // Scale to represent frequency 1-100
-    SecurityForces: [], // Array of security forces
-    PiracyRisk: 50, // Scale to represent risk 1-100
-  },
-  SystemPolitics: {
-    PlayerRelations: 50, // Local player relations
-    PoliticalStability: 50, // Local relations with Faction Owner 1-100
-  },
-  SystemEnvironment: {
-    PlanetaryBodies: [],
-    NotableLocations: [],
-    EnvironmentalHazards: []
-  }
-}>>
-
-/* this needs shoved in storyinit before the setup.variables will become available, and they won't work with old savegames */
-
-/* Division Types and Licenses */
-<<set setup.DivisionTypes to ["Resource Extraction", "Services", "Industrial"]>>
-<<set setup.CorpLicenseTypes to ["OrbitalHarvesting", "AsteroidProspecting", "CelestialBodyExtraction", "NAI-Tech"]>>
-
-/* Corporation Template */
-<<set setup.CorporationTemplate = {
-  CorpName: "",
-  CorpIsActive: true,
-  CorpFinance, {credits: 0, debt: 0},
-  CorpCredits: 0,
-  CorpDebt: 0,
-  CorpInventory: [],
-  CorpProcessingSummary: {
-    NewCredits: 0,
-    NewDebt: 0,
-    InventoryChanges: [],
-    EventLog: []
-  },
-  CorpLocation: "",
-  CorpLicenses: [],
-  CorpDivisions: [],
-  CorpCoherency: 0,
-  CorpControllingNPC: []
-}>>
-
-/* Division Template */
-<<set setup.DivisionTemplate = {
-  DivisionName: "",
-  DivisionIsActive: true,
-  DivisionAutoSellActive: false,
-  DivisionType: "",
-  DivisionSubdivisions: [],
-  DivisionFinance: {credits: 0, debt: 0},
-  DivisionInventory: [],
-  DivisionEmployees: [],
-  DivisionControllingNPC: [],
-  DivisionCoherency: 0,
-  DivisionRequiredLicense: [],
-  DivisionLevel: 1,
-  DivisionEquipmentSlots: 1,
-  DivisionRecipes: [],
-  DivisionInstalledUpgrades: [],
-  DivisionLog: {
-    EventLog: [],
-    InventoryChanges: [],
-    FinanceChanges: []
-  },
-  DivisionBusinessStats: {
-    RevenueBonus: 1,
-    Efficiency: 1,
-    BrandQuality: 1,
-    InputConservation: 1,
-    OutputEnhancement: 1,
-    EmployeeProductivity: 1,
-    MarketInfluence: 1,
-    Corruption: 1,
-    Security: 1
-    ProtectedStorage: 0,
-  }
-}>>
-
-/* Corporation Resource Base Prices Sheet */
-<<set setup.CorpResources to {
-  "Water": { baseValue: 200 },
-  "Raw Ore": { baseValue: 200 },
-  "Scrap": { baseValue: 200 },
-  "Parts": { baseValue: 1000 },
-  "Hydrogen": { baseValue: 200 },
-  "Helium-3": { baseValue: 200 },
-  "Minerals": { baseValue: 2000 },
-  "Refined Metals": { baseValue: 2000 },
-  "Processed Food": { baseValue: 2000 },
-  "Consumer Goods": { baseValue: 5000 },
-  "Luxury Goods": { baseValue: 25000 },
-  "Heavy Mining Equipment": { baseValue: 25000 },
-  "Fuel-Rods": { baseValue: 10000 },
-  "Antimatter": { baseValue: 10000 },
-  "Starship Parts": { baseValue: 35000 },
-  "Artifacts": { baseValue: 50000 },
-  "NAI-Tech": { baseValue: 15000000 },
-  "Computronics": { baseValue: 1000000 },
-  "Military Goods": { baseValue: 75000 },
-  "Military Parts": { baseValue: 75000 },
-  "Personal Weapons": { baseValue: 75000 },
-  "Power-Armor Suits": { baseValue: 500000 },
-  "Starship Weapons": { baseValue: 500000 },
-  "Starship Equipment": { baseValue: 500000 },
-  "Starship Hull Parts": { baseValue: 500000 },
-  "Station Parts": { baseValue: 1000000 },
-  "Orbital Infrastructure Parts": { baseValue: 1000000 },
-  "Fusion Reactor Parts": { baseValue: 1000000 },
-  "Cyberware": { baseValue: 150000 },
-  "Industrial Components": { baseValue: 150000 }
-}>>
-
-/* Extraction Recipes List */
-<<set setup.OrbitalHarvestingRecipes to [
-    {
-        Name: "Hydrogen Collection",
-        Input: {ItemName: "Fuel Rods", Quantity: 2},
-        Output: {ItemName: "Hydrogen", Quantity: 250}
-    },
-    {
-        Name: "Helium-3 Collection",
-        Input: {ItemName: "Fuel Rods", Quantity: 1},
-        Output: {ItemName: "Helium-3", Quantity: 150}
-    },
-    {
-        Name: "Water Synthesis",
-        Input: {ItemName: "Fuel Rods", Quantity: 1},
-        Output: {ItemName: "Water", Quantity: 100}
-    },
-    {
-        Name: "Antimatter Synthesis",
-        Input: {ItemName: "Fuel Rods", Quantity: 8},
-        Output: {ItemName: "Antimatter", Quantity: 10}
-    }
-]>>
-
-<<set setup.AsteroidProspectingRecipes to [
-  {
-    Name: "Ore Mining",
-    Input: {ItemName: "Fuel Rods", Quantity: 1},
-    Output: {ItemName: "Raw Ore", Quantity: 75}
-  },
-  {
-    Name: "Ice Mining",
-    Input: {ItemName: "Fuel Rods", Quantity: 1},
-    Output: {ItemName: "Water", Quantity: 60}
-  }
-]>>
-
-<<set setup.CelestialBodyExtractionRecipes to [
-  {
-    Name: "Surface Ore Mining",
-    Input: {ItemName: "Fuel Rods", Quantity: 2},
-    Output: {ItemName: "Raw Ore", Quantity: 200}
-  },
-  {
-    Name: "Water Extraction",
-    Input: {ItemName: "Fuel Rods", Quantity: 2},
-    Output: {ItemName: "Water", Quantity: 80}
-  },
-  {
-    Name: "Hydrogen Extraction",
-    Input: {ItemName: "Fuel Rods", Quantity: 1},
-    Output: {ItemName: "Hydrogen", Quantity: 40}
-  },
-  {
-    Name: "Mineral Harvesting",
-    Input: {ItemName: "Fuel Rods", Quantity: 2},
-    Output: {ItemName: "Minerals", Quantity: 20}
-  }
-]>>
-
-<<set setup.IndustrialProductionRecipes to [
-  {
-    name: "Refined Metal Production",
-    inputs: [{itemName: "Raw Ore", quantity: 20}],
-    outputs: [{itemName: "Refined Metals", quantity: 10}],
-    badge: "None"
-  },
-  {
-    name: "Fuel Rod Production",
-    inputs: [{itemName: "Helium-3", quantity: 12}, {itemName: "Antimatter", quantity: 2}],
-    outputs: [{itemName: "Fuel-Rods", quantity: 4}],
-    badge: "None"
-  },
-  {
-    name: "Processed Food Production",
-    inputs: [{itemName: "Water", quantity: 6}, {itemName: "Minerals", quantity: 4}],
-    outputs: [{itemName: "Processed Food", quantity: 15}],
-    badge: "None"
-  },
-  {
-    name: "Basic Consumer Goods Production",
-    inputs: [{itemName: "Refined Metals", quantity: 2}, {itemName: "Water", quantity: 10}, {itemName: "Parts", quantity: 5}],
-    outputs: [{itemName: "Consumer Goods", quantity: 5}],
-    badge: "None"
-  },
-  {
-    name: "Luxury Goods Production",
-    inputs: [{itemName: "Consumer Goods", quantity: 3}, {itemName: "Refined Metals", quantity: 1}],
-    outputs: [{itemName: "Luxury Goods", quantity: 1}],
-    badge: "None"
-  },
-  {
-    name: "Parts Production",
-    inputs: [{itemName: "Refined Metals", quantity: 5}],
-    outputs: [{itemName: "Parts", quantity: 5}],
-    badge: "None"
-  }
-]>>/* ... Add any additional recipes with no badge */
-
-<<set setup.HeavyIndustryProductionRecipes to [
-  {
-    name: "Heavy Equipment Manufacturing",
-    inputs: [{itemName: "Refined Metals", quantity: 11}, {itemName: "Fuel-Rods", quantity: 4}, {itemName: "Parts", quantity: 11}],
-    outputs: [{itemName: "Heavy Mining Equipment", quantity: 4}],
-    badge: "Heavy Industry"
-  },
-  {
-    name: "Starship Part Assembly",
-    inputs: [{itemName: "Refined Metals", quantity: 9}, {itemName: "Cyberware", quantity: 1}],
-    outputs: [{itemName: "Starship Parts", quantity: 5}],
-    badge: "Heavy Industry"
-  },
-  {
-    name: "Starship Equipment Production",
-    inputs: [{itemName: "Starship Parts", quantity: 4}, {itemName: "Cyberware", quantity: 2}],
-    outputs: [{itemName: "Starship Equipment", quantity: 1}],
-    badge: "Heavy Industry"
-  },
-  {
-    name: "Starship Hull Fabrication",
-    inputs: [{itemName: "Refined Metals", quantity: 92}, {itemName: "Industrial Components", quantity: 15}],
-    outputs: [{itemName: "Starship Hull Parts", quantity: 5}],
-    badge: "Heavy Industry"
-  },
-  {
-    name: "Industrial Component Manufacturing",
-    inputs: [{itemName: "Refined Metals", quantity: 25}, {itemName: "Fuel-Rods", quantity: 8}],
-    outputs: [{itemName: "Industrial Components", quantity: 1}],
-    badge: "Heavy Industry"
-  }
-]>>/* ... Add any additional recipes with the badge "Heavy Industry" */
-
-<<set setup.HighTechIndustryProductionRecipes to [
-  {
-    name: "Antimatter Synthesis",
-    inputs: [{itemName: "Hydrogen", quantity: 55}, {itemName: "Helium-3", quantity: 55}],
-    outputs: [{itemName: "Antimatter", quantity: 4}],
-    badge: "High-Tech Industry"
-  },
-  {
-    name: "Cyberware Production",
-    inputs: [{itemName: "Minerals", quantity: 25}, {itemName: "Refined Metals", quantity: 25}, {itemName: "Parts", quantity: 25}],
-    outputs: [{itemName: "Cyberware", quantity: 1}],
-    badge: "High-Tech Industry"
-  },
-  {
-    name: "NAI-Tech Fabrication",
-    inputs: [{itemName: "Refined Metals", quantity: 7}, {itemName: "Computronics", quantity: 14}, {itemName: "Parts", quantity: 255}, {itemName: "Refined Metals", quantity: 1000}],
-    outputs: [{itemName: "NAI-Tech", quantity: 1}],
-    badge: "High-Tech Industry"
-  },
-  {
-    name: "Computronics Circuitry",
-    inputs: [{itemName: "Refined Metals", quantity: 244}, {itemName: "Minerals", quantity: 244}],
-    outputs: [{itemName: "Computronics", quantity: 1}],
-    badge: "High-Tech Industry"
-  },
-  {
-    name: "Fusion Reactor Part Manufacturing",
-    inputs: [{itemName: "Fuel-Rods", quantity: 78}, {itemName: "Heavy Mining Equipment", quantity: 8}],
-    outputs: [{itemName: "Fusion Reactor Parts", quantity: 1}],
-    badge: "High-Tech Industry"
-  }
-]>>/* ... Add any additional recipes with the badge "High-Tech Ind" */
-
-<<set setup.MilitaryIndustryProductionRecipes to [
-  {
-    name: "Military Goods Manufacturing",
-    inputs: [{itemName: "Refined Metals", quantity: 66}, {itemName: "Fuel-Rods", quantity: 22}],
-    outputs: [{itemName: "Military Goods", quantity: 5}],
-    badge: "Military Industry"
-  },
-  {
-    name: "Military Parts Production",
-    inputs: [{itemName: "Military Goods", quantity: 5}, {itemName: "Cyberware", quantity: 7}, {itemName: "Refined Metals", quantity: 10}],
-    outputs: [{itemName: "Military Parts", quantity: 20}],
-    badge: "Military Industry"
-  },
-  {
-    name: "Personal Weapons Fabrication",
-    inputs: [{itemName: "Military Parts", quantity: 9}, {itemName: "Refined Metals", quantity: 33}],
-    outputs: [{itemName: "Personal Weapons", quantity: 10}],
-    badge: "Military Industry"
-  },
-  {
-    name: "Power-Armor Suit Assembly",
-    inputs: [{itemName: "Military Goods", quantity: 45}, {itemName: "Cyberware", quantity: 4}, {itemName: "Refined Metals", quantity: 7}],
-    outputs: [{itemName: "Power-Armor Suits", quantity: 8}],
-    badge: "Military Industry"
-  },
-  {
-    name: "Starship Weapons Manufacturing",
-    inputs: [{itemName: "Starship Parts", quantity: 7}, {itemName: "Military Parts", quantity: 3}],
-    outputs: [{itemName: "Starship Weapons", quantity: 1}],
-    badge: "Military Industry"
-  }
-]>>/* ... Add any additional recipes with the badge "Military Industry" */
-
-<<set setup.OrbitalIndustryProductionRecipes to [
-  {
-    name: "Space Station Parts Production",
-    inputs: [{itemName: "Starship Hull Parts", quantity: 7}, {itemName: "Orbital Infrastructure Parts", quantity: 10}, {itemName: "Refined Metals", quantity: 300}],
-    outputs: [{itemName: "Station Parts", quantity: 14}],
-    badge: "Orbital Industry"
-  },
-  {
-    name: "Orbital Infrastructure Assembly",
-    inputs: [{itemName: "Starship Equipment", quantity: 10}, {itemName: "Fusion Reactor Parts", quantity: 1}, {itemName: "Refined Metals", quantity: 10}],
-    outputs: [{itemName: "Orbital Infrastructure Parts", quantity: 6}],
-    badge: "Orbital Industry"
-  }
-]>>/* ... Add any additional recipes with the badge "Orbital Industry" */
-
-<<set setup.RecyclingIndustryProductionRecipes to [
-  {
-    name: "Scrap Processing",
-    inputs: [{itemName: "Scrap", quantity: 5}],
-    outputs: [{itemName: "Refined Metals", quantity: 10}],
-    badge: "Recycling"
-  }
-]>>/*  ... Add any additional recipes with the badge "Recycling" */
 
 
 
 :: CorporateProcessing [widget nobr]
 <<widget "ConsumeInputWithChance">>
   <<set _input to $args[0]>>
+  <<run console.log("ConsumeInputWithChance: Input:", _input)>>
   <<set _chance to $args[1]>>
+  <<run console.log("ConsumeInputWithChance: Chance:", _chance)>>
   <<set _divisionInventory to $args[2]>>
+  <<run console.log("ConsumeInputWithChance: Division Inventory:", _divisionInventory)>>
   <<set _corpInventory to $args[3]>>
+  <<run console.log("ConsumeInputWithChance: Corporation Inventory:", _corpInventory)>>
   <<set _resourceName to _input.name>>
   <<set _quantityNeeded to _input.quantity>>
+  <<run console.log("ConsumeInputWithChance: Resource Name:", _resourceName, "Quantity Needed:", _quantityNeeded)>>
 
   <<for _i = 0; _i < _quantityNeeded; _i++>> <!-- Loop through each required unit of the resource -->
     <<if Math.random() * 100 > _chance>> <!-- Check for resource conservation -->
+      <<run console.log("ConsumeInputWithChance: Loop Iteration", _i, "Random Check Passed")>>
       /* Try to consume resource from division inventory */
       <<set _resourceIndex = _divisionInventory.findIndex(item => item.name === _resourceName && item.quantity > 0)>>
       <<if _resourceIndex gte 0>> <!-- Resource found in division inventory -->
         <<set _divisionInventory[_resourceIndex].quantity -= 1>>
+        <<run console.log("ConsumeInputWithChance: Consumed from Division Inventory", _divisionInventory)>>
       <<else>>
         /* Try to consume resource from corporation inventory */
         <<set _resourceIndex = _corpInventory.findIndex(item => item.name === _resourceName && item.quantity > 0)>>
         <<if _resourceIndex gte 0>> <!-- Resource found in corporation inventory -->
           <<set _corpInventory[_resourceIndex].quantity -= 1>>
+          <<run console.log("ConsumeInputWithChance: Consumed from Corporation Inventory", _corpInventory)>>
         <<else>> <!-- Resource not available -->
           <<set _canProcessRecipe = false>>
+          <<run console.log("ConsumeInputWithChance: Resource not available")>>
           <<break>>
         <</if>>
       <</if>>
@@ -419,14 +129,19 @@
 
 
 
+
 <<widget "ProduceOutputWithChance">>
   <<set _output to $args[0]>>
+  <<run console.log("ProduceOutputWithChance: Output:", _output)>>
   <<set _chance to $args[1]>>
+  <<run console.log("ProduceOutputWithChance: Chance:", _chance)>>
   <<set _divisionInventory to $args[2]>>
+  <<run console.log("ProduceOutputWithChance: Division Inventory before:", _divisionInventory)>>
   <<set _resourceName to _output.name>>
   <<set _baseQuantity to _output.quantity>>
   <<set _extraQuantity to (Math.random() * 100 <= _chance) ? 1 : 0>> <!-- Chance for output enhancement -->
   <<set _totalQuantity to _baseQuantity + _extraQuantity>>
+  <<run console.log("ProduceOutputWithChance: Resource Name:", _resourceName, "Base Quantity:", _baseQuantity, "Extra Quantity:", _extraQuantity)>>
 
   /* Add the total output quantity to the division's inventory */
   <<set _resourceFound = false>>
@@ -434,34 +149,89 @@
     <<if _item.name is _resourceName>>
       <<set _item.quantity += _totalQuantity>>
       <<set _resourceFound = true>>
+      <<run console.log("ProduceOutputWithChance: Added to Inventory", _item)>>
       <<break>>
     <</if>>
   <</for>>
   /* If the resource is not already in the inventory, add it */
   <<if not _resourceFound>>
     <<set _divisionInventory.push({name: _resourceName, quantity: _totalQuantity})>>
+    <<run console.log("ProduceOutputWithChance: New Resource Added", _resourceName, _totalQuantity)>>
   <</if>>
 <</widget>>
 
 
+
 <<widget "ManageOutputs">>
-  <<set _currentDivision to $args[0]>>
+  <<set _currentDivision to $args[0]>
+  <<run console.log("ManageOutputs: Current Division:", _currentDivision)>>
   <<set _currentCorp to $args[1]>>
+  <<run console.log("ManageOutputs: Current Corporation:", _currentCorp)>>
   <<set _autoSellEnabled to _currentDivision.DivisionAutoSellActive>>
   <<set _outputs to _currentDivision.ProcessedOutputs>>
+  <<run console.log("ManageOutputs: AutoSell Enabled:", _autoSellEnabled, "Outputs:", _outputs)>>
 
   <<for _output in _outputs>>
     <<set _outputName to _output.name>>
     <<set _outputQuantity to _output.quantity>>
+    <<run console.log("ManageOutputs: Processing Output", _outputName, "Quantity:", _outputQuantity)>>
 
     <<if _autoSellEnabled>>
+      <<run console.log("ManageOutputs: AutoSell Enabled for", _outputName)>>
       <<ProcessDivisionSale _outputName _outputQuantity _currentCorp>>
     <<else>>
+      <<run console.log("ManageOutputs: Adding Resource to Inventory", _outputName, "Quantity:", _outputQuantity)>>
       <<run AddResource(_outputName, _outputQuantity, _currentCorp.CorpInventory)>>
       <<run LogResourceStored(_outputName, _outputQuantity)>>
     <</if>>
   <</for>>
 <</widget>>
+
+<<widget "ProcessDivisionSale">>
+  <<set _resourceName to $args[0]>>
+  <<set _quantity to $args[1]>>
+  <<set _corp to $args[2]>>
+  <<run console.log("ProcessDivisionSale: Resource", _resourceName, "Quantity:", _quantity, "Corp:", _corp)>>
+  <<set _systemEconomy to ...>> <!-- Retrieve the system economy object based on CorpLocation -->
+  <<run console.log("ProcessDivisionSale: System Economy", _systemEconomy)>>
+  
+  /* Calculate price based on base value and system's price modifier */
+  <<set _baseValue to setup.CorpResources[_resourceName].baseValue>>
+  <<set _priceModifier to _systemEconomy.ResourcePriceModifiers[_resourceName]>>
+  <<set _sellingPrice to _baseValue * _priceModifier * _quantity>>
+  <<run console.log("ProcessDivisionSale: Selling Price", _sellingPrice)>>
+
+  /* Adjust corporation's finances */
+  <<set _corp.CorpFinance.credits += _sellingPrice>>
+  <<run LogSale _resourceName _quantity _sellingPrice>>
+<</widget>>
+
+<<widget "LogEvent">>
+  <<set _division to $args[0]>>
+  <<set _eventDescription to $args[1]>>
+  <<run console.log("LogEvent: Division", _division, "Event Description:", _eventDescription)>>
+
+  <<run _division.DivisionLog.EventLog.push({
+    timestamp: new Date($gameDate.getTime()),
+    description: _eventDescription
+  })>>
+<</widget>>
+
+<<widget "LogInventoryChange">>
+  <<set _division to $args[0]>>
+  <<set _itemName to $args[1]>>
+  <<set _changeQuantity to $args[2]>>
+  <<set _changeType to $args[3]>>
+  <<run console.log("LogInventoryChange: Division", _division, "Item Name:", _itemName, "Change Quantity:", _changeQuantity, "Change Type:", _changeType)>>
+
+  <<run _division.DivisionLog.InventoryChanges.push({
+    timestamp: new Date($gameDate.getTime()),
+    item: _itemName,
+    quantity: _changeQuantity,
+    type: _changeType // 'add' or 'remove'
+  })>>
+<</widget>>
+
 
 <<widget "ProcessDivisionSale">>
   <<set _resourceName to $args[0]>>
@@ -507,84 +277,148 @@
 
 
 
+:: ProcessCorporationCycles [widget nobr]
 <<widget "ProcessCorporationCycles">>
+  <<run console.log("Starting ProcessCorporationCycles widget.")>>
+
+  /* Ensure $CorporationPlayerBusinessLastTime is initialized based on the game's date system */
+  <<if typeof $CorporationPlayerBusinessLastTime === 'undefined' || !$CorporationPlayerBusinessLastTime>>
+    <<set $CorporationPlayerBusinessLastTime = new Date($gameDate.getTime())>> <!-- Initialize based on the current game date -->
+    <<run console.log("Initializing $CorporationPlayerBusinessLastTime to game date.")>>
+  <</if>>
+
+  <<run console.log("Current game date:", $gameDate)>>
+
   /* Initialize current time based on the game's date */
   <<set _currentTime to new Date($gameDate.getTime())>>
+  <<run console.log("Current processing time:", _currentTime)>>
 
   /* Retrieve the last processing time for corporations */
   <<set _lastCorpTime to new Date($CorporationPlayerBusinessLastTime.getTime())>>
+  <<run console.log("Last corporation processing time:", _lastCorpTime)>>
 
   /* Calculate the time passed since the last processing */
   <<set _millisecondsPassed to _currentTime.getTime() - _lastCorpTime.getTime()>>
   <<set _daysPassed to Math.floor(_millisecondsPassed / (24 * 60 * 60 * 1000))>> <!-- Convert milliseconds to days -->
+  <<run console.log("Days passed since last processing:", _daysPassed)>>
 
   /* Check if at least one day has passed to proceed with processing */
   <<if _daysPassed >= 1>>
+    <<run console.log("Processing corporation cycles for", _daysPassed, "days.")>>
     /* Loop through each day that has passed */
     <<for _day = 0; _day < _daysPassed; _day++>>
+      <<run console.log("Processing day", _day + 1, "of", _daysPassed)>> 
 
       /* Iterate over each corporation */
       <<for _i = 0; _i < $PlayerCorporations.length; _i++>>
         <<set _currentCorp to $PlayerCorporations[_i]>>
+        <<run console.log("Processing corporation:", _currentCorp.CorpName)>> 
 
         /* Check the state of the corporation before processing */
         <<if _currentCorp.CorpIsActive>> <!-- Check if the corporation is active -->
+          <<run console.log("Corporation is active. Processing divisions.")>>
 
           /* Iterate over each division of the current corporation */
           <<for _j = 0; _j < _currentCorp.CorpDivisions.length; _j++>>
             <<set _currentDivision to _currentCorp.CorpDivisions[_j]>>
             <<set _stats to _currentDivision.DivisionBusinessStats>>
+            <<run console.log("Processing division:", _currentDivision.DivisionName)>>
 
             /* Check if the division has recipes and is in an active state */
             <<if _currentDivision.DivisionIsActive and _currentDivision.DivisionRecipes.length > 0>>
+              <<run console.log("Division is active and has recipes. Processing recipes.")>>
 
               /* Process each recipe in the division */
               <<for _recipe in _currentDivision.DivisionRecipes>>
                 <<set _canProcessRecipe to true>>
                 <<set _requiredInputs to _recipe.Inputs>>
                 <<set _producedOutputs to _recipe.Outputs>>
-
+                <<run console.log("Processing recipe:", _recipe.Name)>>
                 /* Check and consume inputs with a chance for conservation */
                 <<for _input in _requiredInputs>>
                   <<set _inputConservationChance to (_stats.InputConservation - 1) * 100>>
                   <<ConsumeInputWithChance _input _inputConservationChance _currentDivision.DivisionInventory _currentCorp.CorpInventory>>
                   <<if not _canProcessRecipe>>
                     <<LogEvent _currentDivision "Insufficient resources for recipe: " + _recipe.Name>>
+                    <<run console.log("Insufficient resources for recipe:", _recipe.Name, "on day", _day + 1)>>
                     <<break>> <!-- Exit if input is not available -->
                   <</if>>
                 <</for>>
 
-                /* Produce outputs with a chance for enhancement */
-                <<if _canProcessRecipe>>
-                  <<for _output in _producedOutputs>>
-                    <<set _outputEnhancementChance to (_stats.OutputEnhancement - 1) * 100>>
-                    <<ProduceOutputWithChance _output _outputEnhancementChance _currentDivision.DivisionInventory>>
-                  <</for>>
+            /* Produce outputs with a chance for enhancement */
+            <<if _canProcessRecipe>>
+              <<run console.log("Sufficient resources available. Producing outputs for recipe:", _recipe.Name)>>
+              <<for _output in _producedOutputs>>
+                <<set _outputEnhancementChance to (_stats.OutputEnhancement - 1) * 100>>
+                <<ProduceOutputWithChance _output _outputEnhancementChance _currentDivision.DivisionInventory>>
+              <</for>>
 
-                  /* Auto-sell or store the outputs based on the division's configuration */
-                  <<ManageOutputs _currentDivision _currentCorp>>
+              /* Auto-sell or store the outputs based on the division's configuration */
+              <<ManageOutputs _currentDivision _currentCorp>>
 
-                <<else>>
-                  /* Log a message if the recipe cannot be processed due to insufficient resources */
-                  <<run console.log("Insufficient resources for recipe: " + _recipe.Name + " on day " + (_day + 1))>>
-                <</if>>
-              <</for>> <!-- End of recipe processing loop -->
-            <</if>> <!-- End check for division having recipes and being active -->
+            <<else>>
+              /* Log a message if the recipe cannot be processed due to insufficient resources */
+              <<run console.log("Skipping recipe due to insufficient resources:", _recipe.Name, "on day", _day + 1)>>
+            <</if>>
+          <</for>> <!-- End of recipe processing loop -->
+        <<else>>
+          <<run console.log("Division inactive or no recipes available:", _currentDivision.DivisionName)>>
+        <</if>> <!-- End check for division having recipes and being active -->
 
-          <</for>> <!-- End of division processing loop -->
-        <</if>> <!-- End check for corporation being active -->
+      <</for>> <!-- End of division processing loop -->
+    <<else>>
+      <<run console.log("Corporation is inactive. Skipping:", _currentCorp.CorpName)>>
+    <</if>> <!-- End check for corporation being active -->
 
-      <</for>> <!-- End of corporation processing loop -->
-    <</for>> <!-- End of daily processing loop -->
+  <</for>> <!-- End of corporation processing loop -->
+<</for>> <!-- End of daily processing loop -->
 
-    /* Update the last processing time to the current time */
-    <<set $CorporationPlayerBusinessLastTime to new Date(_currentTime.getTime())>>
-
-  <<else>>
-    /* Log if no processing is done due to insufficient time passage */
-    <<run console.log("Less than a day has passed. Skipping corporation cycle processing.")>>
-  <</if>>
+/* Update the last processing time to the current time */
+<<set $CorporationPlayerBusinessLastTime to new Date(_currentTime.getTime())>>
+<<run console.log("Updated last processing time to:", $CorporationPlayerBusinessLastTime)>>
+<<else>>
+/* Log if no processing is done due to insufficient time passage */
+<<run console.log("Less than a day has passed. Skipping corporation cycle processing.")>>
+<</if>>
 <</widget>>
+
+
+
+:: CreateSystemWidget [widget nobr]
+<<widget "CreateSystem">>
+  /* Initialize $Systems if it's not already an array */
+  <<if not Array.isArray($Systems)>>
+    <<set $Systems = []>>
+  <</if>>
+
+  /* Clone the System Template */
+  <<set _system = clone(setup.SystemTemplate)>>
+
+  /* Assign arguments to system properties with additional debugging */
+  <<for _i = 0; _i < $args.length; _i++>>
+    <<run console.log("Arg " + _i + ": " + $args[_i])>>
+  <</for>>
+  
+  <<set _system.SystemName to $args[0]>>
+  <<set _system.SystemType to $args[1]>>
+  <<set _system.FactionOwner to $args[2]>>
+  <<set _system.DevelopmentLevel to $args[3]>>
+  <<set _system.DangerLevel to $args[4]>>
+  <<set _system.EconomyLevel to $args[5]>>
+  <<set _system.Population to $args[6]>>
+  <<set _system.SunType to $args[7]>>
+  <<set _system.SunOutput to $args[8]>>
+
+  /* Debugging: Log the final system object */
+  <<run console.log("System object before adding to $Systems:", _system)>>
+
+  /* Add the new system to the $Systems array */
+  <<set $Systems.push(_system)>>
+
+  /* Additional Debugging: Log the updated $Systems array */
+  <<run console.log("$Systems array after adding new system:", $Systems)>>
+<</widget>>
+
 
 
 

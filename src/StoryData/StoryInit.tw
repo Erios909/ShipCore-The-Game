@@ -368,3 +368,363 @@ $lowerdecksFabricatorCyberware
 
 <<set $playerGenderA to 1>> <!-- Default gender value to "Man" -->
 
+
+<<set setup.SystemTemplate = {
+  SystemName: "",
+  SystemType: "",
+  FactionOwner: "",
+  PlayerCorpActive: false,
+  DevelopmentLevel: 0,
+  DangerLevel: 500,
+  EconomyLevel: 500,
+  Population: 0,
+  SunType: "",
+  SunOutput: "",
+  SpecialFeatures: [],
+  SystemEconomy: {
+    ResourcePrices: clone(setup.CorpResources),
+    ResourceAbundance: {
+      "Water": "Unknown",
+      "Raw Ore": "Unknown",
+      "Hydrogen": "Unknown",
+      "Minerals": "Unknown",
+      "Scrap": "Unknown",
+      "Helium-3": "Unknown",
+    }
+  },
+  SystemSecurity: {
+    PatrolFrequency: 0,
+    SecurityForces: [],
+    PiracyRisk: 0
+  },
+  SystemPolitics: {
+    PlayerRelations: 0,
+    PoliticalStability: 0
+  },
+  SystemEnvironment: {
+    PlanetaryBodies: [],
+    NotableLocations: [],
+    EnvironmentalHazards: []
+  }
+}>>
+
+
+
+
+/* Division Types and Licenses */
+<<set setup.DivisionTypes to ["Resource Extraction", "Services", "Industrial"]>>
+<<set setup.CorpLicenseTypes to ["OrbitalHarvesting", "AsteroidProspecting", "CelestialBodyExtraction", "NAI-Tech"]>>
+
+/* Corporation Template */
+<<set setup.CorporationTemplate = {
+  CorpName: "",
+  CorpIsActive: true,
+  CorpFinance: {credits: 0, debt: 0},
+  CorpCredits: 0,
+  CorpDebt: 0,
+  CorpInventory: [],
+  CorpProcessingSummary: {
+    NewCredits: 0,
+    NewDebt: 0,
+    InventoryChanges: [],
+    EventLog: []
+  },
+  CorpLocation: "",
+  CorpLicenses: [],
+  CorpDivisions: [],
+  CorpCoherency: 0,
+  CorpControllingNPC: []
+}>>
+
+/* Division Template */
+<<set setup.DivisionTemplate = {
+  DivisionName: "",
+  DivisionIsActive: true,
+  DivisionAutoSellActive: false,
+  DivisionType: "",
+  DivisionSubdivisions: [],
+  DivisionFinance: {credits: 0, debt: 0},
+  DivisionInventory: [],
+  DivisionEmployees: [],
+  DivisionControllingNPC: [],
+  DivisionCoherency: 0,
+  DivisionRequiredLicense: [],
+  DivisionLevel: 1,
+  DivisionEquipmentSlots: 1,
+  DivisionRecipes: [],
+  DivisionInstalledUpgrades: [],
+  DivisionLog: {
+    EventLog: [],
+    InventoryChanges: [],
+    FinanceChanges: []
+  },
+  DivisionBusinessStats: {
+    RevenueBonus: 1,
+    Efficiency: 1,
+    BrandQuality: 1,
+    InputConservation: 1,
+    OutputEnhancement: 1,
+    EmployeeProductivity: 1,
+    MarketInfluence: 1,
+    Corruption: 1,
+    Security: 1,
+    ProtectedStorage: 0
+  }
+}>>
+
+/* Corporation Resource Base Prices Sheet */
+<<set setup.CorpResources to {
+  "Water": { baseValue: 200, priceModifier: 1.0 },
+  "Raw Ore": { baseValue: 200, priceModifier: 1.0 },
+  "Scrap": { baseValue: 200, priceModifier: 1.0 },
+  "Parts": { baseValue: 1000, priceModifier: 1.0 },
+  "Hydrogen": { baseValue: 200, priceModifier: 1.0 },
+  "Helium-3": { baseValue: 200, priceModifier: 1.0 },
+  "Minerals": { baseValue: 2000, priceModifier: 1.0 },
+  "Refined Metals": { baseValue: 2000, priceModifier: 1.0 },
+  "Processed Food": { baseValue: 2000, priceModifier: 1.0 },
+  "Consumer Goods": { baseValue: 5000, priceModifier: 1.0 },
+  "Luxury Goods": { baseValue: 25000, priceModifier: 1.0 },
+  "Heavy Mining Equipment": { baseValue: 25000, priceModifier: 1.0 },
+  "Fuel-Rods": { baseValue: 10000, priceModifier: 1.0 },
+  "Antimatter": { baseValue: 10000, priceModifier: 1.0 },
+  "Starship Parts": { baseValue: 35000, priceModifier: 1.0 },
+  "Artifacts": { baseValue: 50000, priceModifier: 1.0 },
+  "NAI-Tech": { baseValue: 15000000, priceModifier: 1.0 },
+  "Computronics": { baseValue: 1000000, priceModifier: 1.0 },
+  "Military Goods": { baseValue: 75000, priceModifier: 1.0 },
+  "Military Parts": { baseValue: 75000, priceModifier: 1.0 },
+  "Personal Weapons": { baseValue: 75000, priceModifier: 1.0 },
+  "Power-Armor Suits": { baseValue: 500000, priceModifier: 1.0 },
+  "Starship Weapons": { baseValue: 500000, priceModifier: 1.0 },
+  "Starship Equipment": { baseValue: 500000, priceModifier: 1.0 },
+  "Starship Hull Parts": { baseValue: 500000, priceModifier: 1.0 },
+  "Station Parts": { baseValue: 1000000, priceModifier: 1.0 },
+  "Orbital Infrastructure Parts": { baseValue: 1000000, priceModifier: 1.0 },
+  "Fusion Reactor Parts": { baseValue: 1000000, priceModifier: 1.0 },
+  "Cyberware": { baseValue: 150000, priceModifier: 1.0 },
+  "Industrial Components": { baseValue: 150000, priceModifier: 1.0 }
+}>>
+
+
+/* Extraction Recipes List */
+<<set setup.OrbitalHarvestingRecipes to [
+    {
+        Name: "Hydrogen Collection",
+        Input: {ItemName: "Fuel Rods", Quantity: 2},
+        Output: {ItemName: "Hydrogen", Quantity: 250}
+    },
+    {
+        Name: "Helium-3 Collection",
+        Input: {ItemName: "Fuel Rods", Quantity: 1},
+        Output: {ItemName: "Helium-3", Quantity: 150}
+    },
+    {
+        Name: "Water Synthesis",
+        Input: {ItemName: "Fuel Rods", Quantity: 1},
+        Output: {ItemName: "Water", Quantity: 100}
+    },
+    {
+        Name: "Antimatter Synthesis",
+        Input: {ItemName: "Fuel Rods", Quantity: 8},
+        Output: {ItemName: "Antimatter", Quantity: 10}
+    }
+]>>
+
+<<set setup.AsteroidProspectingRecipes to [
+  {
+    Name: "Ore Mining",
+    Input: {ItemName: "Fuel Rods", Quantity: 1},
+    Output: {ItemName: "Raw Ore", Quantity: 75}
+  },
+  {
+    Name: "Ice Mining",
+    Input: {ItemName: "Fuel Rods", Quantity: 1},
+    Output: {ItemName: "Water", Quantity: 60}
+  }
+]>>
+
+<<set setup.CelestialBodyExtractionRecipes to [
+  {
+    Name: "Surface Ore Mining",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Raw Ore", Quantity: 200}
+  },
+  {
+    Name: "Water Extraction",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Water", Quantity: 80}
+  },
+  {
+    Name: "Hydrogen Extraction",
+    Input: {ItemName: "Fuel Rods", Quantity: 1},
+    Output: {ItemName: "Hydrogen", Quantity: 40}
+  },
+  {
+    Name: "Mineral Harvesting",
+    Input: {ItemName: "Fuel Rods", Quantity: 2},
+    Output: {ItemName: "Minerals", Quantity: 20}
+  }
+]>>
+
+<<set setup.IndustrialProductionRecipes to [
+  {
+    name: "Refined Metal Production",
+    inputs: [{itemName: "Raw Ore", quantity: 20}],
+    outputs: [{itemName: "Refined Metals", quantity: 10}],
+    badge: "None"
+  },
+  {
+    name: "Fuel Rod Production",
+    inputs: [{itemName: "Helium-3", quantity: 12}, {itemName: "Antimatter", quantity: 2}],
+    outputs: [{itemName: "Fuel-Rods", quantity: 4}],
+    badge: "None"
+  },
+  {
+    name: "Processed Food Production",
+    inputs: [{itemName: "Water", quantity: 6}, {itemName: "Minerals", quantity: 4}],
+    outputs: [{itemName: "Processed Food", quantity: 15}],
+    badge: "None"
+  },
+  {
+    name: "Basic Consumer Goods Production",
+    inputs: [{itemName: "Refined Metals", quantity: 2}, {itemName: "Water", quantity: 10}, {itemName: "Parts", quantity: 5}],
+    outputs: [{itemName: "Consumer Goods", quantity: 5}],
+    badge: "None"
+  },
+  {
+    name: "Luxury Goods Production",
+    inputs: [{itemName: "Consumer Goods", quantity: 3}, {itemName: "Refined Metals", quantity: 1}],
+    outputs: [{itemName: "Luxury Goods", quantity: 1}],
+    badge: "None"
+  },
+  {
+    name: "Parts Production",
+    inputs: [{itemName: "Refined Metals", quantity: 5}],
+    outputs: [{itemName: "Parts", quantity: 5}],
+    badge: "None"
+  }
+]>>/* ... Add any additional recipes with no badge */
+
+<<set setup.HeavyIndustryProductionRecipes to [
+  {
+    name: "Heavy Equipment Manufacturing",
+    inputs: [{itemName: "Refined Metals", quantity: 11}, {itemName: "Fuel-Rods", quantity: 4}, {itemName: "Parts", quantity: 11}],
+    outputs: [{itemName: "Heavy Mining Equipment", quantity: 4}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Starship Part Assembly",
+    inputs: [{itemName: "Refined Metals", quantity: 9}, {itemName: "Cyberware", quantity: 1}],
+    outputs: [{itemName: "Starship Parts", quantity: 5}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Starship Equipment Production",
+    inputs: [{itemName: "Starship Parts", quantity: 4}, {itemName: "Cyberware", quantity: 2}],
+    outputs: [{itemName: "Starship Equipment", quantity: 1}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Starship Hull Fabrication",
+    inputs: [{itemName: "Refined Metals", quantity: 92}, {itemName: "Industrial Components", quantity: 15}],
+    outputs: [{itemName: "Starship Hull Parts", quantity: 5}],
+    badge: "Heavy Industry"
+  },
+  {
+    name: "Industrial Component Manufacturing",
+    inputs: [{itemName: "Refined Metals", quantity: 25}, {itemName: "Fuel-Rods", quantity: 8}],
+    outputs: [{itemName: "Industrial Components", quantity: 1}],
+    badge: "Heavy Industry"
+  }
+]>>/* ... Add any additional recipes with the badge "Heavy Industry" */
+
+<<set setup.HighTechIndustryProductionRecipes to [
+  {
+    name: "Antimatter Synthesis",
+    inputs: [{itemName: "Hydrogen", quantity: 55}, {itemName: "Helium-3", quantity: 55}],
+    outputs: [{itemName: "Antimatter", quantity: 4}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "Cyberware Production",
+    inputs: [{itemName: "Minerals", quantity: 25}, {itemName: "Refined Metals", quantity: 25}, {itemName: "Parts", quantity: 25}],
+    outputs: [{itemName: "Cyberware", quantity: 1}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "NAI-Tech Fabrication",
+    inputs: [{itemName: "Refined Metals", quantity: 7}, {itemName: "Computronics", quantity: 14}, {itemName: "Parts", quantity: 255}, {itemName: "Refined Metals", quantity: 1000}],
+    outputs: [{itemName: "NAI-Tech", quantity: 1}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "Computronics Circuitry",
+    inputs: [{itemName: "Refined Metals", quantity: 244}, {itemName: "Minerals", quantity: 244}],
+    outputs: [{itemName: "Computronics", quantity: 1}],
+    badge: "High-Tech Industry"
+  },
+  {
+    name: "Fusion Reactor Part Manufacturing",
+    inputs: [{itemName: "Fuel-Rods", quantity: 78}, {itemName: "Heavy Mining Equipment", quantity: 8}],
+    outputs: [{itemName: "Fusion Reactor Parts", quantity: 1}],
+    badge: "High-Tech Industry"
+  }
+]>>/* ... Add any additional recipes with the badge "High-Tech Ind" */
+
+<<set setup.MilitaryIndustryProductionRecipes to [
+  {
+    name: "Military Goods Manufacturing",
+    inputs: [{itemName: "Refined Metals", quantity: 66}, {itemName: "Fuel-Rods", quantity: 22}],
+    outputs: [{itemName: "Military Goods", quantity: 5}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Military Parts Production",
+    inputs: [{itemName: "Military Goods", quantity: 5}, {itemName: "Cyberware", quantity: 7}, {itemName: "Refined Metals", quantity: 10}],
+    outputs: [{itemName: "Military Parts", quantity: 20}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Personal Weapons Fabrication",
+    inputs: [{itemName: "Military Parts", quantity: 9}, {itemName: "Refined Metals", quantity: 33}],
+    outputs: [{itemName: "Personal Weapons", quantity: 10}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Power-Armor Suit Assembly",
+    inputs: [{itemName: "Military Goods", quantity: 45}, {itemName: "Cyberware", quantity: 4}, {itemName: "Refined Metals", quantity: 7}],
+    outputs: [{itemName: "Power-Armor Suits", quantity: 8}],
+    badge: "Military Industry"
+  },
+  {
+    name: "Starship Weapons Manufacturing",
+    inputs: [{itemName: "Starship Parts", quantity: 7}, {itemName: "Military Parts", quantity: 3}],
+    outputs: [{itemName: "Starship Weapons", quantity: 1}],
+    badge: "Military Industry"
+  }
+]>>/* ... Add any additional recipes with the badge "Military Industry" */
+
+<<set setup.OrbitalIndustryProductionRecipes to [
+  {
+    name: "Space Station Parts Production",
+    inputs: [{itemName: "Starship Hull Parts", quantity: 7}, {itemName: "Orbital Infrastructure Parts", quantity: 10}, {itemName: "Refined Metals", quantity: 300}],
+    outputs: [{itemName: "Station Parts", quantity: 14}],
+    badge: "Orbital Industry"
+  },
+  {
+    name: "Orbital Infrastructure Assembly",
+    inputs: [{itemName: "Starship Equipment", quantity: 10}, {itemName: "Fusion Reactor Parts", quantity: 1}, {itemName: "Refined Metals", quantity: 10}],
+    outputs: [{itemName: "Orbital Infrastructure Parts", quantity: 6}],
+    badge: "Orbital Industry"
+  }
+]>>/* ... Add any additional recipes with the badge "Orbital Industry" */
+
+<<set setup.RecyclingIndustryProductionRecipes to [
+  {
+    name: "Scrap Processing",
+    inputs: [{itemName: "Scrap", quantity: 5}],
+    outputs: [{itemName: "Refined Metals", quantity: 10}],
+    badge: "Recycling"
+  }
+]>>/*  ... Add any additional recipes with the badge "Recycling" */
