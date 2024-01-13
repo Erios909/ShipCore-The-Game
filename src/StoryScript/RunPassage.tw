@@ -1,0 +1,93 @@
+:: TestPassage [nobr]
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interaction Form</title>
+        <style>
+         .input-default-text, .textarea-default-text {
+	     color: white;
+         }
+         input, textarea {
+	     color: gray;
+         }
+        </style>
+    </head>
+    <body>
+
+        <input id="targetPassage" class="input-default-text" type="text" placeholder="Enter passage name">
+        <br>
+        <textarea id="variablesToSet" class="textarea-default-text" placeholder="Enter variables (e.g., <<set $JaxIsCompanion to true>>)"></textarea>
+        <br>
+
+        <button id="runButton">Run</button>
+        <p id="errorOutput"></p>
+
+        <script>
+         // Function to run when the button is clicked
+         function runPassage() {
+             var passageName = targetPassageInput.value.trim();
+             var variablesToSet = variablesToSetTextarea.value.trim();
+
+             // Check if the passage exists
+             if (!Story.has(passageName)) {
+                 errorOutput.textContent = "Error: The passage '" + passageName + "' does not exist.";
+                 return;
+             }
+
+             // Process the variables to set, assuming the syntax is correct
+             try {
+                 if (variablesToSet) {
+                     new Function(variablesToSet)();
+                 }
+                 Engine.play(passageName); // Navigate to the passage
+             } catch (e) {
+                 errorOutput.textContent = "Error: There was an issue with setting the variables. " + e.message;
+             }
+         }
+
+         // Get the run button and attach the click event listener
+         var runButton = document.getElementById('runButton');
+         runButton.addEventListener('click', runPassage);
+         // Function to clear the default text and set the text color to white
+         function clearDefaultText(event) {
+             var element = event.target;
+             if (element.classList.contains('input-default-text') || element.classList.contains('textarea-default-text')) {
+                 element.value = '';
+                 element.style.color = 'white'; // Set the text color to white
+                 // Remove the class to prevent the text from clearing on subsequent focus
+                 element.classList.remove('input-default-text');
+                 element.classList.remove('textarea-default-text');
+             }
+         }
+
+         // Function to restore the default text if the input is empty
+         function restoreDefaultText(event) {
+             var element = event.target;
+             if (element.value.trim() === '') {
+                 element.classList.add('textarea-default-text');
+                 element.style.color = 'gray'; // Reset the text color to gray
+                 // Restore the default placeholder text
+                 if (element.id === 'targetPassage') {
+                     element.value = '';
+                     element.placeholder = 'Enter passage name';
+                 } else if (element.id === 'variablesToSet') {
+                     element.value = '';
+                     element.placeholder = 'Enter variables (e.g., <<set $JaxIsCompanion to true>>)';
+                 }
+             }
+         }
+
+         // Get the input and textarea elements
+         var targetPassageInput = document.getElementById('targetPassage');
+         var variablesToSetTextarea = document.getElementById('variablesToSet');
+
+         // Attach the focus and blur event listeners
+         targetPassageInput.addEventListener('focus', clearDefaultText);
+         targetPassageInput.addEventListener('blur', restoreDefaultText);
+         variablesToSetTextarea.addEventListener('focus', clearDefaultText);
+         variablesToSetTextarea.addEventListener('blur', restoreDefaultText);
+        </script>
+    </body>
+</html>
