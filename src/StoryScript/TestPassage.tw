@@ -53,7 +53,7 @@ setup.attemptRunPassage = function() {
 
         <input id="targetPassage" class="input-default-text" type="text" placeholder="Enter passage name">
         <br>
-        <textarea id="variablesToSet" class="textarea-default-text" placeholder="Enter variables (e.g., <<set $JaxIsCompanion to true>>)"></textarea>
+        <textarea id="variablesToSet" spellcheck="false" class="textarea-default-text" placeholder="Enter variables (e.g., <<set $JaxIsCompanion to true>>)"></textarea>
         <br>
 
         <<button "Run">>
