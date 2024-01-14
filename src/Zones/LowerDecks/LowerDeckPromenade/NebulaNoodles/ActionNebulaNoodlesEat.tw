@@ -16,23 +16,7 @@
 
 <<if $nebulaNoodleEventsRecord.today != _today>>
     <<set $nebulaNoodleEventsRecord.today to _today>>
-    <<set $nebulaNoodleEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available noodle events -->
-<<for _i to 1; _i <= 4; _i++>>
-    <<if not $nebulaNoodleEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available noodle events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $nebulaNoodleEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available noodle events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+    <<ResetRandomEvent "NebulaNoodleEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -43,7 +27,7 @@
 <p>You take a seat at one of the available tables, the ambient noise of the promenade fading as you focus on the menu. Deciding on your dish, you place your order and watch the noodle stand's automated systems spring into action, crafting a bowl that's equal parts art and sustenance. The aroma of your upcoming meal wafts over, inviting you to lean back and relax as you wait.</p>
 
 <!-- Random Noodle Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "NebulaNoodleEvent" 10 true>>
     <<case 1>> <!-- Culinary Delight -->
         <p>Your taste buds dance with delight as you savor a bowl of the chef's special noodles. The flavors are rich and the ingredients are clearly top-notch. You feel revitalized.</p>
         <<changemoods "health" "major" "PosEffectOnPlayer">><br>
@@ -93,7 +77,7 @@
     <<default>> <!-- Default Noodle Event -->
         <p>The noodles are decent; nothing extraordinary but they hit the spot. You take a moment to simply enjoy the meal and the break from your adventures.</p>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 

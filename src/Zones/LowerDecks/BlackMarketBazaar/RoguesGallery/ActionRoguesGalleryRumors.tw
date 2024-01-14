@@ -18,12 +18,7 @@
 
 <<if $roguesGalleryRumorsEventsRecord.today != _today>>
     <<set $roguesGalleryRumorsEventsRecord.today to _today>>
-    <<set $roguesGalleryRumorsEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to random(1, 10)>>
-<<if not $roguesGalleryRumorsEventsRecord.triggeredEvents.includes(_randomEvent)>>
-    <<set $roguesGalleryRumorsEventsRecord.triggeredEvents.push(_randomEvent)>>
+    <<ResetRandomEvent "RoguesGalleryRumorsEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -34,7 +29,7 @@
 <p>The Rogue's Gallery is a cacophony of whispers and coded language. You lean back against the bar, a nondescript drink in hand, and let the undercurrent of rumors wash over you. In this den of secrets, every overheard word could be the key to fortune or downfall.</p>
 
 <!-- Random Rumor Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "RoguesGalleryRumorsEvent" 10 true>>
     <<case 1>> <!-- A Smuggler's Boast -->
         <p>A smuggler boasts about a recent haul. You make a mental note of the details; such information could be valuable.</p>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>
@@ -77,7 +72,7 @@
 
     <<default>> <!-- Default Rumor Event -->
         <p>The rumors are many, but none stand out as particularly useful tonight. Still, the act of listening keeps your wits sharp.</p>
-<</switch>>
+<</RandomEventPicker>>
 
 <br><br>
 

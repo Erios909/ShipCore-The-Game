@@ -16,9 +16,16 @@
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
 <p>The lights dim and the holographic show begins, enveloping you in a world of wonder. The stories are moving, the characters compelling, and for a brief time, you're transported away from the harsh realities of life in the Lower Decks.</p>
 
+<<if not $voidVistasWatchShowEventsRecord>> <<set $voidVistasWatchShowEventsRecord to {}>><</if>>
+<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+
+<<if $voidVistasWatchShowEventsRecord.today != _today>>
+    <<set $voidVistasWatchShowEventsRecord.today to _today>>
+    <<ResetRandomEvent "VoidVistasWatchShowEvent">>
+<</if>>
+
 <!-- Showtime Event -->
-<<set _randomEvent to random(1, 10)>>
-<<switch _randomEvent>>
+<<RandomEventPicker "VoidVistasWatchShowEvent" 10 true>>
     <<case 1>> <!-- An Uplifting Adventure -->
         <p>The show features an epic space journey filled with hope and camaraderie. It leaves you feeling lighter and more optimistic.</p>
         <<changemoods "mood" "major" "PosEffectOnPlayer">>
@@ -74,7 +81,7 @@
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "trauma" "minor" "PosEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 <br>
 
 
