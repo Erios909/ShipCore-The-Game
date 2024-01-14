@@ -1248,6 +1248,7 @@ Macro.add('LowerDeckBusinessProfitability', {
 /*  Random Event Picker
 
     Creates a random event picker instance with the specified name.
+    
     Every time the picker is evaluated it will pick and fire an event that is has not picked before.
     If all events have been picked before it will fire the default event.
 
@@ -1265,6 +1266,23 @@ Macro.add('LowerDeckBusinessProfitability', {
             If true the case indices are considered as starting from one (1). [1..10]
             If false the case indices are considered as starting from zero (0). [0..9]
 
+    Container Elements:
+        Reset Triggers:
+            A selection of tags that are evaluated before an event is picked.
+            If a trigger condition succeeds the event pool is reset before a new event is picked. 
+            
+            <<onChangeResetTrigger Expression>> - Reset trigger
+                Evaluates the expression and compares the result to a previous evaluation of the trigger.
+                If the result is different the event picker is reset.
+                If the result is the same, the trigger is a noop.
+
+        Event Cases - Defines the behaviour of different events that can be picked:
+            <<case N... >> - Event tag.
+                The contents of this case will be selected whenever the N-th indice is picked.
+                Multiple N indices can be defined with a space separator.
+            <<default>> - The default event tag. Must be last.
+                The contents of this case will be selected whenever all other cases have been previously selected.
+
     Examples:
     Single Fire Events:
     <<RandomEventPicker "EventName" 2>>
@@ -1276,7 +1294,7 @@ Macro.add('LowerDeckBusinessProfitability', {
             The default event has been fired.
     <</RandomEventPicker>>
 
-    Multiple Fire Events
+    Multiple Fire Events:
     <<RandomEventPicker "EventName" 4>>
         <<case 0 2 3>> // This event will fire a total of 3 times before becoming unavailable.
             Event 0 has been fired.
@@ -1285,6 +1303,20 @@ Macro.add('LowerDeckBusinessProfitability', {
         <<default>>
             The default event has been fired.
     <</RandomEventPicker>>
+
+    Automatic Reset Trigger:
+    <<RandomEventPicker "Automatic Reset On New Game Day" 3>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+    <<case 0>>
+        AutoReset Case 0
+    <<case 1>>
+        AutoReset Case 1
+    <<case 2>>
+        AutoReset Case 2
+    <<default>>
+        AutoReset Default
+    <</RandomEventPicker>>
+
  */
 Macro.add('RandomEventPicker', {
     tags: ['case', 'default', 'onChangeResetTrigger'],
