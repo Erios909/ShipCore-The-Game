@@ -149,4 +149,6 @@ sugarcube-2:
       container: true
     ResetRandomEvent:
       name: ResetRandomEvent
+    # Empty definition to keep intellisense happy.
+    # The macro is only used as a tag and does not do any processing by itself.
     onChangeResetTrigger: {}
