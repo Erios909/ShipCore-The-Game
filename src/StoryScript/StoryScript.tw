@@ -1261,6 +1261,9 @@ Macro.add('LowerDeckBusinessProfitability', {
 
             NB: This value is required to match between event pickers with the same name. 
             Providing different values can corrupt the shared state.
+        (bool, optional) oneIndexed:
+            If true the case indices are considered as starting from one (1). [1..10]
+            If false the case indices are considered as starting from zero (0). [0..9]
 
     Examples:
     Single Fire Events:
@@ -1297,6 +1300,7 @@ Macro.add('RandomEventPicker', {
 
         let eventName = this.args[0];
         let numEvents = this.args[1];
+        let oneIndexed = this.args.length > 3 ? this.args[2] : false;
 
         const len = this.payload.length;
         if (len === 1) {
@@ -1385,7 +1389,7 @@ Macro.add('RandomEventPicker', {
         let selectedEventIndex = eventSharedState.events.shift();
         // Evaluate the clauses
         for (/* Declared previously */ i = 1; i < len; i++) {
-            if(this.payload[i].args.some(val => val === selectedEventIndex)) {
+            if(this.payload[i].args.some(val => val === selectedEventIndex + (oneIndexed ? 1 : 0))) {
                 success = true;
                 new Wikifier(this.output, this.payload[i].contents);
                 break;
