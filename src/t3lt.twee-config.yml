@@ -144,11 +144,18 @@ sugarcube-2:
       name: CreateDivision
     CreateSystem:
       name: CreateSystem
+
+    # Random Event Picker
     RandomEventPicker:
       name: RandomEventPicker
       container: true
     ResetRandomEvent:
       name: ResetRandomEvent
+    WipeRandomEventPickerGlobalState:
+      name: WipeRandomEventPickerGlobalState
+    # Random Event Picker Triggers
     # Empty definition to keep intellisense happy.
     # The macro is only used as a tag and does not do any processing by itself.
     onChangeResetTrigger: {}
+    # Random Event Picker Triggers - END
+    # Random Event Picker - END

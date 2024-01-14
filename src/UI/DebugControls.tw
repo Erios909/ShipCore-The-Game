@@ -153,6 +153,14 @@ Combined Difficulty: $combinedDifficultyScore
 [[testmenu|test menu]]<br>
 [[Test Random Event Picker]]<br><br>
 
+[[ContrabandTechDepotBuyCyberware]] <br>
+[[RoguesGalleryDrink]] <br>
+
+<br><br>
+
+<<button "Wipe Events Global State">>
+    <<WipeRandomEventPickerGlobalState>>
+<</button>>
 
 <<if $eventStack === undefined>>
     <<set $eventStack = []>>

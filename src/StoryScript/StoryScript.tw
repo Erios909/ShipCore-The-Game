@@ -1510,3 +1510,10 @@ Macro.add('ResetRandomEvent', {
         }
     }
 });
+
+Macro.add('WipeRandomEventPickerGlobalState', {
+    handler() {
+        const internalSharedStateVarName = "$Internals_RandomEventPicker_SharedState";
+        State.setVar(internalSharedStateVarName, undefined);
+    }
+});
