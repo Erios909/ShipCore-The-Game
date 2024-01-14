@@ -23,6 +23,18 @@ Random Event Tests:
     <<default>>
         E2 Default
 <</RandomEventPicker>>
+<br>
+<<RandomEventPicker "Automatic Reset On New Day" 3>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+    <<case 0>>
+        AutoReset Case 0
+    <<case 1>>
+        AutoReset Case 1
+    <<case 2>>
+        AutoReset Case 2
+    <<default>>
+        AutoReset Default
+<</RandomEventPicker>>
 
 <br>
 <<button "Reset Events">>

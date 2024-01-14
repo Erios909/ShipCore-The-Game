@@ -149,3 +149,4 @@ sugarcube-2:
       container: true
     ResetRandomEvent:
       name: ResetRandomEvent
+    onChangeResetTrigger: {}

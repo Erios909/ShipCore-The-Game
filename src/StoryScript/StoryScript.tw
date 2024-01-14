@@ -1287,7 +1287,7 @@ Macro.add('LowerDeckBusinessProfitability', {
     <</RandomEventPicker>>
  */
 Macro.add('RandomEventPicker', {
-    tags: ['case', 'default'],
+    tags: ['case', 'default', 'onChangeResetTrigger'],
     
     handler() {
         /* Parameter validation */
@@ -1308,10 +1308,18 @@ Macro.add('RandomEventPicker', {
         }
 
         let i;
-        
-        // Sanity checks copied over from the Sugarcube 2 switch macro implementation.
+        let resetTriggersRegistrationCompleted = false;
+        let resetTriggers = [];
+
+        // Sanity checks and loading of reset triggers.
         for(/* Declared previously */ i = 1; i < len; i++) {
             switch (this.payload[i].name) {
+                case 'onChangeResetTrigger':
+                    if(resetTriggersRegistrationCompleted) {
+                        return this.error(`All reset triggers must be registreed before the first <<case>>. Invalid: ${this.payload[i].args.raw}`);
+                    }
+                    resetTriggers.push(this.payload[i]);
+                    break;
                 case 'default':
                     if (this.payload[i].args.length > 0) {
 						return this.error(`<<default>> does not accept values, invalid: ${this.payload[i].args.raw}`);
@@ -1322,6 +1330,8 @@ Macro.add('RandomEventPicker', {
 					}
                     break;
                 default:
+                    // Marks the reset trigger registration as completed.
+                    resetTriggersRegistrationCompleted = true;
                     if (this.payload[i].args.length === 0) {
 						return this.error(`no value(s) specified for <<${this.payload[i].name}>> (#${i})`);
 					}
@@ -1343,13 +1353,56 @@ Macro.add('RandomEventPicker', {
         if(!globalSharedState.has(eventName)) {
             globalSharedState.set(eventName, {
                 regenerateEventsFlag: true,     // Flag that the events array needs to be seeded again.
-                events: []                      // A collection of randomly generated events that are to be executed in order.
+                events: [],                     // A collection of randomly generated events that are to be executed in order.
+                resetTriggerStates: new Map()  // Map for storing persistent data about automatic reset triggers.
             });
         }
 
         // Should be pretty straight forward as we set it earlier if one does not exist.
         let eventSharedState = globalSharedState.get(eventName);
 
+        // Evaluate all reset triggers for automatic reset.
+        // TODO@Dimi: Possibly use Array.forEach() instead?
+        for (/* Declared previously */ i = 0; i < resetTriggers.length; i++) {
+            const evaluatedTrigger = resetTriggers[i];
+            const resetTriggerStates = eventSharedState.resetTriggerStates;
+            // The state key for the currently evaluated reset trigger.
+            const resetTriggerSharedStateKey = `${evaluatedTrigger.name}-${i}`;
+
+            let triggerEvalResult;
+            switch (evaluatedTrigger.name) {
+                // Trigger that flags the event for reset if its expression is changed from the last evaluation.
+                case 'onChangeResetTrigger': 
+                    // Creates a shared state if it does not exist.
+                    if (!resetTriggerStates.has(resetTriggerSharedStateKey)) {
+                        resetTriggerStates.set(resetTriggerSharedStateKey, {
+                            previousValue: undefined // Stores the value from the previous evaluation.
+                        });
+                    }
+
+                    const triggerState = resetTriggerStates.get(resetTriggerSharedStateKey);
+
+                    // Evaluates the trigger.
+                    try {
+                        triggerEvalResult = Scripting.evalJavaScript(evaluatedTrigger.args.full);
+                    }
+                    catch (ex) {
+                        return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
+                    }
+
+                    // If the trigger event result is different from the previous value,
+                    // mark the event for regeneration and save the new result.
+                    if(triggerEvalResult !== triggerState.previousValue) {
+                        eventSharedState.regenerateEventsFlag = true;
+                        triggerState.previousValue = triggerEvalResult;
+                    }
+                    break;
+                default:
+                    return this.error(`Unknown trigger: ${triggerName}`);
+            }
+        }
+
+        // Regenerate the events array if requested.
         if(eventSharedState.regenerateEventsFlag) {
             // Generates an array from 0 to N - 1
             let events = [...Array(numEvents).keys()]
