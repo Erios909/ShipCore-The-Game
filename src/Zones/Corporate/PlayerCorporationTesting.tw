@@ -1,5 +1,7 @@
-:: Corporate Management Test [Start]
+:: Corporate Management Test [Start nobr]
 Welcome to the Corporate Management Testing Page!
+<!-- Clear index before starting, outside of liveblocks -->
+<<set $PlayerCorpPersistentRecipeIndex = 0>>
 
 <!-- Section for Creating a System -->
 <h2>Create System</h2>
@@ -15,7 +17,7 @@ Sun Output: <<textbox "_sunOutput" "Medium">>
 <<link "Create System">>
   <<CreateSystem _systemName _systemType _factionOwner _developmentLevel _dangerLevel _economyLevel _population _sunType _sunOutput>>
   <<update>><<updatebar>>
-<</link>>
+<</link>><br><br>
 <<liveblock>>
     _systemName, _systemType, _factionOwner, _developmentLevel, _dangerLevel, 
     _economyLevel, _population, _sunType, _sunOutput
@@ -30,7 +32,7 @@ Debt: <<textbox "_corpDebt" "5000">>
 Location: <<textbox "_corpLocation" "Meltisar">>
 Coherency: <<textbox "_corpCoherency" "High">>
 <<link "Create Corporation">><<CreateCorporation _corpName _corpCredits _corpDebt _corpLocation _corpCoherency>><<update>><<updatebar>><</link>>
-
+<br><br>
 
 <!-- Section for Creating Division -->
 <h2>Create Division</h2>
@@ -51,7 +53,7 @@ Coherency: <<textbox "_corpCoherency" "High">>
     Level: <<textbox "_divisionLevel" "2">>
     Required License: <<textbox "_divisionLicense" "License A">>
     Coherency: <<textbox "_divisionCoherency" "Moderate">>
-    <<link "Create Division">><<CreateDivision _selectedCorpIndex _divisionName _divisionType _divisionLevel _divisionLicense _divisionCoherency>><<update>><<updatebar>><</link>>
+    <<link "Create Division">><<CreateDivision _selectedCorpIndex _divisionName _divisionType _divisionLevel _divisionLicense _divisionCoherency>><<update>><<updatebar>><</link>><br><br>
 <<else>>
     <p>No Corporations Defined Yet. Please create a corporation first.</p>
 <</if>>
@@ -92,7 +94,7 @@ Coherency: <<textbox "_corpCoherency" "High">>
 <<else>>
     No Data yet.
 <</if>>
-
+<br><br>
 <!-- Display Created Systems -->
 <h3>Systems Overview</h3>
 <<if $Systems !== undefined>>
@@ -112,7 +114,7 @@ Coherency: <<textbox "_corpCoherency" "High">>
 <<else>>
     No System Data yet.
 <</if>>
-
+<br><br>
 <</liveblock>>
 
 <!-- Part 1: Corporation Selection -->
@@ -128,10 +130,13 @@ Coherency: <<textbox "_corpCoherency" "High">>
         <</for>>
 
         /* Listbox to select a corporation */
-        Corporation: 
-        <<listbox "_selectedCorpIndex" autoselect>>
-            <<optionsfrom _corpOptions>>
-        <</listbox>>
+        <div class="CorpSelection"> Select Corporation: 
+            <div id="corporationListbox">
+                <<listbox "_selectedCorpIndex">>
+                    <<optionsfrom _corpOptions>>
+                <</listbox>>
+            </div>
+        </div>
 
         /* Debugging: Print selected corporation */
         <<set _selectedCorp to $PlayerCorporations[_selectedCorpIndex]>>
@@ -141,7 +146,6 @@ Coherency: <<textbox "_corpCoherency" "High">>
     <</if>>
 
 <!-- Part 2: Division Selection -->
-
     <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
         <<set _selectedDivisionIndex to _selectedDivisionIndex ?? 0>> <!-- Initialize or maintain the selected division index -->
         <<set _divisionOptions = {}>> <!-- Initialize an empty object for the division options -->
@@ -153,10 +157,13 @@ Coherency: <<textbox "_corpCoherency" "High">>
         <</for>>
 
         /* Listbox to select a division from the chosen corporation */
-        Division: 
-        <<listbox "_selectedDivisionIndex" autoselect>>
-            <<optionsfrom _divisionOptions>>
-        <</listbox>>
+        <div class="DivisionSelection"> Select Division: 
+            <div id="divisionListbox">
+                <<listbox "_selectedDivisionIndex">>
+                    <<optionsfrom _divisionOptions>>
+                <</listbox>>
+            </div>
+        </div>
 
         /* Debugging: Print selected division */
         <<set _selectedDivision to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex]>>
@@ -166,6 +173,34 @@ Coherency: <<textbox "_corpCoherency" "High">>
     <<else>>
         <p>No corporations available. Please add a corporation first.</p>
     <</if>>
+
+
+    <!-- Display Selected Corporation and Division -->
+    
+        <<if _hasCorporations>>
+            /* Display the name of the selected corporation */
+            <<if $PlayerCorporations[_selectedCorpIndex]>>
+                <p>Selected Corporation: <<print $PlayerCorporations[_selectedCorpIndex].CorpName>></p>
+            <<else>>
+                <p>No Corporation Selected</p>
+            <</if>>
+
+            /* Display the name of the selected division if available */
+            <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
+                <<if $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex]>>
+                    <p>Selected Division: <<print $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex].DivisionName>></p>
+                <<else>>
+                    <p>No Division Selected</p>
+                <</if>>
+            <<else>>
+                <p>No Divisions Available</p>
+            <</if>>
+        <<else>>
+            <p>No Corporation or Division Data Available</p>
+        <</if>>
+
+
+
 
     <!-- Part 3: Recipe List Based on Division Type and Category -->
     <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
@@ -189,39 +224,55 @@ Coherency: <<textbox "_corpCoherency" "High">>
 
         /* Update recipe list based on the selected corporation's division type and recipe category */
         <<switch _selectedDivisionType>>
-            <<case "Resource Extraction">>
-                <<switch $currentRecipeCategory>>
-                    <<case "Orbital Harvesting">>
-                        <<set _recipeList to setup.OrbitalHarvestingRecipes>>
-                    <<case "Asteroid Prospecting">>
-                        <<set _recipeList to setup.AsteroidProspectingRecipes>>
-                    <<case "Celestial Body Extraction">>
-                        <<set _recipeList to setup.CelestialBodyExtractionRecipes>>
-                    <<default>>
-                        <<set _recipeList to []>> <!-- Default case for Resource Extraction -->
-                <</switch>>
-            <<case "Industrial">>
-                <<switch $currentRecipeCategory>>
-                    <<case "Industrial Production">>
-                        <<set _recipeList to setup.IndustrialProductionRecipes>>
-                    <<case "Heavy Industry Production">>
-                        <<set _recipeList to setup.HeavyIndustryProductionRecipes>>
-                    <<case "High Tech Industry Production">>
-                        <<set _recipeList to setup.HighTechIndustryProductionRecipes>>
-                    <<case "Military Industry Production">>
-                        <<set _recipeList to setup.MilitaryIndustryProductionRecipes>>
-                    <<case "Orbital Industry Production">>
-                        <<set _recipeList to setup.OrbitalIndustryProductionRecipes>>
-                    <<case "Recycling Industry Production">>
-                        <<set _recipeList to setup.RecyclingIndustryProductionRecipes>>
-                    <<default>>
-                        <<set _recipeList to []>> <!-- Default case for Industrial -->
-                <</switch>>
-            <<case "Services">>
-                <<set _recipeList to []>> <!-- No recipes for Services -->
+    <<case "Resource Extraction">>
+        <<run console.log("Selected Division Type: Resource Extraction")>>
+        <<switch $currentRecipeCategory>>
+            <<case "Orbital Harvesting">>
+                <<run console.log("Current Recipe Category: Orbital Harvesting")>>
+                <<set _recipeList to setup.OrbitalHarvestingRecipes>>
+            <<case "Asteroid Prospecting">>
+                <<run console.log("Current Recipe Category: Asteroid Prospecting")>>
+                <<set _recipeList to setup.AsteroidProspectingRecipes>>
+            <<case "Celestial Body Extraction">>
+                <<run console.log("Current Recipe Category: Celestial Body Extraction")>>
+                <<set _recipeList to setup.CelestialBodyExtractionRecipes>>
             <<default>>
-                <<set _recipeList to []>> <!-- Default case for other types -->
+                <<run console.log("Current Recipe Category: Default - Resource Extraction")>>
+                <<set _recipeList to []>> <!-- Default case for Resource Extraction -->
         <</switch>>
+    <<case "Industrial">>
+        <<run console.log("Selected Division Type: Industrial")>>
+        <<switch $currentRecipeCategory>>
+            <<case "Industrial Production">>
+                <<run console.log("Current Recipe Category: Industrial Production")>>
+                <<set _recipeList to setup.IndustrialProductionRecipes>>
+            <<case "Heavy Industry Production">>
+                <<run console.log("Current Recipe Category: Heavy Industry Production")>>
+                <<set _recipeList to setup.HeavyIndustryProductionRecipes>>
+            <<case "High Tech Industry Production">>
+                <<run console.log("Current Recipe Category: High Tech Industry Production")>>
+                <<set _recipeList to setup.HighTechIndustryProductionRecipes>>
+            <<case "Military Industry Production">>
+                <<run console.log("Current Recipe Category: Military Industry Production")>>
+                <<set _recipeList to setup.MilitaryIndustryProductionRecipes>>
+            <<case "Orbital Industry Production">>
+                <<run console.log("Current Recipe Category: Orbital Industry Production")>>
+                <<set _recipeList to setup.OrbitalIndustryProductionRecipes>>
+            <<case "Recycling Industry Production">>
+                <<run console.log("Current Recipe Category: Recycling Industry Production")>>
+                <<set _recipeList to setup.RecyclingIndustryProductionRecipes>>
+            <<default>>
+                <<run console.log("Current Recipe Category: Default - Industrial")>>
+                <<set _recipeList to []>> <!-- Default case for Industrial -->
+        <</switch>>
+    <<case "Services">>
+        <<run console.log("Selected Division Type: Services")>>
+        <<set _recipeList to []>> <!-- No recipes for Services -->
+    <<default>>
+        <<run console.log("Selected Division Type: Default - Other Types")>>
+        <<set _recipeList to []>> <!-- Default case for other types -->
+<</switch>>
+
 
         /* Initialize the recipe index */
         <<set _currentRecipeIndex to 0>>
@@ -230,42 +281,49 @@ Coherency: <<textbox "_corpCoherency" "High">>
 <p>No recipes available for this division type.</p>
 <</if>>
 
-<!-- Part 4: Displaying Recipe and Navigation with Debugging -->
 
-    <<if _recipeList.length > 0>>
-        /* Display the current recipe */
-        <<set _currentRecipe to _recipeList[_currentRecipeIndex]>>
-        <<run console.log("Displaying Recipe: " + _currentRecipe.Name)>>
-        <p><strong>Current Recipe:</strong> <<print _currentRecipe.Name>></p>
+<!-- Part 4: Recipe Navigation -->
+<<run console.log("Testing _recipeList in part 4:" + _recipeList)>>
 
-        /* Navigation buttons for recipes */
+<<if _recipeList.length > 0>>
+    /* Check if $PlayerCorpPersistentRecipeIndex exists, if not, initialize it */
+    <<if $PlayerCorpPersistentRecipeIndex === undefined>>
+        <<set $PlayerCorpPersistentRecipeIndex = 0>>
+    <</if>>
+
+    /* Ensure the persistent recipe index is within the bounds of _recipeList */
+    <<set $PlayerCorpPersistentRecipeIndex = $PlayerCorpPersistentRecipeIndex gte 0 and $PlayerCorpPersistentRecipeIndex lt _recipeList.length ? $PlayerCorpPersistentRecipeIndex : 0>>
+
+    /* Access and display the current recipe */
+    <<set _currentRecipe to _recipeList[$PlayerCorpPersistentRecipeIndex]>>
+    <<run console.log("Displaying RecipeIndex: " + $PlayerCorpPersistentRecipeIndex)>>
+    <<run console.log("Displaying Recipe: " + (_currentRecipe ? JSON.stringify(_currentRecipe) : "None"))>>
+    <p><strong>Current Recipe:</strong> <<print _currentRecipe ? _currentRecipe.Name : "No Recipe">></p>
+
+    /* Navigation buttons for recipes with looping, handling single recipe case */
+    <<if _recipeList.length > 1>>
         <<link "Previous Recipe">>
-            <<if _currentRecipeIndex > 0>>
-                <<set _currentRecipeIndex -= 1>>
-                <<run console.log("Previous Recipe Index: " + _currentRecipeIndex)>>
-                <<update>><<updatebar>>
+            <<if $PlayerCorpPersistentRecipeIndex > 0>>
+                <<set $PlayerCorpPersistentRecipeIndex -= 1>>
             <<else>>
-                <<run console.log("Already at the first recipe.")>>
+                <<set $PlayerCorpPersistentRecipeIndex = _recipeList.length - 1>>
             <</if>>
+            <<update>>
         <</link>>
 
         <<link "Next Recipe">>
-            <<if _currentRecipeIndex < _recipeList.length - 1>>
-                <<set _currentRecipeIndex += 1>>
-                <<run console.log("Next Recipe Index: " + _currentRecipeIndex)>>
-                <<update>><<updatebar>>
+            <<if $PlayerCorpPersistentRecipeIndex < _recipeList.length - 1>>
+                <<set $PlayerCorpPersistentRecipeIndex += 1>>
             <<else>>
-                <<run console.log("No more recipes to display.")>>
+                <<set $PlayerCorpPersistentRecipeIndex = 0>>
             <</if>>
+            <<update>>
         <</link>>
-    <<else>>
-        <<run console.log("No recipes available. Division Type: " + _selectedDivisionType + ", Recipe Category: " + $currentRecipeCategory)>>
-        <p>No recipes available for this division type.</p>
     <</if>>
-
-
-
-
+<<else>>
+    <<run console.log("No recipes available. Division Type: " + _selectedDivisionType + ", Recipe Category: " + $currentRecipeCategory)>>
+    <p>No recipes available for this division type.</p>
+<</if>>
 
 
 <</liveblock>>

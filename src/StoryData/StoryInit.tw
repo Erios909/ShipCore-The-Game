@@ -569,162 +569,162 @@ $lowerdecksFabricatorCyberware
 
 <<set setup.IndustrialProductionRecipes to [
   {
-    name: "Refined Metal Production",
-    inputs: [{itemName: "Raw Ore", quantity: 20}],
-    outputs: [{itemName: "Refined Metals", quantity: 10}],
-    badge: "None"
+    Name: "Refined Metal Production",
+    Inputs: [{ItemName: "Raw Ore", Quantity: 20}],
+    Outputs: [{ItemName: "Refined Metals", Quantity: 10}],
+    Badge: "None"
   },
   {
-    name: "Fuel Rod Production",
-    inputs: [{itemName: "Helium-3", quantity: 12}, {itemName: "Antimatter", quantity: 2}],
-    outputs: [{itemName: "Fuel-Rods", quantity: 4}],
-    badge: "None"
+    Name: "Fuel Rod Production",
+    Inputs: [{ItemName: "Helium-3", Quantity: 12}, {ItemName: "Antimatter", Quantity: 2}],
+    Outputs: [{ItemName: "Fuel-Rods", Quantity: 4}],
+    Badge: "None"
   },
   {
-    name: "Processed Food Production",
-    inputs: [{itemName: "Water", quantity: 6}, {itemName: "Minerals", quantity: 4}],
-    outputs: [{itemName: "Processed Food", quantity: 15}],
-    badge: "None"
+    Name: "Processed Food Production",
+    Inputs: [{ItemName: "Water", Quantity: 6}, {ItemName: "Minerals", Quantity: 4}],
+    Outputs: [{ItemName: "Processed Food", Quantity: 15}],
+    Badge: "None"
   },
   {
-    name: "Basic Consumer Goods Production",
-    inputs: [{itemName: "Refined Metals", quantity: 2}, {itemName: "Water", quantity: 10}, {itemName: "Parts", quantity: 5}],
-    outputs: [{itemName: "Consumer Goods", quantity: 5}],
-    badge: "None"
+    Name: "Basic Consumer Goods Production",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 2}, {ItemName: "Water", Quantity: 10}, {ItemName: "Parts", Quantity: 5}],
+    Outputs: [{ItemName: "Consumer Goods", Quantity: 5}],
+    Badge: "None"
   },
   {
-    name: "Luxury Goods Production",
-    inputs: [{itemName: "Consumer Goods", quantity: 3}, {itemName: "Refined Metals", quantity: 1}],
-    outputs: [{itemName: "Luxury Goods", quantity: 1}],
-    badge: "None"
+    Name: "Luxury Goods Production",
+    Inputs: [{ItemName: "Consumer Goods", Quantity: 3}, {ItemName: "Refined Metals", Quantity: 1}],
+    Outputs: [{ItemName: "Luxury Goods", Quantity: 1}],
+    Badge: "None"
   },
   {
-    name: "Parts Production",
-    inputs: [{itemName: "Refined Metals", quantity: 5}],
-    outputs: [{itemName: "Parts", quantity: 5}],
-    badge: "None"
+    Name: "Parts Production",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 5}],
+    Outputs: [{ItemName: "Parts", Quantity: 5}],
+    Badge: "None"
   }
 ]>>/* ... Add any additional recipes with no badge */
 
 <<set setup.HeavyIndustryProductionRecipes to [
   {
-    name: "Heavy Equipment Manufacturing",
-    inputs: [{itemName: "Refined Metals", quantity: 11}, {itemName: "Fuel-Rods", quantity: 4}, {itemName: "Parts", quantity: 11}],
-    outputs: [{itemName: "Heavy Mining Equipment", quantity: 4}],
-    badge: "Heavy Industry"
+    Name: "Heavy Equipment Manufacturing",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 11}, {ItemName: "Fuel-Rods", Quantity: 4}, {ItemName: "Parts", Quantity: 11}],
+    Outputs: [{ItemName: "Heavy Mining Equipment", Quantity: 4}],
+    Badge: "Heavy Industry"
   },
   {
-    name: "Starship Part Assembly",
-    inputs: [{itemName: "Refined Metals", quantity: 9}, {itemName: "Cyberware", quantity: 1}],
-    outputs: [{itemName: "Starship Parts", quantity: 5}],
-    badge: "Heavy Industry"
+    Name: "Starship Part Assembly",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 9}, {ItemName: "Cyberware", Quantity: 1}],
+    Outputs: [{ItemName: "Starship Parts", Quantity: 5}],
+    Badge: "Heavy Industry"
   },
   {
-    name: "Starship Equipment Production",
-    inputs: [{itemName: "Starship Parts", quantity: 4}, {itemName: "Cyberware", quantity: 2}],
-    outputs: [{itemName: "Starship Equipment", quantity: 1}],
-    badge: "Heavy Industry"
+    Name: "Starship Equipment Production",
+    Inputs: [{ItemName: "Starship Parts", Quantity: 4}, {ItemName: "Cyberware", Quantity: 2}],
+    Outputs: [{ItemName: "Starship Equipment", Quantity: 1}],
+    Badge: "Heavy Industry"
   },
   {
-    name: "Starship Hull Fabrication",
-    inputs: [{itemName: "Refined Metals", quantity: 92}, {itemName: "Industrial Components", quantity: 15}],
-    outputs: [{itemName: "Starship Hull Parts", quantity: 5}],
-    badge: "Heavy Industry"
+    Name: "Starship Hull Fabrication",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 92}, {ItemName: "Industrial Components", Quantity: 15}],
+    Outputs: [{ItemName: "Starship Hull Parts", Quantity: 5}],
+    Badge: "Heavy Industry"
   },
   {
-    name: "Industrial Component Manufacturing",
-    inputs: [{itemName: "Refined Metals", quantity: 25}, {itemName: "Fuel-Rods", quantity: 8}],
-    outputs: [{itemName: "Industrial Components", quantity: 1}],
-    badge: "Heavy Industry"
+    Name: "Industrial Component Manufacturing",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 25}, {ItemName: "Fuel-Rods", Quantity: 8}],
+    Outputs: [{ItemName: "Industrial Components", Quantity: 1}],
+    Badge: "Heavy Industry"
   }
 ]>>/* ... Add any additional recipes with the badge "Heavy Industry" */
 
 <<set setup.HighTechIndustryProductionRecipes to [
   {
-    name: "Antimatter Synthesis",
-    inputs: [{itemName: "Hydrogen", quantity: 55}, {itemName: "Helium-3", quantity: 55}],
-    outputs: [{itemName: "Antimatter", quantity: 4}],
-    badge: "High-Tech Industry"
+    Name: "Antimatter Synthesis",
+    Inputs: [{ItemName: "Hydrogen", Quantity: 55}, {ItemName: "Helium-3", Quantity: 55}],
+    Outputs: [{ItemName: "Antimatter", Quantity: 4}],
+    Badge: "High-Tech Industry"
   },
   {
-    name: "Cyberware Production",
-    inputs: [{itemName: "Minerals", quantity: 25}, {itemName: "Refined Metals", quantity: 25}, {itemName: "Parts", quantity: 25}],
-    outputs: [{itemName: "Cyberware", quantity: 1}],
-    badge: "High-Tech Industry"
+    Name: "Cyberware Production",
+    Inputs: [{ItemName: "Minerals", Quantity: 25}, {ItemName: "Refined Metals", Quantity: 25}, {ItemName: "Parts", Quantity: 25}],
+    Outputs: [{ItemName: "Cyberware", Quantity: 1}],
+    Badge: "High-Tech Industry"
   },
   {
-    name: "NAI-Tech Fabrication",
-    inputs: [{itemName: "Refined Metals", quantity: 7}, {itemName: "Computronics", quantity: 14}, {itemName: "Parts", quantity: 255}, {itemName: "Refined Metals", quantity: 1000}],
-    outputs: [{itemName: "NAI-Tech", quantity: 1}],
-    badge: "High-Tech Industry"
+    Name: "NAI-Tech Fabrication",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 7}, {ItemName: "Computronics", Quantity: 14}, {ItemName: "Parts", Quantity: 255}, {ItemName: "Refined Metals", Quantity: 1000}],
+    Outputs: [{ItemName: "NAI-Tech", Quantity: 1}],
+    Badge: "High-Tech Industry"
   },
   {
-    name: "Computronics Circuitry",
-    inputs: [{itemName: "Refined Metals", quantity: 244}, {itemName: "Minerals", quantity: 244}],
-    outputs: [{itemName: "Computronics", quantity: 1}],
-    badge: "High-Tech Industry"
+    Name: "Computronics Circuitry",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 244}, {ItemName: "Minerals", Quantity: 244}],
+    Outputs: [{ItemName: "Computronics", Quantity: 1}],
+    Badge: "High-Tech Industry"
   },
   {
-    name: "Fusion Reactor Part Manufacturing",
-    inputs: [{itemName: "Fuel-Rods", quantity: 78}, {itemName: "Heavy Mining Equipment", quantity: 8}],
-    outputs: [{itemName: "Fusion Reactor Parts", quantity: 1}],
-    badge: "High-Tech Industry"
+    Name: "Fusion Reactor Part Manufacturing",
+    Inputs: [{ItemName: "Fuel-Rods", Quantity: 78}, {ItemName: "Heavy Mining Equipment", Quantity: 8}],
+    Outputs: [{ItemName: "Fusion Reactor Parts", Quantity: 1}],
+    Badge: "High-Tech Industry"
   }
 ]>>/* ... Add any additional recipes with the badge "High-Tech Ind" */
 
 <<set setup.MilitaryIndustryProductionRecipes to [
   {
-    name: "Military Goods Manufacturing",
-    inputs: [{itemName: "Refined Metals", quantity: 66}, {itemName: "Fuel-Rods", quantity: 22}],
-    outputs: [{itemName: "Military Goods", quantity: 5}],
-    badge: "Military Industry"
+    Name: "Military Goods Manufacturing",
+    Inputs: [{ItemName: "Refined Metals", Quantity: 66}, {ItemName: "Fuel-Rods", Quantity: 22}],
+    Outputs: [{ItemName: "Military Goods", Quantity: 5}],
+    Badge: "Military Industry"
   },
   {
-    name: "Military Parts Production",
-    inputs: [{itemName: "Military Goods", quantity: 5}, {itemName: "Cyberware", quantity: 7}, {itemName: "Refined Metals", quantity: 10}],
-    outputs: [{itemName: "Military Parts", quantity: 20}],
-    badge: "Military Industry"
+    Name: "Military Parts Production",
+    Inputs: [{ItemName: "Military Goods", Quantity: 5}, {ItemName: "Cyberware", Quantity: 7}, {ItemName: "Refined Metals", Quantity: 10}],
+    Outputs: [{ItemName: "Military Parts", Quantity: 20}],
+    Badge: "Military Industry"
   },
   {
-    name: "Personal Weapons Fabrication",
-    inputs: [{itemName: "Military Parts", quantity: 9}, {itemName: "Refined Metals", quantity: 33}],
-    outputs: [{itemName: "Personal Weapons", quantity: 10}],
-    badge: "Military Industry"
+    Name: "Personal Weapons Fabrication",
+    Inputs: [{ItemName: "Military Parts", Quantity: 9}, {ItemName: "Refined Metals", Quantity: 33}],
+    Outputs: [{ItemName: "Personal Weapons", Quantity: 10}],
+    Badge: "Military Industry"
   },
   {
-    name: "Power-Armor Suit Assembly",
-    inputs: [{itemName: "Military Goods", quantity: 45}, {itemName: "Cyberware", quantity: 4}, {itemName: "Refined Metals", quantity: 7}],
-    outputs: [{itemName: "Power-Armor Suits", quantity: 8}],
-    badge: "Military Industry"
+    Name: "Power-Armor Suit Assembly",
+    Inputs: [{ItemName: "Military Goods", Quantity: 45}, {ItemName: "Cyberware", Quantity: 4}, {ItemName: "Refined Metals", Quantity: 7}],
+    Outputs: [{ItemName: "Power-Armor Suits", Quantity: 8}],
+    Badge: "Military Industry"
   },
   {
-    name: "Starship Weapons Manufacturing",
-    inputs: [{itemName: "Starship Parts", quantity: 7}, {itemName: "Military Parts", quantity: 3}],
-    outputs: [{itemName: "Starship Weapons", quantity: 1}],
-    badge: "Military Industry"
+    Name: "Starship Weapons Manufacturing",
+    Inputs: [{ItemName: "Starship Parts", Quantity: 7}, {ItemName: "Military Parts", Quantity: 3}],
+    Outputs: [{ItemName: "Starship Weapons", Quantity: 1}],
+    Badge: "Military Industry"
   }
 ]>>/* ... Add any additional recipes with the badge "Military Industry" */
 
 <<set setup.OrbitalIndustryProductionRecipes to [
   {
-    name: "Space Station Parts Production",
-    inputs: [{itemName: "Starship Hull Parts", quantity: 7}, {itemName: "Orbital Infrastructure Parts", quantity: 10}, {itemName: "Refined Metals", quantity: 300}],
-    outputs: [{itemName: "Station Parts", quantity: 14}],
-    badge: "Orbital Industry"
+    Name: "Space Station Parts Production",
+    Inputs: [{ItemName: "Starship Hull Parts", Quantity: 7}, {ItemName: "Orbital Infrastructure Parts", Quantity: 10}, {ItemName: "Refined Metals", Quantity: 300}],
+    Outputs: [{ItemName: "Station Parts", Quantity: 14}],
+    Badge: "Orbital Industry"
   },
   {
-    name: "Orbital Infrastructure Assembly",
-    inputs: [{itemName: "Starship Equipment", quantity: 10}, {itemName: "Fusion Reactor Parts", quantity: 1}, {itemName: "Refined Metals", quantity: 10}],
-    outputs: [{itemName: "Orbital Infrastructure Parts", quantity: 6}],
-    badge: "Orbital Industry"
+    Name: "Orbital Infrastructure Assembly",
+    Inputs: [{ItemName: "Starship Equipment", Quantity: 10}, {ItemName: "Fusion Reactor Parts", Quantity: 1}, {ItemName: "Refined Metals", Quantity: 10}],
+    Outputs: [{ItemName: "Orbital Infrastructure Parts", Quantity: 6}],
+    Badge: "Orbital Industry"
   }
 ]>>/* ... Add any additional recipes with the badge "Orbital Industry" */
 
 <<set setup.RecyclingIndustryProductionRecipes to [
   {
-    name: "Scrap Processing",
-    inputs: [{itemName: "Scrap", quantity: 5}],
-    outputs: [{itemName: "Refined Metals", quantity: 10}],
-    badge: "Recycling"
+    Name: "Scrap Processing",
+    Inputs: [{ItemName: "Scrap", Quantity: 5}],
+    Outputs: [{ItemName: "Refined Metals", Quantity: 10}],
+    Badge: "Recycling"
   }
 ]>>/*  ... Add any additional recipes with the badge "Recycling" */
