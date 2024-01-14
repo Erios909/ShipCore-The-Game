@@ -16,21 +16,7 @@
 
 <<if $contrabandTechDepotWorkEventsRecord.today != _today>>
     <<set $contrabandTechDepotWorkEventsRecord.today to _today>>
-    <<set $contrabandTechDepotWorkEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available dealer work events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $contrabandTechDepotWorkEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available dealer work events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $contrabandTechDepotWorkEventsRecord.triggeredEvents.push(_randomEvent)>>
+    <<ResetRandomEvent "ContrabandTechDepotWorkEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -45,7 +31,7 @@
  * Each event results in the player gaining cyberware and black market activity points, while losing credits.
  * The events are designed to provide some variety and flavor text for the dealer job.
 */
-<<switch _randomEvent>>
+<<RandomEventPicker "ContrabandTechDepotWorkEvent" 10 true>>
     <<case 1>> <!-- Cutting-Edge Tech -->
         <p>You've managed to acquire some cutting-edge cyberware. The seller assures you it's top of the line, and the price reflects it.</p>
         <<itemchange "cyberware" 1 "gain">>
@@ -111,7 +97,7 @@
         <<itemchange "cyberware" 1 "gain">>
         <<creditchange 30 "negative">>
         <<itemchange "blackmarketactivity" 330 "gain">>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 <br>

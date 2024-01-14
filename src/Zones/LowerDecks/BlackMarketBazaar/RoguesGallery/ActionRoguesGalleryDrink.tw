@@ -17,25 +17,7 @@
 
 <<if $roguesGalleryEventsRecord.today != _today>>
     <<set $roguesGalleryEventsRecord.today to _today>>
-    <<set $roguesGalleryEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<!-- Create a list of available events that have not occurred today -->
-<<set _availableEvents to []>>
-<<for _i to 1; _i <= 5; _i++>>
-    <<if not $roguesGalleryEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<!-- Select a random event from the available ones or default if none are available -->
-<<if _availableEvents.length>> <!-- If there are still available events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $roguesGalleryEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available events -->
-    <<set _randomEvent to 0>> <!-- Default to no event -->
+    <<ResetRandomEvent "RoguesGalleryEvent">>
 <</if>>
 
 <!-- Standard Heading Template -->
@@ -46,7 +28,7 @@
 <p>The Rogue's Gallery is alive with the buzz of clandestine chatter and the clinking of glasses. You order a specialty drink, its exotic fumes promising a brief escape from the harsh realities of space.</p>
 
 <!-- Random Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "RoguesGalleryEvent" 5 true>>
     <<case 1>> <!-- A Friendly Bet -->
         <p>You're roped into a friendly bet with a group of smugglers. The stakes are low, but the thrill of victory boosts your mood.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
@@ -69,7 +51,7 @@
 
     <<default>> <!-- Default Event -->
         <p>The night progresses with no particular incident. You enjoy the drink and the company, feeling neither better nor worse for the experience.</p>
-<</switch>>
+<</RandomEventPicker>>
 <br><br>
 
 <!-- Continue Link -->

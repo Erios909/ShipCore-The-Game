@@ -16,21 +16,7 @@
 
 <<if $shroudedMarketBigDealEventsRecord.today != _today>>
     <<set $shroudedMarketBigDealEventsRecord.today to _today>>
-    <<set $shroudedMarketBigDealEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available big deal events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $shroudedMarketBigDealEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available big deal events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $shroudedMarketBigDealEventsRecord.triggeredEvents.push(_randomEvent)>>
+    <<ResetRandomEvent "ShroudedMarketBigDealEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -40,7 +26,7 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>The stakes are high as you approach the secluded booth, your arms laden with goods. The eyes that meet yours are sharp and calculating, and you know that this deal could change everything. The tension is palpable, and you can feel the stress coursing through your veins as you begin the dance of negotiation.</p>
 
-<<switch _randomEvent>>
+<<RandomEventPicker "ShroudedMarketBigDealEvent" 10 true>>
     <<case 1>> <!-- Monumental Gain -->
         <p>The deal goes better than you could have hoped. You walk away with your pockets significantly heavier.</p>
         <<set $player.credits += 4000>>
@@ -117,7 +103,7 @@
         <<creditchange 3000 "positive">>
         <<itemchange "blackmarketactivity" 3000 "gain">>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <<set $player.stress += 20>>

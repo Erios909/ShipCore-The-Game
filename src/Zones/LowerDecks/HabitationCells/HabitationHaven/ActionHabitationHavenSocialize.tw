@@ -16,25 +16,7 @@
 
 <<if $habitationHavenEventsRecord.today != _today>>
     <<set $habitationHavenEventsRecord.today to _today>>
-    <<set $habitationHavenEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<!-- Create a list of available events that have not occurred today -->
-<<set _availableEvents to []>>
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $habitationHavenEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<!-- Select a random event from the available ones or default if none are available -->
-<<if _availableEvents.length>> <!-- If there are still available events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $habitationHavenEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
+    <<ResetRandomEvent "HabitationHavenEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -53,7 +35,7 @@
 </p>
 
 <!-- Random Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "HabitationHavenEvent" 10 true>>
     <<case 1>> <!-- Random Event 1 -->
         <p>While sharing a table with a few off-duty dock workers, you're drawn into a card game with small stakes. Luck is on your side, and you leave with a bit more credit than you came with.</p><br>
         <<creditchange 25 "positive">><br>
@@ -99,7 +81,7 @@
 <p>
     With all the day's dramas played out, Habitation Haven now settles into a rhythm that feels almost normal. A <<if $worldEconomyScore >= 800>><span style="color: green;">flourishing</span><<elseif $worldEconomyScore >= 600>><span style="color: lightgreen;">stable</span><<elseif $worldEconomyScore >= 400>><span style="color: orange;">struggling</span><<elseif $worldEconomyScore >= 200>><span style="color: red;">crumbling</span><<else>><span style="color: darkred;">collapsed</span><</if>> economy makes itself known through the variety and quality of goods being shared among neighbors, from <<if $worldEconomyScore >= 600>>fresh hydroponics produce<<?elseif $worldEconomyScore >= 400>>stockpiled dry goods<<?else>>rationed nutrient packs<</if>>.<br>
     Despite the <<if $dangerLevelScore >= 800>><span style="color: blue;">low</span><<elseif $dangerLevelScore >= 600>><span style="color: lightgreen;">moderate</span><<elseif $dangerLevelScore >= 400>><span style="color: orange;">high</span><<else>><span style="color: red;">extreme</span><</if>> danger level outside, inside the communal area there is a sense of <<if $dangerLevelScore >= 600>>safety in numbers,<<else>>shared risk and camaraderie,<</if>> with residents trading stories of near-misses or successful forays beyond the cell's boundaries.</p><br>
-<</switch>><br>
+<</RandomEventPicker>><br>
 <</nobr>>
 <!-- Continue Link -->
 [[Continue.|Habitation Haven][$timeadd = 5]]

@@ -17,25 +17,7 @@
 
 <<if $lastHomeEventsRecord.today != _today>>
     <<set $lastHomeEventsRecord.today to _today>>
-    <<set $lastHomeEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<!-- Create a list of available events that have not occurred today -->
-<<set _availableEvents to []>>
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $lastHomeEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<!-- Select a random event from the available ones or default if none are available -->
-<<if _availableEvents.length>> <!-- If there are still available events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $lastHomeEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
+    <<ResetRandomEvent "LastHomeEvent">>
 <</if>>
 
 <!-- Standard Heading Template -->
@@ -46,7 +28,7 @@
 <p>The Last Home's ambient lighting casts soothing shadows across the establishment, inviting you to take a seat at the bar. You order a drink, the ice clinking softly in the glass, and lean in to catch the fragments of hushed conversations. Tales from the edge of the galaxy mix with the latest station gossip, offering a glimpse into the lives of those who call MOR-1 their temporary haven.</p>
 
 <!-- Random Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "LastHomeEvent" 10 true>>
     <<case 1>> <!-- Local Spacers' Toast -->
         <p>A group of spacers toast to a successful voyage and invite you to join. The camaraderie lifts your spirits.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
@@ -93,7 +75,7 @@
         <p>The night wanes, and despite the warmth of the bar, luck isn't on your side as you find yourself buying a round of drinks for newly made friends, or perhaps losing a handful of credits in an ill-advised bet. Either way, it's an evening to remember, even with a slightly lighter wallet.</p>
         <<creditchange 5 "negative">>
         <<creditchange 5 "positive">><br>
-<</switch>>
+<</RandomEventPicker>>
 <br>
 
 <!-- Continue Link -->

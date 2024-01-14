@@ -17,23 +17,7 @@
 
 <<if $lastHomeDartsEventsRecord.today != _today>>
     <<set $lastHomeDartsEventsRecord.today to _today>>
-    <<set $lastHomeDartsEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available darts events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $lastHomeDartsEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available darts events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $lastHomeDartsEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available darts events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
+    <<ResetRandomEvent "LastHomeDartsEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -44,7 +28,7 @@
 <p>The rhythmic thud of darts punctuates the murmur of The Last Home. Off-duty crewmen from various sectors of the station cluster around the dartboard, engaging in friendly competition. With a drink in hand, you step up to the line, greeted by grins and playful banter. It's a moment of camaraderie and skill, a reprieve from the demanding life aboard the station.</p>
 
 <!-- Random Darts Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "LastHomeDartsEvent" 10 true>>
     <<case 1>> <!-- Bullseye Victory -->
         <p>With an uncanny streak of bullseyes, you impress the onlookers and earn a small prize from the bar's ongoing darts competition.</p>
         <<creditchange 20 "positive">><br>
@@ -88,7 +72,7 @@
     <<default>> <!-- Default Darts Event -->
         <p>After a few throws, it's clear tonight isn't your night for darts. You decide to quit while you're behind, saving your credits and pride. No major loss, just a dent in your evening's plans.</p>
         <<creditchange 5 "negative">><br>
-<</switch>>
+<</RandomEventPicker>>
 <br>
 
 <!-- Continue Link -->
