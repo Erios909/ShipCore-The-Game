@@ -12,14 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lastHomeDartsEventsRecord>> <<set $lastHomeDartsEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lastHomeDartsEventsRecord.today != _today>>
-    <<set $lastHomeDartsEventsRecord.today to _today>>
-    <<ResetRandomEvent "LastHomeDartsEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -29,6 +21,7 @@
 
 <!-- Random Darts Events -->
 <<RandomEventPicker "LastHomeDartsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Bullseye Victory -->
         <p>With an uncanny streak of bullseyes, you impress the onlookers and earn a small prize from the bar's ongoing darts competition.</p>
         <<creditchange 20 "positive">><br>

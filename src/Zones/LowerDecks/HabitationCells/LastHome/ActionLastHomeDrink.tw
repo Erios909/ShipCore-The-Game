@@ -12,14 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lastHomeEventsRecord>> <<set $lastHomeEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lastHomeEventsRecord.today != _today>>
-    <<set $lastHomeEventsRecord.today to _today>>
-    <<ResetRandomEvent "LastHomeEvent">>
-<</if>>
-
 <!-- Standard Heading Template -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -29,6 +21,7 @@
 
 <!-- Random Events -->
 <<RandomEventPicker "LastHomeEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Local Spacers' Toast -->
         <p>A group of spacers toast to a successful voyage and invite you to join. The camaraderie lifts your spirits.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>

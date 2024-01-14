@@ -11,14 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $graftersGearBuyPartsEventsRecord>> <<set $graftersGearBuyPartsEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $graftersGearBuyPartsEventsRecord.today != _today>>
-    <<set $graftersGearBuyPartsEventsRecord.today to _today>>
-    <<ResetRandomEvent "GraftersGearBuyPartsEvent">>
-<</if>>
-
 <<set _creditTransaction to 300>> <!-- Price advertised when clicking the option -->
 
 <!-- Area Header -->
@@ -30,6 +22,7 @@
 
 <!-- Random Buying Parts Events -->
 <<RandomEventPicker "GraftersGearBuyPartsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Bulk Discount -->
         <p>The Grafter is in a good mood and offers you a slight discount for buying in bulk. It's a small gesture but welcome nonetheless.</p>
         <<creditchange 30 "positive">><br>

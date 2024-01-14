@@ -12,14 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $marinersRestDrinkEventsRecord>> <<set $marinersRestDrinkEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $marinersRestDrinkEventsRecord.today != _today>>
-    <<set $marinersRestDrinkEventsRecord.today to _today>>
-    <<ResetRandomEvent "MarinersRestDrinkEvent">>
-<</if>>
-
 <!-- Standard Heading Template -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Mariner's Rest</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -29,6 +21,7 @@
 
 <!-- Random Events -->
 <<RandomEventPicker "MarinersRestDrinkEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Spacer's Salute -->
         <p>A group of spacers celebrating a successful salvage operation welcome you to their table. The shared stories and laughter are a welcome distraction from the tough life at the port.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>

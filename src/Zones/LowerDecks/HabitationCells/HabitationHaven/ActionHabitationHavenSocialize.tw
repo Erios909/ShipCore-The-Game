@@ -11,14 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $habitationHavenEventsRecord>> <<set $habitationHavenEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $habitationHavenEventsRecord.today != _today>>
-    <<set $habitationHavenEventsRecord.today to _today>>
-    <<ResetRandomEvent "HabitationHavenEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="socializeTitleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Communal Area - Socialize</span></h2>
 <hr id="socializeTitleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -36,6 +28,7 @@
 
 <!-- Random Events -->
 <<RandomEventPicker "HabitationHavenEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Random Event 1 -->
         <p>While sharing a table with a few off-duty dock workers, you're drawn into a card game with small stakes. Luck is on your side, and you leave with a bit more credit than you came with.</p><br>
         <<creditchange 25 "positive">><br>

@@ -11,14 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $contrabandTechDepotWorkEventsRecord>> <<set $contrabandTechDepotWorkEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $contrabandTechDepotWorkEventsRecord.today != _today>>
-    <<set $contrabandTechDepotWorkEventsRecord.today to _today>>
-    <<ResetRandomEvent "ContrabandTechDepotWorkEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Contraband Tech Depot - Work as a Dealer</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -32,6 +24,7 @@
  * The events are designed to provide some variety and flavor text for the dealer job.
 */
 <<RandomEventPicker "ContrabandTechDepotWorkEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Cutting-Edge Tech -->
         <p>You've managed to acquire some cutting-edge cyberware. The seller assures you it's top of the line, and the price reflects it.</p>
         <<itemchange "cyberware" 1 "gain">>

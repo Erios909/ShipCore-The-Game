@@ -11,14 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $dojoTrainingEventsRecord>> <<set $dojoTrainingEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $dojoTrainingEventsRecord.today != _today>>
-    <<set $dojoTrainingEventsRecord.today to _today>>
-    <<ResetRandomEvent "DojoTrainingEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Solo Training at the Dojo</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -28,6 +20,7 @@
 
 <!-- Random Training Events -->
 <<RandomEventPicker "DojoTrainingEvent" 4 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Focused Practice -->
         <p>Your strikes hit the training dummy with precision, each one a testament to your improving skill. The repetition is meditative, and you find yourself in a state of flow.</p>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>

@@ -11,14 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lowerEngineeringShiftEventsRecord>> <<set $lowerEngineeringShiftEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lowerEngineeringShiftEventsRecord.today != _today>>
-    <<set $lowerEngineeringShiftEventsRecord.today to _today>>
-    <<ResetRandomEvent "LowerEngineeringWorkShiftEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Engineering</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -29,6 +21,7 @@
 <!-- Random Shift Events -->
 
 <<RandomEventPicker "LowerEngineeringWorkShiftEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Calibration Precision -->
         <p>The day's task is a meticulous calibration of the station's atmospheric processors. The tedious work requires your undivided attention, but the satisfaction of a job well done is its own reward.</p>
         <<set _earnedCredits = random(25, 50)>>

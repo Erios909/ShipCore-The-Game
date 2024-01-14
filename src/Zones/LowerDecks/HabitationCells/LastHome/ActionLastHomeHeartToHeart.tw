@@ -12,14 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lastHomeHeartEventsRecord>> <<set $lastHomeHeartEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lastHomeHeartEventsRecord.today != _today>>
-    <<set $lastHomeHeartEventsRecord.today to _today>>
-    <<ResetRandomEvent "LastHomeHeartEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -29,6 +21,7 @@
 
 <!-- Random Heart to Heart Events -->
 <<RandomEventPicker "LastHomeHeartEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Shared Sorrows -->
         <p>The bartender shares a story of lost love, and you find common ground in shared sorrows. You both feel a weight lifted after the talk.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>

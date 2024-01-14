@@ -11,14 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $shroudedMarketBigDealEventsRecord>> <<set $shroudedMarketBigDealEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $shroudedMarketBigDealEventsRecord.today != _today>>
-    <<set $shroudedMarketBigDealEventsRecord.today to _today>>
-    <<ResetRandomEvent "ShroudedMarketBigDealEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Shrouded Market - Broker a Big Deal</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -27,6 +19,7 @@
 <p>The stakes are high as you approach the secluded booth, your arms laden with goods. The eyes that meet yours are sharp and calculating, and you know that this deal could change everything. The tension is palpable, and you can feel the stress coursing through your veins as you begin the dance of negotiation.</p>
 
 <<RandomEventPicker "ShroudedMarketBigDealEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Monumental Gain -->
         <p>The deal goes better than you could have hoped. You walk away with your pockets significantly heavier.</p>
         <<set $player.credits += 4000>>

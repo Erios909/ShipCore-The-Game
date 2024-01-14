@@ -14,14 +14,6 @@
     }>>
     <<updatebar>>
     
-    <<if not $wharfsideWheelAndDealEventsRecord>> <<set $wharfsideWheelAndDealEventsRecord to {}>><</if>>
-    <<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-    
-    <<if $wharfsideWheelAndDealEventsRecord.today != _today>>
-        <<set $wharfsideWheelAndDealEventsRecord.today to _today>>
-        <<ResetRandomEvent "WharfsideWheelAndDealEvent">>
-    <</if>>
-    
     <!-- Area Header -->
     <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Wharfside Tech Emporium - Wheel and Deal</span></h2>
     <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -31,6 +23,7 @@
     
     <!-- Random Wheel and Deal Trading Events -->
 <<RandomEventPicker "WharfsideWheelAndDealEvent" 11 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Profitable Trade-Up -->
         <<itemchange "cyberware" 2 "gain">>
         <<creditchange 50 "positive">>

@@ -17,16 +17,9 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>As the virtual tour guide, you are the bridge between the cosmos and the customers. You slip on the interface gloves, feeling the subtle haptic feedback as you prepare to sweep the patrons away on a galactic adventure. The walls of Void Vistas disappear, replaced by the vast expanse of space stretching out in all directions.</p>
 
-<<if not $voidVistasWorkTourEventsRecord>> <<set $voidVistasWorkTourEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $voidVistasWorkTourEventsRecord.today != _today>>
-    <<set $voidVistasWorkTourEventsRecord.today to _today>>
-    <<ResetRandomEvent "VoidVistasWorkTourEvent">>
-<</if>>
-
 <!-- Random Tour Guide Events -->
 <<RandomEventPicker "VoidVistasWorkTourEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>>
         <p>Your engaging narrative on the life cycle of stars captivates the audience. They leave generous tips for the unforgettable journey.</p>
         <<creditchange 50 "positive">>

@@ -11,16 +11,6 @@
 }>>
 <<updatebar>>
 
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-<<if not $roguesGalleryRumorsEventsRecord>>
-    <<set $roguesGalleryRumorsEventsRecord to {today: "", triggeredEvents: []}>>
-<</if>>
-
-<<if $roguesGalleryRumorsEventsRecord.today != _today>>
-    <<set $roguesGalleryRumorsEventsRecord.today to _today>>
-    <<ResetRandomEvent "RoguesGalleryRumorsEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Rogue's Gallery</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -30,6 +20,7 @@
 
 <!-- Random Rumor Events -->
 <<RandomEventPicker "RoguesGalleryRumorsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- A Smuggler's Boast -->
         <p>A smuggler boasts about a recent haul. You make a mental note of the details; such information could be valuable.</p>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">><br>

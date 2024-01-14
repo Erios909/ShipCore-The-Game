@@ -12,14 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lastHomeGambleEventsRecord>> <<set $lastHomeGambleEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lastHomeGambleEventsRecord.today != _today>>
-    <<set $lastHomeGambleEventsRecord.today to _today>>
-    <<ResetRandomEvent "LastHomeGambleEvent">>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -29,6 +21,7 @@
 
 <!-- Random Gambling Events -->
 <<RandomEventPicker "LastHomeGambleEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Impressive Jackpot -->
         <p>A risky bet pays off as you hit an impressive jackpot on the slot machine, eliciting cheers from around. Your initial investment pales in comparison to the hefty pile of credits now in front of you.</p>
         <<creditchange 100 "positive">><br>
