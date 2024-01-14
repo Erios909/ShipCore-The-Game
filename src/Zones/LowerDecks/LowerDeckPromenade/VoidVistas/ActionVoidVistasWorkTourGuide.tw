@@ -16,7 +16,7 @@
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Void Vistas</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
 <h2 id="locationHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="font-size: 14px;"><<= $location.name >></span></h2>
-<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;>
+<hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>As the virtual tour guide, you are the bridge between the cosmos and the customers. You slip on the interface gloves, feeling the subtle haptic feedback as you prepare to sweep the patrons away on a galactic adventure. The walls of Void Vistas disappear, replaced by the vast expanse of space stretching out in all directions.</p>
 
 <!-- Random Tour Guide Events -->
