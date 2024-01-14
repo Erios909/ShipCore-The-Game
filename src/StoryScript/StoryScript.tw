@@ -513,8 +513,6 @@ window.UpdateStatBar = function (currentValue, maxValue, barId, isInverse) {
 
 
 
-
-
 /* SlideWin v1.0 - Start */
 // Add the SlideWin window to the page.
 var el = document.createElement("div");

@@ -44,7 +44,7 @@ Coherency: <<textbox "_corpCoherency" "High">>
     <</for>>
 
     Corporation: 
-    <<listbox "_selectedCorpIndex" autoselect>>
+    <<listbox "$PlayerCorpSelectedCorpIndex" autoselect>>
         <<optionsfrom _corpOptions>>
     <</listbox>>
 
@@ -53,7 +53,7 @@ Coherency: <<textbox "_corpCoherency" "High">>
     Level: <<textbox "_divisionLevel" "2">>
     Required License: <<textbox "_divisionLicense" "License A">>
     Coherency: <<textbox "_divisionCoherency" "Moderate">>
-    <<link "Create Division">><<CreateDivision _selectedCorpIndex _divisionName _divisionType _divisionLevel _divisionLicense _divisionCoherency>><<update>><<updatebar>><</link>><br><br>
+    <<link "Create Division">><<CreateDivision $PlayerCorpSelectedCorpIndex _divisionName _divisionType _divisionLevel _divisionLicense _divisionCoherency>><<update>><<updatebar>><</link>><br><br>
 <<else>>
     <p>No Corporations Defined Yet. Please create a corporation first.</p>
 <</if>>
@@ -117,10 +117,15 @@ Coherency: <<textbox "_corpCoherency" "High">>
 <br><br>
 <</liveblock>>
 
+
+
+
+
+
 <!-- Part 1: Corporation Selection -->
 <<liveblock>>
     <<set _hasCorporations to $PlayerCorporations !== undefined && $PlayerCorporations.length > 0>>
-    <<set _selectedCorpIndex to _selectedCorpIndex ?? 0>> <!-- Initialize or maintain the selected index -->
+    <<set $PlayerCorpSelectedCorpIndex to $PlayerCorpSelectedCorpIndex ?? 0>> <!-- Initialize or maintain the selected index -->
 
     <<if _hasCorporations>>
         /* Prepare options for corporation selection */
@@ -132,63 +137,56 @@ Coherency: <<textbox "_corpCoherency" "High">>
         /* Listbox to select a corporation */
         <div class="CorpSelection"> Select Corporation: 
             <div id="corporationListbox">
-                <<listbox "_selectedCorpIndex">>
+                <<listbox "$PlayerCorpSelectedCorpIndex">>
                     <<optionsfrom _corpOptions>>
                 <</listbox>>
             </div>
         </div>
 
         /* Debugging: Print selected corporation */
-        <<set _selectedCorp to $PlayerCorporations[_selectedCorpIndex]>>
+        <<set _selectedCorp to $PlayerCorporations[$PlayerCorpSelectedCorpIndex]>>
         <<run console.log("Selected Corporation: " + _selectedCorp.CorpName)>>
     <<else>>
         <p>No corporations available. Please add a corporation first.</p>
     <</if>>
 
-<!-- Part 2: Division Selection -->
-    <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
-        <<set _selectedDivisionIndex to _selectedDivisionIndex ?? 0>> <!-- Initialize or maintain the selected division index -->
-        <<set _divisionOptions = {}>> <!-- Initialize an empty object for the division options -->
+    <!-- Part 2: Division Selection -->
+        <<if _hasCorporations && $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions.length > 0>>
+            <<set $PlayerCorpSelectedDivisionIndex to $PlayerCorpSelectedDivisionIndex ?? 0>>
+            <<set _divisionOptions = {}>>
+            <<for _i = 0; _i < $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions.length; _i++>>
+                <<set _divisionName to $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions[_i].DivisionName>>
+                <<set _divisionOptions[_divisionName] = _i>>
+            <</for>>
 
-        /* Prepare options for division selection */
-        <<for _i = 0; _i < $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length; _i++>>
-            <<set _divisionName to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_i].DivisionName>>
-            <<set _divisionOptions[_divisionName] = _i>> <!-- Map division names to their indices -->
-        <</for>>
-
-        /* Listbox to select a division from the chosen corporation */
-        <div class="DivisionSelection"> Select Division: 
-            <div id="divisionListbox">
-                <<listbox "_selectedDivisionIndex">>
-                    <<optionsfrom _divisionOptions>>
-                <</listbox>>
+            <div class="DivisionSelection">Select Division: 
+                <div id="divisionListbox">
+                    <<listbox "$PlayerCorpSelectedDivisionIndex">>
+                        <<optionsfrom _divisionOptions>>
+                    <</listbox>>
+                </div>
             </div>
-        </div>
-
-        /* Debugging: Print selected division */
-        <<set _selectedDivision to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex]>>
-        <<run console.log("Selected Division: " + _selectedDivision.DivisionName)>>
-    <<elseif _hasCorporations>>
-        <p>The selected corporation has no divisions. Please add a division first.</p>
-    <<else>>
-        <p>No corporations available. Please add a corporation first.</p>
-    <</if>>
+        <<elseif _hasCorporations>>
+            <p>The selected corporation has no divisions. Please add a division first.</p>
+        <<else>>
+            <p>No corporations available. Please add a corporation first.</p>
+        <</if>>
 
 
     <!-- Display Selected Corporation and Division -->
     
         <<if _hasCorporations>>
             /* Display the name of the selected corporation */
-            <<if $PlayerCorporations[_selectedCorpIndex]>>
-                <p>Selected Corporation: <<print $PlayerCorporations[_selectedCorpIndex].CorpName>></p>
+            <<if $PlayerCorporations[$PlayerCorpSelectedCorpIndex]>>
+                <p>Selected Corporation: <<print $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpName>></p>
             <<else>>
                 <p>No Corporation Selected</p>
             <</if>>
 
             /* Display the name of the selected division if available */
-            <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
-                <<if $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex]>>
-                    <p>Selected Division: <<print $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex].DivisionName>></p>
+            <<if _hasCorporations && $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions.length > 0>>
+                <<if $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions[$PlayerCorpSelectedDivisionIndex]>>
+                    <p>Selected Division: <<print $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions[$PlayerCorpSelectedDivisionIndex].DivisionName>></p>
                 <<else>>
                     <p>No Division Selected</p>
                 <</if>>
@@ -203,9 +201,9 @@ Coherency: <<textbox "_corpCoherency" "High">>
 
 
     <!-- Part 3: Recipe List Based on Division Type and Category -->
-    <<if _hasCorporations && $PlayerCorporations[_selectedCorpIndex].CorpDivisions.length > 0>>
+    <<if _hasCorporations && $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions.length > 0>>
         /* Get the selected corporation's division type */
-        <<set _selectedDivisionType to $PlayerCorporations[_selectedCorpIndex].CorpDivisions[_selectedDivisionIndex].DivisionType>>
+        <<set _selectedDivisionType to $PlayerCorporations[$PlayerCorpSelectedCorpIndex].CorpDivisions[$PlayerCorpSelectedDivisionIndex].DivisionType>>
         <<run console.log("Switch check for _selectedDivisionType: " + _selectedDivisionType)>>
 
 
@@ -327,3 +325,18 @@ Coherency: <<textbox "_corpCoherency" "High">>
 
 
 <</liveblock>>
+
+
+<<script>>
+$(document).one(":passagerender", function() {
+    // Add change event listener to the corporation listbox
+    $("#corporationListbox select").on("change", function() {
+        $(document).trigger(":liveupdate");
+    });
+
+    // Add change event listener to the division listbox
+    $("#divisionListbox select").on("change", function() {
+        $(document).trigger(":liveupdate");
+    });
+});
+<</script>>
