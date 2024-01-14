@@ -16,23 +16,7 @@
 
 <<if $dojoSocialEventsRecord.today != _today>>
     <<set $dojoSocialEventsRecord.today to _today>>
-    <<set $dojoSocialEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available social events -->
-<<for _i to 1; _i <= 4; _i++>>
-    <<if not $dojoSocialEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available social events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $dojoSocialEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available social events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+    <<ResetRandomEvent "DojoSocialEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -43,7 +27,7 @@
 <p>The dojo is abuzz with conversation and laughter as students and instructors alike take a break from training to connect with one another. You find yourself drawn into the camaraderie, sharing stories and experiences with those around you.</p>
 
 <!-- Random Social Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "DojoSocialEvent" 4 true>>
     <<case 1>> <!-- Shared Stories -->
         <p>You exchange tales of past exploits with a group of students, each story more elaborate than the last. The shared laughter brings a sense of belonging.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -71,7 +55,7 @@
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
         <<changemoods "stress" "minor" "NegEffectOnPlayer">>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 

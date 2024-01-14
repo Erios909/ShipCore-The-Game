@@ -16,23 +16,7 @@
 
 <<if $lowerEngineeringShiftEventsRecord.today != _today>>
     <<set $lowerEngineeringShiftEventsRecord.today to _today>>
-    <<set $lowerEngineeringShiftEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available shift events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $lowerEngineeringShiftEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available shift events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $lowerEngineeringShiftEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available shift events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+    <<ResetRandomEvent "LowerEngineeringWorkShiftEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -44,7 +28,7 @@
 
 <!-- Random Shift Events -->
 
-<<switch _randomEvent>>
+<<RandomEventPicker "LowerEngineeringWorkShiftEvent" 10 true>>
     <<case 1>> <!-- Calibration Precision -->
         <p>The day's task is a meticulous calibration of the station's atmospheric processors. The tedious work requires your undivided attention, but the satisfaction of a job well done is its own reward.</p>
         <<set _earnedCredits = random(25, 50)>>
@@ -132,7 +116,7 @@
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "mood" "minor" "NegEffectOnPlayer">>
         <<changemoods "economy" "minor" "PosEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <br>

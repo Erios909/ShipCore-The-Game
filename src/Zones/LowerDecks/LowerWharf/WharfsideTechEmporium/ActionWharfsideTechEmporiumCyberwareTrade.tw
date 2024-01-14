@@ -16,23 +16,10 @@
 
 <<if $wharfsideCyberwareTradeEventsRecord.today != _today>>
     <<set $wharfsideCyberwareTradeEventsRecord.today to _today>>
-    <<set $wharfsideCyberwareTradeEventsRecord.triggeredEvents to []>>
+    <<ResetRandomEvent "WharfsideCyberwareTradeEvent">>
 <</if>>
 
-<<set _randomEvent to 0>> <!-- Default to the default event -->
 <<set _baseCreditGain to 900>> <!-- Base credit gain for trading 3 units of cyberware at 300 each -->
-
-<<set _availableEvents to []>> <!-- List of trading cyberware events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $wharfsideCyberwareTradeEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are events to trigger -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $wharfsideCyberwareTradeEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
 
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Wharfside Tech Emporium - Trade Cyberware</span></h2>
@@ -42,7 +29,7 @@
 <p>The Wharfside Tech Emporium is always on the lookout for cutting-edge cybernetics. Your collection has caught the eye of several buyers, and it's time to see how much they're willing to offer.</p>
 
 <!-- Random Trading Cyberware Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "WharfsideCyberwareTradeEvent" 3 true>>
     <<case 1>> <!-- Tech Enthusiast Bonus -->
         <!-- A tech enthusiast recognizes the rarity of the cyberware, willing to pay extra. -->
         <<creditchange 1050 "positive">>
@@ -66,7 +53,7 @@
         <<creditchange 900 "positive">>
         <p>The going rate for cyberware is fair at the Emporium today. You trade in your units and receive the standard market price, no questions asked.</p>
         <br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <!-- Continue Link -->

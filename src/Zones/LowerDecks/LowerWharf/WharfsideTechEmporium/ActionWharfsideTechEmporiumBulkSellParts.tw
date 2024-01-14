@@ -16,23 +16,10 @@
 
 <<if $wharfsideBulkSellPartsEventsRecord.today != _today>>
     <<set $wharfsideBulkSellPartsEventsRecord.today to _today>>
-    <<set $wharfsideBulkSellPartsEventsRecord.triggeredEvents to []>>
+    <<ResetRandomEvent "WharfsideBulkSellPartsEvent">>
 <</if>>
 
-<<set _randomEvent to 0>> <!-- Default to the default event -->
 <<set _baseCreditGain to 750>> <!-- Base credit gain for selling 15 parts at 50 each -->
-
-<<set _availableEvents to []>> <!-- List of bulk selling parts events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $wharfsideBulkSellPartsEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are events to trigger -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $wharfsideBulkSellPartsEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
 
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Wharfside Tech Emporium - Bulk Sell Parts</span></h2>
@@ -42,7 +29,7 @@
 <p>The parts you have are in demand, and the Emporium is bustling with traders who are eager for quality components. With a savvy sales pitch and strategic bargaining, you're ready to see how much you can earn from this bulk sell.</p>
 
 <!-- Random Bulk Selling Parts Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "WharfsideBulkSellPartsEvent" 3 true>>
     <<case 1>> <!-- Premium Purchase -->
         <!-- The trader recognizes the exceptional quality of the parts, offering above the standard rate. -->
         <<creditchange 900 "positive">>
@@ -62,7 +49,7 @@
         <!-- No special circumstances affect the sale; the parts sell for the standard market value. -->
         <<creditchange 750 "positive">>
         <p>The Emporium's standard rates apply today, and you sell your parts without any haggling. It's a straightforward transaction, and you walk away with the market rate.</p>
-<</switch>>
+<</RandomEventPicker>>
 <br>
 
 

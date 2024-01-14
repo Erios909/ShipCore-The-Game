@@ -16,23 +16,7 @@
 
 <<if $dojoMeditationEventsRecord.today != _today>>
     <<set $dojoMeditationEventsRecord.today to _today>>
-    <<set $dojoMeditationEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available meditation events -->
-<<for _i to 1; _i <= 4; _i++>>
-    <<if not $dojoMeditationEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available meditation events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $dojoMeditationEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available meditation events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+    <<ResetRandomEvent "DojoMeditationEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -43,7 +27,7 @@
 <p>The dojo offers a tranquil corner for meditation, away from the bustle of training. You find a comfortable spot, close your eyes, and begin to focus on your breathing, letting the stillness of the room envelop you.</p>
 
 <!-- Random Meditation Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "DojoMeditationEvent" 4 true>>
     <<case 1>> <!-- Deep Tranquility -->
         <p>Your mind settles into a deep tranquility, the worries of the station life fading away. When you open your eyes, you feel refreshed and at peace.</p>
         <<changemoods "stress" "major" "PosEffectOnPlayer">>
@@ -68,7 +52,7 @@
         <p>Your meditation session is calming, if somewhat routine. You manage to find a moment of quiet in the midst of your hectic life.</p>
         <<changemoods "stress" "minor" "PosEffectOnPlayer">>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 

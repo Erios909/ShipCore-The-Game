@@ -16,21 +16,7 @@
 
 <<if $wharfsidePartsTradeEventsRecord.today != _today>>
     <<set $wharfsidePartsTradeEventsRecord.today to _today>>
-    <<set $wharfsidePartsTradeEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of trading parts for tech events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $wharfsidePartsTradeEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are events to trigger -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $wharfsidePartsTradeEventsRecord.triggeredEvents.push(_randomEvent)>>
+    <<ResetRandomEvent "WharfsidePartsTradeEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -43,7 +29,7 @@ Amidst the sea of neon signs and holographic displays, the Wharfside Tech Empori
 </p>
 
 <!-- Random Trading Parts for Tech Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "WharfsidePartsTradeEvent" 3 true>>
     <<case 1>> <!-- Rare Tech Opportunity -->
         <!-- Player trades for a rare piece of tech, gaining additional value. -->
         <<itemchange "cyberware" 2 "gain">> <!-- Gain of 1 additional cyberware -->
@@ -71,7 +57,7 @@ Amidst the sea of neon signs and holographic displays, the Wharfside Tech Empori
         <<creditchange 25 "positive">> <!-- Standard gain of credits -->
         <p>The trade is quick and efficient. Your parts are exchanged for a standard issue of cyberware and a small credit bonus, just as expected.</p>
         <br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <!-- Subtract the parts traded during the event -->

@@ -17,25 +17,7 @@
 
 <<if $marinersRestDrinkEventsRecord.today != _today>>
     <<set $marinersRestDrinkEventsRecord.today to _today>>
-    <<set $marinersRestDrinkEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<!-- Create a list of available events that have not occurred today -->
-<<set _availableEvents to []>>
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $marinersRestDrinkEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<!-- Select a random event from the available ones or default if none are available -->
-<<if _availableEvents.length>> <!-- If there are still available events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $marinersRestDrinkEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
+    <<ResetRandomEvent "MarinersRestDrinkEvent">>
 <</if>>
 
 <!-- Standard Heading Template -->
@@ -46,7 +28,7 @@
 <p>The dim lighting and quiet hum of conversation in Mariner's Rest offer a welcome reprieve from the station's cacophony. You order your favorite drink and find a spot where you can unwind, the gentle melody of a distant harmonica blending with the sound of clinking glasses.</p>
 
 <!-- Random Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "MarinersRestDrinkEvent" 10 true>>
     <<case 1>> <!-- Spacer's Salute -->
         <p>A group of spacers celebrating a successful salvage operation welcome you to their table. The shared stories and laughter are a welcome distraction from the tough life at the port.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
@@ -93,7 +75,7 @@
         <<set $player.credits -= 5>>
         <p>The evening winds down, and you find yourself a few credits lighter after sharing stories and drinks with newfound friends. It's a small price for the memories and warmth shared in this corner of the stars.</p>
         <<creditchange 5 "negative">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <!-- Continue Link -->

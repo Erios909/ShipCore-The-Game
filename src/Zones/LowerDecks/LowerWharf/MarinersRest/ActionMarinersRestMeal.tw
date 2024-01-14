@@ -16,23 +16,7 @@
 
 <<if $marinersRestMealEventsRecord.today != _today>>
     <<set $marinersRestMealEventsRecord.today to _today>>
-    <<set $marinersRestMealEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available meal events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $marinersRestMealEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available meal events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $marinersRestMealEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available meal events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
+    <<ResetRandomEvent "MarinersRestMealEvent">>
 <</if>>
 
 <!-- Area Header -->
@@ -43,7 +27,7 @@
 <p>You find a cozy corner in the bustling tavern and settle down with a menu. The aromas of spiced meats and fresh bread fill the air, promising a satisfying meal. As you place your order, the sounds of the port fade into the background, replaced by the anticipation of a comforting, hearty meal.</p>
 
 <!-- Random Meal Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "MarinersRestMealEvent" 10 true>>
     <<case 1>> <!-- Hearty Stew -->
         <p>The stew is rich and flavorful, filled with tender chunks of meat and vegetables. It warms you to the core and lifts your spirits.</p>
         <<changemoods "health" "major" "PosEffectOnPlayer">>
@@ -95,7 +79,7 @@
     <<default>> <!-- Default Meal Event -->
         <p>The meal is satisfying and filling, a solid square meal that helps you recharge after a long day. You feel ready to face whatever challenges come next.</p>
         <<changemoods "health" "minor" "PosEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 
