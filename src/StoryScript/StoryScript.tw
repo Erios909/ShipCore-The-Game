@@ -1261,6 +1261,27 @@ Macro.add('LowerDeckBusinessProfitability', {
 
             NB: This value is required to match between event pickers with the same name. 
             Providing different values can corrupt the shared state.
+
+    Examples:
+    Single Fire Events:
+    <<RandomEventPicker "EventName" 2>>
+        <<case 0>>
+            Event 0 has been fired.
+        <<case 1>>
+            Event 1 has been fired.
+        <<default>>
+            The default event has been fired.
+    <</RandomEventPicker>>
+
+    Multiple Fire Events
+    <<RandomEventPicker "EventName" 4>>
+        <<case 0 2 3>> // This event will fire a total of 3 times before becoming unavailable.
+            Event 0 has been fired.
+        <<case 1>>
+            Event 1 has been fired.
+        <<default>>
+            The default event has been fired.
+    <</RandomEventPicker>>
  */
 Macro.add('RandomEventPicker', {
     tags: ['case', 'default'],
