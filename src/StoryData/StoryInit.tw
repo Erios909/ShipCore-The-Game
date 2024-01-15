@@ -368,7 +368,7 @@ $lowerdecksFabricatorCyberware
 
 <<set $playerGenderA to 1>> <!-- Default gender value to "Man" -->
 
-
+<!-- PlayerCorporation setup variables -->
 <<set setup.SystemTemplate = {
   SystemName: "",
   SystemType: "",
