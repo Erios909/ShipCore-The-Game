@@ -11,28 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $shroudedMarketTradeContrabandEventsRecord>> <<set $shroudedMarketTradeContrabandEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $shroudedMarketTradeContrabandEventsRecord.today != _today>>
-    <<set $shroudedMarketTradeContrabandEventsRecord.today to _today>>
-    <<set $shroudedMarketTradeContrabandEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available contraband trading events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $shroudedMarketTradeContrabandEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available contraband trading events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $shroudedMarketTradeContrabandEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Shrouded Market - Trade Contraband</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -41,7 +19,8 @@
 <p>The Shrouded Market's underbelly is ripe with the whispers of contraband trade. You navigate through the crowd, your pockets heavy with illicit goods, ready to make a deal that will line them with credits instead.</p>
 
 <!-- Random Contraband Trading Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "ShroudedMarketTradeContrabandEvent">>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- High Demand -->
         <p>The items you're offering are in high demand. You negotiate a price that's well above the standard rate.</p>
         <<set $player.credits += 2200>>
@@ -107,7 +86,7 @@
         <<set $player.credits += 2000>>
         <<creditchange 2000 "positive">>
         <<itemchange "blackmarketactivity" 2000 "gain">>
-<</switch>>
+<</RandomEventPicker>>
 
 <!-- Continue Link -->
 [[Return to the Shrouded Market.|ShroudedMarket]]

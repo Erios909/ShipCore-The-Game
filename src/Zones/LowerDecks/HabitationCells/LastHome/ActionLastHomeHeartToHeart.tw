@@ -12,30 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lastHomeHeartEventsRecord>> <<set $lastHomeHeartEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lastHomeHeartEventsRecord.today != _today>>
-    <<set $lastHomeHeartEventsRecord.today to _today>>
-    <<set $lastHomeHeartEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available heart to heart events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $lastHomeHeartEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available heart to heart events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $lastHomeHeartEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available heart to heart events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Last Home</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -44,7 +20,8 @@
 <p>As time wears on, the crowd at The Last Home thins, leaving only the echo of departed patrons. You find yourself at the bar, face reflected in the well-worn countertop, as the bartender wipes down glasses. It's the perfect time for a quiet conversation, to share the weight of existence on MOR-1 with someone who understands the art of listening.</p>
 
 <!-- Random Heart to Heart Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "LastHomeHeartEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Shared Sorrows -->
         <p>The bartender shares a story of lost love, and you find common ground in shared sorrows. You both feel a weight lifted after the talk.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">>
@@ -91,7 +68,7 @@
         <p>The conversation turns mundane, and while you spend a few credits on drinks, you gain little from the exchange.</p>
         <<set $player.credits -= 5>>
         <<creditchange 5 "negative">><br>
-<</switch>>
+<</RandomEventPicker>>
 <br>
 
 <!-- Continue Link -->

@@ -11,28 +11,7 @@
 }>>
 <<updatebar>>
 
-<<if not $graftersGearBuyPartsEventsRecord>> <<set $graftersGearBuyPartsEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $graftersGearBuyPartsEventsRecord.today != _today>>
-    <<set $graftersGearBuyPartsEventsRecord.today to _today>>
-    <<set $graftersGearBuyPartsEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
 <<set _creditTransaction to 300>> <!-- Price advertised when clicking the option -->
-
-<<set _availableEvents to []>> <!-- List of available buying parts events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $graftersGearBuyPartsEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available buying parts events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $graftersGearBuyPartsEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
 
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Grafter's Gear - Buy Parts</span></h2>
@@ -42,8 +21,8 @@
 <p>The cool glow of bio-luminescent lights casts an otherworldly hue over the shelves of Grafter's Gear, illuminating the intricate web of cybernetic components for sale. With a discerning eye, you peruse the latest advancements in augmentation technology, each piece promising an edge in the harsh realities of space. The Grafter nods in recognition as you approach, ready to negotiate a deal for the essential parts your equipment needs.</p>
 
 <!-- Random Buying Parts Events -->
-<!-- Random Buying Parts Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "GraftersGearBuyPartsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Bulk Discount -->
         <p>The Grafter is in a good mood and offers you a slight discount for buying in bulk. It's a small gesture but welcome nonetheless.</p>
         <<creditchange 30 "positive">><br>
@@ -92,7 +71,7 @@
     <<default>> <!-- Default Buying Parts Event -->
         <p>The exchange goes as expected. No surprises; you hand over the standard rate and gain the parts you sought after.</p>
         <!-- No credit change, so no need for <<creditchange>> or <<debtchange>> macros here -->
-<</switch>>
+<</RandomEventPicker>>
 
 
 <!-- Continue Link -->

@@ -11,28 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $contrabandTechDepotBuyEventsRecord>> <<set $contrabandTechDepotBuyEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $contrabandTechDepotBuyEventsRecord.today != _today>>
-    <<set $contrabandTechDepotBuyEventsRecord.today to _today>>
-    <<set $contrabandTechDepotBuyEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available cyberware buying events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $contrabandTechDepotBuyEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available cyberware buying events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $contrabandTechDepotBuyEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Contraband Tech Depot - Buy Cyberware</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -40,7 +18,8 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>The air is thick with the electric scent of ozone and the undercurrent of danger that comes with dealing in forbidden tech. You're here to buy, and the sellers know it, their eyes gleaming with greed and opportunity.</p>
 
-<<switch _randomEvent>>
+<<RandomEventPicker "ContrabandTechDepotBuyEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Cutting-Edge Tech -->
         <p>You've managed to acquire some cutting-edge cyberware. The seller assures you it's top of the line, and the price reflects it.</p>
         <<itemchange "cyberware" 1 "gain">>
@@ -106,7 +85,7 @@
         <<itemchange "cyberware" 1 "gain">>
         <<creditchange 30 "negative">>
         <<itemchange "blackmarketactivity" 330 "gain">>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <br><br>

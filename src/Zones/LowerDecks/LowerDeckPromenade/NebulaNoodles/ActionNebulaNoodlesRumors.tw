@@ -11,21 +11,6 @@
 }>>
 <<updatebar>>
 
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-<<if not $nebulaRumorsEventsRecord>> 
-    <<set $nebulaRumorsEventsRecord to {today: "", triggeredEvents: []}>>
-<</if>>
-
-<<if $nebulaRumorsEventsRecord.today != _today>> 
-    <<set $nebulaRumorsEventsRecord.today to _today>>
-    <<set $nebulaRumorsEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to random(1, 10)>>
-<<if not $nebulaRumorsEventsRecord.triggeredEvents.includes(_randomEvent)>> 
-    <<set $nebulaRumorsEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Nebula Noodle Stand</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -34,7 +19,8 @@
 <p>You find a spot at the bar, the hum of conversation around you blending with the scent of spices and steam. As you wait for your order, you tune in to the snippets of gossip and tales being exchanged by the stand's eclectic clientele. The Nebula Noodle Stand isn't just a place for a good meal; it's a nexus of news and rumors for those who know how to listen.</p>
 
 <!-- Random Rumor Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "NebulaNoodlesRumorsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- A Laugh Among Friends -->
         <p>A group of regulars shares a joke that has the whole stand laughing. The good cheer is infectious, and you find your spirits lifted.</p>
         <<changemoods "mood" "minor" "PosEffectOnPlayer">><br>
@@ -86,7 +72,7 @@
             <p>You realize you don't have enough credits to pay attention to any valuable information. The missed opportunity adds to your stress.</p>
             <<changemoods "stress" "minor" "NegEffectOnPlayer">><br>
         <</if>>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 

@@ -11,30 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $patchItPodScavengeEventsRecord>> <<set $patchItPodScavengeEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $patchItPodScavengeEventsRecord.today != _today>>
-    <<set $patchItPodScavengeEventsRecord.today to _today>>
-    <<set $patchItPodScavengeEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available scavenging events -->
-<<for _i to 1; _i <= 5; _i++>>
-    <<if not $patchItPodScavengeEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available scavenging events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $patchItPodScavengeEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available scavenging events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Patch-It Pod - Scavenging</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -42,7 +18,8 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 <!-- Random Scavenging Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "PatchItPodScavengeEvent" 5 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Hidden Gem Among the Scrap -->
         <p>Deep within a pile of scrap, your hand grazes something solid and unexpectedly pristine. It's a functioning data pad, perhaps discarded in haste or error. It could fetch a good price.</p>
         <<creditchange 30 "positive">>
@@ -71,7 +48,7 @@
         <p>Your search through the recyclers doesn't unearth anything of big value today, but the smaller components you find could prove useful later. It's not a wasted effort.</p>
         <<changemoods "powerReserves" "minor" "PosEffectOnPlayer">>
         <<itemchange "scrap" 1 "gain">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <br>

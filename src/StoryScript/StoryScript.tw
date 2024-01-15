@@ -1245,11 +1245,275 @@ Macro.add('LowerDeckBusinessProfitability', {
 });
 
 
+/*  Random Event Picker
+
+    Creates a random event picker instance with the specified name.
+    
+    Every time the picker is evaluated it will pick and fire an event that is has not picked before.
+    If all events have been picked before it will fire the default event.
+
+    Arguments: 
+        (string) eventName:
+            The name of the event picker. 
+            All event pickers with the same name share the same state.
+        (int) numEvents:
+            The number of event indices to generate.
+            If there are not enough cases to match all the indices there will be cases where NO event will fire (not even the default).
+
+            NB: This value is required to match between event pickers with the same name. 
+            Providing different values can corrupt the shared state.
+        (bool, optional) oneIndexed:
+            If true the case indices are considered as starting from one (1). [1..10]
+            If false the case indices are considered as starting from zero (0). [0..9]
+
+    Container Elements:
+        Reset Triggers:
+            A selection of tags that are evaluated before an event is picked.
+            If a trigger condition succeeds the event pool is reset before a new event is picked. 
+            
+            <<onChangeResetTrigger Expression>> - Reset trigger
+                Evaluates the expression and compares the result to a previous evaluation of the trigger.
+                If the result is different the event picker is reset.
+                If the result is the same, the trigger is a noop.
+
+        Event Cases - Defines the behaviour of different events that can be picked:
+            <<case N... >> - Event tag.
+                The contents of this case will be selected whenever the N-th indice is picked.
+                Multiple N indices can be defined with a space separator.
+            <<default>> - The default event tag. Must be last.
+                The contents of this case will be selected whenever all other cases have been previously selected.
+
+    Examples:
+    Single Fire Events:
+    <<RandomEventPicker "EventName" 2>>
+        <<case 0>>
+            Event 0 has been fired.
+        <<case 1>>
+            Event 1 has been fired.
+        <<default>>
+            The default event has been fired.
+    <</RandomEventPicker>>
+
+    Multiple Fire Events:
+    <<RandomEventPicker "EventName" 4>>
+        <<case 0 2 3>> // This event will fire a total of 3 times before becoming unavailable.
+            Event 0 has been fired.
+        <<case 1>>
+            Event 1 has been fired.
+        <<default>>
+            The default event has been fired.
+    <</RandomEventPicker>>
+
+    Automatic Reset Trigger:
+    <<RandomEventPicker "Automatic Reset On New Game Day" 3>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+    <<case 0>>
+        AutoReset Case 0
+    <<case 1>>
+        AutoReset Case 1
+    <<case 2>>
+        AutoReset Case 2
+    <<default>>
+        AutoReset Default
+    <</RandomEventPicker>>
+
+ */
+Macro.add('RandomEventPicker', {
+    tags: ['case', 'default', 'onChangeResetTrigger'],
+    
+    handler() {
+        /* Parameter validation */
+        switch (this.args.length) {
+            case 0:
+                return this.error("No event picker name specified.");
+            case 1:
+                return this.error("No number of event cases specified.");
+        }
+
+        let eventName = this.args[0];
+        let numEvents = this.args[1];
+        let oneIndexed = this.args.length > 3 ? this.args[2] : false;
+
+        const len = this.payload.length;
+        if (len === 1) {
+            return this.error("No event cases specified.");
+        }
+
+        let i;
+        let resetTriggersRegistrationCompleted = false;
+        let resetTriggers = [];
+
+        // Sanity checks and loading of reset triggers.
+        for(/* Declared previously */ i = 1; i < len; i++) {
+            switch (this.payload[i].name) {
+                case 'onChangeResetTrigger':
+                    if(resetTriggersRegistrationCompleted) {
+                        return this.error(`All reset triggers must be registreed before the first <<case>>. Invalid: ${this.payload[i].args.raw}`);
+                    }
+                    resetTriggers.push(this.payload[i]);
+                    break;
+                case 'default':
+                    if (this.payload[i].args.length > 0) {
+						return this.error(`<<default>> does not accept values, invalid: ${this.payload[i].args.raw}`);
+					}
+
+					if (i + 1 !== len) {
+						return this.error('<<default>> must be the final case');
+					}
+                    break;
+                default:
+                    // Marks the reset trigger registration as completed.
+                    resetTriggersRegistrationCompleted = true;
+                    if (this.payload[i].args.length === 0) {
+						return this.error(`no value(s) specified for <<${this.payload[i].name}>> (#${i})`);
+					}
+                    break;
+            }
+        }
+
+        // Generate Global Shared State if not generated.
+        const internalSharedStateVarName = "$Internals_RandomEventPicker_SharedState";
+        let globalSharedState = State.getVar(internalSharedStateVarName);
+        if (typeof globalSharedState === "undefined") {
+            globalSharedState = new Map();
+            if (!State.setVar(internalSharedStateVarName, globalSharedState)) {
+                return this.error("Could not generate event picker global shared state.")
+            }
+        }
+
+        // Generates the shared state for the current event if it does not exist.
+        if(!globalSharedState.has(eventName)) {
+            globalSharedState.set(eventName, {
+                regenerateEventsFlag: true,     // Flag that the events array needs to be seeded again.
+                events: [],                     // A collection of randomly generated events that are to be executed in order.
+                resetTriggerStates: new Map()  // Map for storing persistent data about automatic reset triggers.
+            });
+        }
+
+        // Should be pretty straight forward as we set it earlier if one does not exist.
+        let eventSharedState = globalSharedState.get(eventName);
+
+        // Evaluate all reset triggers for automatic reset.
+        // TODO@Dimi: Possibly use Array.forEach() instead?
+        for (/* Declared previously */ i = 0; i < resetTriggers.length; i++) {
+            const evaluatedTrigger = resetTriggers[i];
+            const resetTriggerStates = eventSharedState.resetTriggerStates;
+            // The state key for the currently evaluated reset trigger.
+            const resetTriggerSharedStateKey = `${evaluatedTrigger.name}-${i}`;
+
+            let triggerEvalResult;
+            switch (evaluatedTrigger.name) {
+                // Trigger that flags the event for reset if its expression is changed from the last evaluation.
+                case 'onChangeResetTrigger': 
+                    // Creates a shared state if it does not exist.
+                    if (!resetTriggerStates.has(resetTriggerSharedStateKey)) {
+                        resetTriggerStates.set(resetTriggerSharedStateKey, {
+                            previousValue: undefined // Stores the value from the previous evaluation.
+                        });
+                    }
+
+                    const triggerState = resetTriggerStates.get(resetTriggerSharedStateKey);
+
+                    // Evaluates the trigger.
+                    try {
+                        triggerEvalResult = Scripting.evalJavaScript(evaluatedTrigger.args.full);
+                    }
+                    catch (ex) {
+                        return this.error(`bad evaluation: ${typeof ex === 'object' ? ex.message : ex}`);
+                    }
+
+                    // If the trigger event result is different from the previous value,
+                    // mark the event for regeneration and save the new result.
+                    if(triggerEvalResult !== triggerState.previousValue) {
+                        eventSharedState.regenerateEventsFlag = true;
+                        triggerState.previousValue = triggerEvalResult;
+                    }
+                    break;
+                default:
+                    return this.error(`Unknown trigger: ${triggerName}`);
+            }
+        }
+
+        // Regenerate the events array if requested.
+        if(eventSharedState.regenerateEventsFlag) {
+            // Generates an array from 0 to N - 1
+            let events = [...Array(numEvents).keys()]
+            // TODO@Dimi: Probably move this to a shuffle function.
+            // Durstenfeld shuffle - https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
+            for (/* Declared previously */ i = events.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [events[i], events[j]] = [events[j], events[i]];
+            }
+            // Sets the event queue and resets the regenerate flag.
+            eventSharedState.events = events;
+            eventSharedState.regenerateEventsFlag = false;
+        }
 
 
+        let success = false;
+        
+        if(Config.debug) {
+            this.debugView.name = eventName;
+            this.debugView.title = JSON.stringify(eventSharedState);
+        }
 
+        // All events have been fired. Fire the default event.
+        if(eventSharedState.events.length === 0) {
+            // Finds and executes the default statement.
+            for(/* Declared previously */ i = 1; i < len; i++) {
+                if(this.payload[i].name === 'default') {
+                    success = true;
+                    new Wikifier(this.output, this.payload[i].contents);
+                    break;
+                }
+            }
+            return;
+        }
 
+        // Deque an event from the event queue.
+        let selectedEventIndex = eventSharedState.events.shift();
+        // Evaluate the clauses
+        for (/* Declared previously */ i = 1; i < len; i++) {
+            if(this.payload[i].args.some(val => val === selectedEventIndex + (oneIndexed ? 1 : 0))) {
+                success = true;
+                new Wikifier(this.output, this.payload[i].contents);
+                break;
+            }
+        }
+    }
+});
 
+/*
+    Marks a RandomEventPicker for reset.
+    The event picker will regenerate the pool of events from which to pick the next time its invoked.
+ */
+Macro.add('ResetRandomEvent', {
+    handler() {
+        switch (this.args.length) {
+            case 0:
+                return this.error("No event picker name specified.");
+        }
 
+        let eventName = this.args[0];
 
+        // Generate Global Shared State if not generated.
+        const internalSharedStateVarName = "$Internals_RandomEventPicker_SharedState";
+        let globalSharedState = State.getVar(internalSharedStateVarName);
+        if (typeof globalSharedState === "undefined") {
+            // No need to reset any events if no global state exists.
+            return;
+        }
 
+        // Sets the regenerate events flag if the event exists.
+        if(globalSharedState.has(eventName)) {
+            globalSharedState.get(eventName).regenerateEventsFlag = true;
+        }
+    }
+});
+
+Macro.add('WipeRandomEventPickerGlobalState', {
+    handler() {
+        const internalSharedStateVarName = "$Internals_RandomEventPicker_SharedState";
+        State.setVar(internalSharedStateVarName, undefined);
+    }
+});

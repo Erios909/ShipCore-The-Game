@@ -11,30 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $patchItPodWorkRecord>> <<set $patchItPodWorkRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $patchItPodWorkRecord.today != _today>>
-    <<set $patchItPodWorkRecord.today to _today>>
-    <<set $patchItPodWorkRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available repair work events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $patchItPodWorkRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available repair work events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $patchItPodWorkRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available repair work events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Patch-It Pod - Repair Work</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -42,7 +18,8 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 <!-- Random Repair Work Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "PatchItPodWorkEvent" 3 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Complex Circuitry Challenge -->
         <p>You are handed a tangled mess of wires and circuit boards. It's a challenge, but with focus and a steady hand, you manage to repair the device. The owner is grateful, and your work does not go unrewarded.</p><br>
         <<creditchange 125 "positive">><br>
@@ -58,7 +35,7 @@
     <<default>> <!-- Default Repair Work Event -->
         <p>Your shift at the Patch-It Pod comes to an end. The mundane repairs were nothing out of the ordinary, but you're content with the work and the steady pay it brings.</p><br>
         <<creditchange 115 "positive">>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <br><br>

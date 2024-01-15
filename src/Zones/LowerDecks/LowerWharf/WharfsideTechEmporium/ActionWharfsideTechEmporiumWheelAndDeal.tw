@@ -14,28 +14,6 @@
     }>>
     <<updatebar>>
     
-    <<if not $wharfsideWheelAndDealEventsRecord>> <<set $wharfsideWheelAndDealEventsRecord to {}>><</if>>
-    <<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-    
-    <<if $wharfsideWheelAndDealEventsRecord.today != _today>>
-        <<set $wharfsideWheelAndDealEventsRecord.today to _today>>
-        <<set $wharfsideWheelAndDealEventsRecord.triggeredEvents to []>>
-    <</if>>
-    
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
-    
-    <<set _availableEvents to []>> <!-- List of available wheel and deal trading events -->
-    <<for _i to 1; _i <= 11; _i++>>
-        <<if not $wharfsideWheelAndDealEventsRecord.triggeredEvents.includes(_i)>>
-            <<set _availableEvents.push(_i)>>
-        <</if>>
-    <</for>>
-    
-    <<if _availableEvents.length>> <!-- If there are still available wheel and deal trading events -->
-        <<set _randomEvent to _availableEvents.random()>>
-        <<set $wharfsideWheelAndDealEventsRecord.triggeredEvents.push(_randomEvent)>>
-    <</if>>
-    
     <!-- Area Header -->
     <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Wharfside Tech Emporium - Wheel and Deal</span></h2>
     <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -44,7 +22,8 @@
     <p>With an assortment of scrap, parts, and cyberware at your disposal, you dive into the bustling trade hall. It's a veritable treasure trove for a savvy dealer; you just need to find the right buyer to turn your collection into a windfall.</p>
     
     <!-- Random Wheel and Deal Trading Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "WharfsideWheelAndDealEvent" 11 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Profitable Trade-Up -->
         <<itemchange "cyberware" 2 "gain">>
         <<creditchange 50 "positive">>
@@ -122,7 +101,7 @@
         <<creditchange 100 "positive">>
         <p>You play it safe and opt for an even-steven exchange. Each item finds a new owner, and you walk away with a more valuable selection and a satisfying amount of credits to boot.</p>
         <br>
-<</switch>>
+<</RandomEventPicker>>
 
     <br>
     

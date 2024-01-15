@@ -11,30 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $patchItPodLockerEventsRecord>> <<set $patchItPodLockerEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $patchItPodLockerEventsRecord.today != _today>>
-    <<set $patchItPodLockerEventsRecord.today to _today>>
-    <<set $patchItPodLockerEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available locker salvaging events -->
-<<for _i to 1; _i <= 5; _i++>>
-    <<if not $patchItPodLockerEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available locker salvaging events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $patchItPodLockerEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available locker salvaging events -->
-    <<set _randomEvent to 0>> <!-- Default to the default event -->
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Patch-It Pod - Locker Salvaging</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -42,7 +18,8 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 
 <!-- Random Locker Salvaging Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "PatchItPodLockerEvent" 5 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Mysterious Artifact -->
         <p>Amongst forgotten debris, a mysterious artifact captures your attention. Its origins and function unclear, but undoubtedly valuable to the right buyer.</p>
         <<creditchange 40 "positive">>
@@ -67,7 +44,7 @@
     <<default>> <!-- Default Locker Salvaging Event -->
         <p>The contents of the lockers are mundane, but amongst the assorted bric-a-brac, you find useful knick-knacks and oddments. Nothing of great value, but enough to cover a meal.</p>
         <<creditchange 55 "positive">>
-<</switch>>
+<</RandomEventPicker>>
 
 <br><br>
 <!-- Continue Link -->

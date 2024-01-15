@@ -150,8 +150,17 @@ Combined Difficulty: $combinedDifficultyScore
 [[DaltonCompanionMission|DaltonCompanionMission]]<br>
 [[JaxReturnToColdStorage|JaxReturnToColdStorage]]<br>
 
-[[testmenu|test menu]]<br><br>
+[[testmenu|test menu]]<br>
+[[Test Random Event Picker]]<br><br>
 
+[[ContrabandTechDepotBuyCyberware]] <br>
+[[RoguesGalleryDrink]] <br>
+
+<br><br>
+
+<<button "Wipe Events Global State">>
+    <<WipeRandomEventPickerGlobalState>>
+<</button>>
 
 <<if $eventStack === undefined>>
     <<set $eventStack = []>>

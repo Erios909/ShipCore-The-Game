@@ -11,30 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $dojoTrainingEventsRecord>> <<set $dojoTrainingEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $dojoTrainingEventsRecord.today != _today>>
-    <<set $dojoTrainingEventsRecord.today to _today>>
-    <<set $dojoTrainingEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available training events -->
-<<for _i to 1; _i <= 4; _i++>>
-    <<if not $dojoTrainingEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available training events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $dojoTrainingEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available training events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Solo Training at the Dojo</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -43,7 +19,8 @@
 <p>You step onto the familiar mats of the dojo, the space quiet except for the soft hum of the station's life support systems. With no class in session, you have the luxury of focusing on your personal training regimen. You begin with a series of stretches, warming up your muscles for the workout ahead.</p>
 
 <!-- Random Training Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "DojoTrainingEvent" 4 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Focused Practice -->
         <p>Your strikes hit the training dummy with precision, each one a testament to your improving skill. The repetition is meditative, and you find yourself in a state of flow.</p>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
@@ -69,7 +46,7 @@
         <p>Your solo training session is productive, if uneventful. You go through your paces, maintaining your current level of skill and fitness.</p>
         <<changemoods "health" "minor" "PosEffectOnPlayer">>
         <<changemoods "fatigue" "minor" "NegEffectOnPlayer">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 

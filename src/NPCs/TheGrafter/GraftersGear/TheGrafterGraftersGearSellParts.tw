@@ -11,28 +11,7 @@
 }>>
 <<updatebar>>
 
-<<if not $graftersGearSellPartsEventsRecord>> <<set $graftersGearSellPartsEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $graftersGearSellPartsEventsRecord.today != _today>>
-    <<set $graftersGearSellPartsEventsRecord.today to _today>>
-    <<set $graftersGearSellPartsEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
 <<set _creditGain to 150>> <!-- Advertised price for selling parts -->
-
-<<set _availableEvents to []>> <!-- List of selling parts events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $graftersGearSellPartsEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are events to trigger -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $graftersGearSellPartsEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
 
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Grafter's Gear - Sell Parts</span></h2>
@@ -42,7 +21,8 @@
 <p>Amongst the buzz of servo motors and the soft hum of machinery, you unpack the valuable parts you've acquired. The shop's cluttered interior is a testament to the variety of enhancements that have passed through here. You lay out your wares on the counter, catching the Grafter's attention as you prepare to barter for the best price. In this den of tech and metal, every part has its price.</p>
 
 <!-- Random Selling Parts Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "GraftersGearSellPartsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Keen Interest -->
         <p>You find the Grafter particularly keen on acquiring your parts. With a bit of back-and-forth, you manage to secure a better deal.</p>
         <<creditchange 120 "positive">><br>
@@ -86,7 +66,7 @@
     <<default>> <!-- Default Selling Parts Event -->
         <p>It's business as usual at the Grafter's Gear. The parts are sold at the expected price, without any fuss.</p>
         <<creditchange 100 "positive">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 <br>
 

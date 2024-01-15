@@ -11,28 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $shroudedMarketSellStolenEventsRecord>> <<set $shroudedMarketSellStolenEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $shroudedMarketSellStolenEventsRecord.today != _today>>
-    <<set $shroudedMarketSellStolenEventsRecord.today to _today>>
-    <<set $shroudedMarketSellStolenEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available stolen item selling events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $shroudedMarketSellStolenEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available stolen item selling events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $shroudedMarketSellStolenEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Shrouded Market - Sell Stolen Items</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -40,7 +18,8 @@
 <hr id="locationHr" style="margin-top: 5px; margin-bottom: 5px;">
 <p>In the dimly lit corners of the Shrouded Market, you find yourself among other shadowy figures, each looking to convert their ill-gotten gains into something more liquid. You clutch your stolen items, knowing that here, the right buyer can make all the difference.</p>
 
-<<switch _randomEvent>>
+<<RandomEventPicker "ShroudedMarketSellStolenEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Lucky Break -->
         <p>A collector is on the lookout for exactly what you're selling. You strike a deal for a bit more than the usual rate.</p>
         <<set $player.credits += 550>>
@@ -106,7 +85,7 @@
         <<set $player.credits += 500>>
         <<creditchange 500 "positive">>
         <<itemchange "blackmarketactivity" 500 "gain">>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <!-- Continue Link -->

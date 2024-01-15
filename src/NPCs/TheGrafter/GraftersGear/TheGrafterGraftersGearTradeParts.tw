@@ -12,28 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $graftersGearTradePartsEventsRecord>> <<set $graftersGearTradePartsEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $graftersGearTradePartsEventsRecord.today != _today>>
-    <<set $graftersGearTradePartsEventsRecord.today to _today>>
-    <<set $graftersGearTradePartsEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available trading parts events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $graftersGearTradePartsEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are events to trigger -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $graftersGearTradePartsEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Grafter's Gear - Trade Parts</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -42,7 +20,8 @@
 <p>The air is thick with the scent of lubricant and burnt ozone, mingling with the metallic tang of the cyberware that adorns every corner of Grafter's Gear. You slide a set of high-quality parts across the counter, your eyes locked with the Grafter's calculating gaze. The prospect of a beneficial trade hangs in the air, the potential to walk away with something far more valuable than what you offered.</p>
 
 <!-- Random Trading Parts Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "GraftersGearTradePartsEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Lucrative Exchange -->
         <p>The Grafter is particularly interested in the parts you offer and throws in a little extra as a bonus. You walk away with more cyberware than expected and a small credit bump.</p>
         <<itemchange "cyberware" 2 "gain">>
@@ -100,7 +79,7 @@
     <<default>> <!-- Default Trading Parts Event -->
         <p>The trade goes smoothly without any hitches. You exchange your part for a piece of cyberware that catches your eye.</p>
         <<itemchange "cyberware" 1 "gain">>
-<</switch>>
+<</RandomEventPicker>>
 
 <br><br>
 

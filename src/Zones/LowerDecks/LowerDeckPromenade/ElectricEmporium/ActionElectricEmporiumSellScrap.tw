@@ -12,28 +12,6 @@
 }>>
 <<updatebar>>
 
-<<if not $electricEmporiumSellScrapEventsRecord>> <<set $electricEmporiumSellScrapEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $electricEmporiumSellScrapEventsRecord.today != _today>>
-    <<set $electricEmporiumSellScrapEventsRecord.today to _today>>
-    <<set $electricEmporiumSellScrapEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to the default event -->
-
-<<set _availableEvents to []>> <!-- List of available quick selling events -->
-<<for _i to 1; _i <= 3; _i++>>
-    <<if not $electricEmporiumSellScrapEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available quick selling events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $electricEmporiumSellScrapEventsRecord.triggeredEvents.push(_randomEvent)>>
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">The Electric Emporium - Quick Sale</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -42,8 +20,8 @@
 <p>The scent of molten solder hangs heavy in the air as you navigate through the crowded aisles of The Electric Emporium. Here, every bit of scrap holds value to someone. You carry your raw materials to a buyer who eyes it with a mixture of greed and calculation. Time is money, and you're hoping for a quick transaction to unload your scrap and line your pockets with a few more credits before stepping back into the fray.</p>
 
 /* Random Quick Selling Events */
-/* Random Quick Selling Events */
-<<switch _randomEvent>>
+<<RandomEventPicker "ElectricEmporiumSellScrapEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Buyer's Market -->
         <p>The market’s in your favor today as buyers are in high demand for scrap. You secure a deal that's above the average going rate.</p>
         <<creditchange 40 "positive">>
@@ -98,7 +76,7 @@
         <p>A standard transaction; no haggling, no fuss. You hand over the scrap and receive the average rate, with the whole affair done swiftly.</p>
         <<creditchange 30 "positive">>
         <<itemchange "scrap" 1 "loss">><br>
-<</switch>>
+<</RandomEventPicker>>
 
 
 <br>

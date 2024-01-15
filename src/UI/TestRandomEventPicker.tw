@@ -1,0 +1,45 @@
+:: Test Random Event Picker [nobr] {"position":"1450,50","size":"100,100"}
+
+Random Event Tests:
+<br>
+<<RandomEventPicker "TestEvent1" 4>>
+    <<case 0>>
+        E1 Case 0
+    <<case 1>>
+        E1 Case 1
+    <<case 2>>
+        E1 Case 2
+    <<case 3>>
+        E1 Case 3
+    <<default>>
+        E1 Default
+<</RandomEventPicker>>
+<br>
+<<RandomEventPicker "TestEvent2" 4>>
+    <<case 0 1 2>>
+        E2 Case 0 1 2
+    <<case 3>>
+        E2 Case 3
+    <<default>>
+        E2 Default
+<</RandomEventPicker>>
+<br>
+<<RandomEventPicker "Automatic Reset On New Day" 3>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
+    <<case 0>>
+        AutoReset Case 0
+    <<case 1>>
+        AutoReset Case 1
+    <<case 2>>
+        AutoReset Case 2
+    <<default>>
+        AutoReset Default
+<</RandomEventPicker>>
+
+<br>
+<<button "Reset Events">>
+<<ResetRandomEvent "TestEvent1">>
+<<ResetRandomEvent "TestEvent2">>
+<</button>>
+
+<br>[[Test Random Event Picker]]<br>

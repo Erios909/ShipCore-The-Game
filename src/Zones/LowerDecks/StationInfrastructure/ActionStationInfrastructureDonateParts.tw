@@ -11,30 +11,6 @@
 }>>
 <<updatebar>>
 
-<<if not $lowerEngineeringDonationEventsRecord>> <<set $lowerEngineeringDonationEventsRecord to {}>><</if>>
-<<set _today to $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
-
-<<if $lowerEngineeringDonationEventsRecord.today != _today>>
-    <<set $lowerEngineeringDonationEventsRecord.today to _today>>
-    <<set $lowerEngineeringDonationEventsRecord.triggeredEvents to []>>
-<</if>>
-
-<<set _randomEvent to 0>> <!-- Default to no event -->
-
-<<set _availableEvents to []>> <!-- List of available donation events -->
-<<for _i to 1; _i <= 10; _i++>>
-    <<if not $lowerEngineeringDonationEventsRecord.triggeredEvents.includes(_i)>>
-        <<set _availableEvents.push(_i)>>
-    <</if>>
-<</for>>
-
-<<if _availableEvents.length>> <!-- If there are still available donation events -->
-    <<set _randomEvent to _availableEvents.random()>>
-    <<set $lowerEngineeringDonationEventsRecord.triggeredEvents.push(_randomEvent)>>
-<<else>> <!-- If there are no more available donation events -->
-    <<set _randomEvent to 0>> <!-- Reset events for the next day -->
-<</if>>
-
 <!-- Area Header -->
 <h2 id="titleHeading" style="margin-top: 10px; margin-bottom: 10px;"><span style="color: lightblue; font-weight: bold; font-size: 24px;">Lower Engineering</span></h2>
 <hr id="titleHr" style="margin-top: 5px; margin-bottom: 5px;">
@@ -43,7 +19,8 @@
 <p>Amidst the hum of machinery and the clatter of tools, you offer your parts to the engineering team. The engineers, always in need of supplies, welcome your contribution. As you hand over the parts, you can't help but feel a sense of camaraderie with the hardworking crew keeping the station running.</p>
 
 <!-- Random Donation Events -->
-<<switch _randomEvent>>
+<<RandomEventPicker "LowerEngineeringDonationEvent" 10 true>>
+    <<onChangeResetTrigger $gameDate.getFullYear() + "-" + ($gameDate.getMonth() + 1) + "-" + $gameDate.getDate()>>
     <<case 1>> <!-- Critical Repair -->
         <p>As you hand over the parts to the engineering team, a critical alert blares through the station's PA system. A life support conduit has ruptured in one of the habitation sectors. Thanks to your timely donation, the engineers are able to patch the breach swiftly, averting a potential disaster. The station's residents breathe easier, both literally and figuratively, and the market reflects the positive sentiment. You leave the engineering bay with a sense of pride and a little extra weight in your credit pouch.</p>
         <<set _creditsEarned to random(100, 250)>>
@@ -142,7 +119,7 @@
         <<changemoods "economy" "minor" "PosEffectOnPlayer">>
         <<addmins $timeadd>><br>
         
-<</switch>>
+<</RandomEventPicker>>
 <span class="i-gain">+Lower Rep</span>
 <<set $lowerdecksRep += 5>>
 <br><br>
