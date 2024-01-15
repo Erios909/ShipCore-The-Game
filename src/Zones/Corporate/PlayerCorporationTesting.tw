@@ -340,3 +340,34 @@ $(document).one(":passagerender", function() {
     });
 });
 <</script>>
+
+
+TODO GOALS:
+- Keep in mind that these fucntions should all be implemented in the test page, for now. We'll move the different functions and effects into the game world via passages and interactions one the functionality is setup. For system creation, we should create a few test systems, and then work on a full map creation system so we avoid manually creating 200+ systems ourselves.
+- Create a system
+- Create a corporation
+- Create a division
+- Display a list of systems
+- Display a list of corporations
+- Display a list of divisions
+- Display a list of recipes based on division type and category
+- Implmenet live display boxes for viewing system/corporation/division/recipe data
+- Allow player to select a corporation
+- Allow player to select a division
+- Allow player to select a recipe for division
+- Test the recipe selection and navigation
+- Test the recipe selection and navigation with multiple divisions
+- Test the recipe selection and navigation with multiple corporations
+- Test the recipe selection and navigation with multiple corporations and divisions
+- Test the recipe selection and navigation with multiple corporations and divisions and recipes
+- Test the recipe selection and navigation with multiple corporations and divisions and recipes and categories
+- Test time processing and cycle processing of corporations and divisions with and without recipes
+- Test time processing and cycle processing of corporations and divisions with and without recipes with multiple corporations and divisions
+- Implement and test systems with variable economy statuses, price modifiers, and resource modifiers
+- Implement autoselling, autodebt pay, stockpiling, and division/corporation resource management in processing cycle
+- Implement increasing division and corporation levels, one division per corporation level, one active recipe per division level
+- Implement market flucations, economic crises and economic booms.
+- Implement corporation divisions, badges, and licesnes, enable purchase of license from system owning faciton, and price penalty for not doing so as well as activating an extra-legal flag for furth event processing
+- Implement player corporation and division autosell effects on baseline economy
+- Implement division dissolution on reaching a max debt based on level and assets, Implement corporation dissolution on reaching a max debt based on level and assets
+- Test things
