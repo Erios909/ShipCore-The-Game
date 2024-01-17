@@ -1,0 +1,59 @@
+:: RunPassage [nobr]
+
+<<script>>
+setup.attemptRunPassage = function() {
+    var passageName = document.getElementById('targetPassage').value.trim();
+    var variablesScript = document.getElementById('variablesToSet').value.trim();
+    var errorOutput = document.getElementById('errorOutput');
+    if (passageName === "") {
+        errorOutput.textContent = "Error: Passage name cannot be empty.";
+        return;
+    }
+    if (!Story.has(passageName)) {
+        errorOutput.textContent = "Error: Passage '" + passageName + "' does not exist.";
+        return;
+    }
+    if (variablesScript !== "") {
+        try {
+            /* Use temporary variables to safely evaluate user input. */
+            Scripting.evalJavaScript("var tempVarScope = new Map(" + variablesScript + "); tempVarScope.forEach((value, key) => State.variables[key] = value);");
+        } catch (err) {
+            errorOutput.textContent = "Error in variable syntax: " + err.message;
+            return;
+        }
+    }
+    
+    /* Reset error output and display the passage. */
+    errorOutput.textContent = "";
+    Engine.play(passageName);
+};
+<</script>>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interaction Form</title>
+        <style>
+         .input-default-text, .textarea-default-text {
+	     color: white;
+         }
+         input, textarea {
+	     color: gray;
+         }
+         #errorOutput {
+             color: red;
+         }
+        </style>
+    </head>
+    <body>
+        <input id="targetPassage" spellcheck="false" class="input-default-text" type="text" placeholder="Enter passage name (e.g. BraxtonIntro)">
+        <br>
+        <textarea id="variablesToSet" spellcheck="false" class="textarea-default-text" placeholder="Passage variables (Unimplemented)"></textarea>
+        <br>
+        <<button "Run">>
+            <<run setup.attemptRunPassage()>>
+        <</button>>
+        <p id="errorOutput"></p>
+    </body>
+</html>

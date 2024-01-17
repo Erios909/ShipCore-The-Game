@@ -41,7 +41,6 @@ window.setup = window.setup || {};
 
 window.currentTrackTimeout = null;
 window.currentTrack = null;
-console.log("ohhh mh gerd");
 
 setup.advanceTrack = function() {
     var track = setup.songList[setup.currentSongIndex];

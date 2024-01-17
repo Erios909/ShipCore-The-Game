@@ -141,7 +141,8 @@ Combined Difficulty: $combinedDifficultyScore
 <</link>><br><br>
 
 <<link "Encounter with Dalton" "DaltonIntro">>Go to Dalton Intro<</link>><br>
-<<link "Ambush by Braxton" "BraxtonIntro">>Go to Braxton Ambush<</link>> <br><br>
+<<link "Ambush by Braxton" "BraxtonIntro">>Go to Braxton Ambush<</link>> <br>
+<<link "Run Passage" "RunPassage">>Run a passage<</link>><br><br>
 
 
 [[Corporate Management Test|Corporate Management Test]]<br>
