@@ -1,21 +1,18 @@
-:: TestPassage [nobr]
+:: RunPassage [nobr]
 
 <<script>>
 setup.attemptRunPassage = function() {
     var passageName = document.getElementById('targetPassage').value.trim();
     var variablesScript = document.getElementById('variablesToSet').value.trim();
     var errorOutput = document.getElementById('errorOutput');
-
     if (passageName === "") {
         errorOutput.textContent = "Error: Passage name cannot be empty.";
         return;
     }
-
     if (!Story.has(passageName)) {
         errorOutput.textContent = "Error: Passage '" + passageName + "' does not exist.";
         return;
     }
-
     if (variablesScript !== "") {
         try {
             /* Use temporary variables to safely evaluate user input. */
@@ -25,7 +22,7 @@ setup.attemptRunPassage = function() {
             return;
         }
     }
-
+    
     /* Reset error output and display the passage. */
     errorOutput.textContent = "";
     Engine.play(passageName);
@@ -50,16 +47,13 @@ setup.attemptRunPassage = function() {
         </style>
     </head>
     <body>
-
-        <input id="targetPassage" class="input-default-text" type="text" placeholder="Enter passage name">
+        <input id="targetPassage" spellcheck="false" class="input-default-text" type="text" placeholder="Enter passage name (e.g. BraxtonIntro)">
         <br>
-        <textarea id="variablesToSet" spellcheck="false" class="textarea-default-text" placeholder="Enter variables (e.g., <<set $JaxIsCompanion to true>>)"></textarea>
+        <textarea id="variablesToSet" spellcheck="false" class="textarea-default-text" placeholder="Passage variables (Unimplemented)"></textarea>
         <br>
-
         <<button "Run">>
             <<run setup.attemptRunPassage()>>
         <</button>>
         <p id="errorOutput"></p>
-
     </body>
 </html>

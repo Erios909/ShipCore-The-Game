@@ -142,7 +142,7 @@ Combined Difficulty: $combinedDifficultyScore
 
 <<link "Encounter with Dalton" "DaltonIntro">>Go to Dalton Intro<</link>><br>
 <<link "Ambush by Braxton" "BraxtonIntro">>Go to Braxton Ambush<</link>> <br>
-<<link "Test Passage" "TestPassage">>Test a passage<</link>><br><br>
+<<link "Run Passage" "RunPassage">>Run a passage<</link>><br><br>
 
 [[eventstacktestpage|eventstacktestpage]]<br>
 [[LowerDecksPlayerBusiness|LowerDecksPlayerBusiness]]<br>
